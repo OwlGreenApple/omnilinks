@@ -39,17 +39,22 @@ hr {
     display: block;
     margin-top: 5px;
     right: 0;
+    color:#4a9c1a;
     background: #fff;
     transition: width .2s ease;
     -webkit-transition: width .2s ease;
   }
   .link{
     position: relative;
+    color:#4a9c1a;
   }
   
   .link:hover:after{
     width: 100%;
     left: 0;
-    background: rgb(5, 155, 255);
+    color:#4a9c1a;
+    background: rgb(11, 155, 18);
   }
-  
+  .input-stack {
+    margin-bottom: 20px;
+  }

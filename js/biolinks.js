@@ -27,12 +27,14 @@ $(document).ready(function(){
         return false;
     });
     /* biolink link */
-$(document).on('click', '#addlink', function (e){
-    arra+=1;
+    $(document).on('click', '#addlink', function (e){
    // console.log(arra);
-    $( ".a" ).append( '<div class="input-stack"> <input type="text" name="title['+arra+']" value="" placeholder="Title" class="form-control"> <input type="text" name="url['+arra+']" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button id="deleteskype['+arra+']" type="button"><i class="fas fa-trash-alt"></i></button></div>');
+    $( ".a" ).append( '<div class="input-stack"> <input type="text" name="title[]" value="" placeholder="Title" class="form-control"> <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button  class="deletelink btn btn-danger" type="button"><i class="fas fa-trash-alt"></i></button></div>');
     });
-    $(document).on('click','#deleteskype[]')
+    $(document).on('click','.deletelink',function(e){
+      $(this).parent().remove();
+    });
+
     /* biolink social-media */
     $(document).on('click','#sm',function(e){
         $('.socialmedia').each(function(){

@@ -70,11 +70,11 @@
                             </li>
                             @endif!-->
                             
-                    <div class="dropdown pull-right">
-                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+    <div class="dropdown pull-right">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:green;" v-pre>
                 Halo, {{ Auth::user()->username }} <span class="caret"></span>
             </a>
-             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">edit</a>
                 <a class="dropdown-item" href="{{ route('logout') }}"   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">log out</a>

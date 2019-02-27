@@ -23,7 +23,7 @@ class CreatePagesTable extends Migration
             $table->string('keterangan')->nullable();
             $table->string('fb_title')->nullable();
             $table->string('fb_link')->nullable();
-            $table->integer('wa_pixel_id')->default(0);
+            $table->integer('fb_pixel_id')->default(0);
             $table->string('ig_title')->nullable();
             $table->string('ig_link')->nullable();
             $table->integer('ig_pixel_id')->default(0);
