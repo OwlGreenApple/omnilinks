@@ -43,21 +43,22 @@ Auth::routes();
     Route::get('/register-payment','OrderController@register');
     Route::post('/confirm-payment','OrderController@confirm_payment');
 
-    route::group(['middleware' => ['web','auth']], function () {
+    Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/orders','OrderController@index_order');
     Route::get('/orders/load-order','OrderController@load_order');
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
     //dashboard
     Route::get('/dash',function(){
-        return view('user.dashboard.index');
+        return view('user.dashboard.dash');
     });
     //makebio
-    Route::get('/biolinks/new','biolinkController@newbio');
+    Route::get('/dash/newsingle','biolinkController@newsingle');
+    Route::get('/dash/new','biolinkController@newbio');
     Route::post('/save-bio','biolinkController@savebio');
 });
 
 
-    route::group(['middleware'=>['web','auth','thisadmin']],function(){
+    Route::group(['middleware'=>['web','auth','thisadmin']],function(){
 //admin order
     Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order',function(){

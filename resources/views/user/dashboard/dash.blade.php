@@ -14,7 +14,8 @@
     <div class="container">
         <div class="row">
           <div class="col">
-              <a href="{{asset('/biolinks/new')}}" class="btn btncontent1">CREATE BIO LINK</a>
+              <a href="{{asset('/dash/new')}}" class="btn-primary btncreate">CREATE BIO LINK</a>
+              <a href="{{asset('/dash/newsingle')}}" class="btn-warning btnsingle">CREATE SINGLE LINK</a>
               <div class="card carddash">
         <div class="card-body" >
         <h1 class="textdash">This is No Data To Show</h1>

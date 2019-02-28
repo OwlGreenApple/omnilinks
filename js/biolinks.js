@@ -29,7 +29,8 @@ $(document).ready(function(){
     /* biolink link */
     $(document).on('click', '#addlink', function (e){
    // console.log(arra);
-    $( ".a" ).append( '<div class="input-stack"> <input type="text" name="title[]" value="" placeholder="Title" class="form-control"> <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button  class="deletelink btn btn-danger" type="button"><i class="fas fa-trash-alt"></i></button></div>');
+   //arra+=1;
+    $( ".a" ).append( '<div class="input-stack"> <input type="text" name="title[]" value="" placeholder="Title" class="form-control"> <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div>');
     });
     $(document).on('click','.deletelink',function(e){
       $(this).parent().remove();
@@ -67,3 +68,10 @@ $(document).ready(function(){
             return false;
         });
 });
+function hanyaAngka(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+     if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+      return false;
+    return true;
+  }
