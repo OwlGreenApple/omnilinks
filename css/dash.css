@@ -14,14 +14,14 @@
     margin:0 auto ;
     text-align:center;
 }
-hr {
+/*hr {
     height: .25rem;
     width: 25%;
     margin: 0;
     background: tomato;
     border: none;
     transition: .3s ease-in-out;
-  }
+  }*/
 .margin{
     margin-bottom:20px;  
 }
@@ -150,3 +150,9 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+hr.own {
+    border-top: 3px solid #dbd6d6;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }

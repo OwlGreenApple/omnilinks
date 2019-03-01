@@ -48,13 +48,13 @@ Auth::routes();
     Route::get('/orders/load-order','OrderController@load_order');
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
     //dashboard
-    Route::get('/dash',function(){
-        return view('user.dashboard.dash');
-    });
+    Route::get('/dash','BiolinkController@dash');
     //makebio
-    Route::get('/dash/newsingle','biolinkController@newsingle');
-    Route::get('/dash/new','biolinkController@newbio');
-    Route::post('/save-bio','biolinkController@savebio');
+    Route::get('/dash/newsingle','BiolinkController@newsingle');
+    Route::get('/dash/new/','BiolinkController@newbio');
+    Route::get('/dash/new/{names}','BiolinkController@viewpage');
+    Route::post('/save-template','BiolinkController@savetemp');
+    Route::post('/save-link','BiolinkController@savelink');
 });
 
 

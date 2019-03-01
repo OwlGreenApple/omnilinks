@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePixelTable extends Migration
+class CreateWhatsapplinkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePixelTable extends Migration
      */
     public function up()
     {
-        Schema::create('Pixel', function (Blueprint $table) {
+        Schema::create('whatsapplink', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('pages_id')->default(0);
-            $table->integer('users_id')->default(0);
-            $table->text('script')->nullable();
-            $table->string('description')->nullable();
+            $table->biginteger()
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreatePixelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pixel');
+        Schema::dropIfExists('whatsapplink');
     }
 }

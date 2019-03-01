@@ -34,8 +34,7 @@
 
   <div class="card" style="margin-bottom:20px;">
     <div class="card-body">
-       <form method="post" action="{{url('save-bio')}}" novalidate>
-         {{ csrf_field() }}   
+         
     <ul class="mb-4 nav nav-tabs">
       <li class="nav-item">
         <a href="#link" class="active nav-link link" role="tab" data-toggle="tab">Link</a>
@@ -55,9 +54,10 @@
    
   <!-- tab 1-->
     <div role="tabpanel" class="tab-pane fade in active" id="link">
-   
+    <form method="post" action="{{url('save-link')}}" novalidate>
+         {{ csrf_field() }}
   <!--messengers!-->
-  
+    <input type="hidden" name="names" value="{{$name}}">
       <label for="" style="font-weight:bold;">Messengers :</label>
         <button type="button" class="float-right mb-3 btn btn-primary btn-sm"  id="tambah"><i class="fas fa-plus"></i>
         </button>
@@ -151,15 +151,22 @@
     <button id="deleteig"  class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+
+    <div class="as">
+        <hr class="own">
+      <button type="submit" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
+      </div>
+    </form>
   </div>
 
   <!-- TAB 2 -->
 
   <div role="tabpanel" class="tab-pane fade " id="walink">
-    <span class="">WhatsApp Link Creator</span>
+    <form action="{{url('save-wa')}}">
+    <span class="" style="color:blue">WhatsApp Link Creator</span><br>
          <span>Masukkan Nomor WA</span>
          <form>
-         <input type="text" name="" id="" class="form-control">
+         <input type="text" name="" id="" class="">
         <button type="reset" class="btn btn-danger" style="margin-top: 10px;
     margin-bottom: 10px;">Reset</button></form>
   <div class="card">
@@ -167,26 +174,45 @@
       <textarea class="card-body form-control" name="pesan">
       </textarea>
     </div>
-    <button type="button" class="btn btn-primary btn-biolinks" style="margin-top: 20px;
+    <button type="submit" class="btn btn-primary btn-biolinks" style="margin-top: 20px;
     margin-bottom: 10px;">SAVE & CREATE LINK</button>
-    <p style="margin-top: 67px">Recent WhatsApp Link Creator</p>
+    <p style="margin-top: 67px; color:blue;" >Recent WhatsApp Link Creator</p>
     <div class="card" style="margin-top: 10px;margin-bottom: 20px;">
-    <span class="card-header">Masukkan Pesan</span>
+    <span class="card-header">the number</span>
       <textarea class="card-body form-control" name="recent" readonly="true">
       </textarea>
     </div>
     <button type="button" class="btn btn-success btn-biolinks"> COPY LINK </button>
+    <div class="card" style="margin-top: 75px;margin-bottom: 33px;">
+      <span class="card-header">
+        this is a number
+      </span>
+    </div>
+    </form>
   </div>
   
   <!-- TAB 3 -->
   
   <div class="tab-pane fade" id="pixel">
-    <span>You can write the pixel here</span>
+    <form action="{{url('save-pixel')}}"></form>
+    <span style="color:blue;">Pixel Retargetting</span>
+      <textarea class="card-body form-control" ></textarea>
+        <div class="title" style="margin-top: 20px;">
+          <span>Title</span>
+          <input type="text" name="">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    <hr class="own">
+    <span style="color:blue;">Recent Pixel Retargetting</span>
+  </form>
   </div>
 
   <!-- TAB 4 -->
 
       <div role="tabpanel" class="tab-pane fade" id="style"> 
+         <form method="post" action="{{url('save-template')}}" novalidate>
+         {{ csrf_field() }}
+         <input type="hidden" name="" value="{{$name}}">
       <div class="mb-5 form-group">
         <label>Bio Link alias:
         </label>
@@ -201,19 +227,21 @@
       <label class="switch">
     <input type="checkbox">
     <span class="slider round"></span>
-   
-    </label> &nbsp; Rounded buttons<br>
+    </label> &nbsp;Rounded buttons<br>
     <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" name="rounded">
     <span class="slider round"></span>
     </label>
     &nbsp; outlinend buttons
-      </div>
-      </div>
-      <div class="as">
+    <div class="as">
+        <hr class="own">
       <button type="submit" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
       </div>
-      </form>
+    </form>
+      </div>
+
+      </div>
+      
     </div>
    </div>  
    </div>
