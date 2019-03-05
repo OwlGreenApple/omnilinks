@@ -7,7 +7,7 @@
   <h3 class="omni" style="padding-top:2px; font-weight:500; font-size: 22px;">Sub Heading Title Goes Here</h3>
   </center>
   <div class="container" style="padding-top: 50px; padding-bottom:50px;">
-          <div class="row justify-content-center">
+    <div class="row justify-content-center">
       <div class="col-md-8 col-12">
       <div class="card">
        <div class="cardpag">

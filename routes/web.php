@@ -50,16 +50,29 @@ Auth::routes();
     //dashboard
     Route::get('/dash','BiolinkController@dash');
     //makebio
-    Route::get('/dash/newsingle','BiolinkController@newsingle');
+   
     Route::get('/dash/new/','BiolinkController@newbio');
     Route::get('/dash/new/{names}','BiolinkController@viewpage');
+    Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
     Route::post('/save-template','BiolinkController@savetemp');
     Route::post('/save-link','BiolinkController@savelink');
+    Route::post('/save-wa','BiolinkController@savewa');
+    
+    //makepixel
+    Route::post('/save-pixel','BiolinkController@savepixel');
+    Route::get('/pixel/load-pixel','BiolinkController@loadpixel');
+    Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
+
+    //makesinglelink
+     Route::get('/dash/newsingle','SinglelinkController@newsingle');
+     Route::post('/save-singlelink','SinglelinkController@single');
+     Route::post('/save-singlepixel','SinglelinkController@singlepixel');
+
 });
 
 
     Route::group(['middleware'=>['web','auth','thisadmin']],function(){
-//admin order
+    //admin order
     Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order',function(){
     return view('admin.list-order.index');

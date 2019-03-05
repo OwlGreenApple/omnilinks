@@ -4,49 +4,63 @@ namespace App\Http\Controllers;
 use App\Page;
 use App\Link;
 use App\User;
+use App\Pixel;
 use Illuminate\Http\Request;
 use Auth,Carbon;
 use Ramsey\Uuid\Uuid;
 
 class BiolinkController extends Controller
-{
+{ 
+  
   public function newbio()
   {
+	$num=7; 
+	$generated_string = ""; 
+    $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
+    $len = strlen($domain);  
+    for ($i=0;$i<$num;$i++) 
+    {  
+        $index=rand(0,$len-1); 
+        $generated_string=$generated_string.$domain[$index]; 
+    }  
   	$uuid=Uuid::uuid4();
     $user = Auth::user();
     $page=new Page();
   	$page->user_id=$user->id; 
-  	$page->names=$uuid;
+  	$page->uid=$uuid;
+  	$page->names="omn.lkz/".$generated_string; 
   	$page->save();
-    // $token="";
-    // $page= page::where('name',$name)->first();
-    // if(is_null($page))
-    // {
-    //   $page = new page();
-    //   $page->name = 
-    // }
-   //return $this->viewpage($uuid);
     return redirect('/dash/new/'.$uuid);  
   }
-  public function viewpage($names)
-  {
-  	//$name=page::where('name',$names);
-    return view('user.dashboard.biolinks')->with('name',$names);  
+
+  public function viewpage($uuid)
+  {	
+  	$page=Page::where('uid','=',$uuid)->first();
+  	$pageid=0;
+  	if(!is_null($page)){
+  		$pageid=$page->id;
+  	}
+    return view('user.dashboard.biolinks')->with([
+    	'uuid'=>$uuid,
+    	'pageid'=>$pageid,
+    ]);  
   }
-  public function savetemp(Request $request,$names)
+
+  public function savetemp(Request $request)
   {
 
-  	// $edit->update($request->all());
   }
-  public function savelink(Request $request,$names)
+
+  public function savelink(Request $request)
   {
-  	$names=$request->names;
-  	$page=Page::where('names','=',$names)->first();
+  	$uuid=$request->uuid;
+  	$page=Page::where('uid','=',$uuid)->first();
   	$user=Auth::user();
   	$page->wa_link=$request->wa;
   	$page->fb_link=$request->fb;
   	$page->twitter_link=$request->twitter;
   	$page->skype_link=$request->skype;
+  	$names=$page->names;
   	$page->save();
   	$title=$request->title;
   	$link=$request->url;
@@ -54,33 +68,55 @@ class BiolinkController extends Controller
   	{
   		foreach ($link as $linki) 
   		{
-  			$url=new Link();
-  			$url->users_id=$user_id;
-  			$url->link=$link;
-  			$url->title=$title;
+			$url=new Link();
+			$url->pages_id=$page->id;
+  			$url->users_id=$user->id;
+  			$url->link=$linki;
+  			$url->title=$judul;
   			$url->save();
   		}
   	}
-
-  	  return redirect('/dash/new')->with('ok',' link tervalidasi');
+  	  return redirect('/dash/new/'.$uuid)->with('ok',$names);
   }
- //
- //  		$link->pages_id=$page->id;
- //  		$link->users_id=$user->id;	
- //  		$link->link=$url;
- //  		$link->title=$tile;
- //  		$link->save();
- //  		}
-	//   }  				
 
- //  }
-
-  public function newsingle(Request $request)
-  {
-	  return view('user.dashboard.singlebiolinks');
-  }
   public function dash()
   {
   		return view('user.dashboard.dash');
   }
+  public function savewa()
+  {
+
+  }
+  public function savepixel(Request $request)
+  {
+  	
+  	$uuid=$request->uuidpixel;
+  	$page=Page::where('uid','=',$uuid)->first();
+  	$pixel=new Pixel();
+  	$user=Auth::user();
+  	$pixel->pages_id=$page->id;
+  	$pixel->users_id=$user->id;
+  	$pixel->title=$request->title;
+  	$pixel->script=$request->script;
+  	$pixel->save();
+  	return redirect('/dash/new/'.$uuid);
+  }
+  public function loadpixel(Request $request)
+  {
+  	$idpage=$request->idpage;
+  	$pixels=Pixel::where('users_id',Auth::user()->id)
+  					->orderBy('created_at','ascend')->get();
+  	$arr['view'] =(string) view('user.dashboard.contentpixel')
+                    ->with('pixels',$pixels);
+     return $arr;
+  }
+
+  public function deletepixel(Request $request)
+  {
+  	$pixel=Pixel::find($request->idpixel);
+  	$pixel->delete();
+  	$arr['status']="success";
+  	return $arr;
+  }
+
 }

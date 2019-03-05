@@ -1,6 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
+<script type="text/javascript">
+   function refreshpixel()
+  {
+   //console.log($('#idpage').val());
+    $.ajax({
+      type : 'GET',
+      data : {
+        idpage:$('#idpage').val(),
+      },
+      url : "<?php echo url('/pixel/load-pixel'); ?>",
+      dataType: 'text',
+      success: function (result)
+      {
+        var data=jQuery.parseJSON(result);
+         $('#content').html(data.view);
+         //$('.pixellink').html(data.pixelink);
+      }
+    });
+  }
+  function delete_pixel(idpixel)
+  {
+    $.ajax({
+      type: 'GET',
+      data: {
+       idpixel:idpixel,
+      },
+      url : "<?php echo url ('/pixel/deletepixel'); ?>",
+      dataType: 'text',
+      success: function (result)
+      {
+          
+          var data=jQuery.parseJSON(result);
+          if(data.status=='success')
+          {
+            refreshpixel();  
+          }
+          
+      }
+    });
+  }
+  $(document).ready(function(){
+    refreshpixel();
+  });
+
+ 
+</script>
+ 
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <script src="{{asset('js/biolinks.js')}}"></script>
   <div class="notification container notif">
@@ -18,19 +65,14 @@
     <div class="col-md-6">
     
     @if (session('ok') )
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">x</span>
-      </button>
-      <strong>Success!</strong>{{session('ok')}}
-      </div>
-    @endif 
-
     <div class="alert alert-success alert-dismissible fade show" role="alert">
        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
-      </button>Letakkan link berikut di Bio Instagram
+      </button>Letakkan link berikut di Bio Instagram <strong><a href="{{session('ok')}}">Omni.lkz/{{session('ok')}}</a></strong>
      </div>
+    @endif 
+    
+    
 
   <div class="card" style="margin-bottom:20px;">
     <div class="card-body">
@@ -55,23 +97,26 @@
   <!-- tab 1-->
     <div role="tabpanel" class="tab-pane fade in active" id="link">
     <form method="post" action="{{url('save-link')}}" novalidate>
-         {{ csrf_field() }}
+      {{ csrf_field() }}
   <!--messengers!-->
-    <input type="hidden" name="names" value="{{$name}}">
+    <input type="hidden" name="uuid" value="{{$uuid}}">
       <label for="" style="font-weight:bold;">Messengers :</label>
         <button type="button" class="float-right mb-3 btn btn-primary btn-sm"  id="tambah"><i class="fas fa-plus"></i>
         </button>
 
   <div class="hid">
-    <div class="input-group messengers margin " id="wa"  >
+    <div id="wa" class="messengers">
+    <div class="input-group margin ">
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="fab fa-whatsapp"></i>
       </div>
     </div>
     <input type="text" name="wa" class="form-control" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+    
     <button type="button" class="btn btn-primary" id="deletewa"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+</div>
 
     <div class="input-group messengers margin hidden" id="telegram" style=" display:none;">
     <div class="input-group-prepend">
@@ -194,32 +239,42 @@
   <!-- TAB 3 -->
   
   <div class="tab-pane fade" id="pixel">
-    <form action="{{url('save-pixel')}}"></form>
+    <form action="{{url('save-pixel')}}" method="post">
+       {{ csrf_field() }}
+       <input type="hidden" name="uuidpixel" value="{{$uuid}}">
+      <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
     <span style="color:blue;">Pixel Retargetting</span>
-      <textarea class="card-body form-control" ></textarea>
+      <textarea class="card-body form-control" name="script" ></textarea>
         <div class="title" style="margin-top: 20px;">
           <span>Title</span>
-          <input type="text" name="">
-            <button type="submit" class="btn btn-primary">Save</button>
+          <input type="text" name="title" placeholder="Masukkan Judul">
+            <button type="submit" class="btn btn-primary" >Save</button>
         </div>
-    <hr class="own">
-    <span style="color:blue;">Recent Pixel Retargetting</span>
-  </form>
-  </div>
+        <hr class="own">
+        <span style="color:blue;">Recent Pixel Retargetting</span>
+          <div class="accordion" id="accordionExample">
+           <div id="content">
+             
+           </div>
+            </div>
+          </form>
+        </div>
 
   <!-- TAB 4 -->
 
       <div role="tabpanel" class="tab-pane fade" id="style"> 
          <form method="post" action="{{url('save-template')}}" novalidate>
          {{ csrf_field() }}
-         <input type="hidden" name="" value="{{$name}}">
+         <input type="hidden" name="" value="{{$uuid}}">
       <div class="mb-5 form-group">
         <label>Bio Link alias:
         </label>
         <div>
           <div class="">
             <span>Omni.by/</span>
-            <input type="text" name="slug" value="" class="form-control">
+            <input type="text" name="judul" value=""   class="form-control" placeholder="Masukkan judul">
+            <input type="text" name="link"  value=""   class="form-control" placeholder="masukkan link">
+            <input type="number" name="nomor" value="" class="form-control" placeholder="masukkan nomor">  
           </div>
         </div>
       </div>
@@ -247,5 +302,13 @@
    </div>
   </div>
 </div>
+<script type="text/javascript">
+   
+    $( "body" ).on( "click", ".btn-delete", function() {
+    var idpixel = $(this).attr('dataid');
+    delete_pixel(idpixel); 
+    });
+</script>
+
 @endsection
- 
+

@@ -13,9 +13,15 @@ class CreateWhatsapplinkTable extends Migration
      */
     public function up()
     {
-        Schema::create('whatsapplink', function (Blueprint $table) {
+        Schema::create('whatsapplinks', function (Blueprint $table) 
+        {
             $table->increments('id');
-            $table->biginteger()
+            $table->integer('pages_id')->default(0);
+            $table->integer('users_id')->default(0);
+            $table->string('tittle')->nullable();
+            $table->biginteger('nomor')->unique();
+            $table->text('pesan')->nullable();
+            $table->string('linkgenerator')->nullable();
             $table->timestamps();
         });
     }

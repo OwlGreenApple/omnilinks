@@ -71,7 +71,7 @@
               @endif!-->
               
   <div class="dropdown pull-right">
-        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:green;" v-pre>
+        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:blue;" v-pre>
         Halo, {{ Auth::user()->username }} <span class="caret"></span>
       </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

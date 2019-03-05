@@ -16,6 +16,10 @@
           <div class="col">
               <a href="{{asset('/dash/new')}}" class="btn-primary btncreate">CREATE BIO LINK</a>
               <a href="{{asset('/dash/newsingle')}}" class="btn-warning btnsingle">CREATE SINGLE LINK</a>
+              <div style="padding-top: 49px; margin-left: 20px; font-size: 20px;">
+                <p>Omnilinkz Chart</p>
+                <input type="text" name="search" placeholder="Cari Link / Judul">
+              </div>
               <div class="card carddash">
         <div class="card-body" >
         <h1 class="textdash">This is No Data To Show</h1>
