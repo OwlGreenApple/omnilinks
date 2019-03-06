@@ -49,15 +49,18 @@ Auth::routes();
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
     //dashboard
     Route::get('/dash','BiolinkController@dash');
+    
     //makebio
-   
     Route::get('/dash/new/','BiolinkController@newbio');
     Route::get('/dash/new/{names}','BiolinkController@viewpage');
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
     Route::post('/save-template','BiolinkController@savetemp');
     Route::post('/save-link','BiolinkController@savelink');
-    Route::post('/save-wa','BiolinkController@savewa');
-    
+
+    //make wa link creator
+    Route::post('/save-walink','BiolinkController@savewa');
+    Route::get('/walink/loadwalink','BiolinkController@loadwalink');
+    Route::get('/walink/deletewalink','BiolinkController@deletewalink');
     //makepixel
     Route::post('/save-pixel','BiolinkController@savepixel');
     Route::get('/pixel/load-pixel','BiolinkController@loadpixel');

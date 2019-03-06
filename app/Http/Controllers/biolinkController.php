@@ -5,13 +5,36 @@ use App\Page;
 use App\Link;
 use App\User;
 use App\Pixel;
+use App\Whatsapplink;
 use Illuminate\Http\Request;
 use Auth,Carbon;
 use Ramsey\Uuid\Uuid;
 
 class BiolinkController extends Controller
 { 
-  
+  public function savewa(Request $request)
+  {
+  	$uuid=$request->uuidpixel;
+  	$walink= new Whatsapplink();
+  	$user=Auth::user();
+  	$page=Page::where('uid','=',$uuid)->first();
+  	$walink->users_id=$user->id; 
+  	$walink->pages_id=$page->id;
+  	$walink->nomor=$request->nomorwa;
+  	$walink->pesan=$request->pesan;
+  	$walink->linkgenerator=$request->textlink;
+  	$walink->save();	
+  	return redirect('/dash/new/'.$uuid);
+  }
+
+  public function loadwalink(Request $request)
+  {
+  	$walink=Whatsapplink::where('users_id',Auth::user()->id)
+  					->orderBy('created_at','ascend')->get();
+  	$arr['viewer'] =(string) view('user.dashboard.contentwa')
+                    ->with('walink',$walink);
+     return $arr;
+  }
   public function newbio()
   {
 	$num=7; 
@@ -59,9 +82,18 @@ class BiolinkController extends Controller
   	$page=Page::where('uid','=',$uuid)->first();
   	$user=Auth::user();
   	$page->wa_link=$request->wa;
+  	$page->wa_pixel_id=$request->wapixel;
   	$page->fb_link=$request->fb;
+  	$page->fb_pixel_id=$request->fbpixel;
   	$page->twitter_link=$request->twitter;
+  	$page->telegram_link=$request->telegram;
+  	$page->telegram_pixel_id=$request->telegrampixel;
   	$page->skype_link=$request->skype;
+  	$page->skype_pixel_id=$request->skypepixel;
+  	$page->youtube_link=$request->youtube;
+  	$page->youtube_pixel_id=$request->youtubepixel;
+  	$page->ig_link=$request->ig;
+  	$page->ig_pixel_id=$request->igpixel;
   	$names=$page->names;
   	$page->save();
   	$title=$request->title;
@@ -85,13 +117,9 @@ class BiolinkController extends Controller
   {
   		return view('user.dashboard.dash');
   }
-  public function savewa()
-  {
 
-  }
   public function savepixel(Request $request)
   {
-  	
   	$uuid=$request->uuidpixel;
   	$page=Page::where('uid','=',$uuid)->first();
   	$pixel=new Pixel();
@@ -108,6 +136,7 @@ class BiolinkController extends Controller
   	$idpage=$request->idpage;
   	$pixels=Pixel::where('users_id',Auth::user()->id)
   					->orderBy('created_at','ascend')->get();
+  					//dd($pixels);
   	$arr['view'] =(string) view('user.dashboard.contentpixel')
                     ->with('pixels',$pixels);
      return $arr;
