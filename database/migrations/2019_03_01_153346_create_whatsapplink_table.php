@@ -18,7 +18,7 @@ class CreateWhatsapplinkTable extends Migration
             $table->increments('id');
             $table->integer('pages_id')->default(0);
             $table->integer('users_id')->default(0);
-            $table->string('tittle')->nullable();
+            $table->string('title')->nullable();
             $table->biginteger('nomor')->unique();
             $table->text('pesan')->nullable();
             $table->string('linkgenerator')->nullable();

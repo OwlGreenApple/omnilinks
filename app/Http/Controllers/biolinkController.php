@@ -35,6 +35,7 @@ class BiolinkController extends Controller
 
   public function viewpage($uuid)
   {	
+  	$pixel=Pixel::where('users_id',Auth::user()->id)->get();
   	$page=Page::where('uid','=',$uuid)->first();
   	$pageid=0;
   	if(!is_null($page)){
@@ -43,6 +44,7 @@ class BiolinkController extends Controller
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
     	'pageid'=>$pageid,
+    	'pixels'=>$pixel,
     ]);  
   }
 

@@ -116,9 +116,16 @@
     <button type="button" class="btn btn-primary" id="deletewa"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+    <select name="wapixel" class="form-control">
+      <option value="">--Pilih Pixel Yang telah dibuat--</option>
+      @foreach($pixels as $pixel)
+      <option value="{{$pixel->id}}">{{$pixel->title}}</option>
+      @endforeach
+    </select>
 </div>
-
-    <div class="input-group messengers margin hidden" id="telegram" style=" display:none;">
+    
+    <div id="telegram" class="messengers hidden" style=" display:none;">
+    <div class="input-group margin" >
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="fab fa-telegram-plane"></i>
       </div>
@@ -127,18 +134,32 @@
     <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+    <select name="skypepixel" class="form-control">
+      <option value="">--Pilih Pixel Yang telah dibuat--</option>
+      @foreach($pixels as $pixel)
+      <option value="{{$pixel->id}}">{{$pixel->title}}</option>
+      @endforeach
+    </select>
+  </div>
 
-    <div class="input-group messengers margin hidden" id="skype" style="display:none;">
-    <div class="input-group-prepend">
-      <div class="input-group-text"><i class="fab fa-skype"></i>
-      </div>
-    </div>
+    <div id="skype" class="messengers hidden" style="display:none;">
+      <div class="input-group margin" >
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fab fa-skype"></i>
+          </div>
+        </div>
     <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor Skype">
     <button id="deleteskype" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
+      </div>
+      <select name="skypepixel" class="form-control">
+      <option value="">--Pilih Pixel Yang telah dibuat--</option>
+      @foreach($pixels as $pixel)
+      <option value="{{$pixel->id}}">{{$pixel->title}}</option>
+      @endforeach
+    </select>
     </div>
-  </div>
-    
+  </div> 
     <!--Links-->
 
   <label for="" style="font-weight:bold;">Links :</label>

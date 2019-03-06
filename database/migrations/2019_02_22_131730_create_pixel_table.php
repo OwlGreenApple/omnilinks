@@ -13,7 +13,7 @@ class CreatePixelTable extends Migration
      */
     public function up()
     {
-        Schema::create('Pixels', function (Blueprint $table) {
+        Schema::create('pixels', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('pages_id')->default(0);
             $table->integer('users_id')->default(0);

@@ -11,10 +11,10 @@ use Ramsey\Uuid\Uuid;
 class SingleLinkController extends Controller
 {
       public function newsingle()
-  {
-  	 $data_pixel=Pixel::where('users_id',Auth::user()->id)->get();
-	  return view('user.dashboard.singlebiolinks',['data_pixel'=>$data_pixel]);
-  }
+	  {
+	  	 $data_pixel=Pixel::where('users_id',Auth::user()->id)->get();
+		  return view('user.dashboard.singlebiolinks',['data_pixel'=>$data_pixel]);
+	  }
  	public function single(Request $request)
  	{
  		$link=new Link;
