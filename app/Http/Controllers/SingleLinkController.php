@@ -10,11 +10,13 @@ use Ramsey\Uuid\Uuid;
 
 class SingleLinkController extends Controller
 {
-      public function newsingle()
-	  {
-	  	 $data_pixel=Pixel::where('users_id',Auth::user()->id)->get();
-		  return view('user.dashboard.singlebiolinks',['data_pixel'=>$data_pixel]);
-	  }
+  public function newsingle()
+	 {
+	  $data_pixel=Pixel::where('users_id',Auth::user()->id)
+                          ->where('pages_id',0)
+                          ->get();
+		return view('user.dashboard.singlebiolinks',['data_pixel'=>$data_pixel]);
+	 }
  	public function single(Request $request)
  	{
  		$link=new Link;
@@ -29,14 +31,67 @@ class SingleLinkController extends Controller
  	}
  	public function singlepixel(Request $request)
  	{
- 		$pixel= new Pixel();
+      if(is_null($request->hiddenid))
+    {
+    $pixel= new Pixel();
+    }
+    else
+    {
+      $pixel=Pixel::where('id','=',$request->hiddenid)->first();
+    }
  		$user=Auth::User();
  		$pixel->users_id=$user->id;
  		$pixel->pages_id=0;
  		$pixel->title=$request->titlepixel;
-  		$pixel->script=$request->script;
-  		$pixel->save();
+  	$pixel->script=$request->script;
+  	$pixel->save();
   		return redirect('/dash/newsingle')->with('ok','pixel telah Ditambahkan');
  	}
+  public function loadsinglepixel(Request $request)
+  {
+      $pixels=Pixel::where('title','LIKE','%'.$request->cari.'%')
+                  ->where('users_id',Auth::user()->id)
+                  ->where('pages_id',0)
+                  ->orderBy('created_at','ascend');
 
+        $total=$pixels->count();
+        $pixels=$pixels->paginate(4);
+
+      $arr['view'] =(string) view('user.dashboard.contentsinglepixel')
+                    ->with('pixels',$pixels);
+      $arr ['pager']=(string) view('user.dashboard.paginatesinglepixel')
+                    ->with([
+                      'pixels'=>$pixels,
+                      'total'=>$total,
+                          ]);
+     return $arr;
+  }
+  public function deletesinglepixel(Request $request)
+  {
+    $pixels=Pixel::find($request->idpixel);
+    $pixels->delete();
+    $arr['status']="success";
+    return $arr;
+  }
+  public function loadsinglelink(Request $request)
+  {
+    $link=Link::join('pixels','links.pixel_id','pixels.id')
+                ->select('pixels.title as judul','links.title','links.link')
+                ->where('links.title','Like','%'.$request->carilink.'%')
+                ->where('links.users_id',Auth::user()->id)
+                ->where('links.pages_id',0)
+                ->orderBy('links.created_at','ascend');
+                
+
+    $total=$link->count();
+    $link=$link->paginate(2);
+    $array['view']=(string) view('user.dashboard.contentsinglelink')
+                    ->with('links',$link);
+    $array['pager']=(string) view('user.dashboard.paginatesinglelink')
+                    ->with([
+                      'links'=>$link,
+                      'total'=>$total,
+                    ]);
+    return $array;
+  }
 }

@@ -86,12 +86,3 @@ function hanyaAngka(evt) {
     $temp.remove();
   }
 
- $(document).on('click', '#generate', function (e){
-  var nomor=$('#nomorwa').val();
-  var message=$('#pesan').val();
-  var convert=encodeURI(message);
-  var link ="https://api.whatsapp.com/send?phone="+nomor+"&text="+convert+"";
-  console.log(link);
-  $('#demo').html(link);
- })
-  

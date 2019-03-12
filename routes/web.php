@@ -69,7 +69,11 @@ Auth::routes();
     //makesinglelink
      Route::get('/dash/newsingle','SinglelinkController@newsingle');
      Route::post('/save-singlelink','SinglelinkController@single');
+     Route::get('/dash/newsingle/load-singlelink','SinglelinkController@loadsinglelink');
+
      Route::post('/save-singlepixel','SinglelinkController@singlepixel');
+     Route::get('/pixel/load-singlepixel','SinglelinkController@loadsinglepixel');
+     Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
 
 });
 

@@ -15,7 +15,15 @@ class BiolinkController extends Controller
   public function savewa(Request $request)
   {
   	$uuid=$request->uuidpixel;
-  	$walink= new Whatsapplink();
+    if(is_null($request->editidwa))
+    {
+    $walink= new Whatsapplink();  
+    }
+    else
+    {
+      $walink=Whatsapplink::where('id','=',$request->editidwa)->first(); 
+    }
+  	
   	$user=Auth::user();
   	$page=Page::where('uid','=',$uuid)->first();
   	$walink->users_id=$user->id; 
@@ -23,7 +31,7 @@ class BiolinkController extends Controller
   	$walink->nomor=$request->nomorwa;
   	$walink->pesan=$request->pesan;
   	$walink->linkgenerator=$request->textlink;
-  	$walink->save();	
+  	$walink->save();	  
   	return redirect('/dash/new/'.$uuid);
   }
 
@@ -35,6 +43,14 @@ class BiolinkController extends Controller
                     ->with('walink',$walink);
      return $arr;
   }
+    public function deletewalink(Request $request)
+  {
+   $walink=Whatsapplink::find($request->idwalink);
+   $walink->delete();
+   $arra['status']="success";
+   return $arra;
+  }
+
   public function newbio()
   {
 	$num=7; 
@@ -58,7 +74,9 @@ class BiolinkController extends Controller
 
   public function viewpage($uuid)
   {	
-  	$pixel=Pixel::where('users_id',Auth::user()->id)->get();
+  	$pixel=Pixel::where('users_id',Auth::user()->id)
+                  ->where('pages_id','!=',0)
+                  ->get();
   	$page=Page::where('uid','=',$uuid)->first();
   	$pageid=0;
   	if(!is_null($page)){
@@ -81,19 +99,20 @@ class BiolinkController extends Controller
   	$uuid=$request->uuid;
   	$page=Page::where('uid','=',$uuid)->first();
   	$user=Auth::user();
+    $page->wa_pixel_id=$request->wapixel;
+    $page->twitter_pixel_id=$request->twitterpixel;
+    $page->telegram_pixel_id=$request->telegrampixel;
+    $page->youtube_pixel_id=$request->youtubepixel;
+    $page->ig_pixel_id=$request->igpixel;
+    $page->skype_pixel_id=$request->skypepixel;
+    $page->fb_pixel_id=$request->fbpixel;
   	$page->wa_link=$request->wa;
-  	$page->wa_pixel_id=$request->wapixel;
   	$page->fb_link=$request->fb;
-  	$page->fb_pixel_id=$request->fbpixel;
   	$page->twitter_link=$request->twitter;
   	$page->telegram_link=$request->telegram;
-  	$page->telegram_pixel_id=$request->telegrampixel;
   	$page->skype_link=$request->skype;
-  	$page->skype_pixel_id=$request->skypepixel;
   	$page->youtube_link=$request->youtube;
-  	$page->youtube_pixel_id=$request->youtubepixel;
   	$page->ig_link=$request->ig;
-  	$page->ig_pixel_id=$request->igpixel;
   	$names=$page->names;
   	$page->save();
   	$title=$request->title;
@@ -110,7 +129,9 @@ class BiolinkController extends Controller
   			$url->save();
   		}
   	}
-  	  return redirect('/dash/new/'.$uuid)->with('ok',$names);
+    $arr['status'] = 'success';
+    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="'.$names.'">'.$names.'</a>';
+  	return $arr;
   }
 
   public function dash()
@@ -122,7 +143,15 @@ class BiolinkController extends Controller
   {
   	$uuid=$request->uuidpixel;
   	$page=Page::where('uid','=',$uuid)->first();
-  	$pixel=new Pixel();
+    if (is_null($request->editidpixel)) 
+    {
+        $pixel=new Pixel();
+    }
+    else
+    {
+     $pixel=Pixel::where('id','=',$request->editidpixel)->first(); 
+    }
+    
   	$user=Auth::user();
   	$pixel->pages_id=$page->id;
   	$pixel->users_id=$user->id;
@@ -135,6 +164,7 @@ class BiolinkController extends Controller
   {
   	$idpage=$request->idpage;
   	$pixels=Pixel::where('users_id',Auth::user()->id)
+                  ->where('pages_id','!=',0)
   					->orderBy('created_at','ascend')->get();
   					//dd($pixels);
   	$arr['view'] =(string) view('user.dashboard.contentpixel')

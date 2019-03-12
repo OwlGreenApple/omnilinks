@@ -17,6 +17,7 @@ class CreatePixelTable extends Migration
             $table->increments('id');
             $table->integer('pages_id')->default(0);
             $table->integer('users_id')->default(0);
+            $table->string('title')->nullable();
             $table->text('script')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

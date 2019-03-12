@@ -1,0 +1,1 @@
+{!! $pixels->render() !!}{{$total}}<span>	 Total Items</span>
