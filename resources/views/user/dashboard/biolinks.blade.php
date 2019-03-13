@@ -2,6 +2,50 @@
 
 @section('content')
 <script type="text/javascript">
+  function tambahPages()
+  {
+    $.ajax({
+      type: 'POST',
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'text',
+      data:$("#savelink").serialize(),
+      url:"<?php echo url('/save-link');?>",
+      success: function(result)
+      {  
+         refreshwa();
+         refreshpixel();
+         var data=jQuery.parseJSON(result);
+         if(data.status=="success")
+         {
+            $("#pesan").html(data.message);
+            $("#pesan").addClass("alert-success");
+            $("#pesan").show();
+         }
+      }
+    });
+  }
+
+   function tambahpixel()
+   {
+    $.ajax({
+      type : 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       },
+       url : "<?php echo url ('/save-pixel')?>",
+       dataType: 'text',
+       data:$("#savepixel").serialize(),
+       success : function(result)
+       {
+         $('#script').val("");
+          $('#judul').val("");
+          $('#editidpixel').val("");
+        refreshpixel();
+       },
+    });
+   }
    function refreshpixel()
   {
    //console.log($('#idpage').val());
@@ -20,7 +64,7 @@
       }
     });
   }
-  function delete_pixel(idpixel)
+   function delete_pixel(idpixel)
   {
     $.ajax({
       type: 'GET',
@@ -30,19 +74,84 @@
       url : "<?php echo url ('/pixel/deletepixel'); ?>",
       dataType: 'text',
       success: function (result)
-      {
-          
+      {  
           var data=jQuery.parseJSON(result);
           if(data.status=='success')
           {
             refreshpixel();  
-          }
-          
+          }   
+      }
+    });
+  }
+
+  function tambahwalink()
+  {
+    $.ajax({
+      type : 'POST',
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       },
+      data :$("#savewalink").serialize(),
+      url  : "<?php echo url('/save-walink');?>",
+      dataType:'text',
+      success : function(result)
+      {
+           $('#nomorwa').val("");
+          $('#pesan').val("");
+          $('#demo').val("");
+          refreshwa();
+      }
+    });
+    
+  }
+  function refreshwa()
+  {
+    $.ajax({
+      type : 'GET',
+      url  : "<?php echo url('/walink/loadwalink');?>",
+      dataType : 'text',
+      success: function (result)
+      {
+        var data=jQuery.parseJSON(result);
+        $('#contentwa').html(data.viewer);
+      }
+    });
+  }
+  function deletewalink(idwalink)
+  {
+    $.ajax({
+      type : 'GET',
+      data : {
+      idwalink:idwalink,
+      },
+      url  :"<?php echo url('/walink/deletewalink');?>",
+      dataType: 'text',
+      success: function (result)
+      {
+        var data=jQuery.parseJSON(result);
+        if(data.status=='success')
+        {
+          refreshwa();
+         
+        }
       }
     });
   }
   $(document).ready(function(){
     refreshpixel();
+    refreshwa();
+
+    var list = $('#mySortable'),
+      updatePosition = function() {
+        list.children().each(function(i, e){
+          $(this).children('input[type="text"]').val(++i);
+        });
+      };
+
+  list.sortable({
+    placeholder: "ui-state-highlight",
+    update: updatePosition
+  });
   });
 
  
@@ -63,16 +172,9 @@
   <div class="container">
   <div class="row">
     <div class="col-md-6">
-    
-    @if (session('ok') )
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>Letakkan link berikut di Bio Instagram <strong><a href="{{session('ok')}}">Omni.lkz/{{session('ok')}}</a></strong>
-     </div>
-    @endif 
-    
-    
+
+    <div id="pesan" class="alert"></div>
+        
 
   <div class="card" style="margin-bottom:20px;">
     <div class="card-body">
@@ -95,8 +197,8 @@
   <div class="tab-content"> 
    
   <!-- tab 1-->
-    <div role="tabpanel" class="tab-pane fade in active" id="link">
-    <form method="post" action="{{url('save-link')}}" novalidate>
+    <div role="tabpanel" class="tab-pane fade in active show" id="link">
+    <form method="post" id="savelink" novalidate>
       {{ csrf_field() }}
   <!--messengers!-->
     <input type="hidden" name="uuid" value="{{$uuid}}">
@@ -105,6 +207,7 @@
         </button>
 
   <div class="hid">
+    
     <div id="wa" class="messengers">
     <div class="input-group margin ">
     <div class="input-group-prepend">
@@ -134,7 +237,7 @@
     <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
-    <select name="skypepixel" class="form-control">
+    <select name="telegrampixel" class="form-control">
       <option value="">--Pilih Pixel Yang telah dibuat--</option>
       @foreach($pixels as $pixel)
       <option value="{{$pixel->id}}">{{$pixel->title}}</option>
@@ -166,19 +269,26 @@
     <button type="button" class="float-right mb-3 btn btn-primary btn-sm"  id="addlink"><i class="fas fa-plus"></i> Add Link
      </button><br>
   <div class="a">
+    <ul id="mySortable">
+      <li draggable="true">
+        halo
     <div class="input-stack">
       <input type="text" name="title[]" value="" placeholder="Title" class="form-control" >
       <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
     <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+    </li>
+    <li draggable="true">aer</li>
+    </ul>
   </div>
     <!--social media-->
 
   <label for="" style="font-weight:bold">Social Media</label>
     <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="sm"><i class="fas fa-plus"></i></button>
 
-   <div class="input-group socialmedia margin" id="youtube">
+<div id="youtube" class="socialmedia">
+   <div class="input-group margin">
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="fab fa-youtube"></i>
       </div>
@@ -187,8 +297,16 @@
     <button id="deleteyoutube" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
   </div>
-
-    <div class="input-group socialmedia margin hidden" id="fb" style="display:none;">
+  <select name="youtubepixel" class="form-control">
+      <option value="">--Pilih Pixel Yang telah dibuat--</option>
+    @foreach($pixels as $pixel)
+      <option value="{{$pixel->id}}">{{$pixel->title}}</option>
+      @endforeach
+    </select>
+</div>
+  
+  <div id="fb" class="socialmedia hidden" style="display:none;">
+    <div class="input-group margin">
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="fab fa-facebook-f"></i>
       </div>
@@ -197,8 +315,16 @@
     <button id="deletefb" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+    <select name="fbpixel" class="form-control">
+      <option value="">--Pilih Pixel Yang telah dibuat--</option>
+      @foreach($pixels as $pixel)
+      <option value="{{$pixel->id}}">{{$pixel->title}}</option>
+      @endforeach
+    </select>
+  </div>
 
-    <div class="input-group socialmedia margin hidden" id="twitter" style=" display:none;">
+  <div id="twitter" class="socialmedia hidden" style=" display:none;">
+    <div class="input-group margin">
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="fab fa-twitter"></i>
       </div>
@@ -207,8 +333,16 @@
     <button id="deletetwitter"  class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+    <select name="twitterpixel" class="form-control">
+      <option value="">--Pilih Pixel Yang telah dibuat--</option>
+      @foreach($pixels as $pixel)
+      <option value="{{$pixel->id}}">{{$pixel->title}}</option>
+      @endforeach
+    </select>
+  </div>
 
-    <div class="input-group socialmedia margin hidden" id="ig"  style=" display:none;">
+    <div id="ig" class="socialmedia hidden" style=" display:none;">
+    <div class="input-group margin">
     <div class="input-group-prepend">
       <div class="input-group-text"><i class="fab fa-instagram"></i>
       </div>
@@ -217,10 +351,17 @@
     <button id="deleteig"  class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
+    <select name="igpixel" class="form-control">
+      <option value="">--Pilih Pixel Yang telah dibuat--</option>
+      @foreach($pixels as $pixel)
+      <option value="{{$pixel->id}}">{{$pixel->title}}</option>
+      @endforeach
+    </select>
+  </div>
 
     <div class="as">
         <hr class="own">
-      <button type="submit" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
+      <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
       </div>
     </form>
   </div>
@@ -228,49 +369,49 @@
   <!-- TAB 2 -->
 
   <div role="tabpanel" class="tab-pane fade " id="walink">
-    <form action="{{url('save-wa')}}">
+    <form id="savewalink" method="post">
+     {{ csrf_field() }}
+      <input type="hidden" name="uuidpixel" value="{{$uuid}}">
     <span class="" style="color:blue">WhatsApp Link Creator</span><br>
          <span>Masukkan Nomor WA</span>
-         <form>
-         <input type="text" name="" id="" class="">
+         <input type="text" name="nomorwa" id="nomorwa" class="">
         <button type="reset" class="btn btn-danger" style="margin-top: 10px;
-    margin-bottom: 10px;">Reset</button></form>
+    margin-bottom: 10px;">Reset</button>
   <div class="card">
     <span class="card-header">Masukkan Pesan</span>
-      <textarea class="card-body form-control" name="pesan">
+      <textarea class="card-body form-control" name="pesan" id="pesan">
       </textarea>
     </div>
-    <button type="submit" class="btn btn-primary btn-biolinks" style="margin-top: 20px;
-    margin-bottom: 10px;">SAVE & CREATE LINK</button>
-    <p style="margin-top: 67px; color:blue;" >Recent WhatsApp Link Creator</p>
-    <div class="card" style="margin-top: 10px;margin-bottom: 20px;">
-    <span class="card-header">the number</span>
-      <textarea class="card-body form-control" name="recent" readonly="true">
-      </textarea>
-    </div>
-    <button type="button" class="btn btn-success btn-biolinks"> COPY LINK </button>
-    <div class="card" style="margin-top: 75px;margin-bottom: 33px;">
-      <span class="card-header">
-        this is a number
-      </span>
-    </div>
+    <input type="text" name="editidwa" hidden id="editidwa">
+    <textarea id="demo" hidden="" name="textlink"></textarea>
+   <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">SAVE & CREATE LINK</button>
     </form>
+     <div class="margin" style="margin-top: 47px;">
+        <span style="color:blue;">Recent WhatsApp Link Creator</span>
+          <div class="accordion" id="accordionExample">
+           <div id="contentwa">
+           </div>
+       </div>    
+       </div>
   </div>
   
   <!-- TAB 3 -->
   
   <div class="tab-pane fade" id="pixel">
-    <form action="{{url('save-pixel')}}" method="post">
+    <form id="savepixel" method="post">
        {{ csrf_field() }}
        <input type="hidden" name="uuidpixel" value="{{$uuid}}">
       <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
     <span style="color:blue;">Pixel Retargetting</span>
-      <textarea class="card-body form-control" name="script" ></textarea>
+      <textarea class="card-body form-control" name="script" id="script" ></textarea>
         <div class="title" style="margin-top: 20px;">
           <span>Title</span>
-          <input type="text" name="title" placeholder="Masukkan Judul">
-            <button type="submit" class="btn btn-primary" >Save</button>
+          <input type="text" name="title" placeholder="Masukkan Judul" id="judul">
+          <input type="text" name="editidpixel" hidden id="editidpixel" >
+            <button type="button" id="btnpixel" class="btn btn-primary" >Save</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
         </div>
+      </form>
         <hr class="own">
         <span style="color:blue;">Recent Pixel Retargetting</span>
           <div class="accordion" id="accordionExample">
@@ -278,7 +419,7 @@
              
            </div>
             </div>
-          </form>
+          
         </div>
 
   <!-- TAB 4 -->
@@ -324,10 +465,44 @@
   </div>
 </div>
 <script type="text/javascript">
-   
     $( "body" ).on( "click", ".btn-delete", function() {
     var idpixel = $(this).attr('dataid');
     delete_pixel(idpixel); 
+    });
+    $("body").on("click",".btn-deletewa",function(){
+      var idwalink=$(this).attr('dataidwa');
+      deletewalink(idwalink);
+    });
+     $(document).on('click', '#generate', function (e){
+      var nomor=$('#nomorwa').val();
+      var message=$('#pesan').val();
+      var convert=encodeURI(message);
+      var link ="https://api.whatsapp.com/send?phone="+nomor+"&text="+convert+"";
+      console.log(link);
+      $('#demo').html(link);
+      tambahwalink();
+    });
+    $(document).on("click","#btnpixel",function(e){
+      tambahpixel();
+    });
+    $(document).on("click","#btn-save-link",function(e){
+      tambahPages();
+    });
+    $(document).on('click','.btn-editwa',function(e){
+      var editnomorwa=$(this).attr("datanomorwa");
+      var editpesan=$(this).attr("datapesan");
+      var editidwa=$(this).attr("dataeditwa");
+      $('#editidwa').val(editidwa);
+      $('#nomorwa').val(editnomorwa);
+      $('#pesan').val(editpesan);
+    });
+    $(document).on('click','.btn-editpixel',function(e){
+      var script=$(this).attr("datascriptpixel");
+      var title=$(this).attr("dataedittitle");
+      var editidpixel=$(this).attr("dataeditpixelid");
+      $('#script').val(script);
+      $('#judul').val(title);
+      $('#editidpixel').val(editidpixel);
     });
 </script>
 

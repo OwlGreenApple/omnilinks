@@ -85,3 +85,4 @@ function hanyaAngka(evt) {
     document.execCommand('copy');
     $temp.remove();
   }
+
