@@ -1,5 +1,4 @@
 <?php
-// biolink controller
 namespace App\Http\Controllers;
 use App\Page;
 use App\Link;
@@ -7,7 +6,7 @@ use App\User;
 use App\Pixel;
 use App\Whatsapplink;
 use Illuminate\Http\Request;
-use Auth,Carbon;
+use Auth,Carbon,Validator;
 use Ramsey\Uuid\Uuid;
 
 class BiolinkController extends Controller
@@ -23,7 +22,6 @@ class BiolinkController extends Controller
     {
       $walink=Whatsapplink::where('id','=',$request->editidwa)->first(); 
     }
-  	
   	$user=Auth::user();
   	$page=Page::where('uid','=',$uuid)->first();
   	$walink->users_id=$user->id; 
@@ -51,23 +49,29 @@ class BiolinkController extends Controller
    return $arra;
   }
 
-  public function newbio()
+  public function newbio(Request $request)
   {
-	$num=7; 
-	$generated_string = ""; 
+    $num=7;
+    do
+  {
+    $generated_string = ""; 
     $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
     $len = strlen($domain);  
     for ($i=0;$i<$num;$i++) 
     {  
         $index=rand(0,$len-1); 
         $generated_string=$generated_string.$domain[$index]; 
-    }  
+    } 
+  $cekpage=Page::where('names','=',$generated_string)->first();
+  }
+    while (!is_null($cekpage));
+
   	$uuid=Uuid::uuid4();
     $user = Auth::user();
     $page=new Page();
   	$page->user_id=$user->id; 
   	$page->uid=$uuid;
-  	$page->names="omn.lkz/".$generated_string; 
+  	$page->names=$generated_string; 
   	$page->save();
     return redirect('/dash/new/'.$uuid);  
   }
@@ -88,6 +92,14 @@ class BiolinkController extends Controller
     	'pixels'=>$pixel,
     ]);  
   }
+public function link($names)
+ {
+  $page=Page::where('names','=',$names)->first();
+  $link=Link::where('pages_id','=',$page->id)
+        ->orderBy('created_at','ascend')
+        ->get();
+  return view('user.link.link')->with('link',$link);
+ }
 
   public function savetemp(Request $request)
   {
@@ -117,20 +129,19 @@ class BiolinkController extends Controller
   	$page->save();
   	$title=$request->title;
   	$link=$request->url;
-  	foreach ($title as $judul) 
+  	foreach (array_combine($title, $link)as $judul=>$linki) 
   	{
-  		foreach ($link as $linki) 
-  		{
-			$url=new Link();
-			$url->pages_id=$page->id;
+  			$url=new Link();
+  			$url->pages_id=$page->id;
+        $url->names=null;
   			$url->users_id=$user->id;
   			$url->link=$linki;
   			$url->title=$judul;
-  			$url->save();
-  		}
+   			$url->save();
   	}
+
     $arr['status'] = 'success';
-    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="'.$names.'">'.$names.'</a>';
+    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
   	return $arr;
   }
 

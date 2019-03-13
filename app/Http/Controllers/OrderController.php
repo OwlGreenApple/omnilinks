@@ -92,6 +92,7 @@ class OrderController extends Controller
         $order->no_order = $order_number;
         $order->user_id = $user->id;
         $order->package =$request->namapaket;
+        $order->jmlpoin=0;
         //$order->jmlpoin = 0;
         $order->coupon_id=0;
         $order->total = $request->price;
@@ -120,5 +121,4 @@ class OrderController extends Controller
                 'id'=>$id,		
             ));
       }
-      
 }

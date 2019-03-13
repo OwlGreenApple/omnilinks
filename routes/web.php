@@ -75,6 +75,8 @@ Auth::routes();
      Route::get('/pixel/load-singlepixel','SinglelinkController@loadsinglepixel');
      Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
 
+     //url
+     Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
 });
 
 

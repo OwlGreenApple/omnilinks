@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-  
+  <?php
+
+  ?>
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
     <div class="notification container notif">
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -20,12 +22,12 @@
                 <p>Omnilinkz Chart</p>
                 <input type="text" name="search" placeholder="Cari Link / Judul">
               </div>
-              <div class="card carddash">
+          <div class="card carddash">
         <div class="card-body" >
         <h1 class="textdash">This is No Data To Show</h1>
         </div>
     </div>
-          </div>  
-        </div>
-    </div>
+  </div>  
+</div>
+</div>
 @endsection

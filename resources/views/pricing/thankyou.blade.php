@@ -7,14 +7,12 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1>Thank You For Your Purchasing</h1>
-          <hr class="orn">
-          <p class="pg-title" style="font-color:#ffffff">Setelah Anda menyelesaikan langkah-langkah konfirmasi berikut, segera lakukan pembayaran untuk mendapatkan akses langsung ke akun Omnilinks Anda!</p>
+          <h1>Thank You<br> For Your Purchasing</h1>
+          <p class="pg-title">Setelah Anda menyelesaikan langkah-langkah konfirmasi berikut, segera lakukan pembayaran untuk mendapatkan akses langsung ke akun Omnilinks Anda!</p>
         </div>
       </div>
     </div>
   </section>
-
   <div class="container konten">
     <div class="row">
       <div class="col-sm-4">

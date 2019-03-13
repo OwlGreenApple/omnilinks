@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+ 
 <script type="text/javascript">
   function tambahPages()
   {
@@ -141,20 +143,21 @@
     refreshpixel();
     refreshwa();
 
-    var list = $('#mySortable'),
-      updatePosition = function() {
-        list.children().each(function(i, e){
-          $(this).children('input[type="text"]').val(++i);
-        });
-      };
+    //  var mylist = $('#mySortable'),
+    //   updatePosition = function() {
+    //     mylist.children().each(function(i, e){
+    //       $(this).children('input[type="text"]').val(++i);
+    //     });
+    //   };
 
-  list.sortable({
-    placeholder: "ui-state-highlight",
-    update: updatePosition
-  });
+    // mylist.sortable({
+    //   placeholder: "ui-state-highlight",
+    //   update: updatePosition
+    // });
   });
 
- 
+  
+
 </script>
  
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
@@ -198,7 +201,7 @@
    
   <!-- tab 1-->
     <div role="tabpanel" class="tab-pane fade in active show" id="link">
-    <form method="post" id="savelink" novalidate>
+    <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
       {{ csrf_field() }}
   <!--messengers!-->
     <input type="hidden" name="uuid" value="{{$uuid}}">
@@ -269,18 +272,13 @@
     <button type="button" class="float-right mb-3 btn btn-primary btn-sm"  id="addlink"><i class="fas fa-plus"></i> Add Link
      </button><br>
   <div class="a">
-    <ul id="mySortable">
-      <li draggable="true">
-        halo
+    
     <div class="input-stack">
       <input type="text" name="title[]" value="" placeholder="Title" class="form-control" >
       <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
     <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
     </button>
     </div>
-    </li>
-    <li draggable="true">aer</li>
-    </ul>
   </div>
     <!--social media-->
 
@@ -464,6 +462,8 @@
    </div>
   </div>
 </div>
+
+   
 <script type="text/javascript">
     $( "body" ).on( "click", ".btn-delete", function() {
     var idpixel = $(this).attr('dataid');
