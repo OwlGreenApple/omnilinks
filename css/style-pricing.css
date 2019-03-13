@@ -126,7 +126,7 @@ hr.wh {
   content: "Monthly";
   padding-left: 10px;
   background-color: #fafafa;
-  color: #ac5e5e;
+  color: #0078c1;
   text-align: left;
 }
 
@@ -134,7 +134,7 @@ hr.wh {
   content: "Yearly";
   padding-right: 10px;
   background-color: #fafafa;
-  color: rgb(205, 21, 241);
+  color: #12961a;
   text-align: right;
 }
 
@@ -142,12 +142,11 @@ hr.wh {
   display: block;
   width: 18px;
   margin: 11px;
-  background: rgb(247, 3, 3);
+  background: #0078c1;
   position: absolute;
   top: 0;
   bottom: 0;
   right: 80px;
-  border: 0 solid #8c8c8c;
   border-radius: 18px;
   transition: all 0.3s ease-in 0s;
 }
@@ -268,7 +267,7 @@ thead tr:first-child th {
   border-top: 1px solid #ccc;
   border-top-left-radius: 3px;
   border-left: 1px solid #ccc;
-  background-image:  linear-gradient(51deg, #2c1872, rgba(186, 55, 143, 0.98) 38%, rgba(235, 96, 79, 0.97) 66%, rgba(250, 218, 93, 0.95));
+  background-color:  #0078c1;
 }
 .comparison .qbo {
   background: #009E2C;

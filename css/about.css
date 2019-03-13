@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+
 body,
 html,
 h1,
@@ -12,26 +13,41 @@ h6 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
-.omni {
-  font-size: 36px;
-  font-family: 'Open Sans';
-  font-weight: bold;
-  color: #1aa72d;
-  padding: 40px;
-  margin-left: 10px;
+
+.content-header {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
+
+.omni-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #106AC7;
+  text-align: center;
+}
+
+.omni-sub {
+  font-size: 24px;
+  font-weight: 400;
+  color: #106AC7;
+  text-align: center;
+}
+
+.omni-about {
+  font-weight: 400;
+  color: #106AC7;
+}
+
+.content {
+  padding-bottom: 50px;
+}
+
 .textabout {
-  font-family: 'OpenSans';
   font-size: 18px;
   font-weight: 200;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
   color: #505050;
-  padding: 30px;
-  padding-top: 10px;
 }
+
 .heada {
   padding-top: 13px;
   padding-left: 30px;
@@ -39,22 +55,25 @@ h6 {
   padding-right: 0;
   background-image: none;
 }
+
 .btn-link {
-  color: #1aa72d;
+  color: #106AC7;
   background-color: transparent;
   text-decoration: none !important;
   font-size: 20px;
   font-weight: 400;
   padding-left: 25px;
 }
+
 .btn-link:hover {
-  color: #1aa72d;
+  color: #106AC7;
   background-color: transparent;
   text-decoration: none !important;
   font-size: 20px;
   font-weight: 400;
   padding-left: 25px;
 }
+
 .overflow-wrap {
   display: inline-block;
   max-width: 90%;
@@ -64,25 +83,38 @@ h6 {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .card {
-  margin: 20px 0 20px 0;
   background: #FCFCFC;
   border: 1px solid #DCDCDC;
   box-shadow: 0 1px 2px 0 rgba(176, 176, 176, 0.3);
+  padding: 20px;
+  margin-bottom: 50px;
 }
+
+.card-header {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.card-body {
+  font-size: 18px;
+  font-weight: 400;
+}
+
 #other {
   display: none;
 }
+
 .draw {
   display: none;
   background: #ffffff;
-  padding: 20px;
   border-bottom: 1px solid #d9d9d9;
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
   color: #000000;
-  padding-left: 30px;
 }
+
 .hover:hover {
   background-color: red;
 }

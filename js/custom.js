@@ -14,8 +14,8 @@ $(document).ready(function () {
         $(".monthly-button").show();
         $(".yearly-button").hide();
     	}else{
-    		$('.price-now span.price_pro').text('2,364,000,-');
-    		$('.price-now span.price_premium').text('3,564,000,-');
+    		$('.price-now span.price_pro').text('397,000,-');
+    		$('.price-now span.price_premium').text('697,000,-');
         $(".monthly-button").hide();
         $(".yearly-button").show();
     	}

@@ -31,7 +31,7 @@ class OrderController extends Controller
     }
     public function load_order(Request $request)
     {
-      $orders = Order::where('userid',Auth::user()->id)
+      $orders = Order::where('user_id',Auth::user()->id)
                   ->orderBy('created_at','descend')
                   ->paginate(15);
                   //->get();
@@ -90,14 +90,14 @@ class OrderController extends Controller
         $str = 'OMNILI'.$dt->format('ymdHi');
         $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
         $order->no_order = $order_number;
-        $order->userid = $user->id;
+        $order->user_id = $user->id;
         $order->package =$request->namapaket;
         //$order->jmlpoin = 0;
-        $order->coupon=0;
+        $order->coupon_id=0;
         $order->total = $request->price;
         $order->discount = 0;
         $order->status = 0;
-        $order->bukti_bayar = "";
+        $order->buktibayar = "";
         $order->keterangan = "";
         $order->save();
         //mail order to user 

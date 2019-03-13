@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
 body,
 html {
   width: 100%;
@@ -9,6 +10,7 @@ html {
   background-attachment: fixed;
   background-position: center;
 }
+
 body,
 h1,
 h2,
@@ -19,43 +21,67 @@ h6 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
+
 .Rectangle {
   width: 570px;
   height: 580px;
   background-color: #106ac7;
 }
+
+.container-custom {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
 .card-custom {
   background-color: #ffffff;
-  border-top: 20px solid #106ac7 !important ;
+  border-top: 10px solid #106ac7 !important;
+  margin-top: 50px;
 }
+
 .cardpad {
   background-color: #ffffff;
   padding: 50px;
 }
+
 .cardpadreg {
   background-color: #ffffff;
   padding: 50px;
 }
+
+.cardfor {
+  background-color: #ffffff;
+  padding: 30px 50px 0 50px;
+}
+
 .card-custom-register {
   background-color: #ffffff;
   box-shadow: 0 2px 4px 0 rgba(233, 33, 33, 0.5);
-  border-top: 20px solid #106ac7 !important;
+  border-top: 10px solid #106ac7 !important;
 }
+
+.form-group {
+  margin-bottom: 30px;
+}
+
 .bsub {
-  box-sizing: border-box;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
+  background-color: #106AC7;
   color: #ffffff;
-  text-transform: uppercase;
+  margin-bottom: 30px;
 }
+
 .bsub:hover {
-  background-color: #15D518 !important;
-  box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
+  background-color: #064B91 !important;
+  box-shadow: 1px 2px 2px 1px rgba(75, 75, 75, 0.3);
 }
+
 .omnilink-logo {
   width: 274px;
   height: 43px;
 }
+
 .Daftar-Disini {
   padding: 20px;
   font-family: 'Open Sans', sans-serif;
@@ -64,6 +90,7 @@ h6 {
   text-align: center;
   color: #106ac7;
 }
+
 .form-input {
   color: #222;
   box-sizing: border-box;
@@ -77,40 +104,117 @@ h6 {
   border-radius: .25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 hr.own {
-  border-top: 3px solid #dbd6d6;
+  border-top: 1px solid #D8D8D8;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }
+
 .REGISTER {
   width: 96px;
   height: 27px;
-  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: bold;
   color: #ffffff;
 }
+
 .have {
   text-align: center !important;
   padding: 20px;
   font-size: 18px;
-  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.3px;
   color: #505050;
 }
+
 .text {
-  font-family: 'Open Sans', sans-serif;
   font-size: 18px;
   height: 30px;
   font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.3px;
   color: #505050;
+}
+
+
+
+/*MEDIA QUERIES*/
+@media (max-width: 575.98px) {
+  .cardpad {
+    padding: 15px;
+  }
+
+  .cardpadreg {
+    padding: 15px;
+  }
+
+  .cardfor {
+    padding: 15px;
+  }
+
+  .have {
+    font-size: 14px
+  }
+  
+  .text {
+    font-size: 14px;
+  }
+
+  .bsub {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .cardpad {
+    padding: 15px;
+  }
+
+  .cardpadreg {
+    padding: 15px;
+  }
+
+  .cardfor {
+    padding: 15px;
+  }
+
+  .have {
+    font-size: 14px
+  }
+  
+  .text {
+    font-size: 16px;
+  }
+  
+  .bsub {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .cardpad {
+    padding: 15px;
+  }
+
+  .cardpadreg {
+    padding: 15px;
+  }
+
+  .cardfor {
+    padding: 15px;
+  }
+
+  .have {
+    font-size: 14px
+  }
+  
+  .text {
+    font-size: 16px;
+  }
+  
+  .bsub {
+    font-size: 20px;
+    font-weight: 600;
+  }
 }
