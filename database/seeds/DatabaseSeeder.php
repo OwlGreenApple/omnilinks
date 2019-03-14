@@ -69,5 +69,20 @@ class DatabaseSeeder extends Seeder
             'referral_link'=>null,
             'remember_token'=>null,
           ]);
+
+          DB::table('users')->insert([
+            'name'=>'Puspitasari N',
+            'email'=>'puspita.celebgramme@gmail.com',
+            'username'=>'puspitaa',
+            'password'=>bcrypt('cobadeh'),
+            'gender'=>0, //female
+            'point'=>0,
+            'is_admin'=>1,//admin
+            'is_confirm'=>1,
+            'confirm_code'=>null,
+            'last_login'=>null,
+            'referral_link'=>null,
+            'remember_token'=>null,
+          ]);
     }
 }

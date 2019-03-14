@@ -7,16 +7,18 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Omnilinks</title>
   <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
-  <script src="{{ asset('js/jquery112.js') }}"></script>
+  <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
-
-  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
   
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 

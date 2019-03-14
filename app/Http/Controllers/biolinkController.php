@@ -180,4 +180,22 @@ class BiolinkController extends Controller
   	return $arr;
   }
 
+  public function save_order(Request $request){
+    $page = Page::find($request->idpage);
+
+    if(!is_null($page)){  
+      $sort = '';
+      foreach ($request->msg as $msg) {
+        if($sort==''){
+          $sort = $msg;
+        } else {
+          $sort = $sort.';'.$msg;
+        }
+      }
+
+      $page->sort = $sort;
+      $page->save();
+      
+    }
+  }
 }

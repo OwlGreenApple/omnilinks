@@ -56,6 +56,7 @@ Auth::routes();
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
     Route::post('/save-template','BiolinkController@savetemp');
     Route::post('/save-link','BiolinkController@savelink');
+    Route::get('/save-order','BiolinkController@save_order');
 
     //make wa link creator
     Route::post('/save-walink','BiolinkController@savewa');
