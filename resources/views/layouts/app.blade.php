@@ -14,6 +14,7 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
   <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
+  <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
   
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
@@ -119,14 +120,6 @@
     </div>
   </footer>
   </div>
-<<<<<<< Updated upstream
 </body>
 
 </html>
-=======
-  </footer>   
-   </div>
-
-  </body>
-</html>
->>>>>>> Stashed changes

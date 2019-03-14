@@ -14,7 +14,9 @@ class AddSortPages extends Migration
     public function up()
     {
       Schema::table('pages', function (Blueprint $table) {
-        $table->string('sort')->nullable()->after('description');
+        $table->string('sort_msg')->nullable()->after('description');
+        $table->string('sort_link')->nullable()->after('sort_msg');
+        $table->string('sort_sosmed')->nullable()->after('sort_link');
       });
     }
 

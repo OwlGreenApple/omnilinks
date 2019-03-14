@@ -126,10 +126,11 @@ public function link($names)
   	$page->youtube_link=$request->youtube;
   	$page->ig_link=$request->ig;
   	$names=$page->names;
-  	$page->save();
+
   	$title=$request->title;
   	$link=$request->url;
-  	foreach (array_combine($title, $link)as $judul=>$linki) 
+    $sort_link = '';
+  	foreach (array_combine($title, $link) as $judul=>$linki) 
   	{
   			$url=new Link();
   			$url->pages_id=$page->id;
@@ -138,7 +139,40 @@ public function link($names)
   			$url->link=$linki;
   			$url->title=$judul;
    			$url->save();
+
+        if($sort_link==''){
+          $sort_link = $url->id;
+        } else {
+          $sort_link = $sort_link.';'.$url->id;
+        }
   	}
+
+    $sort_msg = '';
+    if($request->has('msg')){
+      foreach ($request->msg as $msg) {
+        if($sort_msg==''){
+          $sort_msg = $msg;
+        } else {
+          $sort_msg = $sort_msg.';'.$msg;
+        }
+      }
+    }
+      
+    $sort_sosmed = '';
+    if($request->has('sosmed')){
+      foreach ($request->sosmed as $sosmed) {
+        if($sort_sosmed==''){
+          $sort_sosmed = $sosmed;
+        } else {
+          $sort_sosmed = $sort_sosmed.';'.$sosmed;
+        }
+      }
+    }
+
+    $page->sort_link = $sort_link;
+    $page->sort_msg = $sort_msg;
+    $page->sort_sosmed = $sort_sosmed;
+    $page->save();
 
     $arr['status'] = 'success';
     $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
@@ -195,16 +229,31 @@ public function link($names)
     $page = Page::find($request->idpage);
 
     if(!is_null($page)){  
-      $sort = '';
-      foreach ($request->msg as $msg) {
-        if($sort==''){
-          $sort = $msg;
-        } else {
-          $sort = $sort.';'.$msg;
+
+      $sort_msg = '';
+      if($request->has('msg')){
+        foreach ($request->msg as $msg) {
+          if($sort_msg==''){
+            $sort_msg = $msg;
+          } else {
+            $sort_msg = $sort_msg.';'.$msg;
+          }
+        }
+      }
+      
+      $sort_sosmed = '';
+      if($request->has('sosmed')){
+        foreach ($request->sosmed as $sosmed) {
+          if($sort_sosmed==''){
+            $sort_sosmed = $sosmed;
+          } else {
+            $sort_sosmed = $sort_sosmed.';'.$sosmed;
+          }
         }
       }
 
-      $page->sort = $sort;
+      $page->sort_msg = $sort_msg;
+      $page->sort_sosmed = $sort_sosmed;
       $page->save();
       
     }
