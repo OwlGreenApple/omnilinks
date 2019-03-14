@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
-<link href="{{ asset('css/style-pricing.css?v=1.1') }}" rel="stylesheet">
+<link href="{{ asset('css/style-pricing.css') }}" rel="stylesheet">
 <script src="{{ asset('js/custom.js') }}"></script>
 <section class="page-title">
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1>Omnilinks</h1>
+        <h1>Omnilinkz</h1>
         <hr class="orn">
-        <p class="pg-title">Pilih paket Omnilinks </p>
+        <p class="pg-title">Pilih paket Omnilinkz </p>
         <div class="row" align="center">
           <div class="col-12">
             <div class="onoffswitch">
@@ -32,7 +32,7 @@
         <th class="tl ">
         </th>
         <th class="qbse compare-heading ">
-          FREE
+          FREE TRIAL
         </th>
         <th class="qbse compare-heading ">
           PRO
@@ -77,7 +77,7 @@
         </th>
         <th class="price-info ">
           <div class="price-now"><span class="nprice price_premium">297,000,-</span></div>
-          
+
           <div class="monthly-button">
             <a href="{{url('checkout/3')}}">
               <button class="btn btn-default select-price btn-primary-prc" data-package="1">
@@ -99,176 +99,396 @@
       <tr>
         <td>&nbsp;</td>
         <td colspan="3">
-          Influencer Report (PDF) 
-          <span class="tooltipstered" title="Influencer Report (PDF)">
+          Omnilinkz
+          <span class="tooltipstered" title="Omnlinkz">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
       </tr>
       <tr>
         <td>
-          Influencer Report (PDF) 
-          <span class="tooltipstered" title="Influencer Report (PDF)">
+          Omnilinkz
+          <span class="tooltipstered" title="Omnilinkz">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
         <td><span class="tickblue">1</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">5</span></td>
+        <td><span class="tickblue">Unlimited</span></td>
       </tr>
       <tr>
         <td></td>
         <td colspan="3">
-          Show History 
-          <span class="tooltipstered" title="Show History">
+          Single Link
+          <span class="tooltipstered" title="Single Link">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
       </tr>
       <tr class="compare-row">
         <td>
-          Show History 
-          <span class="tooltipstered" title="Show History">
+          Single Link
+          <span class="tooltipstered" title="Single Link">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">2</span></td>
+        <td><span class="tickblue">5</span></td>
+        <td><span class="tickblue">Unlimited</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Clicks /Hari
+          <span class="tooltipstered" title="Clicks /Hari">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Clicks /Hari
+          <span class="tooltipstered" title="Clicks /Hari">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">10</span></td>
+        <td><span class="tickblue">Unlimited</span></td>
+        <td><span class="tickblue">Unlimited</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Profile Image
+          <span class="tooltipstered" title="Profile Image">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr class="compare-row">
+        <td>
+          Profile Image
+          <span class="tooltipstered" title="Profile Image">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Store Brand
+          <span class="tooltipstered" title="Store Brand">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Store Brand
+          <span class="tooltipstered" title="Store Brand">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Banner Promo
+          <span class="tooltipstered" title="Banner Promo">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr class="compare-row">
+        <td>
+          Banner Promo
+          <span class="tooltipstered" title="Banner Promo">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">1</span></td>
+        <td><span class="tickblue">5</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Click to WA Creator
+          <span class="tooltipstered" title="Click to WA Creator">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Click to WA Creator
+          <span class="tooltipstered" title="Click to WA Creator">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Whatsapp
+          <span class="tooltipstered" title="Whatsapp">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr class="compare-row">
+        <td>
+          Whatsapp
+          <span class="tooltipstered" title="Whatsapp">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          FB Messenger
+          <span class="tooltipstered" title="FB Messenger">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr class="compare-row">
+        <td>
+          FB Messenger
+          <span class="tooltipstered" title="FB Messenger">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Line
+          <span class="tooltipstered" title="Line">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Line
+          <span class="tooltipstered" title="Line">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Skype
+          <span class="tooltipstered" title="Skype">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Skype
+          <span class="tooltipstered" title="Skype">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          WeChat
+          <span class="tooltipstered" title="WeChat">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          WeChat
+          <span class="tooltipstered" title="WeChat">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Telegram
+          <span class="tooltipstered" title="Telegram">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Telegram
+          <span class="tooltipstered" title="Telegram">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          FB Pixel
+          <span class="tooltipstered" title="FB Pixel">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          FB Pixel
+          <span class="tooltipstered" title="FB Pixel">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Google Retargetting
+          <span class="tooltipstered" title="Google Retargetting">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Google Retargetting
+          <span class="tooltipstered" title="Google Retargetting">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Twitter Retargetting
+          <span class="tooltipstered" title="Twitter Retargetting">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Twitter Retargetting
+          <span class="tooltipstered" title="Twitter Retargetting">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Google Analytics
+          <span class="tooltipstered" title="Google Analytics">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Google Analytics
+          <span class="tooltipstered" title="Google Analytics">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Priority Support
+          <span class="tooltipstered" title="Priority Support">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Priority Support
+          <span class="tooltipstered" title="Priority Support">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+        <td><span class="cross">&#10060;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+        <td><span class="tickblue">&check;</span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">
+          Themes
+          <span class="tooltipstered" title="Themes">
+            <i class="fas fa-question-circle fonticon"></i>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Themes
+          <span class="tooltipstered" title="Themes">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
         <td><span class="tickblue">5</span></td>
-        <td><span class="tickblue">25</span></td>
-        <td><span class="tickblue">Unlimited</span></td>
+        <td><span class="tickblue">50</span></td>
+        <td><span class="tickblue">50</span></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
         <td colspan="3">
-          Save Profile 
-          <span class="tooltipstered" title="Save Profile">
+          Hide Omnilinkz Brand
+          <span class="tooltipstered" title="Hide Omnilinkz Brand">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
       </tr>
       <tr>
         <td>
-          Save Profile 
-          <span class="tooltipstered" title="Save Profile">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">25</span></td>
-        <td><span class="tickblue">Unlimited</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Compare 
-          <span class="tooltipstered" title="Compare">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Compare 
-          <span class="tooltipstered" title="Compare">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">Yes - 2</span></td>
-        <td><span class="tickblue">Yes - 4</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Compare From History 
-          <span class="tooltipstered" title="Compare From History">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Compare From History 
-          <span class="tooltipstered" title="Compare From History">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">Yes - 2</span></td>
-        <td><span class="tickblue">Yes - 4</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Grouping 
-          <span class="tooltipstered" title="Grouping">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Grouping 
-          <span class="tooltipstered" title="Grouping">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Multi Group 
-          <span class="tooltipstered" title="Multi Group">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Multi Group 
-          <span class="tooltipstered" title="Multi Group">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Multi Delete 
-          <span class="tooltipstered" title="Multi Delete">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Multi Delete 
-          <span class="tooltipstered" title="Multi Delete">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Multi Influencers Report (PDF) 
-          <span class="tooltipstered" title="Multi Influencer Report (PDF)">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Multi Influencers Report (PDF) 
-          <span class="tooltipstered" title="Multi Influencer Report (PDF)">
+          Hide Omnilinkz Brand
+          <span class="tooltipstered" title="Hide Omnilinkz Brand">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
@@ -279,50 +499,21 @@
       <tr>
         <td>&nbsp;</td>
         <td colspan="3">
-          Multi Influencers List (Excel) 
-          <span class="tooltipstered" title="Multi Influencer List (Excel)">
+          Report Analytics
+          <span class="tooltipstered" title="Report Analytics">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
       </tr>
       <tr>
         <td>
-          Multi Influencers List (Excel) 
-          <span class="tooltipstered" title="Multi Influencer List (Excel)">
+          Report Analytics
+          <span class="tooltipstered" title="Report Analytics">
             <i class="fas fa-question-circle fonticon"></i>
           </span>
         </td>
-        <td><span class="cross">&#10060;</span></td>
         <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Agency Logo for Report (PDF)
-          <span class="tooltipstered" data-tooltip-content="#tooltip_content">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-
-        <div class="tooltip_templates" style="display: none;">
-          <span id="tooltip_content">
-            <img src="{{asset('design/agency-logo.PNG')}}" style="width:175px" /><br> 
-            <strong>
-              Agency Logo for Report (PDF)
-            </strong>
-          </span>
-        </div>
-      </tr>
-      <tr>
-        <td>
-          Agency Logo for Report (PDF)
-          <span class="tooltipstered" data-tooltip-content="#tooltip_content">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="cross">&#10060;</span></td>
         <td><span class="tickblue">&check;</span></td>
       </tr>
       <tr>

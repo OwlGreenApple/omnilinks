@@ -19,11 +19,21 @@ class SingleLinkController extends Controller
 	 }
  	public function single(Request $request)
  	{
- 		$link=new Link;
- 		$user=Auth::User();
- 		$link->pages_id=0;
+ 		$num=7;
+    $generated_string = ""; 
+    $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
+    $len = strlen($domain); 
+     for ($i=0;$i<$num;$i++) 
+    {  
+        $index=rand(0,$len-1); 
+        $generated_string=$generated_string.$domain[$index]; 
+    }  
+      $link=new Link;
+ 		  $user=Auth::User();
+ 		  $link->pages_id=0;
   		$link->users_id=$user->id;
   		$link->pixel_id=$request->idpixel;
+      $link->names=$generated_string; 
   		$link->link=$request->url;
   		$link->title=$request->title;
   		$link->save();
@@ -55,7 +65,7 @@ class SingleLinkController extends Controller
                   ->orderBy('created_at','ascend');
 
         $total=$pixels->count();
-        $pixels=$pixels->paginate(4);
+        $pixels=$pixels->paginate(5);
 
       $arr['view'] =(string) view('user.dashboard.contentsinglepixel')
                     ->with('pixels',$pixels);
@@ -76,15 +86,15 @@ class SingleLinkController extends Controller
   public function loadsinglelink(Request $request)
   {
     $link=Link::join('pixels','links.pixel_id','pixels.id')
-                ->select('pixels.title as judul','links.title','links.link')
+                ->select('pixels.title as judul','links.title','links.names as shorten','links.link')
                 ->where('links.title','Like','%'.$request->carilink.'%')
                 ->where('links.users_id',Auth::user()->id)
                 ->where('links.pages_id',0)
                 ->orderBy('links.created_at','ascend');
                 
-
     $total=$link->count();
-    $link=$link->paginate(2);
+    $link=$link->paginate(5);
+
     $array['view']=(string) view('user.dashboard.contentsinglelink')
                     ->with('links',$link);
     $array['pager']=(string) view('user.dashboard.paginatesinglelink')

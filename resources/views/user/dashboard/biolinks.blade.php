@@ -159,8 +159,6 @@
     });
     $( ".sortable" ).disableSelection();
   });
-
- 
 </script>
 
 <style type="text/css">

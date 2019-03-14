@@ -1,1 +1,1 @@
-{!! $links->render() !!} {{$total}}<span>Total Items</span>
+<div class="form-input">{!! $links->render() !!} {{$total}}<span> Total Items</span></div>

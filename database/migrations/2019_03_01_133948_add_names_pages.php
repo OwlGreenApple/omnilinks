@@ -14,7 +14,7 @@ class AddNamesPages extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->string('names')->nullable()->after('user_id');
+            $table->string('names')->unique()->nullable()->after('user_id');
           });
     }
 

@@ -1,83 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<!--header-->
-<section class="header">
-        <div class="row">
-            <div class="col-md-6 detailheader">
-                <h1 class="txt" style="font-size: 48px;">All-In-One Instagram<br>Bio Link</h1>
-                <h2 class="txt">Sub Heading Title here</h2>
-            <a href="" class="btn btnget">
-                GET STARTED
-            </a>
-            </div>
-            <div class="col-md-6">
-            </div>
+
+<header class="heads">
+  <div class="container">
+    <div class="row row-property">
+      <div class="col-md-5 order-sm-12">
+        <img class="mx-auto d-block img-property" src="image/mockup-top.png">
+      </div>
+      <div class="col-md-7 order-sm-1">
+        <div class="h-100 d-flex justify-content-center flex-column">
+          <h1 class="title-top">All-In-One Instagram<br>Bio Link</h1>
+          <h3 class="sub-title">Sub Heading Title Goes Here</h3>
+          <button type="button" class="btn btn-lg btn-primary btn-custom">GET STARTED</button>
+        </div>
+      </div>
     </div>
-    </section>
-    <!--content1-->
-    <section>
-            <div class="row">
-            <div class="col-md-6 leftcontent">
-                <div class="leftimg">
-                    <img src="{{asset('image/thumb-01.png')}}" alt="">
-                </div>
-            </div>   
-            <div class="col-md-6 rightcontent">
-            <h1 class="txtsection" style="font-size: 48px;">Multiple Link On <br>Your Bio</h1>
-                <h2 class="txtsection">Sub Heading Title Goes here</h2>
-            <a href="" class="btn btncontent1">
-                GET STARTED
-            </a>
-            </div>
+  </div>
+</header>
+
+<section class="content-one">
+  <div class="container container-one">
+    <div class="row">
+      <div class="col-sm-6 img-bg-one">
+        <img class="mx-auto d-block img-content-one" src="image/img-thumb-one.png">
+      </div>
+      <div class="col-sm-6" style="background-color:#fff;">
+        <div class="h-100 d-flex justify-content-center flex-column text-content-one">
+          <h2 class="title-top-content-one">MULTIPLE LINK ON<br>YOUR BIO</h2>
+          <h3 class="sub-title-content-one">Sub Heading Title Goes Here</h3>
+          <button type="button" class="btn btn-lg btn-primary btn-custom">GET STARTED</button>
         </div>
-    </section>
-    <!--content2-->
-        <section>
-            <div class="row">
-            <div class="col-md-6 leftcontent2">
-            <h1 class="txtsection" style="font-size: 48px;">Omnilinks Data<br><div style="margin-left: 86px; padding-left: 51px;">Analystik</div></h1>
-                <h2 class="txtsection">Sub Heading Title Goes here</h2>
-            <a href="" class="btn btncontent1" style="margin-left: 140px;">
-                GET STARTED
-            </a>
-            </div>   
-            <div class="col-md-6 rightcontent2">
-            <div class="leftimg">
-                    <img src="{{asset('image/thumb-02.png')}}" alt="">
-                </div>
-              
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-two">
+  <div class="container container-two">
+    <div class="row">
+      <div class="col-sm-6 order-sm-12 img-bg-two">
+        <img class="mx-auto d-block img-content-two" src="image/img-thumb-two.png">
+      </div>
+      <div class="col-sm-6 order-sm-1" style="background-color:#fff;">
+        <div class="h-100 d-flex justify-content-center flex-column text-content-two">
+          <h2 class="title-top-content-two">OMNILINKZ DATA<br>ANALYTICS</h2>
+          <h3 class="sub-title-content-two">Sub Heading Title Goes Here</h3>
+          <button type="button" class="btn btn-lg btn-primary btn-custom">GET STARTED</button>
         </div>
-    </section>
-    <!--content3/footer content-->
-    <section class="secfoot">
-        <div class="row">
-            <div class="col-md-6">
-        <h1 class="txtsecfoot" style="font-size:41px;">Start Make Your Own Now</h1>
-            </div>
-            <div class="col-md-6">
-                <a href="" class="btn btnget" style="margin-left:156px;">Start Now</a>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-three">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="title-btm mx-auto d-block">START MAKE YOUR OWN NOW</h2>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-lg btn-primary btn-custom mx-auto d-block">GET STARTED</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 @endsection
-<!--<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Home</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
