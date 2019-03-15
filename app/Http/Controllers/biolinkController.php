@@ -92,14 +92,15 @@ class BiolinkController extends Controller
     	'pixels'=>$pixel,
     ]);  
   }
-public function link($names)
- {
-  $page=Page::where('names','=',$names)->first();
-  $link=Link::where('pages_id','=',$page->id)
-        ->orderBy('created_at','ascend')
-        ->get();
-  return view('user.link.link')->with('link',$link);
- }
+
+  public function link($names)
+  {
+    $page=Page::where('names','=',$names)->first();
+    $link=Link::where('pages_id','=',$page->id)
+          ->orderBy('created_at','ascend')
+          ->get();
+    return view('user.link.link')->with('link',$link);
+  }
 
   public function savetemp(Request $request)
   {
@@ -130,7 +131,7 @@ public function link($names)
   	$title=$request->title;
   	$link=$request->url;
     $sort_link = '';
-  	foreach (array_combine($title, $link) as $judul=>$linki) 
+  	foreach (array_combine($title, $link) as $judul => $linki) 
   	{
   			$url=new Link();
   			$url->pages_id=$page->id;
@@ -141,30 +142,61 @@ public function link($names)
    			$url->save();
 
         if($sort_link==''){
-          $sort_link = $url->id;
+          $sort_link = $url->id.'-12';
         } else {
-          $sort_link = $sort_link.';'.$url->id;
+          $sort_link = $sort_link.';'.$url->id.'-12';
         }
   	}
 
     $sort_msg = '';
     if($request->has('msg')){
+      $countmsg = 12/count($request->msg);
+
       foreach ($request->msg as $msg) {
         if($sort_msg==''){
-          $sort_msg = $msg;
+          $sort_msg = $msg.'-'.$countmsg;
         } else {
-          $sort_msg = $sort_msg.';'.$msg;
+          $sort_msg = $sort_msg.';'.$msg.'-'.$countmsg;
         }
       }
     }
       
     $sort_sosmed = '';
     if($request->has('sosmed')){
+      $countsosmed = count($request->sosmed);
+      $mod = count($request->sosmed)%3;
+      $div = floor(count($request->sosmed)/3);
+
+      $col = 0;
+      $colmod = 0;
+      if($mod>0){
+        $colmod = 12/$mod;
+      } 
+      if($div>0){
+        $col = 12/3;
+      }
+
+      $count = 0;
+      $countdiv = 0;
       foreach ($request->sosmed as $sosmed) {
         if($sort_sosmed==''){
-          $sort_sosmed = $sosmed;
+          if($countdiv==$div){
+            $sort_sosmed = $sosmed.'-'.$colmod;
+          } else {
+            $sort_sosmed = $sosmed.'-'.$col;
+          }
         } else {
-          $sort_sosmed = $sort_sosmed.';'.$sosmed;
+          if($countdiv==$div){
+            $sort_sosmed = $sort_sosmed.';'.$sosmed.'-'.$colmod;
+          } else {
+            $sort_sosmed = $sort_sosmed.';'.$sosmed.'-'.$col;
+          }
+        }
+
+        $count = $count+1;
+        if($count>=3){
+          $count=0;
+          $countdiv=1;
         }
       }
     }

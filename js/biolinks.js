@@ -7,6 +7,7 @@ $(document).ready(function(){
         {
             $(this).show();
             $(this).removeClass('hidden');
+            $(this).parent().attr("id","msg-"+$(this).attr('data-type'));
             return false;
         }      
     });
@@ -41,14 +42,14 @@ $(document).ready(function(){
 
     /* biolink social-media */
     $(document).on('click','#sm',function(e){
-        $('.socialmedia').each(function(){
-            if($(this).hasClass('hidden'))
-            {
-            $(this).show();
-            $(this).removeClass('hidden');
-            return false;
-            }
-        });
+      $('.socialmedia').each(function(){
+        if($(this).hasClass('hidden')) {
+          $(this).show();
+          $(this).removeClass('hidden');
+          $(this).parent().attr("id","sosmed-"+$(this).attr('data-type'));
+          return false;
+        }
+      });
     });
     $('#deleteyoutube').on('click',  function () {
                 $('#youtube').hide();

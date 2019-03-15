@@ -299,8 +299,8 @@
                       </div>
                     </li>
 
-                    <li id="msg-telegram">
-                      <div id="telegram" class="messengers hidden" style=" display:none;">
+                    <li id="msg">
+                      <div id="telegram" class="messengers hidden" data-type="telegram" style=" display:none;">
 
                         <div class="row">
                           <div class="col-md-1 col-1 pl-md-3 pl-2">
@@ -343,8 +343,8 @@
                       </div>
                     </li>
 
-                    <li id="msg-skype">
-                      <div id="skype" class="messengers hidden" style="display:none;">
+                    <li id="msg">
+                      <div id="skype" class="messengers hidden" data-type="skype" style="display:none;">
 
                         <div class="row">
                           <div class="col-md-1 col-1 pl-md-3 pl-2">
@@ -474,8 +474,8 @@
                     </div>
                   </li>
                   
-                  <li id="sosmed-fb">
-                    <div id="fb" class="socialmedia hidden" style="display:none;">
+                  <li id="sosmed">
+                    <div id="fb" class="socialmedia hidden" style="display:none;" data-type="fb">
                       <div class="row">
                         <div class="col-md-1 col-1 pl-md-3 pl-2">
                           <span class="handle">
@@ -515,8 +515,8 @@
                     </div>
                   </li>
                 
-                  <li id="sosmed-twitter">
-                    <div id="twitter" class="socialmedia hidden" style=" display:none;">
+                  <li id="sosmed">
+                    <div id="twitter" class="socialmedia hidden" style=" display:none;" data-type="twitter">
                       <div class="row">
                         <div class="col-md-1 col-1 pl-md-3 pl-2">
                           <span class="handle">
@@ -556,8 +556,8 @@
                     </div> 
                   </li>
                 
-                  <li id="sosmed-ig">
-                    <div id="ig" class="socialmedia hidden" style=" display:none;">
+                  <li id="sosmed">
+                    <div id="ig" class="socialmedia hidden" style=" display:none;" data-type="ig">
                       <div class="row">
                         <div class="col-md-1 col-1 pl-md-3 pl-2">
                           <span class="handle">
@@ -730,6 +730,12 @@
           </div>
         </div>
       </div>  
+    </div>
+
+    <div class="col-md-6">
+        
+    </div>
+      
     </div>
   </div>
 </div>
