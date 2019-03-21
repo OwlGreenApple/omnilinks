@@ -20,7 +20,7 @@ class UserController extends Controller
     }
     public function create(Request $request)
     {
-        \App\Uses::create( $request->all());
+        \App\Uses::create($request->all());
         return redirect('/use');
     }
     public function edit($id)

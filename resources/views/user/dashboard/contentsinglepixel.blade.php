@@ -1,3 +1,8 @@
+@if(!$pixels->count())
+<tr align="center">
+		<td colspan="3">No Data To show</td>
+	</tr>
+	@else
 @foreach($pixels as $pixel)
 	<tr align="center">
 		<td>{{$pixel->title}}</td>	
@@ -8,3 +13,4 @@
       </td>
 	</tr>
 @endforeach
+@endif

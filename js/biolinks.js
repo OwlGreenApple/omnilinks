@@ -30,12 +30,15 @@ $(document).ready(function(){
     $(document).on('click', '#addlink', function (e){
    // console.log(arra);
    //arra+=1;
-    $( ".a" ).append( '<div class="input-stack"> <input type="text" name="title[]" value="" placeholder="Title" class="form-control"> <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div>');
+    $( ".a" ).append( '<div class="input-stack"><input type="hidden" name="idlink[]" value="new"> <input type="text" name="title[]" value="" placeholder="Title" class="form-control"> <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div>');
     });
     $(document).on('click','.deletelink',function(e){
       $(this).parent().remove();
     });
-
+    //Banner
+//    $(document).on('click','#addBanner',function(){
+//        $('.b').append(' <input type="text" name="judulBanner" value="" class="form-control" placeholder="Judul banner"><input type="text" name="linkBanner" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel" class="form-control"><option value="">--Pilih Pixel Yang telah dibuat--</option>@foreach($pixels as $pixel)<option value="{{$pixel->id}}">{{$pixel->title}}</option>@endforeach</select><input type="file" name="bannerImage" value="Upload">');
+//    });
     /* biolink social-media */
     $(document).on('click','#sm',function(e){
         $('.socialmedia').each(function(){

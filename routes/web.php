@@ -47,20 +47,28 @@ Auth::routes();
     Route::get('/orders','OrderController@index_order');
     Route::get('/orders/load-order','OrderController@load_order');
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
+
     //dashboard
-    Route::get('/dash','BiolinkController@dash');
-    
+    Route::get('/dash',function(){
+        return view('user.dashboard.dash');
+    });
+    Route::get('/dash/load-dashboard','DashboardController@loadDashboard');
+    Route::get('/dash/load-link','DashboardController@loadlink');
+    Route::get('/dash/delete-pages','DashboardController@deletePage');
+
     //makebio
     Route::get('/dash/new/','BiolinkController@newbio');
     Route::get('/dash/new/{names}','BiolinkController@viewpage');
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
     Route::post('/save-template','BiolinkController@savetemp');
+    Route::get('/banner/load-banner','BiolinkController@addBanner');
     Route::post('/save-link','BiolinkController@savelink');
 
     //make wa link creator
     Route::post('/save-walink','BiolinkController@savewa');
     Route::get('/walink/loadwalink','BiolinkController@loadwalink');
     Route::get('/walink/deletewalink','BiolinkController@deletewalink');
+
     //makepixel
     Route::post('/save-pixel','BiolinkController@savepixel');
     Route::get('/pixel/load-pixel','BiolinkController@loadpixel');
@@ -74,9 +82,10 @@ Auth::routes();
      Route::post('/save-singlepixel','SinglelinkController@singlepixel');
      Route::get('/pixel/load-singlepixel','SinglelinkController@loadsinglepixel');
      Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
-
+     Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
      //url
      Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
+     Route::get('/omn.lkz/{names}','BiolinkController@link');
 });
 
 

@@ -14,8 +14,9 @@
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
       <span id="{{$walinks->id}}">{{$walinks->linkgenerator}}</span>
-       <button type="button" class="btn btn-success btn-biolinks" onclick="copyTO('#{{$walinks->id}}')">COPY LINK</button>
       </div>
+       <button type="button" class="btn btn-success btn-biolinks" onclick="copyTO('#{{$walinks->id}}')">COPY LINK</button>
     </div>
   </div>
+  
 @endforeach

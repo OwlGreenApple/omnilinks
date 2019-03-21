@@ -59,12 +59,14 @@ class OrderController extends Controller
         $order = Order::find($request->id_confirm);
         $folder = Auth::user()->email.'/buktibayar';
   
-        if($order->status==0){
+        if($order->status==0)
+        {
           $order->status = 1;
   
-          if($request->hasFile('buktibayar')){
+          if($request->hasFile('buktibayar'))
+          {
             $path = Storage::putFile('bukti',$request->file('buktibayar'));
-            $order->bukti_bayar = $path;
+            $order->buktibayar = $path;
             
           } else {
             $arr['status'] = 'error';

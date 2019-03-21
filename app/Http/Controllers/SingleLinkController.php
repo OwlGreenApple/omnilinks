@@ -19,21 +19,28 @@ class SingleLinkController extends Controller
 	 }
  	public function single(Request $request)
  	{
- 		$num=7;
-    $generated_string = ""; 
-    $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
-    $len = strlen($domain); 
-     for ($i=0;$i<$num;$i++) 
-    {  
+    if(is_null($request->idlink))
+    {
+      $link=new Link;
+      $num=7;
+      $generated_string = ""; 
+      $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
+      $len = strlen($domain); 
+       for ($i=0;$i<$num;$i++) 
+      {  
         $index=rand(0,$len-1); 
         $generated_string=$generated_string.$domain[$index]; 
-    }  
-      $link=new Link;
+      }  
+      $link->names=$generated_string; 
+    }
+    else
+    {
+      $link=Link::where('id','=',$request->idlink)->first();
+    }
  		  $user=Auth::User();
  		  $link->pages_id=0;
   		$link->users_id=$user->id;
   		$link->pixel_id=$request->idpixel;
-      $link->names=$generated_string; 
   		$link->link=$request->url;
   		$link->title=$request->title;
   		$link->save();
@@ -41,9 +48,9 @@ class SingleLinkController extends Controller
  	}
  	public function singlepixel(Request $request)
  	{
-      if(is_null($request->hiddenid))
+    if(is_null($request->hiddenid))
     {
-    $pixel= new Pixel();
+      $pixel= new Pixel();
     }
     else
     {
@@ -64,8 +71,8 @@ class SingleLinkController extends Controller
                   ->where('pages_id',0)
                   ->orderBy('created_at','ascend');
 
-        $total=$pixels->count();
-        $pixels=$pixels->paginate(5);
+      $total=$pixels->count();
+      $pixels=$pixels->paginate(3);
 
       $arr['view'] =(string) view('user.dashboard.contentsinglepixel')
                     ->with('pixels',$pixels);
@@ -85,15 +92,15 @@ class SingleLinkController extends Controller
   }
   public function loadsinglelink(Request $request)
   {
-    $link=Link::join('pixels','links.pixel_id','pixels.id')
-                ->select('pixels.title as judul','links.title','links.names as shorten','links.link')
+    $link=Link::leftjoin('pixels','links.pixel_id','pixels.id')
+                ->select('pixels.title as judul','links.title','links.id as idlink','links.names as shorten','links.link as datalink','links.pixel_id as idpixel')
                 ->where('links.title','Like','%'.$request->carilink.'%')
                 ->where('links.users_id',Auth::user()->id)
                 ->where('links.pages_id',0)
                 ->orderBy('links.created_at','ascend');
                 
     $total=$link->count();
-    $link=$link->paginate(5);
+    $link=$link->paginate(3);
 
     $array['view']=(string) view('user.dashboard.contentsinglelink')
                     ->with('links',$link);
@@ -104,4 +111,12 @@ class SingleLinkController extends Controller
                     ]);
     return $array;
   }
+  public function deletesinglelink(Request $request)
+  {
+    $link=link::find($request->idlink);
+    $link->delete();
+    $arr['status']='success';
+    return $arr;
+  }
 }
+

@@ -4,9 +4,11 @@ use App\Page;
 use App\Link;
 use App\User;
 use App\Pixel;
+use App\Banner;
 use App\Whatsapplink;
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
-use Auth,Carbon,Validator;
+use Auth,Carbon,Validator,Storage;
 use Ramsey\Uuid\Uuid;
 
 class BiolinkController extends Controller
@@ -53,19 +55,18 @@ class BiolinkController extends Controller
   {
     $num=7;
     do
-  {
-    $generated_string = ""; 
-    $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
-    $len = strlen($domain);  
-    for ($i=0;$i<$num;$i++) 
-    {  
+    {
+      $generated_string = ""; 
+      $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
+      $len = strlen($domain);  
+      for ($i=0;$i<$num;$i++) 
+      {  
         $index=rand(0,$len-1); 
         $generated_string=$generated_string.$domain[$index]; 
-    } 
-  $cekpage=Page::where('names','=',$generated_string)->first();
-  }
+      } 
+      $cekpage=Page::where('names','=',$generated_string)->first();
+    }
     while (!is_null($cekpage));
-
   	$uuid=Uuid::uuid4();
     $user = Auth::user();
     $page=new Page();
@@ -83,6 +84,9 @@ class BiolinkController extends Controller
                   ->get();
   	$page=Page::where('uid','=',$uuid)->first();
   	$pageid=0;
+    $links=Link::where('users_id',Auth::user()->id)
+                ->where('pages_id',$page->id)
+                ->get();
   	if(!is_null($page)){
   		$pageid=$page->id;
   	}
@@ -90,6 +94,7 @@ class BiolinkController extends Controller
     	'uuid'=>$uuid,
     	'pageid'=>$pageid,
     	'pixels'=>$pixel,
+      'links'=>$links,
     ]);  
   }
 public function link($names)
@@ -98,12 +103,68 @@ public function link($names)
   $link=Link::where('pages_id','=',$page->id)
         ->orderBy('created_at','ascend')
         ->get();
-  return view('user.link.link')->with('link',$link);
+  $banner=Banner::where('pages_id','=',$page->id)
+        ->orderBy('created_at','ascend')
+        ->get();
+  return view('user.link.link')
+        ->with(['links'=>$link,
+                 'pages'=>$page,
+                'banner'=>$banner,
+              ]);
  }
 
   public function savetemp(Request $request)
   {
-
+    $uuid=$request->uuidtemp;
+    $page=Page::where('uid','=',$uuid)->first();
+    $page->page_title=$request->judul;
+    $page->link_utama=$request->link;
+    
+    if(is_null($request->file('imagepages')))
+    {
+    $path=null;
+    }
+    else{
+    $path = Storage::putFile('template',$request->file('imagepages')); 
+    }
+    $page->image_pages = $path;
+    $page->telpon_utama=$request->nomor;
+    $page->save();
+    $names=$page->names;
+    for($i=0;$i<count($request->judulBanner);$i++) 
+    { 
+      $banner= new Banner();
+      $user=Auth::user();
+      $banner->users_id=$user->id;
+      $banner->pages_id=$page->id;
+      $banner->title=$request->judulBanner[$i];
+      $banner->link=$request->linkBanner[$i];
+      $banner->pixel_id=$request->bannerpixel[$i];
+      if(is_null($request->file('bannerImage')))
+      {
+        $path1=null;
+      }
+      else
+      {
+        $path1=Storage::putFile('banner',$request->file('bannerImage')[$i]);  
+      }
+      $banner->images_banner=$path1;
+      $banner->save(); 
+    }
+    
+    $arr['status'] = 'success';
+    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
+    return $arr;
+  }
+  public function addBanner()
+  {
+    $pixels=Pixel::where('users_id',Auth::user()->id)
+                  ->where('pages_id','!=',0)
+                  ->orderBy('created_at','ascend')
+                  ->get();
+    $arr['view'] =(string) view('user.dashboard.bannerContent')
+                    ->with('pixels',$pixels);
+     return $arr;
   }
 
   public function savelink(Request $request)
@@ -111,13 +172,20 @@ public function link($names)
   	$uuid=$request->uuid;
   	$page=Page::where('uid','=',$uuid)->first();
   	$user=Auth::user();
-    $page->wa_pixel_id=$request->wapixel;
-    $page->twitter_pixel_id=$request->twitterpixel;
-    $page->telegram_pixel_id=$request->telegrampixel;
-    $page->youtube_pixel_id=$request->youtubepixel;
-    $page->ig_pixel_id=$request->igpixel;
-    $page->skype_pixel_id=$request->skypepixel;
-    $page->fb_pixel_id=$request->fbpixel;
+    $wa=$request->wapixel;
+    $twitter=$request->twitterpixel;
+    $telegram=$request->telegrampixel;
+    $youtube=$request->youtubepixel;
+    $ig=$request->igpixel;
+    $skype=$request->skypepixel;
+    $fb=$request->fbpixel;
+    $page->wa_pixel_id=$wa;
+    $page->twitter_pixel_id=$twitter;
+    $page->ig_pixel_id=$ig;
+    $page->telegram_pixel_id=$telegram;
+    $page->youtube_pixel_id=$youtube;
+    $page->skype_pixel_id=$skype;
+    $page->fb_pixel_id=$fb;
   	$page->wa_link=$request->wa;
   	$page->fb_link=$request->fb;
   	$page->twitter_link=$request->twitter;
@@ -129,25 +197,33 @@ public function link($names)
   	$page->save();
   	$title=$request->title;
   	$link=$request->url;
-  	foreach (array_combine($title, $link)as $judul=>$linki) 
-  	{
-  			$url=new Link();
-  			$url->pages_id=$page->id;
+   /// dd($link);
+    $id=$request->idlink;
+    for ($i=0; $i <count($title); $i++)
+     { 
+      if($id[$i]=='new')
+      {
+        $url=new Link();
+        
+      }
+      else
+      {
+         $url=Link::find($id[$i]);
+
+      }
+       $url->pages_id=$page->id;
         $url->names=null;
-  			$url->users_id=$user->id;
-  			$url->link=$linki;
-  			$url->title=$judul;
-   			$url->save();
-  	}
+        $url->users_id=$user->id;
+        $url->title=$title[$i];
+        $url->link=$link[$i];
+        $url->save();
+    }
+      
 
     $arr['status'] = 'success';
+
     $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
   	return $arr;
-  }
-
-  public function dash()
-  {
-  		return view('user.dashboard.dash');
   }
 
   public function savepixel(Request $request)

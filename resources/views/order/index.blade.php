@@ -81,7 +81,7 @@
       cache: false,
       contentType: false,
       processData: false,
-    //   beforeSend: function()
+    //   beforeSend: function()s
     //   {
     //     $('#loader').show();
     //     $('.div-loading').addClass('background-load');
@@ -304,7 +304,7 @@
     $('#mod-date').html($(this).attr('data-date'));
 
     var keterangan = '-';
-    console.log($(this).attr('data-keterangan'));
+   // console.log($(this).attr('data-keterangan'));
     if($(this).attr('data-keterangan')!='' || $(this).attr('data-keterangan')!=null){
       keterangan = $(this).attr('data-keterangan');
     }

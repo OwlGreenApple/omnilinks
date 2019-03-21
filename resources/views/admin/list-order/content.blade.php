@@ -22,7 +22,7 @@
       @if($order->bukti_bayar=='' or $order->bukti_bayar==null)
         -
       @else
-        <a class="popup-newWindow" href="<?php echo  Storage::disk('public')->url('app/'.$order->bukti_bayar) ?>">
+        <a class="popup-newWindow" href="<?php echo  Storage::disk('public')->url('app/'.$order->buktibayar) ?>">
           View
         </a>
       @endif
