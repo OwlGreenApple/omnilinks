@@ -8,11 +8,12 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Omnilinks</title>
   <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
-  <script src="{{ asset('js/jquery112.js') }}"></script>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
-  <script src="{{asset('js/jquery-ui.js')}}"></script>
-  <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+  <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+   <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,9 +24,9 @@
 
 </head>
 
-<body>
+<body ng-app="">
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel  ">
+    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
       <div class="container-fluid">
         <?php if(Auth::check()){?>
         <a class="navbar-brand" href="{{ url('/dash') }}">

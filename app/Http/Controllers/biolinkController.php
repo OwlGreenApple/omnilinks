@@ -194,11 +194,12 @@ public function link($names)
   	$page->youtube_link=$request->youtube;
   	$page->ig_link=$request->ig;
   	$names=$page->names;
-  	$page->save();
+  	
   	$title=$request->title;
   	$link=$request->url;
    /// dd($link);
     $id=$request->idlink;
+      $sort_link = '';
     for ($i=0; $i <count($title); $i++)
      { 
       if($id[$i]=='new')
@@ -217,8 +218,73 @@ public function link($names)
         $url->title=$title[$i];
         $url->link=$link[$i];
         $url->save();
+
+        if($sort_link=='')
+        {
+          $sort_link = $url->id.'-12';
+        } else
+         {
+          $sort_link = $sort_link.';'.$url->id.'-12';
+        }
+    }
+
+    $sort_msg = '';
+    if($request->has('msg'))
+    {
+      $countmsg = 12/count($request->msg);
+
+      foreach ($request->msg as $msg) {
+        if($sort_msg==''){
+          $sort_msg = $msg.'-'.$countmsg;
+        } else {
+          $sort_msg = $sort_msg.';'.$msg.'-'.$countmsg;
+        }
+      }
     }
       
+    $sort_sosmed = '';
+    if($request->has('sosmed')){
+      $countsosmed = count($request->sosmed);
+      $mod = count($request->sosmed)%3;
+      $div = floor(count($request->sosmed)/3);
+      $col = 0;
+      $colmod = 0;
+      if($mod>0){
+        $colmod = 12/$mod;
+      } 
+      if($div>0){
+        $col = 12/3;
+      }
+
+      $count = 0;
+      $countdiv = 0;
+      foreach ($request->sosmed as $sosmed) {
+        if($sort_sosmed==''){
+          if($countdiv==$div){
+            $sort_sosmed = $sosmed.'-'.$colmod;
+          } else {
+            $sort_sosmed = $sosmed.'-'.$col;
+          }
+        } else {
+          if($countdiv==$div){
+            $sort_sosmed = $sort_sosmed.';'.$sosmed.'-'.$colmod;
+          } else {
+            $sort_sosmed = $sort_sosmed.';'.$sosmed.'-'.$col;
+          }
+        }
+
+        $count = $count+1;
+        if($count>=3){
+          $count=0;
+          $countdiv=1;
+        }
+      }
+    }
+
+    $page->sort_link = $sort_link;
+    $page->sort_msg = $sort_msg;
+    $page->sort_sosmed = $sort_sosmed;
+      $page->save();
 
     $arr['status'] = 'success';
 

@@ -30,10 +30,10 @@ $(document).ready(function(){
     $(document).on('click', '#addlink', function (e){
    // console.log(arra);
    //arra+=1;
-    $( ".a" ).append( '<div class="input-stack"><input type="hidden" name="idlink[]" value="new"> <input type="text" name="title[]" value="" placeholder="Title" class="form-control"> <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div>');
+    $( ".a" ).append( '<li id="link-wa"><div class="row"><div class="col-md-1 col-1 pl-md-3 pl-2"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="col-md-11 col-11"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" placeholder="Title" class="form-control" ><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div></div></div></li>');
     });
     $(document).on('click','.deletelink',function(e){
-      $(this).parent().remove();
+      $(this).parent().parent().parent().remove();
     });
     //Banner
 //    $(document).on('click','#addBanner',function(){

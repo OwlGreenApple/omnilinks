@@ -331,10 +331,14 @@
     });
     $("body").on("click", "#submitlink", function() {
         tambahLink();
+        $('#pesan').removeClass('alert-danger');
+      $('#pesan').children().remove();
     });
 
     $("body").on("click", "#submitpixel", function() {
         tambahPixel();
+        $('#pesan').removeClass('alert-danger');
+      $('#pesan').children().remove();
     });
     $("body").on("click",".btn-editlink",function(){
       var ideditlink=$(this).attr('dataeditid');
@@ -389,7 +393,6 @@
     });
     $(document).on('click', '.pagination a', function(e) {
         e.preventDefault();
-
         if (groupTab == "link") {
             currentPageLink = $(this).attr('href');
             loadSingleLinks();

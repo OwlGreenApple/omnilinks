@@ -33,7 +33,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             dataType: 'text',
-            data: $("#savelink").serialize(),
+            data: $("#savelink").serialize()+'&'+$('.sortable-msg').sortable('serialize')+'&'+$('.sortable-link').sortable('serialize')+'&'+$('.sortable-sosmed').sortable('serialize'),
             url: "<?php echo url('/save-link');?>",
             success: function(result) {
                 refreshwa();
@@ -160,9 +160,46 @@
             }
         });
     }
+
     $(document).ready(function() {
         refreshpixel();
         refreshwa();
+        $('.infooter').remove();
+          $( ".sortable-msg" ).sortable({
+      handle: '.handle',
+      cursor: 'move',
+      axis: 'y',
+      stop: function (event, ui) {
+        var data = $(this).sortable('serialize');
+        //save_order(data);
+      }
+    });
+    $( ".sortable-msg" ).disableSelection();
+    //$( ".sortable-msg" ).draggable();
+
+    $( ".sortable-link" ).sortable({
+      handle: '.handle',
+      cursor: 'move',
+      axis: 'y',
+      stop: function (event, ui) {
+        var data = $(this).sortable('serialize');
+        //save_order(data);
+      }
+    });
+    $( ".sortable-link" ).disableSelection();
+    //$( ".sortable-link" ).draggable();
+
+    $( ".sortable-sosmed" ).sortable({
+      handle: '.handle',
+      cursor: 'move',
+      axis: 'y',
+      stop: function (event, ui) {
+        var data = $(this).sortable('serialize');
+        //save_order(data);
+      }
+    });
+    $( ".sortable-sosmed" ).disableSelection();
+    });
         $('.infooter').remove();
         $("#wizard-picture").change(function() {
             readURL(this);
@@ -177,9 +214,18 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    });
+  
 </script>
-
+<style type="text/css">
+     .sortable-msg, .sortable-link, .sortable-sosmed { 
+    list-style-type: none; 
+    margin-left: -40px;
+  }
+  .handle {
+    cursor: move;
+    padding: 10px;
+  }
+</style>
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <script src="{{asset('js/biolinks.js')}}"></script>
 <section id="tabs" class="project-tab">
@@ -196,7 +242,7 @@
             <div class="col-md-6">
 
                 <div id="pesan" class="alert"></div>
-
+                 <div id="pesanAlert" class="alert"></div>
 
                 <div class="card carddash" style="margin-bottom:20px;">
                     <div class="card-body">
@@ -224,50 +270,96 @@
                                     {{ csrf_field() }}
                                     <!--messengers!-->
                                     <input type="hidden" name="uuid" value="{{$uuid}}">
-                                    <label for="" style="font-weight:bold;">Messengers :</label>
-                                    <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="tambah"><i class="fas fa-plus"></i>
+                                    <label class="mb-3" for="" style="font-weight:bold;">Messengers :</label>
+                                    <button type="button" class="float-right btn btn-primary btn-sm" id="tambah"><i class="fas fa-plus"></i>
                                     </button>
 
-                                    <div class="hid">
-
+                             <div class="hid">
+                                 <ul class="sortable-msg">
+                                      <li id="msg-wa">
                                         <div id="wa" class="messengers">
-                                            <div class="input-group margin ">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="fab fa-whatsapp"></i>
+                                            <div class="row">
+                                              <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                                <span class="handle">
+                                                  <i class="fas fa-bars"></i>
+                                                </span>
+                                              </div>
+                                              <div class="col-md-11 col-11">
+                                                <div class="input-group margin ">
+                                                  <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                      <i class="fab fa-whatsapp"></i>
                                                     </div>
-                                                </div>
-                                                <input type="text" name="wa" class="form-control" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+                                                  </div>
 
-                                                <button type="button" class="btn btn-primary" id="deletewa"><i class="fas fa-trash-alt"></i>
-                                                </button>
+                                                  <input type="text" name="wa" class="form-control" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+                                                
+                                                  <button type="button" class="btn btn-primary" id="deletewa">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                  </button>
+                                                </div>
+                                              </div>
                                             </div>
-                                            <select name="wapixel" class="form-control">
+
+                                        <div class="row">
+                                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                                                <select name="wapixel" class="form-control">
                                                 <option value="">--Pilih Pixel Yang telah dibuat--</option>
                                                 @foreach($pixels as $pixel)
                                                 <option value="{{$pixel->id}}">{{$pixel->title}}</option>
                                                 @endforeach
                                             </select>
+                                            </div>
                                         </div>
+                                    </div>
+                                </li>
 
+                                    <li id="msg">
                                         <div id="telegram" class="messengers hidden" style=" display:none;">
+                                            <div class="row">
+                                                 <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                                    <span class="handle">
+                                                      <i class="fas fa-bars"></i>
+                                                    </span>
+                                                  </div>
+
+                                        <div class="col-md-11 col-11">    
                                             <div class="input-group margin">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text"><i class="fab fa-telegram-plane"></i>
                                                     </div>
                                                 </div>
+
                                                 <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor telegram">
                                                 <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </div>
-                                            <select name="telegrampixel" class="form-control">
+                                        </div>
+                                    </div>
+                                           <div class="row">
+                                               <div class="offset-md-1 offset-1 col-md-11 col-11">
+                                                 <select name="telegrampixel" class="form-control">
                                                 <option value="">--Pilih Pixel Yang telah dibuat--</option>
                                                 @foreach($pixels as $pixel)
                                                 <option value="{{$pixel->id}}">{{$pixel->title}}</option>
                                                 @endforeach
-                                            </select>
+                                                 </select>   
+                                               </div>
+                                           </div>
                                         </div>
+                                    </li>
 
+                                    <li id="msg">
                                         <div id="skype" class="messengers hidden" style="display:none;">
+                                            <div class="row">
+                                                <div class="col-md-1 pl-md-3 pl-2">
+                                                    <span class="handle">
+                                                      <i class="fas fa-bars"></i>
+                                                    </span>
+                                                </div>
+                                            
+
+                                          <div class="col-md-11 col-11">
                                             <div class="input-group margin">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text"><i class="fab fa-skype"></i>
@@ -277,27 +369,41 @@
                                                 <button id="deleteskype" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </div>
+                                            </div>
+                                        </div>
+
+                                         <div class="row">
+                                            <div class="offset-md-1 offset-1 col-md-11 col-11">
                                             <select name="skypepixel" class="form-control">
                                                 <option value="">--Pilih Pixel Yang telah dibuat--</option>
                                                 @foreach($pixels as $pixel)
                                                 <option value="{{$pixel->id}}">{{$pixel->title}}</option>
                                                 @endforeach
                                             </select>
+                                            </div>
+                                         </div>
                                         </div>
-                                    </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
                                     <!--Links-->
 
-                                    <label for="" style="font-weight:bold;">Links :</label>
-                                    <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addlink"><i class="fas fa-plus"></i> Add Link
+                                    <label class="mb-3" for="" style="font-weight:bold;">Links :</label>
+                                    <button type="button" class="float-right btn btn-primary btn-sm" id="addlink"><i class="fas fa-plus"></i> Add Link
                                     </button><br>
 
-                                    <div class="a">
-                                        <input type="hidden" name="idlink[]" value="new">
-                                        <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
-                                        <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
-                                        <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                        </button>
+                                    <div>
+                                    <ul class="sortable-link a">       
                                         @foreach($links as $link)
+                                         <li id="link-wa">
+                                            <div class="row">
+                                                <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                                     <span class="handle">
+                                                        <i class="fas fa-bars"></i>
+                                                      </span>  
+                                                </div>
+                                     <div class="col-md-11 col-11"> 
                                         <div class="input-stack">
                                             <input type="hidden" name="idlink[]" value="{{$link->id}}">
                                             <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
@@ -305,86 +411,204 @@
                                             <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
                                             </button>
                                         </div>
-                                        @endforeach
                                     </div>
+                                </div>
+                                 </li>
+                               @endforeach
+                                        <li id="link-wa">
+                                          <div class="row">
+                                                <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                                     <span class="handle">
+                                                        <i class="fas fa-bars"></i>
+                                                      </span>  
+                                                </div>
+                                    <div class="col-md-11 col-11"> 
+                                        <div class="input-stack">
+                                            <input type="hidden" name="idlink[]" value="new">
+                                            <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
+                                            <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
+                                            <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                   </li>
+                                    </ul>
+                                </div>
 
                                     <!--social media-->
 
-                                    <label for="" style="font-weight:bold">Social Media</label>
-                                    <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="sm"><i class="fas fa-plus"></i></button>
+                                              <label class="mb-3" for="" style="font-weight:bold">
+                  Social Media
+                </label>
+                <button type="button" class="float-right btn btn-primary btn-sm" id="sm">
+                  <i class="fas fa-plus"></i>
+                </button>
 
-                                    <div id="youtube" class="socialmedia">
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-youtube"></i>
-                                                </div>
-                                            </div>
-                                            <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url">
-                                            <button id="deleteyoutube" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                        <select name="youtubepixel" class="form-control">
-                                            <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                            @foreach($pixels as $pixel)
-                                            <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                <ul class="sortable-sosmed">
+                  <li id="sosmed-youtube">
+                    <div id="youtube" class="socialmedia">
+                      <div class="row">
+                        <div class="col-md-1 col-1 pl-md-3 pl-2">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
 
-                                    <div id="fb" class="socialmedia hidden" style="display:none;">
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-facebook-f"></i>
-                                                </div>
-                                            </div>
-                                            <input type="text" name="fb" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook">
-                                            <button id="deletefb" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                        <select name="fbpixel" class="form-control">
-                                            <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                            @foreach($pixels as $pixel)
-                                            <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-youtube"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" >
+                            <button id="deleteyoutube" class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>  
+                      </div>
+                      
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="youtubepixel" class="form-control">
+                            <option value="">
+                              --Pilih Pixel Yang telah dibuat--
+                            </option>
+                            @foreach($pixels as $pixel)
+                              <option value="{{$pixel->id}}">
+                                {{$pixel->title}}
+                              </option>
+                            @endforeach
+                          </select>
+                        </div>  
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <li id="sosmed">
+                    <div id="fb" class="socialmedia hidden" style="display:none;" data-type="fb">
+                      <div class="row">
+                        <div class="col-md-1 col-1 pl-md-3 pl-2">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
 
-                                    <div id="twitter" class="socialmedia hidden" style=" display:none;">
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-twitter"></i>
-                                                </div>
-                                            </div>
-                                            <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter">
-                                            <button id="deletetwitter" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                        <select name="twitterpixel" class="form-control">
-                                            <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                            @foreach($pixels as $pixel)
-                                            <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-facebook-f"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="fb" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook" >
+                            <button id="deletefb" class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>    
+                        </div>
+                      </div>
 
-                                    <div id="ig" class="socialmedia hidden" style=" display:none;">
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-instagram"></i>
-                                                </div>
-                                            </div>
-                                            <input type="text" name="ig" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
-                                            <button id="deleteig" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                        <select name="igpixel" class="form-control">
-                                            <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                            @foreach($pixels as $pixel)
-                                            <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="fbpixel" class="form-control">
+                            <option value="">
+                              --Pilih Pixel Yang telah dibuat--
+                            </option>
+                            @foreach($pixels as $pixel)
+                              <option value="{{$pixel->id}}">
+                                {{$pixel->title}}
+                              </option>
+                            @endforeach
+                          </select>    
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                
+                  <li id="sosmed">
+                    <div id="twitter" class="socialmedia hidden" style=" display:none;" data-type="twitter">
+                      <div class="row">
+                        <div class="col-md-1 col-1 pl-md-3 pl-2">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
 
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-twitter"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter">
+                            <button id="deletetwitter"  class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="twitterpixel" class="form-control">
+                            <option value="">
+                              --Pilih Pixel Yang telah dibuat--
+                            </option>
+                            @foreach($pixels as $pixel)
+                              <option value="{{$pixel->id}}">
+                                {{$pixel->title}}
+                              </option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+                    </div> 
+                  </li>
+                
+                  <li id="sosmed">
+                    <div id="ig" class="socialmedia hidden" style=" display:none;" data-type="ig">
+                      <div class="row">
+                        <div class="col-md-1 col-1 pl-md-3 pl-2">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-instagram"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="ig" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
+                            <button id="deleteig"  class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="igpixel" class="form-control">
+                            <option value="">
+                              --Pilih Pixel Yang telah dibuat--
+                            </option>
+                            @foreach($pixels as $pixel)
+                              <option value="{{$pixel->id}}">
+                                {{$pixel->title}}
+                              </option>
+                            @endforeach
+                          </select>
+                        </div>  
+                      </div>
+                    </div> 
+                  </li>
+                </ul>
                                     <div class="as">
                                         <hr class="own">
                                         <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
@@ -401,7 +625,7 @@
                                     <span class="" style="color:blue">WhatsApp Link Creator</span><br>
                                     <span>Masukkan Nomor WA</span>
                                     <input type="number" name="nomorwa" id="nomorwa" class="">
-                                    <button type="reset" class="btn btn-danger" style="margin-top: 10px; margin-bottom: 10px;">Reset</button>
+                                    <button type="reset" class="btn btn-danger btn-reset" style="margin-top: 10px; margin-bottom: 10px;">Reset</button>
                                     <div class="card">
                                         <span class="card-header">Masukkan Pesan</span>
                                         <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
@@ -433,7 +657,7 @@
                                         <input type="text" name="title" placeholder="Masukkan Judul" id="judul">
                                         <input type="text" name="editidpixel" hidden id="editidpixel">
                                         <button type="button" id="btnpixel" class="btn btn-primary">Save</button>
-                                        <button type="reset" class="btn btn-warning">Reset</button>
+                                        <button type="reset" class="btn btn-warning btn-reset">Reset</button>
                                     </div>
                                 </form>
                                 <hr class="own">
@@ -506,12 +730,25 @@
                     </div>
                 </div>
             </div>
+            <!--phone-->
             <div class="col-md-6">
                 <div class="fixed">
                     <div class="center">
                         <div class="mobile">
                             <div class="mobile1">
-                                <div class="screen"></div>
+                                <div class="screen">
+                                <!--screen-->
+                                <ul>
+                                    <li class="link"><a href="/prPx" title="Email" class="btn btn-primary"><i class="fas fa-envelope"></i><span>Email</span></a></li>
+                                    <li class="link"><a href="/prPx" title="Email" class="btn btn-primary"><i class="fas fa-envelope"></i><span>@{{name}}</span></a></li>
+                                    <li class="link"><a href="/ABpr" title="Skype" class="btn btn-primary"><i class="fab fa-skype"></i><span>Skype</span></a></li>
+
+                                    <li class="link"><a href="/Ohlr" title="Telegram" class="btn btn-primary"><i class="fab fa-telegram-plane"></i><span>telegram</span></a></li>
+                                    <li class="link"><a href="/s9DA" title="WhatsApp" class="btn btn-primary"><i class="fab fa-whatsapp"></i><span>whatsapp</span></a></li>
+
+                                    <li class="link"><a href="/u605" title="Messenger" class="btn btn-primary"><i class="fab fa-facebook-messenger"></i><span>Messenger</span></a></li>
+                                    </ul>
+                                </div>                                    
                             </div>
                         </div>
                     </div>
@@ -521,10 +758,14 @@
     </div>
 </section>
 
+    <p>Name : <input type="text" ng-model="name"></p>
+
 <script type="text/javascript">
     var batas = 1;
     $("body").on("click", "#savetemp", function() {
         tambahTemp();
+      $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
     });
     $("body").on("click", "#addBanner", function() {
         tambahBanner();
@@ -559,14 +800,24 @@
     });
     $(document).on("click", "#btnpixel", function(e) {
         tambahpixel();
+         $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
     });
     $(document).on("click", "#btn-save-link", function(e) {
         tambahPages();
+         $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
     });
+    $('.btn-reset').click(function(){
+      $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
+    });
+
     $(document).on('click', '.btn-editwa', function(e) {
         var editnomorwa = $(this).attr("datanomorwa");
         var editpesan = $(this).attr("datapesan");
         var editidwa = $(this).attr("dataeditwa");
+        $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
         $('#editidwa').val(editidwa);
         $('#nomorwa').val(editnomorwa);
         $('#pesan').val(editpesan);
@@ -575,6 +826,7 @@
         var script = $(this).attr("datascriptpixel");
         var title = $(this).attr("dataedittitle");
         var editidpixel = $(this).attr("dataeditpixelid");
+        $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
         $('#script').val(script);
         $('#judul').val(title);
         $('#editidpixel').val(editidpixel);
