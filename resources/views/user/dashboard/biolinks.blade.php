@@ -225,9 +225,376 @@
     cursor: move;
     padding: 10px;
   }
+  .theme-take{
+    width: 19%;
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid transparent;
+    transition: all .15s ease-in-out;
+  }
+  .mrgtp{
+    margin-top: 3.25rem !important;
+  }
+  .theme1{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(339deg, #21d4fd, #b721ff);
+  }
+   .theme2{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(134deg, #00b4db, #1094c2);
+  }
+
+   .theme3{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(139deg, #25b7b2, #3b9893);
+  }
+   .theme4{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #fc7a3c, #ed4d55);
+  }
+   .theme5{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(312deg, #aa19e7, #2333bf);
+  }
+   .theme6{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #ae92d3, rgba(153, 85, 242, 0.99));
+  }
+   .theme7{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #f7971e, #ffd200);
+  }
+   .theme8{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, #05a907, #17abaa);
+  }
+   .theme9{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(229deg, #ff4e50, #ff8158 41%, #f9d423);
+  }
+   .theme10{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(229deg, #1353b9, #38aee9 44%, #0ae68f);
+  }
+
+.theme11{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(to bottom, #fe8c00, #f83600);
+  }
+   .theme12{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(134deg, #0e76ef, #4497f1 52%, #137bf5);
+  }
+   .theme13{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(45deg, #2c1872, rgba(186, 55, 143, 0.98) 38%, rgba(235, 96, 79, 0.97) 66%, rgba(250, 218, 93, 0.95));
+  }
+   .theme14{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(to bottom, #1a2980, #26d0ce);
+  }
+   .theme15{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #52c234, #061700);
+  }
+   .theme16{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #e65c00, #f9d423);
+  }
+   .theme17{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(to bottom, #4ecdc4, #556270);
+  }
+   .theme18{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(to bottom, #f7ff00, #db36a4);
+  }
+   .theme19{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #1e3c72, #2a5298);
+  }
+   .theme20{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #1d976c, #93f9b9);
+  }
+
+  .theme21{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #c2ffd8, #465efb);
+  }
+   .theme22{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #97abff, #123597);
+  }
+   .theme23{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #3b2667, #bc78ec);
+  }
+   .theme24{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(133deg, #dac72c, #49c628);
+  }
+   .theme25{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #f761a1, #8c1bab);
+  }
+   .theme26{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(133deg, #ffdb01, #0e197d);
+  }
+   .theme27{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #f05f57, #360940);
+  }
+   .theme28{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(133deg, #ff6fd8, #3813c2);
+  }
+   .theme29{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(133deg, #ffa8a8, #fcff00);
+  }
+   .theme30{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(133deg, #3c8ce7, #00eaff);
+  }
+
+  .theme31{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to top, #7028e4, #e5b2ca);
+  }
+   .theme32{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to bottom, #fbc2eb, #a18cd1);
+  }
+   .theme33{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to top, #ffb199, #ff0844);
+  }
+   .theme34{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(296deg, #fbab7e, #f7ce68);
+  }
+   .theme35{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(227deg, #ae8b9c, #8baaaa); 
+  }
+   .theme36{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(227deg, #7de2fc, #b9b6e5);
+  }
+   .theme37{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to left, #b12a5b, #cf556c 25%, #ff8c7f 63%, #ff8177);
+  }
+   .theme38{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(to left, #f9d423, #f83600);
+  }
+   .theme39{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(to top, #009efd, #2af598);
+  }
+   .theme40{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to top, #04befe, #4481eb);
+  }
+
+  .theme41{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(to bottom, #f857a6, #ff5858);
+  }
+   .theme42{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: linear-gradient(to left, #517fa4, #243949);
+  }
+   .theme43{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to top, #fa71cd, #c471f5);
+  }
+   .theme44{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+   background-image: radial-gradient(circle at 50% 50%, #16d9e3, #46aef7);
+  }
+   .theme45{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(to left, #6a11cb, #2575fc);
+  }
+   .theme46{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(227deg, #7742b2, #f180ff 52%, #fd8bd9);
+  }
+   .theme47{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(to top, #f9f047, #0fd850);
+  }
+   .theme48{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(to bottom, #00ecbc, #007adf);
+  }
+   .theme49{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-image: linear-gradient(227deg, #a445b2, #d41872 52%, #ff0066);
+  }
+   .theme50{
+  width: 70.3px;
+  height: 62px;
+  border-radius: 8px;
+  cursor: pointer;
+ background-image: linear-gradient(to bottom, #56ab2f, #a8e063);
+  }
+
 </style>
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
-<script src="{{asset('js/biolinks.js')}}"></script>
+<link rel="stylesheet" href="{{asset('css/template.css')}}">
+
 <section id="tabs" class="project-tab">
     <div class="container">
         <div class="row notif">
@@ -630,7 +997,7 @@
                                         <span class="card-header">Masukkan Pesan</span>
                                         <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
                                     </div>
-                                    <input type="text" name="editidwa" hidden id="editidwa">
+                                    <input type="text" name="editidwa" hidden="" id="editidwa">
                                     <textarea id="demo" hidden="" name="textlink"></textarea>
                                     <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">SAVE & CREATE LINK</button>
                                 </form>
@@ -710,6 +1077,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="text" name="backtheme" hidden id="backtheme">
                                         <label class="switch">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
@@ -720,7 +1088,183 @@
                                         </label>
                                         &nbsp; outlinend buttons
                                         <div class="as">
-                                            <hr class="own">
+                                        
+                                                                                        <!-- Bootstrap CSS -->
+                                                <ul class="nav nav-tabs" role="tablist">
+                                                  <li class="nav-item">
+                                                    <a class="nav-link active" href="#buzz" role="tab" data-toggle="tab">GRADIENT</a>
+                                                  </li>
+                                                  <li class="nav-item">
+                                                    <a class="nav-link" href="#references" role="tab" data-toggle="tab">SOLID</a>
+                                                  </li>
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+
+                                                    <!--theme color -->
+                                                  <div role="tabpanel" class="tab-pane fade in active show" id="buzz">
+                                                      <div class="theme mrgtp">
+                                                          <div class="theme-take">
+                                                              <div class="theme1"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme2"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme3"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme4"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme5"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme6"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme7"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme8"></div>
+                                                          </div>
+                                                         <div class="theme-take">
+                                                              <div class="theme9"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme10"></div>
+                                                          </div>
+                                                           <div class="theme-take">
+                                                              <div class="theme11"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme12"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme13"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme14"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme15"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme16"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme17"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme18"></div>
+                                                          </div>
+                                                         <div class="theme-take">
+                                                              <div class="theme19"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme20"></div>
+                                                          </div>
+                                                        
+                                                          <div class="theme-take">
+                                                              <div class="theme21"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme22"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme23"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme24"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme25"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme26"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme27"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme28"></div>
+                                                          </div>
+                                                         <div class="theme-take">
+                                                              <div class="theme29"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme30"></div>
+                                                          </div>
+                                                     
+                                                       <div class="theme-take">
+                                                              <div class="theme31"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme32"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme33"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme34"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme35"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme36"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme37"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme38"></div>
+                                                          </div>
+                                                         <div class="theme-take">
+                                                              <div class="theme39"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme40"></div>
+                                                          </div>
+                                                     
+                                                       <div class="theme-take">
+                                                              <div class="theme41"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme42"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme43"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme44"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme45"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme46"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme47"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme48"></div>
+                                                          </div>
+                                                         <div class="theme-take">
+                                                              <div class="theme49"></div>
+                                                          </div>
+                                                          <div class="theme-take">
+                                                              <div class="theme50"></div>
+                                                          </div>
+                                                     
+                                                      
+                                                      </div>
+                                                  </div>
+
+                                                  <div role="tabpanel" class="tab-pane fade" id="references">ccc</div>
+                                                </div>
+
                                             <button type="button" class="btn btn-primary btn-biolinks" id="savetemp"><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
                                         </div>
                                     </div>
@@ -736,18 +1280,8 @@
                     <div class="center">
                         <div class="mobile">
                             <div class="mobile1">
-                                <div class="screen">
+                                <div class="screen" id="phonecolor">
                                 <!--screen-->
-                                <ul>
-                                    <li class="link"><a href="/prPx" title="Email" class="btn btn-primary"><i class="fas fa-envelope"></i><span>Email</span></a></li>
-                                    <li class="link"><a href="/prPx" title="Email" class="btn btn-primary"><i class="fas fa-envelope"></i><span>@{{name}}</span></a></li>
-                                    <li class="link"><a href="/ABpr" title="Skype" class="btn btn-primary"><i class="fab fa-skype"></i><span>Skype</span></a></li>
-
-                                    <li class="link"><a href="/Ohlr" title="Telegram" class="btn btn-primary"><i class="fab fa-telegram-plane"></i><span>telegram</span></a></li>
-                                    <li class="link"><a href="/s9DA" title="WhatsApp" class="btn btn-primary"><i class="fab fa-whatsapp"></i><span>whatsapp</span></a></li>
-
-                                    <li class="link"><a href="/u605" title="Messenger" class="btn btn-primary"><i class="fab fa-facebook-messenger"></i><span>Messenger</span></a></li>
-                                    </ul>
                                 </div>                                    
                             </div>
                         </div>
@@ -757,7 +1291,7 @@
         </div>
     </div>
 </section>
-
+<script src="{{asset('js/biolinks.js')}}"></script>
     <p>Name : <input type="text" ng-model="name"></p>
 
 <script type="text/javascript">
@@ -820,7 +1354,7 @@
         $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
         $('#editidwa').val(editidwa);
         $('#nomorwa').val(editnomorwa);
-        $('#pesan').val(editpesan);
+        $('#pesan-wa').val(editpesan);
     });
     $(document).on('click', '.btn-editpixel', function(e) {
         var script = $(this).attr("datascriptpixel");
@@ -831,6 +1365,7 @@
         $('#judul').val(title);
         $('#editidpixel').val(editidpixel);
     });
+   
 </script>
 
 @endsection

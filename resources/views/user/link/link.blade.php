@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/linkmain.css')}}">
 	<link rel="stylesheet" href="{{asset('css/dash.css')}}">
 	<title>Link</title>
-	</head>
+	</head>d
 	<body class="gradient1-theme rounded-buttons outlined-buttons">
 
 	<header class="container notif">

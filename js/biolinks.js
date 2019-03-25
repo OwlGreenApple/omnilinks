@@ -89,3 +89,257 @@ function hanyaAngka(evt) {
     $temp.remove();
   }
 
+  //
+   $('.theme1').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html(' <div class="screen colorgradient1" id="phonecolor"></div>');
+        console.log('halo');
+        $('#backtheme').val(1);
+    });
+    $('.theme2').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient2" id="phonecolor"></div>');
+        $('#backtheme').val(2);
+    });
+    $('.theme3').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient3" id="phonecolor"></div>');
+        $('#backtheme').val(3);
+    });
+     $('.theme4').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient4" id="phonecolor"></div>');
+        $('#backtheme').val(4);
+    });
+    $('.theme5').click(function(){
+         $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient5" id="phonecolor"></div>');
+        $('#backtheme').val(5);
+    });
+    $('.theme6').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient6" id="phonecolor"></div>');
+        $('#backtheme').val(6);
+    });
+     $('.theme7').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient7" id="phonecolor"></div>');
+        $('#backtheme').val(7);
+    });
+    $('.theme8').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient8" id="phonecolor"></div>');
+        $('#backtheme').val(8);
+    });
+    $('.theme9').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient9" id="phonecolor"></div>');
+        $('#backtheme').val(9);
+    });
+    $('.theme10').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient10" id="phonecolor"></div>');
+        $('#backtheme').val(10);
+    });
+     $('.theme11').click(function(){
+   $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient11" id="phonecolor"></div>');
+        $('#backtheme').val(11);
+    });
+    $('.theme12').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient12" id="phonecolor"></div>');
+        $('#backtheme').val(12);
+    });
+    $('.theme13').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient13" id="phonecolor"></div>');
+        $('#backtheme').val(13);
+    });
+     $('.theme14').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient14" id="phonecolor"></div>');
+        $('#backtheme').val(14);
+    });
+    $('.theme15').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient15" id="phonecolor"></div>');
+        $('#backtheme').val(15);
+    });
+    $('.theme16').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient16" id="phonecolor"></div>');
+        $('#backtheme').val(16);
+    });
+     $('.theme17').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient17" id="phonecolor"></div>');
+        $('#backtheme').val(17);
+    });
+    $('.theme18').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient18" id="phonecolor"></div>');
+        $('#backtheme').val(18);
+    });
+    $('.theme19').click(function(){
+     $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient19" id="phonecolor"></div>');
+        $('#backtheme').val(19);
+    });
+    $('.theme20').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient20" id="phonecolor"></div>');
+        $('#backtheme').val(20);
+    });
+      $('.theme21').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient21" id="phonecolor"></div>');
+        $('#backtheme').val(21);
+    });
+    $('.theme22').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient22" id="phonecolor"></div>');
+        $('#backtheme').val(22);
+    });
+    $('.theme23').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient23" id="phonecolor"></div>');
+        $('#backtheme').val(23);
+    });
+     $('.theme24').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient24" id="phonecolor"></div>');
+        $('#backtheme').val(24);
+    });
+    $('.theme25').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient25" id="phonecolor"></div>');
+        $('#backtheme').val(25);
+    });
+    $('.theme26').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient26" id="phonecolor"></div>');
+        $('#backtheme').val(26);
+    });
+     $('.theme27').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient27" id="phonecolor"></div>');
+        $('#backtheme').val(27);
+    });
+    $('.theme28').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient28" id="phonecolor"></div>');
+        $('#backtheme').val(28);
+    });
+    $('.theme29').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient29" id="phonecolor"></div>');
+        $('#backtheme').val(29);
+    });
+    $('.theme30').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient30" id="phonecolor"></div>');
+        $('#backtheme').val(30);
+    });
+     $('.theme31').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient31" id="phonecolor"></div>');
+        $('#backtheme').val(31);
+    });
+    $('.theme32').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient32" id="phonecolor"></div>');
+        $('#backtheme').val(32);
+    });
+    $('.theme33').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient33" id="phonecolor"></div>');
+        $('#backtheme').val(33);
+    });
+     $('.theme34').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient34" id="phonecolor"></div>');
+        $('#backtheme').val(34);
+    });
+    $('.theme35').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient35" id="phonecolor"></div>');
+        $('#backtheme').val(35);
+    });
+    $('.theme36').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient36" id="phonecolor"></div>');
+        $('#backtheme').val(36);
+    });
+     $('.theme37').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient37" id="phonecolor"></div>');
+        $('#backtheme').val(37);
+    });
+    $('.theme38').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient38" id="phonecolor"></div>');
+        $('#backtheme').val(38);
+    });
+    $('.theme39').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient39" id="phonecolor"></div>');
+        $('#backtheme').val(39);
+    });
+    $('.theme40').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient40" id="phonecolor"></div>');
+        $('#backtheme').val(40);
+    });
+       $('.theme41').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient41" id="phonecolor"></div>');
+        $('#backtheme').val(41);
+    });
+    $('.theme42').click(function(){
+        $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient42" id="phonecolor"></div>');
+        $('#backtheme').val(42);
+    });
+    $('.theme43').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient43" id="phonecolor"></div>');
+        $('#backtheme').val(43);
+    });
+     $('.theme44').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient44" id="phonecolor"></div>');
+        $('#backtheme').val(44);
+    });
+    $('.theme45').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient45" id="phonecolor"></div>');
+        $('#backtheme').val(45);
+    });
+    $('.theme46').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient46" id="phonecolor"></div>');
+        $('#backtheme').val(46);
+    });
+     $('.theme47').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient47" id="phonecolor"></div>');
+        $('#backtheme').val(47);
+    });
+    $('.theme48').click(function(){
+       $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient48" id="phonecolor"></div>');
+        $('#backtheme').val(48);
+    });
+    $('.theme49').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient49" id="phonecolor"></div>');
+        $('#backtheme').val(49);
+    });
+    $('.theme50').click(function(){
+      $('.mobile1').children().remove();
+        $('.mobile1').html('<div class="screen colorgradient50" id="phonecolor"></div>');
+        $('#backtheme').val(50);
+    });
+    
+

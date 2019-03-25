@@ -97,6 +97,7 @@
 }
 .btn-biolinks{
     float: right;
+    margin-right: 16px;
     padding-left: 50px;
     padding-right: 50px;
     border-radius: 20px;

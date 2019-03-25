@@ -129,6 +129,7 @@ public function link($names)
     }
     $page->image_pages = $path;
     $page->telpon_utama=$request->nomor;
+    $page->template_id=$request->backtheme;
     $page->save();
     $names=$page->names;
     for($i=0;$i<count($request->judulBanner);$i++) 

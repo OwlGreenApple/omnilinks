@@ -60,7 +60,7 @@
                     <div class="p-4 bd-highlight">
                         <div class="buton">
                         <button type="button" deletedataid="{{$page->id}}" onclick="return confirm('Yakin Anda Ingin Menghapus data ini?')"   class="btn btn-sm btn-danger float-right btn-deletePage"><i class="fas fa-trash-alt"></i></button></div>
-                        <a href="{{url('/dash/new/'.$page->uid)}}" class="btn btn-sm btn-success float-right btn-editpage" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></a>
+                        <button class="btn btn-sm btn-success float-right btn-editPage" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button>
                         <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Saved AS PDF</button>
                     </div>
                 </div>
@@ -209,9 +209,7 @@
         $('body').on('click','.btn-editPage',function(e){
             e.preventDefault();
             e.stopPropagation();
-            let url=$(this).attr('href');
-            $(this).load(url);
-            return false;
+            window.location.href="{{url('/dash/new/'.$page->uid)}}";
          });
         $('body').on('click','.link-header',function(e) {
             //e.stopPropagation();
