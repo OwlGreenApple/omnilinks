@@ -289,7 +289,6 @@ hr.own {
       margin:58px auto;
       overflow: hidden;
       border-radius: 30px;
-      border:2px solid rgba(0,0,0,.3);
       box-shadow: inset 0 0 8px rgba(0,0,0,.3);
     }
     .home{

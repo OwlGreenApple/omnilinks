@@ -32,7 +32,7 @@
 	 background-image: linear-gradient(229deg, #1353b9, #38aee9 44%, #0ae68f);
 }
 .colorgradient11{
-	 background-image: linear-gradient(229deg, #1353b9, #38aee9 44%, #0ae68f);
+	 background-image: linear-gradient(to bottom, #fe8c00, #f83600);
 }
 .colorgradient12{
 	background-image: linear-gradient(134deg, #0e76ef, #4497f1 52%, #137bf5);
@@ -150,4 +150,7 @@
 }
 .colorgradient50{
 	background-image: linear-gradient(to bottom, #56ab2f, #a8e063);
+}
+.rounded-p{
+	border-radius: 50%;
 }

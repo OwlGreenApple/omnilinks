@@ -199,7 +199,15 @@
       }
     });
     $( ".sortable-sosmed" ).disableSelection();
- 
+
+    $(document).on('click','#solid',function(){
+      $('.mobile1').children().remove();
+      $('.mobile1').html('<div class="screen" id="phonecolor"></div>');
+      $('#backtheme').val('');
+    });
+
+    $('#colorpicker').farbtastic('#colour');
+    $('#colorpicker').farbtastic('.screen');
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -209,6 +217,10 @@
                 reader.readAsDataURL(input.files[0]);
             }
           }
+
+        $("#wizard-picture").on('change', function(){
+        readURL(this);
+          });
       });
   
 </script>
@@ -588,7 +600,9 @@
   }
 
 </style>
+<link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
+
 <link rel="stylesheet" href="{{asset('css/template.css')}}">
 
 <section id="tabs" class="project-tab">
@@ -1073,7 +1087,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="text" name="backtheme" hidden id="backtheme">
+                                        <input type="text" name="backtheme" id="backtheme" hidden="" readonly="true" value="1">
                                         <label class="switch">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
@@ -1082,16 +1096,16 @@
                                             <input type="checkbox" name="rounded">
                                             <span class="slider round"></span>
                                         </label>
-                                        &nbsp; outlinend buttons
+                                        &nbsp; outlined buttons
                                         <div class="as">
                                         
                                                                                         <!-- Bootstrap CSS -->
                                                 <ul class="nav nav-tabs" role="tablist">
                                                   <li class="nav-item">
-                                                    <a class="nav-link active" href="#buzz" role="tab" data-toggle="tab">GRADIENT</a>
+                                                    <a class="nav-link active" href="#buzz" id="gradient" role="tab" data-toggle="tab">GRADIENT</a>
                                                   </li>
                                                   <li class="nav-item">
-                                                    <a class="nav-link" href="#references" role="tab" data-toggle="tab">SOLID</a>
+                                                    <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">SOLID</a>
                                                   </li>
                                                 </ul>
                                                 <!-- Tab panes -->
@@ -1259,7 +1273,12 @@
                                                       </div>
                                                   </div>
 
-                                                  <div role="tabpanel" class="tab-pane fade" id="references">ccc</div>
+                                                  <div role="tabpanel" class="tab-pane fade" id="references">
+                                                    <div align="center">
+                                                    <div id="colorpicker"></div>
+                                                    <input type="text" id="colour" name="colour" value="#123456" readonly="">
+                                                  </div>
+                                                  </div>
                                                 </div>
 
                                             <button type="button" class="btn btn-primary btn-biolinks" id="savetemp"><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
@@ -1277,7 +1296,7 @@
                     <div class="center">
                         <div class="mobile">
                             <div class="mobile1">
-                                <div class="screen" id="phonecolor">
+                                <div class="screen colorgradient1" id="phonecolor">
                                 <!--screen-->
                                 </div>                                    
                             </div>
@@ -1288,6 +1307,7 @@
         </div>
     </div>
 </section>
+<script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
     <p>Name : <input type="text" ng-model="name"></p>
 
@@ -1361,6 +1381,6 @@
         $('#judul').val(title);
         $('#editidpixel').val(editidpixel);
     });
-
+    
 </script>
 @endsection
