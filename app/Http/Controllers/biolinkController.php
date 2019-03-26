@@ -195,7 +195,6 @@ public function link($names)
   	$page->youtube_link=$request->youtube;
   	$page->ig_link=$request->ig;
   	$names=$page->names;
-  	
   	$title=$request->title;
   	$link=$request->url;
    /// dd($link);
@@ -287,6 +286,7 @@ public function link($names)
     $page->sort_sosmed = $sort_sosmed;
       $page->save();
 
+    
     $arr['status'] = 'success';
 
     $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
@@ -333,5 +333,4 @@ public function link($names)
   	$arr['status']="success";
   	return $arr;
   }
-
 }
