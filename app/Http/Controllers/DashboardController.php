@@ -17,7 +17,7 @@ class DashboardController extends Controller
     	$page=Page::where('user_id',Auth::user()->id)
     				->orderBy('created_at','ascend')
     				->paginate(5);
-    	
+    	//dd($page->count());
     	$arr['view']=(string) view('user.dashboard.dashboardcontent')
     	 				->with('pages',$page);
 

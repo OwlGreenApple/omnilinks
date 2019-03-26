@@ -95,6 +95,7 @@
 .margin{
     margin-bottom:20px;  
 }
+
 .btn-biolinks{
     float: right;
     margin-right: 16px;
@@ -102,38 +103,47 @@
     padding-right: 50px;
     border-radius: 20px;
 }
+
+/* Dashboard */
 .btncreate{
-  padding-top: 8px ;
-  padding-bottom: 7px;
-  padding-left: 7px;
-  padding-right: 11px;
+  cursor: pointer;
+  padding: 12px 40px;
   font-size: 16px;
   font-weight: 700;
-  color: #ffffff;
   border-radius: 50px;
   margin-left: 20px;
+  border:none;
+  box-shadow: 0 1px 2px 0 rgba(75, 75, 75, 0.50);
 }
-  .btncreate:hover{
-    text-decoration: none;
-    color: #ffffff;
-  }
+
+.btncreate:hover{
+  box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
+}
+
+.btncreate:active,
+.btncreate:focus,
+.btncreate.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
+}
+
+.btnbio {
+  background-color: #106BC8;
+  color: #ffffff;
+}
   
 .btnsingle{
-  padding-top: 8px ;
-  padding-bottom: 7px;
-  padding-left: 7px;
-  padding-right: 11px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #000000;
-  border-radius: 50px;
-  margin-left: 20px;
+  background-color: #FBCE2D;
+  color: #505050;
 }
-  .btnsingle:hover{
-    text-decoration: none;
-    color: #ffffff;
-  }
-  /* The switch - the box around the slider */
+
+.btn-copylink:hover {
+  color: #6EB1F7;
+}
+
+/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
