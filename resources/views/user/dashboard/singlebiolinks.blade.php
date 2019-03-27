@@ -120,11 +120,16 @@
     });
 </script>
 <style type="text/css">
-    .formin {
+ /*   .formin {
         margin-left: 20px;
         padding-left: 20px;
     }
-    .btn-console{
+
+*/  
+ .form-control{
+    border-radius:none;
+ }
+  .btn-console{
         border-radius: 16px;
     }
     .text-card{
@@ -200,7 +205,6 @@
                                     </label>
                                     <input type="hidden" name="idlink" id="idlink"> 
                                     <select name="idpixel" id="idpixel" class="col-md-6 form-control">
-
                                         <option value="">--Pilih--</option>
                                         @foreach($data_pixel as $pixel)
                                         <option value="{{$pixel->id}}">{{$pixel->title}}</option>
@@ -322,12 +326,18 @@
     });
 
     $("body").on("click", ".btn-deletepixelsingle", function() {
+        if(confirm('anda yakin ingin menghapus pixel ini'))
+        {
         var idpixel = $(this).attr('dataid');
-        deleteSinglePixel(idpixel);
+        deleteSinglePixel(idpixel);    
+        }
     });
     $('body').on('click','.btn-deletelink',function(){
-       var idlink=$(this).attr('datadeleteid');
-        deleteLink(idlink);
+        if(confirm('anda yakin ingin menghapus link ini'))
+        {
+        var idlink=$(this).attr('datadeleteid');
+        deleteLink(idlink);     
+        }     
     });
     $("body").on("click", "#submitlink", function() {
         tambahLink();

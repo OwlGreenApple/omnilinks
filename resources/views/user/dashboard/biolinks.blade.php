@@ -124,7 +124,7 @@
             dataType: 'text',
             success: function(result) {
                 $('#nomorwa').val("");
-                $('#pesan').val("");
+                $('#pesan-wa').val("");
                 ///$('#demo').val("");
                 refreshwa();
             }
@@ -200,14 +200,11 @@
     });
     $( ".sortable-sosmed" ).disableSelection();
 
-    $(document).on('click','#solid',function(){
-      $('.mobile1').children().remove();
-      $('.mobile1').html('<div class="screen" id="phonecolor"></div>');
-      $('#backtheme').val('');
-    });
+   
 
     $('#colorpicker').farbtastic('#colour');
-    $('#colorpicker').farbtastic('.screen');
+    //$.farbtastic('#colorpicker','.screen');
+    //$('#colorpicker').farbtastic('.screen');
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -815,7 +812,7 @@
 
                                     <!--social media-->
 
-                                              <label class="mb-3" for="" style="font-weight:bold">
+                 <label class="mb-3" for="" style="font-weight:bold">
                   Social Media
                 </label>
                 <button type="button" class="float-right btn btn-primary btn-sm" id="sm">
@@ -1087,16 +1084,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="text" name="backtheme" id="backtheme" hidden="" readonly="true" value="1">
+                                      
+                                        <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">  
                                         <label class="switch">
-                                            <input type="checkbox">
+                                            <input type="checkbox" name="rounded" value="rounded-p" >
                                             <span class="slider round"></span>
                                         </label> &nbsp;Rounded buttons<br>
                                         <label class="switch">
-                                            <input type="checkbox" name="rounded">
+                                            <input type="checkbox" name="outlined" value="outlined">
                                             <span class="slider round"></span>
                                         </label>
-                                        &nbsp; outlined buttons
+                                        &nbsp; Outlined buttons
                                         <div class="as">
                                         
                                                                                         <!-- Bootstrap CSS -->
@@ -1280,7 +1278,10 @@
                                                   </div>
                                                   </div>
                                                 </div>
-
+                                            <label class="switch">
+                                            <input type="checkbox" name="powered" id="powered" value="powered" disabled="disabled" checked="">
+                                            <span class="slider round"></span>
+                                        </label> &nbsp; Powered By Omnilinks<br>
                                             <button type="button" class="btn btn-primary btn-biolinks" id="savetemp"><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
                                         </div>
                                     </div>
@@ -1309,7 +1310,6 @@
 </section>
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
-    <p>Name : <input type="text" ng-model="name"></p>
 
 <script type="text/javascript">
     var batas = 1;
@@ -1333,12 +1333,16 @@
         }
     });
     $("body").on("click", ".btn-delete", function() {
+      if (confirm('anda yakin ingin menghapus pixel ini')) {
         var idpixel = $(this).attr('dataid');
         delete_pixel(idpixel);
+      }
     });
     $("body").on("click", ".btn-deletewa", function() {
+      if (confirm('anda yakin ingin menghapus walink ini')) {
         var idwalink = $(this).attr('dataidwa');
-        deletewalink(idwalink);
+        deletewalink(idwalink); 
+      }
     });
     $(document).on('click', '#generate', function(e) {
         var nomor = $('#nomorwa').val();
@@ -1372,6 +1376,7 @@
         $('#nomorwa').val(editnomorwa);
         $('#pesan-wa').val(editpesan);
     });
+
     $(document).on('click', '.btn-editpixel', function(e) {
         var script = $(this).attr("datascriptpixel");
         var title = $(this).attr("dataedittitle");
@@ -1381,6 +1386,19 @@
         $('#judul').val(title);
         $('#editidpixel').val(editidpixel);
     });
-    
+     $(document).on('click','#solid',function(){
+      $('#backtheme').val('');
+    });
+     // $(document).on('click','.marker',function(){
+     //      $('#backtheme').val('');
+     // });
+      $(document).on('click','#gradient',function(){
+        $('#backtheme').val('colorgradient1');
+        $('.mobile1').html(' <div class="screen colorgradient1" id="phonecolor"></div>');
+    });
+    //  $('#powered').prop('disabled','disabled');
+      $(document).bind('contextmenu',function(e){
+        e.preventDefault();
+      });
 </script>
 @endsection

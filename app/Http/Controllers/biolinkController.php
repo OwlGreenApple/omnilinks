@@ -99,10 +99,7 @@ class BiolinkController extends Controller
   }
 public function link($names)
  {
-  $page=Page:: leftjoin('template','pages.template_id','template.id')
-              ->select('template.id as idtemp','pages.id as idpage','template.color','pages.page_title','pages.link_utama',
-                        'pages.telpon_utama','pages.image_pages','pages.color_picker','pages.template_id')
-               ->where('pages.names',$names)  
+  $page=Page::where('pages.names',$names)  
               ->first();
   return view('user.link.link')->with('pages',$page);
  }
@@ -116,17 +113,18 @@ public function link($names)
     
     if(is_null($request->file('imagepages')))
     {
-    $path=null;
+      $path=null;
     }
-    else{
-    $path = Storage::putFile('template',$request->file('imagepages')); 
+    else
+    {
+     $path = Storage::putFile('template',$request->file('imagepages')); 
     }
     $page->image_pages = $path;
     $page->telpon_utama=$request->nomor;
 
     if ($request->backtheme=="") 
     {
-       $page->template_id=0;
+       $page->template_id=null;
        $colour="background-color:".$request->colour;
        $page->color_picker=$colour;
     }
@@ -135,7 +133,9 @@ public function link($names)
       $page->color_picker=null;
       $page->template_id=$request->backtheme;  
     }
-    
+    $page->rounded=$request->rounded;
+    $page->outline=$request->outlined;
+    $page->powerede=$request->powered;
     $page->save();
     $names=$page->names;
     for($i=0;$i<count($request->judulBanner);$i++) 

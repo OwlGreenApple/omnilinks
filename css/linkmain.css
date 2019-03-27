@@ -541,10 +541,7 @@ fieldset:disabled a.btn {
   .buttons .btn {
     white-space: normal; }
 
-.messengers {
-  clear: both; }
-  .messengers.links-num-3 .link, .messengers.links-num-4 .link, .messengers.links-num-5 .link, .messengers.links-num-6 .link, .messengers.links-num-7 .link, .messengers.links-num-8 .link, .messengers.links-num-9 .link, .messengers.links-num-10 .link, .messengers.links-num-11 .link, .messengers.links-num-12 .link {
-    max-width: 33.33333%; }
+
   .messengers .btn .fa-network + span {
     display: none; }
   .messengers.links-num-1 .link:nth-of-type(1), .messengers.links-num-4 .link:nth-of-type(1), .messengers.links-num-7 .link:nth-of-type(1), .messengers.links-num-10 .link:nth-of-type(1), .messengers.links-num-1 .messengers.links-num-2 .link:nth-of-type(2), .messengers.links-num-2 .messengers.links-num-1 .link:nth-of-type(2), .messengers.links-num-4 .messengers.links-num-2 .link:nth-of-type(2), .messengers.links-num-2 .messengers.links-num-4 .link:nth-of-type(2), .messengers.links-num-7 .messengers.links-num-2 .link:nth-of-type(2), .messengers.links-num-2 .messengers.links-num-7 .link:nth-of-type(2), .messengers.links-num-10 .messengers.links-num-2 .link:nth-of-type(2), .messengers.links-num-2 .messengers.links-num-10 .link:nth-of-type(2), .messengers.links-num-1 .messengers.links-num-5 .link:nth-of-type(2), .messengers.links-num-5 .messengers.links-num-1 .link:nth-of-type(2), .messengers.links-num-4 .messengers.links-num-5 .link:nth-of-type(2), .messengers.links-num-5 .messengers.links-num-4 .link:nth-of-type(2), .messengers.links-num-7 .messengers.links-num-5 .link:nth-of-type(2), .messengers.links-num-5 .messengers.links-num-7 .link:nth-of-type(2), .messengers.links-num-10 .messengers.links-num-5 .link:nth-of-type(2), .messengers.links-num-5 .messengers.links-num-10 .link:nth-of-type(2), .messengers.links-num-1 .messengers.links-num-8 .link:nth-of-type(2), .messengers.links-num-8 .messengers.links-num-1 .link:nth-of-type(2), .messengers.links-num-4 .messengers.links-num-8 .link:nth-of-type(2), .messengers.links-num-8 .messengers.links-num-4 .link:nth-of-type(2), .messengers.links-num-7 .messengers.links-num-8 .link:nth-of-type(2), .messengers.links-num-8 .messengers.links-num-7 .link:nth-of-type(2), .messengers.links-num-10 .messengers.links-num-8 .link:nth-of-type(2), .messengers.links-num-8 .messengers.links-num-10 .link:nth-of-type(2), .messengers.links-num-1 .messengers.links-num-11 .link:nth-of-type(2), .messengers.links-num-11 .messengers.links-num-1 .link:nth-of-type(2), .messengers.links-num-4 .messengers.links-num-11 .link:nth-of-type(2), .messengers.links-num-11 .messengers.links-num-4 .link:nth-of-type(2), .messengers.links-num-7 .messengers.links-num-11 .link:nth-of-type(2), .messengers.links-num-11 .messengers.links-num-7 .link:nth-of-type(2), .messengers.links-num-10 .messengers.links-num-11 .link:nth-of-type(2), .messengers.links-num-11 .messengers.links-num-10 .link:nth-of-type(2) {
@@ -567,17 +564,7 @@ fieldset:disabled a.btn {
     display: inline-block;
     width: 100%; }
 
-.social_links {
-  text-align: center;
-  margin: 1em auto;
-  margin-bottom: -1.3em; }
-  .social_links .link {
-    display: inline-block;
-    font-size: 2em;
-    padding: 0.3em 0.8em;
-    margin: 0;
-    width: 33.333%;
-    text-align: center; }
+
     .social_links .link a {
       color: inherit; }
     .social_links .link .fa-network {
@@ -3411,8 +3398,6 @@ header {
       .show > .valintine9-theme.outlined-buttons .btn.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5); }
 
-.rounded-buttons .btn {
-  border-radius: 50px !important; }
 
 html {
   min-height: 100%; }
