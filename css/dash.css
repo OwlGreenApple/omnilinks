@@ -43,6 +43,7 @@
     border: none;
     transition: .3s ease-in-out;
   }*/
+
   /*Profile Pic Start*/
 .picture-container{
     position: relative;
@@ -107,11 +108,10 @@
 /* Dashboard */
 .btncreate{
   cursor: pointer;
-  padding: 12px 40px;
-  font-size: 16px;
+  padding: 12px 30px;
+  font-size: 15px;
   font-weight: 700;
   border-radius: 50px;
-  margin-left: 20px;
   border:none;
   box-shadow: 0 1px 2px 0 rgba(75, 75, 75, 0.50);
 }
@@ -135,12 +135,22 @@
 }
   
 .btnsingle{
+  margin-left: 10px;
   background-color: #FBCE2D;
   color: #505050;
 }
 
 .btn-copylink:hover {
   color: #6EB1F7;
+}
+
+.picture-sm {
+  width: 70px; 
+  height: 70px; 
+  background-color: #999999;
+  border: 4px solid #CCCCCC; 
+  color: #FFFFFF; 
+  border-radius: 50%;
 }
 
 /* The switch - the box around the slider */
