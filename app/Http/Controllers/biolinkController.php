@@ -124,20 +124,22 @@ public function link($names)
 
     if ($request->backtheme=="") 
     {
-       $page->template_id=null;
+       $page->template=null;
        $colour="background-color:".$request->colour;
        $page->color_picker=$colour;
     }
     else
     {
       $page->color_picker=null;
-      $page->template_id=$request->backtheme;  
+      $page->template=$request->backtheme;  
     }
+
     $page->rounded=$request->rounded;
     $page->outline=$request->outlined;
     $page->powerede=$request->powered;
     $page->save();
     $names=$page->names;
+
     for($i=0;$i<count($request->judulBanner);$i++) 
     { 
       $banner= new Banner();
@@ -203,9 +205,8 @@ public function link($names)
   	$names=$page->names;
   	$title=$request->title;
   	$link=$request->url;
-   /// dd($link);
     $id=$request->idlink;
-      $sort_link = '';
+    $sort_link = '';
     for ($i=0; $i <count($title); $i++)
      { 
       if($id[$i]=='new')
@@ -216,7 +217,6 @@ public function link($names)
       else
       {
          $url=Link::find($id[$i]);
-
       }
        $url->pages_id=$page->id;
         $url->names=null;
@@ -280,7 +280,8 @@ public function link($names)
         }
 
         $count = $count+1;
-        if($count>=3){
+        if($count>=3)
+        {
           $count=0;
           $countdiv=1;
         }
@@ -290,9 +291,23 @@ public function link($names)
     $page->sort_link = $sort_link;
     $page->sort_msg = $sort_msg;
     $page->sort_sosmed = $sort_sosmed;
-      $page->save();
+    $page->save();
 
+    if((is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)))
+    {
+     $page->colom='col-md-12 col-12';
+    }
+    elseif((!is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && !is_null($page->telegram_link))) 
+    {
+      $page->colom='col-md-6 col-6';
+    }
+    elseif(!is_null($page->wa_link) && !is_null($page->skype_link) && !is_null($page->telegram_link))
+    {
+      $page->colom='col-md-4 col-4';
+    }
     
+    $page->save();
+
     $arr['status'] = 'success';
 
     $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';

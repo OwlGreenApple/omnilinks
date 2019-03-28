@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTemplateTable extends Migration
+class AddColomPages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function (Blueprint $table) {
-        $table->string('template')->nullable()->after('user_id');
-      });
+        Schema::table('pages',function(Blueprint $table){
+          $table->string('colom')->nullable()->after('description');
+        });
     }
 
     /**

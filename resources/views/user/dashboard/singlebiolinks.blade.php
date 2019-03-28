@@ -316,6 +316,63 @@
 </div>
 </section>
 
+<!-- Modal Delete Confirmation -->
+<div class="modal fade" id="confirm-delete-pixel" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Delete Confirmation
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete?
+        <input type="hidden" name="id_deletepixel" id="id_deletepixel">
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-danger btn-delete-pixel" data-dismiss="modal">
+          Yes
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<!-- Modal Delete Confirmation -->
+<div class="modal fade" id="confirm-delete-link" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Delete Confirmation
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete?
+        <input type="hidden" name="id_deletelink" id="id_deletelink">
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-danger btn-delete-link" data-dismiss="modal">
+          Yes
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
 <script type="text/javascript">
     $("body").on("click", "#caripixel", function() {
         loadSinglePixel();
@@ -325,19 +382,27 @@
         loadSingleLinks();
     });
 
-    $("body").on("click", ".btn-deletepixelsingle", function() {
-        if(confirm('anda yakin ingin menghapus pixel ini'))
-        {
-        var idpixel = $(this).attr('dataid');
-        deleteSinglePixel(idpixel);    
-        }
+    $("body").on("click", ".btn-deletepixelsingle", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('#id_deletepixel').val($(this).attr('dataid'));
+         $('#confirm-delete-pixel').modal('show');
     });
-    $('body').on('click','.btn-deletelink',function(){
-        if(confirm('anda yakin ingin menghapus link ini'))
-        {
-        var idlink=$(this).attr('datadeleteid');
-        deleteLink(idlink);     
-        }     
+    $("body").on("click",".btn-delete-pixel",function(e){
+        var iddeletepixel = $('#id_deletepixel').val();
+        deleteSinglePixel(iddeletepixel);
+    });
+
+    $('body').on('click','.btn-deletelink',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $('#id_deletelink').val($(this).attr('datadeleteid'));
+        $('#confirm-delete-link').modal('show');
+               
+    });
+    $('body').on('click','.btn-delete-link',function(){
+        var idlink=$('#id_deletelink').val();
+       deleteLink(idlink); 
     });
     $("body").on("click", "#submitlink", function() {
         tambahLink();

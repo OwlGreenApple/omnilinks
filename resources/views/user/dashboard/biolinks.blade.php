@@ -599,8 +599,7 @@
 </style>
 <link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
-
-<link rel="stylesheet" href="{{asset('css/template.css')}}">
+<link rel="stylesheet" href="{{asset('css/theme.css')}}">
 
 <section id="tabs" class="project-tab">
     <div class="container">
@@ -1279,7 +1278,7 @@
                                                   </div>
                                                 </div>
                                             <label class="switch">
-                                            <input type="checkbox" name="powered" id="powered" value="powered" disabled="disabled" checked="">
+                                            <input type="checkbox" name="powered" id="powered" value="powered" checked="">
                                             <span class="slider round"></span>
                                         </label> &nbsp; Powered By Omnilinks<br>
                                             <button type="button" class="btn btn-primary btn-biolinks" id="savetemp"><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
@@ -1397,8 +1396,8 @@
         $('.mobile1').html(' <div class="screen colorgradient1" id="phonecolor"></div>');
     });
     //  $('#powered').prop('disabled','disabled');
-      $(document).bind('contextmenu',function(e){
-        e.preventDefault();
-      });
+      // $(document).bind('contextmenu',function(e){
+      //   e.preventDefault();
+      // });
 </script>
 @endsection

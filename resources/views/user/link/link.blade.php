@@ -13,15 +13,14 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{{asset('css/linkmain.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/template.css')}}">
 	<link rel="stylesheet" href="{{asset('css/dash.css')}}">
 	<title>Link</title>
 	</head>
-	@if(is_null($pages->template_id))
+	@if(is_null($pages->template))
 	<body style=" color:#fff; {{$pages->color_picker}}" class="a {{$pages->rounded}} {{$pages->outline}}">
 	@else
-	<body class="{{$pages->color}} {{$pages->rounded}} {{$pages->outline}}" >
+	<body class="{{$pages->template}} {{$pages->rounded}} {{$pages->outline}}" >
 	@endif
 	<header class="container notif">
 		<div class="row">
@@ -36,19 +35,19 @@
 				<ul style="bottom: 31px; font-size: large; margin-left: 112px;">
 				  <li style="display: block; margin-bottom: 50px;">{{$pages->page_title}}</li>
 				  <li style="display: block; margin-bottom: 50px;">{{$pages->link_utama}}</li>
-				  <li style="display: block">{{$pages->telpon_utama}}c</li>
+				  <li style="display: block">{{$pages->telpon_utama}}</li>
 				</ul>
 			</div>
 		</div>
 	</header>
 <?php
-  $link=Link::where('pages_id','=',$pages->idpage)
+  $link=Link::where('pages_id','=',$pages->id)
         ->orderBy('created_at','ascend')
         ->get();
-  $banner=Banner::where('pages_id','=',$pages->idpage)
+  $banner=Banner::where('pages_id','=',$pages->id)
         ->orderBy('created_at','ascend')
         ->get();
-        ?>
+ ?>
 	<div class="galleryContainer">
     <div class="slideShowContainer">
         <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow"><span class="arrow arrowLeft"></span></div>
@@ -69,33 +68,63 @@
        @endif
     </div>
     <div id="dotsContainer"></div>
-</div>
-	<div class="container biolink-page">
+  </div>
+
+
+	<div class="container biolink-page" style="margin-top: 20px">
 	<header></header>
-	
-	<ul class="links messengers links-num-6">
+	<div class="row" style="margin-bottom: 50px;">
+	@if(!is_null($pages->wa_link) || !is_null($pages->wa_pixel_id))
+	  <div class="{{$pages->colom}}">
+        <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i></a>
+	  </div>
+	  @endif
+	  @if(!is_null($pages->skype_link) || !is_null($pages->skype_pixel_id))
+      <div class="{{$pages->colom}}">
+        <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i></a>
+	  </div>
+	  @endif
+	  @if(!is_null($pages->telegram_link) || !is_null($pages->telegram_pixel_id))
+      <div class="{{$pages->colom}}">
+        <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+      @endif	
+	</div>
 
-	<li class="link"><a href="/prPx" title="Email" class="btn btn-light"><i class="fas fa-envelope"></i></a></li>
-	<li class="link"><a href="/ABpr" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i></a></li>
-	<li class="link"><a href="/Ohlr" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i></a></li>
-	</ul>
-
-	<ul class="links buttons">
-	@foreach($link as $link) 
-	<li class="link"><a href="{{$link->link}}" title="" class="btn btn-light"><span>{{$link->title}}</span></a>
-	  </li>
+<div class="row">
+	@foreach($link as $link)
+	<div class="col-md-12 col-12" style="margin-bottom: 20px;"> 
+	<a href="{{$link->link}}" title="" class="btn btn-light"><span>{{$link->title}}</span></a>
+	</div>
 	@endforeach
 	</ul>
+	</div>
+	<div class="row rows">
 
-	<ul class="links social_links links-num-7">
-		<li class="link"><a href="/EdT0" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-		<li class="link"><a href="/5V3m" title="fb"><i class="fab fa-facebook-f"></i></a></li>
-		<li class="link"><a href="/4rCk" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-		<li class="link"><a href="/9FhK" title="ig"><i class="fab fa-instagram"></i></a></li>
-	</ul>
+	@if(!is_null($pages->twitter_link)|| !is_null($pages->twitter_pixel_id))
+	   <div class="col-md-3 col-3 linked">
+	   <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+	   </div>
+   @endif
+   @if(!is_null($pages->fb_link)|| !is_null($pages->fb_pixel_id))
+	   <div class="col-md-3 col-3 linked">
+	   <a href="#" title="fb"><i class="fab fa-facebook-f"></i></a>
+	   </div>
+   @endif
+   @if(!is_null($pages->youtube_link)|| !is_null($pages->youtube_pixel_id))
+	   <div class="col-md-3 col-3 linked">
+	   <a href="#" title="Youtube"><i class="fab fa-youtube"></i></a>
+	   </div>
+	@endif
+	@if(!is_null($pages->ig_link)|| !is_null($pages->ig_pixel_id))
+	   <div class="col-md-3 col-3 linked">
+	   <a href="#" title="ig"><i class="fab fa-instagram"></i></a>	
+	   </div>
+	 @endif
+	</div>
 </div>
-@if(!is_null($pages->powered))
-<div class="powered-by-shorby"><a href="">powered by<br><br>&nbsp;&nbsp;<span class="shorby-logo">Omnilinks</span>
+@if(!is_null($pages->powerede))
+<div class="powered-omnilinks"><a href=""><span style="font-size: small;">Powered by</span><br>&nbsp;&nbsp;<span class="logo">Omnilinks</span>
 </a>
 </div>
 @else
