@@ -46,9 +46,24 @@
 
 </script>
 
+<style type="text/css">
+  
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+}
+.fa-search {
+  width: 15px;
+  margin: -25px 10px;
+  float: right;
+}  
+</style>
+
 <div class="container">
   <div class="row notif">
-    <div class="col-md-12">
+    <div class="col-md-12 mb-3">
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <button type="button" class="close" aria-label="Close">
           <span aria-hidden="true">×</span>
@@ -71,40 +86,57 @@
         </button>
       </a>
 
-      <div style="padding-top: 49px; margin-left: 20px; font-size: 20px;">
+      <div style="padding-top: 49px; font-size: 25px;">
         <p>Omnilinkz Chart</p>
-        <input type="text" name="search" class="form-cari" placeholder="Cari Link / Judul">
 
-        <div style="float: right;">
-          <select name="bulan" class="form-control form-controll">
-            <?php 
-              $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+        <div class="row mb-4 mt-5">
+          <div class="col-md-6">
+            <div class="input-group">
+              <input type="text" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">
 
-              for($a=1;$a<=12;$a++) {
-                if($a==date("m")) { 
-                  $pilih="selected";
-                } else {
-                  $pilih="";
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">
+                  <i class="fas fa-search"></i>
+                </span>
+              </div>
+            </div>  
+          </div>
+          
+          <div class="col-md-6 text-md-right text-left">
+            <select name="bulan" class="form-control form-controll">
+              <?php 
+                $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+                for($a=1;$a<=12;$a++) {
+                  if($a==date("m")) { 
+                    $pilih="selected";
+                  } else {
+                    $pilih="";
+                  }
+                  echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
                 }
-                echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
-              }
-            ?>
-          </select>
+              ?>
+            </select>
 
-          <select name="tahun" class="form-control form-controll">
-            <?php
-              $thn_skr = date('Y');
-              for ($x = $thn_skr; $x >= 1980; $x--) {
-            ?>
-                <option value="<?php echo $x ?>">
-                  <?php echo $x ?>    
-                </option>
-            <?php
-              }
-            ?>
-          </select>
-
+            <select name="tahun" class="form-control form-controll">
+              <?php
+                $thn_skr = date('Y');
+                for ($x = $thn_skr; $x >= 1980; $x--) {
+              ?>
+                  <option value="<?php echo $x ?>">
+                    <?php echo $x ?>    
+                  </option>
+              <?php
+                }
+              ?>
+            </select> 
+          </div>
+            
         </div>
+        
+
+        <div style="clear: both;"></div>
+
       </div>
 
       <hr>

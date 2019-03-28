@@ -14,7 +14,7 @@ class AddTotalcounterTable extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-        $table->string('total_counter')->nullable()->after('skype_link_counter');
+        $table->biginteger('total_counter')->default(0)->after('skype_link_counter');
         });
     }
 
