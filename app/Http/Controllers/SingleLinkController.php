@@ -12,10 +12,8 @@ class SingleLinkController extends Controller
 {
   public function newsingle()
 	 {
-	  $data_pixel=Pixel::where('users_id',Auth::user()->id)
-                          ->where('pages_id',0)
-                          ->get();
-		return view('user.dashboard.singlebiolinks',['data_pixel'=>$data_pixel]);
+	 
+		return view('user.dashboard.singlebiolinks');
 	 }
  	public function single(Request $request)
  	{
@@ -116,6 +114,15 @@ class SingleLinkController extends Controller
     $link=link::find($request->idlink);
     $link->delete();
     $arr['status']='success';
+    return $arr;
+  }
+  public function loadPixelLink()
+  {
+     $data_pixel=Pixel::where('users_id',Auth::user()->id)
+                          ->where('pages_id',0)
+                          ->get();
+    $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
+                  ->with('data_pixel',$data_pixel);
     return $arr;
   }
 }

@@ -63,7 +63,7 @@ Auth::routes();
     Route::post('/save-template','BiolinkController@savetemp');
     Route::get('/banner/load-banner','BiolinkController@addBanner');
     Route::post('/save-link','BiolinkController@savelink');
-
+    Route::get('/load/pixelpage','BiolinkController@pixelpage');
     //make wa link creator
     Route::post('/save-walink','BiolinkController@savewa');
     Route::get('/walink/loadwalink','BiolinkController@loadwalink');
@@ -78,10 +78,10 @@ Auth::routes();
      Route::get('/dash/newsingle','SinglelinkController@newsingle');
      Route::post('/save-singlelink','SinglelinkController@single');
      Route::get('/dash/newsingle/load-singlelink','SinglelinkController@loadsinglelink');
-
      Route::post('/save-singlepixel','SinglelinkController@singlepixel');
      Route::get('/pixel/load-singlepixel','SinglelinkController@loadsinglepixel');
      Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
+     Route::get('/pixel/loadPixelLink','SinglelinkController@loadPixelLink');
      Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
      //url
      Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');

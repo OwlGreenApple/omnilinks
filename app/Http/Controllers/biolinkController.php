@@ -79,9 +79,7 @@ class BiolinkController extends Controller
 
   public function viewpage($uuid)
   {	
-  	$pixel=Pixel::where('users_id',Auth::user()->id)
-                  ->where('pages_id','!=',0)
-                  ->get();
+ 
   	$page=Page::where('uid','=',$uuid)->first();
   	$pageid=0;
     $links=Link::where('users_id',Auth::user()->id)
@@ -93,7 +91,6 @@ class BiolinkController extends Controller
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
     	'pageid'=>$pageid,
-    	'pixels'=>$pixel,
       'links'=>$links,
     ]);  
   }
@@ -102,6 +99,17 @@ public function link($names)
   $page=Page::where('pages.names',$names)  
               ->first();
   return view('user.link.link')->with('pages',$page);
+ }
+
+ public function pixelpage()
+ {
+    $pixel=Pixel::where('users_id',Auth::user()->id)
+                  ->where('pages_id','!=',0)
+                  ->get();
+
+    $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
+                  ->with('data_pixel',$pixel);
+    return $arr;
  }
 
   public function savetemp(Request $request)
@@ -306,11 +314,27 @@ public function link($names)
       $page->colom='col-md-4 col-4';
     }
     
+    if ((is_null($page->fb_link)&& is_null($page->ig_link) && is_null($page->twitter_link) && !is_null($page->youtube_link))||(is_null($page->fb_link)&& is_null($page->ig_link) && !is_null($page->twitter_link) && is_null($page->youtube_link))||(is_null($page->fb_link) && !is_null($page->ig_link) && is_null($page->twitter_link) && is_null($page->youtube_link))||(!is_null($page->fb_link)&& is_null($page->ig_link) && is_null($page->twitter_link) && is_null($page->youtube_link))) 
+    {
+      $page->colom_sosmed='col-md-12 col-12 text-center';
+    }
+    elseif((is_null($page->fb_link)&& is_null($page->ig_link) && !is_null($page->twitter_link) && !is_null($page->youtube_link))||(is_null($page->fb_link)&& !is_null($page->ig_link) && is_null($page->twitter_link) && !is_null($page->youtube_link))||(!is_null($page->fb_link) && is_null($page->ig_link) && is_null($page->twitter_link) && !is_null($page->youtube_link))||(!is_null($page->fb_link)&& !is_null($page->ig_link) && is_null($page->twitter_link) && is_null($page->youtube_link))||(!is_null($page->fb_link)&& is_null($page->ig_link) && !is_null($page->twitter_link) && is_null($page->youtube_link))||(is_null($page->fb_link)&& !is_null($page->ig_link) && !is_null($page->twitter_link) && is_null($page->youtube_link)))
+    {
+      $page->colom_sosmed='col-md-6 col-6 text-center';
+    }
+    elseif ((is_null($page->fb_link)&& !is_null($page->ig_link) && !is_null($page->twitter_link) && !is_null($page->youtube_link))||(!is_null($page->fb_link)&& !is_null($page->ig_link) && !is_null($page->twitter_link) && is_null($page->youtube_link))||(!is_null($page->fb_link) && !is_null($page->ig_link) && is_null($page->twitter_link) && !is_null($page->youtube_link))||(!is_null($page->fb_link)&& is_null($page->ig_link) && !is_null($page->twitter_link) && !is_null($page->youtube_link))) 
+    {
+       $page->colom_sosmed='col-md-4 col-4 text-center';
+    }
+    elseif(!is_null($page->fb_link) && !is_null($page->ig_link) && !is_null($page->twitter_link) && !is_null($page->youtube_link))
+    {
+      $page->colom_sosmed='col-md-3 col-3 text-center';
+    }
     $page->save();
 
     $arr['status'] = 'success';
 
-    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
+    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a><i class="fas fa-file"></i';
   	return $arr;
   }
 

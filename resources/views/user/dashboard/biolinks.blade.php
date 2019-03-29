@@ -63,6 +63,8 @@
                 $('#judul').val("");
                 $('#editidpixel').val("");
                 refreshpixel();
+                loadPixelPage();
+                tambahBanner();
             },
         });
     }
@@ -113,6 +115,27 @@
         });
     }
 
+    function loadPixelPage()
+    {
+      $.ajax({
+        type:'GET',
+        url:"<?php echo url('/load/pixelpage');?>",
+        dataType:'text',
+        success: function(result)
+        {
+          var data=jQuery.parseJSON(result);
+          $('#wapixel').html(data.view);
+          $('#telegrampixel').html(data.view);
+          $('#skypepixel').html(data.view);
+          $('#youtubepixel').html(data.view);
+          $('#fbpixel').html(data.view);
+          $('#igpixel').html(data.view);
+          $('#twitterpixel').html(data.view);
+          $('.bannerpixel').html(data.view);
+        }
+      });
+    }
+
     function tambahwalink() {
         $.ajax({
             type: 'POST',
@@ -156,17 +179,18 @@
                 var data = jQuery.parseJSON(result);
                 if (data.status == 'success') {
                     refreshwa();
-
                 }
             }
         });
     }
 
     $(document).ready(function() {
+        loadPixelPage();
         refreshpixel();
         refreshwa();
+
         $('.infooter').remove();
-          $( ".sortable-msg" ).sortable({
+        $( ".sortable-msg" ).sortable({
       handle: '.handle',
       cursor: 'move',
       axis: 'y',
@@ -676,12 +700,7 @@
 
                                         <div class="row">
                                             <div class="offset-md-1 col-md-11 offset-1 col-11">
-                                                <select name="wapixel" class="form-control">
-                                                <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                                @foreach($pixels as $pixel)
-                                                <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                                @endforeach
-                                            </select>
+                                                <select name="wapixel" class="form-control" id="wapixel"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -711,12 +730,7 @@
                                     </div>
                                            <div class="row">
                                                <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                                 <select name="telegrampixel" class="form-control">
-                                                <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                                @foreach($pixels as $pixel)
-                                                <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                                @endforeach
-                                                 </select>   
+                                                 <select name="telegrampixel" id="telegrampixel" class="form-control"></select>   
                                                </div>
                                            </div>
                                         </div>
@@ -747,12 +761,7 @@
 
                                          <div class="row">
                                             <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                            <select name="skypepixel" class="form-control">
-                                                <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                                @foreach($pixels as $pixel)
-                                                <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                                @endforeach
-                                            </select>
+                                            <select name="skypepixel" class="form-control" id="skypepixel"></select>
                                             </div>
                                          </div>
                                         </div>
@@ -845,15 +854,7 @@
                       
                       <div class="row">
                         <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="youtubepixel" class="form-control">
-                            <option value="">
-                              --Pilih Pixel Yang telah dibuat--
-                            </option>
-                            @foreach($pixels as $pixel)
-                              <option value="{{$pixel->id}}">
-                                {{$pixel->title}}
-                              </option>
-                            @endforeach
+                          <select name="youtubepixel" id="youtubepixel" class="form-control">
                           </select>
                         </div>  
                       </div>
@@ -886,16 +887,7 @@
 
                       <div class="row">
                         <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="fbpixel" class="form-control">
-                            <option value="">
-                              --Pilih Pixel Yang telah dibuat--
-                            </option>
-                            @foreach($pixels as $pixel)
-                              <option value="{{$pixel->id}}">
-                                {{$pixel->title}}
-                              </option>
-                            @endforeach
-                          </select>    
+                          <select name="fbpixel" id="fbpixel" class="form-control"></select>    
                         </div>
                       </div>
                     </div>
@@ -927,15 +919,7 @@
 
                       <div class="row">
                         <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="twitterpixel" class="form-control">
-                            <option value="">
-                              --Pilih Pixel Yang telah dibuat--
-                            </option>
-                            @foreach($pixels as $pixel)
-                              <option value="{{$pixel->id}}">
-                                {{$pixel->title}}
-                              </option>
-                            @endforeach
+                          <select name="twitterpixel" id="twitterpixel" class="form-control">
                           </select>
                         </div>
                       </div>
@@ -967,15 +951,7 @@
 
                       <div class="row">
                         <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="igpixel" class="form-control">
-                            <option value="">
-                              --Pilih Pixel Yang telah dibuat--
-                            </option>
-                            @foreach($pixels as $pixel)
-                              <option value="{{$pixel->id}}">
-                                {{$pixel->title}}
-                              </option>
-                            @endforeach
+                          <select name="igpixel" id="igpixel" class="form-control">
                           </select>
                         </div>  
                       </div>
@@ -1070,11 +1046,8 @@
                                                         <div class="c">
                                                             <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
                                                             <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
-                                                            <select name="bannerpixel[]" class="form-control">
-                                                                <option value="">--Pilih Pixel Yang telah dibuat--</option>
-                                                                @foreach($pixels as $pixel)
-                                                                <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                                                @endforeach
+                                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
+                                                               
                                                             </select>
                                                             <input type="file" name="bannerImage[]" value="Upload">
                                                             <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>

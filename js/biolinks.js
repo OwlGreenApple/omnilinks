@@ -2,7 +2,7 @@
 var arra=0;
 $(document).ready(function(){
     $(document).on('click', '#tambah', function (e) {
-    $('.messengers').each(function () {
+    $('.messengers').each(function(){
         if($(this).hasClass('hidden'))
         {
             $(this).show();

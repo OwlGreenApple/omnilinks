@@ -6,7 +6,43 @@
     var currentPagePixel = "";
     var groupTab = "link";
 
-    function loadSinglePixel() {
+    $(document).on('click', '#link-tab', function() {
+        groupTab = "link";
+        $('#table-pixel-save').children().remove();
+        $('#table-link-save').html('<div id="table-link"><table class="table"><thead align="center"><th class="">title</th><th class="">pixel</th><th class="">link</th><th>action</th></thead><tbody id="contentlink"></tbody></table><div id="pageer"></div></div>');
+        loadSingleLinks();
+        $('#search-pixel').hide();
+        $('#search-pixel').addClass('hidden');
+        $("#search-link").show();
+        $("#search-link").removeClass('hidden');
+        //return false;
+    });
+    $(document).on('click', '#pixel-tab', function() {
+        groupTab = "pixel";
+        $('#table-link-save').children().remove();
+        $('#table-pixel-save').html('<div id="table-pixel"><table class="table"><thead align="center"><th class="">title</th><th class="">Last Modified</th><th class="">Action</th></thead><tbody id="contentpixel"></tbody></table><div id="pager"></div></div>');
+        loadSinglePixel();
+        $('#search-link').hide();
+        $('#search-link').addClass('hidden');
+        $("#search-pixel").show();
+        $("#search-pixel").removeClass('hidden');
+        //return false;
+    });
+    function loadPixelLink()
+    {
+      $.ajax({
+        type: 'GET',
+        url: '<?php echo url('/pixel/loadPixelLink'); ?>',
+        dataType:'text',
+        success:function(result){
+            var data=jQuery.parseJSON(result);
+            $('#idpixel').html(data.view);
+        }
+      });      
+    }
+
+    function loadSinglePixel() 
+    {
         if (currentPagePixel == "") {
             currentPagePixel = "<?php echo url('/pixel/load-singlepixel'); ?>";
         }
@@ -26,7 +62,8 @@
         });
     }
    
-    function loadSingleLinks() {
+    function loadSingleLinks() 
+    {
         if (currentPageLink == "") {
             currentPageLink = "<?php echo url('/dash/newsingle/load-singlelink')?>";
         }
@@ -85,7 +122,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "<?php echo url('/save-singlelink')?>",
+            url: "<?php echo url('/save-singlelink'); ?>",
             data: $("#formlink").serialize(),
             dataType: 'text',
             success: function(result) {
@@ -102,7 +139,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "<?php echo url('/save-singlepixel') ?>",
+            url: "<?php echo url('/save-singlepixel'); ?>",
             data: $("#formpixel").serialize(),
             dataType: 'text',
             success: function(result) {
@@ -110,6 +147,7 @@
                 $('#script').val("");
                 loadSinglePixel();
                 loadSingleLinks();
+                loadPixelLink();
             }
         });
     }
@@ -117,6 +155,8 @@
     $(document).ready(function() {
         loadSinglePixel();
         loadSingleLinks();
+        loadPixelLink();
+
     });
 </script>
 <style type="text/css">
@@ -205,10 +245,7 @@
                                     </label>
                                     <input type="hidden" name="idlink" id="idlink"> 
                                     <select name="idpixel" id="idpixel" class="col-md-6 form-control">
-                                        <option value="">--Pilih--</option>
-                                        @foreach($data_pixel as $pixel)
-                                        <option value="{{$pixel->id}}">{{$pixel->title}}</option>
-                                        @endforeach
+                                      
                                     </select>
                                 </div>
                                 <div class="form-group row">
@@ -268,6 +305,7 @@
 
             
                     <!--table link-->
+                <div id="table-link-save">
                     <div id="table-link">
 
                         <table class="table" >
@@ -293,7 +331,10 @@
 
                         </div>
                     </div>
+                </div>
+                    <!--table pixel-->
 
+                <div id="table-pixel-save">
                     <div id="table-pixel" class="hidden" style="display: none;">
                         <table class="table">
                             <thead align="center">
@@ -311,6 +352,8 @@
                         </table>
                         <div id="pager"></div>
                     </div>
+                </div>
+
         </div>
     </div>
 </div>
@@ -442,30 +485,7 @@
         $('#titlepixel').val(title);
         $('#script').val(script);
     });
-    $(document).on('click', '#link-tab', function() {
-        groupTab = "link";
-        $('#table-pixel').hide();
-        $('table-pixel').addClass('hidden');
-        $("#table-link").show();
-        $("#table-link").removeClass('hidden');
-        $('#search-pixel').hide();
-        $('search-pixel').addClass('hidden');
-        $("#search-link").show();
-        $("#search-link").removeClass('hidden');
-        return false;
-    });
-    $(document).on('click', '#pixel-tab', function() {
-        groupTab = "pixel";
-        $('#table-link').hide();
-        $('table-link').addClass('hidden');
-        $("#table-pixel").show();
-        $("#table-pixel").removeClass('hidden');
-        $('#search-link').hide();
-        $('#search-link').addClass('hidden');
-        $("#search-pixel").show();
-        $("#search-pixel").removeClass('hidden');
-        return false;
-    });
+
     $(document).on('click', '.pagination a', function(e) {
         e.preventDefault();
         if (groupTab == "link") {

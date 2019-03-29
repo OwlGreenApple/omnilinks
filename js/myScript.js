@@ -11,6 +11,7 @@ function initGallery()
     if(slides.length<2){
         var nextPrevBtns=document.querySelector(".leftArrow,.rightArrow");
         nextPrevBtns.style.display="none";
+        document.getElementById('right').style.display="none";
         for (i = 0; i < nextPrevBtn.length; i++) {
             nextPrevBtn[i].style.display="none";
         }

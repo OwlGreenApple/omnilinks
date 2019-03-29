@@ -160,11 +160,11 @@
               <i class='fab fa-whatsapp'></i>
               <span> Whatsapp</span><br>
             @endif
-            @if($page->telegram_pixel_id!=0 and !is_null($page->telegram_pixel_id))
+            @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
               <i class='fab fa-telegram'></i>
               <span> Telegram</span><br>
             @endif
-            @if($page->skype_pixel_id!=0 and !is_null($page->skype_pixel_id))
+            @if($page->skype_pixel_id!=0 && !is_null($page->skype_pixel_id))
               <i class='fab fa-skype'></i>
               <span> Skype</span><br>
             @endif
@@ -178,15 +178,15 @@
 
           <div class="col-md-3">
             <div class="p-4 bd-highlight float-right">
-              @if($page->wa_pixel_id!=0 and  !is_null($page->wa_pixel_id))
+              @if($page->wa_pixel_id!=0 &&  !is_null($page->wa_pixel_id))
                 <input type="text" name="" value="{{$page->wa_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
 
-              @if($page->telegram_pixel_id!=0 and !is_null($page->telegram_pixel_id))
+              @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
                 <input type="text" name="" value="{{$page->telegram_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
 
-              @if($page->skype_pixel_id!=0 and !is_null($page->skype_pixel_id))
+              @if($page->skype_pixel_id!=0 && !is_null($page->skype_pixel_id))
                 <input type="text" name="" value="{{$page->skype_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
             </div>
@@ -239,22 +239,22 @@
           <div class="col-md-7">
             <span>Social-Media</span><br>
 
-            @if($page->fb_pixel_id!=0 and !is_null($page->fb_pixel_id))
+            @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
               <i class='fab fa-facebook-f'></i>
               <span> Facebook</span><br>
             @endif
 
-            @if($page->ig_pixel_id!=0 and !is_null($page->ig_pixel_id))
+            @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
               <i class='fab fa-instagram'></i>
               <span> Instagram</span><br>
             @endif
 
-            @if($page->twitter_pixel_id!=0 and !is_null($page->twitter_pixel_id))
+            @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
               <i class='fab fa-twitter'></i>
               <span> Twitter</span><br>
             @endif
 
-            @if($page->youtube_pixel_id!=0 and !is_null($page->youtube_pixel_id))
+            @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
               <i class='fab fa-youtube'></i>
               <span> Youtube</span><br>
             @endif
@@ -268,19 +268,19 @@
 
           <div class="col-md-3">
             <div class="p-4 bd-highlight float-right">
-              @if($page->fb_pixel_id!=0 and !is_null($page->fb_pixel_id))
+              @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
                 <input type="text" name="" value="{{$page->fb_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
 
-              @if($page->ig_pixel_id!=0 and !is_null($page->ig_pixel_id))
+              @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
                 <input type="text" name="" value="{{$page->ig_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
 
-              @if($page->twitter_pixel_id!=0 and !is_null($page->twitter_pixel_id))
+              @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
                 <input type="text" name="" value="{{$page->twitter_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
 
-              @if($page->yotube_pixel_id!=0 and !is_null($page->youtube_pixel_id))
+              @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
                 <input type="text" name="" value="{{$page->youtube_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
             </div>
