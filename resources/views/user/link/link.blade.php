@@ -15,6 +15,14 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/template.css')}}">
 	<link rel="stylesheet" href="{{asset('css/dash.css')}}">
+	<style type="text/css">
+		.rows{
+			margin-top: -15px;
+		}
+		.row{
+			margin-right: -10px;
+		}
+	</style>
 	<title>Link</title>
 	</head>
 	@if(is_null($pages->template))
@@ -22,31 +30,31 @@
 	@else
 	<body class="{{$pages->template}} {{$pages->rounded}} {{$pages->outline}}" >
 	@endif
-	<header class="container notif">
+	<header class="container">
 		<div class="row">
-			<div class="col-md-3 col-3 p-3">
+			<div class="col-md-3 col-3 p-4">
 				@if(is_null($pages->image_pages))
-				 <img src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" style="border-radius: 50%;width: 128px; height: 124px; margin-left: 36px;">
+				 <img src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" class="imagetitle">
 				 @else
-				  <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" style="border-radius: 50%; width: 128px; height: 124px; margin-left: 36px;">
+				  <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" class="imagetitle" >
 				 @endif
 			</div>
-			<div class="col-md-3 col-3 p-3">
-				<ul style="bottom: 31px; font-size: large; margin-left: 35px;">
+			<div class="col-md-8 col-8 p-4">
+				<ul class="ultitle">
 				@if(is_null($pages->page_title))
-				  <li style="display: block; margin-bottom: 11px;"><p class="font-weight-bold">NO PAGE TITLE</p></li>
+				  <li style="display: block; margin-bottom: 1px;"><p class="font-weight-bold">NO PAGE TITLE</p></li>
 				 @else
-				  <li style="display: block; margin-bottom: 11px;">{{$pages->page_title}}</li>
+				  <li style="display: block; margin-bottom: 1px;">{{$pages->page_title}}</li>
 				 @endif
 				 @if(is_null($pages->link_utama))
-				  <li style="display: block; margin-bottom: 8px;"><p class="font-weight-bold">NO LINK TITLE</p></li>
+				  <li style="display: block; margin-bottom: -15px;"><p class="font-weight-bold">NO LINK TITLE</p></li>
 				 @else
-				  <li style="display: block; margin-bottom: 8px; font-size: 9px;" ><p class="font-weight-bold">{{$pages->link_utama}}</p></li>
+				  <li style="display: block; margin-bottom: -15px; font-size:smaller;  word-break: break-all;" ><p class="font-weight-bold">{{$pages->link_utama}}</p></li>
 				 @endif
 				 @if(is_null($pages->telpon_utama))
 				  <li style="display: block"><p class="font-weight-bold">NO PHONE</p></li>
 				 @else
-				  <li style="display: block; font-size: 14px;"><p class="font-weight-bold">{{$pages->telpon_utama}}</p></li>
+				  <li style="display: block; margin-top: -4px;"><p class="font-weight-bold">{{$pages->telpon_utama}}</p></li>
 				 @endif
 				</ul>
 			</div>
@@ -84,20 +92,20 @@
 
 <div class="container biolink-page" style="margin-top: 33px">
 	<header></header>
-	<div class="row" style="margin-bottom: 50px;">
+	<div class="row" style="margin-bottom: 13px;">
 	@if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0)
 	  <div class="{{$pages->colom}}">
-        <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i><span style="font-size: x-small;"> Whatsapp</span></a>
+        <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i><span style="font-size: medium;"> Whatsapp</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->skype_link) || $pages->skype_pixel_id!=0)
       <div class="{{$pages->colom}}">
-        <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i><span style="font-size: x-small;"> Skype</span></a>
+        <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i><span style="font-size: medium;"> Skype</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
       <div class="{{$pages->colom}}">
-        <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i><span style="font-size: x-small;"> Telegram</span></a>
+        <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i><span style="font-size: medium;"> Telegram</span></a>
       </div>
       @endif
       @if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0 and !is_null($pages->skype_link) || $pages->skype_pixel_id!=0 and !is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
@@ -107,10 +115,13 @@
 
 <div class="row">
 	@foreach($link as $link)
-	<div class="col-md-12 col-12" style="margin-bottom: 20px;"> 
-	<a href="{{$link->link}}" title="" class="btn btn-light"><span>{{$link->title}}</span></a>
+	<div class="col-md-12 col-12" style="margin-bottom: 10px; margin-top: -5px;"> 
+	<a href="" title="" class="btn btn-light"><span>{{$link->title}}</span></a>
 	</div>
 	@endforeach
+	<div class="col-md-12 col-12" style="margin-bottom: 10px; margin-top: -5px;"> 
+	<a href="" title="" class="btn btn-light"><span>tes</span></a>
+	</div>
 </div>
 
 	<div class="row rows">
@@ -141,13 +152,13 @@
 	</div>
 </div>
 @if(!is_null($pages->powerede))
-<div class="powered-omnilinks"><a href=""><span style="font-size: small;">Powered by</span><br>&nbsp;&nbsp;<img style="width: 150px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
+<div class="powered-omnilinks"><a href=""><span style="font-size: small;">Powered by</span><br>&nbsp;&nbsp;<img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
 </a>
 </div>
 @else
 <div></div>
 @endif
-
+<div></div>
 <script src="{{asset('js/myScript.js')}}"></script>
 </body>
 

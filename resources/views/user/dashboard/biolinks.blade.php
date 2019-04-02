@@ -661,162 +661,263 @@
 
                         <div class="tab-content">
 
-                            <!-- tab 1-->
-                            <div role="tabpanel" class="tab-pane fade in active show" id="link">
-                                <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
-                                    {{ csrf_field() }}
-                                    <!--messengers!-->
-                                    <input type="hidden" name="uuid" value="{{$uuid}}">
-                                    <label class="mb-3" for="" style="font-weight:bold;">Messengers :</label>
-                                    <button type="button" class="float-right btn btn-primary btn-sm" id="tambah"><i class="fas fa-plus"></i>
-                                    </button>
+                        <!-- tab 1-->
+                        <div role="tabpanel" class="tab-pane fade in active show" id="link">
+                            <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
+                                {{ csrf_field() }}
+                                <!--messengers!-->
+                                <input type="hidden" name="uuid" value="{{$uuid}}">
+                                <label class="mb-3" for="" style="font-weight:bold;">Messengers :</label>
+                                <button type="button" class="float-right btn btn-primary btn-sm" id="tambah"><i class="fas fa-plus"></i>
+                                </button>
 
-                             <div class="hid">
-                                 <ul class="sortable-msg">
-                                      <li id="msg-wa">
-                                        <div id="wa" class="messengers">
-                                            <div class="row">
-                                              <div class="col-md-1 col-1 pl-md-3 pl-2">
+                         <div class="hid">
+                             <ul class="sortable-msg">
+                                @if(is_null($pages->wa_link))
+                                  <li id="msg-wa">
+                                    <div id="wa" class="messengers">
+                                        <div class="row">
+                                          <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                            <span class="handle">
+                                              <i class="fas fa-bars"></i>
+                                            </span>
+                                          </div>
+                                          <div class="col-md-11 col-11">
+                                            <div class="input-group margin ">
+                                              <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                  <i class="fab fa-whatsapp"></i>
+                                                </div>
+                                              </div>
+
+                                              <input type="text" name="wa" class="form-control" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+                                            
+                                              <button type="button" class="btn btn-primary" id="deletewa">
+                                                <i class="fas fa-trash-alt"></i>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                    <div class="row">
+                                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                                            <select name="wapixel" class="form-control" id="wapixel"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            @else
+
+                            <li id="msg-wa">
+                                    <div id="wa" class="messengers">
+                                        <div class="row">
+                                          <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                            <span class="handle">
+                                              <i class="fas fa-bars"></i>
+                                            </span>
+                                          </div>
+                                          <div class="col-md-11 col-11">
+                                            <div class="input-group margin ">
+                                              <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                  <i class="fab fa-whatsapp"></i>
+                                                </div>
+                                              </div>
+
+                                              <input type="text" name="wa" class="form-control" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+                                            
+                                              <button type="button" class="btn btn-primary" id="deletewa">
+                                                <i class="fas fa-trash-alt"></i>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                    <div class="row">
+                                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                                            <select name="wapixel" class="form-control" id="wapixel"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            @endif
+
+                            @if(is_null($pages->telegram_link))
+                                <li id="msg">
+                                    <div id="telegram" class="messengers hidden" style=" display:none;">
+                                        <div class="row">
+                                             <div class="col-md-1 col-1 pl-md-3 pl-2">
                                                 <span class="handle">
                                                   <i class="fas fa-bars"></i>
                                                 </span>
                                               </div>
-                                              <div class="col-md-11 col-11">
-                                                <div class="input-group margin ">
-                                                  <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                      <i class="fab fa-whatsapp"></i>
-                                                    </div>
-                                                  </div>
 
-                                                  <input type="text" name="wa" class="form-control" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
-                                                
-                                                  <button type="button" class="btn btn-primary" id="deletewa">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                  </button>
+                                    <div class="col-md-11 col-11">    
+                                        <div class="input-group margin">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fab fa-telegram-plane"></i>
                                                 </div>
-                                              </div>
                                             </div>
 
-                                        <div class="row">
-                                            <div class="offset-md-1 col-md-11 offset-1 col-11">
-                                                <select name="wapixel" class="form-control" id="wapixel"></select>
-                                            </div>
+                                            <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor telegram">
+                                            <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
+                                            </button>
                                         </div>
+                                    </div>
+                                </div>
+                                       <div class="row">
+                                           <div class="offset-md-1 offset-1 col-md-11 col-11">
+                                             <select name="telegrampixel" id="telegrampixel" class="form-control"></select>   
+                                           </div>
+                                       </div>
                                     </div>
                                 </li>
+                                @else
+                                   <li id="msg">
+                                    <div id="telegram" class="messengers">
+                                        <div class="row">
+                                             <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                                <span class="handle">
+                                                  <i class="fas fa-bars"></i>
+                                                </span>
+                                              </div>
 
-                                    <li id="msg">
-                                        <div id="telegram" class="messengers hidden" style=" display:none;">
-                                            <div class="row">
-                                                 <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                                    <span class="handle">
-                                                      <i class="fas fa-bars"></i>
-                                                    </span>
-                                                  </div>
-
-                                        <div class="col-md-11 col-11">    
-                                            <div class="input-group margin">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="fab fa-telegram-plane"></i>
-                                                    </div>
+                                    <div class="col-md-11 col-11">    
+                                        <div class="input-group margin">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fab fa-telegram-plane"></i>
                                                 </div>
-
-                                                <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor telegram">
-                                                <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
-                                                </button>
                                             </div>
+
+                                            <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
+                                            <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                           <div class="row">
-                                               <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                                 <select name="telegrampixel" id="telegrampixel" class="form-control"></select>   
-                                               </div>
+                                </div>
+                                       <div class="row">
+                                           <div class="offset-md-1 offset-1 col-md-11 col-11">
+                                             <select name="telegrampixel" id="telegrampixel" class="form-control"></select>   
                                            </div>
+                                       </div>
+                                    </div>
+                                </li>
+                                @endif
+
+                              @if(is_null($pages->skype_link))
+                                <li id="msg">
+                                    <div id="skype" class="messengers hidden" style="display:none;">
+                                        <div class="row">
+                                            <div class="col-md-1 pl-md-3 pl-2">
+                                                <span class="handle">
+                                                  <i class="fas fa-bars"></i>
+                                                </span>
+                                            </div>
+                                        
+
+                                      <div class="col-md-11 col-11">
+                                        <div class="input-group margin">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fab fa-skype"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor Skype">
+                                            <button id="deleteskype" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
+                                            </button>
                                         </div>
+                                        </div>
+                                    </div>
+
+                                     <div class="row">
+                                        <div class="offset-md-1 offset-1 col-md-11 col-11">
+                                        <select name="skypepixel" class="form-control" id="skypepixel"></select>
+                                        </div>
+                                     </div>
+                                    </div>
                                     </li>
-
-                                    <li id="msg">
-                                        <div id="skype" class="messengers hidden" style="display:none;">
-                                            <div class="row">
-                                                <div class="col-md-1 pl-md-3 pl-2">
-                                                    <span class="handle">
-                                                      <i class="fas fa-bars"></i>
-                                                    </span>
+                              @else
+                               <li id="msg">
+                                    <div id="skype" class="messengers">
+                                        <div class="row">
+                                            <div class="col-md-1 pl-md-3 pl-2">
+                                                <span class="handle">
+                                                  <i class="fas fa-bars"></i>
+                                                </span>
+                                            </div
+                                      <div class="col-md-11 col-11">
+                                        <div class="input-group margin">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fab fa-skype"></i>
                                                 </div>
-                                            
-
-                                          <div class="col-md-11 col-11">
-                                            <div class="input-group margin">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="fab fa-skype"></i>
-                                                    </div>
-                                                </div>
-                                                <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor Skype">
-                                                <button id="deleteskype" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                                </button>
                                             </div>
-                                            </div>
-                                        </div>
-
-                                         <div class="row">
-                                            <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                            <select name="skypepixel" class="form-control" id="skypepixel"></select>
-                                            </div>
-                                         </div>
-                                        </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                    <!--Links-->
-
-                                    <label class="mb-3" for="" style="font-weight:bold;">Links :</label>
-                                    <button type="button" class="float-right btn btn-primary btn-sm" id="addlink"><i class="fas fa-plus"></i> Add Link
-                                    </button><br>
-
-                                    <div>
-                                    <ul class="sortable-link a">       
-                                        @foreach($links as $link)
-                                         <li id="link-wa">
-                                            <div class="row">
-                                                <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                                     <span class="handle">
-                                                        <i class="fas fa-bars"></i>
-                                                      </span>  
-                                                </div>
-                                     <div class="col-md-11 col-11"> 
-                                        <div class="input-stack">
-                                            <input type="hidden" name="idlink[]" value="{{$link->id}}">
-                                            <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
-                                            <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
-                                            <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
+                                            <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
+                                            <button id="deleteskype" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
                                             </button>
                                         </div>
-                                    </div>
-                                </div>
-                                 </li>
-                               @endforeach
-                                        <li id="link-wa">
-                                          <div class="row">
-                                                <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                                     <span class="handle">
-                                                        <i class="fas fa-bars"></i>
-                                                      </span>  
-                                                </div>
-                                    <div class="col-md-11 col-11"> 
-                                        <div class="input-stack">
-                                            <input type="hidden" name="idlink[]" value="new">
-                                            <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
-                                            <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
-                                            <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                            </button>
                                         </div>
                                     </div>
+
+                                     <div class="row">
+                                        <div class="offset-md-1 offset-1 col-md-11 col-11">
+                                        <select name="skypepixel" class="form-control" id="skypepixel"></select>
+                                        </div>
+                                     </div>
                                     </div>
-                                   </li>
-                                    </ul>
+                                    </li>
+                              @endif
+
+                                </ul>
+                            </div>
+
+                                <!--Links-->
+
+                                <label class="mb-3" for="" style="font-weight:bold;">Links :</label>
+                                <button type="button" class="float-right btn btn-primary btn-sm" id="addlink"><i class="fas fa-plus"></i> Add Link
+                                </button><br>
+
+                                <div>
+                                <ul class="sortable-link a">       
+                                    @foreach($links as $link)
+                                     <li id="link-wa">
+                                        <div class="row">
+                                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                                 <span class="handle">
+                                                    <i class="fas fa-bars"></i>
+                                                  </span>  
+                                            </div>
+                                 <div class="col-md-11 col-11"> 
+                                    <div class="input-stack">
+                                        <input type="hidden" name="idlink[]" value="{{$link->id}}">
+                                        <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
+                                        <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
+                                        <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
                                 </div>
+                            </div>
+                             </li>
+                           @endforeach
+                                    <li id="link-wa">
+                                      <div class="row">
+                                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                                                 <span class="handle">
+                                                    <i class="fas fa-bars"></i>
+                                                  </span>  
+                                            </div>
+                                <div class="col-md-11 col-11"> 
+                                    <div class="input-stack">
+                                        <input type="hidden" name="idlink[]" value="new">
+                                        <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
+                                        <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
+                                        <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                </div>
+                               </li>
+                                </ul>
+                            </div>
 
                                     <!--social media-->
 
@@ -828,6 +929,7 @@
                 </button>
 
                 <ul class="sortable-sosmed">
+                  @if(is_null($pages->youtube_link))
                   <li id="sosmed-youtube">
                     <div id="youtube" class="socialmedia">
                       <div class="row">
@@ -860,7 +962,41 @@
                       </div>
                     </div>
                   </li>
-                  
+                  @else
+                   <li id="sosmed-youtube">
+                    <div id="youtube" class="socialmedia">
+                      <div class="row">
+                        <div class="col-md-1 col-1 pl-md-3 pl-2">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-youtube"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}" >
+                            <button id="deleteyoutube" class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>  
+                      </div>
+                      
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="youtubepixel" id="youtubepixel" class="form-control">
+                          </select>
+                        </div>  
+                      </div>
+                    </div>
+                  </li>
+                  @endif
+                  @if(is_null($pages->fb_link))
                   <li id="sosmed">
                     <div id="fb" class="socialmedia hidden" style="display:none;" data-type="fb">
                       <div class="row">
@@ -892,7 +1028,40 @@
                       </div>
                     </div>
                   </li>
-                
+                @else
+                    <li id="sosmed">
+                  <div id="fb" class="socialmedia" data-type="fb">
+                    <div class="row">
+                      <div class="col-md-1 col-1 pl-md-3 pl-2">
+                        <span class="handle">
+                          <i class="fas fa-bars"></i>
+                        </span>
+                      </div>
+
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-facebook-f"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="fb" class="form-control" value="{{$pages->fb_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook" >
+                            <button id="deletefb" class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>    
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="fbpixel" id="fbpixel" class="form-control"></select>    
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                @endif
+                @if(is_null($pages->twitter_link))
                   <li id="sosmed">
                     <div id="twitter" class="socialmedia hidden" style=" display:none;" data-type="twitter">
                       <div class="row">
@@ -925,9 +1094,44 @@
                       </div>
                     </div> 
                   </li>
-                
+                @else
+                    <li id="sosmed">
+                    <div id="twitter" class="socialmedia hidden" data-type="twitter">
+                      <div class="row">
+                        <div class="col-md-1 col-1 pl-md-3 pl-2">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-twitter"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
+                            <button id="deletetwitter"  class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="twitterpixel" id="twitterpixel" class="form-control">
+                          </select>
+                        </div>
+                      </div>
+                    </div> 
+                  </li>
+                @endif
+
+                @if(is_null($pages->ig_link))
                   <li id="sosmed">
-                    <div id="ig" class="socialmedia hidden" style=" display:none;" data-type="ig">
+                    <div id="ig" class="socialmedia hidden" style="display: none;"  data-type="ig">
                       <div class="row">
                         <div class="col-md-1 col-1 pl-md-3 pl-2">
                           <span class="handle">
@@ -957,6 +1161,39 @@
                       </div>
                     </div> 
                   </li>
+                  @else
+                   <li id="sosmed">
+                    <div id="ig" class="socialmedia "  data-type="ig">
+                      <div class="row">
+                        <div class="col-md-1 col-1 pl-md-3 pl-2">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+                        <div class="col-md-11 col-11">
+                          <div class="input-group margin">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fab fa-instagram"></i>
+                              </div>
+                            </div>
+                            <input type="text" name="ig" class="form-control" value="{{$pages->ig_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
+                            <button id="deleteig"  class="btn btn-primary" type="button">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <select name="igpixel" id="igpixel" class="form-control">
+                          </select>
+                        </div>  
+                      </div>
+                    </div> 
+                  </li>
+                  @endif
                 </ul>
                                     <div class="as">
                                         <hr class="own">
@@ -1029,14 +1266,26 @@
                                             <div class="row">
                                                 <div class="col-md-4 picture-container">
                                                     <div class="picture">
-                                                        <img src="" class="picture-src" id="wizardPicturePreview" title="">
+                                                        <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
                                                         <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg, .jpeg">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8">
+                                                  @if(is_null($pages->page_title))
                                                     <input type="text" name="judul" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                                                  @else
+                                                   <input type="text" name="judul" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                                                   @endif
+                                                  @if(is_null($pages->link_utama))
                                                     <input type="text" name="link" value="" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                                                    @else
+                                                    <input type="text" name="link" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                                                    @endif
+                                                  @if(is_null($pages->telpon_utama))
                                                     <input type="number" name="nomor" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                                                  @else
+                                                   <input type="number" name="nomor" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                                                  @endif
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner"><i class="fas fa-plus"></i>
@@ -1044,10 +1293,17 @@
                                                     <span style="color:blue;">Banner</span>
                                                     <div class="contentBanner">
                                                         <div class="c">
+                                                          @foreach($banner as $banner)
+                                                            <input type="text" name="judulBanner[]" value="{{$banner->title}}" class="form-control" placeholder="Judul banner">
+                                                            <input type="text" name="linkBanner[]" value="{{$banner->link}}" class="form-control" placeholder="masukkan link">
+                                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
+                                                            </select>
+                                                            <input type="file" name="bannerImage[]" value="Upload">
+                                                            <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
+                                                            @endforeach
                                                             <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
                                                             <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
                                                             <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
-                                                               
                                                             </select>
                                                             <input type="file" name="bannerImage[]" value="Upload">
                                                             <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>

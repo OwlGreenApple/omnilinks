@@ -125,26 +125,32 @@
               <hr class="">
             </div>
 
-            @foreach($banners as $banner)
+           
               <div class="col-md-7">
                 <span>Banner</span><br>
+                 @foreach($banners as $banner)
                 <i class="fab fa-font-awesome-flag"></i>
-                <span> {{$banner->title}}</span>
+                <span> {{$banner->title}}</span><br>
+                @endforeach
                 <br>
               </div>
 
               <div class="col-md-2">
                 <div class="p-4 bd-highlight">
+                   @foreach($banners as $banner)
                   <span>clicks</span><br>
+                  @endforeach
                 </div>
               </div>
 
               <div class="col-md-3">
                 <div class="p-4 bd-highlight float-right">
+                  @foreach($banners as $banner)
                   <input type="text" name="" value="{{$banner->link}}" readonly="" style="margin-bottom: 2px;"><br>
+                  @endforeach
                 </div>       
               </div> 
-            @endforeach 
+             
           </div>
         @endif
 
@@ -172,7 +178,16 @@
 
           <div class="col-md-2">
             <div class="p-4 bd-highlight">
-              clicks
+              @if($page->wa_pixel_id!=0 &&  !is_null($page->wa_pixel_id))
+              <span>clicks wa</span><br>
+              @endif
+             @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
+                <span>Click telgram</span><br>
+              @endif
+
+              @if($page->skype_pixel_id!=0 && !is_null($page->skype_pixel_id))
+              <span>Click Skype</span><br>
+              @endif              
             </div>
           </div>
 
@@ -205,29 +220,34 @@
             <div class="col-md-12">
               <hr class="">
             </div>
-
-            @foreach($links as $link)
+            
               <div class="col-md-7">
                 <span>Links</span><br>
+                @foreach($links as $link)
                 <i class="fas fa-link"></i>
                 <span>
                   {{$link->title}}
                 </span>
                 <br>
+                @endforeach
               </div>
 
               <div class="col-md-2">
                 <div class="p-4 bd-highlight">
+                  @foreach($links as $link)
                   <span>clicks</span><br>
+                  @endforeach
                 </div>
               </div>
                   
               <div class="col-md-3">
                 <div class="p-4 bd-highlight float-right">
+                  @foreach($links as $link)
                   <input type="text" name="" value="{{$link->link}}" readonly="" style="margin-bottom: 2px;"><br>
+                  @endforeach 
                 </div>       
               </div> 
-            @endforeach 
+            
           </div>
         @endif
 
@@ -262,7 +282,18 @@
 
           <div class="col-md-2">
             <div class="p-4 bd-highlight">
-              clicks
+              @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
+              <span>clicks Fb</span><br>
+              @endif
+              @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
+               <span>clicks ig</span><br>
+               @endif
+               @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
+                <span>clicks twit</span><br>
+                @endif
+                @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
+                 <span>clicks yt</span><br>
+                 @endif
             </div>
           </div>
 

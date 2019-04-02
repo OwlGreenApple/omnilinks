@@ -85,12 +85,17 @@ class BiolinkController extends Controller
     $links=Link::where('users_id',Auth::user()->id)
                 ->where('pages_id',$page->id)
                 ->get();
+    $banner=Banner::where('users_id',Auth::user()->id)
+                  ->where('pages_id',$page->id)
+                  ->get();
   	if(!is_null($page)){
   		$pageid=$page->id;
   	}
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
+      'pages'=>$page,
     	'pageid'=>$pageid,
+      'banner'=>$banner,
       'links'=>$links,
     ]);  
   }

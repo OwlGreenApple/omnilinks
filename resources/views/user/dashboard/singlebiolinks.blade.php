@@ -126,8 +126,7 @@
             data: $("#formlink").serialize(),
             dataType: 'text',
             success: function(result) {
-                $('#titlelink').val("");
-                $('#urllink').val("");
+                //$('#formlink').load();
                 loadSingleLinks();
             }
         });

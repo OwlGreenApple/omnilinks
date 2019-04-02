@@ -32,15 +32,11 @@ $(document).ready(function(){
    // console.log(arra);
    //arra+=1;
     $( ".a" ).append( '<li id="link-wa"><div class="row"><div class="col-md-1 col-1 pl-md-3 pl-2"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="col-md-11 col-11"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" placeholder="Title" class="form-control" ><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div></div></div></li>');
-
     });
     $(document).on('click','.deletelink',function(e){
       $(this).parent().parent().parent().remove();
     });
-    //Banner
-//    $(document).on('click','#addBanner',function(){
-//        $('.b').append(' <input type="text" name="judulBanner" value="" class="form-control" placeholder="Judul banner"><input type="text" name="linkBanner" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel" class="form-control"><option value="">--Pilih Pixel Yang telah dibuat--</option>@foreach($pixels as $pixel)<option value="{{$pixel->id}}">{{$pixel->title}}</option>@endforeach</select><input type="file" name="bannerImage" value="Upload">');
-//    });
+    
     /* biolink social-media */
     $(document).on('click','#sm',function(e){
       $('.socialmedia').each(function(){
