@@ -91,12 +91,14 @@ class BiolinkController extends Controller
   	if(!is_null($page)){
   		$pageid=$page->id;
   	}
+    
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
       'pages'=>$page,
     	'pageid'=>$pageid,
       'banner'=>$banner,
       'links'=>$links,
+      'viewpage'=> (string) view('user.link.link')->with('pages',$page),
     ]);  
   }
 public function link($names)

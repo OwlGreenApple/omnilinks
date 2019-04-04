@@ -2,8 +2,6 @@
 
 @section('content')
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
-<script src="{{asset('js/biolinks.js')}}"></script>
-
 <script type="text/javascript">
     function tambahTemp() {
         var form = $('#saveTemplate')[0];
@@ -234,6 +232,7 @@
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+                    $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -708,6 +707,7 @@
                             </li>
 
                             @else
+
 
                             <li id="msg-wa">
                                     <div id="wa" class="messengers">
@@ -1195,124 +1195,124 @@
                   </li>
                   @endif
                 </ul>
-                                    <div class="as">
-                                        <hr class="own">
-                                        <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
-                                    </div>
-                                </form>
-                            </div>
+                      <div class="as">
+                          <hr class="own">
+                          <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
+                      </div>
+                  </form>
+              </div>
 
-                            <!-- TAB 2 -->
+              <!-- TAB 2 -->
 
-                            <div role="tabpanel" class="tab-pane fade " id="walink">
-                                <form id="savewalink" method="post">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="uuidpixel" value="{{$uuid}}">
-                                    <span class="" style="color:blue">WhatsApp Link Creator</span><br>
-                                    <span>Masukkan Nomor WA</span>
-                                    <input type="number" name="nomorwa" id="nomorwa" class="">
-                                    <button type="reset" class="btn btn-danger btn-reset" style="margin-top: 10px; margin-bottom: 10px;">Reset</button>
-                                    <div class="card">
-                                        <span class="card-header">Masukkan Pesan</span>
-                                        <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
-                                    </div>
-                                    <input type="text" name="editidwa" hidden="" id="editidwa">
-                                    <textarea id="demo" hidden="" name="textlink"></textarea>
-                                    <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">SAVE & CREATE LINK</button>
-                                </form>
-                                <div class="margin" style="margin-top: 47px;">
-                                    <span style="color:blue;">Recent WhatsApp Link Creator</span>
-                                    <div class="accordion" id="accordionExample">
-                                        <div id="contentwa">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+              <div role="tabpanel" class="tab-pane fade " id="walink">
+                  <form id="savewalink" method="post">
+                      {{ csrf_field() }}
+                      <input type="hidden" name="uuidpixel" value="{{$uuid}}">
+                      <span class="" style="color:blue">WhatsApp Link Creator</span><br>
+                      <span>Masukkan Nomor WA</span>
+                      <input type="number" name="nomorwa" id="nomorwa" class="">
+                      <button type="reset" class="btn btn-danger btn-reset" style="margin-top: 10px; margin-bottom: 10px;">Reset</button>
+                      <div class="card">
+                          <span class="card-header">Masukkan Pesan</span>
+                          <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
+                      </div>
+                      <input type="text" name="editidwa" hidden="" id="editidwa">
+                      <textarea id="demo" hidden="" name="textlink"></textarea>
+                      <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">SAVE & CREATE LINK</button>
+                  </form>
+                  <div class="margin" style="margin-top: 47px;">
+                      <span style="color:blue;">Recent WhatsApp Link Creator</span>
+                      <div class="accordion" id="accordionExample">
+                          <div id="contentwa">
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
                             <!-- TAB 3 -->
 
-                            <div class="tab-pane fade" id="pixel">
-                                <form id="savepixel" method="post">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="uuidpixel" value="{{$uuid}}">
-                                    <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
-                                    <span style="color:blue;">Pixel Retargetting</span>
-                                    <textarea class="card-body form-control" name="script" id="script"></textarea>
-                                    <div class="title" style="margin-top: 20px;">
-                                        <span>Title</span>
-                                        <input type="text" name="title" placeholder="Masukkan Judul" id="judul">
-                                        <input type="text" name="editidpixel" hidden id="editidpixel">
-                                        <button type="button" id="btnpixel" class="btn btn-primary">Save</button>
-                                        <button type="reset" class="btn btn-warning btn-reset">Reset</button>
-                                    </div>
-                                </form>
-                                <hr class="own">
-                                <span style="color:blue;">Recent Pixel Retargetting</span>
-                                <div class="accordion" id="accordionExample">
-                                    <div id="content">
+              <div class="tab-pane fade" id="pixel">
+                  <form id="savepixel" method="post">
+                      {{ csrf_field() }}
+                      <input type="hidden" name="uuidpixel" value="{{$uuid}}">
+                      <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
+                      <span style="color:blue;">Pixel Retargetting</span>
+                      <textarea class="card-body form-control" name="script" id="script"></textarea>
+                      <div class="title" style="margin-top: 20px;">
+                          <span>Title</span>
+                          <input type="text" name="title" placeholder="Masukkan Judul" id="judul">
+                          <input type="text" name="editidpixel" hidden id="editidpixel">
+                          <button type="button" id="btnpixel" class="btn btn-primary">Save</button>
+                          <button type="reset" class="btn btn-warning btn-reset">Reset</button>
+                      </div>
+                  </form>
+                  <hr class="own">
+                  <span style="color:blue;">Recent Pixel Retargetting</span>
+                  <div class="accordion" id="accordionExample">
+                      <div id="content">
 
-                                    </div>
-                                </div>
-                            </div>
+                      </div>
+                  </div>
+              </div>
 
                             <!-- TAB 4 -->
 
-                            <div role="tabpanel" class="tab-pane fade" id="style">
-                                <form method="post" id="saveTemplate" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="uuidtemp" value="{{$uuid}}">
-                                    <div class="mb-5 form-group">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-4 picture-container">
-                                                    <div class="picture">
-                                                        <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
-                                                        <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg, .jpeg">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8">
-                                                  @if(is_null($pages->page_title))
-                                                    <input type="text" name="judul" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
-                                                  @else
-                                                   <input type="text" name="judul" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
-                                                   @endif
-                                                  @if(is_null($pages->link_utama))
-                                                    <input type="text" name="link" value="" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
-                                                    @else
-                                                    <input type="text" name="link" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
-                                                    @endif
-                                                  @if(is_null($pages->telpon_utama))
-                                                    <input type="number" name="nomor" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
-                                                  @else
-                                                   <input type="number" name="nomor" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
-                                                  @endif
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner"><i class="fas fa-plus"></i>
-                                                    </button>
-                                                    <span style="color:blue;">Banner</span>
-                                                    <div class="contentBanner">
-                                                        <div class="c">
-                                                          @foreach($banner as $banner)
-                                                            <input type="text" name="judulBanner[]" value="{{$banner->title}}" class="form-control" placeholder="Judul banner">
-                                                            <input type="text" name="linkBanner[]" value="{{$banner->link}}" class="form-control" placeholder="masukkan link">
-                                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
-                                                            </select>
-                                                            <input type="file" name="bannerImage[]" value="Upload">
-                                                            <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
-                                                            @endforeach
-                                                            <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
-                                                            <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
-                                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
-                                                            </select>
-                                                            <input type="file" name="bannerImage[]" value="Upload">
-                                                            <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+            <div role="tabpanel" class="tab-pane fade" id="style">
+                <form method="post" id="saveTemplate" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="uuidtemp" value="{{$uuid}}">
+                    <div class="mb-5 form-group">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 picture-container">
+                                    <div class="picture">
+                                        <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
+                                        <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                  @if(is_null($pages->page_title))
+                                    <input type="text" name="judul" ng-model="pagetitle" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                                  @else
+                                   <input type="text" name="judul" ng-model="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                                   @endif
+                                  @if(is_null($pages->link_utama))
+                                    <input type="text" name="link" value="" ng-model="pagelink" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                                    @else
+                                    <input type="text" name="link" ng-model="pagelink" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                                    @endif
+                                  @if(is_null($pages->telpon_utama))
+                                    <input type="number" name="nomor" ng-model="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                                  @else
+                                   <input type="number" name="nomor" ng-model="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                                  @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner"><i class="fas fa-plus"></i>
+                                    </button>
+                                    <span style="color:blue;">Banner</span>
+                                    <div class="contentBanner">
+                                        <div class="c">
+                                          @foreach($banner as $banner)
+                                            <input type="text" name="judulBanner[]" value="{{$banner->title}}" class="form-control" placeholder="Judul banner">
+                                            <input type="text" name="linkBanner[]" value="{{$banner->link}}" class="form-control" placeholder="masukkan link">
+                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
+                                            </select>
+                                            <input type="file" name="bannerImage[]" value="Upload">
+                                            <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
+                                            @endforeach
+                                            <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
+                                            <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
+                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
+                                            </select>
+                                            <input type="file" name="bannerImage[]" value="Upload">
+                                            <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
                                         </div>
-                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
                                         <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">  
                                         <label class="switch">
                                             <input type="checkbox" name="rounded" value="rounded-p" >
@@ -1525,8 +1525,33 @@
                     <div class="center">
                         <div class="mobile">
                             <div class="mobile1">
-                                <div class="screen colorgradient1" id="phonecolor">
+                                <div class="screen colorgradient1" id="phonecolor" style="border:none;">
                                 <!--screen-->
+                                    <header class="container" style="padding-top: 33px; padding-bottom: 12px;">
+                                      <div class="row">
+                                        <div class="col-md-2 col-3">
+                                           <img id="viewpicture" src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
+                                           
+                                        </div>
+                                        <div class="col-md-7 col-8 p-2">
+                                          <ul style="margin-left: 23px;">
+                                            <li style="display: block; margin-bottom: -15px;"><p class="font-weight-bold" style="color: #fff;">@{{pagetitle}}</p></li>                            
+                                            <li style="display: block; margin-bottom: -15px; "><p class="font-weight-bold" style="color: #fff;">@{{pagelink}}</p></li>
+                                            <li style="display: block;"><p class="font-weight-bold" style="color: #fff;">@{{telpon}}</p></li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </header>
+                                    <div class="row">
+                                  
+                                      <div class="col-md-8" id="viewLink">
+                                       <a href="" title="" class="btn btn-light" style="margin-left: 19px;
+                                     width: 139%; margin-bottom: 12px;"><span>tes</span></a>
+                                      </div>
+                                      
+                                        
+                                      
+                                    </div>
                                 </div>                                    
                             </div>
                         </div>

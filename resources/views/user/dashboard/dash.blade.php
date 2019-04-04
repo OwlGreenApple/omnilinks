@@ -2,7 +2,9 @@
 
 @section('content')
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
+<link rel="stylesheet" href="{{asset('css/sb-admin.css')}}">
 
+ 
 <script type="text/javascript">
   // var currentPage="";
   function refreshDashboard() {
@@ -60,6 +62,10 @@
   float: right;
 }  
 </style>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
 
 <div class="container">
   <div class="row notif">
@@ -103,7 +109,7 @@
           </div>
           
           <div class="col-md-6 text-md-right text-left">
-            <select name="bulan" class="form-control form-controll">
+            <select name="bulan" class="custom-select form-controll">
               <?php 
                 $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 
@@ -118,7 +124,7 @@
               ?>
             </select>
 
-            <select name="tahun" class="form-control form-controll">
+            <select name="tahun" class="custom-select form-controll">
               <?php
                 $thn_skr = date('Y');
                 for ($x = $thn_skr; $x >= 1980; $x--) {
@@ -140,6 +146,20 @@
       </div>
 
       <hr>
+
+    <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-3">
+              <div class="card-header">
+                <i class="fas fa-chart-area"></i>
+                Area Chart Example</div>
+              <div class="card-body">
+                <div id="chart"></div>
+              </div>
+              <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            </div>
+          </div>
+    </div>
 
       <div id="content"></div>
     </div>
@@ -202,7 +222,67 @@
       
   </div>
 </div>
+<script type="text/javascript">
+  
+$.getJSON(
+    'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+    function (data) {
 
+        Highcharts.chart('chart', {
+            chart: {
+                zoomType: 'x'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: 'Exchange rate'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+
+            series: [{
+                type: 'area',
+                name: 'USD to EUR',
+                data: data
+            }]
+        });
+    }
+);
+</script>
 <script type="text/javascript">
   $('body').on('click','.btn-deletePage',function(e) 
   {

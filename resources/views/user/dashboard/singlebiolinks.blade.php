@@ -169,7 +169,7 @@
     border-radius:none;
  }
   .btn-console{
-        border-radius: 16px;
+        border-radius: 24px;
     }
     .text-card{
         margin-left: 20px;
@@ -289,7 +289,7 @@
             <div id="search-link" style="margin-bottom: 20px;">
                 <span style="font-size: 30px; color: #3A84D1; ">Recent</span>
                 <div style="float: right;">
-                    <input type="search" name="carilink" placeholder="Search Link" class="carilink form-controll form-control" arial-label="Search" style="">
+                    <input type="search" name="carilink" placeholder="Search Link" class="carilink form-controll form-control" arial-label="Search" style="background-color: #fff;">
                     <button class="btn btn-success" id="carilink" type="button">Search</button>
                 </div>
             </div>
@@ -297,7 +297,7 @@
             <div id="search-pixel" style="margin-bottom: 20px; display: none;" class="hidden">
                 <span style="font-size: 30px; color: #3A84D1;">Recent</span>
                 <div style="float: right;">
-                    <input type="search" name="cari" placeholder="Search Pixel" class="cari form-controll form-control" arial-label="Search">
+                    <input type="search" name="cari" placeholder="Search Pixel" style="background-color: #fff;" class="cari form-controll form-control" arial-label="Search">
                     <button class="btn btn-success" id="caripixel" type="button">Search</button>
                 </div>
             </div>

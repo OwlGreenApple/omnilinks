@@ -24,6 +24,7 @@
  .form-controll {
         display: inline;
         width: auto;
+        font-size: .9rem;
         background-color: #F2F2F2;
     }
   .form-cari{

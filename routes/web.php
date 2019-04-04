@@ -64,6 +64,9 @@ Auth::routes();
     Route::get('/banner/load-banner','BiolinkController@addBanner');
     Route::post('/save-link','BiolinkController@savelink');
     Route::get('/load/pixelpage','BiolinkController@pixelpage');
+    Route::get('/view/biolinks',function(){
+        return view('user.link.link');
+    });
     //make wa link creator
     Route::post('/save-walink','BiolinkController@savewa');
     Route::get('/walink/loadwalink','BiolinkController@loadwalink');
