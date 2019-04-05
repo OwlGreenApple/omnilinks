@@ -187,6 +187,30 @@
         refreshpixel();
         refreshwa();
 
+          $('.outlined').click(function()
+          {
+            if($(this).prop("checked") == true)
+            {
+                $(".mobile1").addClass("outlinedview");
+            }
+            else if($(this).prop("checked") == false)
+            {
+                $(".mobile1").removeClass("outlinedview");
+            }
+          });
+
+          $('.rounded').click(function()
+          {
+            if($(this).prop("checked") == true)
+            {
+                $(".mobile1").addClass("roundedview");
+            }
+            else if($(this).prop("checked") == false)
+            {
+                $(".mobile1").removeClass("roundedview");
+            }
+          });
+
         $('.infooter').remove();
         $( ".sortable-msg" ).sortable({
       handle: '.handle',
@@ -618,7 +642,18 @@
   cursor: pointer;
  background-image: linear-gradient(to bottom, #56ab2f, #a8e063);
   }
-
+.roundedview .btnview {
+  border-radius: 50px ; 
+}
+.outlinedview .btnview{
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+.outlinedview .btnview:hover{
+  background: #ffff;
+  color: #000000 !important;
+}
 </style>
 <link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
@@ -1267,7 +1302,7 @@
                                 <div class="col-md-4 picture-container">
                                     <div class="picture">
                                         <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
-                                        <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png">
+                                        <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -1315,11 +1350,11 @@
                       
                                         <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">  
                                         <label class="switch">
-                                            <input type="checkbox" name="rounded" value="rounded-p" >
+                                            <input type="checkbox" name="rounded" class="rounded" value="rounded-p" >
                                             <span class="slider round"></span>
                                         </label> &nbsp;Rounded buttons<br>
                                         <label class="switch">
-                                            <input type="checkbox" name="outlined" value="outlined">
+                                            <input type="checkbox" name="outlined" class="outlined" value="outlined">
                                             <span class="slider round"></span>
                                         </label>
                                         &nbsp; Outlined buttons
@@ -1527,7 +1562,7 @@
                             <div class="mobile1">
                                 <div class="screen colorgradient1" id="phonecolor" style="border:none;">
                                 <!--screen-->
-                                    <header class="container" style="padding-top: 33px; padding-bottom: 12px;">
+                                    <header class="container  " style="padding-top: 33px; padding-bottom: 12px;">
                                       <div class="row">
                                         <div class="col-md-2 col-3">
                                            <img id="viewpicture" src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
@@ -1545,8 +1580,8 @@
                                     <div class="row">
                                   
                                       <div class="col-md-8" id="viewLink">
-                                       <a href="" title="" class="btn btn-light" style="margin-left: 19px;
-                                     width: 139%; margin-bottom: 12px;"><span>tes</span></a>
+                                       <button type="button" class="btn btnview btn-light" style="margin-left: 19px;
+                                     width: 139%; margin-bottom: 12px;">tes</button>
                                       </div>
                                       
                                         
@@ -1566,6 +1601,11 @@
 
 <script type="text/javascript">
     var batas = 1;
+    
+      
+
+
+
     $("body").on("click", "#savetemp", function() {
         tambahTemp();
       $('#pesanAlert').removeClass('alert-danger');
@@ -1602,7 +1642,7 @@
         var message = $('#pesan-wa').val();
         var convert = encodeURI(message);
         var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";
-        console.log(link);
+        //console.log(link);
         $('#demo').html(link);
         tambahwalink();
     });
@@ -1647,7 +1687,7 @@
      // });
       $(document).on('click','#gradient',function(){
         $('#backtheme').val('colorgradient1');
-        $('.mobile1').html(' <div class="screen colorgradient1" id="phonecolor"></div>');
+        //$('.mobile1').html('<div class="screen colorgradient1" id="phonecolor"></div>');
     });
     //  $('#powered').prop('disabled','disabled');
       // $(document).bind('contextmenu',function(e){

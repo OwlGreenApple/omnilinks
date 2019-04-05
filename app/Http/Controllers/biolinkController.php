@@ -98,7 +98,6 @@ class BiolinkController extends Controller
     	'pageid'=>$pageid,
       'banner'=>$banner,
       'links'=>$links,
-      'viewpage'=> (string) view('user.link.link')->with('pages',$page),
     ]);  
   }
 public function link($names)

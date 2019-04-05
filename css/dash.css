@@ -38,16 +38,7 @@
       height: 72px;
       border-radius: 60%;
     }
-/*hr {
-    height: .25rem;
-    width: 25%;
-    margin: 0;
-    background: tomato;
-    border: none;
-    transition: .3s ease-in-out;
-  }*/
 
-  /*Profile Pic Start*/
 .picture-container{
     position: relative;
     cursor: pointer;
@@ -276,7 +267,7 @@ hr.own {
     }
  
     .mobile{
-      width: 303px;
+      width: 301px;
       height: 586px;
       background:#F0F1F1;
       border-radius: 30px;

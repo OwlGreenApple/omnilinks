@@ -78,17 +78,17 @@ Auth::routes();
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 
     //makesinglelink
-     Route::get('/dash/newsingle','SinglelinkController@newsingle');
-     Route::post('/save-singlelink','SinglelinkController@single');
-     Route::get('/dash/newsingle/load-singlelink','SinglelinkController@loadsinglelink');
-     Route::post('/save-singlepixel','SinglelinkController@singlepixel');
-     Route::get('/pixel/load-singlepixel','SinglelinkController@loadsinglepixel');
-     Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
-     Route::get('/pixel/loadPixelLink','SinglelinkController@loadPixelLink');
-     Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
+    Route::get('/dash/newsingle','SinglelinkController@newsingle');
+    Route::post('/save-singlelink','SinglelinkController@single');
+    Route::get('/dash/newsingle/load-singlelink','SinglelinkController@loadsinglelink');
+    Route::post('/save-singlepixel','SinglelinkController@singlepixel');
+    Route::get('/pixel/load-singlepixel','SinglelinkController@loadsinglepixel');
+    Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
+    Route::get('/pixel/loadPixelLink','SinglelinkController@loadPixelLink');
+    Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
      //url
-     Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
-     Route::get('/omn.lkz/{names}','BiolinkController@link');
+    Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
+    Route::get('/omn.lkz/{names}','BiolinkController@link');
 });
 
 

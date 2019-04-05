@@ -29,15 +29,5 @@
       </div>
     </div>
   </div>
-<<<<<<< Updated upstream
 </div>
-=======
-
-<div id="parent">
-  
-</div>
-<script type="text/javascript">
- 
-</script>
->>>>>>> Stashed changes
 @endsection

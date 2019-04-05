@@ -41,7 +41,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="/user/create" method="post">
+  <form action="/user/create" method="post">
       {{csrf_field()}}
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
