@@ -2,193 +2,204 @@
 
 @section('content')
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
+<link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
+<link rel="stylesheet" href="{{asset('css/theme.css')}}">
+
 <script type="text/javascript">
-    function tambahTemp() {
-        var form = $('#saveTemplate')[0];
-        var formData = new FormData(form);
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            url: "<?php echo url('/save-template');?>",
-            success: function(data) {
-                //var data=jQuery.parseJSON(result);
-                if (data.status == "success") {
-                    $("#pesan").html(data.message);
-                    $("#pesan").addClass("alert-success");
-                    $("#pesan").show();
-                }
-            }
-        });
-    }
-
-    function tambahPages() {
-        $.ajax({
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            dataType: 'text',
-            data: $("#savelink").serialize()+'&'+$('.sortable-msg').sortable('serialize')+'&'+$('.sortable-link').sortable('serialize')+'&'+$('.sortable-sosmed').sortable('serialize'),
-            url: "<?php echo url('/save-link');?>",
-            success: function(result) {
-                refreshwa();
-                refreshpixel();
-                var data = jQuery.parseJSON(result);
-                if (data.status == "success") {
-                    $("#pesan").html(data.message);
-                    $("#pesan").addClass("alert-success");
-                    $("#pesan").show();
-                }
-            }
-        });
-    }
-
-    function tambahpixel() {
-        $.ajax({
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: "<?php echo url ('/save-pixel')?>",
-            dataType: 'text',
-            data: $("#savepixel").serialize(),
-            success: function(result) {
-                $('#script').val("");
-                $('#judul').val("");
-                $('#editidpixel').val("");
-                refreshpixel();
-                loadPixelPage();
-                tambahBanner();
-            },
-        });
-    }
-
-    function tambahBanner() {
-        $.ajax({
-            type: 'GET',
-            dataType: 'text',
-            url: "<?php echo url('/banner/load-banner') ;?>",
-            success: function(result) {
-                var data = jQuery.parseJSON(result);
-                $('.contentBanner').append(data.view);
-            }
-        });
-    }
-
-    function refreshpixel() {
-        //console.log($('#idpage').val());
-        $.ajax({
-            type: 'GET',
-            data: {
-                idpage: $('#idpage').val(),
-            },
-            url: "<?php echo url('/pixel/load-pixel'); ?>",
-            dataType: 'text',
-            success: function(result) {
-                var data = jQuery.parseJSON(result);
-                $('#content').html(data.view);
-                //$('.pixellink').html(data.pixelink);
-            }
-        });
-    }
-
-    function delete_pixel(idpixel) {
-        $.ajax({
-            type: 'GET',
-            data: {
-                idpixel: idpixel,
-            },
-            url: "<?php echo url ('/pixel/deletepixel'); ?>",
-            dataType: 'text',
-            success: function(result) {
-                var data = jQuery.parseJSON(result);
-                if (data.status == 'success') {
-                    refreshpixel();
-                }
-            }
-        });
-    }
-
-    function loadPixelPage()
-    {
-      $.ajax({
-        type:'GET',
-        url:"<?php echo url('/load/pixelpage');?>",
-        dataType:'text',
-        success: function(result)
-        {
-          var data=jQuery.parseJSON(result);
-          $('#wapixel').html(data.view);
-          $('#telegrampixel').html(data.view);
-          $('#skypepixel').html(data.view);
-          $('#youtubepixel').html(data.view);
-          $('#fbpixel').html(data.view);
-          $('#igpixel').html(data.view);
-          $('#twitterpixel').html(data.view);
-          $('.bannerpixel').html(data.view);
+  function tambahTemp() {
+    var form = $('#saveTemplate')[0];
+    var formData = new FormData(form);
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      url: "<?php echo url('/save-template');?>",
+      success: function(data) {
+        //var data=jQuery.parseJSON(result);
+        if (data.status == "success") {
+          $("#pesan").html(data.message);
+          $("#pesan").addClass("alert-success");
+          $("#pesan").show();
         }
-      });
-    }
+      }
+    });
+  }
 
-    function tambahwalink() {
-        $.ajax({
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: $("#savewalink").serialize(),
-            url: "<?php echo url('/save-walink');?>",
-            dataType: 'text',
-            success: function(result) {
-                $('#nomorwa').val("");
-                $('#pesan-wa').val("");
-                ///$('#demo').val("");
-                refreshwa();
-            }
-        });
-
-    }
-
-    function refreshwa() {
-        $.ajax({
-            type: 'GET',
-            url: "<?php echo url('/walink/loadwalink');?>",
-            dataType: 'text',
-            success: function(result) {
-                var data = jQuery.parseJSON(result);
-                $('#contentwa').html(data.viewer);
-            }
-        });
-    }
-
-    function deletewalink(idwalink) {
-        $.ajax({
-            type: 'GET',
-            data: {
-                idwalink: idwalink,
-            },
-            url: "<?php echo url('/walink/deletewalink');?>",
-            dataType: 'text',
-            success: function(result) {
-                var data = jQuery.parseJSON(result);
-                if (data.status == 'success') {
-                    refreshwa();
-                }
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        loadPixelPage();
-        refreshpixel();
+  function tambahPages() {
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'text',
+      data: $("#savelink").serialize()+'&'+$('.sortable-msg').sortable('serialize')+'&'+$('.sortable-link').sortable('serialize')+'&'+$('.sortable-sosmed').sortable('serialize'),
+      url: "<?php echo url('/save-link');?>",
+      success: function(result) {
         refreshwa();
+        refreshpixel();
+        var data = jQuery.parseJSON(result);
+        if (data.status == "success") {
+          $("#pesan").html(data.message);
+          $("#pesan").addClass("alert-success");
+          $("#pesan").show();
+        }
+      }
+    });
+  }
 
-        $('.infooter').remove();
-        $( ".sortable-msg" ).sortable({
+  function tambahpixel() {
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "<?php echo url ('/save-pixel')?>",
+      dataType: 'text',
+      data: $("#savepixel").serialize(),
+      success: function(result) {
+        $('#script').val("");
+        $('#judul').val("");
+        $('#editidpixel').val("");
+        refreshpixel();
+        loadPixelPage();
+        tambahBanner();
+      },
+    });
+  }
+
+  function tambahBanner() {
+    $.ajax({
+      type: 'GET',
+      dataType: 'text',
+      url: "<?php echo url('/banner/load-banner') ;?>",
+      success: function(result) {
+        var data = jQuery.parseJSON(result);
+        $('.contentBanner').append(data.view);
+      }
+    });
+  }
+
+  function refreshpixel() {
+    //console.log($('#idpage').val());
+    $.ajax({
+      type: 'GET',
+      data: {
+        idpage: $('#idpage').val(),
+      },
+      url: "<?php echo url('/pixel/load-pixel'); ?>",
+      dataType: 'text',
+      success: function(result) {
+        var data = jQuery.parseJSON(result);
+        $('#content').html(data.view);
+        //$('.pixellink').html(data.pixelink);
+      }
+    });
+  }
+
+  function delete_pixel(idpixel) {
+    $.ajax({
+      type: 'GET',
+      data: {
+        idpixel: idpixel,
+      },
+      url: "<?php echo url ('/pixel/deletepixel'); ?>",
+      dataType: 'text',
+      success: function(result) {
+        var data = jQuery.parseJSON(result);
+        if (data.status == 'success') {
+          refreshpixel();
+        }
+      }
+    });
+  }
+
+  function loadPixelPage() {
+    $.ajax({
+      type:'GET',
+      url:"<?php echo url('/load/pixelpage');?>",
+      dataType:'text',
+      success: function(result) {
+        var data=jQuery.parseJSON(result);
+        $('#wapixel').html(data.view);
+        $('#telegrampixel').html(data.view);
+        $('#skypepixel').html(data.view);
+        $('#youtubepixel').html(data.view);
+        $('#fbpixel').html(data.view);
+        $('#igpixel').html(data.view);
+        $('#twitterpixel').html(data.view);
+        $('.bannerpixel').html(data.view);
+      }
+    });
+  }
+
+  function tambahwalink() {
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: $("#savewalink").serialize(),
+      url: "<?php echo url('/save-walink');?>",
+      dataType: 'text',
+      success: function(result) {
+        $('#nomorwa').val("");
+        $('#pesan-wa').val("");
+        ///$('#demo').val("");
+        refreshwa();
+      }
+    });
+  }
+
+  function refreshwa() {
+    $.ajax({
+      type: 'GET',
+      url: "<?php echo url('/walink/loadwalink');?>",
+      dataType: 'text',
+      success: function(result) {
+        var data = jQuery.parseJSON(result);
+        $('#contentwa').html(data.viewer);
+      }
+    });
+  }
+
+  function deletewalink(idwalink) {
+    $.ajax({
+      type: 'GET',
+      data: {
+        idwalink: idwalink,
+      },
+      url: "<?php echo url('/walink/deletewalink');?>",
+      dataType: 'text',
+      success: function(result) {
+        var data = jQuery.parseJSON(result);
+        if (data.status == 'success') {
+          refreshwa();
+        }
+      }
+    });
+  }
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(document).ready(function() {
+    loadPixelPage();
+    refreshpixel();
+    refreshwa();
+
+    $('.infooter').remove();
+
+    $( ".sortable-msg" ).sortable({
       handle: '.handle',
       cursor: 'move',
       axis: 'y',
@@ -211,6 +222,7 @@
     });
     $( ".sortable-link" ).disableSelection();
     //$( ".sortable-link" ).draggable();
+
     $( ".sortable-sosmed" ).sortable({
       handle: '.handle',
       cursor: 'move',
@@ -222,30 +234,18 @@
     });
     $( ".sortable-sosmed" ).disableSelection();
 
-   
-
     $('#colorpicker').farbtastic('#colour');
     //$.farbtastic('#colorpicker','.screen');
     //$('#colorpicker').farbtastic('.screen');
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-                    $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-          }
 
-        $("#wizard-picture").on('change', function(){
+    $("#wizard-picture").on('change', function(){
         readURL(this);
-          });
-      });
-  
+    });
+  });
 </script>
+
 <style type="text/css">
-     .sortable-msg, .sortable-link, .sortable-sosmed { 
+  .sortable-msg, .sortable-link, .sortable-sosmed { 
     list-style-type: none; 
     margin-left: -40px;
   }
@@ -620,947 +620,763 @@
   }
 
 </style>
-<link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
-<link rel="stylesheet" href="{{asset('css/dash.css')}}">
-<link rel="stylesheet" href="{{asset('css/theme.css')}}">
 
 <section id="tabs" class="project-tab">
-    <div class="container">
-        <div class="row notif">
-            <div class="col-md-12">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
-                    untuk terus menggunakan Omnilinks
-                </div>
-            </div>
-            <div class="col-md-6">
+  <div class="container">
+    <div class="row notif">
+      <div class="col-md-12">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span> untuk terus menggunakan Omnilinks
+        </div>
+      </div>
 
-                <div id="pesan" class="alert"></div>
-                 <div id="pesanAlert" class="alert"></div>
+      <div class="col-md-6">
+        <div id="pesan" class="alert"></div>
+        <div id="pesanAlert" class="alert"></div>
 
-                <div class="card carddash" style="margin-bottom:20px;">
-                    <div class="card-body">
+        <div class="card carddash" style="margin-bottom:20px;">
+          <div class="card-body">
+            <ul class="mb-4 nav nav-tabs">
+              <li class="nav-item">
+                <a href="#link" class="active nav-link link" role="tab" data-toggle="tab">
+                  Link
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
+                  WA Link Creator
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
+                  Pixel
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#style" class="nav-link link" role="tab" data-toggle="tab">
+                  Tampilan
+                </a>
+              </li>
+            </ul>
 
-                        <ul class="mb-4 nav nav-tabs">
-                            <li class="nav-item">
-                                <a href="#link" class="active nav-link link" role="tab" data-toggle="tab">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">WA Link Creator</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">Pixel</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#style" class="nav-link link" role="tab" data-toggle="tab">Tampilan</a>
-                            </li>
-                        </ul>
+            <div class="tab-content">
 
-                        <div class="tab-content">
+              <!-- tab 1-->
+              <div role="tabpanel" class="tab-pane fade in active show" id="link">
+                <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
+                  {{ csrf_field() }}
 
-                        <!-- tab 1-->
-                        <div role="tabpanel" class="tab-pane fade in active show" id="link">
-                            <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
-                                {{ csrf_field() }}
-                                <!--messengers!-->
-                                <input type="hidden" name="uuid" value="{{$uuid}}">
-                                <label class="mb-3" for="" style="font-weight:bold;">Messengers :</label>
-                                <button type="button" class="float-right btn btn-primary btn-sm" id="tambah"><i class="fas fa-plus"></i>
+                  <!--messengers!-->
+                  <input type="hidden" name="uuid" value="{{$uuid}}">
+                  <label class="mb-3" for="" style="font-weight:bold;">
+                    Messengers :
+                  </label>
+                  <button type="button" class="float-right btn btn-primary btn-sm" id="tambah">
+                    <i class="fas fa-plus"></i>
+                  </button>
+
+                  <div class="hid">
+                    <ul class="sortable-msg">
+                      <li id="msg-wa">
+                        <div id="wa" class="messengers" style="display: table;width: 100%">
+                          
+                            <div style="display: table-cell;">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+                            <div style="display: table-cell;">
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin ">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-whatsapp"></i>
+                                  </div>
+                                </div>
+
+                                <input type="text" name="wa" class="form-control" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">                        
+                              </div>
+                            </div>
+                          
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="wapixel" class="form-control" id="wapixel"></select>
+                            </div>
+                            </div>
+                            <div style="display: table-cell;">
+                              <button type="button" class="btn btn-primary" id="deletewa">
+                                  <i class="fas fa-trash-alt"></i>
                                 </button>
-
-                         <div class="hid">
-                             <ul class="sortable-msg">
-                                @if(is_null($pages->wa_link))
-                                  <li id="msg-wa">
-                                    <div id="wa" class="messengers">
-                                        <div class="row">
-                                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                            <span class="handle">
-                                              <i class="fas fa-bars"></i>
-                                            </span>
-                                          </div>
-                                          <div class="col-md-11 col-11">
-                                            <div class="input-group margin ">
-                                              <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                  <i class="fab fa-whatsapp"></i>
-                                                </div>
-                                              </div>
-
-                                              <input type="text" name="wa" class="form-control" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
-                                            
-                                              <button type="button" class="btn btn-primary" id="deletewa">
-                                                <i class="fas fa-trash-alt"></i>
-                                              </button>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                    <div class="row">
-                                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                                            <select name="wapixel" class="form-control" id="wapixel"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            @else
-
-
-                            <li id="msg-wa">
-                                    <div id="wa" class="messengers">
-                                        <div class="row">
-                                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                            <span class="handle">
-                                              <i class="fas fa-bars"></i>
-                                            </span>
-                                          </div>
-                                          <div class="col-md-11 col-11">
-                                            <div class="input-group margin ">
-                                              <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                  <i class="fab fa-whatsapp"></i>
-                                                </div>
-                                              </div>
-
-                                              <input type="text" name="wa" class="form-control" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
-                                            
-                                              <button type="button" class="btn btn-primary" id="deletewa">
-                                                <i class="fas fa-trash-alt"></i>
-                                              </button>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                    <div class="row">
-                                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                                            <select name="wapixel" class="form-control" id="wapixel"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @endif
-
-                            @if(is_null($pages->telegram_link))
-                                <li id="msg">
-                                    <div id="telegram" class="messengers hidden" style=" display:none;">
-                                        <div class="row">
-                                             <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                                <span class="handle">
-                                                  <i class="fas fa-bars"></i>
-                                                </span>
-                                              </div>
-
-                                    <div class="col-md-11 col-11">    
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-telegram-plane"></i>
-                                                </div>
-                                            </div>
-
-                                            <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor telegram">
-                                            <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                       <div class="row">
-                                           <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                             <select name="telegrampixel" id="telegrampixel" class="form-control"></select>   
-                                           </div>
-                                       </div>
-                                    </div>
-                                </li>
-                                @else
-                                   <li id="msg">
-                                    <div id="telegram" class="messengers">
-                                        <div class="row">
-                                             <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                                <span class="handle">
-                                                  <i class="fas fa-bars"></i>
-                                                </span>
-                                              </div>
-
-                                    <div class="col-md-11 col-11">    
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-telegram-plane"></i>
-                                                </div>
-                                            </div>
-
-                                            <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
-                                            <button type="button" class="btn  btn-primary" id="deletetelegram"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                       <div class="row">
-                                           <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                             <select name="telegrampixel" id="telegrampixel" class="form-control"></select>   
-                                           </div>
-                                       </div>
-                                    </div>
-                                </li>
-                                @endif
-
-                              @if(is_null($pages->skype_link))
-                                <li id="msg">
-                                    <div id="skype" class="messengers hidden" style="display:none;">
-                                        <div class="row">
-                                            <div class="col-md-1 pl-md-3 pl-2">
-                                                <span class="handle">
-                                                  <i class="fas fa-bars"></i>
-                                                </span>
-                                            </div>
-                                        
-
-                                      <div class="col-md-11 col-11">
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-skype"></i>
-                                                </div>
-                                            </div>
-                                            <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan nomor Skype">
-                                            <button id="deleteskype" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                        </div>
-                                    </div>
-
-                                     <div class="row">
-                                        <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                        <select name="skypepixel" class="form-control" id="skypepixel"></select>
-                                        </div>
-                                     </div>
-                                    </div>
-                                    </li>
-                              @else
-                               <li id="msg">
-                                    <div id="skype" class="messengers">
-                                        <div class="row">
-                                            <div class="col-md-1 pl-md-3 pl-2">
-                                                <span class="handle">
-                                                  <i class="fas fa-bars"></i>
-                                                </span>
-                                            </div
-                                      <div class="col-md-11 col-11">
-                                        <div class="input-group margin">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fab fa-skype"></i>
-                                                </div>
-                                            </div>
-                                            <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
-                                            <button id="deleteskype" class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                        </div>
-                                    </div>
-
-                                     <div class="row">
-                                        <div class="offset-md-1 offset-1 col-md-11 col-11">
-                                        <select name="skypepixel" class="form-control" id="skypepixel"></select>
-                                        </div>
-                                     </div>
-                                    </div>
-                                    </li>
-                              @endif
-
-                                </ul>
                             </div>
-
-                                <!--Links-->
-
-                                <label class="mb-3" for="" style="font-weight:bold;">Links :</label>
-                                <button type="button" class="float-right btn btn-primary btn-sm" id="addlink"><i class="fas fa-plus"></i> Add Link
-                                </button><br>
-
-                                <div>
-                                <ul class="sortable-link a">       
-                                    @foreach($links as $link)
-                                     <li id="link-wa">
-                                        <div class="row">
-                                            <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                                 <span class="handle">
-                                                    <i class="fas fa-bars"></i>
-                                                  </span>  
-                                            </div>
-                                 <div class="col-md-11 col-11"> 
-                                    <div class="input-stack">
-                                        <input type="hidden" name="idlink[]" value="{{$link->id}}">
-                                        <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
-                                        <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
-                                        <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                             </li>
-                           @endforeach
-                                    <li id="link-wa">
-                                      <div class="row">
-                                            <div class="col-md-1 col-1 pl-md-3 pl-2">
-                                                 <span class="handle">
-                                                    <i class="fas fa-bars"></i>
-                                                  </span>  
-                                            </div>
-                                <div class="col-md-11 col-11"> 
-                                    <div class="input-stack">
-                                        <input type="hidden" name="idlink[]" value="new">
-                                        <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
-                                        <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
-                                        <button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                </div>
-                               </li>
-                                </ul>
-                            </div>
-
-                                    <!--social media-->
-
-                 <label class="mb-3" for="" style="font-weight:bold">
-                  Social Media
-                </label>
-                <button type="button" class="float-right btn btn-primary btn-sm" id="sm">
-                  <i class="fas fa-plus"></i>
-                </button>
-
-                <ul class="sortable-sosmed">
-                  @if(is_null($pages->youtube_link))
-                  <li id="sosmed-youtube">
-                    <div id="youtube" class="socialmedia">
-                      <div class="row">
-                        <div class="col-md-1 col-1 pl-md-3 pl-2">
-                          <span class="handle">
-                            <i class="fas fa-bars"></i>
-                          </span>
                         </div>
+                      </li>
 
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-youtube"></i>
+                      <li id="msg">
+                        <div id="telegram" class="messengers hidden" style=" display:none;">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="col-md-11 col-11">    
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-telegram-plane"></i>
+                                  </div>
+                                </div>
+
+                                <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
+                                <button type="button" class="btn  btn-primary" id="deletetelegram">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
                               </div>
                             </div>
-                            <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" >
-                            <button id="deleteyoutube" class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
                           </div>
-                        </div>  
-                      </div>
-                      
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="youtubepixel" id="youtubepixel" class="form-control">
-                          </select>
-                        </div>  
-                      </div>
-                    </div>
-                  </li>
-                  @else
-                   <li id="sosmed-youtube">
-                    <div id="youtube" class="socialmedia">
-                      <div class="row">
-                        <div class="col-md-1 col-1 pl-md-3 pl-2">
-                          <span class="handle">
-                            <i class="fas fa-bars"></i>
-                          </span>
-                        </div>
 
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-youtube"></i>
-                              </div>
+                          <div class="row">
+                            <div class="offset-md-1 offset-1 col-md-11 col-11">
+                              <select name="telegrampixel" id="telegrampixel" class="form-control"></select>   
                             </div>
-                            <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}" >
-                            <button id="deleteyoutube" class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
-                          </div>
-                        </div>  
-                      </div>
-                      
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="youtubepixel" id="youtubepixel" class="form-control">
-                          </select>
-                        </div>  
-                      </div>
-                    </div>
-                  </li>
-                  @endif
-                  @if(is_null($pages->fb_link))
-                  <li id="sosmed">
-                    <div id="fb" class="socialmedia hidden" style="display:none;" data-type="fb">
-                      <div class="row">
-                        <div class="col-md-1 col-1 pl-md-3 pl-2">
-                          <span class="handle">
-                            <i class="fas fa-bars"></i>
-                          </span>
-                        </div>
-
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-facebook-f"></i>
-                              </div>
-                            </div>
-                            <input type="text" name="fb" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook" >
-                            <button id="deletefb" class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
-                          </div>    
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="fbpixel" id="fbpixel" class="form-control"></select>    
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                @else
-                    <li id="sosmed">
-                  <div id="fb" class="socialmedia" data-type="fb">
-                    <div class="row">
-                      <div class="col-md-1 col-1 pl-md-3 pl-2">
-                        <span class="handle">
-                          <i class="fas fa-bars"></i>
-                        </span>
-                      </div>
-
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-facebook-f"></i>
-                              </div>
-                            </div>
-                            <input type="text" name="fb" class="form-control" value="{{$pages->fb_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook" >
-                            <button id="deletefb" class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
-                          </div>    
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="fbpixel" id="fbpixel" class="form-control"></select>    
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                @endif
-                @if(is_null($pages->twitter_link))
-                  <li id="sosmed">
-                    <div id="twitter" class="socialmedia hidden" style=" display:none;" data-type="twitter">
-                      <div class="row">
-                        <div class="col-md-1 col-1 pl-md-3 pl-2">
-                          <span class="handle">
-                            <i class="fas fa-bars"></i>
-                          </span>
-                        </div>
-
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-twitter"></i>
-                              </div>
-                            </div>
-                            <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter">
-                            <button id="deletetwitter"  class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
                           </div>
                         </div>
-                      </div>
+                      </li>
 
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="twitterpixel" id="twitterpixel" class="form-control">
-                          </select>
-                        </div>
-                      </div>
-                    </div> 
-                  </li>
-                @else
-                    <li id="sosmed">
-                    <div id="twitter" class="socialmedia hidden" data-type="twitter">
-                      <div class="row">
-                        <div class="col-md-1 col-1 pl-md-3 pl-2">
-                          <span class="handle">
-                            <i class="fas fa-bars"></i>
-                          </span>
-                        </div>
+                      <li id="msg">
+                        <div id="skype" class="messengers hidden" style=" display:none;">
+                          <div class="row">
+                            <div class="col-md-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-skype"></i>
+                                  </div>
+                                </div>
 
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-twitter"></i>
+                                <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
+
+                                <button id="deleteskype" class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
                               </div>
                             </div>
-                            <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
-                            <button id="deletetwitter"  class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
+                          </div>
+
+                          <div class="row">
+                            <div class="offset-md-1 offset-1 col-md-11 col-11">
+                              <select name="skypepixel" class="form-control" id="skypepixel"></select>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </li>
+                    </ul>
+                  </div>
 
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="twitterpixel" id="twitterpixel" class="form-control">
-                          </select>
-                        </div>
-                      </div>
-                    </div> 
-                  </li>
-                @endif
+                  <!--Links-->
+                  <label class="mb-3" for="" style="font-weight:bold;">
+                    Links :
+                  </label>
+                  <button type="button" class="float-right btn btn-primary btn-sm" id="addlink">
+                    <i class="fas fa-plus"></i> 
+                  </button>
+                  <br>
 
-                @if(is_null($pages->ig_link))
-                  <li id="sosmed">
-                    <div id="ig" class="socialmedia hidden" style="display: none;"  data-type="ig">
-                      <div class="row">
-                        <div class="col-md-1 col-1 pl-md-3 pl-2">
-                          <span class="handle">
-                            <i class="fas fa-bars"></i>
-                          </span>
-                        </div>
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-instagram"></i>
+                  <div>
+                    <ul class="sortable-link a">       
+                      @foreach($links as $link)
+                        <li id="link-wa">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>  
+                            </div>
+                            <div class="col-md-11 col-11"> 
+                              <div class="input-stack">
+                                <input type="hidden" name="idlink[]" value="{{$link->id}}">
+                                <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
+                                <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
+                                <button class="deletelink btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
                               </div>
                             </div>
-                            <input type="text" name="ig" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
-                            <button id="deleteig"  class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
+                          </div>
+                        </li>
+                      @endforeach
+
+                      <li id="link-wa">
+                        <div class="row">
+                          <div class="col-md-1 col-1 pl-md-3 pl-2">
+                            <span class="handle">
+                              <i class="fas fa-bars"></i>
+                            </span>  
+                          </div>
+                          <div class="col-md-11 col-11"> 
+                            <div class="input-stack">
+                              <input type="hidden" name="idlink[]" value="new">
+                              <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
+                              <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
+                              <button class="deletelink btn btn-primary" type="button">
+                                <i class="fas fa-trash-alt"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </li>
+                    </ul>
+                  </div>
 
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="igpixel" id="igpixel" class="form-control">
-                          </select>
-                        </div>  
-                      </div>
-                    </div> 
-                  </li>
-                  @else
-                   <li id="sosmed">
-                    <div id="ig" class="socialmedia "  data-type="ig">
-                      <div class="row">
-                        <div class="col-md-1 col-1 pl-md-3 pl-2">
-                          <span class="handle">
-                            <i class="fas fa-bars"></i>
-                          </span>
+                  <!--social media-->
+                  <label class="mb-3" for="" style="font-weight:bold">
+                    Social Media
+                  </label>
+                  <button type="button" class="float-right btn btn-primary btn-sm" id="sm">
+                    <i class="fas fa-plus"></i>
+                  </button>
+
+                  <ul class="sortable-sosmed">
+                    @if(is_null($pages->youtube_link))
+                      <li id="sosmed-youtube">
+                        <div id="youtube" class="socialmedia">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-youtube"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" >
+                                <button id="deleteyoutube" class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>  
+                          </div>
+                        
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="youtubepixel" id="youtubepixel" class="form-control">
+                              </select>
+                            </div>  
+                          </div>
                         </div>
-                        <div class="col-md-11 col-11">
-                          <div class="input-group margin">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fab fa-instagram"></i>
+                      </li>
+                    @else
+                      <li id="sosmed-youtube">
+                        <div id="youtube" class="socialmedia">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-youtube"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}" >
+                                <button id="deleteyoutube" class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>  
+                          </div>
+                          
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="youtubepixel" id="youtubepixel" class="form-control">
+                              </select>
+                            </div>  
+                          </div>
+                        </div>
+                      </li>
+                    @endif
+
+                    @if(is_null($pages->fb_link))
+                      <li id="sosmed">
+                        <div id="fb" class="socialmedia hidden" style="display:none;" data-type="fb">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-facebook-f"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="fb" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook" >
+                                <button id="deletefb" class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>    
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="fbpixel" id="fbpixel" class="form-control"></select>    
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    @else
+                      <li id="sosmed">
+                        <div id="fb" class="socialmedia" data-type="fb">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-facebook-f"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="fb" class="form-control" value="{{$pages->fb_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook" >
+                                <button id="deletefb" class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>    
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="fbpixel" id="fbpixel" class="form-control"></select>    
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    @endif
+
+                    @if(is_null($pages->twitter_link))
+                      <li id="sosmed">
+                        <div id="twitter" class="socialmedia hidden" style=" display:none;" data-type="twitter">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-twitter"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter">
+                                <button id="deletetwitter"  class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
                               </div>
                             </div>
-                            <input type="text" name="ig" class="form-control" value="{{$pages->ig_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
-                            <button id="deleteig"  class="btn btn-primary" type="button">
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
                           </div>
-                        </div>
-                      </div>
 
-                      <div class="row">
-                        <div class="offset-md-1 col-md-11 offset-1 col-11">
-                          <select name="igpixel" id="igpixel" class="form-control">
-                          </select>
-                        </div>  
-                      </div>
-                    </div> 
-                  </li>
-                  @endif
-                </ul>
-                      <div class="as">
-                          <hr class="own">
-                          <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks "><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
-                      </div>
-                  </form>
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="twitterpixel" id="twitterpixel" class="form-control">
+                              </select>
+                            </div>
+                          </div>
+                        </div> 
+                      </li>
+                    @else
+                      <li id="sosmed">
+                        <div id="twitter" class="socialmedia hidden" data-type="twitter">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-twitter"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
+                                <button id="deletetwitter"  class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="twitterpixel" id="twitterpixel" class="form-control">
+                              </select>
+                            </div>
+                          </div>
+                        </div> 
+                      </li>
+                    @endif
+
+                    @if(is_null($pages->ig_link))
+                      <li id="sosmed">
+                        <div id="ig" class="socialmedia hidden" style="display: none;"  data-type="ig">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-instagram"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="ig" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
+                                <button id="deleteig"  class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="igpixel" id="igpixel" class="form-control">
+                              </select>
+                            </div>  
+                          </div>
+                        </div> 
+                      </li>
+                    @else
+                      <li id="sosmed">
+                        <div id="ig" class="socialmedia "  data-type="ig">
+                          <div class="row">
+                            <div class="col-md-1 col-1 pl-md-3 pl-2">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+                            <div class="col-md-11 col-11">
+                              <div class="input-group margin">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-instagram"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="ig" class="form-control" value="{{$pages->ig_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
+                                <button id="deleteig"  class="btn btn-primary" type="button">
+                                  <i class="fas fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="offset-md-1 col-md-11 offset-1 col-11">
+                              <select name="igpixel" id="igpixel" class="form-control">
+                              </select>
+                            </div>  
+                          </div>
+                        </div> 
+                      </li>
+                    @endif
+                  </ul>
+
+                  <div class="as">
+                    <hr class="own">
+                    <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks ">
+                      <i class="far fa-save" style="margin-right:5px;"></i>
+                      SAVE
+                    </button>
+                  </div>
+                </form>
               </div>
 
               <!-- TAB 2 -->
-
               <div role="tabpanel" class="tab-pane fade " id="walink">
-                  <form id="savewalink" method="post">
-                      {{ csrf_field() }}
-                      <input type="hidden" name="uuidpixel" value="{{$uuid}}">
-                      <span class="" style="color:blue">WhatsApp Link Creator</span><br>
-                      <span>Masukkan Nomor WA</span>
-                      <input type="number" name="nomorwa" id="nomorwa" class="">
-                      <button type="reset" class="btn btn-danger btn-reset" style="margin-top: 10px; margin-bottom: 10px;">Reset</button>
-                      <div class="card">
-                          <span class="card-header">Masukkan Pesan</span>
-                          <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
-                      </div>
-                      <input type="text" name="editidwa" hidden="" id="editidwa">
-                      <textarea id="demo" hidden="" name="textlink"></textarea>
-                      <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">SAVE & CREATE LINK</button>
-                  </form>
-                  <div class="margin" style="margin-top: 47px;">
-                      <span style="color:blue;">Recent WhatsApp Link Creator</span>
-                      <div class="accordion" id="accordionExample">
-                          <div id="contentwa">
-                          </div>
-                      </div>
+                <form id="savewalink" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="uuidpixel" value="{{$uuid}}">
+                  <span class="" style="color:blue">
+                    WhatsApp Link Creator
+                  </span>
+                  <br>
+                  <span>
+                    Masukkan Nomor WA
+                  </span>
+                  <input type="number" name="nomorwa" id="nomorwa" class="">
+                  <button type="reset" class="btn btn-danger btn-reset" style="margin-top: 10px; margin-bottom: 10px;">
+                    Reset
+                  </button>
+                  <div class="card">
+                    <span class="card-header">
+                      Masukkan Pesan
+                    </span>
+                    <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
                   </div>
-              </div>
+                  <input type="text" name="editidwa" hidden="" id="editidwa">
+                  <textarea id="demo" hidden="" name="textlink"></textarea>
+                  <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">
+                    SAVE & CREATE LINK
+                  </button>
+                </form>
 
-                            <!-- TAB 3 -->
-
-              <div class="tab-pane fade" id="pixel">
-                  <form id="savepixel" method="post">
-                      {{ csrf_field() }}
-                      <input type="hidden" name="uuidpixel" value="{{$uuid}}">
-                      <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
-                      <span style="color:blue;">Pixel Retargetting</span>
-                      <textarea class="card-body form-control" name="script" id="script"></textarea>
-                      <div class="title" style="margin-top: 20px;">
-                          <span>Title</span>
-                          <input type="text" name="title" placeholder="Masukkan Judul" id="judul">
-                          <input type="text" name="editidpixel" hidden id="editidpixel">
-                          <button type="button" id="btnpixel" class="btn btn-primary">Save</button>
-                          <button type="reset" class="btn btn-warning btn-reset">Reset</button>
-                      </div>
-                  </form>
-                  <hr class="own">
-                  <span style="color:blue;">Recent Pixel Retargetting</span>
+                <div class="margin" style="margin-top: 47px;">
+                  <span style="color:blue;">
+                    Recent WhatsApp Link Creator
+                  </span>
                   <div class="accordion" id="accordionExample">
-                      <div id="content">
-
-                      </div>
+                    <div id="contentwa"></div>
                   </div>
+                </div>
               </div>
 
-                            <!-- TAB 4 -->
+              <!-- TAB 3 -->
+              <div class="tab-pane fade" id="pixel">
+                <form id="savepixel" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="uuidpixel" value="{{$uuid}}">
+                  <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
+                  <span style="color:blue;">
+                    Pixel Retargetting
+                  </span>
+                  <textarea class="card-body form-control" name="script" id="script"></textarea>
 
-            <div role="tabpanel" class="tab-pane fade" id="style">
+                  <div class="title" style="margin-top: 20px;">
+                    <span>Title</span>
+                    <input type="text" name="title" placeholder="Masukkan Judul" id="judul">
+                    <input type="text" name="editidpixel" hidden id="editidpixel">
+                    <button type="button" id="btnpixel" class="btn btn-primary">
+                      Save
+                    </button>
+                    <button type="reset" class="btn btn-warning btn-reset">
+                      Reset
+                    </button>
+                  </div>
+                </form>
+
+                <hr class="own">
+
+                <span style="color:blue;">
+                  Recent Pixel Retargetting
+                </span>
+                <div class="accordion" id="accordionExample">
+                  <div id="content"></div>
+                </div>
+              </div>
+
+              <!-- TAB 4 -->
+              <div role="tabpanel" class="tab-pane fade" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="uuidtemp" value="{{$uuid}}">
-                    <div class="mb-5 form-group">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-4 picture-container">
-                                    <div class="picture">
-                                        <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
-                                        <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png">
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                  @if(is_null($pages->page_title))
-                                    <input type="text" name="judul" ng-model="pagetitle" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
-                                  @else
-                                   <input type="text" name="judul" ng-model="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
-                                   @endif
-                                  @if(is_null($pages->link_utama))
-                                    <input type="text" name="link" value="" ng-model="pagelink" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
-                                    @else
-                                    <input type="text" name="link" ng-model="pagelink" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
-                                    @endif
-                                  @if(is_null($pages->telpon_utama))
-                                    <input type="number" name="nomor" ng-model="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
-                                  @else
-                                   <input type="number" name="nomor" ng-model="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
-                                  @endif
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner"><i class="fas fa-plus"></i>
-                                    </button>
-                                    <span style="color:blue;">Banner</span>
-                                    <div class="contentBanner">
-                                        <div class="c">
-                                          @foreach($banner as $banner)
-                                            <input type="text" name="judulBanner[]" value="{{$banner->title}}" class="form-control" placeholder="Judul banner">
-                                            <input type="text" name="linkBanner[]" value="{{$banner->link}}" class="form-control" placeholder="masukkan link">
-                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
-                                            </select>
-                                            <input type="file" name="bannerImage[]" value="Upload">
-                                            <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
-                                            @endforeach
-                                            <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
-                                            <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
-                                            <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
-                                            </select>
-                                            <input type="file" name="bannerImage[]" value="Upload">
-                                            <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                  {{ csrf_field() }}
+                  <input type="hidden" name="uuidtemp" value="{{$uuid}}">
+                  <div class="mb-5 form-group">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-4 picture-container">
+                          <div class="picture">
+                            <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
+                            <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg, .jpeg">
+                          </div>
                         </div>
-                      
-                                        <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">  
-                                        <label class="switch">
-                                            <input type="checkbox" name="rounded" value="rounded-p" >
-                                            <span class="slider round"></span>
-                                        </label> &nbsp;Rounded buttons<br>
-                                        <label class="switch">
-                                            <input type="checkbox" name="outlined" value="outlined">
-                                            <span class="slider round"></span>
-                                        </label>
-                                        &nbsp; Outlined buttons
-                                        <div class="as">
-                                        
-                                                                                        <!-- Bootstrap CSS -->
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                  <li class="nav-item">
-                                                    <a class="nav-link active" href="#buzz" id="gradient" role="tab" data-toggle="tab">GRADIENT</a>
-                                                  </li>
-                                                  <li class="nav-item">
-                                                    <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">SOLID</a>
-                                                  </li>
-                                                </ul>
-                                                <!-- Tab panes -->
-                                                <div class="tab-content">
-
-                                                    <!--theme color -->
-                                                  <div role="tabpanel" class="tab-pane fade in active show" id="buzz">
-
-                                                      <div class="theme mrgtp">
-                                                          <div class="theme-take">
-                                                              <div class="theme1"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme2"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme3"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme4"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme5"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme6"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme7"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme8"></div>
-                                                          </div>
-                                                         <div class="theme-take">
-                                                              <div class="theme9"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme10"></div>
-                                                          </div>
-                                                           <div class="theme-take">
-                                                              <div class="theme11"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme12"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme13"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme14"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme15"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme16"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme17"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme18"></div>
-                                                          </div>
-                                                         <div class="theme-take">
-                                                              <div class="theme19"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme20"></div>
-                                                          </div>
-                                                        
-                                                          <div class="theme-take">
-                                                              <div class="theme21"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme22"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme23"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme24"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme25"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme26"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme27"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme28"></div>
-                                                          </div>
-                                                         <div class="theme-take">
-                                                              <div class="theme29"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme30"></div>
-                                                          </div>
-                                                     
-                                                       <div class="theme-take">
-                                                              <div class="theme31"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme32"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme33"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme34"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme35"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme36"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme37"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme38"></div>
-                                                          </div>
-                                                         <div class="theme-take">
-                                                              <div class="theme39"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme40"></div>
-                                                          </div>
-                                                     
-                                                       <div class="theme-take">
-                                                              <div class="theme41"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme42"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme43"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme44"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme45"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme46"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme47"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme48"></div>
-                                                          </div>
-                                                         <div class="theme-take">
-                                                              <div class="theme49"></div>
-                                                          </div>
-                                                          <div class="theme-take">
-                                                              <div class="theme50"></div>
-                                                          </div>
-                                                     
-                            
-                                                      </div>
-                                                  </div>
-
-                                                  <div role="tabpanel" class="tab-pane fade" id="references">
-                                                    <div align="center">
-                                                    <div id="colorpicker"></div>
-                                                    <input type="text" id="colour" name="colour" value="#123456" readonly="">
-                                                  </div>
-                                                  </div>
-                                                </div>
-                                            <label class="switch">
-                                            <input type="checkbox" name="powered" id="powered" value="powered" checked="">
-                                            <span class="slider round"></span>
-                                        </label> &nbsp; Powered By Omnilinks<br>
-                                            <button type="button" class="btn btn-primary btn-biolinks" id="savetemp"><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                        <div class="col-md-8">
+                          @if(is_null($pages->page_title))
+                            <input type="text" name="judul" ng-model="pagetitle" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                          @else
+                           <input type="text" name="judul" ng-model="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                          @endif
+                          @if(is_null($pages->link_utama))
+                            <input type="text" name="link" value="" ng-model="pagelink" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                          @else
+                            <input type="text" name="link" ng-model="pagelink" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                          @endif
+                          @if(is_null($pages->telpon_utama))
+                            <input type="number" name="nomor" ng-model="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                          @else
+                            <input type="number" name="nomor" ng-model="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                          @endif
                         </div>
+                        <div class="col-md-12">
+                          <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                          <span style="color:blue;">
+                            Banner
+                          </span>
+                          <div class="contentBanner">
+                            <div class="c">
+                              @foreach($banner as $banner)
+                                <input type="text" name="judulBanner[]" value="{{$banner->title}}" class="form-control" placeholder="Judul banner">
+                                <input type="text" name="linkBanner[]" value="{{$banner->link}}" class="form-control" placeholder="masukkan link">
+                                <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
+                                </select>
+                                <input type="file" name="bannerImage[]" value="Upload">
+                                <button class="btn btn-primary btn-deleteBanner">
+                                  <i class="fa fa-trash-alt"></i>
+                                </button>
+                              @endforeach
+
+                              <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
+                              <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
+                              <select name="bannerpixel[]" id="bannerpixel"  class="form-control bannerpixel">
+                              </select>
+                              <input type="file" name="bannerImage[]" value="Upload">
+                              <button class="btn btn-primary btn-deleteBanner">
+                                <i class="fa fa-trash-alt"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
-            </div>
-            <!--phone-->
-            <div class="col-md-6">
-                <div class="fixed">
-                    <div class="center">
-                        <div class="mobile">
-                            <div class="mobile1">
-                                <div class="screen colorgradient1" id="phonecolor" style="border:none;">
-                                <!--screen-->
-                                    <header class="container" style="padding-top: 33px; padding-bottom: 12px;">
-                                      <div class="row">
-                                        <div class="col-md-2 col-3">
-                                           <img id="viewpicture" src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
-                                           
-                                        </div>
-                                        <div class="col-md-7 col-8 p-2">
-                                          <ul style="margin-left: 23px;">
-                                            <li style="display: block; margin-bottom: -15px;"><p class="font-weight-bold" style="color: #fff;">@{{pagetitle}}</p></li>                            
-                                            <li style="display: block; margin-bottom: -15px; "><p class="font-weight-bold" style="color: #fff;">@{{pagelink}}</p></li>
-                                            <li style="display: block;"><p class="font-weight-bold" style="color: #fff;">@{{telpon}}</p></li>
-                                          </ul>
-                                        </div>
-                                      </div>
-                                    </header>
-                                    <div class="row">
-                                  
-                                      <div class="col-md-8" id="viewLink">
-                                       <a href="" title="" class="btn btn-light" style="margin-left: 19px;
-                                     width: 139%; margin-bottom: 12px;"><span>tes</span></a>
-                                      </div>
                                       
-                                        
-                                      
-                                    </div>
-                                </div>                                    
-                            </div>
+                    <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">  
+
+                    <label class="switch">
+                      <input type="checkbox" name="rounded" value="rounded-p" >
+                      <span class="slider round"></span>
+                    </label> &nbsp;Rounded buttons<br>
+
+                    <label class="switch">
+                      <input type="checkbox" name="outlined" value="outlined">
+                      <span class="slider round"></span>
+                    </label> &nbsp; Outlined buttons
+
+                    <div class="as">
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#buzz" id="gradient" role="tab" data-toggle="tab">
+                            GRADIENT
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">
+                            SOLID
+                          </a>
+                        </li>
+                      </ul>
+
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+
+                        <!--theme color -->
+                        <div role="tabpanel" class="tab-pane fade in active show" id="buzz">
+                          <div class="theme mrgtp">                 
+                            @include('user.dashboard.theme-page')
+                          </div>
                         </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="references">
+                          <div align="center">
+                            <div id="colorpicker"></div>
+                            <input type="text" id="colour" name="colour" value="#123456" readonly="">
+                          </div>
+                        </div>
+                      </div>
+
+                      <label class="switch">
+                        <input type="checkbox" name="powered" id="powered" value="powered" checked="">
+                        <span class="slider round"></span>
+                      </label> &nbsp; Powered By Omnilinks<br>
+
+                      <button type="button" class="btn btn-primary btn-biolinks" id="savetemp">
+                        <i class="far fa-save" style="margin-right:5px;"></i>
+                        SAVE
+                      </button>
                     </div>
-                </div>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+
+      <!--phone-->
+      <div class="col-md-6">
+        <div class="fixed">
+          <div class="center">
+            <div class="mobile">
+              <div class="mobile1">
+                <div class="screen colorgradient1" id="phonecolor" style="border:none;">
+                  <!--screen-->
+                  <header class="container" style="padding-top: 33px; padding-bottom: 12px;">
+                    <div class="row">
+                      <div class="col-md-2 col-3">
+                        <img id="viewpicture" src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">                     
+                      </div>
+                      <div class="col-md-7 col-8 p-2">
+                        <ul style="margin-left: 23px;">
+                          <li style="display: block; margin-bottom: -15px;">
+                            <p class="font-weight-bold" style="color: #fff;">
+                              @{{pagetitle}}
+                            </p>
+                          </li>                            
+                          <li style="display: block; margin-bottom: -15px; ">
+                            <p class="font-weight-bold" style="color: #fff;">
+                              @{{pagelink}}
+                            </p>
+                          </li>
+                          <li style="display: block;">
+                            <p class="font-weight-bold" style="color: #fff;">
+                              @{{telpon}}
+                            </p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </header>
+
+                  <div class="row">              
+                    <div class="col-md-8" id="viewLink">
+                      <a href="" title="" class="btn btn-light" style="margin-left: 19px; width: 139%; margin-bottom: 12px;">
+                        <span>tes</span>
+                      </a>
+                    </div>                    
+                  </div>
+                </div>                                    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
 </section>
+
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
 

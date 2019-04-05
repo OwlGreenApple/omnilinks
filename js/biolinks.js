@@ -1,22 +1,25 @@
 /* biolink messenngers*/
 var arra=0;
 $(document).ready(function(){
-    $(document).on('click', '#tambah', function (e) {
+
+  $(document).on('click', '#tambah', function (e) {
     $('.messengers').each(function(){
-        if($(this).hasClass('hidden'))
-        {
-            $(this).show();
-            $(this).removeClass('hidden');
-            $(this).parent().attr("id","msg-"+$(this).attr('data-type'));
-            return false;
-        }      
+      if($(this).hasClass('hidden')) {
+        console.log('remove hidden');
+        $(this).show();
+        $(this).removeClass('hidden');
+        $(this).parent().attr("id","msg-"+$(this).attr('data-type'));
+        return false;
+      }      
     });
-});
-    $('#deletewa').on('click', function () {
-            $('#wa').hide();
-            $('#wa').addClass('hidden');
-            return false;
-        });
+  });
+
+  $('#deletewa').on('click', function () {
+    $('#wa').hide();
+    $('#wa').addClass('hidden');
+    return false;
+  });
+
     $('#deletetelegram').on('click', function () {
             $('#telegram').hide();
             $('#telegram').addClass('hidden');
