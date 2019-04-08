@@ -53,6 +53,9 @@ class SingleLinkController extends Controller
     else
     {
       $pixel=Pixel::where('id','=',$request->hiddenid)->first();
+      if (!$pixel->count()) {
+        return redirect(404);
+      }
     }
  		$user=Auth::User();
  		$pixel->users_id=$user->id;
@@ -60,7 +63,7 @@ class SingleLinkController extends Controller
  		$pixel->title=$request->titlepixel;
   	$pixel->script=$request->script;
   	$pixel->save();
-  		return redirect('/dash/newsingle')->with('ok','pixel telah Ditambahkan');
+  	return redirect('/dash/newsingle')->with('ok','pixel telah Ditambahkan');
  	}
   public function loadsinglepixel(Request $request)
   {

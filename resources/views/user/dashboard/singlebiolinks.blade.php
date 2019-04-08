@@ -11,6 +11,7 @@
         $('#table-pixel-save').children().remove();
         $('#table-link-save').html('<div id="table-link"><table class="table"><thead align="center"><th class="">title</th><th class="">pixel</th><th class="">link</th><th>action</th></thead><tbody id="contentlink"></tbody></table><div id="pageer"></div></div>');
         loadSingleLinks();
+        $('#formpixel').trigger('reset');
         $('#search-pixel').hide();
         $('#search-pixel').addClass('hidden');
         $("#search-link").show();
@@ -22,6 +23,7 @@
         $('#table-link-save').children().remove();
         $('#table-pixel-save').html('<div id="table-pixel"><table class="table"><thead align="center"><th class="">title</th><th class="">Last Modified</th><th class="">Action</th></thead><tbody id="contentpixel"></tbody></table><div id="pager"></div></div>');
         loadSinglePixel();
+        $("#formlink").trigger('reset');
         $('#search-link').hide();
         $('#search-link').addClass('hidden');
         $("#search-pixel").show();
@@ -242,11 +244,12 @@
                                 <div class="form-group row">
                                     <label for="password-confirm" class="col-md-2 col-form-label labell">Pixel
                                     </label>
-                                    <input type="hidden" name="idlink" id="idlink"> 
+                                  
                                     <select name="idpixel" id="idpixel" class="col-md-6 form-control">
                                       
                                     </select>
                                 </div>
+                                  <input type="text" hidden="" name="idlink" id="idlink"> 
                                 <div class="form-group row">
                                   <div class="col-md-3 offset-md-2">
                                  <button type="reset" class="btn btn-danger btn-lg btn-console btn-reset">RESET</button>
@@ -270,8 +273,9 @@
                                     <label for="password-confirm" class="col-md-2 float-right col-form-label labell">Pixel
                                     </label>
                                     <textarea name="script" id="script" class="col-md-6 form-control" required=""></textarea>
+
                                 </div>
-                                <input type="text" id="hiddenid" hidden="" name="hiddenid">
+                                   <input type="text" id="hiddenid" hidden="" name="hiddenid">
                                 <div class="form-group row">
                                   <div class="col-md-3 offset-md-2">  
                                 <button type="reset" class="btn btn-danger btn-console btn-lg btn-reset">RESET</button>
@@ -448,7 +452,7 @@
     });
     $("body").on("click", "#submitlink", function() {
         tambahLink();
-        $('#pesan').removeClass('alert-danger');
+      $('#pesan').removeClass('alert-danger');
       $('#pesan').children().remove();
     });
 
