@@ -1,8 +1,4 @@
-<?php
-	if(!is_null($pixels)&&$pixels->count())
-	{
-	?>	
-	@foreach($pixels as $pixel)
+		@foreach($pixels as $pixel)
 	 <div class="card">
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
@@ -21,6 +17,3 @@
     </div>
   </div>
 @endforeach
-	<?php
-	}
- ?>

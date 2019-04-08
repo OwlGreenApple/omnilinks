@@ -18,9 +18,12 @@
 	<style type="text/css">
 		.rows{
 			margin-top: -15px;
+			padding-right: 25px;
+			padding-left: 23px;
 		}
 		.row{
 			margin-right: -10px;
+
 		}
 	</style>
 	<title>Link</title>
@@ -74,10 +77,7 @@
         <div onclick="plusSlides(1)" class="nextPrevBtn rightArrow" id="right"><span class="arrow arrowRight"></span></div>
         <div class="captionTextHolder"><p class="captionText slideTextFromTop"></p></div>
         @if(is_null($banner[0]->images_banner))
-         <div class="imageHolder">
-            <img src="https://www.mancinifoods.com/site/wp-content/uploads/2018/05/no-thumbnail.png">
-            <p class="captionText"></p>
-        </div>
+      <div></div>
         @else
         @foreach($banner as $banner)
         <div class="imageHolder">

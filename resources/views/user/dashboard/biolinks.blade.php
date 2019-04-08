@@ -189,6 +189,7 @@
         refreshwa();
 
         $('.infooter').remove();
+
         $('.outlined').click(function() {
             if ($(this).prop("checked") == true) {
                 $(".mobile1").addClass("outlinedview");
@@ -203,6 +204,15 @@
             } else if ($(this).prop("checked") == false) {
                 $(".mobile1").removeClass("roundedview");
             }
+        });
+
+        $("#powered").click(function(){
+          if ($(this).prop("checked")==true) {
+            $("#poweredview").children().show();
+          }
+          else if($(this).prop("checked")==false){
+           $("#poweredview").children().hide(); 
+          }
         });
 
         function readURL(input) {
@@ -259,6 +269,7 @@
             readURL(this);
         });
     });
+ 
 </script>
 
 <style type="text/css">
@@ -720,10 +731,101 @@
         border-color: #fff;
     }
 
-    .outlinedview .btnview:hover {
+    .outlinedview .btnview:hover{
         background: #ffff;
         color: #000000 !important;
     }
+    .outlinedview .txtspan{
+       color: #fff;
+       font-size: smaller;
+      border-color: #fff;
+    }
+
+    .outlinedview .txtspan:hover{
+      font-size: smaller;
+      color: #000000 !important;
+    }
+  .rows{
+      margin-top: -15px;
+    }
+      .rows .linked {
+    display: inline-block;
+    font-size:xx-large;
+    padding: 0.3em 0.8em;
+    margin: 0;
+    width: 21.333%;
+    text-align: center; }
+
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  width: 259px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+.dot {
+  cursor: pointer;
+  height: 7px;
+  width: 7px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+ .activated .dot:hover {
+  background-color: #717171;
+}
+.fit {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+.imagesize{
+  width:100%;
+  height: 117px;
+}
+
 </style>
 
 <section id="tabs" class="project-tab">
@@ -1600,13 +1702,76 @@
                                         </div>
                                     </div>
                                 </header>
-                                <div class="row">
+                                <div class="col-md-12">
+                                  <div class="slideshow-container">
+                                      <div class="ap">
+                                      <div class="mySlides fit">
+                                        <img src="https://cdn.pixabay.com/photo/2016/04/15/04/02/water-1330252__340.jpg" class="imagesize">
+                                      </div>
 
-                                    <div class="col-md-8" id="viewLink">
-                                        <button type="button" class="btn btnview btn-light" style="margin-left: 19px;
-                             width: 139%; margin-bottom: 12px;">tes</button>
+                                      <div class="mySlides fit">
+
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXORJaE09hY_hdP0CLQlNGczblJC4fMluQJQIAEVHFYs_58MFC" class="imagesize"> 
+
+                                      </div>
+
+                                      <div class="mySlides fit">
+
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize" >
+                                       
+                                      </div>
+
+                                      </div>
+                                      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                                      </div>
+                                      <br>
+
+                                      <div style="text-align:center ; margin-top: -25px;">
+                                        <span class="dot" onclick="currentSlide(1)"></span> 
+                                        <span class="dot" onclick="currentSlide(2)"></span> 
+                                        <span class="dot" onclick="currentSlide(3)"></span> 
+                                      </div>
+                                </div>
+                                <div class="row rows" style="font-size: xx-small; margin-top: 12px;">
+                                  <div class="col-md-4">
+                                      <button type="button" class="btn btn-md btnview btn-light" style="margin-left: 19px;
+                               width: 100%; margin-bottom: 12px;"><i class="fab fa-whatsapp"></i><span class="txtspan" style="font-size: xx-small;"> Whatsapp</span></button>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <button type="button" class="btn btn-md btnview btn-light" style="
+                             width: 100%; margin-bottom: 12px;"><i class="fab fa-skype"></i><span class="txtspan" style="font-size: xx-small;"> Skype</span></button>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <button type="button" class="btn btn-md btnview btn-light" style="margin-left: -16px;
+                             width: 100%; margin-bottom: 12px;"><i class="fab fa-telegram-plane"></i><span class="txtspan" style="font-size: xx-small;"> Telegram</span></button>
+                                  </div>
+                                    <div class="col-md-12" style="padding-right: 31px; padding-left: 34px; " id="viewLink">
+                                        <button type="button" class="btn btn-md btnview btn-light" style="
+                             width: 100%; margin-bottom: 12px;">tes</button>
                                     </div>
-                                    <div class="col-md-12" align="center">
+
+                                <div class="row" style="padding-left: 27px; padding-right: 44px;">
+                                   <div class="col-md-3 linked">
+                                       <a href="#" title="fb"><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
+                                       </div>
+                                    
+                                       <div class="col-md-3 linked">
+                                       <a href="#" title="ig"><i class="fab fa-instagram" style="color: #fff;"></i></a>  
+                                       </div>  
+                                    
+                                       <div class="col-md-3 linked">
+                                       <a href="#" title="Twitter"><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
+                                       </div>
+                                    
+                                         <div class="col-md-3 linked">
+                                       <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
+                                       </div>
+                                  </div>
+
+
+                                    <div class="col-md-12" align="center" id="poweredview">
                                         <div class="powered-omnilinks"><a href="#"><span style="font-size: small; color: #fff;">Powered by</span><br>&nbsp;&nbsp;<img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
                                             </a>
                                         </div>
@@ -1703,6 +1868,38 @@
     $(document).on('click', '#solid', function() {
         $('#backtheme').val('');
     });
+       let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          let i;
+          let slides = document.getElementsByClassName("mySlides");
+          let dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {
+            slideIndex = 1
+          }    
+          if (n < 1) {
+            slideIndex = slides.length
+          }
+          for (i = 0; i < slides.length; i++) 
+          {
+              slides[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) 
+          {
+              dots[i].className = dots[i].className.replace(" activated", "");
+          }
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " activated";
+        }
     // $(document).on('click','.marker',function(){
     //      $('#backtheme').val('');
     // });
