@@ -21,9 +21,9 @@ class OrderController extends Controller
     public function register(Request $request) 
     {
         return view('auth.register')->with(array(
-			"price"=>$request->price,
-			"namapaket"=>$request->namapaket,
-		));
+    			"price"=>$request->price,
+    			"namapaket"=>$request->namapaket,
+    		));
     }
     public function index_order()
     {
