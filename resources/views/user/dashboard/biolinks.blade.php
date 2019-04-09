@@ -4,7 +4,15 @@
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
+<style type="text/css">
+  .form-control{
+    border-radius: unset;
+  }
+  .btn{
+    border-radius: unset;
+  }
 
+</style>
 <script type="text/javascript">
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
@@ -295,6 +303,9 @@
 
                   <!--messengers!-->
                   <input type="hidden" name="uuid" value="{{$uuid}}">
+                  <input type="hidden" id="viewwa" name="" value="benar">
+                  <input type="hidden" id="viewskpe" name="" value="benar">
+                  <input type="hidden" id="viewtele" name="" value="benar">
                   <label class="mb-3 blue-txt">
                     Messenger
                   </label>
@@ -461,7 +472,7 @@
                                   <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
                                   <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
                                 </div>
-                              </div> 
+                              </div>
                             </div>
                             
                             <div class="div-cell cell-btn deletelink">
@@ -959,7 +970,7 @@
           <div class="center">
             <div class="mobile">
               <div class="mobile1">
-                <div class="screen colorgradient1" id="phonecolor" style="border:none;">
+                <div class="screen colorgradient1" id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
                   <header class="container  " style="padding-top: 33px; padding-bottom: 12px;">
                     <div class="row">
@@ -1014,25 +1025,26 @@
                       <span class="dot" onclick="currentSlide(3)"></span> 
                     </div>
                   </div>
-                  <div class="row rows" style="font-size: xx-small; margin-top: 12px;">
-                    <div class="col-md-4">
-                      <button type="button" class="btn btn-md btnview btn-light" style="margin-left: 19px;
-                      width: 100%; margin-bottom: 12px;"><i class="fab fa-whatsapp"></i><span class="txtspan" style="font-size: xx-small;"> Whatsapp</span></button>
+                  <div class="row rows" style="font-size: xx-small; margin-top: 12px; margin-left: 3px; margin-right: 2px;">
+                 <div class="col-md-4">
+                      <button type="button" class="btn btn-md btnview btn-light" style="
+                      width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-whatsapp"></i><span class="txtspan" style="font-size: xx-small;"> Whatsapp</span></button>
                     </div>
                     <div class="col-md-4">
                       <button type="button" class="btn btn-md btnview btn-light" style="
-                      width: 100%; margin-bottom: 12px;"><i class="fab fa-skype"></i><span class="txtspan" style="font-size: xx-small;"> Skype</span></button>
+                      width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-skype"></i><span class="txtspan" style="font-size: xx-small;"> Skype</span></button>
                     </div>
                     <div class="col-md-4">
-                      <button type="button" class="btn btn-md btnview btn-light" style="margin-left: -16px;
-                      width: 100%; margin-bottom: 12px;"><i class="fab fa-telegram-plane"></i><span class="txtspan" style="font-size: xx-small;"> Telegram</span></button>
-                    </div>
-                    <div class="col-md-12" style="padding-right: 31px; padding-left: 34px; " id="viewLink">
                       <button type="button" class="btn btn-md btnview btn-light" style="
-                      width: 100%; margin-bottom: 12px;">tes</button>
+                      width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-telegram-plane"></i><span class="txtspan" style="font-size: xx-small;"> Telegram</span></button>
                     </div>
 
-                    <div class="row" style="padding-left: 27px; padding-right: 44px;">
+                    <div class="col-md-12" id="viewLink">
+                      <button type="button" class="btn btn-md btnview btn-light" style="
+                      width: 100%; margin-bottom: 12px; ">tes</button>
+                    </div>
+                </div>
+                    <div class="row rows" style="padding-left: 27px; padding-right: 44px;">
                      <div class="col-md-3 linked">
                        <a href="#" title="fb"><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
                      </div>
@@ -1056,35 +1068,7 @@
                     </a>
                   </div>
                 </div>
-
-              </div>
-              <div class="col-md-7 col-8 p-2">
-                <ul style="margin-left: 23px;">
-                  <li style="display: block; margin-bottom: -15px;">
-                    <p class="font-weight-bold" style="color: #fff;">@{{pagetitle}}</p>
-                  </li>
-                  <li style="display: block; margin-bottom: -15px; ">
-                    <p class="font-weight-bold" style="color: #fff;">@{{pagelink}}</p>
-                  </li>
-                  <li style="display: block;">
-                    <p class="font-weight-bold" style="color: #fff;">@{{telpon}}</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </header>
-          <div class="row">
-
-            <div class="col-md-8" id="viewLink">
-              <button type="button" class="btn btnview btn-light" style="margin-left: 19px;
-              width: 139%; margin-bottom: 12px;">tes</button>
-            </div>
-            <div class="col-md-12" align="center">
-              <div class="powered-omnilinks"><a href="#"><span style="font-size: small; color: #fff;">Powered by</span><br>&nbsp;&nbsp;<img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
-              </a>
-            </div>
-          </div>
-
+           
         </div>
       </div>
     </div>
@@ -1170,8 +1154,8 @@
     var convert = encodeURI(message);
     var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";
         //console.log(link);
-        $('#demo').html(link);
-        tambahwalink();
+    $('#demo').html(link);
+    tambahwalink();
       });
 
   $(document).on("click", "#btnpixel", function(e) {

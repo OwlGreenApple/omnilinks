@@ -1,6 +1,9 @@
-
 var arra=0;
 let viewButton=1;
+// function deleteview(id)
+// {
+//    let delete=0; 
+// }
 $(document).ready(function(){
 
   $(document).on('click', '#tambah', function (e) {
@@ -41,23 +44,22 @@ $(document).ready(function(){
     $('.link-list:first').clone().appendTo('.sortable-link').find("input").val("");
     //$("#viewLink").append(' <button type="button" class="btn btn-light btnview" style="width: 100%; margin-bottom: 12px;">tes</button>');
     //$( ".a" ).append( '<li id="link-wa"><div class="row"><div class="col-md-1 col-1 pl-md-3 pl-2"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="col-md-11 col-11"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" placeholder="Title" class="form-control" ><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div></div></div></li>');
-  });
-
-  $(document).on('click','.deletelink',function(e){
-    $("#viewLink").children().remove();
-
-    $(this).parent().parent().parent().remove();
-  });
-
-  /* biolink social-media */
-  $(document).on('click','#sm',function(e){
-    $('.socialmedia').each(function(){
-      if($(this).hasClass('hidden')) {
-        $(this).show();
-        $(this).removeClass('hidden');
-        $(this).parent().attr("id","sosmed-"+$(this).attr('data-type'));
-        return false;
-      }
+    });
+    $(document).on('click','.deletelink',function(e){
+      $("#viewLink").children().remove();
+      $(this).parent().parent().parent().remove();
+    });
+    
+    /* biolink social-media */
+    $(document).on('click','#sm',function(e){
+      $('.socialmedia').each(function(){
+        if($(this).hasClass('hidden')) {
+          $(this).show();
+          $(this).removeClass('hidden');
+          $(this).parent().attr("id","sosmed-"+$(this).attr('data-type'));
+          return false;
+        }
+      });
     });
   });
   $('#deleteyoutube').on('click',  function () {
