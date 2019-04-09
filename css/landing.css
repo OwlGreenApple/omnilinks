@@ -19,6 +19,14 @@ p,span {
   color: #505050;
 }
 
+.blue-txt {
+  color: #116BC7;
+}
+
+.gray-txt {
+  color: #555555;
+}
+
 .dropdown-menu {
   right: 0;
   left: auto;

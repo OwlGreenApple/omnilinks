@@ -295,8 +295,8 @@
 
                   <!--messengers!-->
                   <input type="hidden" name="uuid" value="{{$uuid}}">
-                  <label class="mb-3" for="" style="font-weight:bold;">
-                    Messengers :
+                  <label class="mb-3 blue-txt">
+                    Messenger
                   </label>
                   <button type="button" class="float-right btn btn-primary btn-sm" id="tambah">
                     <i class="fas fa-plus"></i>
@@ -406,8 +406,8 @@
                   </div>
 
                   <!--Links-->
-                  <label class="mb-3" for="" style="font-weight:bold;">
-                    Links :
+                  <label class="mb-3 blue-txt">
+                    Link
                   </label>
                   <button type="button" class="float-right btn btn-primary btn-sm" id="addlink">
                     <i class="fas fa-plus"></i>
@@ -416,53 +416,69 @@
 
                   <div>
                     <ul class="sortable-link a">
-                      @foreach($links as $link)
-                      <li id="link-wa">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-                          <div class="col-md-11 col-11">
-                            <div class="input-stack">
-                              <input type="hidden" name="idlink[]" value="{{$link->id}}">
-                              <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
-                              <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
-                              <button class="deletelink btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      @endforeach
+                      @if($links->count())
+                        @foreach($links as $link)
+                          <li class="link-list">
+                            <div class="div-table mb-4">
+                              <div class="div-cell">
+                                <span class="handle">
+                                  <i class="fas fa-bars"></i>
+                                </span>
+                              </div>
 
-                      <li id="link-wa">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-                          <div class="col-md-11 col-11">
-                            <div class="input-stack">
-                              <input type="hidden" name="idlink[]" value="new">
-                              <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
-                              <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;">
-                              <button class="deletelink btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
+                              <div class="div-cell">
+                                <div class="col-md-12 col-12 pr-0 pl-0">
+                                  <div class="input-stack">
+                                    <input type="hidden" name="idlink[]" value="{{$link->id}}">
+
+                                    <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
+                                    <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="div-cell cell-btn deletelink">
+                                <span>
+                                  <i class="far fa-trash-alt"></i>
+                                </span>
+                              </div>
                             </div>
+                          </li>
+                        @endforeach
+                      @else 
+                        <li class="link-list">
+                          <div class="div-table mb-4">
+                            <div class="div-cell">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="div-cell">
+                              <div class="col-md-12 col-12 pr-0 pl-0">
+                                <div class="input-stack">
+                                  <input type="hidden" name="idlink[]" value="new">
+                                  <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
+                                  <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
+                                </div>
+                              </div> 
+                            </div>
+                            
+                            <div class="div-cell cell-btn deletelink">
+                              <span>
+                                <i class="far fa-trash-alt"></i>
+                              </span>
+                            </div>
+
                           </div>
-                        </div>
-                      </li>
+                        </li>
+                      @endif
                     </ul>
                   </div>
 
                   <!--social media-->
-                  <label class="mb-3" for="" style="font-weight:bold">
-                    Social Media
+                  <label class="mb-3 blue-txt">
+                    Media Sosial
                   </label>
                   <button type="button" class="float-right btn btn-primary btn-sm" id="sm">
                     <i class="fas fa-plus"></i>
@@ -739,7 +755,6 @@
                   </ul>
 
                   <div class="as">
-                    <hr class="own">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks ">
                       <i class="far fa-save" style="margin-right:5px;"></i>
                       SAVE
@@ -753,7 +768,7 @@
                 <form id="savewalink" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="uuidpixel" value="{{$uuid}}">
-                  <span class="" style="color:blue">
+                  <span class="blue-txt">
                     WhatsApp Link Creator
                   </span>
                   <br>
@@ -778,7 +793,7 @@
                 </form>
 
                 <div class="margin" style="margin-top: 47px;">
-                  <span style="color:blue;">
+                  <span class="blue-txt">
                     Recent WhatsApp Link Creator
                   </span>
                   <div class="accordion" id="accordionExample">
@@ -793,7 +808,7 @@
                   {{ csrf_field() }}
                   <input type="hidden" name="uuidpixel" value="{{$uuid}}">
                   <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
-                  <span style="color:blue;">
+                  <span class="blue-txt">
                     Pixel Retargetting
                   </span>
                   <textarea class="card-body form-control" name="script" id="script"></textarea>
@@ -813,7 +828,7 @@
 
                 <hr class="own">
 
-                <span style="color:blue;">
+                <span class="blue-txt">
                   Recent Pixel Retargetting
                 </span>
                 <div class="accordion" id="accordionExample">
@@ -827,9 +842,9 @@
 
                   {{ csrf_field() }}
                   <input type="hidden" name="uuidtemp" value="{{$uuid}}">
-                  <div class="mb-5 form-group">
+                  <div class="form-group">
                     <div class="container">
-                      <div class="row">
+                      <div class="row mt-5">
                         <div class="col-md-4 picture-container">
                           <div class="picture">
                             <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
@@ -853,11 +868,14 @@
                           <input type="number" name="nomor" ng-model="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
                           @endif
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-4">
                           <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner"><i class="fas fa-plus"></i>
                           </button>
-                          <span style="color:blue;">Banner</span>
-                          <div class="contentBanner">
+                          <span class="blue-txt">
+                            Banner Promo
+                          </span>
+
+                          <div class="contentBanner mb-5">
                             <div class="c">
                               @foreach($banner as $banner)
                               <input type="text" name="judulBanner[]" value="{{$banner->title}}" class="form-control" placeholder="Judul banner">
@@ -880,28 +898,30 @@
                     </div>
 
                     <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">
+                    <p class="blue-txt">
+                      Theme
+                    </p>
                     <label class="switch">
                       <input type="checkbox" name="rounded" class="rounded" value="rounded-p">
                       <span class="slider round"></span>
-                    </label> &nbsp;Rounded buttons<br>
+                    </label>&nbsp;Rounded buttons<br>
                     <label class="switch">
                       <input type="checkbox" name="outlined" class="outlined" value="outlined">
                       <span class="slider round"></span>
-                    </label>
-                    &nbsp; Outlined buttons
+                    </label>&nbsp; Outlined buttons
                     <div class="as">
 
                       <!-- Bootstrap CSS -->
-                      <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
+                      <ul class="nav nav-tabs sub-nav mt-4" role="tablist">
+                        <li class="nav-item sub-nav">
                           <a class="nav-link active" href="#buzz" id="gradient" role="tab" data-toggle="tab">GRADIENT</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item sub-nav">
                           <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">SOLID</a>
                         </li>
                       </ul>
                       <!-- Tab panes -->
-                      <div class="tab-content">
+                      <div class="tab-content mt-4 mb-4">
 
                         <!--theme color -->
                         <div role="tabpanel" class="tab-pane fade in active show" id="buzz">
@@ -918,7 +938,7 @@
                           </div>
                         </div>
                       </div>
-                      <label class="switch">
+                      <label class="switch mb-4">
                         <input type="checkbox" name="powered" id="powered" value="powered" checked="">
                         <span class="slider round"></span>
                       </label> &nbsp; Powered By Omnilinks<br>

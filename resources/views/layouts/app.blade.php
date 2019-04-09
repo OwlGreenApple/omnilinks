@@ -15,7 +15,7 @@
   <script src="{{asset('js/pricing.js')}}"></script>
   <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-   <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
 
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
@@ -63,7 +63,7 @@
               @else
 
               <div class="dropdown pull-right">
-                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:blue;" v-pre>
+                <a class="nav-link dropdown-toggle blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">
                   Halo, {{ Auth::user()->username }} <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

@@ -214,7 +214,7 @@ hr.own {
   margin-right: auto;
 }
 .messengers{
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .socialmedia{
   margin-bottom: 20px;
@@ -239,12 +239,17 @@ hr.own {
   font-size: 16px;
   font-weight: bold;
 }
+.nav-item.sub-nav .nav-link.active {
+  color: #fff;
+  background-color: #0062cc;
+  border-bottom: 3px solid #0062cc !important;
+}
 .project-tab .nav-link {
   border: 1px solid transparent;
   border-top-left-radius: .25rem;
   border-top-right-radius: .25rem;
   border-bottom: none;
-  color: #0062cc;
+  color: #106BC8;
   font-size: 16px;
   font-weight: 600;
 }
@@ -262,6 +267,9 @@ hr.own {
 }
 .nav-tabs{
   border-bottom: none;
+}
+.nav-tabs.sub-nav {
+  border-bottom: 3px solid #0062cc;
 }
 
 .mobile{
@@ -313,7 +321,7 @@ hr.own {
   top: 50%;
   left: 50%;
   margin-left: 130px;
-  margin-top: -285px;
+  margin-top: -290px;
 
 }
 
