@@ -95,17 +95,17 @@
 	<div class="row" style="margin-bottom: 13px;">
 	@if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0)
 	  <div class="{{$pages->colom}}">
-        <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i><span style="font-size: medium;"> Whatsapp</span></a>
+        <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i><span style="font-size: smaller;"> Whatsapp</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->skype_link) || $pages->skype_pixel_id!=0)
       <div class="{{$pages->colom}}">
-        <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i><span style="font-size: medium;"> Skype</span></a>
+        <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i><span style="font-size: smaller;"> Skype</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
       <div class="{{$pages->colom}}">
-        <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i><span style="font-size: medium;"> Telegram</span></a>
+        <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i><span style="font-size: smaller;"> Telegram</span></a>
       </div>
       @endif
       @if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0 and !is_null($pages->skype_link) || $pages->skype_pixel_id!=0 and !is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)

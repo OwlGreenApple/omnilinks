@@ -7,7 +7,8 @@
     <div class="card-body">
       <h1 class="textdash">
         Buat Omnilinkz pertama Anda<br>Pilih <span style="color:#106BC8;">"BIO LINK"</span> atau <span style="color:#106BC8;">"SINGLE LINK"
-      </h1>
+          </span>
+        </h1>
     </div>
   </div>
 @else
@@ -15,7 +16,6 @@
     <div class="card carddash">
       <div class="card-body link-header" id="linkHeader" dataid="{{$page->id}}" style="cursor:pointer;">
         <div class="row">
-
           <div class="col-md-1">
             <div class="photo p-2 bd-highlight justify-content-center">
               <div class="imga">
