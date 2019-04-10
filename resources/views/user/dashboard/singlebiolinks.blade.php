@@ -414,7 +414,56 @@ table tr:nth-child(even) td
 
   </div>
 </div>
+
+<!-- Modal Copy Link -->
+<div class="modal fade" id="copy-link" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Copy 
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Copy berhasil!
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" data-dismiss="modal">
+          OK
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
 <script type="text/javascript">
+  $( "body" ).on( "click", ".btn-copy", function(e) 
+  {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var link = $(this).attr("data-copy");
+
+    var tempInput = document.createElement("input");
+    tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+    tempInput.value = link;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+
+    /*$(".link-"+id).select();
+    document.execCommand("copy");*/
+    $('#copy-link').modal('show');
+  });
+
   /*$('.nav-tabs a').click(function () {
     console.log($(this).data("second-tab"));
     $(this).tab('show');

@@ -10,7 +10,9 @@
       <td>{{$link->judul}}</td>
       <td>
         Omn.lkz/{{$link->shorten}}&nbsp;
-        <i class="far fa-copy"></i>
+        <span class="btn-copy" data-copy="Omn.lkz/{{$link->shorten}}">
+          <i class="far fa-copy"></i>  
+        </span>
       </td>
       <td>
         <button type="button" class="btn btn-sm btn-primary btn-editlink" dataeditid="{{$link->idlink}}" datatitle="{{$link->title}}"

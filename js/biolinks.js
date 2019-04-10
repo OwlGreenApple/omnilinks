@@ -82,7 +82,7 @@ $(document).ready(function(){
     $('#twitter').addClass('hidden');
     return false;
   });
-});
+
 /* hanya angka */
 function hanyaAngka(evt) {
   var charCode = (evt.which)?evt.which:event.keyCode

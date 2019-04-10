@@ -8,10 +8,6 @@
   .form-control{
     border-radius: unset;
   }
-  .btn{
-    border-radius: unset;
-  }
-
 </style>
 <script type="text/javascript">
   function tambahTemp() {
@@ -496,273 +492,140 @@
                   </button>
 
                   <ul class="sortable-sosmed">
-                    @if(is_null($pages->youtube_link))
                     <li id="sosmed-youtube">
-                      <div id="youtube" class="socialmedia">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                  <i class="fab fa-youtube"></i>
-                                </div>
-                              </div>
-                              <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url">
-                              <button id="deleteyoutube" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </div>
+                      <div id="youtube" class="socialmedia div-table mb-4">
+      
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
                         </div>
 
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
-                            <select name="youtubepixel" id="youtubepixel" class="form-control">
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    @else
-                    <li id="sosmed-youtube">
-                      <div id="youtube" class="socialmedia">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
                               <div class="input-group-prepend">
                                 <div class="input-group-text">
                                   <i class="fab fa-youtube"></i>
                                 </div>
                               </div>
                               <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}">
-                              <button id="deleteyoutube" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
                             </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          </div> 
+                          <div class="col-md-12 col-12 pr-0 pl-0">
                             <select name="youtubepixel" id="youtubepixel" class="form-control">
                             </select>
-                          </div>
+                          </div> 
                         </div>
-                      </div>
+                          
+                        <div class="div-cell cell-btn" id="deleteyoutube">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
+                        </div>
+                      </div>                      
                     </li>
-                    @endif
 
-                    @if(is_null($pages->fb_link))
                     <li id="sosmed">
-                      <div id="fb" class="socialmedia hidden" style="display:none;" data-type="fb">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                  <i class="fab fa-facebook-f"></i>
-                                </div>
-                              </div>
-                              <input type="text" name="fb" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook">
-                              <button id="deletefb" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </div>
+                      <div id="fb" class="socialmedia div-table hidden" style="display: none;" data-type="fb">
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
                         </div>
 
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
-                            <select name="fbpixel" id="fbpixel" class="form-control"></select>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    @else
-                    <li id="sosmed">
-                      <div id="fb" class="socialmedia" data-type="fb">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
                               <div class="input-group-prepend">
                                 <div class="input-group-text">
                                   <i class="fab fa-facebook-f"></i>
                                 </div>
                               </div>
                               <input type="text" name="fb" class="form-control" value="{{$pages->fb_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook">
-                              <button id="deletefb" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
+                            </div>
+
+                            <div class="col-md-12 col-12 pr-0 pl-0">
+                              <select name="fbpixel" id="fbpixel" class="form-control"></select>
                             </div>
                           </div>
                         </div>
-
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
-                            <select name="fbpixel" id="fbpixel" class="form-control"></select>
-                          </div>
+                        
+                        <div class="div-cell cell-btn" id="deletefb">
+                          <span>
+                            <i class="far fa-trash-alt"></i>  
+                          </span>
                         </div>
                       </div>
                     </li>
-                    @endif
 
-                    @if(is_null($pages->twitter_link))
                     <li id="sosmed">
-                      <div id="twitter" class="socialmedia hidden" style=" display:none;" data-type="twitter">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                  <i class="fab fa-twitter"></i>
-                                </div>
-                              </div>
-                              <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter">
-                              <button id="deletetwitter" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </div>
+                      <div id="twitter" class="socialmedia div-table hidden" style="display: none;" data-type="twitter">
+              
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
                         </div>
 
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
-                            <select name="twitterpixel" id="twitterpixel" class="form-control">
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    @else
-                    <li id="sosmed">
-                      <div id="twitter" class="socialmedia hidden" data-type="twitter">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
                               <div class="input-group-prepend">
                                 <div class="input-group-text">
                                   <i class="fab fa-twitter"></i>
                                 </div>
                               </div>
                               <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
-                              <button id="deletetwitter" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
                             </div>
                           </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
                             <select name="twitterpixel" id="twitterpixel" class="form-control">
                             </select>
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    @endif
-
-                    @if(is_null($pages->ig_link))
-                    <li id="sosmed">
-                      <div id="ig" class="socialmedia hidden" style="display: none;" data-type="ig">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                  <i class="fab fa-instagram"></i>
-                                </div>
-                              </div>
-                              <input type="text" name="ig" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
-                              <button id="deleteig" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
-                            <select name="igpixel" id="igpixel" class="form-control">
-                            </select>
-                          </div>
+                          
+                        <div class="div-cell cell-btn" id="deletetwitter">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
                         </div>
                       </div>
                     </li>
-                    @else
+
                     <li id="sosmed">
-                      <div id="ig" class="socialmedia " data-type="ig">
-                        <div class="row">
-                          <div class="col-md-1 col-1 pl-md-3 pl-2">
-                            <span class="handle">
-                              <i class="fas fa-bars"></i>
-                            </span>
-                          </div>
-                          <div class="col-md-11 col-11">
-                            <div class="input-group margin">
+                      <div id="ig" class="socialmedia div-table hidden" style="display: none;" data-type="ig">
+              
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
                               <div class="input-group-prepend">
                                 <div class="input-group-text">
                                   <i class="fab fa-instagram"></i>
                                 </div>
                               </div>
                               <input type="text" name="ig" class="form-control" value="{{$pages->ig_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
-                              <button id="deleteig" class="btn btn-primary" type="button">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
                             </div>
                           </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="offset-md-1 col-md-11 offset-1 col-11">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
                             <select name="igpixel" id="igpixel" class="form-control">
                             </select>
                           </div>
                         </div>
+                          
+                        <div class="div-cell cell-btn" id="deleteig">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
+                        </div>
                       </div>
                     </li>
-                    @endif
                   </ul>
 
                   <div class="as">
@@ -782,32 +645,43 @@
                   <span class="blue-txt">
                     WhatsApp Link Creator
                   </span>
-                  <br>
-                  <span>
-                    Masukkan Nomor WA
-                  </span>
-                  <input type="number" name="nomorwa" id="nomorwa" class="">
-                  <button type="reset" class="btn btn-danger btn-reset" style="margin-top: 10px; margin-bottom: 10px;">
-                    Reset
-                  </button>
+                  
+                  <div class="form-group mt-3 mb-4 row">
+                    <label for="nomorwa" class="control-label col-md-5">
+                       Masukkan Nomor WA
+                    </label>
+                    <div class="col-md-7 row">
+                      <input type="text" name="nomorwa" id="nomorwa" class="form-control col-md-9" onkeypress="return hanyaAngka(event)">
+                      <div class="col-md-3">
+                        <button type="reset" class="btn btn-danger btn-reset">
+                          Reset
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                
                   <div class="card">
-                    <span class="card-header">
+                    <span class="card-header card-gray">
                       Masukkan Pesan
                     </span>
                     <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
                   </div>
+
                   <input type="text" name="editidwa" hidden="" id="editidwa">
                   <textarea id="demo" hidden="" name="textlink"></textarea>
-                  <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">
-                    SAVE & CREATE LINK
-                  </button>
+
+                  <div class="col-md-12 pr-0 text-right">
+                    <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">
+                      SAVE & CREATE LINK
+                    </button>  
+                  </div>
                 </form>
 
                 <div class="margin" style="margin-top: 47px;">
-                  <span class="blue-txt">
+                  <span class="blue-txt mb-4">
                     Recent WhatsApp Link Creator
                   </span>
-                  <div class="accordion" id="accordionExample">
+                  <div class="accordion mt-3" id="accordionExample">
                     <div id="contentwa"></div>
                   </div>
                 </div>
@@ -880,28 +754,60 @@
                           @endif
                         </div>
                         <div class="col-md-12 mt-4">
-                          <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner"><i class="fas fa-plus"></i>
+                          <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner">
+                            <i class="fas fa-plus"></i>
                           </button>
                           <span class="blue-txt">
                             Banner Promo
                           </span>
 
                           <div class="contentBanner mb-5">
-                            <div class="c">
-                              @foreach($banner as $banner)
-                              <input type="text" name="judulBanner[]" value="{{$banner->title}}" class="form-control" placeholder="Judul banner">
-                              <input type="text" name="linkBanner[]" value="{{$banner->link}}" class="form-control" placeholder="masukkan link">
-                              <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
-                              </select>
-                              <input type="file" name="bannerImage[]" value="Upload">
-                              <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
-                              @endforeach
-                              <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
-                              <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
-                              <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
-                              </select>
-                              <input type="file" name="bannerImage[]" value="Upload">
-                              <button class="btn btn-primary btn-deleteBanner"><i class="fa fa-trash-alt"></i></button>
+                            <div class="c div-banner">
+                              @if($banner->count())
+                                @foreach($banner as $ban)
+                                <div class="div-table list-banner mb-4">
+                                  <div class="div-cell">
+                                    <input type="text" name="judulBanner[]" value="{{$ban->title}}" class="form-control" placeholder="Judul banner">
+                                    <input type="text" name="linkBanner[]" value="{{$ban->link}}" class="form-control" placeholder="masukkan link">
+                                    <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
+                                    </select>
+                                    <!--<input type="file" name="bannerImage[]" value="Upload">-->
+                                    <div class="custom-file">
+                                      <input type="file" name="bannerImage[]" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+
+                                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="div-cell cell-btn btn-deleteBanner">
+                                    <span>
+                                      <i class="far fa-trash-alt"></i>
+                                    </span>
+                                  </div>  
+                                </div>
+                                @endforeach
+                              @else 
+                                <div class="div-table list-banner mb-4">
+                                  <div class="div-cell">
+                                    <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
+                                    <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
+                                    <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
+                                    </select>
+                                    <!--<input type="file" name="bannerImage[]" value="Upload">-->
+                                    <div class="custom-file">
+                                      <input type="file" name="bannerImage[]" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+
+                                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="div-cell cell-btn btn-deleteBanner">
+                                    <span>
+                                      <i class="far fa-trash-alt"></i>
+                                    </span>
+                                  </div>  
+                                </div>
+                              @endif
                             </div>
                           </div>
                         </div>
@@ -919,7 +825,7 @@
                     <label class="switch">
                       <input type="checkbox" name="outlined" class="outlined" value="outlined">
                       <span class="slider round"></span>
-                    </label>&nbsp; Outlined buttons
+                    </label>&nbsp;Outlined buttons
                     <div class="as">
 
                       <!-- Bootstrap CSS -->
@@ -1112,6 +1018,12 @@
     });
   });
 
+  // Add the following code if you want the name of the file appear on select
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+
   $("body").on("click", "#savetemp", function() {
     tambahTemp();
     $('#pesanAlert').removeClass('alert-danger');
@@ -1119,7 +1031,15 @@
   });
 
   $("body").on("click", "#addBanner", function() {
-    tambahBanner();
+    //tambahBanner();
+    var $el = $('.list-banner:first').clone().appendTo('.div-banner');
+    $el.find("input").val("");
+    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+
+    /*$el.wrap('<form>').closest('form').trigger("reset");
+    $el.unwrap();
+    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');*/
+
     batas += 1;
     if (batas == 5) {
       $(this).attr('disabled', 'disabled');

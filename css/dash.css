@@ -2,10 +2,32 @@
 {
   padding:50px 0 0 0 !important;
 }
+.card-gray {
+  background-color: #EBEBEB;
+}
+.card-none {
+  background: transparent;
+  border:none;
+}
+.card-none .card-header, .card-none .card-body {
+  border: 1px solid rgba(0,0,0,.125);
+}
+.card-none .card-body {
+  background-color: #fff;  
+}
 .carddash
 {
   margin: 35px 0 35px 0; 
   background-color: #F6F6F6;
+}
+.view-wa {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: #555555;
+}
+.view-wa:hover {
+  color: #3490dc;
 }
 .noshow
 {   
@@ -90,11 +112,12 @@
 }
 
 .btn-biolinks{
-  float: right;
-  margin-right: 16px;
-  padding-left: 50px;
-  padding-right: 50px;
+  /*float: right;
+  margin-right: 16px;*/
+  padding-left: 30px;
+  padding-right: 30px;
   border-radius: 20px;
+  font-weight: 600;
 }
 
 /* Dashboard */
