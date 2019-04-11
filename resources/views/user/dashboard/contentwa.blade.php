@@ -1,9 +1,9 @@
 @foreach($walink as $walinks)
   <div class="card card-none mb-3">
     <div class="card-header card-gray" id="headingOne">
-      <span class="view-wa" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <span class="view-wa" data-toggle="collapse" data-target="#detail-{{$walinks->id}}" aria-expanded="true" aria-controls="detail-{{$walinks->id}}">
         {{$walinks->nomor}}
-        <span class="ml-4">
+        <span class="ml-2">
           <i class="fas fa-sort-down"></i>  
         </span>
         
@@ -18,7 +18,7 @@
       </button>
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="detail-{{$walinks->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body mb-2">
         <span id="{{$walinks->id}}">
           {{$walinks->linkgenerator}}

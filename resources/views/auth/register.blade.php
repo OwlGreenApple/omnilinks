@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 <div class="container" style="padding-top: 50px; padding-bottom:50px;">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-12">
+    <div class="col-md-6 col-12">
       <div class="card-custom-register">
         <div class="card cardpadreg">
           <h5 class="Daftar-Disini">Daftar Disini</h5>
@@ -97,7 +97,7 @@
               <div class="form-group row">
                 <div class="col-md-12 col-12">
                   <button type="submit" class="btn btn-primary bsub btn-block">
-                    {{ __('Register') }}
+                    REGISTER
                   </button>
                   <hr class="own">
                   <h3 class="have">Sudah Punya Akun?&nbsp;<a href="{{ __('login')}}">Masuk Disini</a></h3>

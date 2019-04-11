@@ -628,7 +628,7 @@
                     </li>
                   </ul>
 
-                  <div class="as">
+                  <div class="as col-md-12 text-right">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks ">
                       <i class="far fa-save" style="margin-right:5px;"></i>
                       SAVE
@@ -664,7 +664,7 @@
                     <span class="card-header card-gray">
                       Masukkan Pesan
                     </span>
-                    <textarea class="card-body form-control" name="pesan" id="pesan-wa"> </textarea>
+                    <textarea class="form-control" name="pesan" id="pesan-wa" style="height:100px"> </textarea>
                   </div>
 
                   <input type="text" name="editidwa" hidden="" id="editidwa">
@@ -696,27 +696,29 @@
                   <span class="blue-txt">
                     Pixel Retargetting
                   </span>
-                  <textarea class="card-body form-control" name="script" id="script"></textarea>
+                  <textarea class="form-control mt-3" name="script" id="script" style="height:100px"></textarea>
 
-                  <div class="title" style="margin-top: 20px;">
-                    <span>Title</span>
-                    <input type="text" name="title" placeholder="Masukkan Judul" id="judul">
+                  <div class="title form-inline mb-5 mt-3">
+                    <span class="mr-2">
+                      Title
+                    </span>
+
+                    <input type="text" class="form-control col-md-5 mr-2" name="title" placeholder="Masukkan Judul" id="judul">
                     <input type="text" name="editidpixel" hidden id="editidpixel">
-                    <button type="button" id="btnpixel" class="btn btn-primary">
+
+                    <button type="button" id="btnpixel" class="btn btn-primary mr-2">
                       Save
                     </button>
-                    <button type="reset" class="btn btn-warning btn-reset">
+                    <button type="reset" class="btn btn-danger btn-reset">
                       Reset
                     </button>
                   </div>
                 </form>
 
-                <hr class="own">
-
                 <span class="blue-txt">
                   Recent Pixel Retargetting
                 </span>
-                <div class="accordion" id="accordionExample">
+                <div class="accordion mt-3" id="accordionExample">
                   <div id="content"></div>
                 </div>
               </div>
@@ -859,7 +861,14 @@
                         <input type="checkbox" name="powered" id="powered" value="powered" checked="">
                         <span class="slider round"></span>
                       </label> &nbsp; Powered By Omnilinks<br>
-                      <button type="button" class="btn btn-primary btn-biolinks" id="savetemp"><i class="far fa-save" style="margin-right:5px;"></i>SAVE</button>
+
+                      <div class="col-md-12 text-right">
+                        <button type="button" class="btn btn-primary btn-biolinks" id="savetemp">
+                          <i class="far fa-save" style="margin-right:5px;"></i>
+                          SAVE
+                        </button>  
+                      </div>
+                      
                     </div>
                   </div>
                 </form>
@@ -990,6 +999,7 @@
 
 <script type="text/javascript">
   var batas = 1;
+  var elhtml;
 
   $(document).ready(function() {
     $('.outlined').click(function() {
@@ -1019,7 +1029,7 @@
   });
 
   // Add the following code if you want the name of the file appear on select
-  $(".custom-file-input").on("change", function() {
+  $(document).on("change", ".custom-file-input",function() {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
@@ -1032,8 +1042,16 @@
 
   $("body").on("click", "#addBanner", function() {
     //tambahBanner();
-    var $el = $('.list-banner:first').clone().appendTo('.div-banner');
+    
+    var $el;
+    if($('.list-banner').length<=0){
+      $el = $( ".div-banner" ).append(elhtml);
+    } else {
+      $el = $('.list-banner:first').clone().appendTo('.div-banner');
+    }
+
     $el.find("input").val("");
+    $el.find("input").attr("value", "");
     $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
 
     /*$el.wrap('<form>').closest('form').trigger("reset");
@@ -1047,6 +1065,10 @@
   });
 
   $("body").on("click", ".btn-deleteBanner", function() {
+    if($('.list-banner').length<=1){
+      elhtml = $('.div-banner').html();
+    } 
+
     $(this).parent().remove();
     batas -= 1;
     if (batas != 5) {

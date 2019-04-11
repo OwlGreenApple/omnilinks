@@ -167,6 +167,9 @@ table tr:nth-child(even) td
 .labell{
   font-size: 16px;
 }
+.btn-copy {
+  cursor: pointer;
+}
 
 </style>
 
@@ -184,7 +187,7 @@ table tr:nth-child(even) td
         </div>
         <div id="pesan" class="alert"></div>
 
-        <div class="card carddash" style="margin-bottom:20px;">
+        <div class="card carddash" style="margin-bottom:50px;">
           <div class="card-body">
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
               <a class="nav-link active" href=".links" data-target=".links" role="tab" data-toggle="tab" id="link-tab">

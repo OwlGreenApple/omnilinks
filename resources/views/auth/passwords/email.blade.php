@@ -7,7 +7,7 @@
     <div class="col-md-12">
       <img class="mx-auto d-block" src="../image/omnilinkz-logo-wh.png" width="240px;" height="auto">
     </div>
-    <div class="col-md-8 col-12 ">
+    <div class="col-md-6 col-12 ">
       <div class="card-custom">
         <div class="card cardfor">
           <h5 class="Daftar-Disini">Reset Password</h5>

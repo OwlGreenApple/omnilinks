@@ -155,7 +155,7 @@
   color: #505050;
 }
 
-.btn-copylink:hover {
+.btn-copylink:hover, .btn-copy:hover{
   color: #6EB1F7;
 }
 

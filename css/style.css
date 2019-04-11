@@ -19,7 +19,7 @@ h4,
 h5,
 h6 {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .Rectangle {
@@ -65,7 +65,7 @@ h6 {
 }
 
 .bsub {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   background-color: #106AC7;
   color: #ffffff;
@@ -85,7 +85,7 @@ h6 {
 .Daftar-Disini {
   padding: 20px;
   font-family: 'Open Sans', sans-serif;
-  font-size: 40px;
+  font-size: 37px;
   font-weight: 700;
   text-align: center;
   color: #106ac7;
@@ -123,13 +123,13 @@ hr.own {
 .have {
   text-align: center !important;
   padding: 20px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #505050;
 }
 
 .text {
-  font-size: 18px;
+  font-size: 16px;
   height: 30px;
   font-weight: 600;
   color: #505050;
