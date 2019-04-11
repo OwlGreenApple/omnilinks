@@ -25,6 +25,9 @@
 			margin-right: -10px;
 
 		}
+		.mrglink{
+			margin-bottom: 10px; margin-top: -5px;
+		}
 	</style>
 	<title>Link</title>
 	</head>
@@ -36,27 +39,19 @@
 	<header class="container">
 		<div class="row">
 			<div class="col-md-3 col-3 p-4">
-				@if(is_null($pages->image_pages))
-				 <img src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" class="imagetitle">
-				 @else
-				  <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" class="imagetitle" >
+				@if(!is_null($pages->image_pages))
+				 <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" class="imagetitle" >
 				 @endif
 			</div>
-			<div class="col-md-8 col-8 p-4">
+			<div class="col-md-8 col-8 p-4" style="margin-top: 12px">
 				<ul class="ultitle">
-				@if(is_null($pages->page_title))
-				  <li style="display: block; margin-bottom: 1px;"><p class="font-weight-bold">NO PAGE TITLE</p></li>
-				 @else
-				  <li style="display: block; margin-bottom: 1px;">{{$pages->page_title}}</li>
+				@if(!is_null($pages->page_title))
+				  <li style="display: block; margin-bottom: 1px; font-size: large;">{{$pages->page_title}}</li>
 				 @endif
-				 @if(is_null($pages->link_utama))
-				  <li style="display: block; margin-bottom: -15px;"><p class="font-weight-bold">NO LINK TITLE</p></li>
-				 @else
+				 @if(!is_null($pages->link_utama))
 				  <li style="display: block; margin-bottom: -15px; font-size:smaller;  word-break: break-all;" ><p class="font-weight-bold">{{$pages->link_utama}}</p></li>
 				 @endif
-				 @if(is_null($pages->telpon_utama))
-				  <li style="display: block"><p class="font-weight-bold">NO PHONE</p></li>
-				 @else
+				 @if(!is_null($pages->telpon_utama))
 				  <li style="display: block; margin-top: -4px;"><p class="font-weight-bold">{{$pages->telpon_utama}}</p></li>
 				 @endif
 				</ul>
@@ -76,9 +71,7 @@
         <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow"><span class="arrow arrowLeft"></span></div>
         <div onclick="plusSlides(1)" class="nextPrevBtn rightArrow" id="right"><span class="arrow arrowRight"></span></div>
         <div class="captionTextHolder"><p class="captionText slideTextFromTop"></p></div>
-        @if(is_null($banner[0]->images_banner))
-      <div></div>
-        @else
+        @if(!is_null($banner[0]->images_banner))
         @foreach($banner as $banner)
         <div class="imageHolder">
             <img src="<?php echo url(Storage::disk('local')->url('app/'.$banner->images_banner));?>">
@@ -95,17 +88,17 @@
 	<div class="row" style="margin-bottom: 13px;">
 	@if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0)
 	  <div class="{{$pages->colom}}">
-        <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i><span style="font-size: smaller;"> Whatsapp</span></a>
+        <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i><span class="textbutton"> Whatsapp</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->skype_link) || $pages->skype_pixel_id!=0)
       <div class="{{$pages->colom}}">
-        <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i><span style="font-size: smaller;"> Skype</span></a>
+        <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i><span class="textbutton"> Skype</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
       <div class="{{$pages->colom}}">
-        <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i><span style="font-size: smaller;"> Telegram</span></a>
+        <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i><span class="textbutton" > Telegram</span></a>
       </div>
       @endif
       @if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0 and !is_null($pages->skype_link) || $pages->skype_pixel_id!=0 and !is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
@@ -115,11 +108,11 @@
 
 <div class="row">
 	@foreach($link as $link)
-	<div class="col-md-12 col-12" style="margin-bottom: 10px; margin-top: -5px;"> 
+	<div class="col-md-12 col-12 mrglink"> 
 	<a href="" title="" class="btn btn-light"><span>{{$link->title}}</span></a>
 	</div>
 	@endforeach
-	<div class="col-md-12 col-12" style="margin-bottom: 10px; margin-top: -5px;"> 
+	<div class="col-md-12 col-12 mrglink"> 
 	<a href="" title="" class="btn btn-light"><span>tes</span></a>
 	</div>
 </div>

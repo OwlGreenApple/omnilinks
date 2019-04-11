@@ -1,3 +1,4 @@
+<?php $x=0; ?>
 @foreach($pixels as $pixel)
   <div class="card card-none">
     <div class="card-header card-gray" id="headingOne">
@@ -23,5 +24,5 @@
        {{$pixel->script}}
      </div>
    </div>
-  </div>
+  </div>      
 @endforeach

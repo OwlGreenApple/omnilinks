@@ -192,6 +192,7 @@
       reader.onload = function(e) {
         $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
         $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
+        $('#viewpicture').show();
       }
       reader.readAsDataURL(input.files[0]);
     }
@@ -240,6 +241,7 @@
     $(".sortable-sosmed").disableSelection();
 
     $('#colorpicker').farbtastic('#colour');
+    $('#colorpicker').farbtastic('#phonecolor');
     //$.farbtastic('#colorpicker','.screen');
     //$('#colorpicker').farbtastic('.screen');
 
@@ -740,19 +742,19 @@
                         </div>
                         <div class="col-md-8">
                           @if(is_null($pages->page_title))
-                          <input type="text" name="judul" ng-model="pagetitle" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                          <input type="text" name="judul" id="pagetitle" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
                           @else
-                          <input type="text" name="judul" ng-model="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+                          <input type="text" name="judul" id="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
                           @endif
                           @if(is_null($pages->link_utama))
-                          <input type="text" name="link" value="" ng-model="pagelink" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                          <input type="text" name="link" value="" id="pagelink" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
                           @else
-                          <input type="text" name="link" ng-model="pagelink" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
+                          <input type="text" name="link" id="pagelink" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
                           @endif
                           @if(is_null($pages->telpon_utama))
-                          <input type="number" name="nomor" ng-model="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                          <input type="number" name="nomor" id="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
                           @else
-                          <input type="number" name="nomor" ng-model="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                          <input type="number" name="nomor" id="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
                           @endif
                         </div>
                         <div class="col-md-12 mt-4">
@@ -861,14 +863,12 @@
                         <input type="checkbox" name="powered" id="powered" value="powered" checked="">
                         <span class="slider round"></span>
                       </label> &nbsp; Powered By Omnilinks<br>
-
                       <div class="col-md-12 text-right">
                         <button type="button" class="btn btn-primary btn-biolinks" id="savetemp">
                           <i class="far fa-save" style="margin-right:5px;"></i>
                           SAVE
                         </button>  
                       </div>
-                      
                     </div>
                   </div>
                 </form>
@@ -890,19 +890,19 @@
                   <header class="container  " style="padding-top: 33px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
-                        <img id="viewpicture" src="https://pngimage.net/wp-content/uploads/2018/06/no-avatar-png.png" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
+                        <img id="viewpicture" src="" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px; display: none;">
 
                       </div>
                       <div class="col-md-7 col-8 p-2">
                         <ul style="margin-left: 23px;">
                           <li style="display: block; margin-bottom: -15px;">
-                            <p class="font-weight-bold" style="color: #fff;">@{{pagetitle}}</p>
+                            <p class="font-weight-bold" style="color: #fff;" id="outputtitle"></p>
                           </li>
                           <li style="display: block; margin-bottom: -15px; ">
-                            <p class="font-weight-bold" style="color: #fff;">@{{pagelink}}</p>
+                            <p class="font-weight-bold" style="color: #fff;" id="outputlink"></p>
                           </li>
                           <li style="display: block;">
-                            <p class="font-weight-bold" style="color: #fff;">@{{telpon}}</p>
+                            <p class="font-weight-bold" style="color: #fff;" id="outputnomor"></p>
                           </li>
                         </ul>
                       </div>
@@ -954,9 +954,9 @@
                       width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-telegram-plane"></i><span class="txtspan" style="font-size: xx-small;"> Telegram</span></button>
                     </div>
 
-                    <div class="col-md-12" id="viewLink">
-                      <button type="button" class="btn btn-md btnview btn-light" style="
-                      width: 100%; margin-bottom: 12px; ">tes</button>
+                    <div class="col-md-12" id="viewLink" >
+                      <input type="button" name="titlelinkoutput[]" value="tes" class="btn btn-md btnview btn-light" style="
+                      width: 100%; margin-bottom: 12px; "> 
                     </div>
                 </div>
                     <div class="row rows" style="padding-left: 27px; padding-right: 44px;">
@@ -1002,6 +1002,32 @@
   var elhtml;
 
   $(document).ready(function() {
+
+      let inputtitle=$('#pagetitle');
+      let inputlink=$('#pagelink');
+      let inputtelpon=$('#telpon');
+
+      let outputtitle=$('#outputtitle');
+      let outputlink=$('#outputlink');
+      let outputnomor=$('#outputnomor');
+
+      inputtitle.keyup(function(){
+        outputtitle.text(inputtitle.val());
+      });
+       inputlink.keyup(function(){
+        outputlink.text(inputlink.val());
+      });
+        inputtelpon.keyup(function(){
+        outputnomor.text(inputtelpon.val());
+      });
+      outputtitle.text(inputtitle.val());
+      outputlink.text(inputlink.val());
+      outputnomor.text(inputtelpon.val());
+
+      let inputtitlelink=$('input[name="title[]"]').val();
+      let output=$('input[name="[titlelinkoutput[]"]').val();
+      console.log(inputtitlelink[0]);
+      
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("outlinedview");

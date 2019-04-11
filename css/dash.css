@@ -348,15 +348,15 @@ hr.own {
 
 }
 
-.powered-omnilinks {
+/*.powered-omnilinks {
   text-align: center;
   font-size: large;
   margin-bottom: 10px;
   position: relative;
   z-index: 10;
-}
+}*/
 
-.powered-omnilinks a {
+/*.powered-omnilinks a {
   color: inherit;
   text-decoration: none;
 }
@@ -366,12 +366,12 @@ hr.own {
 .powered-omnilinks afocus {
   color: inherit;
   text-decoration: none;
-}
-
+}*/
+/*
 .powered-omnilinks .logo {
   font-size: 1.2em;
 }
-
+*/
 .sortable-msg,
 .sortable-link,
 .sortable-sosmed {
