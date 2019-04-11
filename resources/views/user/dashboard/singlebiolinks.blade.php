@@ -335,7 +335,7 @@ table tr:nth-child(even) td
                 <table class="table">
                   <thead align="center">
                     <th class="">
-
+                      Title
                     </th>
                     <th class="">
                       Last Modified

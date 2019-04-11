@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
 
 <head>
   <meta charset="utf-8">
@@ -14,7 +14,7 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
   <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
   <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
 
   <link rel="dns-prefetch" href="//fonts.gstatic.com">

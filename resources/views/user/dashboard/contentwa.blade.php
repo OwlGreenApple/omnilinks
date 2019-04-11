@@ -1,7 +1,10 @@
+<?php $x=0 ?>
 @foreach($walink as $walinks)
+<?php 
+$x++; ?>
   <div class="card card-none mb-3">
-    <div class="card-header card-gray" id="headingOne">
-      <span class="view-wa" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+    <div class="card-header card-gray" id="heading{{$x}}">
+      <span class="view-wa" data-toggle="collapse" data-target="#collapse{{$x}}" aria-expanded="true" aria-controls="collapseOne">
         {{$walinks->nomor}}
         <span class="ml-4">
           <i class="fas fa-sort-down"></i>  
@@ -18,7 +21,7 @@
       </button>
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id="collapse{{$x}}" class="collapse" aria-labelledby="heading{{$x}}" data-parent="#accordionExample">
       <div class="card-body mb-2">
         <span id="{{$walinks->id}}">
           {{$walinks->linkgenerator}}

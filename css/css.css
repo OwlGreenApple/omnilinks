@@ -32,6 +32,9 @@
     color: inherit;
     text-decoration: none; 
 }
+.textbutton{
+  font-size: smaller;
+}
     .powered-omnilinks a:hover, .powered-omnilinks a:active, .powered-omnilinks afocus 
     {
       color: inherit;
@@ -62,6 +65,9 @@
       height: 100px; 
       margin-left: 48px;
     }
+    .textbutton{
+  font-size: smaller;
+}
 .powered-omnilinks 
 {
   text-align: center;
@@ -92,6 +98,9 @@
   }
     @media (max-width: 412px) and (min-width: 412px) 
   { 
+    .textbutton{
+  font-size: smaller;
+}
     .galleryContainer 
     {
     width: 95%;
@@ -140,6 +149,9 @@
 
    @media (max-width: 375px) 
   { 
+    .textbutton{
+  font-size: 11px;
+}
       .ultitle{
       font-size: small; 
       margin-left: 22px;
@@ -189,6 +201,9 @@
 
 @media (min-width: 576px) and (max-width: 767.98px) 
 { 
+  .textbutton{
+    font-size: smaller;
+  }
       .ultitle{
       font-size: medium; 
       margin-left: 22px;
@@ -236,7 +251,10 @@
 
 @media (min-width: 768px) and (max-width: 991.98px)
  { 
-    
+    .textbutton{
+      font-size: smaller;
+    }
+
   .ultitle{
       font-size: medium; 
       margin-left: 22px;
@@ -284,6 +302,9 @@
 
 @media (min-width: 992px) and (max-width: 1199.98px) 
 {
+   .textbutton{
+      font-size: smaller;
+    }
       .ultitle{
       font-size: medium; 
       margin-left: 22px;
@@ -331,6 +352,9 @@
  }
  @media (min-height: 812px){
      
+     .textbutton{
+      font-size: smaller;
+     }
   .ultitle{
       font-size: medium; 
       margin-left: 22px;
@@ -379,6 +403,9 @@
  }
 
  @media (max-height: 736px) and (min-height: 736px;){
+  .textbutton{
+    font-size: smaller;
+  }
       .ultitle{
       font-size: medium; 
       margin-left: 22px;
