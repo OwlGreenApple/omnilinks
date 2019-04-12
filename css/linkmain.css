@@ -483,7 +483,7 @@ fieldset:disabled a.btn {
   20%, to {
     transform: scale3d(1, 1, 1); } }
 
-/*header {
+header {
   text-align: center;
   margin-bottom: 2em; }
   header .avatar {
@@ -494,9 +494,9 @@ fieldset:disabled a.btn {
     text-align: center;
     margin-bottom: 1em; }
   header .avatar + h1 {
-    font-size: 1em;*/ }
+    font-size: 1em; }
 
-/*
+
   {
     bodyColor:
     backgroundColor:
@@ -510,8 +510,8 @@ fieldset:disabled a.btn {
   }
   
   
-*/
-/*.default-theme {
+
+.default-theme {
   color: #333;
   background-color: #FFF; }
   .default-theme .shorby-logo {
@@ -3306,7 +3306,7 @@ fieldset:disabled a.btn {
     /* Make video to at least 100% wide and tall 
     min-width: 100%;
     min-height: 100%;
-    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+    /* Setting width & height to auto prevents the browser from stretching or squishing the video 
     width: auto;
     height: auto;
     /* Center the video */

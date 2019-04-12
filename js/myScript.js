@@ -41,7 +41,9 @@ function moveSlide(n){
     };
     var slideTextAnimClass;
     if(n>slideIndex) {
-        if(n >= slides.length){n=0;}
+        if(n >= slides.length){
+            n=0;
+        }
         moveSlideAnimClass.forCurrent="moveLeftCurrentSlide";
         moveSlideAnimClass.forNext="moveLeftNextSlide";
         slideTextAnimClass="slideTextFromTop";

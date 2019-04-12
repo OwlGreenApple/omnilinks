@@ -736,7 +736,11 @@
                       <div class="row mt-5">
                         <div class="col-md-4 picture-container">
                           <div class="picture">
+                            @if(is_null($pages->image_pages))
                             <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
+                            @else
+                            <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); ?>" class="picture-src" id="wizardPicturePreview" title="">
+                            @endif
                             <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg">
                           </div>
                         </div>
@@ -878,7 +882,6 @@
           </div>
         </div>
       </div>
-
       <!--phone-->
       <div class="col-md-6">
         <div class="fixed">
@@ -887,11 +890,14 @@
               <div class="mobile1">
                 <div class="screen colorgradient1" id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
-                  <header class="container  " style="padding-top: 33px; padding-bottom: 12px;">
+                  <header class="container  " style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
+                        @if(is_null($pages->image_pages))
                         <img id="viewpicture" src="" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px; display: none;">
-
+                        @else
+                        <img id="viewpicture" src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
+                        @endif
                       </div>
                       <div class="col-md-7 col-8 p-2">
                         <ul style="margin-left: 23px;">
@@ -941,21 +947,21 @@
                     </div>
                   </div>
                   <div class="row rows" style="font-size: xx-small; margin-top: 12px; margin-left: 3px; margin-right: 2px;">
-                 <div class="col-md-4">
+                 <div class="col-4">
                       <button type="button" class="btn btn-md btnview btn-light" style="
                       width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-whatsapp"></i><span class="txtspan" style="font-size: xx-small;"> Whatsapp</span></button>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-4">
                       <button type="button" class="btn btn-md btnview btn-light" style="
                       width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-skype"></i><span class="txtspan" style="font-size: xx-small;"> Skype</span></button>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-4">
                       <button type="button" class="btn btn-md btnview btn-light" style="
                       width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-telegram-plane"></i><span class="txtspan" style="font-size: xx-small;"> Telegram</span></button>
                     </div>
 
-                    <div class="col-md-12" id="viewLink" >
-                      <input type="button" name="titlelinkoutput[]" value="tes" class="btn btn-md btnview btn-light" style="
+                    <div class="col-md-12" id="viewLink">
+                      <input type="button" name="titlelinkoutput[]" value="tes" id="viewbutton[1]" class="btn btn-md btnview btn-light btnviewlink" style="
                       width: 100%; margin-bottom: 12px; "> 
                     </div>
                 </div>
@@ -998,7 +1004,6 @@
 <script src="{{asset('js/biolinks.js')}}"></script>
 
 <script type="text/javascript">
-  var batas = 1;
   var elhtml;
 
   $(document).ready(function() {
@@ -1024,9 +1029,14 @@
       outputlink.text(inputlink.val());
       outputnomor.text(inputtelpon.val());
 
-      let inputtitlelink=$('input[name="title[]"]').val();
-      let output=$('input[name="[titlelinkoutput[]"]').val();
-      console.log(inputtitlelink[0]);
+      // let inputtitlelink=$('input[name="title[]"]');
+      // let output=$('input[name="[titlelinkoutput[]"]');
+      // if (inputtitlelink.length==output.length) 
+      // {
+
+      // }
+      
+      // console.log(inputtitlelink[0]);
       
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
@@ -1069,10 +1079,14 @@
   $("body").on("click", "#addBanner", function() {
     //tambahBanner();
     
-    var $el;
+    let $el;
     if($('.list-banner').length<=0){
       $el = $( ".div-banner" ).append(elhtml);
-    } else {
+    }
+    else if ($('.list-banner').length==5) {
+       $(this).attr('disabled', 'disabled'); 
+      }
+     else {
       $el = $('.list-banner:first').clone().appendTo('.div-banner');
     }
 
@@ -1083,23 +1097,18 @@
     /*$el.wrap('<form>').closest('form').trigger("reset");
     $el.unwrap();
     $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');*/
-
-    batas += 1;
-    if (batas == 5) {
-      $(this).attr('disabled', 'disabled');
-    }
+     
+      
   });
 
   $("body").on("click", ".btn-deleteBanner", function() {
     if($('.list-banner').length<=1){
       elhtml = $('.div-banner').html();
     } 
-
-    $(this).parent().remove();
-    batas -= 1;
-    if (batas != 5) {
+    if ($('.list-banner').length<=5) {
       $("#addBanner").removeAttr("disabled");
     }
+    $(this).parent().remove();
   });
 
   $("body").on("click", ".btn-delete", function() {
