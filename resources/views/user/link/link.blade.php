@@ -37,6 +37,7 @@
 	<body class="{{$pages->template}} {{$pages->rounded}} {{$pages->outline}}" >
 	@endif
 	<header class="container">
+
 		<div class="row">
 			<div class="col-md-3 col-3 p-4">
 				@if(!is_null($pages->image_pages))
@@ -82,22 +83,22 @@
     </div>
     <div id="dotsContainer"></div>
   </div>
-
 <div class="container biolink-page" style="margin-top: 33px">
+	
 	<header></header>
-	<div class="row" style="margin-bottom: 13px;">
+	<div class="links messengers {{$pages->colom}}" style="margin-bottom: 13px;">
 	@if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0)
-	  <div class="{{$pages->colom}}">
+	  <div class="link">
         <a href="#" title="wa" class="btn btn-light"><i class="fab fa-whatsapp"></i><span class="textbutton"> Whatsapp</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->skype_link) || $pages->skype_pixel_id!=0)
-      <div class="{{$pages->colom}}">
+      <div class="link">
         <a href="#" title="Skype" class="btn btn-light"><i class="fab fa-skype"></i><span class="textbutton"> Skype</span></a>
 	  </div>
 	  @endif
 	  @if(!is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
-      <div class="{{$pages->colom}}">
+      <div class="link">
         <a href="#" title="Telegram" class="btn btn-light"><i class="fab fa-telegram-plane"></i><span class="textbutton" > Telegram</span></a>
       </div>
       @endif
@@ -109,11 +110,11 @@
 <div class="row">
 	@foreach($link as $link)
 	<div class="col-md-12 col-12 mrglink"> 
-	<a href="" title="" class="btn btn-light"><span>{{$link->title}}</span></a>
+	<a href="#" title="" class="btn btn-light"><span>{{$link->title}}</span></a>
 	</div>
 	@endforeach
 	<div class="col-md-12 col-12 mrglink"> 
-	<a href="" title="" class="btn btn-light"><span>tes</span></a>
+	<a href="#" title="" class="btn btn-light"><span>tes</span></a>
 	</div>
 </div>
 

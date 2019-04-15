@@ -890,7 +890,7 @@
               <div class="mobile1">
                 <div class="screen colorgradient1" id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
-                  <header class="container  " style="padding-top: 17px; padding-bottom: 12px;">
+                  <header class="container" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
                         @if(is_null($pages->image_pages))
@@ -899,13 +899,13 @@
                         <img id="viewpicture" src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
                         @endif
                       </div>
-                      <div class="col-md-7 col-8 p-2">
-                        <ul style="margin-left: 23px;">
-                          <li style="display: block; margin-bottom: -15px;">
+                      <div class="col-md-10 col-8 p-2">
+                        <ul style="margin-left: 23px; font-size: 11px;">
+                          <li style="display: block; margin-bottom: -15px;  ">
                             <p class="font-weight-bold" style="color: #fff;" id="outputtitle"></p>
                           </li>
                           <li style="display: block; margin-bottom: -15px; ">
-                            <p class="font-weight-bold" style="color: #fff;" id="outputlink"></p>
+                            <p class="font-weight-bold" style="color: #fff; word-break: break-all;" id="outputlink"></p>
                           </li>
                           <li style="display: block;">
                             <p class="font-weight-bold" style="color: #fff;" id="outputnomor"></p>
@@ -946,24 +946,25 @@
                       <span class="dot" onclick="currentSlide(3)"></span> 
                     </div>
                   </div>
-                  <div class="row rows" style="font-size: xx-small; margin-top: 12px; margin-left: 3px; margin-right: 2px;">
-                 <div class="col-4">
-                      <button type="button" class="btn btn-md btnview btn-light" style="
-                      width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-whatsapp"></i><span class="txtspan" style="font-size: xx-small;"> Whatsapp</span></button>
+                  <div class="links messengers links-num-3" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
+                 <div class="link txtspan">
+                      <a href="#" class="btn btn-md btnview btn-light" style="
+                      width: 100%;  padding-left: 2px;"><i class="fab fa-whatsapp"></i><span class="txthov" style="font-size: xx-small;"> Whatsapp</span></a>
                     </div>
-                    <div class="col-4">
-                      <button type="button" class="btn btn-md btnview btn-light" style="
-                      width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-skype"></i><span class="txtspan" style="font-size: xx-small;"> Skype</span></button>
+                    <div class="link txtspan">
+                      <a href="#" class="btn btn-md btnview btn-light" style="
+                      width: 100%;  padding-left: 2px;"><i class="fab fa-skype"></i><span class="txthov" style="font-size: xx-small;"> Skype</span></a>
                     </div>
-                    <div class="col-4">
-                      <button type="button" class="btn btn-md btnview btn-light" style="
-                      width: 100%; margin-bottom: 12px; padding-left: 2px;"><i class="fab fa-telegram-plane"></i><span class="txtspan" style="font-size: xx-small;"> Telegram</span></button>
-                    </div>
-
-                    <div class="col-md-12" id="viewLink">
+                    <div class="link txtspan">
+                      <a href="#" class="btn btn-md btnview btn-light" style="
+                      width: 100%;  padding-left: 2px;"><i class="fab fa-telegram-plane"></i><span class="txthov" style="font-size: xx-small;"> Telegram</span></a>
+                    </div> 
+                </div>
+                <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
+                <div class="col-md-12" id="viewLink">
                       <input type="button" name="titlelinkoutput[]" value="tes" id="viewbutton[1]" class="btn btn-md btnview btn-light btnviewlink" style="
                       width: 100%; margin-bottom: 12px; "> 
-                    </div>
+                </div>
                 </div>
                     <div class="row rows" style="padding-left: 27px; padding-right: 44px;">
                      <div class="col-md-3 linked">
@@ -1089,8 +1090,10 @@
      else {
       $el = $('.list-banner:first').clone().appendTo('.div-banner');
     }
-
-    $el.find("input").val("");
+    if($el.find("input").val("")){
+    $el.find("input").val("");  
+    }
+    
     $el.find("input").attr("value", "");
     $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
 
@@ -1115,7 +1118,7 @@
     if (confirm('anda yakin ingin menghapus pixel ini')) {
       var idpixel = $(this).attr('dataid');
       delete_pixel(idpixel);
-    }
+   }
   });
 
   $("body").on("click", ".btn-deletewa", function() {
