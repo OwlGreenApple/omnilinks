@@ -150,7 +150,11 @@ public function link($names)
 
     $page->rounded=$request->rounded;
     $page->outline=$request->outlined;
-    $page->powerede=$request->powered;
+    
+    if($request->powered=='powered'){
+      $page->powered=1;
+    }
+    
     $page->save();
     $names=$page->names;
 
@@ -384,4 +388,83 @@ public function link($names)
   	$arr['status']="success";
   	return $arr;
   }
+
+  public function click($mode,$id){
+    if($mode=='link'){
+      $link = Link::find($id);
+      $link->counter = $link->counter+1;
+      $link->save();
+
+      Storage::put('clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/link-'.$link->title.'/counter.txt',$link->counter);
+
+      $pixel = Pixel::find($link->pixel_id);
+
+      //jalanin pixel
+      //echo "<script>";
+      echo $pixel->script;
+      //echo "</script>";
+
+      return redirect($link->link);
+
+    } else {
+      $pages = Page::find($id);
+
+      switch ($mode) {
+        case "wa":
+          $pages->wa_link_counter = $pages->wa_link_counter+1;
+          $counter = $pages->wa_link_counter;   
+          $link = $pages->wa_link;
+          $idpixel = $pages->wa_pixel_id;
+        break;
+        case "telegram":
+          $pages->telegram_link_counter = $pages->telegram_link_counter+1;
+          $counter = $pages->telegram_link_counter; 
+          $link = $pages->telegram_link;
+          $idpixel = $pages->telegram_pixel_id;
+        break;
+        case "skype":
+          $pages->skype_link_counter = $pages->skype_link_counter+1;
+          $counter = $pages->skype_link_counter; 
+          $link = $pages->skype_link;
+          $idpixel = $pages->skype_pixel_id;
+        break;
+        case "youtube":
+          $pages->youtube_link_counter = $pages->youtube_link_counter+1;
+          $counter = $pages->youtube_link_counter; 
+          $link = $pages->youtube_link;
+          $idpixel = $pages->youtube_pixel_id;
+        break;
+        case "fb":
+          $pages->fb_link_counter = $pages->fb_link_counter+1;
+          $counter = $pages->fb_link_counter; 
+          $link = $pages->fb_link;
+          $idpixel = $pages->fb_pixel_id;
+        break;
+        case "twitter":
+          $pages->twitter_link_counter = $pages->twitter_link_counter+1;
+          $counter = $pages->twitter_link_counter; 
+          $link = $pages->twitter_link;
+          $idpixel = $pages->twitter_pixel_id;
+        break;
+        case "ig":
+          $pages->ig_link_counter = $pages->ig_link_counter+1;
+          $counter = $pages->ig_link_counter; 
+          $link = $pages->ig_link;
+          $idpixel = $pages->ig_pixel_id;
+        break;
+      }
+
+      Storage::put('clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/'.$mode.'/counter.txt',$counter);
+      $pages->save();
+
+      $pixel = Pixel::find($idpixel);
+      //jalanin pixel
+      //echo "<script>";
+      echo $pixel->script;
+      //echo "</script>";
+
+      return redirect($link);
+    }
+  }
+
 }

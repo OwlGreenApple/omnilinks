@@ -17,8 +17,10 @@ Route::get('/', 'HomeController@index');
 // Route::get('/use/{id}/edit','UserController@edit');
 // Route::post('/use/{id}/update','UserController@update');
 // Route::get('/use/{id}/delete','UserController@delete');
-
 Auth::routes();
+
+//redirect
+Route::get('click/{mode}/{id}', 'BiolinkController@click');
 
 //information
     Route::get('/about',function(){
