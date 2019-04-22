@@ -532,6 +532,7 @@ hr.own {
   }
  .messengers 
  {
+  margin-bottom: 15px;
   clear: both; 
 }
   .messengers.links-num-3 .link 

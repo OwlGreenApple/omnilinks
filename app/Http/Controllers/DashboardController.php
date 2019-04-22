@@ -6,7 +6,7 @@ use App\User;
 use App\Pixel;
 use App\Banner;
 use App\Whatsapplink;
-use Auth,Carbon,Validator;
+use Auth,Carbon,Validator,Storage;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
 
@@ -27,11 +27,19 @@ class DashboardController extends Controller
     public function deletePage(Request $Request)
     {
     	$page=Page::find($Request->deletedataid);
-    	$page->delete();
-    	$link=Link::where('pages_id',$Request->deletedataid);
-    	$link->delete();
-    	$banner=Banner::where('pages_id',$Request->deletedataid);
-    	$banner->delete();
+      if (is_file($page->image_pages)) {
+       Storage::delete($page->image_pages);
+      }
+    	$link=Link::where('pages_id',$Request->deletedataid)->delete();
+    	$banner=Banner::where('pages_id',$Request->deletedataid)->get();
+      foreach ($banner as $viewbanner)
+       {
+        if (is_file($banner->images_banner[0])) {
+            Storage::delete($viewbanner->images_banner);
+            $viewbanner->delete();
+        }
+      }
+      $page->delete();
     	$arr['status']="success";
   		return $arr;
     }
