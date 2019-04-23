@@ -271,7 +271,7 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="active nav-link link" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
@@ -286,7 +286,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#style" class="nav-link link" role="tab" data-toggle="tab">
+                <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
                   Tampilan
                 </a>
               </li>
@@ -295,7 +295,7 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in active show" id="link">
+              <div role="tabpanel" class="tab-pane fade in " id="link">
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
 
@@ -455,7 +455,7 @@
                           </li>
                         @endforeach
                       @else 
-                        <li class="link-list">
+                        <li class="link-list" link-id="link-url-1">
                           <div class="div-table mb-4">
                             <div class="div-cell">
                               <span class="handle">
@@ -467,7 +467,7 @@
                               <div class="col-md-12 col-12 pr-0 pl-0">
                                 <div class="input-stack">
                                   <input type="hidden" name="idlink[]" value="new">
-                                  <input type="text" name="title[]" value="" placeholder="Title" class="form-control">
+                                  <input type="text" name="title[]" value="" id="title-1-view" placeholder="Title" class="form-control">
                                   <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
                                 </div>
                               </div>
@@ -726,7 +726,7 @@
               </div>
 
               <!-- TAB 4 -->
-              <div role="tabpanel" class="tab-pane fade" id="style">
+              <div role="tabpanel" class="tab-pane fade in active show" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
 
                   {{ csrf_field() }}
@@ -947,23 +947,22 @@
                     </div>
                   </div>
                   <div class="links messengers links-num-3" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                 <div class="link txtspan">
+                 <div class="link">
                       <a href="#" class="btn btn-md btnview btn-light" style="
                       width: 100%;  padding-left: 2px;"><i class="fab fa-whatsapp"></i><span class="txthov" style="font-size: xx-small;"> Whatsapp</span></a>
                     </div>
-                    <div class="link txtspan">
+                    <div class="link">
                       <a href="#" class="btn btn-md btnview btn-light" style="
                       width: 100%;  padding-left: 2px;"><i class="fab fa-skype"></i><span class="txthov" style="font-size: xx-small;"> Skype</span></a>
                     </div>
-                    <div class="link txtspan">
+                    <div class="link">
                       <a href="#" class="btn btn-md btnview btn-light" style="
                       width: 100%;  padding-left: 2px;"><i class="fab fa-telegram-plane"></i><span class="txthov" style="font-size: xx-small;"> Telegram</span></a>
                     </div> 
                 </div>
                 <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                 <div class="col-md-12" id="viewLink">
-                      <input type="button" name="titlelinkoutput[]" value="tes" id="viewbutton[1]" class="btn btn-md btnview btn-light btnviewlink" style="
-                      width: 100%; margin-bottom: 12px; "> 
+                  <button type="button" class="btn btn-light btnview" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">tes</button>
                 </div>
                 </div>
                     <div class="row rows" style="padding-left: 27px; padding-right: 44px;">
@@ -1038,7 +1037,9 @@
       // }
       
       // console.log(inputtitlelink[0]);
-      
+    //let idlinkview=$('#title-'+execute+'-view');
+
+
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("outlinedview");

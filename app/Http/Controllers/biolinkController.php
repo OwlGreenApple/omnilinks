@@ -152,7 +152,7 @@ public function link($names)
     $page->outline=$request->outlined;
     
     if($request->powered=='powered'){
-      $page->powered=1;
+      $page->powerede=1;
     }
     
     $page->save();

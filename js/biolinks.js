@@ -1,6 +1,7 @@
 var arra=0;
-var elmhtml;
+var elmhtml,counterLink=1;
 let viewButton=1;
+
 // function deleteview(id)
 // {
 //    let delete=0; 
@@ -44,28 +45,32 @@ $(document).ready(function(){
     viewButton+=1;
 
     var $el;
-    if($('.link-list').length<=0){
+    /*if($('.link-list').length<=0){
       var $el = $( ".sortable-link" ).append(elmhtml);
     } else {
       var $el = $('.link-list:first').clone().appendTo('.sortable-link');
     }
     $el.find("input").val("");
-    $el.find("input").attr("value", "");
+    $el.find("input").attr("value", "");*/
+    counterLink+=1;
+    $('.sortable-link').append('<li class="link-list" link-id="link-url-'+counterLink+'"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" id="title-'+counterLink+'-view" placeholder="Title" class="form-control"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div></div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
     
-    $("#viewLink").append(' <button type="button" class="btn btn-light btnview" style="width: 100%; margin-bottom: 12px;">tes</button>');
+    $("#viewLink").append(' <button type="button" class="btn btn-light btnview" id="link-url-'+counterLink+'-preview" style="width: 100%; margin-bottom: 12px;">tes</button>');
     //$( ".a" ).append( '<li id="link-wa"><div class="row"><div class="col-md-1 col-1 pl-md-3 pl-2"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="col-md-11 col-11"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" placeholder="Title" class="form-control" ><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div></div></div></li>');
   });
   $(document).on('click','.deletelink',function(e){
    // $("#viewLink").children().remove();
 
-    let elviewlink=$("#viewLink");
+    /*let elviewlink=$("#viewLink");
 
     if($('.link-list').length<=1)
     {
       elmhtml = $('.sortable-link').html();
     } 
-    elviewlink.children().remove();
-    
+    elviewlink.children().remove();*/
+    idLink = $(this).parent().parent().attr("link-id");
+    console.log(idLink);
+    $("#"+idLink+"-preview").remove();
 
     $(this).parent().parent().remove();
   });

@@ -530,10 +530,11 @@ hr.own {
     border: 1px solid #ced4da;
     cursor: pointer;
   }
-  .messengers 
-  {
-    clear: both; 
-  }
+.messengers 
+ {
+  margin-bottom: 15px;
+  clear: both; 
+}
   .messengers.links-num-3 .link 
   {
     max-width: 32.33333%; 
