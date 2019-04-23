@@ -125,15 +125,12 @@ public function link($names)
     $page->page_title=$request->judul;
     $page->link_utama=$request->link;
     
-    if(is_null($request->file('imagepages')))
+    if(!is_null($request->file('imagepages')))
     {
-      $path=null;
+      $path = Storage::putFile('template',$request->file('imagepages')); 
+      $page->image_pages = $path;
     }
-    else
-    {
-     $path = Storage::putFile('template',$request->file('imagepages')); 
-    }
-    $page->image_pages = $path;
+
     $page->telpon_utama=$request->nomor;
 
     if ($request->backtheme=="") 
@@ -158,24 +155,31 @@ public function link($names)
     $page->save();
     $names=$page->names;
 
+    //dd($request->all());
     for($i=0;$i<count($request->judulBanner);$i++) 
     { 
-      $banner= new Banner();
+      if($request->idBanner[$i]==null){
+        $banner= new Banner();
+      } else {
+        $banner= Banner::find($request->idBanner[$i]);
+      }
+      
       $user=Auth::user();
       $banner->users_id=$user->id;
       $banner->pages_id=$page->id;
       $banner->title=$request->judulBanner[$i];
       $banner->link=$request->linkBanner[$i];
       $banner->pixel_id=$request->bannerpixel[$i];
-      if(is_null($request->file('bannerImage')))
-      {
-        $path1=null;
-      }
-      else
-      {
-        $path1=Storage::putFile('banner',$request->file('bannerImage')[$i]);  
-      }
-      $banner->images_banner=$path1;
+
+      if($request->hasFile('bannerImage.'.$i)) {
+        $dir = 'banner/'.Auth::user()->email.'/'.$banner->title;
+        //$filename = $request->file('bannerImage')[$i]->getClientOriginalName();
+        $filename = $banner->title.'.jpg';
+
+        $path1=Storage::putFileAs($dir,$request->file('bannerImage')[$i],$filename);  
+        $banner->images_banner=$path1;
+      } 
+      
       $banner->save(); 
     }
     
@@ -395,7 +399,20 @@ public function link($names)
       $link->counter = $link->counter+1;
       $link->save();
 
-      Storage::put('clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/link-'.$link->title.'/counter.txt',$link->counter);
+      $filename = 'clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/link-'.$link->title.'/counter.txt';
+
+      $counter = 0;
+
+      if(file_exists('storage/app/'.$filename)){
+        $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
+        $content = (int)fread($myfile, filesize('storage/app/'.$filename));
+        $counter = $content + 1;
+        fclose($myfile);
+      } else {
+        $counter = 1;
+      }
+
+      Storage::put($filename,$counter);
 
       $pixel = Pixel::find($link->pixel_id);
 
@@ -406,55 +423,97 @@ public function link($names)
 
       return redirect($link->link);
 
+    } else if($mode=='banner'){
+      $banner = Banner::find($id);
+      $banner->counter = $banner->counter+1;
+      $banner->save();
+
+      $filename = 'clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/banner-'.$banner->title.'/counter.txt';
+
+      $counter = 0;
+
+      if(file_exists('storage/app/'.$filename)){
+        $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
+        $content = (int)fread($myfile, filesize('storage/app/'.$filename));
+        $counter = $content + 1;
+        fclose($myfile);
+      } else {
+        $counter = 1;
+      }
+
+      Storage::put($filename,$counter);
+
+      $pixel = Pixel::find($banner->pixel_id);
+
+      //jalanin pixel
+      //echo "<script>";
+      echo $pixel->script;
+      //echo "</script>";
+
+      return redirect($banner->link);
+
     } else {
       $pages = Page::find($id);
 
       switch ($mode) {
         case "wa":
           $pages->wa_link_counter = $pages->wa_link_counter+1;
-          $counter = $pages->wa_link_counter;   
+          //$counter = $pages->wa_link_counter;   
           $link = $pages->wa_link;
           $idpixel = $pages->wa_pixel_id;
         break;
         case "telegram":
           $pages->telegram_link_counter = $pages->telegram_link_counter+1;
-          $counter = $pages->telegram_link_counter; 
+          //$counter = $pages->telegram_link_counter; 
           $link = $pages->telegram_link;
           $idpixel = $pages->telegram_pixel_id;
         break;
         case "skype":
           $pages->skype_link_counter = $pages->skype_link_counter+1;
-          $counter = $pages->skype_link_counter; 
+          //$counter = $pages->skype_link_counter; 
           $link = $pages->skype_link;
           $idpixel = $pages->skype_pixel_id;
         break;
         case "youtube":
           $pages->youtube_link_counter = $pages->youtube_link_counter+1;
-          $counter = $pages->youtube_link_counter; 
+          //$counter = $pages->youtube_link_counter; 
           $link = $pages->youtube_link;
           $idpixel = $pages->youtube_pixel_id;
         break;
         case "fb":
           $pages->fb_link_counter = $pages->fb_link_counter+1;
-          $counter = $pages->fb_link_counter; 
+          //$counter = $pages->fb_link_counter; 
           $link = $pages->fb_link;
           $idpixel = $pages->fb_pixel_id;
         break;
         case "twitter":
           $pages->twitter_link_counter = $pages->twitter_link_counter+1;
-          $counter = $pages->twitter_link_counter; 
+          //$counter = $pages->twitter_link_counter; 
           $link = $pages->twitter_link;
           $idpixel = $pages->twitter_pixel_id;
         break;
         case "ig":
           $pages->ig_link_counter = $pages->ig_link_counter+1;
-          $counter = $pages->ig_link_counter; 
+          //$counter = $pages->ig_link_counter; 
           $link = $pages->ig_link;
           $idpixel = $pages->ig_pixel_id;
         break;
       }
 
-      Storage::put('clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/'.$mode.'/counter.txt',$counter);
+      $filename = 'clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/'.$mode.'/counter.txt';
+
+      $counter = 0;
+
+      if(file_exists('storage/app/'.$filename)){
+        $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
+        $content = (int)fread($myfile, filesize('storage/app/'.$filename));
+        $counter = $content + 1;
+        fclose($myfile);
+      } else {
+        $counter = 1;
+      }
+
+      Storage::put($filename,$counter);
       $pages->save();
 
       $pixel = Pixel::find($idpixel);
@@ -464,6 +523,7 @@ public function link($names)
       //echo "</script>";
 
       return redirect($link);
+
     }
   }
 

@@ -776,6 +776,8 @@
                                 <div class="div-table list-banner mb-4">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="{{$ban->title}}" class="form-control" placeholder="Judul banner">
+                                    <input type="hidden" name="idBanner[]" value="{{$ban->id}}">
+
                                     <input type="text" name="linkBanner[]" value="{{$ban->link}}" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
@@ -783,7 +785,9 @@
                                     <div class="custom-file">
                                       <input type="file" name="bannerImage[]" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 
-                                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                      <label class="custom-file-label" for="inputGroupFile01">
+                                        {{basename($ban->images_banner)}}
+                                      </label>
                                     </div>
                                   </div>
                                   
@@ -798,6 +802,8 @@
                                 <div class="div-table list-banner mb-4">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
+                                    <input type="hidden" name="idBanner[]" value="">
+
                                     <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
@@ -827,11 +833,11 @@
                       Theme
                     </p>
                     <label class="switch">
-                      <input type="checkbox" name="rounded" class="rounded" value="rounded-p">
+                      <input type="checkbox" name="rounded" class="rounded" value="rounded-p" <?php if($pages->rounded!=null) echo 'checked'?>>
                       <span class="slider round"></span>
                     </label>&nbsp;Rounded buttons<br>
                     <label class="switch">
-                      <input type="checkbox" name="outlined" class="outlined" value="outlined">
+                      <input type="checkbox" name="outlined" class="outlined" value="outlined" <?php if($pages->outline!=null) echo 'checked'?>>
                       <span class="slider round"></span>
                     </label>&nbsp;Outlined buttons
                     <div class="as">
@@ -990,10 +996,16 @@
 
 
                    <div class="col-md-12" align="center" id="poweredview">
-                    <div class="powered-omnilinks"><a href="#"><span style="font-size: small; color: #fff;">Powered by</span><br>&nbsp;&nbsp;<img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
-                    </a>
-                  </div>
-                </div>
+                    <div class="powered-omnilinks">
+                      <a href="#">
+                        <span style="font-size: small; color: #fff;">
+                          Powered by
+                        </span>
+                        <br>&nbsp;&nbsp;
+                        <img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
+                      </a>
+                   </div>
+                 </div>
            
         </div>
       </div>

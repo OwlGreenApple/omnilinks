@@ -19,44 +19,55 @@
   <title>Link</title>
 </head>
 
-<style type="text/css">
-  .rows{
-    margin-top: -15px;
-    padding-right: 25px;
-    padding-left: 23px;
-  }
-  .row{
-    margin-right: -10px;
-  }
-  .mrglink{
-    margin-bottom: 10px; margin-top: -5px;
-  }
-</style>
-
 @if(is_null($pages->template))
 <body style=" color:#fff; {{$pages->color_picker}}" class="a {{$pages->rounded}} {{$pages->outline}}">
 @else
 <body class="{{$pages->template}} {{$pages->rounded}} {{$pages->outline}}" >
 @endif
+  
+  <style type="text/css">
+    .rows{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding-right: 25px;
+      padding-left: 25px;
+    }
+    .row{
+      /*margin-right: -10px;*/
+    }
+    .mrglink{
+      margin-bottom: 20px; /*margin-top: -5px;*/
+    }
+  </style>
 
   <header class="container">
     <div class="row">
-     <div class="col-md-3 col-3 p-4">
-      @if(!is_null($pages->image_pages))
-        <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" class="imagetitle" >
-      @endif
+      <div class="col-md-2 offset-md-3 col-3 offset-1 pt-4 pb-4 text-center">
+        @if(!is_null($pages->image_pages))
+          <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" class="imagetitle" >
+        @endif
       </div>
 
-      <div class="col-md-8 col-8 p-4" style="margin-top: 12px">
+      <div class="col-md-4 col-7 pt-4 pb-4" style="margin-top: 12px">
         <ul class="ultitle">
           @if(!is_null($pages->page_title))
-          <li style="display: block; margin-bottom: 1px; font-size: large;">{{$pages->page_title}}</li>
+            <li style="display: block; margin-bottom: 1px; font-size: large;">
+              {{$pages->page_title}}
+            </li>
           @endif
           @if(!is_null($pages->link_utama))
-          <li style="display: block; margin-bottom: -15px; font-size:smaller;  word-break: break-all;" ><p class="font-weight-bold">{{$pages->link_utama}}</p></li>
+            <li style="display: block; margin-bottom: -15px; font-size:smaller;  word-break: break-all;" >
+              <p class="font-weight-bold">
+                {{$pages->link_utama}}
+              </p>
+            </li>
           @endif
           @if(!is_null($pages->telpon_utama))
-          <li style="display: block; margin-top: -4px;"><p class="font-weight-bold">{{$pages->telpon_utama}}</p></li>
+            <li style="display: block; margin-top: -4px;">
+              <p class="font-weight-bold">
+                {{$pages->telpon_utama}}
+              </p>
+            </li>
           @endif
         </ul>
       </div>
@@ -86,8 +97,10 @@ $banner = Banner::where('pages_id','=',$pages->id)
       @if(!is_null($banner[0]->images_banner))
         @foreach($banner as $banner)
         <div class="imageHolder">
-          <img src="<?php echo url(Storage::disk('local')->url('app/'.$banner->images_banner));?>">
-          <p class="captionText"></p>
+          <a href="{{url('click/banner/'.$banner->id)}}" target="_blank">
+            <img src="<?php echo url(Storage::disk('local')->url('app/'.$banner->images_banner));?>">
+            <p class="captionText"></p> 
+          </a>
         </div>
         @endforeach
       @endif
@@ -97,19 +110,19 @@ $banner = Banner::where('pages_id','=',$pages->id)
 
   <div class="container biolink-page" style="margin-top: 33px">
 	  <header></header>
-	  <div class="links messengers {{$pages->colom}}" style="margin-bottom: 13px;">
+	  <div class="links messengers {{$pages->colom}} row" style="margin-bottom: 20px;">
 
       @if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0)
-        <div class="link">
+        <div class="link col-md-4 col-4">
           <a href="{{url('click/wa/'.$pages->id)}}" title="wa" class="btn btn-light" target="_blank">
             <i class="fab fa-whatsapp"></i>
-            <span class="textbutton"> Whatsapp</span>
+            <span class="textbutton"> WhatsApp</span>
           </a>
         </div>
       @endif
 
       @if(!is_null($pages->skype_link) || $pages->skype_pixel_id!=0)
-        <div class="link">
+        <div class="link col-md-4 col-4">
           <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" class="btn btn-light" target="_blank">
             <i class="fab fa-skype"></i>
             <span class="textbutton"> Skype</span>
@@ -118,9 +131,9 @@ $banner = Banner::where('pages_id','=',$pages->id)
       @endif
 
       @if(!is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
-        <div class="link">
+        <div class="link col-md-4 col-4">
           <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" class="btn btn-light" target="_blank">
-            <i class="fab fa-telegram-plane"></i>
+            <i class="fab fa-telegram"></i>
             <span class="textbutton" > Telegram</span>
           </a>
         </div>
@@ -150,7 +163,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
     	@if(!is_null($pages->fb_link) || $pages->fb_pixel_id!=0)
         <div class="{{$pages->colom_sosmed}} linked">
           <a href="{{url('click/fb/'.$pages->id)}}" title="fb" target="_blank">
-            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-facebook-square"></i>
           </a>
         </div>
       @endif
@@ -184,9 +197,9 @@ $banner = Banner::where('pages_id','=',$pages->id)
   @if(!is_null($pages->powered))
     <div class="powered-omnilinks">
       <a href="">
-        <span style="font-size: small;">Powered by</span>
-        <br>&nbsp;&nbsp;
-        <img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
+        <span style="font-size: small;">powered by</span>
+        <br>
+        <img style="width: 150px; margin-bottom: 50px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
       </a>
     </div>
   @else
