@@ -467,7 +467,7 @@
                               <div class="col-md-12 col-12 pr-0 pl-0">
                                 <div class="input-stack">
                                   <input type="hidden" name="idlink[]" value="new">
-                                  <input type="text" name="title[]" value="" id="title-1-view" placeholder="Title" class="form-control">
+                                  <input type="text" name="title[]" value="" id="title-1-view" placeholder="Title" class="form-control focuslink">
                                   <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
                                 </div>
                               </div>
@@ -946,41 +946,46 @@
                       <span class="dot" onclick="currentSlide(3)"></span> 
                     </div>
                   </div>
-                  <div class="links messengers links-num-3" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                 <div class="link">
+                  <div class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
+                 <div class="link shown-mes" id="waviewid" >
                       <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;"><i class="fab fa-whatsapp"></i><span class="txthov" style="font-size: xx-small;"> Whatsapp</span></a>
+                      width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><span class="txthov" style="font-size: xx-small;"> Whatsapp</span></a>
                     </div>
-                    <div class="link">
+                    <div class="link hiddens" id="telegramviewid" style="display: none;">
                       <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;"><i class="fab fa-skype"></i><span class="txthov" style="font-size: xx-small;"> Skype</span></a>
-                    </div>
-                    <div class="link">
-                      <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;"><i class="fab fa-telegram-plane"></i><span class="txthov" style="font-size: xx-small;"> Telegram</span></a>
+                      width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><span class="txthov" style="font-size: xx-small;"> Telegram</span></a>
                     </div> 
+                     <div class="link hiddens" id="skypeviewid" style="display: none;">
+                      <a href="#" class="btn btn-md btnview btn-light" style="
+                      width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><span class="txthov" style="font-size: xx-small;"> Skype</span></a>
+                    </div>
                 </div>
                 <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                 <div class="col-md-12" id="viewLink">
-                  <button type="button" class="btn btn-light btnview" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">tes</button>
+                  @if($links->count())
+                  @foreach($links as $link)
+                  <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                  @endforeach
+                  @else
+                  <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                  @endif
                 </div>
                 </div>
-                    <div class="row rows" style="padding-left: 27px; padding-right: 44px;">
-                     <div class="col-md-3 linked">
-                       <a href="#" title="fb"><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
-                     </div>
-
-                     <div class="col-md-3 linked">
-                       <a href="#" title="ig"><i class="fab fa-instagram" style="color: #fff;"></i></a>  
-                     </div>  
-
-                     <div class="col-md-3 linked">
-                       <a href="#" title="Twitter"><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
-                     </div>
-
-                     <div class="col-md-3 linked">
+                    <div class="row rows " style="padding-left: 27px; padding-right: 44px;">
+                     <div class="col-md-3 linked shown-sm" id="youtubeviewid">
                        <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
                      </div>
+                     <div class="col-md-3 linked hiddensm " id="facebookviewid" style="display: none;">
+                       <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
+                     </div>
+                     <div class="col-md-3 linked hiddensm" id="twitterviewid" style=" display: none;">
+                       <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
+                     </div>
+                      <div class="col-md-3 linked hiddensm" id="instagramviewid"  style=" display: none;">
+                       <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
+                      </div>  
+                       
+                       
                    </div>
 
 
@@ -1002,9 +1007,9 @@
 </section>
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
-
+<noscript>Jalankan Javascript di browser anda</noscript>
 <script type="text/javascript">
-  var elhtml;
+  let elhtml;
 
   $(document).ready(function() {
 
@@ -1038,6 +1043,17 @@
       
       // console.log(inputtitlelink[0]);
     //let idlinkview=$('#title-'+execute+'-view');
+$(document).on('focus','.focuslink',function(){
+    let inputlinkview=$(this);
+    let getoutputviewlink=inputlinkview.attr('id');
+    let outputviewlink=$('.'+getoutputviewlink+'-get');
+    $(document).on('keyup',inputlinkview,function(){
+       outputviewlink.text(inputlinkview.val());
+       if (inputlinkview.val()=='') {
+        outputviewlink.text('Masukkan Link');
+       }
+    });
+});
 
 
     $('.outlined').click(function() {
@@ -1074,6 +1090,7 @@
 
   $("body").on("click", "#savetemp", function() {
     tambahTemp();
+    tambahPages();
     $('#pesanAlert').removeClass('alert-danger');
     $('#pesanAlert').children().remove();
   });
@@ -1094,7 +1111,6 @@
     if($el.find("input").val("")){
     $el.find("input").val("");  
     }
-    
     $el.find("input").attr("value", "");
     $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
 
@@ -1147,6 +1163,7 @@
 
   $(document).on("click", "#btn-save-link", function(e) {
     tambahPages();
+    tambahTemp();
     $('#pesanAlert').removeClass('alert-danger');
     $('#pesanAlert').children().remove();
   });
