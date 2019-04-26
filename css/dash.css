@@ -542,7 +542,7 @@ hr.own {
   }
   .messengers.links-num-3 .link 
   {
-    max-width: 32.33333%; 
+    max-width: 33.33333%; 
   }
   .messengers .btn .fa-network + span 
   {
@@ -550,7 +550,7 @@ hr.own {
   }
   .messengers.links-num-1 .link
   {
-    max-width: 99%; 
+    max-width: 100%; 
   }
   .messengers.links-num-1 .link:nth-of-type(1) .btn .fa-network + span
   {
@@ -558,7 +558,7 @@ hr.own {
    }
   .messengers.links-num-2 .link 
   {
-    max-width: 49%; 
+    max-width: 50%; 
   }
   .messengers .link 
   {

@@ -53,7 +53,6 @@ function moveSlide(n){
         moveSlideAnimClass.forNext="moveRightPrevSlide";
         slideTextAnimClass="slideTextFromBottom";
     }
-
     if(n!=slideIndex){
         next = slides[n];
         current=slides[slideIndex];

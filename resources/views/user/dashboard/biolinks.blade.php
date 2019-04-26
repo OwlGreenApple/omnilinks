@@ -8,6 +8,18 @@
   .form-control{
     border-radius: unset;
   }
+   .messengers.links-num-2 .link 
+  {
+    max-width: 49%; 
+  }
+  .messengers.links-num-1 .link
+  {
+    max-width: 99%; 
+  }
+   .messengers.links-num-3 .link 
+  {
+    max-width: 32.33333%; 
+  }
 </style>
 <script type="text/javascript">
   function tambahTemp() {
@@ -301,9 +313,7 @@
 
                   <!--messengers!-->
                   <input type="hidden" name="uuid" value="{{$uuid}}">
-                  <input type="hidden" id="viewwa" name="" value="benar">
-                  <input type="hidden" id="viewskpe" name="" value="benar">
-                  <input type="hidden" id="viewtele" name="" value="benar">
+             
                   <label class="mb-3 blue-txt">
                     Messenger
                   </label>
@@ -329,7 +339,7 @@
                                     <i class="fab fa-whatsapp"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="wa" class="form-control" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+                                <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
                               </div>
                             </div>
 
@@ -362,7 +372,7 @@
                                     <i class="fab fa-telegram-plane"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="telegram" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
+                                <input type="text" name="telegram" class="form-control telegram-input" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
                               </div>
 
                               <div class="col-md-12 col-12 pr-0 pl-0">
@@ -395,7 +405,7 @@
                                     <i class="fab fa-skype"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
+                                <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control skype-input" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
                               </div>
                             </div>
 
@@ -426,8 +436,11 @@
                   <div>
                     <ul class="sortable-link a">
                       @if($links->count())
+                      <?php $utl=0; ?>
                         @foreach($links as $link)
-                          <li class="link-list">
+                        <?php 
+                        $utl+=1; ?>
+                          <li class="link-list" link-id="link-url-update-<?=$utl?>">
                             <div class="div-table mb-4">
                               <div class="div-cell">
                                 <span class="handle">
@@ -440,13 +453,13 @@
                                   <div class="input-stack">
                                     <input type="hidden" name="idlink[]" value="{{$link->id}}">
 
-                                    <input type="text" name="title[]" value="{{$link->title}}" placeholder="Title" class="form-control">
+                                    <input type="text" name="title[]" value="{{$link->title}}" id="title-<?=$utl?>-view-update" placeholder="Title" class="form-control focuslink-update">
                                     <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
                                   </div>
                                 </div>
                               </div>
                               
-                              <div class="div-cell cell-btn deletelink">
+                              <div class="div-cell cell-btn deletelink-update">
                                 <span>
                                   <i class="far fa-trash-alt"></i>
                                 </span>
@@ -511,7 +524,7 @@
                                   <i class="fab fa-youtube"></i>
                                 </div>
                               </div>
-                              <input type="text" name="youtube" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}">
+                              <input type="text" name="youtube" class="form-control youtube-input" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}">
                             </div>
                           </div> 
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -544,7 +557,7 @@
                                   <i class="fab fa-facebook-f"></i>
                                 </div>
                               </div>
-                              <input type="text" name="fb" class="form-control" value="{{$pages->fb_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook">
+                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook">
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
@@ -578,7 +591,7 @@
                                   <i class="fab fa-twitter"></i>
                                 </div>
                               </div>
-                              <input type="text" name="twitter" class="form-control" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
+                              <input type="text" name="twitter" class="form-control twitter-input" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -612,7 +625,7 @@
                                   <i class="fab fa-instagram"></i>
                                 </div>
                               </div>
-                              <input type="text" name="ig" class="form-control" value="{{$pages->ig_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
+                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -777,7 +790,6 @@
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="{{$ban->title}}" class="form-control" placeholder="Judul banner">
                                     <input type="hidden" name="idBanner[]" value="{{$ban->id}}">
-
                                     <input type="text" name="linkBanner[]" value="{{$ban->link}}" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
@@ -802,8 +814,7 @@
                                 <div class="div-table list-banner mb-4">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
-                                    <input type="hidden" name="idBanner[]" value="">
-
+                                    <input type="hidden" name="idBanner[]" value="new">
                                     <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
@@ -923,20 +934,13 @@
                   <div class="col-md-12">
                     <div class="slideshow-container">
                       <div class="ap">
+                       @foreach($banner as $ban)
                         <div class="mySlides fit">
-                          <img src="https://cdn.pixabay.com/photo/2016/04/15/04/02/water-1330252__340.jpg" class="imagesize">
-                        </div>
-
+                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize"> 
+                        </div>                       
+                       @endforeach
                         <div class="mySlides fit">
-
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXORJaE09hY_hdP0CLQlNGczblJC4fMluQJQIAEVHFYs_58MFC" class="imagesize"> 
-
-                        </div>
-
-                        <div class="mySlides fit">
-
                           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize" >
-
                         </div>
 
                       </div>
@@ -946,11 +950,7 @@
                     </div>
                     <br>
 
-                    <div style="text-align:center ; margin-top: -25px;">
-                      <span class="dot" onclick="currentSlide(1)"></span> 
-                      <span class="dot" onclick="currentSlide(2)"></span> 
-                      <span class="dot" onclick="currentSlide(3)"></span> 
-                    </div>
+                    <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   <div class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                  <div class="link shown-mes" id="waviewid" >
@@ -969,8 +969,10 @@
                 <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                 <div class="col-md-12" id="viewLink">
                   @if($links->count())
+                  <?php $utlq=0  ?>
                   @foreach($links as $link)
-                  <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                  <?php $utlq+=1 ?>
+                  <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
                   @endforeach
                   @else
                   <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
@@ -1025,6 +1027,7 @@
 
   $(document).ready(function() {
 
+    dotsok();
       let inputtitle=$('#pagetitle');
       let inputlink=$('#pagelink');
       let inputtelpon=$('#telpon');
@@ -1059,6 +1062,7 @@ $(document).on('focus','.focuslink',function(){
     let inputlinkview=$(this);
     let getoutputviewlink=inputlinkview.attr('id');
     let outputviewlink=$('.'+getoutputviewlink+'-get');
+    //console(outputviewlink);
     $(document).on('keyup',inputlinkview,function(){
        outputviewlink.text(inputlinkview.val());
        if (inputlinkview.val()=='') {
@@ -1067,7 +1071,17 @@ $(document).on('focus','.focuslink',function(){
     });
 });
 
-
+$(document).on('focus','.focuslink-update',function(){
+  let inputlinkview=$(this);
+  let getoutputviewlink=inputlinkview.attr('id');
+  let outputviewlink=$('.'+getoutputviewlink+'-get');
+  $(document).on('keyup',inputlinkview,function(){
+    outputviewlink.text(inputlinkview.val());
+    if (inputlinkview.val()=='') {
+      outputviewlink.text('Masukkan Link');
+    }
+  });
+});
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("outlinedview");
@@ -1109,12 +1123,11 @@ $(document).on('focus','.focuslink',function(){
 
   $("body").on("click", "#addBanner", function() {
     //tambahBanner();
-    
     let $el;
     if($('.list-banner').length<=0){
       $el = $( ".div-banner" ).append(elhtml);
     }
-    else if ($('.list-banner').length==5) {
+    if ($('.list-banner').length==5) {
        $(this).attr('disabled', 'disabled'); 
       }
      else {
@@ -1123,14 +1136,11 @@ $(document).on('focus','.focuslink',function(){
     if($el.find("input").val("")){
     $el.find("input").val("");  
     }
-    $el.find("input").attr("value", "");
+    $el.find("input").attr("value","");
     $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
-
-    /*$el.wrap('<form>').closest('form').trigger("reset");
+    $el.wrap('<form>').closest('form').trigger("reset");
     $el.unwrap();
-    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');*/
-     
-      
+    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');  
   });
 
   $("body").on("click", ".btn-deleteBanner", function() {
@@ -1236,10 +1246,20 @@ $(document).on('focus','.focuslink',function(){
     }
     for (i = 0; i < dots.length; i++) 
     {
-      dots[i].className = dots[i].className.replace(" activated", "");
+      dots[i].className = dots[i].className.replace("activated","");
     }
     slides[slideIndex-1].style.display = "block";  
-    dots[slideIndex-1].className += " activated";
+    dots[slideIndex-1].className +=" activated";
+  }
+  function dotsok()
+  {
+    let i,dotselement,slidesid;
+    dotselement=$('#dot-view');
+    slidesid=$('.mySlides');
+    for (i = 0; i < slidesid.length ; i++) 
+    {
+      dotselement.append('<span class="dot" onclick="currentSlide('+i+')"></span>');
+    } 
   }
 
     // $(document).on('click','.marker',function(){

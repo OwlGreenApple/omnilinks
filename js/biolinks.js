@@ -39,7 +39,41 @@ $(document).ready(function () {
 
     changeLength();
     changeLengthMedia();
-
+// if ($('.wa-input').val()!='') {
+//       $('#wa').show();
+//       $('#waviewid').addClass('shown-mes').show();
+//         changeLength();
+//     }
+//     if ($('.telegram-input').val()!='') {
+//       $('#telegram').show();
+//       $('#telegramviewid').addClass('shown-mes').show();
+//         changeLength();
+//     }
+//     if ($('.skype-input').val()!='') {
+//       $('#skype').show();
+//       $('#skypeviewid').addClass('shown-mes').show();
+//         changeLength();
+//     }
+//     if ($('.youtube-input').val()!='') {
+//       $('#youtube').show();
+//       $('#youtubeviewid').addClass('shown-sm').show();
+//       changeLengthMedia();
+//     }
+//     if ($('.twitter-input').val()!='') {
+//       $('#twitter').show();
+//       $('#twitterviewid').addClass('shown-sm').show();
+//       changeLengthMedia();
+//     }
+//     if ($('.fb-input').val()!='') {
+//       $('#fb').show();
+//       $('#facebookviewid').addClass('shown-sm').show();
+//       changeLengthMedia();
+//     }
+//     if ($('.ig-input').val()!='') {
+//       $('#ig').show();
+//       $('#instagramviewid').addClass('shown-sm').show();
+//       changeLengthMedia();
+//     }
     $(document).on('click', '#tambah', function (e) {
         $('.messengers').each(function () {
             if ($(this).hasClass('hidden')) {
@@ -64,6 +98,7 @@ $(document).ready(function () {
     $('#deletewa').on('click', function () {
         $('#wa').hide();
         $('#wa').addClass('hidden');
+        $('#wa').find("input").val('');
         $('#waviewid').hide();
         $('#waviewid').addClass('hiddens');
         $('#waviewid').removeClass('shown-mes');
@@ -74,6 +109,7 @@ $(document).ready(function () {
     $('#deletetelegram').on('click', function () {
         $('#telegram').hide();
         $('#telegram').addClass('hidden');
+        $('#telegram').find("input").val('');
         $('#telegramviewid').hide();
         $('#telegramviewid').addClass('hiddens');
         $('#telegramviewid').removeClass('shown-mes');
@@ -84,6 +120,7 @@ $(document).ready(function () {
     $('#deleteskype').on('click', function () {
         $('#skype').hide();
         $('#skype').addClass('hidden');
+        $('#skype').find("input").val('');
         $('#skypeviewid').hide();
         $('#skypeviewid').addClass('hiddens');
         $('#skypeviewid').removeClass('shown-mes');
@@ -121,9 +158,15 @@ $(document).ready(function () {
         } 
         elviewlink.children().remove();*/
         idLink = $(this).parent().parent().attr("link-id");
-        console.log(idLink);
+        //console.log(idLink);
         $("#" + idLink + "-preview").remove();
 
+        $(this).parent().parent().remove();
+    });
+
+    $(document).on('click','.deletelink-update',function(e){
+        let idlinkDel=$(this).parent().parent().attr("link-id");
+        $("#" + idlinkDel + "-get").remove();
         $(this).parent().parent().remove();
     });
 
@@ -151,6 +194,7 @@ $(document).ready(function () {
     $('#deleteyoutube').on('click', function () {
         $('#youtube').hide();
         $('#youtube').addClass('hidden');
+        $('#youtube').find("input").val('');
         $('#youtubeviewid').hide();
         $('#youtubeviewid').addClass('hiddensm');
         $('#youtubeviewid').removeClass('shown-sm');
@@ -160,6 +204,7 @@ $(document).ready(function () {
     $('#deleteig').on('click', function (e) {
         $('#ig').hide();
         $('#ig').addClass('hidden');
+        $('#ig').find("input").val('');
         $('#instagramviewid').hide();
         $('#instagramviewid').addClass('hiddensm');
         $('#instagramviewid').removeClass('shown-sm');
@@ -169,6 +214,7 @@ $(document).ready(function () {
     $('#deletefb').on('click', function (e) {
         $('#fb').hide();
         $('#fb').addClass('hidden');
+        $('#fb').find("input").val('');
         $('#facebookviewid').hide();
         $('#facebookviewid').addClass('hiddensm');
         $('#facebookviewid').removeClass('shown-sm');
@@ -178,6 +224,7 @@ $(document).ready(function () {
     $('#deletetwitter').on('click', function (e) {
         $('#twitter').hide();
         $('#twitter').addClass('hidden');
+        $('#twitter').find("input").val('');
         $('#twitterviewid').hide();
         $('#twitterviewid').addClass('hiddensm');
         $('#twitterviewid').removeClass('shown-sm');
@@ -187,7 +234,7 @@ $(document).ready(function () {
 });
 /* hanya angka */
 function hanyaAngka(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode
+    var charCode = (evt.which) ? evt.which :event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;

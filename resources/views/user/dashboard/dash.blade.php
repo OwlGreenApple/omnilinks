@@ -80,11 +80,9 @@
     </div>
 
     <div class="col-md-12">
-      <a href="{{asset('/dash/new')}}" style="text-decoration: none;">
-        <button class="btnbio btncreate">
+        <button class="btnbio btncreate btncreate-bio">
           BIO LINK  
         </button>
-      </a>
 
       <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
         <button class="btnsingle btncreate">
@@ -222,6 +220,33 @@
       
   </div>
 </div>
+
+<div class="modal fade" id="confirm-create" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+         Create BioLink  Confirmation
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to Create a Bio?
+      </div>
+      <div class="modal-footer" id="foot">
+        <button href="{{asset('/dash/new')}}" class="btn btn-primary btn-create-ok" data-dismiss="modal">
+          Yes
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
 <script type="text/javascript">
   
 $.getJSON(
@@ -291,7 +316,14 @@ $.getJSON(
     $('#id_delete').val($(this).attr('deletedataid'));
     $('#confirm-delete').modal('show');
   });
-
+  $('body').on('click','.btncreate-bio',function(e){
+    e.preventDefault();
+    $('#confirm-create').modal('show');
+  });
+  $('body').on('click','.btn-create-ok',function(e){
+    let urla="<?php echo e(asset('/dash/new'))?>";
+    window.location.href=urla;
+  });
   $('body').on('click','.btn-delete-ok',function(e) 
   {
     var iddeletepages = $('#id_delete').val();

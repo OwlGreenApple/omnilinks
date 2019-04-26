@@ -18,7 +18,7 @@ class BiolinkController extends Controller
   	$uuid=$request->uuidpixel;
     if(is_null($request->editidwa))
     {
-    $walink= new Whatsapplink();  
+      $walink= new Whatsapplink();  
     }
     else
     {
@@ -154,16 +154,15 @@ public function link($names)
     
     $page->save();
     $names=$page->names;
-
+    $idbanner=$Request->idBanner;
     //dd($request->all());
     for($i=0;$i<count($request->judulBanner);$i++) 
     { 
-      if($request->idBanner[$i]==null){
+      if($idbanner[$i]=="new"){
         $banner= new Banner();
       } else {
-        $banner= Banner::find($request->idBanner[$i]);
-      }
-      
+        $banner= Banner::where('id','=',$request->idBanner[$i])->first();
+      }      
       $user=Auth::user();
       $banner->users_id=$user->id;
       $banner->pages_id=$page->id;
@@ -234,11 +233,10 @@ public function link($names)
       if($id[$i]=='new')
       {
         $url=new Link();
-        
       }
       else
       {
-         $url=Link::find($id[$i]);
+         $url=Link::where('id','=',$id[$i])->first();
       }
        $url->pages_id=$page->id;
         $url->names=null;
@@ -317,15 +315,15 @@ public function link($names)
 
     if((is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)))
     {
-     $page->colom='link-num-1';
+     $page->colom='links-num-1';
     }
     elseif((!is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && !is_null($page->telegram_link))) 
     {
-      $page->colom='link-num-2';
+      $page->colom='links-num-2';
     }
     elseif(!is_null($page->wa_link) && !is_null($page->skype_link) && !is_null($page->telegram_link))
     {
-      $page->colom='link-num-3';
+      $page->colom='links-num-3';
     }
     
     if ((is_null($page->fb_link)&& is_null($page->ig_link) && is_null($page->twitter_link) && !is_null($page->youtube_link))||(is_null($page->fb_link)&& is_null($page->ig_link) && !is_null($page->twitter_link) && is_null($page->youtube_link))||(is_null($page->fb_link) && !is_null($page->ig_link) && is_null($page->twitter_link) && is_null($page->youtube_link))||(!is_null($page->fb_link)&& is_null($page->ig_link) && is_null($page->twitter_link) && is_null($page->youtube_link))) 

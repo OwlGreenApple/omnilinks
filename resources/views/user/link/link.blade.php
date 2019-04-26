@@ -76,7 +76,7 @@
 
 <?php
 $link = Link::where('pages_id','=',$pages->id)
-          ->orderBy('created_at','ascend')
+          ->orderBy('created_at','descend')
           ->get();
 $banner = Banner::where('pages_id','=',$pages->id)
           ->orderBy('created_at','ascend')
@@ -113,7 +113,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
 	  <div class="links messengers {{$pages->colom}} row" style="margin-bottom: 20px;">
 
       @if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0)
-        <div class="link col-md-4 col-4">
+        <div class="link">
           <a href="{{url('click/wa/'.$pages->id)}}" title="wa" class="btn btn-light" target="_blank">
             <i class="fab fa-whatsapp"></i>
             <span class="textbutton"> WhatsApp</span>
@@ -122,7 +122,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
       @endif
 
       @if(!is_null($pages->skype_link) || $pages->skype_pixel_id!=0)
-        <div class="link col-md-4 col-4">
+        <div class="link">
           <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" class="btn btn-light" target="_blank">
             <i class="fab fa-skype"></i>
             <span class="textbutton"> Skype</span>
@@ -131,7 +131,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
       @endif
 
       @if(!is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
-        <div class="link col-md-4 col-4">
+        <div class="link">
           <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" class="btn btn-light" target="_blank">
             <i class="fab fa-telegram"></i>
             <span class="textbutton" > Telegram</span>
