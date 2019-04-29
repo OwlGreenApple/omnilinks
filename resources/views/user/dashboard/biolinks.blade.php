@@ -198,17 +198,7 @@
     });
   }
 
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
-        $('#viewpicture').show();
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
+  
 
   $(document).ready(function() {
     loadPixelPage();
@@ -256,11 +246,35 @@
     $('#colorpicker').farbtastic('#phonecolor');
     //$.farbtastic('#colorpicker','.screen');
     //$('#colorpicker').farbtastic('.screen');
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
+
+        $('#viewpicture').show();
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 
     $("#wizard-picture").on('change', function() {
       readURL(this);
     });
-    // $('.picture').on('change')
+    $('.pictureClass').on('change',function(){
+      let inputthis=$(this).attr('id');
+        function readThis(input) {
+          if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("."+inputthis+"-get").attr('src',e.target.result).fadeIn('slow');
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      readThis(this);
+     });
   });
 </script>
 
@@ -798,7 +812,7 @@
                                     </select>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
-                                      <input type="file" name="bannerImage[]" class="custom-file-input" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01">
+                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01">
 
                                       <label class="custom-file-label" for="inputGroupFile01">
                                         {{basename($ban->images_banner)}}
@@ -817,13 +831,13 @@
                                 <div class="div-table list-banner mb-4" picture-id="picture-id-1">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
-                                    <input type="hidden" name="idBanner[]" value="new">
+                                    <input type="hidden" name="idBanner[]" value="">
                                     <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
-                                      <input type="file" name="bannerImage[]" class="custom-file-input" id="input-picture-1" aria-describedby="inputGroupFileAddon01">
+                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-6" aria-describedby="inputGroupFileAddon01">
 
                                       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
@@ -941,13 +955,13 @@
                       <?php $ut=0 ?>
                        @foreach($banner as $ban)
                        <?php $ut+=1; ?>
-                        <div class="mySlides fit input-picture-<?=$ut?>-get" id="picture-id-<?=$ut?>-get">
-                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize"> 
+                        <div class="mySlides fit" id="picture-id-<?=$ut?>-get">
+                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>"> 
                         </div>                       
                        @endforeach
                         @else  
-                        <div class="mySlides fit input-picture-1-get" id="picture-id-1-get">
-                          <img id="picture-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize" >
+                        <div class="mySlides fit " id="picture-id-1-get">
+                          <img id="picture-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-1-get" >
                         </div>
                       @endif
                       </div>
@@ -1027,7 +1041,7 @@
 <noscript>Jalankan Javascript di browser anda</noscript>
 <script type="text/javascript">
   let elhtml;
-  let idpic=5;
+  let idpic=6;
   $(document).ready(function() {
       dotview();
       dotsok();
@@ -1148,7 +1162,12 @@ $(document).on('focus','.focuslink-update',function(){
     $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
     $el.wrap('<form>').closest('form').trigger("reset");
     $el.unwrap();
-    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');  
+    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+    $('#viewbanner').append('<div class="mySlides fit" id="picture-id-'+idpic+'-get"  style="display:none"><img id="picture-'+idpic+'" src="" class="imagesize input-picture-'+idpic+'-get"></div>');
+    let slidesi=$('.mySlides:last');
+    for (var i = 0; i < slidesi.length; i++) {
+      $('')
+    }
   });
 
   $("body").on("click", ".btn-deleteBanner", function() {
