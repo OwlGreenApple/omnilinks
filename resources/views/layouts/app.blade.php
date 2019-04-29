@@ -7,7 +7,7 @@
 
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Omnilinks</title>
+  <title>Omnilinkz</title>
 
   <!-- Scripts -->
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
@@ -29,16 +29,17 @@
 
 </head>
 
-<body ng-app="">
+<body>
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
       <div class="container-fluid">
         <?php if(Auth::check()){?>
-        <a class="navbar-brand" href="{{ url('/dash') }}">
-          <?php } else{?>
+          <a class="navbar-brand" href="{{ url('/dash') }}">
+        <?php } else{?>
           <a class="navbar-brand" href="{{ url('/') }}">
-            <?php }?>
-            <img src="{{asset('image/omnilinkz-logo.png')}}" width="180px;" alt=""></a>
+        <?php }?>
+            <img src="{{asset('image/omnilinkz-logo.png')}}" width="180px;" alt="">
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -52,75 +53,77 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               @guest
-              <li class="nav-item">
-                <a class="nav-link navlog" href="{{ route('login') }}">{{ __('LOG IN') }}</a>
-              </li>
-              @if (Route::has('register'))
-              <li class="nav-item">
-                <a class="btn btn-md btn-primary btn-prim-custom" href="{{ route('register') }}">{{ __('GET STARTED FOR FREE') }}</a>
-              </li>
-              @endif
+                <li class="nav-item">
+                  <a class="nav-link navlog" href="{{ route('login') }}">{{ __('LOG IN') }}</a>
+                </li>
+                @if (Route::has('register'))
+                  <li class="nav-item">
+                    <a class="btn btn-md btn-primary btn-prim-custom" href="{{ route('register') }}">{{ __('GET STARTED FOR FREE') }}</a>
+                  </li>
+                @endif
               @else
 
-              <div class="dropdown pull-right">
-                <a class="nav-link dropdown-toggle blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">
-                  Halo, {{ Auth::user()->username }} <span class="caret"></span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                    Log Out
+                <div class="dropdown pull-right">
+                  <a class="nav-link dropdown-toggle blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">
+                    Halo, {{ Auth::user()->username }} <span class="caret"></span>
                   </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                      Log Out
+                    </a>
+                  </div>
                 </div>
-              </div>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-              </form>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form>
+              @endguest
             </ul>
           </div>
-          @endguest
       </div>
     </nav>
-  </div>
-  
-  @yield('content')
 
-  <footer class="infooter font-small">
-    <div class="container text-md-left">
-      <div class="row">
-        <div class="col-md-3 mx-auto">
-          <ul class="list-unstyled">
-            <h5 style="color:#ffffff;">Omnilinkz </h5>
-            <li><a href="{{asset('/about')}}" class="linkfooter">About Us</a></li>
-            <li><a href="{{asset('/pricing')}}" class="linkfooter">Pricing</a></li>
-            <li><a href="{{asset('/faq')}}" class="linkfooter">Faq</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 mx-auto">
-          <ul class="list-unstyled">
-            <h5 style="color:#ffffff;">Helps</h5>
-            <li><a href="{{asset('/helps')}}" class="linkfooter">Terms And Condition</a></li>
-            <li><a href="{{asset('/helps')}}" class="linkfooter">Privacy And Policy</a></li>
-            <li><a href="#" class="linkfooter">Blog</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 mx-auto">
-          <ul class="list-unstyled">
-            <h5 style="color:#ffffff;">Contact us</h5>
-            <li class="linkfooter"><a onclick="window.location.href='mailto:support@omnilinkz.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">support@omnilinkz.com</a></li>
-            <li><a href="#" onclick='window.open("http://facebook.com");return false;'><i class="fab fa-facebook linkfooter"></i></a><a href="#" onclick='window.open("http://instagram.com");return false;'><i class="fab fa-instagram linkfooter" style="margin-left:5px;"></i></a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 mx-auto">
-          <ul class="list-unstyled">
-            <h5 style="color:#ffffff;">Copyright</h5>
-            <li class="linkfooter">© 2019 Omnilinkz</li>
-            <li class="linkfooter">All Right Reserved</li>
-          </ul>
+    <main>
+      @yield('content')  
+    </main>
+
+    <footer class="infooter font-small">
+      <div class="container text-md-left">
+        <div class="row">
+          <div class="col-md-3 mx-auto">
+            <ul class="list-unstyled">
+              <h5 style="color:#ffffff;">Omnilinkz </h5>
+              <li><a href="{{asset('/about')}}" class="linkfooter">About Us</a></li>
+              <li><a href="{{asset('/pricing')}}" class="linkfooter">Pricing</a></li>
+              <li><a href="{{asset('/faq')}}" class="linkfooter">Faq</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mx-auto">
+            <ul class="list-unstyled">
+              <h5 style="color:#ffffff;">Helps</h5>
+              <li><a href="{{asset('/helps')}}" class="linkfooter">Terms And Condition</a></li>
+              <li><a href="{{asset('/helps')}}" class="linkfooter">Privacy And Policy</a></li>
+              <li><a href="#" class="linkfooter">Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mx-auto">
+            <ul class="list-unstyled">
+              <h5 style="color:#ffffff;">Contact us</h5>
+              <li class="linkfooter"><a onclick="window.location.href='mailto:support@omnilinkz.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">support@omnilinkz.com</a></li>
+              <li><a href="#" onclick='window.open("http://facebook.com");return false;'><i class="fab fa-facebook linkfooter"></i></a><a href="#" onclick='window.open("http://instagram.com");return false;'><i class="fab fa-instagram linkfooter" style="margin-left:5px;"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mx-auto">
+            <ul class="list-unstyled">
+              <h5 style="color:#ffffff;">Copyright</h5>
+              <li class="linkfooter">© 2019 Omnilinkz</li>
+              <li class="linkfooter">All Right Reserved</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-  </body>
+    </footer>
+  </div>  
+</body>
 
 </html>

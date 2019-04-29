@@ -6,11 +6,14 @@
     <td data-label="Package">
       {{$order->package}}
     </td> 
-    <td data-label="Total">
+    <td data-label="Harga">
       Rp. <?php echo number_format($order->total) ?>
     </td>
     <td data-label="Discount">
       Rp. <?php echo number_format($order->discount) ?>
+    </td>
+    <td data-label="Total">
+      Rp. <?php echo number_format($order->grand_total) ?>
     </td>
     <td data-label="Date">
       {{$order->created_at}}
@@ -33,7 +36,7 @@
     </td>
     <td data-label="Status">
       @if($order->status==0)
-        <button type="button" class="btn btn-danger btn-confirm" data-toggle="modal" data-target="#confirm-payment" data-id="{{$order->id}}" data-no-order="{{$order->no_order}}" data-package="{{$order->package}}" data-total="{{$order->total}}" data-discount="{{$order->discount}}" data-date="{{$order->created_at}}" data-keterangan="{{$order->keterangan}}">
+        <button type="button" class="btn btn-primary btn-confirm" data-toggle="modal" data-target="#confirm-payment" data-id="{{$order->id}}" data-no-order="{{$order->no_order}}" data-package="{{$order->package}}" data-total="{{$order->total}}" data-discount="{{$order->discount}}" data-date="{{$order->created_at}}" data-keterangan="{{$order->keterangan}}">
           Confirm Payment
         </button>
       @elseif($order->status==1)

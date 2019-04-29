@@ -11,6 +11,10 @@ h6 {
   font-weight: 600;
 }
 
+html,body {
+  height: 100%;
+}
+
 body {
   background-color: #fff;
 }
@@ -37,9 +41,14 @@ p,span {
 }
 
 .navbar {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  /*padding-top: 30px;
+  padding-bottom: 30px;*/
   background-color: #ffffff;
+  min-height: 80px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
 .navlog {

@@ -110,7 +110,7 @@
   }
 </script>
 
-<div class="container">
+<div class="col-md-10 offset-md-1" style="height:100%; margin-top:30px">
   <div class="row justify-content-center">
     <div class="col-md-12">
 
@@ -135,11 +135,14 @@
             <th action="package">
               Package
             </th>
-            <th  action="total">
-              Total
+            <th  action="harga">
+              Harga
             </th>
             <th  action="discount">
               Discount
+            </th>
+            <th  action="grand_total">
+              Total
             </th>
             <th  action="created_at">
               Date

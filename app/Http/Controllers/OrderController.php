@@ -7,6 +7,7 @@ use App\HistorySearch;
 use App\User;
 use App\Group;
 use App\Save;
+use App\Coupon;
 use App\Order;
 use App\UserLog;
 use App\Notification;
@@ -25,10 +26,18 @@ class OrderController extends Controller
     			"namapaket"=>$request->namapaket,
     		));
     }
+
     public function index_order()
     {
       return view('order.index');
     }
+
+    public function checkout($id){
+      return view('pricing.checkout')->with(array(
+                'id'=>$id,    
+              ));
+    }
+
     public function load_order(Request $request)
     {
       $orders = Order::where('user_id',Auth::user()->id)
@@ -41,9 +50,10 @@ class OrderController extends Controller
                         ->with('orders',$orders); 
       return $arr;
     }
+
     public function load_list_order(Request $request)
     {
-      $orders = Order::join('users','orders.userid','users.id')  
+      $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
                   ->select('orders.*','users.email')
                   ->orderBy('created_at','descend')
                   ->get();
@@ -53,7 +63,67 @@ class OrderController extends Controller
                         ->with('orders',$orders); */
       return $arr;
     }
-  
+    
+    public function cek_kupon($kodekupon,$harga,$idpaket){
+      $arr['status'] = 'success';
+      $arr['message'] = '';
+      $arr['total'] = $harga;
+      $arr['diskon'] = 0;
+      $arr['coupon'] = null;
+
+      if($kodekupon!=''){
+        $coupon = Coupon::where('kodekupon',$kodekupon)
+                  ->where(function($query) use ($idpaket) {
+                    $query->where('package_id',$idpaket)
+                          ->orwhere('package_id',0);
+                  })
+                  ->first();
+
+        if(is_null($coupon)){
+          $arr['status'] = 'error';
+          $arr['message'] = 'Kupon tidak ditemukan';
+        } else {
+          $now = new DateTime();
+          $date = new DateTime($coupon->valid_until);
+          
+          if($date<$now){
+            $arr['status'] = 'error';
+            $arr['message'] = 'Kupon sudah tidak berlaku';
+          } else {
+            if($coupon->valid_to=='new' and Auth::check()){
+
+            } else if($coupon->valid_to=='extend' and !Auth::check()){
+
+            } else {
+              $total = 0;
+              $diskon = 0;
+
+              if($coupon->diskon_value==0 and $coupon->diskon_percent!=0){
+                $diskon = $harga * $coupon->diskon_percent/100;
+                $total = $harga - $diskon;
+              } else {
+                $diskon = $coupon->diskon_value;
+                $total = $harga - $coupon->diskon_value;
+              }
+
+              $arr['status'] = 'success';
+              $arr['message'] = '';
+              $arr['total'] = $total;
+              $arr['diskon'] = $diskon;
+              $arr['coupon'] = $coupon;
+            }
+          }
+        }
+      }
+
+      return $arr;
+    }
+
+    public function check_kupon(Request $request){
+      $arr = $this->cek_kupon($request->kupon,$request->harga,$request->idpaket);
+      return $arr;
+    }
+
     public function confirm_payment_order(Request $request)
     {
         $order = Order::find($request->id_confirm);
@@ -85,6 +155,7 @@ class OrderController extends Controller
   
         return $arr;
     }
+
     public function confirm_payment(Request $request){
         $user = Auth::user();
         $dt = Carbon::now();
@@ -99,6 +170,7 @@ class OrderController extends Controller
         $order->coupon_id=0;
         $order->total = $request->price;
         $order->discount = 0;
+        $order->grand_total = $request->price;
         $order->status = 0;
         $order->buktibayar = "";
         $order->keterangan = "";
@@ -111,16 +183,82 @@ class OrderController extends Controller
             'no_order' => $order_number,
         ];
         Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-          $message->from('no-reply@omnilinks.com', 'Omnilinks');
+          $message->from('no-reply@omnilinkz.com', 'Omnilinkz');
           $message->to($user->email);
-          $message->subject('[Omnilinks] Order Nomor '.$order_number);
+          $message->subject('[Omnilinkz] Order Nomor '.$order_number);
         });
     
         return view('pricing.thankyou');
+    }
+
+    public static function add_time($user,$time){
+      if(is_null($user->valid_until)){
+        $valid = new DateTime($time);
+      } else {
+        $now = new DateTime();
+        $uservalid = new DateTime($user->valid_until);
+
+        if($uservalid<$now){
+          $valid = new DateTime($time);
+        } else {
+          $uservalid = strtotime($user->valid_until);
+          $valid = new DateTime (date("Y-m-d", strtotime($time, $uservalid)));
+        }
       }
-      public function checkout($id){
-        return view('pricing.checkout')->with(array(
-                'id'=>$id,		
-            ));
+
+      return $valid;
+    }
+
+    public function confirm_order(Request $request){
+      $order = Order::find($request->id);
+      $order->status = 2;
+      
+      $user = User::find($order->user_id);
+      $valid=null;
+
+      if(substr($order->package,0,5) === "Basic"){
+        if($order->package=='Basic Monthly'){
+          //$valid = new DateTime("+1 months");
+          $valid = $this->add_time($user,"+1 months");
+        } else if($order->package=='Basic Yearly'){
+          //$valid = new DateTime("+12 months");
+          $valid = $this->add_time($user,"+12 months");
+        }
+
+        $user->valid_until = $valid;
+        $user->membership = 'basic';
+      } else if(substr($order->package,0,5) === "Elite"){
+        if($order->package=='Elite Monthly'){
+          //$valid = new DateTime("+1 months");
+          $valid = $this->add_time($user,"+1 months");
+        } else if($order->package=='Elite Yearly'){
+          //$valid = new DateTime("+12 months");
+          $valid = $this->add_time($user,"+12 months");
+        }
+
+        $user->valid_until = $valid;
+        $user->membership = 'elite';
       }
+
+      $user->save();
+      $order->save();
+
+      // Mail::to($user->email)->queue(new ConfirmOrderMail($user,$order));
+      $emaildata = [
+        'order' => $order,
+        'user' => $user,
+      ];
+
+      Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order) {
+        $message->from('no-reply@omnilinkz.com', 'Omnilinkz');
+        $message->to($user->email);
+        $message->subject('[Omnilinkz] Konfirmasi Order'.$order->no_order);
+      });
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Order berhasil dikonfirmasi';
+
+      return $arr;
+    }
+      
 }

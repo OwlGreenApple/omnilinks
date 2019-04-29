@@ -42,6 +42,7 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
     });
 
     Route::get('/checkout/{id}','OrderController@checkout');
+    Route::post('/check-kupon','OrderController@check_kupon');
     Route::get('/register-payment','OrderController@register');
     Route::post('/confirm-payment','OrderController@confirm_payment');
 
@@ -94,11 +95,11 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
 });
 
 
-    Route::group(['middleware'=>['web','auth','thisadmin']],function(){
+Route::group(['middleware'=>['web','auth','thisadmin']],function(){
     //admin order
-    Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order',function(){
-    return view('admin.list-order.index');
+      return view('admin.list-order.index');
     });
+    Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order/confirm','OrderController@confirm_order');
 });

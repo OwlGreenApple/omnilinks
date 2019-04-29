@@ -15,7 +15,7 @@ class thisadmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && ($request->user()->level==1))
+        if (auth()->check() && ($request->user()->is_admin==1))
         {
             return $next($request);
           }
