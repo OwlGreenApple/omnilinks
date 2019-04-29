@@ -29,7 +29,6 @@ function changeLengthMedia() {
         $('.shown-sm').removeClass('col-md-6 col-md-12 col-md-3');
         $('.shown-sm').addClass('col-md-4 linked shown-sm');
     } else if ($('.shown-sm').length == 4) {
-
         $('.shown-sm').removeClass('col-md-6 col-md-4 col-md-12');
         $('.shown-sm').addClass('col-md-3 linked shown-sm');
     }
@@ -39,41 +38,41 @@ $(document).ready(function () {
 
     changeLength();
     changeLengthMedia();
-// if ($('.wa-input').val()!='') {
-//       $('#wa').show();
-//       $('#waviewid').addClass('shown-mes').show();
-//         changeLength();
-//     }
-//     if ($('.telegram-input').val()!='') {
-//       $('#telegram').show();
-//       $('#telegramviewid').addClass('shown-mes').show();
-//         changeLength();
-//     }
-//     if ($('.skype-input').val()!='') {
-//       $('#skype').show();
-//       $('#skypeviewid').addClass('shown-mes').show();
-//         changeLength();
-//     }
-//     if ($('.youtube-input').val()!='') {
-//       $('#youtube').show();
-//       $('#youtubeviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
-//     if ($('.twitter-input').val()!='') {
-//       $('#twitter').show();
-//       $('#twitterviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
-//     if ($('.fb-input').val()!='') {
-//       $('#fb').show();
-//       $('#facebookviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
-//     if ($('.ig-input').val()!='') {
-//       $('#ig').show();
-//       $('#instagramviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
+if ($('.wa-input').val()!='') {
+      $('#wa').show();
+      $('#waviewid').addClass('shown-mes').show();
+        changeLength();
+    }
+    if ($('.telegram-input').val()!='') {
+      $('#telegram').show();
+      $('#telegramviewid').addClass('shown-mes').show();
+        changeLength();
+    }
+    if ($('.skype-input').val()!='') {
+      $('#skype').show();
+      $('#skypeviewid').addClass('shown-mes').show();
+        changeLength();
+    }
+    if ($('.youtube-input').val()!='') {
+      $('#youtube').show();
+      $('#youtubeviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
+    if ($('.twitter-input').val()!='') {
+      $('#twitter').show();
+      $('#twitterviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
+    if ($('.fb-input').val()!='') {
+      $('#fb').show();
+      $('#facebookviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
+    if ($('.ig-input').val()!='') {
+      $('#ig').show();
+      $('#instagramviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
     $(document).on('click', '#tambah', function (e) {
         $('.messengers').each(function () {
             if ($(this).hasClass('hidden')) {

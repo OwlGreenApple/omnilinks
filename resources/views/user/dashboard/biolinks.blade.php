@@ -198,17 +198,7 @@
     });
   }
 
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
-        $('#viewpicture').show();
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
+  
 
   $(document).ready(function() {
     loadPixelPage();
@@ -256,10 +246,35 @@
     $('#colorpicker').farbtastic('#phonecolor');
     //$.farbtastic('#colorpicker','.screen');
     //$('#colorpicker').farbtastic('.screen');
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
+
+        $('#viewpicture').show();
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 
     $("#wizard-picture").on('change', function() {
       readURL(this);
     });
+    $('.pictureClass').on('change',function(){
+      let inputthis=$(this).attr('id');
+        function readThis(input) {
+          if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("."+inputthis+"-get").attr('src',e.target.result).fadeIn('slow');
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      readThis(this);
+     });
   });
 </script>
 
@@ -323,7 +338,7 @@
 
                   <div class="hid">
                     <ul class="sortable-msg">
-                      <li id="msg-wa">
+                      <li id="msg">
                         <div id="wa" class="messengers div-table">
                           <div class="div-cell">
                             <span class="handle">
@@ -332,7 +347,7 @@
                           </div>
 
                           <div class="div-cell">
-                            <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="col-md-12 col-12 pr-0  pl-0">
                               <div class="input-group">
                                 <div class="input-group-prepend">
                                   <div class="input-group-text">
@@ -785,8 +800,10 @@
                           <div class="contentBanner mb-5">
                             <div class="c div-banner">
                               @if($banner->count())
+                              <?php $uc=0; ?>
                                 @foreach($banner as $ban)
-                                <div class="div-table list-banner mb-4">
+                                <?php $uc+=1; ?>
+                                <div class="div-table list-banner mb-4" picture-id="picture-id-<?=$uc?>">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="{{$ban->title}}" class="form-control" placeholder="Judul banner">
                                     <input type="hidden" name="idBanner[]" value="{{$ban->id}}">
@@ -795,7 +812,7 @@
                                     </select>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
-                                      <input type="file" name="bannerImage[]" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01">
 
                                       <label class="custom-file-label" for="inputGroupFile01">
                                         {{basename($ban->images_banner)}}
@@ -811,16 +828,16 @@
                                 </div>
                                 @endforeach
                               @else 
-                                <div class="div-table list-banner mb-4">
+                                <div class="div-table list-banner mb-4" picture-id="picture-id-1">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
-                                    <input type="hidden" name="idBanner[]" value="new">
+                                    <input type="hidden" name="idBanner[]" value="">
                                     <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
-                                      <input type="file" name="bannerImage[]" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-6" aria-describedby="inputGroupFileAddon01">
 
                                       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
@@ -933,16 +950,20 @@
                   </header>
                   <div class="col-md-12">
                     <div class="slideshow-container">
-                      <div class="ap">
+                      <div class="ap" id="viewbanner">
+                      @if($banner->count())
+                      <?php $ut=0 ?>
                        @foreach($banner as $ban)
-                        <div class="mySlides fit">
-                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize"> 
+                       <?php $ut+=1; ?>
+                        <div class="mySlides fit" id="picture-id-<?=$ut?>-get">
+                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>"> 
                         </div>                       
                        @endforeach
-                        <div class="mySlides fit">
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize" >
+                        @else  
+                        <div class="mySlides fit " id="picture-id-1-get">
+                          <img id="picture-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-1-get" >
                         </div>
-
+                      @endif
                       </div>
                       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                       <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -992,11 +1013,7 @@
                       <div class="col-md-3 linked hiddensm" id="instagramviewid"  style=" display: none;">
                        <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
                       </div>  
-                       
-                       
                    </div>
-
-
                    <div class="col-md-12" align="center" id="poweredview">
                     <div class="powered-omnilinks">
                       <a href="#">
@@ -1024,10 +1041,10 @@
 <noscript>Jalankan Javascript di browser anda</noscript>
 <script type="text/javascript">
   let elhtml;
-
+  let idpic=6;
   $(document).ready(function() {
-
-    dotsok();
+      dotview();
+      dotsok();
       let inputtitle=$('#pagetitle');
       let inputlink=$('#pagelink');
       let inputtelpon=$('#telpon');
@@ -1116,13 +1133,15 @@ $(document).on('focus','.focuslink-update',function(){
 
   $("body").on("click", "#savetemp", function() {
     tambahTemp();
-    tambahPages();
+    //tambahPages();
     $('#pesanAlert').removeClass('alert-danger');
     $('#pesanAlert').children().remove();
   });
 
   $("body").on("click", "#addBanner", function() {
     //tambahBanner();
+    
+    idpic+=1
     let $el;
     if($('.list-banner').length<=0){
       $el = $( ".div-banner" ).append(elhtml);
@@ -1133,14 +1152,22 @@ $(document).on('focus','.focuslink-update',function(){
      else {
       $el = $('.list-banner:first').clone().appendTo('.div-banner');
     }
-    if($el.find("input").val("")){
-    $el.find("input").val("");  
-    }
+    // if($el.find("input").val("")){
+    // $el.find("input").val("");  
+    // }
     $el.find("input").attr("value","");
+    $el.attr("picture-id","picture-id-"+idpic+"");
+    $el.find("input[type='file']").attr("id","input-picture-"+idpic+"");
+
     $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
     $el.wrap('<form>').closest('form').trigger("reset");
     $el.unwrap();
-    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');  
+    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+    $('#viewbanner').append('<div class="mySlides fit" id="picture-id-'+idpic+'-get"  style="display:none"><img id="picture-'+idpic+'" src="" class="imagesize input-picture-'+idpic+'-get"></div>');
+    let slidesi=$('.mySlides:last');
+    for (var i = 0; i < slidesi.length; i++) {
+      $('')
+    }
   });
 
   $("body").on("click", ".btn-deleteBanner", function() {
@@ -1150,7 +1177,11 @@ $(document).on('focus','.focuslink-update',function(){
     if ($('.list-banner').length<=5) {
       $("#addBanner").removeAttr("disabled");
     }
+
     $(this).parent().remove();
+     let idthis=$(this).parent().attr("picture-id");
+    $("#"+idthis+"-get").remove();
+    dotview();
   });
 
   $("body").on("click", ".btn-delete", function() {
@@ -1235,10 +1266,10 @@ $(document).on('focus','.focuslink-update',function(){
     let slides = document.getElementsByClassName("mySlides");
     let dots = document.getElementsByClassName("dot");
     if (n > slides.length) {
-      slideIndex = 1
+      slideIndex = 1;
     }    
     if (n < 1) {
-      slideIndex = slides.length
+      slideIndex = slides.length;
     }
     for (i = 0; i < slides.length; i++) 
     {
@@ -1258,10 +1289,17 @@ $(document).on('focus','.focuslink-update',function(){
     slidesid=$('.mySlides');
     for (i = 0; i < slidesid.length ; i++) 
     {
-      dotselement.append('<span class="dot" onclick="currentSlide('+i+')"></span>');
+      dotselement.append('<span class="dot" id="" onclick="currentSlide('+i+')"></span>');
     } 
   }
-
+  function dotview(){
+    if ($(".dot").length==1) {
+      $("#dot-view").hide();
+      $('.prev').hide();
+      $('.next').hide();
+    }   
+  }
+ 
     // $(document).on('click','.marker',function(){
     //      $('#backtheme').val('');
     // });
