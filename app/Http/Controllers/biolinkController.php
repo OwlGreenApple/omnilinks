@@ -102,7 +102,7 @@ class BiolinkController extends Controller
   }
 public function link($names)
  {
-  $page=Page::where('pages.names',$names)  
+  $page=Page::where('names',$names)  
               ->first();
   return view('user.link.link')->with('pages',$page);
  }
@@ -154,15 +154,16 @@ public function link($names)
     
     $page->save();
     $names=$page->names;
-    $idbanner=$Request->idBanner;
+    $idbanner=$request->idBanner;
     //dd($request->all());
     for($i=0;$i<count($request->judulBanner);$i++) 
     { 
-      if($idbanner[$i]=="new"){
-        $banner= new Banner();
+      if($idbanner[$i]==""){
+        $banner= new Banner(); 
       } else {
         $banner= Banner::where('id','=',$request->idBanner[$i])->first();
-      }      
+      }  
+         
       $user=Auth::user();
       $banner->users_id=$user->id;
       $banner->pages_id=$page->id;

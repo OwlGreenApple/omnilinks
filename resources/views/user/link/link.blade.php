@@ -103,6 +103,8 @@ $banner = Banner::where('pages_id','=',$pages->id)
           </a>
         </div>
         @endforeach
+        @else
+        <div></div>
       @endif
     </div>
     <div id="dotsContainer"></div>
@@ -112,7 +114,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
 	  <header></header>
 	  <div class="links messengers {{$pages->colom}} row" style="margin-bottom: 20px;">
 
-      @if(!is_null($pages->wa_link) || $pages->wa_pixel_id!=0)
+      @if(!is_null($pages->wa_link)
         <div class="link">
           <a href="{{url('click/wa/'.$pages->id)}}" title="wa" class="btn btn-light" target="_blank">
             <i class="fab fa-whatsapp"></i>
@@ -121,7 +123,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
         </div>
       @endif
 
-      @if(!is_null($pages->skype_link) || $pages->skype_pixel_id!=0)
+      @if(!is_null($pages->skype_link))
         <div class="link">
           <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" class="btn btn-light" target="_blank">
             <i class="fab fa-skype"></i>
@@ -130,7 +132,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
         </div>
       @endif
 
-      @if(!is_null($pages->telegram_link) || $pages->telegram_pixel_id!=0)
+      @if(!is_null($pages->telegram_link))
         <div class="link">
           <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" class="btn btn-light" target="_blank">
             <i class="fab fa-telegram"></i>

@@ -29,7 +29,6 @@ function changeLengthMedia() {
         $('.shown-sm').removeClass('col-md-6 col-md-12 col-md-3');
         $('.shown-sm').addClass('col-md-4 linked shown-sm');
     } else if ($('.shown-sm').length == 4) {
-
         $('.shown-sm').removeClass('col-md-6 col-md-4 col-md-12');
         $('.shown-sm').addClass('col-md-3 linked shown-sm');
     }
@@ -39,41 +38,41 @@ $(document).ready(function () {
 
     changeLength();
     changeLengthMedia();
-// if ($('.wa-input').val()!='') {
-//       $('#wa').show();
-//       $('#waviewid').addClass('shown-mes').show();
-//         changeLength();
-//     }
-//     if ($('.telegram-input').val()!='') {
-//       $('#telegram').show();
-//       $('#telegramviewid').addClass('shown-mes').show();
-//         changeLength();
-//     }
-//     if ($('.skype-input').val()!='') {
-//       $('#skype').show();
-//       $('#skypeviewid').addClass('shown-mes').show();
-//         changeLength();
-//     }
-//     if ($('.youtube-input').val()!='') {
-//       $('#youtube').show();
-//       $('#youtubeviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
-//     if ($('.twitter-input').val()!='') {
-//       $('#twitter').show();
-//       $('#twitterviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
-//     if ($('.fb-input').val()!='') {
-//       $('#fb').show();
-//       $('#facebookviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
-//     if ($('.ig-input').val()!='') {
-//       $('#ig').show();
-//       $('#instagramviewid').addClass('shown-sm').show();
-//       changeLengthMedia();
-//     }
+if ($('.wa-input').val()!='') {
+      $('#wa').show();
+      $('#waviewid').addClass('shown-mes').show();
+        changeLength();
+    }
+    if ($('.telegram-input').val()!='') {
+      $('#telegram').show();
+      $('#telegramviewid').addClass('shown-mes').show();
+        changeLength();
+    }
+    if ($('.skype-input').val()!='') {
+      $('#skype').show();
+      $('#skypeviewid').addClass('shown-mes').show();
+        changeLength();
+    }
+    if ($('.youtube-input').val()!='') {
+      $('#youtube').show();
+      $('#youtubeviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
+    if ($('.twitter-input').val()!='') {
+      $('#twitter').show();
+      $('#twitterviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
+    if ($('.fb-input').val()!='') {
+      $('#fb').show();
+      $('#facebookviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
+    if ($('.ig-input').val()!='') {
+      $('#ig').show();
+      $('#instagramviewid').addClass('shown-sm').show();
+      changeLengthMedia();
+    }
     $(document).on('click', '#tambah', function (e) {
         $('.messengers').each(function () {
             if ($(this).hasClass('hidden')) {
@@ -144,7 +143,7 @@ $(document).ready(function () {
         counterLink += 1;
         $('.sortable-link').append('<li class="link-list" link-id="link-url-' + counterLink + '"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div></div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
 
-        $("#viewLink").append(' <button type="button" class="btn btn-light btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
+        $("#viewLink").append('<button type="button" class="btn btn-light btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
         //$( ".a" ).append( '<li id="link-wa"><div class="row"><div class="col-md-1 col-1 pl-md-3 pl-2"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="col-md-11 col-11"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" placeholder="Title" class="form-control" ><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control" style="margin-bottom:20px;"><button class="deletelink btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></button></div></div></div></li>');
     });
     $(document).on('click', '.deletelink', function (e) {
