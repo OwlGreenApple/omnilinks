@@ -155,15 +155,24 @@ public function link($names)
     $page->save();
     $names=$page->names;
     $idbanner=$request->idBanner;
+    $statusbanner=$request->statusBanner;
     //dd($request->all());
     for($i=0;$i<count($request->judulBanner);$i++) 
     { 
+      if ($statusbanner[$i]=="delete") 
+      {
+        $bannerde= Banner::find($request->idBanner[$i])->delete();
+        continue;
+      }
+      
       if($idbanner[$i]==""){
         $banner= new Banner(); 
       } else {
         $banner= Banner::where('id','=',$request->idBanner[$i])->first();
-      }  
-         
+      }
+
+   
+
       $user=Auth::user();
       $banner->users_id=$user->id;
       $banner->pages_id=$page->id;

@@ -262,17 +262,38 @@
     $("#wizard-picture").on('change', function() {
       readURL(this);
     });
-    $('.pictureClass').on('change',function(){
+    $(document).on('change','.pictureClass',function(){
       let inputthis=$(this).attr('id');
         function readThis(input) {
           if (input.files && input.files[0]) {
           var reader = new FileReader();
           reader.onload = function(e) {
-            $("."+inputthis+"-get").attr('src',e.target.result).fadeIn('slow');
+            $("."+inputthis+"-get").attr('src',e.target.result);
+            // $("."+inputthis+"-get").parent().show();
+            if ($(".mylides").hide()) {
+              $("."+inputthis+"-get").parent().show();
+              $("."+inputthis+"-dot").siblings().removeClass("activated");
+              $("."+inputthis+"-dot").addClass("activated");
+            }
+            
+
+            $("."+inputthis+"-get").attr("value","ada");
+            $("#"+inputthis+"-dot").show();
+             if ($(".dot").length==1) {
+              $(".dot").parent().hide();
+              $('.prev').hide();
+              $('.next').hide();
+            }
+            else{
+              $(".dot").parent().show();
+              $('.prev').show();
+              $('.next').show();
+            }
           }
           reader.readAsDataURL(input.files[0]);
         }
       }
+      //showSlides();
       readThis(this);
      });
   });
@@ -807,6 +828,7 @@
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="{{$ban->title}}" class="form-control" placeholder="Judul banner">
                                     <input type="hidden" name="idBanner[]" value="{{$ban->id}}">
+                                    <input type="hidden" name="statusBanner[]" class="statusBanner" value="">
                                     <input type="text" name="linkBanner[]" value="{{$ban->link}}" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
@@ -820,7 +842,7 @@
                                     </div>
                                   </div>
                                   
-                                  <div class="div-cell cell-btn btn-deleteBanner">
+                                  <div class="div-cell cell-btn btn-deleteBannerUpdate">
                                     <span>
                                       <i class="far fa-trash-alt"></i>
                                     </span>
@@ -832,6 +854,7 @@
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
                                     <input type="hidden" name="idBanner[]" value="">
+                                    <input type="hidden" name="statusBanner[]" class="statusBanner" value="">
                                     <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
                                     <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
                                     </select>
@@ -955,13 +978,13 @@
                       <?php $ut=0 ?>
                        @foreach($banner as $ban)
                        <?php $ut+=1; ?>
-                        <div class="mySlides fit" id="picture-id-<?=$ut?>-get">
-                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>"> 
+                        <div class="mySlides mylides fit" id="picture-id-<?=$ut?>-get">
+                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
                         </div>                       
                        @endforeach
                         @else  
-                        <div class="mySlides fit " id="picture-id-1-get">
-                          <img id="picture-1" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-1-get" >
+                        <div class="mySlides mylides fit " id="picture-id-6-get">
+                          <img id="picture-6" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-6-get" value="ada" >
                         </div>
                       @endif
                       </div>
@@ -1040,10 +1063,12 @@
 <script src="{{asset('js/biolinks.js')}}"></script>
 <noscript>Jalankan Javascript di browser anda</noscript>
 <script type="text/javascript">
-  let elhtml;
+  var elhtml;
   let idpic=6;
+  let counterBanner=0;
   $(document).ready(function() {
-      dotview();
+     // dotview();
+    
       dotsok();
       let inputtitle=$('#pagetitle');
       let inputlink=$('#pagelink');
@@ -1137,40 +1162,89 @@ $(document).on('focus','.focuslink-update',function(){
     $('#pesanAlert').removeClass('alert-danger');
     $('#pesanAlert').children().remove();
   });
+  // $(".prev").click(function(){
+  //  let sibli=$(this).siblings(".mySlides").css("display","block");
+  //  console.log($(this).siblings(".mySlides").children().val());
+  //  if (sibli.children().val()=='tidakada') {
+  //   plusSlides(1);
+  //  }
+  // });
+  // $(".next").click(function(){
+  //  let sibli=$(this).parent();
+  //  let find= sibli.find(".mySlides");
+  //  if (find.css("display")=='block') {
+  //   let findimage=find.children().val();
+  //   if (findimage=="tidakada") {
+  //      plusSlides(-1);
+  //   }
+  //  }
 
+  //  // siblings(".mySlides").css("display","block");
+  //  // if (sibli.children().val()=="tidakada") {
+  //  // 
+  //  // }
+  // });
   $("body").on("click", "#addBanner", function() {
     //tambahBanner();
     
-    idpic+=1
+    idpic+=1;
     let $el;
-    if($('.list-banner').length<=0){
-      $el = $( ".div-banner" ).append(elhtml);
-    }
+    // if($('.list-banner').length<=0){
+    //   $el = $( ".div-banner" ).append(elhtml);
+    // }
+    //  else {
+    //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
+    // }
+      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="as" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+     $el = $(".div-banner").append(elhtml);
+     loadPixelPage();
     if ($('.list-banner').length==5) {
        $(this).attr('disabled', 'disabled'); 
       }
-     else {
-      $el = $('.list-banner:first').clone().appendTo('.div-banner');
-    }
     // if($el.find("input").val("")){
     // $el.find("input").val("");  
     // }
-    $el.find("input").attr("value","");
-    $el.attr("picture-id","picture-id-"+idpic+"");
-    $el.find("input[type='file']").attr("id","input-picture-"+idpic+"");
 
-    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
-    $el.wrap('<form>').closest('form').trigger("reset");
-    $el.unwrap();
-    $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
-    $('#viewbanner').append('<div class="mySlides fit" id="picture-id-'+idpic+'-get"  style="display:none"><img id="picture-'+idpic+'" src="" class="imagesize input-picture-'+idpic+'-get"></div>');
-    let slidesi=$('.mySlides:last');
-    for (var i = 0; i < slidesi.length; i++) {
-      $('')
+    // $el.find("input").attr("value","");
+    // $el.attr("picture-id","picture-id-"+idpic+"");
+    // $el.find("input[type='file']").attr("id","input-picture-"+idpic+"");
+
+    // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+    // $el.wrap('<form>').closest('form').trigger("reset");
+    // $el.unwrap();
+    // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+    let countbanner=$('.mySlides').length;
+      // if (countbanner==1) {
+
+      // }
+    $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:none" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/water-1330252__340.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+    let slidesi=$('.mySlides');
+    let dotselementt=$('#dot-view');
+    let slidesiLength=slidesi.length-1;
+    //console.log(slidesiLength);
+      dotselementt.append('<span class="dot picture-id-'+idpic+'-dot input-picture-'+idpic+'-dot" id="input-picture-'+idpic+'-dot" onclick="currentSlide('+slidesiLength+')" style="display:none"></span>');
+       if ($(".dot").length==1) 
+    {
+      $(".dot").parent().hide();
+      $('.prev').hide();
+      $('.next').hide();
     }
   });
 
-  $("body").on("click", ".btn-deleteBanner", function() {
+  $(document).on("click",".btn-deleteBannerUpdate",function(){
+    $(this).parent().hide();
+    $(this).parent().removeClass('list-banner');
+    let hide=$(this).parent();
+    hide.find(".statusBanner").val("delete");
+    let idthis=$(this).parent().attr("picture-id");
+    $("#"+idthis+"-get").remove();
+    $("."+idthis+"-dot").remove();
+    // if () {}    
+      plusSlides(-1);
+  });
+
+
+  $(document).on("click", ".btn-deleteBanner", function() {
     if($('.list-banner').length<=1){
       elhtml = $('.div-banner').html();
     } 
@@ -1180,8 +1254,16 @@ $(document).on('focus','.focuslink-update',function(){
 
     $(this).parent().remove();
      let idthis=$(this).parent().attr("picture-id");
+
     $("#"+idthis+"-get").remove();
-    dotview();
+
+    $("."+idthis+"-dot").remove();    
+      plusSlides(-1);
+     if ($(".dot").length==1) {
+      $(".dot").parent().hide();
+      $('.prev').hide();
+      $('.next').hide();
+    }
   });
 
   $("body").on("click", ".btn-delete", function() {
@@ -1273,32 +1355,34 @@ $(document).on('focus','.focuslink-update',function(){
     }
     for (i = 0; i < slides.length; i++) 
     {
-      slides[i].style.display = "none";  
+      slides[i].style.display = "none";
+      //slides[i].value='hid';
     }
     for (i = 0; i < dots.length; i++) 
     {
       dots[i].className = dots[i].className.replace("activated","");
     }
-    slides[slideIndex-1].style.display = "block";  
+    slides[slideIndex-1].style.display = "block";
+    //slides[slideIndex-1].value='block';   
     dots[slideIndex-1].className +=" activated";
   }
   function dotsok()
   {
-    let i,dotselement,slidesid;
+    let i,a=0,dotselement,slidesid;
     dotselement=$('#dot-view');
     slidesid=$('.mySlides');
     for (i = 0; i < slidesid.length ; i++) 
     {
-      dotselement.append('<span class="dot" id="" onclick="currentSlide('+i+')"></span>');
-    } 
-  }
-  function dotview(){
-    if ($(".dot").length==1) {
-      $("#dot-view").hide();
+      a+=1;
+      dotselement.append('<span class="dot picture-id-'+a+'-dot input-picture-'+a+'-dot" id="input-picture-'+a+'-dot" onclick="currentSlide('+i+')"></span>');
+    }
+     if ($(".dot").length==1) {
+      $(".dot").parent().hide();
       $('.prev').hide();
       $('.next').hide();
-    }   
+    }
   }
+
  
     // $(document).on('click','.marker',function(){
     //      $('#backtheme').val('');
