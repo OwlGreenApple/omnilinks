@@ -36,14 +36,17 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
     Route::post('post-register', 'Auth\RegisterController@post_register');
     Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
     Route::get('/home', 'HomeController@index')->name('home');
-//pricing
-    Route::get('/pricing',function(){
-    return view('pricing.pricing');
-    });
 
+    //pricing
+    Route::get('/pricing',function(){
+      return view('pricing.pricing');
+    });
     Route::get('/checkout/{id}','OrderController@checkout');
-    Route::get('/register-payment','OrderController@register');
+    Route::post('/check-kupon','OrderController@check_kupon');
+    Route::post('/register-payment','OrderController@register');
     Route::post('/confirm-payment','OrderController@confirm_payment');
+    Route::get('/thankyou','OrderController@thankyou');
+
 
     Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/orders','OrderController@index_order');
@@ -94,11 +97,18 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
 });
 
 
-    Route::group(['middleware'=>['web','auth','thisadmin']],function(){
+Route::group(['middleware'=>['web','auth','thisadmin']],function(){
     //admin order
-    Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order',function(){
-    return view('admin.list-order.index');
+      return view('admin.list-order.index');
     });
+    Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order/confirm','OrderController@confirm_order');
+
+    //List Coupon
+    Route::get('/list-coupon','CouponController@index');
+    Route::get('/list-coupon/load-coupon','CouponController@load_coupon');
+    Route::get('/list-coupon/add','CouponController@add_coupon');
+    Route::get('/list-coupon/edit','CouponController@edit_coupon');
+    Route::get('/list-coupon/delete','CouponController@delete_coupon');
 });

@@ -110,7 +110,7 @@
   }
 </script>
 
-<div class="container">
+<div class="col-md-10 offset-md-1" style="height:100%; margin-top:30px">
   <div class="row justify-content-center">
     <div class="col-md-12">
 
@@ -129,25 +129,31 @@
       <form class="responsive">
         <table class="table responsive" id="myTable">
           <thead align="center">
-            <th action="no_order">
+            <th class="menu-mobile">
+              Details
+            </th>
+            <th class="menu-nomobile" action="no_order">
               No Order
             </th>
-            <th action="package">
+            <th class="menu-nomobile" action="package">
               Package
             </th>
-            <th  action="total">
-              Total
+            <th class="menu-nomobile" action="harga">
+              Harga
             </th>
-            <th  action="discount">
+            <th class="menu-nomobile" action="discount">
               Discount
             </th>
-            <th  action="created_at">
+            <th class="menu-nomobile" action="grand_total">
+              Total
+            </th>
+            <th class="menu-nomobile" action="created_at">
               Date
             </th>
-            <th >
+            <th class="menu-nomobile">
               Bukti Bayar
             </th>
-            <th  action="keterangan">
+            <th class="menu-nomobile" action="keterangan">
               Keterangan
             </th>
             <th class="header" action="status">
@@ -287,6 +293,12 @@
 
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".view-details", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-'+id).toggleClass('d-none');
+  });
+  
   $( "body" ).on( "click", ".btn-search", function() {
     currentPage = '';
     refresh_page();

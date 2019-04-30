@@ -15,14 +15,17 @@
     <td data-label="Discount">
       Rp. <?php echo number_format($order->discount) ?>
     </td>
+    <td data-label="Discount">
+      Rp. <?php echo number_format($order->grand_total) ?>
+    </td>
     <td data-label="Date">
       {{$order->created_at}}
     </td>
     <td data-label="Bukti Bayar" align="center">
-      @if($order->bukti_bayar=='' or $order->bukti_bayar==null)
+      @if($order->buktibayar=='' or $order->buktibayar==null)
         -
       @else
-        <a class="popup-newWindow" href="<?php echo  Storage::disk('public')->url('app/'.$order->buktibayar) ?>">
+        <a class="popup-newWindow" href="<?php echo Storage::disk('public')->url('app/'.$order->buktibayar) ?>">
           View
         </a>
       @endif
@@ -31,7 +34,7 @@
       @if($order->keterangan=='' or $order->keterangan==null)
         -
       @else
-        $order->keterangan
+        {{$order->keterangan}}
       @endif
     </td>
     <td data-label="Status">
