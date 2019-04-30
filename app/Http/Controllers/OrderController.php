@@ -18,52 +18,26 @@ use Carbon, Crypt;
 use Auth,Mail,Validator,Storage,DateTime;
 
 class OrderController extends Controller
-{
-    public function register(Request $request) 
-    {
-        return view('auth.register')->with(array(
-    			"price"=>$request->price,
-    			"namapaket"=>$request->namapaket,
-    		));
+{   
+    public function cekharga($namapaket, $price){
+      $paket = array(
+        'Basic Monthly' => 197000,
+        'Elite Monthly' => 297000,
+        'Basic Yearly' => 660000,
+        'Elite Yearly' => 900000,
+      );
+
+      if(isset($paket[$namapaket])){
+        if($price!=$paket[$namapaket]){
+          return false; 
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
     }
 
-    public function index_order()
-    {
-      return view('order.index');
-    }
-
-    public function checkout($id){
-      return view('pricing.checkout')->with(array(
-                'id'=>$id,    
-              ));
-    }
-
-    public function load_order(Request $request)
-    {
-      $orders = Order::where('user_id',Auth::user()->id)
-                  ->orderBy('created_at','descend')
-                  ->paginate(15);
-                  //->get();
-      $arr['view'] = (string) view('order.content')
-                        ->with('orders',$orders);
-      $arr['pager'] = (string) view('order.pagination')
-                        ->with('orders',$orders); 
-      return $arr;
-    }
-
-    public function load_list_order(Request $request)
-    {
-      $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
-                  ->select('orders.*','users.email')
-                  ->orderBy('created_at','descend')
-                  ->get();
-      $arr['view'] = (string) view('admin.list-order.content')
-                        ->with('orders',$orders);
-      /*$arr['pager'] = (string) view('admin.list-order.pagination')
-                        ->with('orders',$orders); */
-      return $arr;
-    }
-    
     public function cek_kupon($kodekupon,$harga,$idpaket){
       $arr['status'] = 'success';
       $arr['message'] = '';
@@ -119,6 +93,69 @@ class OrderController extends Controller
       return $arr;
     }
 
+    public function register(Request $request) {
+      $stat = $this->cekharga($request->namapaket,$request->price);
+
+      if($stat==false){
+        return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      }
+
+      $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
+
+      if($arr['status']=='error'){
+        return redirect("checkout/1")->with("error", $arr['message']);
+      }
+
+      return view('auth.register')->with(array(
+    		"price"=>$request->price,
+    		"namapaket"=>$request->namapaket,
+        "coupon_code"=>$request->kupon,
+        "idpaket" => $request->idpaket,
+    	));
+    }
+
+    public function index_order()
+    {
+      return view('order.index');
+    }
+
+    public function thankyou()
+    {
+      return view('pricing.thankyou');
+    }
+
+    public function checkout($id){
+      return view('pricing.checkout')->with(array(
+                'id'=>$id,    
+              ));
+    }
+
+    public function load_order(Request $request)
+    {
+      $orders = Order::where('user_id',Auth::user()->id)
+                  ->orderBy('created_at','descend')
+                  ->paginate(15);
+                  //->get();
+      $arr['view'] = (string) view('order.content')
+                        ->with('orders',$orders);
+      $arr['pager'] = (string) view('order.pagination')
+                        ->with('orders',$orders); 
+      return $arr;
+    }
+
+    public function load_list_order(Request $request)
+    {
+      $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
+                  ->select('orders.*','users.email')
+                  ->orderBy('created_at','descend')
+                  ->get();
+      $arr['view'] = (string) view('admin.list-order.content')
+                        ->with('orders',$orders);
+      /*$arr['pager'] = (string) view('admin.list-order.pagination')
+                        ->with('orders',$orders); */
+      return $arr;
+    }
+    
     public function check_kupon(Request $request){
       $arr = $this->cek_kupon($request->kupon,$request->harga,$request->idpaket);
       return $arr;
@@ -157,36 +194,64 @@ class OrderController extends Controller
     }
 
     public function confirm_payment(Request $request){
+      $stat = $this->cekharga($request->namapaket,$request->price);
+
+      if($stat==false){
+        return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      }
+
         $user = Auth::user();
+
+        $diskon = 0;
+        $total = $request->price;
+        $kuponid = null;
+        if($request->kupon!=''){
+          $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
+
+          if($arr['status']=='error'){
+            return redirect("checkout/1")->with("error", $arr['message']);
+          } else {
+            $total = $arr['total'];
+            $diskon = $arr['diskon'];
+            
+            if($arr['coupon']!=null){
+              $kuponid = $arr['coupon']->id;
+            }
+          }
+        }
+
         $dt = Carbon::now();
         $order = new Order;
-        $str = 'OMNILI'.$dt->format('ymdHi');
+        $str = 'OML'.$dt->format('ymdHi');
         $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
         $order->no_order = $order_number;
         $order->user_id = $user->id;
         $order->package =$request->namapaket;
         $order->jmlpoin=0;
         //$order->jmlpoin = 0;
-        $order->coupon_id=0;
+        $order->coupon_id = $kuponid;
         $order->total = $request->price;
-        $order->discount = 0;
-        $order->grand_total = $request->price;
+        $order->discount = $diskon;
+        $order->grand_total = $total;
         $order->status = 0;
         $order->buktibayar = "";
         $order->keterangan = "";
         $order->save();
-        //mail order to user 
-        $emaildata = [
-            'order' => $order,
-            'user' => $user,
-            'nama_paket' => $request->namapaket,
-            'no_order' => $order_number,
-        ];
-        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-          $message->from('no-reply@omnilinkz.com', 'Omnilinkz');
-          $message->to($user->email);
-          $message->subject('[Omnilinkz] Order Nomor '.$order_number);
-        });
+
+        if($order->grand_total!=0){
+          //mail order to user 
+          $emaildata = [
+              'order' => $order,
+              'user' => $user,
+              'nama_paket' => $request->namapaket,
+              'no_order' => $order_number,
+          ];
+          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+            $message->from('no-reply@omnilinkz.com', 'Omnilinkz');
+            $message->to($user->email);
+            $message->subject('[Omnilinkz] Order Nomor '.$order_number);
+          });
+        }
     
         return view('pricing.thankyou');
     }

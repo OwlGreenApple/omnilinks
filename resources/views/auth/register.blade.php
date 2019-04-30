@@ -12,6 +12,9 @@
               @csrf
               <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
               <input type="hidden" name="namapaket" value="<?php if (isset ($namapaket)) {echo $namapaket;} ?>">
+              <input type="hidden" name="kupon" value="<?php if (isset($coupon_code)) {echo $coupon_code;} ?>">
+              <input type="hidden" name="idpaket" value="<?php if (isset($idpaket)) {echo $idpaket;} ?>">
+
               <div class="form-group row">
                 @if (session('error') )
                 <div class="col-md-12 alert alert-danger">
@@ -74,11 +77,11 @@
                     Gender:&nbsp;
                   </label>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="1" checked>
                     <label class="form-check-label" for="inlineRadio1">Male</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="0">
                     <label class="form-check-label" for="inlineRadio2">Female</label>
                   </div>
                 </div>
@@ -86,7 +89,7 @@
               <div class="form-group row">
                 <div class="col-md-12">
                   <label for="agree-term" class="label-agree-term">
-                    <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" />
+                    <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" required />
                     I agree with
                     <a href="{{url('statics/terms-conditions')}}" class="term-service">
                       Terms and Conditions
@@ -99,8 +102,11 @@
                   <button type="submit" class="btn btn-primary bsub btn-block">
                     REGISTER
                   </button>
-                  <hr class="own">
-                  <h3 class="have">Sudah Punya Akun?&nbsp;<a href="{{ __('login')}}">Masuk Disini</a></h3>
+
+                  <?php if(!isset($price)) { ?>
+                    <hr class="own">
+                    <h3 class="have">Sudah Punya Akun?&nbsp;<a href="{{ __('login')}}">Masuk Disini</a></h3>
+                  <?php } ?>
                 </div>
               </div>
             </form>

@@ -5,11 +5,12 @@
   var table;
 
   $(document).ready(function() {
-    // table = $('#myTable').DataTable({
-    //   destroy: true,
-    //   "order": [],
-    // });
-    // $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
+    table = $('#myTable').DataTable({
+                responsive : true,
+                destroy: true,
+                "order": [],
+            });
+    $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
 
     refresh_page();
 
@@ -19,6 +20,7 @@
   });
 
   function refresh_page(){
+    table.destroy();
     $.ajax({
       type : 'GET',
       url : "<?php echo url('/list-order/load-order') ?>",
@@ -35,10 +37,11 @@
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
         
-        // table = $('#myTable').DataTable({
-        //         destroy: true,
-        //         "order": [],
-        //     });
+        table = $('#myTable').DataTable({
+                  responsive : true,
+                  destroy: true,
+                  "order": [],
+                });
 
       }
     });
@@ -129,31 +132,34 @@
       <form>
         <table class="table" id="myTable">
           <thead align="center">
-            <th class="header" action="no_order">
+            <th data-priority="1" action="no_order all">
               No Order
             </th>
-            <th class="header" action="email">
+            <th data-priority="2" action="email all">
               Email
             </th>
-            <th class="header" action="package">
+            <th action="package none">
               Package
             </th>
-            <th class="header" action="total">
-              Total
+            <th action="total all">
+              Harga
             </th>
-            <th class="header" action="discount">
+            <th action="discount all">
               Discount
             </th>
-            <th class="header" action="created_at">
+            <th action="grand_total all">
+              Total
+            </th>
+            <th action="created_at none">
               Date
             </th>
-            <th class="header">
+            <th class="all">
               Bukti Bayar
             </th>
-            <th class="header" action="keterangan">
+            <th action="keterangan none">
               Keterangan
             </th>
-            <th class="header" action="status">
+            <th data-priority="3" action="status all">
               Status
             </th>
           </thead>
