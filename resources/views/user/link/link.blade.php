@@ -20,7 +20,7 @@
 </head>
 
 @if(is_null($pages->template))
-<body style=" color:#fff; {{$pages->color_picker}}" class="a {{$pages->rounded}} {{$pages->outline}}">
+<body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a {{$pages->rounded}} {{$pages->outline}}">
 @else
 <body class="{{$pages->template}} {{$pages->rounded}} {{$pages->outline}}" >
 @endif
