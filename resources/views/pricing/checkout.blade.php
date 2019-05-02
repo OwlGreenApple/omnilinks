@@ -75,16 +75,16 @@
                 <div class="col-12 col-md-12">
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
                   <select class="form-control" name="idpaket" id="select-auto-manage">
-                    <option class="" data-price="197000" data-paket="Basic Monthly" value="{{$id}}" <?php if ($id==1) echo "selected" ; ?>>
+                    <option class="" data-price="197000" data-paket="Basic Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
                       Basic Monthly - IDR 197.000,-/mo
                     </option>
-                    <option class="" data-price="297000" data-paket="Elite Monthly" value="{{$id}}" <?php if ($id==3) echo "selected" ; ?>>
+                    <option class="" data-price="297000" data-paket="Elite Monthly" value="3" <?php if ($id==3) echo "selected" ; ?>>
                       Elite Monthly - IDR 297.000,-/mo
                     </option>
-                    <option class="" data-price="660000" data-paket="Basic Yearly" value="{{$id}}" <?php if ($id==2) echo "selected" ; ?>>
+                    <option class="" data-price="660000" data-paket="Basic Yearly" value="2" <?php if ($id==2) echo "selected" ; ?>>
                       Basic Yearly - IDR 660.000,-/year
                     </option>
-                    <option class="" data-price="900000" data-paket="Elite Yearly" value="{{$id}}" <?php if ($id==4) echo "selected" ; ?>>
+                    <option class="" data-price="900000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
                       Elite Yearly - IDR 900.000,-/year
                     </option>
                   </select>

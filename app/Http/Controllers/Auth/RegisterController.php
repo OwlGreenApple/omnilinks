@@ -14,7 +14,7 @@ use App\Mail\Confirm_Email;
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
 
-use Carbon, Crypt, Mail;
+use Carbon, Crypt, Mail, DateTime;
 
 class RegisterController extends Controller
 {
@@ -71,7 +71,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {       
-       
+        $ordercont = new OrderController;
+
         $user = User::create([
             'email' => $data['email'],
             'name' => $data['name'],
@@ -81,10 +82,7 @@ class RegisterController extends Controller
             'membership' => 'free',
         ]);
 
-        if ($data['price']<>"") 
-        {
-            $ordercont = new OrderController;
-
+        if ($data['price']<>"") {
             $diskon = 0;
             $total = $data['price'];
             $kuponid = null;
@@ -133,8 +131,38 @@ class RegisterController extends Controller
                 $message->to($user->email);
                 $message->subject('[Omnilink] Order Nomor '.$order_number);
               });
+            } else {
+              $order->status = 2;
+              $order->save();
+
+              if(substr($order->package,0,5) === "Basic"){
+                if($order->package=='Basic Monthly'){
+                  $valid = $ordercont->add_time($user,"+1 months");
+                } else if($order->package=='Basic Yearly'){
+                  $valid = $ordercont->add_time($user,"+12 months");
+                }
+
+                $user->valid_until = $valid;
+                $user->membership = 'basic';
+
+              } else if(substr($order->package,0,5) === "Elite"){
+                if($order->package=='Elite Monthly'){
+                  $valid = $ordercont->add_time($user,"+1 months");
+                } else if($order->package=='Elite Yearly'){
+                  $valid = $ordercont->add_time($user,"+12 months");
+                }
+
+                $user->valid_until = $valid;
+                $user->membership = 'elite';
+              }
+
+              $user->save();
             }
+          } else {
+            $user->valid_until = new DateTime('+7 days');
+            $user->save();
           }
+
           return $user;
 
     }

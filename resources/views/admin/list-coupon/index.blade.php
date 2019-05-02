@@ -150,7 +150,7 @@
   }
 </script>
 
-<div class="container" style="height:100%; margin-top:30px">
+<div class="container" style="height:100%; margin-top:30px; margin-bottom:120px;">
   <div class="row justify-content-center">
     <div class="col-md-11">
 

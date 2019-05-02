@@ -251,6 +251,32 @@ class OrderController extends Controller
             $message->to($user->email);
             $message->subject('[Omnilinkz] Order Nomor '.$order_number);
           });
+        } else {
+          $order->status = 2;
+          $order->save();
+
+          if(substr($order->package,0,5) === "Basic"){
+            if($order->package=='Basic Monthly'){
+              $valid = $this->add_time($user,"+1 months");
+            } else if($order->package=='Basic Yearly'){
+              $valid = $this->add_time($user,"+12 months");
+            }
+
+            $user->valid_until = $valid;
+            $user->membership = 'basic';
+
+          } else if(substr($order->package,0,5) === "Elite"){
+            if($order->package=='Elite Monthly'){
+               $valid = $this->add_time($user,"+1 months");
+            } else if($order->package=='Elite Yearly'){
+              $valid = $this->add_time($user,"+12 months");
+            }
+
+            $user->valid_until = $valid;
+            $user->membership = 'elite';
+          }
+
+          $user->save();
         }
     
         return view('pricing.thankyou');
@@ -270,6 +296,30 @@ class OrderController extends Controller
           $valid = new DateTime (date("Y-m-d", strtotime($time, $uservalid)));
         }
       }
+
+      /*if(is_null($user->valid_until)){
+        $valid = new DateTime($time);
+      } else {
+        $now = new DateTime();
+
+        if(is_a($user->valid_until, 'DateTime')){
+          $uservalid = $user->valid_until;
+        } else {
+          $uservalid = new DateTime($user->valid_until);  
+        }
+
+        if($uservalid<$now){
+          $valid = new DateTime($time);
+        } else {
+          if(is_a($user->valid_until, 'DateTime')){
+            //modify nya masih belum jalan
+            $valid = $user->valid_until->modify($time);
+          } else {
+            $uservalid = strtotime($user->valid_until);
+            $valid = new DateTime (date("Y-m-d", strtotime($time, $uservalid)));
+          }
+        }
+      }*/
 
       return $valid;
     }

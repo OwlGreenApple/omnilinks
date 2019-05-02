@@ -113,7 +113,7 @@
   }
 </script>
 
-<div class="col-md-12" style="height:100%; margin-top:30px">
+<div class="col-md-12" style="height:100%; margin-top:30px;margin-bottom: 120px;">
   <div class="row justify-content-center">
     <div class="col-md-11">
 

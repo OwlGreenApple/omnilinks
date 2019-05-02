@@ -1,5 +1,5 @@
 <center>
-<b>Terimakasih atas registrasinya di Omnilinks <br>
+Terimakasih atas registrasinya di Omnilinks <br>
 </center>
 <br>
 Silahkan klik link dibawah untuk mengkonfirmasi registrasi Anda <br>

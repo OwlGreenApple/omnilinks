@@ -85,6 +85,19 @@
                     Halo, {{ Auth::user()->username }} <span class="caret"></span>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @if(Auth::user()->is_admin==1)
+                      <a class="dropdown-item <?php if(Request::is('list-order')) echo 'active' ?>" href="{{ url('list-order') }}">
+                        List Order
+                      </a>
+                      <a class="dropdown-item <?php if(Request::is('list-coupon')) echo 'active' ?>" href="{{ url('list-coupon') }}">
+                        List Kupon
+                      </a>
+                    @else 
+                      <a class="dropdown-item <?php if(Request::is('orders')) echo 'active' ?>" href="{{ url('orders') }}">
+                        Order
+                      </a>
+                    @endif
+
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
                       Log Out

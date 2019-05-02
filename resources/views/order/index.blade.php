@@ -156,7 +156,7 @@
             <th class="menu-nomobile" action="keterangan">
               Keterangan
             </th>
-            <th class="header" action="status">
+            <th class="header" action="status" style="width:145px">
               Status
             </th>
           </thead>
