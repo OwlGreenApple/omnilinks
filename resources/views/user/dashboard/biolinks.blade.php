@@ -8,7 +8,7 @@
   .form-control{
     border-radius: unset;
   }
-   .messengers.links-num-2 .link 
+  .messengers.links-num-2 .link 
   {
     max-width: 49%; 
   }
@@ -16,7 +16,7 @@
   {
     max-width: 99%; 
   }
-   .messengers.links-num-3 .link 
+  .messengers.links-num-3 .link 
   {
     max-width: 32.33333%; 
   }
@@ -242,22 +242,32 @@
     });
     $(".sortable-sosmed").disableSelection();
 
-    $('#colorpicker').farbtastic('#colour');
-    $('#colorpicker').farbtastic('#phonecolor');
-    //$.farbtastic('#colorpicker','.screen');
-    //$('#colorpicker').farbtastic('.screen');
-    function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
-
-        $('#viewpicture').show();
-      }
-      reader.readAsDataURL(input.files[0]);
+    function onColorChange(color) {
+      // dosomeStuff();
+      console.log(color);
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen");
+      $("#phonecolor").css("background-color",color);
+      $("#backtheme").val();
+      $("#color").val(color);
     }
-  }
+    $('#colorpicker').farbtastic('#color');
+    var picker = $.farbtastic('#colorpicker');
+    // picker.setColor("#b6b6ff");
+    picker.linkTo(onColorChange);
+    
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+          $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
+
+          $('#viewpicture').show();
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
 
     $("#wizard-picture").on('change', function() {
       readURL(this);
@@ -891,7 +901,8 @@
                       </div>
                     </div>
 
-                    <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">
+                    <input type="text" name="modeBackground" id="modeBackground" hidden="" readonly="true"  value="gradient">
+                    <input type="text" name="backtheme" id="backtheme" hidden="" readonly="true"  value="colorgradient1">
                     <p class="blue-txt">
                       Theme
                     </p>
@@ -928,7 +939,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="references">
                           <div align="center">
                             <div id="colorpicker"></div>
-                            <input type="text" id="colour" name="colour" value="#123456" readonly="">
+                            <input type="text" id="color" name="color" value="#123456">
                           </div>
                         </div>
                       </div>
@@ -1163,6 +1174,27 @@ $(document).on('focus','.focuslink-update',function(){
         $("#poweredview").children().hide(); 
       }
     });
+    $(document).on('click', '#gradient', function() {
+      $('#modeBackground').val('gradient');
+      // $('#backtheme').val('colorgradient1');
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen "+$('#backtheme').val());
+    });
+    $(document).on('click', '#solid', function() {
+      $('#modeBackground').val('solid');
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen");
+      $("#phonecolor").css("background-color",$("#color").val());
+      // $("#backtheme").val();
+    });
+    <?php if (!is_null($pages->color_picker)) { ?>
+      $('#color').val("<?php echo $pages->color_picker; ?>");
+      $("#solid").click();
+    <?php } ?>
+    <?php if (!is_null($pages->template)) { ?>
+      $('#backtheme').val("<?php echo $pages->template; ?>");
+      $("#gradient").click();
+    <?php } ?>
   });
 
   // Add the following code if you want the name of the file appear on select
@@ -1357,10 +1389,6 @@ $(document).on('focus','.focuslink-update',function(){
     $('#editidpixel').val(editidpixel);
   });
 
-  $(document).on('click', '#solid', function() {
-    $('#backtheme').val('');
-  });
-
   let slideIndex = 1;
   showSlides(slideIndex);
 
@@ -1416,13 +1444,9 @@ $(document).on('focus','.focuslink-update',function(){
     // $(document).on('click','.marker',function(){
     //      $('#backtheme').val('');
     // });
-    $(document).on('click', '#gradient', function() {
-      $('#backtheme').val('colorgradient1');
-        //$('.mobile1').html('<div class="screen colorgradient1" id="phonecolor"></div>');
-      });
     //  $('#powered').prop('disabled','disabled');
     // $(document).bind('contextmenu',function(e){
     //   e.preventDefault();
     // });
-  </script>
-  @endsection
+</script>
+@endsection

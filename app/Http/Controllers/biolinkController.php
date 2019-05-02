@@ -114,15 +114,16 @@ class BiolinkController extends Controller
       'links'=>$links,
     ]);  
   }
-public function link($names)
- {
-  $page=Page::where('names',$names)  
+  
+  public function link($names)
+  {
+    $page=Page::where('names',$names)  
               ->first();
-  return view('user.link.link')->with('pages',$page);
- }
+    return view('user.link.link')->with('pages',$page);
+  }
 
- public function pixelpage()
- {
+  public function pixelpage()
+  {
     $pixel=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
                   ->get();
@@ -130,7 +131,7 @@ public function link($names)
     $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
                   ->with('data_pixel',$pixel);
     return $arr;
- }
+  }
 
   public function savetemp(Request $request)
   {
@@ -147,13 +148,13 @@ public function link($names)
 
     $page->telpon_utama=$request->nomor;
 
-    if ($request->backtheme=="") 
+    // if ($request->backtheme=="") 
+    if ($request->modeBackground=="solid") 
     {
        $page->template=null;
-       $colour="background-color:".$request->colour;
-       $page->color_picker=$colour;
+       $page->color_picker=$request->color;
     }
-    else
+    else if ($request->modeBackground=="gradient") 
     {
       $page->color_picker=null;
       $page->template=$request->backtheme;  
@@ -211,6 +212,7 @@ public function link($names)
     $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
     return $arr;
   }
+  
   public function addBanner()
   {
     $pixels=Pixel::where('users_id',Auth::user()->id)
