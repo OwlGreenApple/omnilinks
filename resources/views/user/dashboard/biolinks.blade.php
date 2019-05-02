@@ -22,6 +22,7 @@
   }
 </style>
 <script type="text/javascript">
+  var picker;
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
@@ -205,6 +206,14 @@
     refreshpixel();
     refreshwa();
 
+    <?php if($pages->is_rounded) {?>
+      $(".mobile1").addClass("roundedview");
+    <?php } ?>
+
+    <?php if($pages->is_outlined) {?>
+      $(".mobile1").addClass("outlinedview");
+    <?php } ?>
+
     $('.infooter').remove();
 
     $(".sortable-msg").sortable({
@@ -244,7 +253,7 @@
 
     function onColorChange(color) {
       // dosomeStuff();
-      console.log(color);
+      // console.log(color);
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen");
       $("#phonecolor").css("background-color",color);
@@ -252,8 +261,11 @@
       $("#color").val(color);
     }
     $('#colorpicker').farbtastic('#color');
-    var picker = $.farbtastic('#colorpicker');
+    picker = $.farbtastic('#colorpicker');
     // picker.setColor("#b6b6ff");
+    $("#color").on('keyup', function() {
+      picker.setColor($(this).val());
+    });
     picker.linkTo(onColorChange);
     
     function readURL(input) {
@@ -895,13 +907,18 @@
                       Theme
                     </p>
                     <label class="switch">
-                      <input type="checkbox" name="rounded" class="rounded" value="rounded-p" <?php if($pages->rounded!=null) echo 'checked'?>>
+                      <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
                       <span class="slider round"></span>
-                    </label>&nbsp;Rounded buttons<br>
+                    </label>&nbsp;Rounded buttons
+                    &nbsp;&nbsp;
+                    <a href="" class="nav-link">Custom Color</a>
+                    <br>
                     <label class="switch">
-                      <input type="checkbox" name="outlined" class="outlined" value="outlined" <?php if($pages->outline!=null) echo 'checked'?>>
+                      <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
                       <span class="slider round"></span>
                     </label>&nbsp;Outlined buttons
+                    &nbsp;&nbsp;
+                    <a href="" class="nav-link">Custom Color</a>
                     <div class="as">
 
                       <!-- Bootstrap CSS -->
@@ -1135,19 +1152,25 @@ $(document).on('focus','.focuslink-update',function(){
     }
   });
 });
+
+
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("outlinedview");
+        $(this).val(1);
       } else if ($(this).prop("checked") == false) {
         $(".mobile1").removeClass("outlinedview");
+        $(this).val(0);
       }
     });
 
     $('.rounded').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("roundedview");
+        $(this).val(1);
       } else if ($(this).prop("checked") == false) {
         $(".mobile1").removeClass("roundedview");
+        $(this).val(0);
       }
     });
 

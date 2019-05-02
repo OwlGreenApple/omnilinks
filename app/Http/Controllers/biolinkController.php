@@ -148,6 +148,8 @@ class BiolinkController extends Controller
 
     $page->rounded=$request->rounded;
     $page->outline=$request->outlined;
+    $page->is_rounded=$request->rounded;
+    $page->is_outlined=$request->outlined;
     
     if($request->powered=='powered'){
       $page->powered=1;
