@@ -12,7 +12,7 @@
         <div class="card cardfor">
           <h5 class="Daftar-Disini">Reset Password</h5>
           <div class="card-body">
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST"  id="signup-form" class="signup-form" action="{{ route('password.email') }}">
               @csrf
               <div class="form-group row">
                 <div class="col-md-12 col-12">

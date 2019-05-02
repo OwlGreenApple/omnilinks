@@ -8,7 +8,7 @@
   .form-control{
     border-radius: unset;
   }
-   .messengers.links-num-2 .link 
+  .messengers.links-num-2 .link 
   {
     max-width: 49%; 
   }
@@ -16,12 +16,13 @@
   {
     max-width: 99%; 
   }
-   .messengers.links-num-3 .link 
+  .messengers.links-num-3 .link 
   {
     max-width: 32.33333%; 
   }
 </style>
 <script type="text/javascript">
+  var picker;
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
@@ -35,10 +36,10 @@
       url: "<?php echo url('/save-template');?>",
       success: function(data) {
                 //var data=jQuery.parseJSON(result);
-                if (data.status == "success") {
-                  $("#pesan").html(data.message);
-                  $("#pesan").addClass("alert-success");
-                  $("#pesan").show();
+        if (data.status == "success") {
+            $("#pesan").html(data.message);
+            $("#pesan").addClass("alert-success");
+            $("#pesan").show();
                 }
               }
             });
@@ -205,6 +206,14 @@
     refreshpixel();
     refreshwa();
 
+    <?php if($pages->is_rounded) {?>
+      $(".mobile1").addClass("roundedview");
+    <?php } ?>
+
+    <?php if($pages->is_outlined) {?>
+      $(".mobile1").addClass("outlinedview");
+    <?php } ?>
+
     $('.infooter').remove();
 
     $(".sortable-msg").sortable({
@@ -242,22 +251,35 @@
     });
     $(".sortable-sosmed").disableSelection();
 
-    $('#colorpicker').farbtastic('#colour');
-    $('#colorpicker').farbtastic('#phonecolor');
-    //$.farbtastic('#colorpicker','.screen');
-    //$('#colorpicker').farbtastic('.screen');
-    function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
-
-        $('#viewpicture').show();
-      }
-      reader.readAsDataURL(input.files[0]);
+    function onColorChange(color) {
+      // dosomeStuff();
+      // console.log(color);
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen");
+      $("#phonecolor").css("background-color",color);
+      $("#backtheme").val();
+      $("#color").val(color);
     }
-  }
+    $('#colorpicker').farbtastic('#color');
+    picker = $.farbtastic('#colorpicker');
+    // picker.setColor("#b6b6ff");
+    $("#color").on('keyup', function() {
+      picker.setColor($(this).val());
+    });
+    picker.linkTo(onColorChange);
+    
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+          $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
+
+          $('#viewpicture').show();
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
 
     $("#wizard-picture").on('change', function() {
       readURL(this);
@@ -323,16 +345,19 @@
                   Link
                 </a>
               </li>
+              @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
               <li class="nav-item">
                 <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
                   WA Link Creator
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
                   Pixel
                 </a>
               </li>
+              @endif
               <li class="nav-item">
                 <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
                   Tampilan
@@ -488,7 +513,7 @@
                                 <div class="col-md-12 col-12 pr-0 pl-0">
                                   <div class="input-stack">
                                     <input type="hidden" name="idlink[]" value="{{$link->id}}">
-
+                                    <input type="hidden" name="deletelink[]" class="delete-link" value="">
                                     <input type="text" name="title[]" value="{{$link->title}}" id="title-<?=$utl?>-view-update" placeholder="Title" class="form-control focuslink-update">
                                     <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
                                   </div>
@@ -503,7 +528,8 @@
                             </div>
                           </li>
                         @endforeach
-                      @else 
+                      @else
+
                         <li class="link-list" link-id="link-url-1">
                           <div class="div-table mb-4">
                             <div class="div-cell">
@@ -516,6 +542,7 @@
                               <div class="col-md-12 col-12 pr-0 pl-0">
                                 <div class="input-stack">
                                   <input type="hidden" name="idlink[]" value="new">
+                                  <input type="hidden" name="deletelink[]" class="deletelink" value="">
                                   <input type="text" name="title[]" value="" id="title-1-view" placeholder="Title" class="form-control focuslink">
                                   <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
                                 </div>
@@ -687,7 +714,7 @@
                   </div>
                 </form>
               </div>
-
+      @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
               <!-- TAB 2 -->
               <div role="tabpanel" class="tab-pane fade " id="walink">
                 <form id="savewalink" method="post">
@@ -773,7 +800,7 @@
                   <div id="content"></div>
                 </div>
               </div>
-
+              @endif
               <!-- TAB 4 -->
               <div role="tabpanel" class="tab-pane fade in active show" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
@@ -811,13 +838,16 @@
                           @endif
                         </div>
                         <div class="col-md-12 mt-4">
+                       @if(Auth::user()->membership=='elite') 
                           <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner">
                             <i class="fas fa-plus"></i>
                           </button>
+                      @endif
+                       @if(Auth::user()->membership!='free')
                           <span class="blue-txt">
                             Banner Promo
                           </span>
-
+                        @endif
                           <div class="contentBanner mb-5">
                             <div class="c div-banner">
                               @if($banner->count())
@@ -841,16 +871,18 @@
                                       </label>
                                     </div>
                                   </div>
-                                  
+                                @if(Auth::user()->membership=='elite')
                                   <div class="div-cell cell-btn btn-deleteBannerUpdate">
                                     <span>
                                       <i class="far fa-trash-alt"></i>
                                     </span>
-                                  </div>  
+                                  </div>
+                                @endif  
                                 </div>
                                 @endforeach
-                              @else 
-                                <div class="div-table list-banner mb-4" picture-id="picture-id-1">
+                              @else
+                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                                <div class="div-table list-banner mb-4" picture-id="picture-id-6">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
                                     <input type="hidden" name="idBanner[]" value="">
@@ -865,12 +897,14 @@
                                       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
                                   </div>
-                                  
+                          @endif
+                         @if(Auth::user()->membership=='elite')
                                   <div class="div-cell cell-btn btn-deleteBanner">
                                     <span>
                                       <i class="far fa-trash-alt"></i>
                                     </span>
-                                  </div>  
+                                  </div>
+                                @endif    
                                 </div>
                               @endif
                             </div>
@@ -879,18 +913,24 @@
                       </div>
                     </div>
 
-                    <input type="text" name="backtheme" id="backtheme" readonly="true" hidden="" value="colorgradient1">
+                    <input type="text" name="modeBackground" id="modeBackground" hidden="" readonly="true"  value="gradient">
+                    <input type="text" name="backtheme" id="backtheme" hidden="" readonly="true"  value="colorgradient1">
                     <p class="blue-txt">
                       Theme
                     </p>
                     <label class="switch">
-                      <input type="checkbox" name="rounded" class="rounded" value="rounded-p" <?php if($pages->rounded!=null) echo 'checked'?>>
+                      <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
                       <span class="slider round"></span>
-                    </label>&nbsp;Rounded buttons<br>
+                    </label>&nbsp;Rounded buttons
+                    &nbsp;&nbsp;
+                    <a href="" class="nav-link">Custom Color</a>
+                    <br>
                     <label class="switch">
-                      <input type="checkbox" name="outlined" class="outlined" value="outlined" <?php if($pages->outline!=null) echo 'checked'?>>
+                      <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
                       <span class="slider round"></span>
                     </label>&nbsp;Outlined buttons
+                    &nbsp;&nbsp;
+                    <a href="" class="nav-link">Custom Color</a>
                     <div class="as">
 
                       <!-- Bootstrap CSS -->
@@ -916,7 +956,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="references">
                           <div align="center">
                             <div id="colorpicker"></div>
-                            <input type="text" id="colour" name="colour" value="#123456" readonly="">
+                            <input type="text" id="color" name="color" value="#123456">
                           </div>
                         </div>
                       </div>
@@ -982,15 +1022,18 @@
                           <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
                         </div>                       
                        @endforeach
-                        @else  
+                        @else
+                        @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                         <div class="mySlides mylides fit " id="picture-id-6-get">
                           <img id="picture-6" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-6-get" value="ada" >
                         </div>
+                        @endif
                       @endif
                       </div>
+                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                       <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
+                    @endif
                     </div>
                     <br>
 
@@ -1124,19 +1167,25 @@ $(document).on('focus','.focuslink-update',function(){
     }
   });
 });
+
+
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("outlinedview");
+        $(this).val(1);
       } else if ($(this).prop("checked") == false) {
         $(".mobile1").removeClass("outlinedview");
+        $(this).val(0);
       }
     });
 
     $('.rounded').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("roundedview");
+        $(this).val(1);
       } else if ($(this).prop("checked") == false) {
         $(".mobile1").removeClass("roundedview");
+        $(this).val(0);
       }
     });
 
@@ -1148,6 +1197,27 @@ $(document).on('focus','.focuslink-update',function(){
         $("#poweredview").children().hide(); 
       }
     });
+    $(document).on('click', '#gradient', function() {
+      $('#modeBackground').val('gradient');
+      // $('#backtheme').val('colorgradient1');
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen "+$('#backtheme').val());
+    });
+    $(document).on('click', '#solid', function() {
+      $('#modeBackground').val('solid');
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen");
+      $("#phonecolor").css("background-color",$("#color").val());
+      // $("#backtheme").val();
+    });
+    <?php if (!is_null($pages->color_picker)) { ?>
+      $('#color').val("<?php echo $pages->color_picker; ?>");
+      $("#solid").click();
+    <?php } ?>
+    <?php if (!is_null($pages->template)) { ?>
+      $('#backtheme').val("<?php echo $pages->template; ?>");
+      $("#gradient").click();
+    <?php } ?>
   });
 
   // Add the following code if you want the name of the file appear on select
@@ -1195,7 +1265,7 @@ $(document).on('focus','.focuslink-update',function(){
     //  else {
     //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
     // }
-      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="as" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
      $el = $(".div-banner").append(elhtml);
      loadPixelPage();
     if ($('.list-banner').length==5) {
@@ -1217,7 +1287,14 @@ $(document).on('focus','.focuslink-update',function(){
       // if (countbanner==1) {
 
       // }
-    $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:none" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/water-1330252__340.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+    let style=""; 
+    if ($(".list-banner").length==1) {
+      style="block";
+    }
+    else{
+     style="none"; 
+    }
+    $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
     let slidesi=$('.mySlides');
     let dotselementt=$('#dot-view');
     let slidesiLength=slidesi.length-1;
@@ -1239,7 +1316,12 @@ $(document).on('focus','.focuslink-update',function(){
     let idthis=$(this).parent().attr("picture-id");
     $("#"+idthis+"-get").remove();
     $("."+idthis+"-dot").remove();
-    // if () {}    
+    // if () {}  
+      if($('.list-banner').length<=1){
+      elhtml = $('.div-banner').html();
+      $('.prev').hide();
+      $('.next').hide();
+    }  
       plusSlides(-1);
   });
 
@@ -1247,6 +1329,8 @@ $(document).on('focus','.focuslink-update',function(){
   $(document).on("click", ".btn-deleteBanner", function() {
     if($('.list-banner').length<=1){
       elhtml = $('.div-banner').html();
+      $('.prev').hide();
+      $('.next').hide();
     } 
     if ($('.list-banner').length<=5) {
       $("#addBanner").removeAttr("disabled");
@@ -1328,10 +1412,6 @@ $(document).on('focus','.focuslink-update',function(){
     $('#editidpixel').val(editidpixel);
   });
 
-  $(document).on('click', '#solid', function() {
-    $('#backtheme').val('');
-  });
-
   let slideIndex = 1;
   showSlides(slideIndex);
 
@@ -1387,13 +1467,9 @@ $(document).on('focus','.focuslink-update',function(){
     // $(document).on('click','.marker',function(){
     //      $('#backtheme').val('');
     // });
-    $(document).on('click', '#gradient', function() {
-      $('#backtheme').val('colorgradient1');
-        //$('.mobile1').html('<div class="screen colorgradient1" id="phonecolor"></div>');
-      });
     //  $('#powered').prop('disabled','disabled');
     // $(document).bind('contextmenu',function(e){
     //   e.preventDefault();
     // });
-  </script>
-  @endsection
+</script>
+@endsection

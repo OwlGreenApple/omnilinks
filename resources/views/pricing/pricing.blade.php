@@ -217,20 +217,7 @@
               </div>
             </div>
 
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                White Label
-                &nbsp;
-                <span class="tooltipstered" title="White Label">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
+            
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2">
@@ -441,6 +428,22 @@
                 </span>
               </div>
             </div>
+            
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2">
+                <span class="red-color">
+                  <i class="fas fa-times-circle"></i>
+                </span>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                With Label
+                &nbsp;
+                <span class="tooltipstered" title="White Label">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -784,7 +787,7 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                White Label
+                With Label
                 &nbsp;
                 <span class="tooltipstered" title="White Label">
                   <i class="fas fa-question-circle icon-reflink"></i>
@@ -1126,7 +1129,7 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                White Label
+                With Label
                 &nbsp;
                 <span class="tooltipstered" title="White Label">
                   <i class="fas fa-question-circle icon-reflink"></i>

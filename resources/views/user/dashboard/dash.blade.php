@@ -71,13 +71,21 @@
   <div class="row notif">
     <div class="col-md-12 mb-3">
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="close" aria-label="Close">
+        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
           <span aria-hidden="true">×</span>
         </button>
         Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
         untuk terus menggunakan Omnilinks
       </div>
+    @if (session('error'))
+    <div class="alert alert-danger">
+       <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+          <span aria-hidden="true">×</span>
+        </button>
+        {{ session('error') }} <a href="{{asset('/pricing')}}">Subscribe</a>
     </div>
+    @endif
+  </div>
 
     <div class="col-md-12">
         <button class="btnbio btncreate btncreate-bio">
@@ -321,6 +329,7 @@ $.getJSON(
     $('#confirm-create').modal('show');
   });
   $('body').on('click','.btn-create-ok',function(e){
+
     let urla="<?php echo e(asset('/dash/new'))?>";
     window.location.href=urla;
   });
