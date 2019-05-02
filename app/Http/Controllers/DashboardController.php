@@ -33,11 +33,9 @@ class DashboardController extends Controller
     	$link=Link::where('pages_id',$Request->deletedataid)->delete();
     	$banner=Banner::where('pages_id',$Request->deletedataid)->get();
       foreach ($banner as $viewbanner)
-       {
-        if (is_file($banner->images_banner[0])) {
+       {     
             Storage::delete($viewbanner->images_banner);
             $viewbanner->delete();
-        }
       }
       $page->delete();
     	$arr['status']="success";

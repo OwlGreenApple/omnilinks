@@ -13,6 +13,7 @@
 <div class="theme-take">
   <div class="theme5"></div>
 </div>
+ @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
 <div class="theme-take">
   <div class="theme6"></div>
 </div>
@@ -148,3 +149,4 @@
 <div class="theme-take">
   <div class="theme50"></div>
 </div>
+@endif

@@ -53,6 +53,19 @@ class BiolinkController extends Controller
 
   public function newbio(Request $request)
   {
+    $user = Auth::user();
+    $pageCheck=Page::where('user_id',$user->id)
+                      ->count();
+    if ($user->membership=='free') {
+      if ($pageCheck>=1) {
+        return redirect('/dash')->with("error","maaf anda sudah tidak bisa membuat pages lagi,silahkan upgrade terlebih dahulu");
+      }
+    }
+    else if ($user->membership=='basic') {
+      if ($pageCheck>=5) {
+        return redirect('/dash')->with("error","maaf anda sudah tidak bisa membuat pages lagi,silahkan upgrade terlebih dahulu"); 
+      }
+    }
     $num=7;
     do
     {
@@ -68,12 +81,13 @@ class BiolinkController extends Controller
     }
     while (!is_null($cekpage));
   	$uuid=Uuid::uuid4();
-    $user = Auth::user();
+  
     $page=new Page();
   	$page->user_id=$user->id; 
   	$page->uid=$uuid;
   	$page->names=$generated_string; 
   	$page->save();
+
     return redirect('/dash/new/'.$uuid);  
   }
 
@@ -157,44 +171,45 @@ class BiolinkController extends Controller
     
     $page->save();
     $names=$page->names;
-    $idbanner=$request->idBanner;
-    $statusbanner=$request->statusBanner;
-    //dd($request->all());
-    for($i=0;$i<count($request->judulBanner);$i++) 
-    { 
-      if ($statusbanner[$i]=="delete") 
-      {
-        $bannerde= Banner::find($request->idBanner[$i])->delete();
-        continue;
+    if (Auth::user()->membership=='basic' or  Auth::user()->membership=='elite') 
+    {
+      $idbanner=$request->idBanner;
+      $statusbanner=$request->statusBanner;
+      //dd($request->all());
+      for($i=0;$i<count($request->judulBanner);$i++) 
+      { 
+        
+        
+        if($idbanner[$i]==""){
+          $banner= new Banner(); 
+        } else {
+          if ($statusbanner[$i]=="delete") 
+        {
+          $bannerde= Banner::find($request->idBanner[$i])->delete();
+          continue;
+        }
+          $banner= Banner::where('id','=',$request->idBanner[$i])->first();
+        }
+        $user=Auth::user();
+        $banner->users_id=$user->id;
+        $banner->pages_id=$page->id;
+        $banner->title=$request->judulBanner[$i];
+        $banner->link=$request->linkBanner[$i];
+        $banner->pixel_id=$request->bannerpixel[$i];
+
+        if($request->hasFile('bannerImage.'.$i)) {
+          $dir = 'banner/'.Auth::user()->email.'/'.$banner->title;
+          //$filename = $request->file('bannerImage')[$i]->getClientOriginalName();
+          $filename = $banner->title.'.jpg';
+
+          $path1=Storage::putFileAs($dir,$request->file('bannerImage')[$i],$filename);  
+          $banner->images_banner=$path1;
+        } 
+        
+        $banner->save(); 
       }
-      
-      if($idbanner[$i]==""){
-        $banner= new Banner(); 
-      } else {
-        $banner= Banner::where('id','=',$request->idBanner[$i])->first();
-      }
-
-   
-
-      $user=Auth::user();
-      $banner->users_id=$user->id;
-      $banner->pages_id=$page->id;
-      $banner->title=$request->judulBanner[$i];
-      $banner->link=$request->linkBanner[$i];
-      $banner->pixel_id=$request->bannerpixel[$i];
-
-      if($request->hasFile('bannerImage.'.$i)) {
-        $dir = 'banner/'.Auth::user()->email.'/'.$banner->title;
-        //$filename = $request->file('bannerImage')[$i]->getClientOriginalName();
-        $filename = $banner->title.'.jpg';
-
-        $path1=Storage::putFileAs($dir,$request->file('bannerImage')[$i],$filename);  
-        $banner->images_banner=$path1;
-      } 
-      
-      $banner->save(); 
     }
-    
+
     $arr['status'] = 'success';
     $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
     return $arr;
@@ -241,6 +256,7 @@ class BiolinkController extends Controller
   	$title=$request->title;
   	$link=$request->url;
     $id=$request->idlink;
+    $deletelink=$request->deletelink;
     $sort_link = '';
     for ($i=0; $i <count($title); $i++)
      { 
@@ -250,8 +266,13 @@ class BiolinkController extends Controller
       }
       else
       {
+        if ($deletelink[$i]=='delete') {
+        $linkku=Link::find($id[$i])->delete();
+        continue;
+      }
          $url=Link::where('id','=',$id[$i])->first();
       }
+
        $url->pages_id=$page->id;
         $url->names=null;
         $url->users_id=$user->id;

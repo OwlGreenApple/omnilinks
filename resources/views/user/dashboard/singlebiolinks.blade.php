@@ -108,10 +108,19 @@
       data: $("#formlink").serialize(),
       dataType: 'text',
       success: function(result) {
-                //$('#formlink').load();
-                loadSingleLinks();
-              }
-            });
+         var data = jQuery.parseJSON(result);
+         if (data.status=="success") {
+           $("#message").html(data.message);
+          $("#message").addClass("alert-success");
+            loadSingleLinks();
+         }
+         else if(data.status=="gagal"){
+           $("#confirm-error").modal('show');
+           // loadSingleLinks();
+         }
+          
+       }
+     });
   }
 
   function tambahPixel() {
@@ -186,6 +195,7 @@ table tr:nth-child(even) td
           </div>
         </div>
         <div id="pesan" class="alert"></div>
+        <div id="message" class="alert"></div>
 
         <div class="card carddash" style="margin-bottom:50px;">
           <div class="card-body">
@@ -193,11 +203,14 @@ table tr:nth-child(even) td
               <a class="nav-link active" href=".links" data-target=".links" role="tab" data-toggle="tab" id="link-tab">
                 Link
               </a>
+            @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+
               <a class="nav-link" href=".pixels" data-target=".pixels" role="tab" data-toggle="tab" id="pixel-tab">
                 Pixel
               </a>
+              @endif
             </div>
-
+         
             <!-- Tab panes -->
             <div class="tab-content mt-4" id="nav-tabContent">
               <!--Tab Link-->
@@ -217,16 +230,19 @@ table tr:nth-child(even) td
                     </label>
                     <input type="text" class="col-md-6 form-control" name="url" placeholder="" required id="urllink">
                   </div>
+                @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
 
                   <div class="form-group row">
                     <label for="password-confirm" class="col-md-2 col-form-label labell gray-txt text-right">
                       Pixel
                     </label>
-
+                  
                     <select name="idpixel" id="idpixel" class="col-md-6 form-control">
 
                     </select>
+
                   </div>
+                   @endif
                   <input type="text" hidden="" name="idlink" id="idlink"> 
                   <div class="form-group row">
                     <div class="col-md-10 offset-md-2">
@@ -241,6 +257,7 @@ table tr:nth-child(even) td
                 </form>
               </div>
 
+          @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
 
               <!--Tab Pixel-->
               <div role="tabpanel" class="tab-pane fade pixels" id="pixel">
@@ -272,7 +289,7 @@ table tr:nth-child(even) td
                   </div>
                 </form>
               </div>
-
+           @endif
             </div>
 
           </div>
@@ -300,9 +317,12 @@ table tr:nth-child(even) td
                     <th class="">
                       Title
                     </th>
+                  @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+
                     <th class="">
                       Pixel
                     </th>
+                    @endif
                     <th class="">
                       Link
                     </th>
@@ -320,7 +340,8 @@ table tr:nth-child(even) td
               </div>
             </div>
           </div>
-          
+         @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+
           <div class="pixels2">
             <div id="search-pixel" style="margin-bottom: 20px">
               <span class="blue-txt" style="font-size: 24px">
@@ -353,6 +374,7 @@ table tr:nth-child(even) td
               </div>
             </div>
           </div>
+          @endif
         </div>
 
       </div>
@@ -384,6 +406,26 @@ table tr:nth-child(even) td
           Cancel
         </button>
       </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="confirm-error" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Error message
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        maaf anda sudah tidak bisa membuat link ini lagi mohon untuk upgrade Omnilinks <a href="{{asset('/pricing')}}" target="_blank">Upgrade</a>
+      </div>
+      
     </div>
 
   </div>
