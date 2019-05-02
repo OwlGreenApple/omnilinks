@@ -19,6 +19,16 @@ class SingleLinkController extends Controller
  	{
     if(is_null($request->idlink))
     {
+      $linkCheck=Link::where('users_id',Auth::user()->id)
+                      ->where('pages_id',0)
+                      ->count();
+      if ((Auth::user()->membership=='basic') OR (Auth::user()->membership=='free')) {
+         if($linkCheck>=5) {
+          $arr['status'] = 'gagal';
+          $arr['message']='maaf anda sudah tidak bisa menambahkan link lagi';
+          return $arr;
+        } 
+      }         
       $link=new Link;
       $num=7;
       $generated_string = ""; 
@@ -42,8 +52,12 @@ class SingleLinkController extends Controller
   		$link->link=$request->url;
   		$link->title=$request->title;
   		$link->save();
-  		return redirect('/dash/newsingle')->with('ok','Link telah Ditambahkan');
+      $arr['status'] = 'success';
+      $arr['message']='anda sudah menambahkan link';
+      return $arr;
+  		//return redirect('/dash/newsingle')->with('ok','Link telah Ditambahkan');
  	}
+
  	public function singlepixel(Request $request)
  	{
     if(is_null($request->hiddenid))

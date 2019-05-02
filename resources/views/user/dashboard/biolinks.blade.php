@@ -35,10 +35,10 @@
       url: "<?php echo url('/save-template');?>",
       success: function(data) {
                 //var data=jQuery.parseJSON(result);
-                if (data.status == "success") {
-                  $("#pesan").html(data.message);
-                  $("#pesan").addClass("alert-success");
-                  $("#pesan").show();
+        if (data.status == "success") {
+            $("#pesan").html(data.message);
+            $("#pesan").addClass("alert-success");
+            $("#pesan").show();
                 }
               }
             });
@@ -323,16 +323,19 @@
                   Link
                 </a>
               </li>
+              @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
               <li class="nav-item">
                 <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
                   WA Link Creator
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
                   Pixel
                 </a>
               </li>
+              @endif
               <li class="nav-item">
                 <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
                   Tampilan
@@ -488,7 +491,7 @@
                                 <div class="col-md-12 col-12 pr-0 pl-0">
                                   <div class="input-stack">
                                     <input type="hidden" name="idlink[]" value="{{$link->id}}">
-
+                                    <input type="hidden" name="deletelink[]" class="delete-link" value="">
                                     <input type="text" name="title[]" value="{{$link->title}}" id="title-<?=$utl?>-view-update" placeholder="Title" class="form-control focuslink-update">
                                     <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
                                   </div>
@@ -503,7 +506,8 @@
                             </div>
                           </li>
                         @endforeach
-                      @else 
+                      @else
+
                         <li class="link-list" link-id="link-url-1">
                           <div class="div-table mb-4">
                             <div class="div-cell">
@@ -516,6 +520,7 @@
                               <div class="col-md-12 col-12 pr-0 pl-0">
                                 <div class="input-stack">
                                   <input type="hidden" name="idlink[]" value="new">
+                                  <input type="hidden" name="deletelink[]" class="deletelink" value="">
                                   <input type="text" name="title[]" value="" id="title-1-view" placeholder="Title" class="form-control focuslink">
                                   <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
                                 </div>
@@ -687,7 +692,7 @@
                   </div>
                 </form>
               </div>
-
+      @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
               <!-- TAB 2 -->
               <div role="tabpanel" class="tab-pane fade " id="walink">
                 <form id="savewalink" method="post">
@@ -773,7 +778,7 @@
                   <div id="content"></div>
                 </div>
               </div>
-
+              @endif
               <!-- TAB 4 -->
               <div role="tabpanel" class="tab-pane fade in active show" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
@@ -811,13 +816,16 @@
                           @endif
                         </div>
                         <div class="col-md-12 mt-4">
+                       @if(Auth::user()->membership=='elite') 
                           <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner">
                             <i class="fas fa-plus"></i>
                           </button>
+                      @endif
+                       @if(Auth::user()->membership!='free')
                           <span class="blue-txt">
                             Banner Promo
                           </span>
-
+                        @endif
                           <div class="contentBanner mb-5">
                             <div class="c div-banner">
                               @if($banner->count())
@@ -841,16 +849,18 @@
                                       </label>
                                     </div>
                                   </div>
-                                  
+                                @if(Auth::user()->membership=='elite')
                                   <div class="div-cell cell-btn btn-deleteBannerUpdate">
                                     <span>
                                       <i class="far fa-trash-alt"></i>
                                     </span>
-                                  </div>  
+                                  </div>
+                                @endif  
                                 </div>
                                 @endforeach
-                              @else 
-                                <div class="div-table list-banner mb-4" picture-id="picture-id-1">
+                              @else
+                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                                <div class="div-table list-banner mb-4" picture-id="picture-id-6">
                                   <div class="div-cell">
                                     <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
                                     <input type="hidden" name="idBanner[]" value="">
@@ -865,12 +875,14 @@
                                       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
                                   </div>
-                                  
+                          @endif
+                         @if(Auth::user()->membership=='elite')
                                   <div class="div-cell cell-btn btn-deleteBanner">
                                     <span>
                                       <i class="far fa-trash-alt"></i>
                                     </span>
-                                  </div>  
+                                  </div>
+                                @endif    
                                 </div>
                               @endif
                             </div>
@@ -982,15 +994,18 @@
                           <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
                         </div>                       
                        @endforeach
-                        @else  
+                        @else
+                        @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                         <div class="mySlides mylides fit " id="picture-id-6-get">
                           <img id="picture-6" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-6-get" value="ada" >
                         </div>
+                        @endif
                       @endif
                       </div>
+                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                       <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
+                    @endif
                     </div>
                     <br>
 
@@ -1195,7 +1210,7 @@ $(document).on('focus','.focuslink-update',function(){
     //  else {
     //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
     // }
-      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="as" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
      $el = $(".div-banner").append(elhtml);
      loadPixelPage();
     if ($('.list-banner').length==5) {
@@ -1217,7 +1232,14 @@ $(document).on('focus','.focuslink-update',function(){
       // if (countbanner==1) {
 
       // }
-    $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:none" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/water-1330252__340.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+    let style=""; 
+    if ($(".list-banner").length==1) {
+      style="block";
+    }
+    else{
+     style="none"; 
+    }
+    $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
     let slidesi=$('.mySlides');
     let dotselementt=$('#dot-view');
     let slidesiLength=slidesi.length-1;
@@ -1239,7 +1261,12 @@ $(document).on('focus','.focuslink-update',function(){
     let idthis=$(this).parent().attr("picture-id");
     $("#"+idthis+"-get").remove();
     $("."+idthis+"-dot").remove();
-    // if () {}    
+    // if () {}  
+      if($('.list-banner').length<=1){
+      elhtml = $('.div-banner').html();
+      $('.prev').hide();
+      $('.next').hide();
+    }  
       plusSlides(-1);
   });
 
@@ -1247,6 +1274,8 @@ $(document).on('focus','.focuslink-update',function(){
   $(document).on("click", ".btn-deleteBanner", function() {
     if($('.list-banner').length<=1){
       elhtml = $('.div-banner').html();
+      $('.prev').hide();
+      $('.next').hide();
     } 
     if ($('.list-banner').length<=5) {
       $("#addBanner").removeAttr("disabled");

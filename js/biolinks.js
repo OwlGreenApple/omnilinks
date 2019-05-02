@@ -156,7 +156,7 @@ if ($('.wa-input').val()!='') {
           elmhtml = $('.sortable-link').html();
         } 
         elviewlink.children().remove();*/
-        idLink = $(this).parent().parent().attr("link-id");
+      let   idLink = $(this).parent().parent().attr("link-id");
         //console.log(idLink);
         $("#" + idLink + "-preview").remove();
 
@@ -166,7 +166,9 @@ if ($('.wa-input').val()!='') {
     $(document).on('click','.deletelink-update',function(e){
         let idlinkDel=$(this).parent().parent().attr("link-id");
         $("#" + idlinkDel + "-get").remove();
-        $(this).parent().parent().remove();
+        let deleteval=$(this).parent();
+        deleteval.find(".delete-link").val('delete');
+        $(this).parent().parent().hide();
     });
 
     /* biolink social-media */

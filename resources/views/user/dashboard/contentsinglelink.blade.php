@@ -7,7 +7,10 @@
   @foreach($links as $link)
     <tr align="center">
       <td>{{$link->title}}</td>
+      @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+
       <td>{{$link->judul}}</td>
+      @endif
       <td>
         Omn.lkz/{{$link->shorten}}&nbsp;
         <span class="btn-copy" data-copy="Omn.lkz/{{$link->shorten}}">
