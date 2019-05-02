@@ -114,7 +114,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
 	  <header></header>
 	  <div class="links messengers {{$pages->colom}} row" style="margin-bottom: 20px;">
 
-      @if(!is_null($pages->wa_link)
+      @if(!is_null($pages->wa_link))
         <div class="link">
           <a href="{{url('click/wa/'.$pages->id)}}" title="wa" class="btn btn-light" target="_blank">
             <i class="fab fa-whatsapp"></i>
