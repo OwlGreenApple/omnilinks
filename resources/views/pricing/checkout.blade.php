@@ -59,10 +59,13 @@
     <div class="col-md-8 col-12">
       <div class="card-custom">
         <div class="card cardpad">
+
+          <div id="pesan" class="alert"></div>
+
           <?php if (Auth::check()) {?>
           <form method="POST" action="{{url('confirm-payment')}}">
             <?php } else {?>
-            <form method="GET" action="{{url('register-payment')}}">
+            <form method="POST" action="{{url('register-payment')}}">
               <?php }?>
               {{ csrf_field() }}
               <input type="hidden" id="price" name="price">

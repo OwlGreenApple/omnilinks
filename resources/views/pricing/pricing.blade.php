@@ -140,7 +140,11 @@
                 1
               </div>  
               <div class="col-md-9 col-9 text-left">
-                Omnilinkz
+                Omnilinkz 
+                &nbsp;
+                <span class="tooltipstered" title="Omnilinkz">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -150,6 +154,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Single Link
+                &nbsp;
+                <span class="tooltipstered" title="Single Link">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -159,6 +167,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Click/Hari
+                &nbsp;
+                <span class="tooltipstered" title="Click/Hari">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -170,6 +182,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Profile Image
+                &nbsp;
+                <span class="tooltipstered" title="Profile Image">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -181,6 +197,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Store Brand
+                &nbsp;
+                <span class="tooltipstered" title="Store Brand">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -190,6 +210,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Themes
+                &nbsp;
+                <span class="tooltipstered" title="Themes">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -201,6 +225,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 White Label
+                &nbsp;
+                <span class="tooltipstered" title="White Label">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -212,6 +240,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 WhatsApp
+                &nbsp;
+                <span class="tooltipstered" title="WhatsApp">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -223,6 +255,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 FB Messenger
+                &nbsp;
+                <span class="tooltipstered" title="FB Messenger">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -234,6 +270,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Line
+                &nbsp;
+                <span class="tooltipstered" title="Line">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -245,6 +285,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Skype
+                &nbsp;
+                <span class="tooltipstered" title="Skype">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -256,6 +300,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 WeChat
+                &nbsp;
+                <span class="tooltipstered" title="WeChat">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -267,6 +315,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Telegram
+                &nbsp;
+                <span class="tooltipstered" title="Telegram">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -278,6 +330,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 FB Pixel
+                &nbsp;
+                <span class="tooltipstered" title="FB Pixel">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -289,6 +345,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Google Retargetting
+                &nbsp;
+                <span class="tooltipstered" title="Google Retargetting">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -300,6 +360,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Twitter Retargetting
+                &nbsp;
+                <span class="tooltipstered" title="Twitter Retargetting">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -311,6 +375,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Google Analytics
+                &nbsp;
+                <span class="tooltipstered" title="Google Analytics">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -322,6 +390,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Priority Support
+                &nbsp;
+                <span class="tooltipstered" title="Priority Support">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -333,6 +405,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Banner Promo
+                &nbsp;
+                <span class="tooltipstered" title="Banner Promo">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -344,6 +420,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Click to WA Creator
+                &nbsp;
+                <span class="tooltipstered" title="Click to WA Creator">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -355,6 +435,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Report Analytics
+                &nbsp;
+                <span class="tooltipstered" title="Report Analytics">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
           </div>
@@ -409,6 +493,10 @@
               </div>  
               <div class="col-md-9 col-9 text-left">
                 Omnilinkz
+                &nbsp;
+                <span class="tooltipstered" title="Omnilinkz">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -418,6 +506,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Single Link
+                &nbsp;
+                <span class="tooltipstered" title="Single Link">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -427,6 +519,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Click/Hari
+                &nbsp;
+                <span class="tooltipstered" title="Click/Hari">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -438,6 +534,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Profile Image
+                &nbsp;
+                <span class="tooltipstered" title="Profile Image">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -449,6 +549,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Store Brand
+                &nbsp;
+                <span class="tooltipstered" title="Store Brand">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -458,6 +562,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Banner Promo
+                &nbsp;
+                <span class="tooltipstered" title="Banner Promo">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -469,6 +577,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Click to WA Creator
+                &nbsp;
+                <span class="tooltipstered" title="Click to WA Creator">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -480,6 +592,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 WhatsApp
+                &nbsp;
+                <span class="tooltipstered" title="WhatsApp">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -491,6 +607,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 FB Messenger
+                &nbsp;
+                <span class="tooltipstered" title="FB Messenger">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -502,6 +622,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Line
+                &nbsp;
+                <span class="tooltipstered" title="Line">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -513,6 +637,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Skype
+                &nbsp;
+                <span class="tooltipstered" title="Skype">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -524,6 +652,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 WeChat
+                &nbsp;
+                <span class="tooltipstered" title="WeChat">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -535,6 +667,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Telegram
+                &nbsp;
+                <span class="tooltipstered" title="Telegram">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -546,6 +682,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 FB Pixel
+                &nbsp;
+                <span class="tooltipstered" title="FB Pixel">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -557,6 +697,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Google Retargetting
+                &nbsp;
+                <span class="tooltipstered" title="Google Retargetting">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -568,6 +712,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Twitter Retargetting
+                &nbsp;
+                <span class="tooltipstered" title="Twitter Retargetting">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -579,6 +727,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Google Analytics
+                &nbsp;
+                <span class="tooltipstered" title="Google Analytics">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -590,6 +742,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Priority Support
+                &nbsp;
+                <span class="tooltipstered" title="Priority Support">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -599,6 +755,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Themes
+                &nbsp;
+                <span class="tooltipstered" title="Themes">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -610,6 +770,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Report Analytics
+                &nbsp;
+                <span class="tooltipstered" title="Report Analytics">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -621,6 +785,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 White Label
+                &nbsp;
+                <span class="tooltipstered" title="White Label">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
           </div>
@@ -667,6 +835,10 @@
               </div>  
               <div class="col-md-9 col-9 text-left">
                 Omnilinkz
+                &nbsp;
+                <span class="tooltipstered" title="Omnilinkz">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -676,6 +848,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Single Link
+                &nbsp;
+                <span class="tooltipstered" title="Single Link">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -685,6 +861,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Click/Hari
+                &nbsp;
+                <span class="tooltipstered" title="Click/Hari">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -696,6 +876,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Profile Image
+                &nbsp;
+                <span class="tooltipstered" title="Profile Image">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -707,6 +891,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Store Brand
+                &nbsp;
+                <span class="tooltipstered" title="Store Brand">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -716,6 +904,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Banner Promo
+                &nbsp;
+                <span class="tooltipstered" title="Banner Promo">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -727,6 +919,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Click to WA Creator
+                &nbsp;
+                <span class="tooltipstered" title="Click to WA Creator">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -738,6 +934,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 WhatsApp
+                &nbsp;
+                <span class="tooltipstered" title="WhatsApp">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -749,6 +949,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 FB Messenger
+                &nbsp;
+                <span class="tooltipstered" title="FB Messenger">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -760,6 +964,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Line
+                &nbsp;
+                <span class="tooltipstered" title="Line">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -771,6 +979,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Skype
+                &nbsp;
+                <span class="tooltipstered" title="Skype">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -782,6 +994,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 WeChat
+                &nbsp;
+                <span class="tooltipstered" title="WeChat">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -793,6 +1009,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Telegram
+                &nbsp;
+                <span class="tooltipstered" title="Telegram">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -804,6 +1024,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 FB Pixel
+                &nbsp;
+                <span class="tooltipstered" title="FB Pixel">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -815,6 +1039,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Google Retargetting
+                &nbsp;
+                <span class="tooltipstered" title="Google Retargetting">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -826,6 +1054,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Twitter Retargetting
+                &nbsp;
+                <span class="tooltipstered" title="Twitter Retargetting">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -837,6 +1069,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Google Analytics
+                &nbsp;
+                <span class="tooltipstered" title="Google Analytics">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -848,6 +1084,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Priority Support
+                &nbsp;
+                <span class="tooltipstered" title="Priority Support">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -857,6 +1097,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Themes
+                &nbsp;
+                <span class="tooltipstered" title="Themes">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -868,6 +1112,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 Report Analytics
+                &nbsp;
+                <span class="tooltipstered" title="Report Analytics">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>
 
@@ -879,6 +1127,10 @@
               </div>
               <div class="col-md-9 col-9 text-left">
                 White Label
+                &nbsp;
+                <span class="tooltipstered" title="White Label">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
               </div>
             </div>                   
           </div>

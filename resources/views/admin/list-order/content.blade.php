@@ -15,6 +15,9 @@
     <td data-label="Discount">
       Rp. <?php echo number_format($order->discount) ?>
     </td>
+    <td data-label="Discount">
+      Rp. <?php echo number_format($order->grand_total) ?>
+    </td>
     <td data-label="Date">
       {{$order->created_at}}
     </td>

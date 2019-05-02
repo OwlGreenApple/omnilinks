@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
+@font-face { 
+  font-family: SourceSansPro-Light; 
+  src: url("../fonts/SourceSansPro-Light.otf");
+} 
+
+@font-face { 
+  font-family: SourceSansPro-Regular; 
+  src: url("../fonts/SourceSansPro-Regular.otf");
+} 
+
+@font-face { 
+  font-family: SourceSansPro-Semibold; 
+  src: url("../fonts/SourceSansPro-Semibold.otf");
+} 
+
+@font-face { 
+  font-family: SourceSansPro-Bold; 
+  src: url("../fonts/SourceSansPro-Bold.otf");
+} 
+
 body,
 h1,
 h2,
@@ -11,8 +31,9 @@ h6 {
   font-weight: 600;
 }
 
-html,body {
-  height: 100%;
+html,body,main,#app {
+  /*height: 100vh;
+  min-height: 100vh;*/
 }
 
 body {
@@ -34,6 +55,28 @@ p,span {
 .dropdown-menu {
   right: 0;
   left: auto;
+}
+
+.icon-dropdown {
+  display: inline-block; 
+  float: right;
+  margin-top: -12px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.menu-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .menu-nomobile {
+    display: none;
+  }
+
+  .menu-mobile {
+    display: block;
+  }
 }
 
 .navbar-laravel {
