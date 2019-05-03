@@ -251,8 +251,8 @@
     });
     $(".sortable-sosmed").disableSelection();
 
+    //picker for background device color purpose
     function onColorChange(color) {
-      // dosomeStuff();
       // console.log(color);
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen");
@@ -267,6 +267,43 @@
       picker.setColor($(this).val());
     });
     picker.linkTo(onColorChange);
+    
+    //for background color button purpose 
+    function onColorButtonChange(color) {
+      // console.log(color);
+      $("#colorButton").val(color);
+      $('.btnview').css("background-color",color);
+    }
+    $('#colorpickerButton').farbtastic('#colorButton');
+    picker = $.farbtastic('#colorpickerButton');
+    // picker.setColor("#b6b6ff");
+    $("#colorButton").on('keyup', function() {
+      picker.setColor($(this).val());
+    });
+    picker.linkTo(onColorButtonChange);
+    $("#link-custom-background-color").on('click', function(e) {
+      e.preventDefault();
+      $('#modal-color-picker-button').modal('toggle');
+    });
+
+    //modal-color-picker-outline-button colorpickerOutlineButton colorOutlineButton
+    //for button purpose colorpickerButton colorButton
+    function onOutlineColorButtonChange(color) {
+      // console.log(color);
+      $("#colorOutlineButton").val(color);
+      $('.btnview').css("border-color",color);
+    }
+    $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
+    picker = $.farbtastic('#colorpickerOutlineButton');
+    // picker.setColor("#b6b6ff");
+    $("#colorOutlineButton").on('keyup', function() {
+      picker.setColor($(this).val());
+    });
+    picker.linkTo(onOutlineColorButtonChange);
+    $("#link-custom-outline-color").on('click', function(e) {
+      e.preventDefault();
+      $('#modal-color-picker-outline-button').modal('toggle');
+    });
     
     function readURL(input) {
       if (input.files && input.files[0]) {
@@ -918,21 +955,90 @@
                     <p class="blue-txt">
                       Theme
                     </p>
-                    <label class="switch">
-                      <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
-                      <span class="slider round"></span>
-                    </label>&nbsp;Rounded buttons
-                    &nbsp;&nbsp;
-                    <a href="" class="nav-link">Custom Color</a>
-                    <br>
-                    <label class="switch">
-                      <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
-                      <span class="slider round"></span>
-                    </label>&nbsp;Outlined buttons
-                    &nbsp;&nbsp;
-                    <a href="" class="nav-link">Custom Color</a>
-                    <div class="as">
+                    
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label class="switch">
+                          <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
+                          <span class="slider round"></span>
+                        </label>
+                        
+                      </div>
+                      <div class="col-md-4">
+                        <label class="caption">
+                          Rounded buttons
+                        </label>
+                      </div>
+                      <div class="col-md-4">
+                        <a href="" id="link-custom-background-color" class="nav-link">Custom Color</a>
+                      </div>
+                    </div>
+                    <!-- Modal For Color Picker Button-->
+                    <div class="modal fade" id="modal-color-picker-button" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  Choose Background Color For The Buttons
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-md-4 col-xs-4">
+                                    <div align="center">
+                                      <div id="colorpickerButton"></div>
+                                      <input type="text" id="colorButton" name="colorButton" value="#123456">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>	
 
+                    <div class="row">
+                      <div class="col-md-2">
+                        <label class="switch">
+                          <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
+                          <span class="slider round"></span>
+                        </label>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="caption">
+                          Outlined buttons
+                        </label>
+                      </div>
+                      <div class="col-md-4">
+                        <a href="" id="link-custom-outline-color" class="nav-link">Custom Color</a>
+                      </div>
+                    </div>
+                    <!-- Modal For Color Picker Button-->
+                    <div class="modal fade" id="modal-color-picker-outline-button" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  Choose Outline Color For The Buttons
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col-md-4 col-xs-4">
+                                    <div align="center">
+                                      <div id="colorpickerOutlineButton"></div>
+                                      <input type="text" id="colorOutlineButton" name="colorOutlineButton" value="#123456">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>	
+
+                    
+                    <div class="as">
                       <!-- Bootstrap CSS -->
                       <ul class="nav nav-tabs sub-nav mt-4" role="tablist">
                         <li class="nav-item sub-nav">
@@ -1218,6 +1324,17 @@ $(document).on('focus','.focuslink-update',function(){
       $('#backtheme').val("<?php echo $pages->template; ?>");
       $("#gradient").click();
     <?php } ?>
+
+    //for bacground, outline color 
+    <?php if (!is_null($pages->rounded)) { ?>
+      $('#colorButton').val("<?php echo $pages->rounded; ?>");
+      $('.btnview').css("background-color","<?php echo $pages->rounded; ?>");
+    <?php } ?>
+    <?php if (!is_null($pages->outline)) { ?>
+      $('#colorOutlineButton').val("<?php echo $pages->outline; ?>");
+      $('.btnview').css("border-color","<?php echo $pages->outline; ?>");
+    <?php } ?>
+
   });
 
   // Add the following code if you want the name of the file appear on select

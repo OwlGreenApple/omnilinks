@@ -160,8 +160,8 @@ class BiolinkController extends Controller
       $page->template=$request->backtheme;  
     }
 
-    $page->rounded=$request->rounded;
-    $page->outline=$request->outlined;
+    $page->rounded=$request->colorButton;
+    $page->outline=$request->colorOutlineButton;
     $page->is_rounded=$request->rounded;
     $page->is_outlined=$request->outlined;
     
