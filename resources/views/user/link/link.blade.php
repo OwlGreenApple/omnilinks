@@ -11,6 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
@@ -20,9 +21,9 @@
 </head>
 
 @if(is_null($pages->template))
-<body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a {{$pages->rounded}} {{$pages->outline}}">
+<body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a ">
 @else
-<body class="{{$pages->template}} {{$pages->rounded}} {{$pages->outline}}" >
+<body class="{{$pages->template}} " >
 @endif
   
   <style type="text/css">
@@ -116,16 +117,16 @@ $banner = Banner::where('pages_id','=',$pages->id)
 
       @if(!is_null($pages->wa_link))
         <div class="link">
-          <a href="{{url('click/wa/'.$pages->id)}}" title="wa" class="btn btn-light" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-            <span class="textbutton"> WhatsApp</span>
+          <a href="{{url('click/wa/'.$pages->id)}}" title="wa" class="btn btnview" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+              <span class="textbutton"> WhatsApp</span>
           </a>
         </div>
       @endif
 
       @if(!is_null($pages->skype_link))
         <div class="link">
-          <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" class="btn btn-light" target="_blank">
+          <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" class="btn btnview" target="_blank">
             <i class="fab fa-skype"></i>
             <span class="textbutton"> Skype</span>
           </a>
@@ -134,7 +135,7 @@ $banner = Banner::where('pages_id','=',$pages->id)
 
       @if(!is_null($pages->telegram_link))
         <div class="link">
-          <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" class="btn btn-light" target="_blank">
+          <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" class="btn btnview" target="_blank">
             <i class="fab fa-telegram"></i>
             <span class="textbutton" > Telegram</span>
           </a>
@@ -149,13 +150,13 @@ $banner = Banner::where('pages_id','=',$pages->id)
     <div class="row">
     	@foreach($link as $link)
       	<div class="col-md-12 col-12 mrglink"> 
-          <a href="{{url('click/link/'.$link->id)}}" title="" class="btn btn-light" target="_blank">
+          <a href="{{url('click/link/'.$link->id)}}" title="" class="btn btnview" target="_blank">
             <span>{{$link->title}}</span>
           </a>
         </div>
       @endforeach
       <div class="col-md-12 col-12 mrglink"> 
-        <a href="#" title="" class="btn btn-light">
+        <a href="#" title="" class="btn btnview">
           <span>tes</span>
         </a>
       </div>
@@ -211,6 +212,25 @@ $banner = Banner::where('pages_id','=',$pages->id)
   <div></div>
 
   <script src="{{asset('js/myScript.js')}}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      <?php if (!is_null($pages->rounded)) { ?>
+        $('.btn').css("background-color","<?php echo $pages->rounded; ?>");
+      <?php } ?>
+      <?php if (!is_null($pages->outline)) { ?>
+        $('.btn').css("border-color","<?php echo $pages->outline; ?>");
+      <?php } ?>
+      
+      <?php if($pages->is_rounded) {?>
+        $("body").addClass("roundedview");
+      <?php } ?>
+      <?php if($pages->is_outlined) {?>
+        $("body").addClass("outlinedview");
+      <?php } ?>
 
+
+    });
+  
+  </script>
 </body>
 </html>
