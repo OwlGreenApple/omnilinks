@@ -324,6 +324,13 @@ $.getJSON(
     $('#id_delete').val($(this).attr('deletedataid'));
     $('#confirm-delete').modal('show');
   });
+
+  $('body').on('click','.btn-pdf',function(e) 
+  {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+
   $('body').on('click','.btncreate-bio',function(e){
     e.preventDefault();
     $('#confirm-create').modal('show');

@@ -92,6 +92,7 @@
 
           <div class="col-md-3">
             <div class="p-4 bd-highlight">
+
               <div class="buton">
                 <button type="button" deletedataid="{{$page->id}}" class="btn btn-sm btn-danger float-right btn-deletePage">
                   <i class="fas fa-trash-alt"></i>
@@ -102,10 +103,13 @@
                 <i class="fas fa-pencil-alt"></i>
               </button>
 
-              <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;">
-                <i class="far fa-file-pdf"></i>
-                Saved AS PDF
-              </button>
+              <a href="{{url('pdf/1/biolinks')}}" target="_blank">
+                <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;">
+                  <i class="far fa-file-pdf"></i>
+                  Saved AS PDF
+                </button>
+              </a>
+
             </div>
           </div>
         </div>

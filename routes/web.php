@@ -60,6 +60,8 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
     Route::get('/dash/load-dashboard','DashboardController@loadDashboard');
     Route::get('/dash/load-link','DashboardController@loadlink');
     Route::get('/dash/delete-pages','DashboardController@deletePage');
+    Route::get('/pdf/{id}/biolinks','DashboardController@pdf_biolinks');
+    Route::get('/tes','DashboardController@counter_click_month');
 
     //makebio
     Route::get('/dash/new/','BiolinkController@newbio');
