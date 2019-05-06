@@ -12,7 +12,7 @@ return array(
     ),
     'image' => array(
         'enabled' => true,
-        'binary'  => '/usr/local/bin/wkhtmltoimage',
+        'binary'  => base_path('vendor\wemersonjanuario\wkhtmltoimage-windows\bin\64bit\wkhtmltoimage'),
         'timeout' => false,
         'options' => array(),
         'env'     => array(),

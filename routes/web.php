@@ -61,6 +61,7 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
     Route::get('/dash/load-link','DashboardController@loadlink');
     Route::get('/dash/delete-pages','DashboardController@deletePage');
     Route::get('/pdf/{id}/biolinks','DashboardController@pdf_biolinks');
+    Route::get('/pdf/{id}/singlelinks','DashboardController@pdf_singlelinks');
     Route::get('/tes','DashboardController@counter_click_month');
 
     //makebio

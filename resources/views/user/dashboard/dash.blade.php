@@ -6,6 +6,37 @@
 
  
 <script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: false,
+      theme: "light2",
+      title:{
+        text: "Simple Line Chart"
+      },
+      axisY:{
+        includeZero: false
+      },
+      data: [{        
+        type: "line",       
+        dataPoints: [
+          { y: 450 },
+          { y: 414},
+          { y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+          { y: 460 },
+          { y: 450 },
+          { y: 500 },
+          { y: 480 },
+          { y: 480 },
+          { y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+          { y: 500 },
+          { y: 480 },
+          { y: 510 }
+        ]
+      }]
+    });
+    chart.render();  
+  };  
+
   // var currentPage="";
   function refreshDashboard() {
     // if(currentPage=="")
@@ -70,6 +101,9 @@
 <div class="container">
   <div class="row notif">
     <div class="col-md-12 mb-3">
+
+      <div id="chartContainer" style="height: 200px; width: 200px"></div>
+
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <button type="button" class="close" aria-label="Close" data-dismiss="alert">
           <span aria-hidden="true">×</span>

@@ -42,7 +42,7 @@ class DashboardController extends Controller
       $page->delete();
     	$arr['status']="success";
   		return $arr;
-    }
+    } 
 
     public function pdf_biolinks($id){
       $page = Page::find($id);
@@ -51,15 +51,52 @@ class DashboardController extends Controller
 
       $click = $this->counter_click_month($page,$banners,$links);
 
+      $chart = $this->chart_day($page,$banners,$links);
+
       $data = array(
         'page' => $page, 
         'banners' => $banners,
         'links' => $links,
         'click' => $click,
+        'chart' => $chart,
       );
 
       $pdf = PDF::loadView('user.pdf.pdf-all', $data)
-            ->setPaper('a4');
+            ->setPaper('a4')
+            ->setOption('footer-html', view('user.pdf.footer'))
+            ->setOption('margin-bottom', 10)
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm')
+            ->setOption('enable-javascript', true)
+            ->setOption('images', true)
+            ->setOption('javascript-delay', 13000)
+            ->setOption('enable-smart-shrinking', true)
+            ->setOption('no-stop-slow-scripts', true);
+
+      return $pdf->stream();
+    }
+
+    public function pdf_singlelinks($id){
+      $link = Link::find($id);
+
+      $chart = $this->chart_link($link);
+
+      $data = array(
+        'link' => $link,
+        'chart' => $chart,
+      );
+
+      $pdf = PDF::loadView('user.pdf.pdf-single', $data)
+            ->setPaper('a4')
+            ->setOption('footer-html', view('user.pdf.footer'))
+            ->setOption('margin-bottom', 10)
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm')
+            ->setOption('enable-javascript', true)
+            ->setOption('images', true)
+            ->setOption('javascript-delay', 13000)
+            ->setOption('enable-smart-shrinking', true)
+            ->setOption('no-stop-slow-scripts', true);
 
       return $pdf->stream();
     }
@@ -121,6 +158,69 @@ class DashboardController extends Controller
           }
         }
           
+        $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
+      }
+
+      return $arr;
+    }
+
+    public function chart_day($page,$banners,$links){
+      $query_date = date('d-m-Y');
+      $first_date = date('01-m-Y', strtotime($query_date));
+      //$last_date = date('t-m-Y', strtotime($query_date));
+      $arr = [];
+
+      $click_day = 0;
+      while($first_date <= $query_date){
+        foreach ($banners as $banner) {
+          $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/banner-'.$banner->title.'/counter.txt';
+
+          $click = $this->check_file($filename);
+
+          $click_day = $click_day + $click;
+        }
+        
+        foreach ($links as $link) {
+          $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
+
+          $click = $this->check_file($filename);
+
+          $click_day = $click_day + $click;
+        } 
+
+        $key = ['wa','telegram','skype','fb','ig','twitter','youtube'];
+        
+        foreach ($key as $k) {
+          $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/'.$k.'/counter.txt';
+
+          $click = $this->check_file($filename);
+
+          $click_day = $click_day + $click;
+        }
+          
+        $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click_day);
+
+        $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
+      }
+
+      return $arr;
+    }
+
+    public function chart_link($link){
+      $query_date = date('d-m-Y');
+      $first_date = date('01-m-Y', strtotime($query_date));
+      //$last_date = date('t-m-Y', strtotime($query_date));
+      $arr = [];
+
+      $click_day = 0;
+      while($first_date <= $query_date){
+        
+        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
+
+        $click = $this->check_file($filename);
+
+        $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click);
+
         $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
       }
 
