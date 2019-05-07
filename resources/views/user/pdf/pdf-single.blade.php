@@ -65,7 +65,7 @@
           Total Click
         </span> <br>
         <span class="total-click">
-          
+          {{$total_click}}
         </span> <br>
         <span class="click-txt">
           dalam 30 hari

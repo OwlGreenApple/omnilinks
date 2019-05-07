@@ -1,3 +1,49 @@
+@font-face { 
+  font-family: SourceSansPro-Regular; 
+  src: url("../fonts/SourceSansPro-Regular.otf");
+} 
+
+@font-face { 
+  font-family: SourceSansPro-Bold; 
+  src: url("../fonts/SourceSansPro-Bold.otf");
+} 
+
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+}
+
+.fa-search {
+  width: 15px;
+  margin: -25px 10px;
+  float: right;
+}  
+
+.div-click { 
+  font-size: 25px;
+  height:300px;
+  line-height:300px;
+}
+
+.span-click {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+#total-click {
+  font-size: 70px;
+  color: #106BC8;
+  font-family: SourceSansPro-Bold; 
+}
+
+.click-page {
+  font-size: 22px;
+  font-family: SourceSansPro-Bold;   
+}
+
 .notif
 {
   padding:50px 0 0 0 !important;

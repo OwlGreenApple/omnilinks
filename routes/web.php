@@ -58,6 +58,7 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
         return view('user.dashboard.dash');
     });
     Route::get('/dash/load-dashboard','DashboardController@loadDashboard');
+    Route::get('/dash/load-chart','DashboardController@load_chart');
     Route::get('/dash/load-link','DashboardController@loadlink');
     Route::get('/dash/delete-pages','DashboardController@deletePage');
     Route::get('/pdf/{id}/biolinks','DashboardController@pdf_biolinks');

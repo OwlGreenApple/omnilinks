@@ -16,16 +16,40 @@ class DashboardController extends Controller
 {
     public function loadDashboard()
     {
-    	$page=Page::where('user_id',Auth::user()->id)
-    				->orderBy('created_at','ascend')
-    				->paginate(5);
+    	$page = Page::where('user_id',Auth::user()->id)
+      				->orderBy('created_at','ascend')
+      				->paginate(5);
+
     	//dd($page->count());
     	$arr['view']=(string) view('user.dashboard.dashboardcontent')
     	 				->with('pages',$page);
 
     	return $arr;
     }
-   
+    
+    public function load_chart(Request $request){
+      $query_date = date('d-m-Y');
+      $first_date = date('01-m-Y', strtotime($query_date));
+      $arr = array();
+
+      $total_click = 0;
+      while($first_date <= $query_date){
+        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/all/total-click/counter.txt';
+
+        $click = $this->check_file($filename);
+        $total_click = $total_click + $click;
+          
+        $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click);
+
+        $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
+      }
+
+      $arr['chart'] = $arr;
+      $arr['total_click'] = $total_click;
+
+      return $arr;
+    }
+
     public function deletePage(Request $Request)
     {
     	$page=Page::find($Request->deletedataid);
@@ -79,11 +103,12 @@ class DashboardController extends Controller
     public function pdf_singlelinks($id){
       $link = Link::find($id);
 
-      $chart = $this->chart_link($link);
+      $arr = $this->chart_link($link);
 
       $data = array(
         'link' => $link,
-        'chart' => $chart,
+        'chart' => $arr['chart'],
+        'total_click' => $arr['total_click'],
       );
 
       $pdf = PDF::loadView('user.pdf.pdf-single', $data)
@@ -119,7 +144,33 @@ class DashboardController extends Controller
       //$last_date = date('t-m-Y', strtotime($query_date));
       $arr = array();
 
-      while($first_date <= $query_date){
+      foreach ($banners as $banner) {
+        $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/'.$page->id.'/banner-'.$banner->title.'/counter.txt';
+
+        $click = $this->check_file($filename);
+
+        $arr[$banner->title] = $click;
+      }
+
+      foreach ($links as $link) {
+        $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/'.$page->id.'/link-'.$link->title.'/counter.txt';
+
+        $click = $this->check_file($filename);
+
+        $arr[$link->title] = $click;
+      } 
+
+      $key = ['wa','telegram','skype','fb','ig','twitter','youtube'];
+        
+      foreach ($key as $k) {
+        $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/'.$page->id.'/'.$k.'/counter.txt';
+
+        $click = $this->check_file($filename);
+
+        $arr[$k] = $click;
+      }
+
+      /*while($first_date <= $query_date){
         foreach ($banners as $banner) {
           $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/banner-'.$banner->title.'/counter.txt';
 
@@ -159,7 +210,7 @@ class DashboardController extends Controller
         }
           
         $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
-      }
+      }*/
 
       return $arr;
     }
@@ -170,7 +221,17 @@ class DashboardController extends Controller
       //$last_date = date('t-m-Y', strtotime($query_date));
       $arr = [];
 
-      $click_day = 0;
+      while($first_date <= $query_date){
+        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/'.$page->id.'/total-click/counter.txt';
+
+        $click = $this->check_file($filename);
+          
+        $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click);
+
+        $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
+      }
+
+      /*$click_day = 0;
       while($first_date <= $query_date){
         foreach ($banners as $banner) {
           $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/banner-'.$banner->title.'/counter.txt';
@@ -201,7 +262,7 @@ class DashboardController extends Controller
         $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click_day);
 
         $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
-      }
+      }*/
 
       return $arr;
     }
@@ -211,8 +272,23 @@ class DashboardController extends Controller
       $first_date = date('01-m-Y', strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
       $arr = [];
+      $total_click = 0;
 
-      $click_day = 0;
+      while($first_date <= $query_date){
+        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/0/link-'.$link->title.'/counter.txt';
+
+        $click = $this->check_file($filename);
+        $total_click = $total_click + $click;
+
+        $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click);
+
+        $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
+      }
+
+      $allarr['chart'] = $arr;
+      $allarr['total_click'] = $total_click;
+
+      /*$click_day = 0;
       while($first_date <= $query_date){
         
         $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
@@ -222,8 +298,8 @@ class DashboardController extends Controller
         $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click);
 
         $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
-      }
+      }*/
 
-      return $arr;
+      return $allarr;
     }
 }

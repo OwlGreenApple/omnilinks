@@ -1,6 +1,7 @@
 <?php 
     use App\Link;
     use App\Banner;
+    use App\Http\Controllers\DashboardController;
  ?>
 @if(!$pages->count())
   <div class="card noshow">
@@ -13,6 +14,21 @@
   </div>
 @else
   @foreach($pages as $page)
+    <?php
+      $links=Link::where('users_id',Auth::user()->id)
+              ->where('pages_id',$page->id)
+              ->get();
+
+      $banners=Banner::where('users_id',Auth::user()->id)
+                ->where('pages_id',$page->id)
+                ->get();
+
+      $dashcont = new DashboardController;
+
+      $arr = $dashcont->counter_click_month($page,$banners,$links);
+
+    ?>
+
     <div class="card carddash">
       <div class="card-body link-header" id="linkHeader" dataid="{{$page->id}}" style="cursor:pointer;">
         <div class="row">
@@ -85,7 +101,9 @@
 
           <div class="col-md-2">
             <div class="p-4 bd-highlight" align="center">
-              {{$page->total_counter}}<br>
+              <span class="click-page">
+                {{array_sum($arr)}}
+              </span><br>
               clicks
             </div>
           </div>
@@ -103,8 +121,8 @@
                 <i class="fas fa-pencil-alt"></i>
               </button>
 
-              <a href="{{url('pdf/1/biolinks')}}" target="_blank">
-                <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;">
+              <a href="{{url('pdf/'.$page->id.'/biolinks')}}" target="_blank">
+                <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;" data-url="{{url('pdf/'.$page->id.'/biolinks')}}">
                   <i class="far fa-file-pdf"></i>
                   Saved AS PDF
                 </button>
@@ -117,12 +135,6 @@
 
       <div class="card-body content-link hidden" style="display: none;">
         <!--banner-->
-        <?php 
-          $banners=Banner::where('users_id',Auth::user()->id)
-                    ->where('pages_id',$page->id)
-                    ->get(); 
-        ?>
-
         @if($banners->count())
           <div class="row">
             <div class="col-md-12">
@@ -141,8 +153,10 @@
 
               <div class="col-md-2">
                 <div class="p-4 bd-highlight">
-                   @foreach($banners as $banner)
-                  <span>clicks</span><br>
+                  @foreach($banners as $banner)
+                    <span>
+                      {{$arr[$banner->title]}} clicks
+                    </span><br>
                   @endforeach
                 </div>
               </div>
@@ -183,14 +197,20 @@
           <div class="col-md-2">
             <div class="p-4 bd-highlight">
               @if($page->wa_pixel_id!=0 &&  !is_null($page->wa_pixel_id))
-              <span>clicks wa</span><br>
+              <span>
+                {{$arr['wa']}} clicks
+              </span><br>
               @endif
              @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
-                <span>Click telgram</span><br>
+                <span>
+                  {{$arr['telegram']}} clicks
+                </span><br>
               @endif
 
               @if($page->skype_pixel_id!=0 && !is_null($page->skype_pixel_id))
-              <span>Click Skype</span><br>
+                <span>
+                  {{$arr['skype']}} clicks
+                </span><br>
               @endif              
             </div>
           </div>
@@ -213,12 +233,6 @@
         </div>
 
         <!--Links-->
-        <?php
-          $links=Link::where('users_id',Auth::user()->id)
-                  ->where('pages_id',$page->id)
-                  ->get();
-        ?>
-        
         @if($links->count())
           <div class="row">
             <div class="col-md-12">
@@ -239,7 +253,9 @@
               <div class="col-md-2">
                 <div class="p-4 bd-highlight">
                   @foreach($links as $link)
-                  <span>clicks</span><br>
+                    <span>
+                      {{$arr[$link->title]}} clicks
+                    </span><br>
                   @endforeach
                 </div>
               </div>
@@ -287,17 +303,25 @@
           <div class="col-md-2">
             <div class="p-4 bd-highlight">
               @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
-              <span>clicks Fb</span><br>
+                <span>
+                  {{$arr['fb']}} clicks
+                </span><br>
               @endif
               @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
-               <span>clicks ig</span><br>
-               @endif
-               @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
-                <span>clicks twit</span><br>
-                @endif
-                @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
-                 <span>clicks yt</span><br>
-                 @endif
+                <span>
+                  {{$arr['ig']}} clicks
+                </span><br>
+              @endif
+              @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
+                <span>
+                  {{$arr['twitter']}} clicks
+                </span><br>
+              @endif
+              @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
+                <span>
+                  {{$arr['youtube']}} clicks
+                </span><br>
+              @endif
             </div>
           </div>
 
