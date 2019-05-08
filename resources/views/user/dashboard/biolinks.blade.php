@@ -206,14 +206,6 @@
     refreshpixel();
     refreshwa();
 
-    <?php if($pages->is_rounded) {?>
-      $(".mobile1").addClass("roundedview");
-    <?php } ?>
-
-    <?php if($pages->is_outlined) {?>
-      $(".mobile1").addClass("outlinedview");
-    <?php } ?>
-
     $('.infooter').remove();
 
     $(".sortable-msg").sortable({
@@ -292,6 +284,18 @@
       // console.log(color);
       $("#colorOutlineButton").val(color);
       $('.btnview').css("border-color",color);
+      
+      if ($('input[name="outlined"]')=="1") {
+        console.log("a");
+        $(".mobile1").addClass("outlinedview");
+        $('.btnview').css("background-color","transparent");
+        $('.btnview').css("color",color);
+      } else {
+        console.log("b");
+        $('.btnview').css("background-color",color);
+        $('.btnview').css("color","#fff");
+      }
+      
     }
     $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
     picker = $.farbtastic('#colorpickerOutlineButton');
@@ -355,6 +359,22 @@
       //showSlides();
       readThis(this);
      });
+     
+    $( ".txthov" ).hover(
+      function() {
+          temp1 = $(this).css("color");
+          temp2 = $(this).css("background-color");
+         
+          $(this).parent().children().css("background-color",temp1);
+          $(this).parent().children().css("color",temp2);
+      }, function() {
+          temp1 = $(this).css("color");
+          temp2 = $(this).css("background-color");
+         
+          $(this).parent().children().css("background-color",temp1);
+          $(this).parent().children().css("color",temp2);
+      }
+    );     
   });
 </script>
 
@@ -1147,16 +1167,16 @@
                   </div>
                   <div class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                  <div class="link shown-mes" id="waviewid" >
-                      <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><span class="txthov" style="font-size: xx-small;"> Whatsapp</span></a>
+                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
                     </div>
                     <div class="link hiddens" id="telegramviewid" style="display: none;">
-                      <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><span class="txthov" style="font-size: xx-small;"> Telegram</span></a>
+                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
                     </div> 
-                     <div class="link hiddens" id="skypeviewid" style="display: none;">
-                      <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><span class="txthov" style="font-size: xx-small;"> Skype</span></a>
+                    <div class="link hiddens" id="skypeviewid" style="display: none;">
+                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
                     </div>
                 </div>
                 <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
@@ -1165,10 +1185,14 @@
                   <?php $utlq=0  ?>
                   @foreach($links as $link)
                   <?php $utlq+=1 ?>
-                  <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                    <div class="txthov">
+                      <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                    </div>
                   @endforeach
                   @else
-                  <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                    <div class="txthov">
+                      <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                    </div>
                   @endif
                 </div>
                 </div>
@@ -1275,15 +1299,26 @@ $(document).on('focus','.focuslink-update',function(){
 });
 
 
+
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("outlinedview");
         $(this).val(1);
+        
+        $('.btnview').css("background-color","transparent");
+        $('.btnview').css("color",$("#colorOutlineButton").val());
       } else if ($(this).prop("checked") == false) {
         $(".mobile1").removeClass("outlinedview");
         $(this).val(0);
+        
+        $('.btnview').css("background-color",$("#colorOutlineButton").val());
+        $('.btnview').css("color","#fff");
       }
     });
+
+    <?php if($pages->is_rounded) {?>
+      $(".mobile1").addClass("roundedview");
+    <?php } ?>
 
     $('.rounded').click(function() {
       if ($(this).prop("checked") == true) {
@@ -1328,11 +1363,20 @@ $(document).on('focus','.focuslink-update',function(){
     //for bacground, outline color 
     <?php if (!is_null($pages->rounded)) { ?>
       $('#colorButton').val("<?php echo $pages->rounded; ?>");
-      $('.btnview').css("background-color","<?php echo $pages->rounded; ?>");
+      // $('.btnview').css("background-color","<?php echo $pages->rounded; ?>");
     <?php } ?>
     <?php if (!is_null($pages->outline)) { ?>
       $('#colorOutlineButton').val("<?php echo $pages->outline; ?>");
       $('.btnview').css("border-color","<?php echo $pages->outline; ?>");
+    <?php } ?>
+
+    <?php if($pages->is_outlined) {?>
+      $(".mobile1").addClass("outlinedview");
+      $('.btnview').css("background-color","transparent");
+      $('.btnview').css("color","<?php echo $pages->outline; ?>");
+    <?php } else {?>
+      $('.btnview').css("background-color","<?php echo $pages->outline; ?>");
+      $('.btnview').css("color","#fff");
     <?php } ?>
 
   });
