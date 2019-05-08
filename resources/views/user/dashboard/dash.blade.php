@@ -6,7 +6,7 @@
 
  
 <script type="text/javascript">
-  // var currentPage="";
+  var currentPage="";
   var chart = '';
 
   function load_chart(){
@@ -56,20 +56,18 @@
   }
 
   function refreshDashboard() {
-    // if(currentPage=="")
-    // {
-    //   currentPage=;
-    // }
+    if(currentPage=="") {
+      currentPage = "<?php echo url('/dash/load-dashboard'); ?>";
+    }
 
     $.ajax({
       type: 'GET',
-      url: "<?php echo url('/dash/load-dashboard'); ?>",
+      url: currentPage,
       dataType: 'text',
       success: function(result) {
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        load_chart();
-        //$('#pager').html(data.pager);
+        $('#pager').html(data.pager);
       }
     });
   }
@@ -93,11 +91,12 @@
 
   $(document).ready(function() {
     refreshDashboard();
+    load_chart();
   });
 
 </script>
 
-<div class="container">
+<div class="container mb-5">
   <div class="row notif">
     <div class="col-md-12 mb-3">
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -197,7 +196,9 @@
       
     </div>
 
-      <div class="" id="content"></div>
+    <div class="" id="content"></div>
+
+    <div id="pager"></div>
 
     </div>
   </div>
@@ -288,18 +289,18 @@
 </div>
 
 <script type="text/javascript">
+  $(document).on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    currentPage = $(this).attr('href');
+    refreshDashboard();
+  });
+
   $('body').on('click','.btn-deletePage',function(e) 
   {
     e.preventDefault();
     e.stopPropagation();
     $('#id_delete').val($(this).attr('deletedataid'));
     $('#confirm-delete').modal('show');
-  });
-
-  $('body').on('click','.btn-pdf',function(e) 
-  {
-    e.preventDefault();
-    e.stopPropagation();
   });
 
   $('body').on('click','.btncreate-bio',function(e){
@@ -329,6 +330,14 @@
     e.stopPropagation();
     var url = $(this).attr('data-url');
     window.open(url);
+  });
+
+  $('body').on('click','.single-report',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var url = $(this).attr('data-url');
+    window.location.href = url;
+    //window.open(url);
   });
 
   $('body').on('click','.link-header',function(e) {

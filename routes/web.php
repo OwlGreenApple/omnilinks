@@ -61,10 +61,10 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
     Route::get('/dash/load-chart','DashboardController@load_chart');
     Route::get('/dash/load-link','DashboardController@loadlink');
     Route::get('/dash/delete-pages','DashboardController@deletePage');
-    Route::get('/pdf/{id}/biolinks','DashboardController@pdf_biolinks');
-    Route::get('/pdf/{id}/singlelinks','DashboardController@pdf_singlelinks');
-    Route::get('/tes','DashboardController@counter_click_month');
-
+    Route::get('/pdf/{id}/biolinks','DashboardController@pdf_page');
+    Route::get('/pdf/{pageid}/{id}/{mode}','DashboardController@pdf_single');
+    Route::get('/dash-detail/{pageid}/{id}/{mode}','DashboardController@dashboard_detail');
+    
     //makebio
     Route::get('/dash/new/','BiolinkController@newbio');
     Route::get('/dash/new/{names}','BiolinkController@viewpage');

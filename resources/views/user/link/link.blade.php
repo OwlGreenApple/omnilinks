@@ -95,17 +95,19 @@ $banner = Banner::where('pages_id','=',$pages->id)
       <div class="captionTextHolder">
         <p class="captionText slideTextFromTop"></p>
       </div>
-      @if(!is_null($banner[0]->images_banner))
-        @foreach($banner as $banner)
-        <div class="imageHolder">
-          <a href="{{url('click/banner/'.$banner->id)}}" target="_blank">
-            <img src="<?php echo url(Storage::disk('local')->url('app/'.$banner->images_banner));?>">
-            <p class="captionText"></p> 
-          </a>
-        </div>
-        @endforeach
-        @else
-        <div></div>
+      @if($banner->count())
+        @if(!is_null($banner[0]->images_banner))
+          @foreach($banner as $banner)
+          <div class="imageHolder">
+            <a href="{{url('click/banner/'.$banner->id)}}" target="_blank">
+              <img src="<?php echo url(Storage::disk('local')->url('app/'.$banner->images_banner));?>">
+              <p class="captionText"></p> 
+            </a>
+          </div>
+          @endforeach
+          @else
+          <div></div>
+        @endif
       @endif
     </div>
     <div id="dotsContainer"></div>
@@ -148,13 +150,15 @@ $banner = Banner::where('pages_id','=',$pages->id)
     </div>
 
     <div class="row">
-    	@foreach($link as $link)
-      	<div class="col-md-12 col-12 mrglink"> 
-          <a href="{{url('click/link/'.$link->id)}}" title="" class="btn btnview" target="_blank">
-            <span>{{$link->title}}</span>
-          </a>
-        </div>
-      @endforeach
+      @if($link->count())
+      	@foreach($link as $link)
+        	<div class="col-md-12 col-12 mrglink"> 
+            <a href="{{url('click/link/'.$link->id)}}" title="" class="btn btnview" target="_blank">
+              <span>{{$link->title}}</span>
+            </a>
+          </div>
+        @endforeach
+      @endif
       <div class="col-md-12 col-12 mrglink"> 
         <a href="#" title="" class="btn btnview">
           <span>tes</span>

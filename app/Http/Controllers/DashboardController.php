@@ -18,13 +18,24 @@ class DashboardController extends Controller
     {
     	$page = Page::where('user_id',Auth::user()->id)
       				->orderBy('created_at','ascend')
-      				->paginate(5);
+      				->paginate(10);
 
-    	//dd($page->count());
     	$arr['view']=(string) view('user.dashboard.dashboardcontent')
-    	 				->with('pages',$page);
+    	 				      ->with('pages',$page);
+      $arr['pager'] = (string) view('user.dashboard.dash_pagination')
+                      ->with('pages',$page);
 
     	return $arr;
+    }
+
+    public function dashboard_detail($pageid,$id,$mode) {
+      $data = $this->detail_report($pageid,$id,$mode);
+
+      return view('user.dashboard.dashboard-detail.index')
+              ->with('data',$data)
+              ->with('pageid',$pageid)
+              ->with('id',$id)
+              ->with('mode',$mode);
     }
     
     public function load_chart(Request $request){
@@ -68,7 +79,7 @@ class DashboardController extends Controller
   		return $arr;
     } 
 
-    public function pdf_biolinks($id){
+    public function pdf_page($id){
       $page = Page::find($id);
       $banners = Banner::where('pages_id',$id)->get();
       $links = Link::where('pages_id',$id)->get();
@@ -100,16 +111,79 @@ class DashboardController extends Controller
       return $pdf->stream();
     }
 
-    public function pdf_singlelinks($id){
-      $link = Link::find($id);
+    public function detail_report($pageid,$id,$mode){
+      if($mode=='link'){
+        $link = Link::find($id); 
+        $arr = $this->chart_link($pageid,'link-'.$link->title); 
+    
+        $data = array(
+          'title' => $link->title,
+          'link' => $link->link,
+          'created_at' => $link->created_at,
+          'chart' => $arr['chart'],
+          'total_click' => $arr['total_click'],
+        );
+      } else if($mode=='banner') {
+        $banner = Banner::find($id);
+        $arr = $this->chart_link($pageid,'banner-'.$banner->title);
 
-      $arr = $this->chart_link($link);
+        $data = array(
+          'title' => $banner->title,
+          'link' => $banner->link,
+          'created_at' => $banner->created_at,
+          'chart' => $arr['chart'],
+          'total_click' => $arr['total_click'],
+        );
+      } else {
+        $page = Page::find($pageid);  
 
-      $data = array(
-        'link' => $link,
-        'chart' => $arr['chart'],
-        'total_click' => $arr['total_click'],
-      );
+        switch($mode){
+          case 'wa':
+            $title = 'WhatsApp';
+            $link = $page->wa_link;
+          break;
+          case 'telegram':
+            $title = 'Telegram';
+            $link = $page->telegram_link;
+          break;
+          case 'skype':
+            $title = 'Skype';
+            $link = $page->skype_link;
+          break;
+          case 'fb':
+            $title = 'Facebook';
+            $link = $page->fb_link;
+          break;
+          case 'ig':
+            $title = 'Instagram';
+            $link = $page->ig_link;
+          break;
+          case 'twitter':
+            $title = 'Twitter';
+            $link = $page->twitter_link;
+          break;
+          case 'youtube':
+            $title = 'Youtube';
+            $link = $page->youtube_link;
+          break;
+        }
+
+        $arr = $this->chart_link($pageid,$mode);
+
+        $data = array(
+          'title' => $title,
+          'link' => $link,
+          'created_at' => $page->created_at,
+          'chart' => $arr['chart'],
+          'total_click' => $arr['total_click'],
+        );
+      }
+
+      return $data;
+    }
+
+    public function pdf_single($pageid,$id,$mode){
+      $data = $this->detail_report($pageid,$id,$mode);
 
       $pdf = PDF::loadView('user.pdf.pdf-single', $data)
             ->setPaper('a4')
@@ -267,7 +341,7 @@ class DashboardController extends Controller
       return $arr;
     }
 
-    public function chart_link($link){
+    public function chart_link($pageid,$name){
       $query_date = date('d-m-Y');
       $first_date = date('01-m-Y', strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
@@ -275,7 +349,7 @@ class DashboardController extends Controller
       $total_click = 0;
 
       while($first_date <= $query_date){
-        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/0/link-'.$link->title.'/counter.txt';
+        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/'.$pageid.'/'.$name.'/counter.txt';
 
         $click = $this->check_file($filename);
         $total_click = $total_click + $click;
@@ -288,17 +362,19 @@ class DashboardController extends Controller
       $allarr['chart'] = $arr;
       $allarr['total_click'] = $total_click;
 
-      /*$click_day = 0;
-      while($first_date <= $query_date){
-        
-        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
+      /*while($first_date <= $query_date){
+        $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/0/link-'.$link->title.'/counter.txt';
 
         $click = $this->check_file($filename);
+        $total_click = $total_click + $click;
 
         $arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click);
 
         $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
-      }*/
+      }
+
+      $allarr['chart'] = $arr;
+      $allarr['total_click'] = $total_click;*/
 
       return $allarr;
     }
