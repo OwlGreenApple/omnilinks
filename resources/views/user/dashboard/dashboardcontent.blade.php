@@ -1,7 +1,24 @@
 <?php 
     use App\Link;
     use App\Banner;
+    use App\Http\Controllers\DashboardController;
  ?>
+
+<script>
+  $(document).ready(function() {
+    $('.tooltipstered').tooltipster({
+      contentAsHTML: true,
+      trigger: 'ontouchstart' in window || navigator.maxTouchPoints ? 'click' : 'hover',
+    });
+  });
+</script>
+
+<style>
+  .tooltipstered > a {
+    color: #505050;
+  }  
+</style>
+
 @if(!$pages->count())
   <div class="card noshow">
     <div class="card-body">
@@ -13,6 +30,21 @@
   </div>
 @else
   @foreach($pages as $page)
+    <?php
+      $links=Link::where('users_id',Auth::user()->id)
+              ->where('pages_id',$page->id)
+              ->get();
+
+      $banners=Banner::where('users_id',Auth::user()->id)
+                ->where('pages_id',$page->id)
+                ->get();
+
+      $dashcont = new DashboardController;
+
+      $arr = $dashcont->counter_click_month($page,$banners,$links);
+
+    ?>
+
     <div class="card carddash">
       <div class="card-body link-header" id="linkHeader" dataid="{{$page->id}}" style="cursor:pointer;">
         <div class="row">
@@ -34,7 +66,7 @@
               <input type="hidden" class="link-{{$page->id}}" value="omn.lkz/{{$page->names}}">
             </a>
             &nbsp;
-            <span class="btn-copylink" data-id="{{$page->id}}" data-link="omn.lkz/{{$page->names}}">
+            <span class="btn-copylink" data-id="{{$page->id}}" data-link="{{url('omn.lkz/'.$page->names)}}">
               <i class="far fa-clone"></i>  
             </span>
 
@@ -85,7 +117,9 @@
 
           <div class="col-md-2">
             <div class="p-4 bd-highlight" align="center">
-              {{$page->total_counter}}<br>
+              <span class="click-page">
+                {{array_sum($arr)}}
+              </span><br>
               clicks
             </div>
           </div>
@@ -103,8 +137,8 @@
                 <i class="fas fa-pencil-alt"></i>
               </button>
 
-              <a href="{{url('pdf/1/biolinks')}}" target="_blank">
-                <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;">
+              <a href="{{url('pdf/'.$page->id.'/biolinks')}}" target="_blank">
+                <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;" data-url="{{url('pdf/'.$page->id.'/biolinks')}}">
                   <i class="far fa-file-pdf"></i>
                   Saved AS PDF
                 </button>
@@ -117,12 +151,6 @@
 
       <div class="card-body content-link hidden" style="display: none;">
         <!--banner-->
-        <?php 
-          $banners=Banner::where('users_id',Auth::user()->id)
-                    ->where('pages_id',$page->id)
-                    ->get(); 
-        ?>
-
         @if($banners->count())
           <div class="row">
             <div class="col-md-12">
@@ -133,16 +161,22 @@
               <div class="col-md-7">
                 <span>Banner</span><br>
                  @foreach($banners as $banner)
-                <i class="fab fa-font-awesome-flag"></i>
-                <span> {{$banner->title}}</span><br>
+                    <span class="tooltipstered" title="Click To View Details">
+                      <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner')}}" data-url="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner')}}">
+                        <i class="fab fa-font-awesome-flag"></i>
+                        <span> {{$banner->title}}</span>
+                      </a><br>
+                    </span>
                 @endforeach
                 <br>
               </div>
 
               <div class="col-md-2">
                 <div class="p-4 bd-highlight">
-                   @foreach($banners as $banner)
-                  <span>clicks</span><br>
+                  @foreach($banners as $banner)
+                    <span>
+                      {{$arr[$banner->title]}} clicks
+                    </span><br>
                   @endforeach
                 </div>
               </div>
@@ -167,30 +201,51 @@
           <div class="col-md-7">
             <span>MESSENGERS</span><br>
             @if($page->wa_pixel_id!=0 and !is_null($page->wa_pixel_id))
-              <i class='fab fa-whatsapp'></i>
-              <span> Whatsapp</span><br>
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/wa')}}" data-url="{{url('dash-detail/'.$page->id.'/0/wa')}}">
+                  <i class='fab fa-whatsapp'></i>
+                  <span> Whatsapp</span>
+                </a>
+              </span>
+              <br>
             @endif
-            @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
-              <i class='fab fa-telegram'></i>
-              <span> Telegram</span><br>
+            @if($page->telegram_pixel_id!=0 and !is_null($page->telegram_pixel_id))
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/telegram')}}" data-url="{{url('dash-detail/'.$page->id.'/0/telegram')}}">
+                  <i class='fab fa-telegram'></i>
+                  <span> Telegram</span>
+                </a>
+              </span>
+              <br>
             @endif
-            @if($page->skype_pixel_id!=0 && !is_null($page->skype_pixel_id))
-              <i class='fab fa-skype'></i>
-              <span> Skype</span><br>
+            @if($page->skype_pixel_id!=0 and !is_null($page->skype_pixel_id))
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/skype')}}" data-url="{{url('dash-detail/'.$page->id.'/0/skype')}}">
+                  <i class='fab fa-skype'></i>
+                  <span> Skype</span>
+                </a>
+              </span>
+              <br>
             @endif
           </div>
 
           <div class="col-md-2">
             <div class="p-4 bd-highlight">
               @if($page->wa_pixel_id!=0 &&  !is_null($page->wa_pixel_id))
-              <span>clicks wa</span><br>
+              <span>
+                {{$arr['wa']}} clicks
+              </span><br>
               @endif
              @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
-                <span>Click telgram</span><br>
+                <span>
+                  {{$arr['telegram']}} clicks
+                </span><br>
               @endif
 
               @if($page->skype_pixel_id!=0 && !is_null($page->skype_pixel_id))
-              <span>Click Skype</span><br>
+                <span>
+                  {{$arr['skype']}} clicks
+                </span><br>
               @endif              
             </div>
           </div>
@@ -213,12 +268,6 @@
         </div>
 
         <!--Links-->
-        <?php
-          $links=Link::where('users_id',Auth::user()->id)
-                  ->where('pages_id',$page->id)
-                  ->get();
-        ?>
-        
         @if($links->count())
           <div class="row">
             <div class="col-md-12">
@@ -228,18 +277,22 @@
               <div class="col-md-7">
                 <span>Links</span><br>
                 @foreach($links as $link)
-                <i class="fas fa-link"></i>
-                <span>
-                  {{$link->title}}
-                </span>
-                <br>
+                  <span class="tooltipstered" title="Click To View Details">
+                    <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link')}}" data-url="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link')}}">
+                      <i class="fas fa-link"></i>
+                      <span>{{$link->title}}</span>
+                    </a>
+                  </span>
+                  <br>
                 @endforeach
               </div>
 
               <div class="col-md-2">
                 <div class="p-4 bd-highlight">
                   @foreach($links as $link)
-                  <span>clicks</span><br>
+                    <span>
+                      {{$arr[$link->title]}} clicks
+                    </span><br>
                   @endforeach
                 </div>
               </div>
@@ -264,40 +317,67 @@
             <span>Social-Media</span><br>
 
             @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
-              <i class='fab fa-facebook-f'></i>
-              <span> Facebook</span><br>
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/fb')}}" data-url="{{url('dash-detail/'.$page->id.'/0/fb')}}">
+                  <i class="fab fa-facebook-square"></i>
+                  <span> Facebook</span>
+                </a>
+              </span>
+              <br>
             @endif
 
             @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
-              <i class='fab fa-instagram'></i>
-              <span> Instagram</span><br>
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/ig')}}" data-url="{{url('dash-detail/'.$page->id.'/0/ig')}}">
+                  <i class='fab fa-instagram'></i>
+                  <span> Instagram</span>
+                </a>
+              </span>
+              <br>
             @endif
 
             @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
-              <i class='fab fa-twitter'></i>
-              <span> Twitter</span><br>
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/twitter')}}" data-url="{{url('dash-detail/'.$page->id.'/0/twitter')}}">
+                  <i class='fab fa-twitter'></i>
+                  <span> Twitter</span>
+                </a>
+              </span>
+              <br>
             @endif
 
             @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
-              <i class='fab fa-youtube'></i>
-              <span> Youtube</span><br>
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/youtube')}}" data-url="{{url('dash-detail/'.$page->id.'/0/youtube')}}">
+                  <i class='fab fa-youtube'></i>
+                  <span> Youtube</span><br>
+                </a>
+              </span>
             @endif
           </div>
 
           <div class="col-md-2">
             <div class="p-4 bd-highlight">
               @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
-              <span>clicks Fb</span><br>
+                <span>
+                  {{$arr['fb']}} clicks
+                </span><br>
               @endif
               @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
-               <span>clicks ig</span><br>
-               @endif
-               @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
-                <span>clicks twit</span><br>
-                @endif
-                @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
-                 <span>clicks yt</span><br>
-                 @endif
+                <span>
+                  {{$arr['ig']}} clicks
+                </span><br>
+              @endif
+              @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
+                <span>
+                  {{$arr['twitter']}} clicks
+                </span><br>
+              @endif
+              @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
+                <span>
+                  {{$arr['youtube']}} clicks
+                </span><br>
+              @endif
             </div>
           </div>
 

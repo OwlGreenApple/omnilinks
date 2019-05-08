@@ -6,52 +6,68 @@
 
  
 <script type="text/javascript">
-  window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: false,
-      theme: "light2",
-      title:{
-        text: "Simple Line Chart"
-      },
-      axisY:{
-        includeZero: false
-      },
-      data: [{        
-        type: "line",       
-        dataPoints: [
-          { y: 450 },
-          { y: 414},
-          { y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
-          { y: 460 },
-          { y: 450 },
-          { y: 500 },
-          { y: 480 },
-          { y: 480 },
-          { y: 410 , indexLabel: "lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
-          { y: 500 },
-          { y: 480 },
-          { y: 510 }
-        ]
-      }]
-    });
-    chart.render();  
-  };  
+  var currentPage="";
+  var chart = '';
 
-  // var currentPage="";
+  function load_chart(){
+    $.ajax({                                      
+      url: "<?php echo url('/dash/load-chart'); ?>",
+      type: 'get',
+      dataType: 'json',
+      success: function(data) {
+        chart = new CanvasJS.Chart("chartContainer", {
+              animationEnabled: true,
+              axisX:{
+                valueFormatString: "DD",
+                title: "Hari",
+              },
+              axisY:{
+                title: "Total Click",
+              },
+              legend:{
+                cursor: "pointer",
+                dockInsidePlotArea: true,
+                itemclick: toggleDataSeries
+              },              
+              data: [
+              {
+                type: "area",       
+                xValueType: "dateTime",
+                xValueFormatString: "DD-MM-YYYY",
+                dataPoints: data.chart,
+              }]
+            });
+
+          chart.render();
+
+          function toggleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              e.dataSeries.visible = false;
+            }
+            else{
+              e.dataSeries.visible = true;
+            }
+            chart.render();
+          }
+
+          $('#total-click').html(data.total_click);
+      }
+    });
+  }
+
   function refreshDashboard() {
-    // if(currentPage=="")
-    // {
-    //   currentPage=;
-    // }
+    if(currentPage=="") {
+      currentPage = "<?php echo url('/dash/load-dashboard'); ?>";
+    }
 
     $.ajax({
       type: 'GET',
-      url: "<?php echo url('/dash/load-dashboard'); ?>",
+      url: currentPage,
       dataType: 'text',
       success: function(result) {
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        //$('#pager').html(data.pager);
+        $('#pager').html(data.pager);
       }
     });
   }
@@ -75,35 +91,14 @@
 
   $(document).ready(function() {
     refreshDashboard();
+    load_chart();
   });
 
 </script>
 
-<style type="text/css">
-  
-.invalid-feedback {
-  display: none;
-  width: 100%;
-  margin-top: 0.25rem;
-  font-size: 80%;
-}
-.fa-search {
-  width: 15px;
-  margin: -25px 10px;
-  float: right;
-}  
-</style>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-
-
-<div class="container">
+<div class="container mb-5">
   <div class="row notif">
     <div class="col-md-12 mb-3">
-
-      <div id="chartContainer" style="height: 200px; width: 200px"></div>
-
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <button type="button" class="close" aria-label="Close" data-dismiss="alert">
           <span aria-hidden="true">×</span>
@@ -111,15 +106,15 @@
         Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
         untuk terus menggunakan Omnilinks
       </div>
-    @if (session('error'))
-    <div class="alert alert-danger">
-       <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-          <span aria-hidden="true">×</span>
-        </button>
-        {{ session('error') }} <a href="{{asset('/pricing')}}">Subscribe</a>
+      @if (session('error'))
+        <div class="alert alert-danger">
+          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+          </button>
+          {{ session('error') }} <a href="{{asset('/pricing')}}">Subscribe</a>
+        </div>
+      @endif
     </div>
-    @endif
-  </div>
 
     <div class="col-md-12">
         <button class="btnbio btncreate btncreate-bio">
@@ -132,7 +127,7 @@
         </button>
       </a>
 
-      <div style="padding-top: 49px; font-size: 25px;">
+      <div style="padding-top: 49px; font-size: 25px; padding-bottom: 5px">
         <p>Omnilinkz Chart</p>
 
         <div class="row mb-4 mt-5">
@@ -185,23 +180,26 @@
 
       </div>
 
-      <hr>
+      <hr style="margin-bottom: 45px">
 
     <div class="row">
-          <div class="col-md-6">
-            <div class="card mb-3">
-              <div class="card-header">
-                <i class="fas fa-chart-area"></i>
-                Area Chart Example</div>
-              <div class="card-body">
-                <div id="chart"></div>
-              </div>
-              <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            </div>
-          </div>
+      <div class="col-md-8">
+        <div id="chartContainer" style="height:300px; width:100%;"></div>    
+      </div>
+      <div class="col-md-4 div-click" align="center">
+        <span class="span-click">
+          Total Click <br>
+          <span id="total-click"></span> <br> 
+          dalam 30 hari
+        </span>
+      </div>
+      
     </div>
 
-      <div id="content"></div>
+    <div class="" id="content"></div>
+
+    <div id="pager"></div>
+
     </div>
   </div>
 </div>
@@ -289,80 +287,20 @@
       
   </div>
 </div>
-<script type="text/javascript">
-  
-$.getJSON(
-    'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
-    function (data) {
 
-        Highcharts.chart('chart', {
-            chart: {
-                zoomType: 'x'
-            },
-            subtitle: {
-                text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-            },
-            xAxis: {
-                type: 'datetime'
-            },
-            yAxis: {
-                title: {
-                    text: 'Exchange rate'
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                area: {
-                    fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
-                    },
-                    marker: {
-                        radius: 2
-                    },
-                    lineWidth: 1,
-                    states: {
-                        hover: {
-                            lineWidth: 1
-                        }
-                    },
-                    threshold: null
-                }
-            },
-
-            series: [{
-                type: 'area',
-                name: 'USD to EUR',
-                data: data
-            }]
-        });
-    }
-);
-</script>
 <script type="text/javascript">
+  $(document).on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    currentPage = $(this).attr('href');
+    refreshDashboard();
+  });
+
   $('body').on('click','.btn-deletePage',function(e) 
   {
     e.preventDefault();
     e.stopPropagation();
     $('#id_delete').val($(this).attr('deletedataid'));
     $('#confirm-delete').modal('show');
-  });
-
-  $('body').on('click','.btn-pdf',function(e) 
-  {
-    e.preventDefault();
-    e.stopPropagation();
   });
 
   $('body').on('click','.btncreate-bio',function(e){
@@ -385,6 +323,21 @@ $.getJSON(
     e.stopPropagation();
     var uid = $(this).attr('data-id');
     window.location.href="{{url('/dash/new/')}}"+'/'+uid;
+  });
+
+  $('body').on('click','.btn-pdf',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var url = $(this).attr('data-url');
+    window.open(url);
+  });
+
+  $('body').on('click','.single-report',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var url = $(this).attr('data-url');
+    window.location.href = url;
+    //window.open(url);
   });
 
   $('body').on('click','.link-header',function(e) {

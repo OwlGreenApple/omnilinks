@@ -426,26 +426,35 @@ class BiolinkController extends Controller
   	return $arr;
   }
 
+  public function make_file($date,$pageid,$name){
+    $filename = 'clicked/'.Auth::user()->email.'/'.$date.'/'.$pageid.'/'.$name.'/counter.txt';
+
+    $counter = 0;
+
+    if(file_exists('storage/app/'.$filename)){
+      $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
+      $content = (int)fread($myfile, filesize('storage/app/'.$filename));
+      $counter = $content + 1;
+      fclose($myfile);
+    } else {
+      $counter = 1;
+    }
+
+    Storage::put($filename,$counter);
+  }
+
   public function click($mode,$id){
     if($mode=='link'){
       $link = Link::find($id);
       $link->counter = $link->counter+1;
       $link->save();
 
-      $filename = 'clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/link-'.$link->title.'/counter.txt';
-
-      $counter = 0;
-
-      if(file_exists('storage/app/'.$filename)){
-        $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
-        $content = (int)fread($myfile, filesize('storage/app/'.$filename));
-        $counter = $content + 1;
-        fclose($myfile);
-      } else {
-        $counter = 1;
-      }
-
-      Storage::put($filename,$counter);
+      $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->title);
+      $this->make_file(date('d-m-Y'),$link->pages_id,'total-click');
+      $this->make_file(date('d-m-Y'),'all','total-click');
+      $this->make_file(date('m-Y'),$link->pages_id,'link-'.$link->title);
+      $this->make_file(date('m-Y'),$link->pages_id,'total-click');
+      $this->make_file(date('m-Y'),'all','total-click');
 
       $pixel = Pixel::find($link->pixel_id);
 
@@ -461,20 +470,12 @@ class BiolinkController extends Controller
       $banner->counter = $banner->counter+1;
       $banner->save();
 
-      $filename = 'clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/banner-'.$banner->title.'/counter.txt';
-
-      $counter = 0;
-
-      if(file_exists('storage/app/'.$filename)){
-        $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
-        $content = (int)fread($myfile, filesize('storage/app/'.$filename));
-        $counter = $content + 1;
-        fclose($myfile);
-      } else {
-        $counter = 1;
-      }
-
-      Storage::put($filename,$counter);
+      $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->title);
+      $this->make_file(date('d-m-Y'),$banner->pages_id,'total-click');
+      $this->make_file(date('d-m-Y'),'all','total-click');
+      $this->make_file(date('m-Y'),$banner->pages_id,'banner-'.$banner->title);
+      $this->make_file(date('m-Y'),$banner->pages_id,'total-click');
+      $this->make_file(date('m-Y'),'all','total-click');
 
       $pixel = Pixel::find($banner->pixel_id);
 
@@ -491,63 +492,48 @@ class BiolinkController extends Controller
       switch ($mode) {
         case "wa":
           $pages->wa_link_counter = $pages->wa_link_counter+1;
-          //$counter = $pages->wa_link_counter;   
           $link = $pages->wa_link;
           $idpixel = $pages->wa_pixel_id;
         break;
         case "telegram":
           $pages->telegram_link_counter = $pages->telegram_link_counter+1;
-          //$counter = $pages->telegram_link_counter; 
           $link = $pages->telegram_link;
           $idpixel = $pages->telegram_pixel_id;
         break;
         case "skype":
           $pages->skype_link_counter = $pages->skype_link_counter+1;
-          //$counter = $pages->skype_link_counter; 
           $link = $pages->skype_link;
           $idpixel = $pages->skype_pixel_id;
         break;
         case "youtube":
           $pages->youtube_link_counter = $pages->youtube_link_counter+1;
-          //$counter = $pages->youtube_link_counter; 
           $link = $pages->youtube_link;
           $idpixel = $pages->youtube_pixel_id;
         break;
         case "fb":
           $pages->fb_link_counter = $pages->fb_link_counter+1;
-          //$counter = $pages->fb_link_counter; 
           $link = $pages->fb_link;
           $idpixel = $pages->fb_pixel_id;
         break;
         case "twitter":
           $pages->twitter_link_counter = $pages->twitter_link_counter+1;
-          //$counter = $pages->twitter_link_counter; 
           $link = $pages->twitter_link;
           $idpixel = $pages->twitter_pixel_id;
         break;
         case "ig":
           $pages->ig_link_counter = $pages->ig_link_counter+1;
-          //$counter = $pages->ig_link_counter; 
           $link = $pages->ig_link;
           $idpixel = $pages->ig_pixel_id;
         break;
       }
-
-      $filename = 'clicked/'.Auth::user()->email.'/'.date('d-m-Y').'/'.$mode.'/counter.txt';
-
-      $counter = 0;
-
-      if(file_exists('storage/app/'.$filename)){
-        $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
-        $content = (int)fread($myfile, filesize('storage/app/'.$filename));
-        $counter = $content + 1;
-        fclose($myfile);
-      } else {
-        $counter = 1;
-      }
-
-      Storage::put($filename,$counter);
       $pages->save();
+
+      $this->make_file(date('d-m-Y'),$pages->id,$mode);
+      $this->make_file(date('d-m-Y'),$pages->id,'total-click');
+      $this->make_file(date('d-m-Y'),'all','total-click');
+      $this->make_file(date('m-Y'),$pages->id,$mode);
+      $this->make_file(date('m-Y'),$pages->id,'total-click');
+      $this->make_file(date('m-Y'),'all','total-click');
 
       $pixel = Pixel::find($idpixel);
       //jalanin pixel

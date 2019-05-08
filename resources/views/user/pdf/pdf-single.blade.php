@@ -45,12 +45,12 @@
       <div class="col-xs-12">
         <span class="titel">
           <span style="font-size:40px">
-            <b>{{$link->title}}</b>  
+            <b>{{$title}}</b>  
           </span>
           <br>
-          URL : {{$link->link}} <br>
+          URL : {{$link}} <br>
           <br>
-          Created on : {{ date("F d, Y", strtotime($link->created_at))  }} 
+          Created on : {{ date("F d, Y", strtotime($created_at))  }} 
         </span>
       </div>
     </div>
@@ -65,7 +65,7 @@
           Total Click
         </span> <br>
         <span class="total-click">
-          
+          {{$total_click}}
         </span> <br>
         <span class="click-txt">
           dalam 30 hari
