@@ -200,162 +200,55 @@
   }
 
   
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
 
-  $(document).ready(function() {
-    loadPixelPage();
-    refreshpixel();
-    refreshwa();
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
 
-    <?php if($pages->is_rounded) {?>
-      $(".mobile1").addClass("roundedview");
-    <?php } ?>
-
-    <?php if($pages->is_outlined) {?>
-      $(".mobile1").addClass("outlinedview");
-    <?php } ?>
-
-    $('.infooter').remove();
-
-    $(".sortable-msg").sortable({
-      handle: '.handle',
-      cursor: 'move',
-      axis: 'y',
-      stop: function(event, ui) {
-        var data = $(this).sortable('serialize');
-        //save_order(data);
-      }
-    });
-    $(".sortable-msg").disableSelection();
-    //$( ".sortable-msg" ).draggable();
-
-    $(".sortable-link").sortable({
-      handle: '.handle',
-      cursor: 'move',
-      axis: 'y',
-      stop: function(event, ui) {
-        var data = $(this).sortable('serialize');
-        //save_order(data);
-      }
-    });
-    $(".sortable-link").disableSelection();
-    //$( ".sortable-link" ).draggable();
-
-    $(".sortable-sosmed").sortable({
-      handle: '.handle',
-      cursor: 'move',
-      axis: 'y',
-      stop: function(event, ui) {
-        var data = $(this).sortable('serialize');
-        //save_order(data);
-      }
-    });
-    $(".sortable-sosmed").disableSelection();
-
-    //picker for background device color purpose
-    function onColorChange(color) {
-      // console.log(color);
-      $("#phonecolor").removeClass();
-      $("#phonecolor").addClass("screen");
-      $("#phonecolor").css("background-color",color);
-      $("#backtheme").val();
-      $("#color").val(color);
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {
+      slideIndex = 1;
+    }    
+    if (n < 1) {
+      slideIndex = slides.length;
     }
-    $('#colorpicker').farbtastic('#color');
-    picker = $.farbtastic('#colorpicker');
-    // picker.setColor("#b6b6ff");
-    $("#color").on('keyup', function() {
-      picker.setColor($(this).val());
-    });
-    picker.linkTo(onColorChange);
-    
-    //for background color button purpose 
-    function onColorButtonChange(color) {
-      // console.log(color);
-      $("#colorButton").val(color);
-      $('.btnview').css("background-color",color);
+    for (i = 0; i < slides.length; i++) 
+    {
+      slides[i].style.display = "none";
+      //slides[i].value='hid';
     }
-    $('#colorpickerButton').farbtastic('#colorButton');
-    picker = $.farbtastic('#colorpickerButton');
-    // picker.setColor("#b6b6ff");
-    $("#colorButton").on('keyup', function() {
-      picker.setColor($(this).val());
-    });
-    picker.linkTo(onColorButtonChange);
-    $("#link-custom-background-color").on('click', function(e) {
-      e.preventDefault();
-      $('#modal-color-picker-button').modal('toggle');
-    });
-
-    //modal-color-picker-outline-button colorpickerOutlineButton colorOutlineButton
-    //for button purpose colorpickerButton colorButton
-    function onOutlineColorButtonChange(color) {
-      // console.log(color);
-      $("#colorOutlineButton").val(color);
-      $('.btnview').css("border-color",color);
+    for (i = 0; i < dots.length; i++) 
+    {
+      dots[i].className = dots[i].className.replace("activated","");
     }
-    $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
-    picker = $.farbtastic('#colorpickerOutlineButton');
-    // picker.setColor("#b6b6ff");
-    $("#colorOutlineButton").on('keyup', function() {
-      picker.setColor($(this).val());
-    });
-    picker.linkTo(onOutlineColorButtonChange);
-    $("#link-custom-outline-color").on('click', function(e) {
-      e.preventDefault();
-      $('#modal-color-picker-outline-button').modal('toggle');
-    });
-    
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-          $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
-
-          $('#viewpicture').show();
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
+    slides[slideIndex-1].style.display = "block";
+    //slides[slideIndex-1].value='block';   
+    dots[slideIndex-1].className +=" activated";
+  }
+  function dotsok()
+  {
+    let i,a=0,dotselement,slidesid;
+    dotselement=$('#dot-view');
+    slidesid=$('.mySlides');
+    for (i = 0; i < slidesid.length ; i++) 
+    {
+      a+=1;
+      dotselement.append('<span class="dot picture-id-'+a+'-dot input-picture-'+a+'-dot" id="input-picture-'+a+'-dot" onclick="currentSlide('+i+')"></span>');
     }
+     if ($(".dot").length==1) {
+      $(".dot").parent().hide();
+      $('.prev').hide();
+      $('.next').hide();
+    }
+  }
 
-    $("#wizard-picture").on('change', function() {
-      readURL(this);
-    });
-    $(document).on('change','.pictureClass',function(){
-      let inputthis=$(this).attr('id');
-        function readThis(input) {
-          if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            $("."+inputthis+"-get").attr('src',e.target.result);
-            // $("."+inputthis+"-get").parent().show();
-            if ($(".mylides").hide()) {
-              $("."+inputthis+"-get").parent().show();
-              $("."+inputthis+"-dot").siblings().removeClass("activated");
-              $("."+inputthis+"-dot").addClass("activated");
-            }
-            
 
-            $("."+inputthis+"-get").attr("value","ada");
-            $("#"+inputthis+"-dot").show();
-             if ($(".dot").length==1) {
-              $(".dot").parent().hide();
-              $('.prev').hide();
-              $('.next').hide();
-            }
-            else{
-              $(".dot").parent().show();
-              $('.prev').show();
-              $('.next').show();
-            }
-          }
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
-      //showSlides();
-      readThis(this);
-     });
-  });
 </script>
 
 <section id="tabs" class="project-tab">
@@ -1147,16 +1040,16 @@
                   </div>
                   <div class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                  <div class="link shown-mes" id="waviewid" >
-                      <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><span class="txthov" style="font-size: xx-small;"> Whatsapp</span></a>
+                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
                     </div>
                     <div class="link hiddens" id="telegramviewid" style="display: none;">
-                      <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><span class="txthov" style="font-size: xx-small;"> Telegram</span></a>
+                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
                     </div> 
-                     <div class="link hiddens" id="skypeviewid" style="display: none;">
-                      <a href="#" class="btn btn-md btnview btn-light" style="
-                      width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><span class="txthov" style="font-size: xx-small;"> Skype</span></a>
+                    <div class="link hiddens" id="skypeviewid" style="display: none;">
+                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
                     </div>
                 </div>
                 <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
@@ -1165,10 +1058,14 @@
                   <?php $utlq=0  ?>
                   @foreach($links as $link)
                   <?php $utlq+=1 ?>
-                  <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                    <div class="txthov">
+                      <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                    </div>
                   @endforeach
                   @else
-                  <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                    <div class="txthov">
+                      <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                    </div>
                   @endif
                 </div>
                 </div>
@@ -1215,6 +1112,7 @@
   var elhtml;
   let idpic=6;
   let counterBanner=0;
+  
   $(document).ready(function() {
      // dotview();
     
@@ -1249,41 +1147,52 @@
       
       // console.log(inputtitlelink[0]);
     //let idlinkview=$('#title-'+execute+'-view');
-$(document).on('focus','.focuslink',function(){
-    let inputlinkview=$(this);
-    let getoutputviewlink=inputlinkview.attr('id');
-    let outputviewlink=$('.'+getoutputviewlink+'-get');
-    //console(outputviewlink);
-    $(document).on('keyup',inputlinkview,function(){
-       outputviewlink.text(inputlinkview.val());
-       if (inputlinkview.val()=='') {
-        outputviewlink.text('Masukkan Link');
-       }
+    $(document).on('focus','.focuslink',function(){
+      let inputlinkview=$(this);
+      let getoutputviewlink=inputlinkview.attr('id');
+      let outputviewlink=$('.'+getoutputviewlink+'-get');
+      //console(outputviewlink);
+      $(document).on('keyup',inputlinkview,function(){
+         outputviewlink.text(inputlinkview.val());
+         if (inputlinkview.val()=='') {
+          outputviewlink.text('Masukkan Link');
+         }
+      });
     });
-});
 
-$(document).on('focus','.focuslink-update',function(){
-  let inputlinkview=$(this);
-  let getoutputviewlink=inputlinkview.attr('id');
-  let outputviewlink=$('.'+getoutputviewlink+'-get');
-  $(document).on('keyup',inputlinkview,function(){
-    outputviewlink.text(inputlinkview.val());
-    if (inputlinkview.val()=='') {
-      outputviewlink.text('Masukkan Link');
-    }
-  });
-});
+    $(document).on('focus','.focuslink-update',function(){
+      let inputlinkview=$(this);
+      let getoutputviewlink=inputlinkview.attr('id');
+      let outputviewlink=$('.'+getoutputviewlink+'-get');
+      $(document).on('keyup',inputlinkview,function(){
+        outputviewlink.text(inputlinkview.val());
+        if (inputlinkview.val()=='') {
+          outputviewlink.text('Masukkan Link');
+        }
+      });
+    });
+
 
 
     $('.outlined').click(function() {
       if ($(this).prop("checked") == true) {
         $(".mobile1").addClass("outlinedview");
         $(this).val(1);
+        
+        $('.btnview').css("background-color","transparent");
+        $('.btnview').css("color",$("#colorOutlineButton").val());
       } else if ($(this).prop("checked") == false) {
         $(".mobile1").removeClass("outlinedview");
         $(this).val(0);
+        
+        $('.btnview').css("background-color",$("#colorOutlineButton").val());
+        $('.btnview').css("color","#fff");
       }
     });
+
+    <?php if($pages->is_rounded) {?>
+      $(".mobile1").addClass("roundedview");
+    <?php } ?>
 
     $('.rounded').click(function() {
       if ($(this).prop("checked") == true) {
@@ -1328,257 +1237,392 @@ $(document).on('focus','.focuslink-update',function(){
     //for bacground, outline color 
     <?php if (!is_null($pages->rounded)) { ?>
       $('#colorButton').val("<?php echo $pages->rounded; ?>");
-      $('.btnview').css("background-color","<?php echo $pages->rounded; ?>");
+      // $('.btnview').css("background-color","<?php echo $pages->rounded; ?>");
     <?php } ?>
     <?php if (!is_null($pages->outline)) { ?>
       $('#colorOutlineButton').val("<?php echo $pages->outline; ?>");
       $('.btnview').css("border-color","<?php echo $pages->outline; ?>");
     <?php } ?>
 
-  });
-
-  // Add the following code if you want the name of the file appear on select
-  $(document).on("change", ".custom-file-input",function() {
-    var fileName = $(this).val().split("\\").pop();
-    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-  });
-
-  $("body").on("click", "#savetemp", function() {
-    tambahTemp();
-    //tambahPages();
-    $('#pesanAlert').removeClass('alert-danger');
-    $('#pesanAlert').children().remove();
-  });
-  // $(".prev").click(function(){
-  //  let sibli=$(this).siblings(".mySlides").css("display","block");
-  //  console.log($(this).siblings(".mySlides").children().val());
-  //  if (sibli.children().val()=='tidakada') {
-  //   plusSlides(1);
-  //  }
-  // });
-  // $(".next").click(function(){
-  //  let sibli=$(this).parent();
-  //  let find= sibli.find(".mySlides");
-  //  if (find.css("display")=='block') {
-  //   let findimage=find.children().val();
-  //   if (findimage=="tidakada") {
-  //      plusSlides(-1);
-  //   }
-  //  }
-
-  //  // siblings(".mySlides").css("display","block");
-  //  // if (sibli.children().val()=="tidakada") {
-  //  // 
-  //  // }
-  // });
-  $("body").on("click", "#addBanner", function() {
-    //tambahBanner();
+    <?php if($pages->is_outlined) {?>
+      $(".mobile1").addClass("outlinedview");
+      $('.btnview').css("background-color","transparent");
+      $('.btnview').css("color","<?php echo $pages->outline; ?>");
+    <?php } else {?>
+      $('.btnview').css("background-color","<?php echo $pages->outline; ?>");
+      $('.btnview').css("color","#fff");
+    <?php } ?>
     
-    idpic+=1;
-    let $el;
-    // if($('.list-banner').length<=0){
-    //   $el = $( ".div-banner" ).append(elhtml);
-    // }
-    //  else {
-    //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
-    // }
-      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
-     $el = $(".div-banner").append(elhtml);
-     loadPixelPage();
-    if ($('.list-banner').length==5) {
-       $(this).attr('disabled', 'disabled'); 
+    loadPixelPage();
+    refreshpixel();
+    refreshwa();
+
+    $('.infooter').remove();
+
+    $(".sortable-msg").sortable({
+      handle: '.handle',
+      cursor: 'move',
+      axis: 'y',
+      stop: function(event, ui) {
+        var data = $(this).sortable('serialize');
+        //save_order(data);
       }
-    // if($el.find("input").val("")){
-    // $el.find("input").val("");  
-    // }
+    });
+    $(".sortable-msg").disableSelection();
+    //$( ".sortable-msg" ).draggable();
 
-    // $el.find("input").attr("value","");
-    // $el.attr("picture-id","picture-id-"+idpic+"");
-    // $el.find("input[type='file']").attr("id","input-picture-"+idpic+"");
+    $(".sortable-link").sortable({
+      handle: '.handle',
+      cursor: 'move',
+      axis: 'y',
+      stop: function(event, ui) {
+        var data = $(this).sortable('serialize');
+        //save_order(data);
+      }
+    });
+    $(".sortable-link").disableSelection();
+    //$( ".sortable-link" ).draggable();
 
-    // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
-    // $el.wrap('<form>').closest('form').trigger("reset");
-    // $el.unwrap();
-    // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
-    let countbanner=$('.mySlides').length;
-      // if (countbanner==1) {
+    $(".sortable-sosmed").sortable({
+      handle: '.handle',
+      cursor: 'move',
+      axis: 'y',
+      stop: function(event, ui) {
+        var data = $(this).sortable('serialize');
+        //save_order(data);
+      }
+    });
+    $(".sortable-sosmed").disableSelection();
 
+    //picker for background device color purpose
+    function onColorChange(color) {
+      // console.log(color);
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen");
+      $("#phonecolor").css("background-color",color);
+      $("#backtheme").val();
+      $("#color").val(color);
+    }
+    $('#colorpicker').farbtastic('#color');
+    picker = $.farbtastic('#colorpicker');
+    // picker.setColor("#b6b6ff");
+    $("#color").on('keyup', function() {
+      picker.setColor($(this).val());
+    });
+    picker.linkTo(onColorChange);
+    
+    //for background color button purpose 
+    function onColorButtonChange(color) {
+      // console.log(color);
+      $("#colorButton").val(color);
+      $('.btnview').css("background-color",color);
+    }
+    $('#colorpickerButton').farbtastic('#colorButton');
+    picker = $.farbtastic('#colorpickerButton');
+    // picker.setColor("#b6b6ff");
+    $("#colorButton").on('keyup', function() {
+      picker.setColor($(this).val());
+    });
+    picker.linkTo(onColorButtonChange);
+    $("#link-custom-background-color").on('click', function(e) {
+      e.preventDefault();
+      $('#modal-color-picker-button').modal('toggle');
+    });
+
+    //modal-color-picker-outline-button colorpickerOutlineButton colorOutlineButton
+    //for button purpose colorpickerButton colorButton
+    function onOutlineColorButtonChange(color) {
+      // console.log(color);
+      $("#colorOutlineButton").val(color);
+      $('.btnview').css("border-color",color);
+      
+      if ($('input[name="outlined"]')=="1") {
+        console.log("a");
+        $(".mobile1").addClass("outlinedview");
+        $('.btnview').css("background-color","transparent");
+        $('.btnview').css("color",color);
+      } else {
+        console.log("b");
+        $('.btnview').css("background-color",color);
+        $('.btnview').css("color","#fff");
+      }
+      
+    }
+    $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
+    picker = $.farbtastic('#colorpickerOutlineButton');
+    // picker.setColor("#b6b6ff");
+    $("#colorOutlineButton").on('keyup', function() {
+      picker.setColor($(this).val());
+    });
+    picker.linkTo(onOutlineColorButtonChange);
+    $("#link-custom-outline-color").on('click', function(e) {
+      e.preventDefault();
+      $('#modal-color-picker-outline-button').modal('toggle');
+    });
+    
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+          $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
+
+          $('#viewpicture').show();
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#wizard-picture").on('change', function() {
+      readURL(this);
+    });
+    $(document).on('change','.pictureClass',function(){
+      let inputthis=$(this).attr('id');
+        function readThis(input) {
+          if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $("."+inputthis+"-get").attr('src',e.target.result);
+            // $("."+inputthis+"-get").parent().show();
+            if ($(".mylides").hide()) {
+              $("."+inputthis+"-get").parent().show();
+              $("."+inputthis+"-dot").siblings().removeClass("activated");
+              $("."+inputthis+"-dot").addClass("activated");
+            }
+            
+
+            $("."+inputthis+"-get").attr("value","ada");
+            $("#"+inputthis+"-dot").show();
+             if ($(".dot").length==1) {
+              $(".dot").parent().hide();
+              $('.prev').hide();
+              $('.next').hide();
+            }
+            else{
+              $(".dot").parent().show();
+              $('.prev').show();
+              $('.next').show();
+            }
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      //showSlides();
+      readThis(this);
+     });
+     
+    $(".txthov").hover(
+      function() {
+          temp1 = $(this).css("color");
+          temp2 = $(this).css("background-color");
+         
+          $(this).parent().children().css("background-color",temp1);
+          $(this).parent().children().css("color",temp2);
+      }, function() {
+          temp1 = $(this).css("color");
+          temp2 = $(this).css("background-color");
+         
+          $(this).parent().children().css("background-color",temp1);
+          $(this).parent().children().css("color",temp2);
+      }
+    );     
+
+
+    // Add the following code if you want the name of the file appear on select
+    $(document).on("change", ".custom-file-input",function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+    $("body").on("click", "#savetemp", function() {
+      tambahTemp();
+      //tambahPages();
+      $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
+    });
+    // $(".prev").click(function(){
+    //  let sibli=$(this).siblings(".mySlides").css("display","block");
+    //  console.log($(this).siblings(".mySlides").children().val());
+    //  if (sibli.children().val()=='tidakada') {
+    //   plusSlides(1);
+    //  }
+    // });
+    // $(".next").click(function(){
+    //  let sibli=$(this).parent();
+    //  let find= sibli.find(".mySlides");
+    //  if (find.css("display")=='block') {
+    //   let findimage=find.children().val();
+    //   if (findimage=="tidakada") {
+    //      plusSlides(-1);
+    //   }
+    //  }
+
+    //  // siblings(".mySlides").css("display","block");
+    //  // if (sibli.children().val()=="tidakada") {
+    //  // 
+    //  // }
+    // });
+    $("body").on("click", "#addBanner", function() {
+      //tambahBanner();
+      
+      idpic+=1;
+      let $el;
+      // if($('.list-banner').length<=0){
+      //   $el = $( ".div-banner" ).append(elhtml);
       // }
-    let style=""; 
-    if ($(".list-banner").length==1) {
-      style="block";
-    }
-    else{
-     style="none"; 
-    }
-    $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
-    let slidesi=$('.mySlides');
-    let dotselementt=$('#dot-view');
-    let slidesiLength=slidesi.length-1;
-    //console.log(slidesiLength);
-      dotselementt.append('<span class="dot picture-id-'+idpic+'-dot input-picture-'+idpic+'-dot" id="input-picture-'+idpic+'-dot" onclick="currentSlide('+slidesiLength+')" style="display:none"></span>');
-       if ($(".dot").length==1) 
-    {
-      $(".dot").parent().hide();
-      $('.prev').hide();
-      $('.next').hide();
-    }
-  });
+      //  else {
+      //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
+      // }
+        elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+       $el = $(".div-banner").append(elhtml);
+       loadPixelPage();
+      if ($('.list-banner').length==5) {
+         $(this).attr('disabled', 'disabled'); 
+        }
+      // if($el.find("input").val("")){
+      // $el.find("input").val("");  
+      // }
 
-  $(document).on("click",".btn-deleteBannerUpdate",function(){
-    $(this).parent().hide();
-    $(this).parent().removeClass('list-banner');
-    let hide=$(this).parent();
-    hide.find(".statusBanner").val("delete");
-    let idthis=$(this).parent().attr("picture-id");
-    $("#"+idthis+"-get").remove();
-    $("."+idthis+"-dot").remove();
-    // if () {}  
+      // $el.find("input").attr("value","");
+      // $el.attr("picture-id","picture-id-"+idpic+"");
+      // $el.find("input[type='file']").attr("id","input-picture-"+idpic+"");
+
+      // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+      // $el.wrap('<form>').closest('form').trigger("reset");
+      // $el.unwrap();
+      // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+      let countbanner=$('.mySlides').length;
+        // if (countbanner==1) {
+
+        // }
+      let style=""; 
+      if ($(".list-banner").length==1) {
+        style="block";
+      }
+      else{
+       style="none"; 
+      }
+      $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+      let slidesi=$('.mySlides');
+      let dotselementt=$('#dot-view');
+      let slidesiLength=slidesi.length-1;
+      //console.log(slidesiLength);
+        dotselementt.append('<span class="dot picture-id-'+idpic+'-dot input-picture-'+idpic+'-dot" id="input-picture-'+idpic+'-dot" onclick="currentSlide('+slidesiLength+')" style="display:none"></span>');
+         if ($(".dot").length==1) 
+      {
+        $(".dot").parent().hide();
+        $('.prev').hide();
+        $('.next').hide();
+      }
+    });
+
+    $(document).on("click",".btn-deleteBannerUpdate",function(){
+      $(this).parent().hide();
+      $(this).parent().removeClass('list-banner');
+      let hide=$(this).parent();
+      hide.find(".statusBanner").val("delete");
+      let idthis=$(this).parent().attr("picture-id");
+      $("#"+idthis+"-get").remove();
+      $("."+idthis+"-dot").remove();
+      // if () {}  
+        if($('.list-banner').length<=1){
+        elhtml = $('.div-banner').html();
+        $('.prev').hide();
+        $('.next').hide();
+      }  
+        plusSlides(-1);
+    });
+
+
+    $(document).on("click", ".btn-deleteBanner", function() {
       if($('.list-banner').length<=1){
-      elhtml = $('.div-banner').html();
-      $('.prev').hide();
-      $('.next').hide();
-    }  
-      plusSlides(-1);
-  });
+        elhtml = $('.div-banner').html();
+        $('.prev').hide();
+        $('.next').hide();
+      } 
+      if ($('.list-banner').length<=5) {
+        $("#addBanner").removeAttr("disabled");
+      }
 
+      $(this).parent().remove();
+       let idthis=$(this).parent().attr("picture-id");
 
-  $(document).on("click", ".btn-deleteBanner", function() {
-    if($('.list-banner').length<=1){
-      elhtml = $('.div-banner').html();
-      $('.prev').hide();
-      $('.next').hide();
-    } 
-    if ($('.list-banner').length<=5) {
-      $("#addBanner").removeAttr("disabled");
-    }
+      $("#"+idthis+"-get").remove();
 
-    $(this).parent().remove();
-     let idthis=$(this).parent().attr("picture-id");
+      $("."+idthis+"-dot").remove();    
+        plusSlides(-1);
+       if ($(".dot").length==1) {
+        $(".dot").parent().hide();
+        $('.prev').hide();
+        $('.next').hide();
+      }
+    });
 
-    $("#"+idthis+"-get").remove();
+    $("body").on("click", ".btn-delete", function() {
+      if (confirm('anda yakin ingin menghapus pixel ini')) {
+        var idpixel = $(this).attr('dataid');
+        delete_pixel(idpixel);
+      }
+    });
 
-    $("."+idthis+"-dot").remove();    
-      plusSlides(-1);
-     if ($(".dot").length==1) {
-      $(".dot").parent().hide();
-      $('.prev').hide();
-      $('.next').hide();
-    }
-  });
+    $("body").on("click", ".btn-deletewa", function() {
+      if (confirm('anda yakin ingin menghapus walink ini')) {
+        var idwalink = $(this).attr('dataidwa');
+        deletewalink(idwalink);
+      }
+    });
 
-  $("body").on("click", ".btn-delete", function() {
-    if (confirm('anda yakin ingin menghapus pixel ini')) {
-      var idpixel = $(this).attr('dataid');
-      delete_pixel(idpixel);
-   }
-  });
+    $(document).on('click', '#generate', function(e) {
+      var nomor = $('#nomorwa').val();
+      var message = $('#pesan-wa').val();
+      var convert = encodeURI(message);
+      var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";
+          //console.log(link);
+      $('#demo').html(link);
+      tambahwalink();
+    });
 
-  $("body").on("click", ".btn-deletewa", function() {
-    if (confirm('anda yakin ingin menghapus walink ini')) {
-      var idwalink = $(this).attr('dataidwa');
-      deletewalink(idwalink);
-    }
-  });
+    $(document).on("click", "#btnpixel", function(e) {
+      tambahpixel();
+      $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
+    });
 
-  $(document).on('click', '#generate', function(e) {
-    var nomor = $('#nomorwa').val();
-    var message = $('#pesan-wa').val();
-    var convert = encodeURI(message);
-    var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";
-        //console.log(link);
-    $('#demo').html(link);
-    tambahwalink();
-      });
+    $(document).on("click", "#btn-save-link", function(e) {
+      tambahPages();
+      tambahTemp();
+      $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
+    });
 
-  $(document).on("click", "#btnpixel", function(e) {
-    tambahpixel();
-    $('#pesanAlert').removeClass('alert-danger');
-    $('#pesanAlert').children().remove();
-  });
+    $('.btn-reset').click(function() {
+      $('#pesanAlert').removeClass('alert-danger');
+      $('#pesanAlert').children().remove();
+    });
 
-  $(document).on("click", "#btn-save-link", function(e) {
-    tambahPages();
-    tambahTemp();
-    $('#pesanAlert').removeClass('alert-danger');
-    $('#pesanAlert').children().remove();
-  });
+    $(document).on('click', '.btn-editwa', function(e) {
+      var editnomorwa = $(this).attr("datanomorwa");
+      var editpesan = $(this).attr("datapesan");
+      var editidwa = $(this).attr("dataeditwa");
+      $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
+      $('#editidwa').val(editidwa);
+      $('#nomorwa').val(editnomorwa);
+      $('#pesan-wa').val(editpesan);
+    });
 
-  $('.btn-reset').click(function() {
-    $('#pesanAlert').removeClass('alert-danger');
-    $('#pesanAlert').children().remove();
-  });
-
-  $(document).on('click', '.btn-editwa', function(e) {
-    var editnomorwa = $(this).attr("datanomorwa");
-    var editpesan = $(this).attr("datapesan");
-    var editidwa = $(this).attr("dataeditwa");
-    $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
-    $('#editidwa').val(editidwa);
-    $('#nomorwa').val(editnomorwa);
-    $('#pesan-wa').val(editpesan);
-  });
-
-  $(document).on('click', '.btn-editpixel', function(e) {
-    var script = $(this).attr("datascriptpixel");
-    var title = $(this).attr("dataedittitle");
-    var editidpixel = $(this).attr("dataeditpixelid");
-    $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
-    $('#script').val(script);
-    $('#judul').val(title);
-    $('#editidpixel').val(editidpixel);
+    $(document).on('click', '.btn-editpixel', function(e) {
+      var script = $(this).attr("datascriptpixel");
+      var title = $(this).attr("dataedittitle");
+      var editidpixel = $(this).attr("dataeditpixelid");
+      $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
+      $('#script').val(script);
+      $('#judul').val(title);
+      $('#editidpixel').val(editidpixel);
+    });
   });
 
   let slideIndex = 1;
   showSlides(slideIndex);
-
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
-
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
-
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {
-      slideIndex = 1;
-    }    
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-    for (i = 0; i < slides.length; i++) 
-    {
-      slides[i].style.display = "none";
-      //slides[i].value='hid';
-    }
-    for (i = 0; i < dots.length; i++) 
-    {
-      dots[i].className = dots[i].className.replace("activated","");
-    }
-    slides[slideIndex-1].style.display = "block";
-    //slides[slideIndex-1].value='block';   
-    dots[slideIndex-1].className +=" activated";
-  }
-  function dotsok()
-  {
-    let i,a=0,dotselement,slidesid;
-    dotselement=$('#dot-view');
-    slidesid=$('.mySlides');
-    for (i = 0; i < slidesid.length ; i++) 
-    {
-      a+=1;
-      dotselement.append('<span class="dot picture-id-'+a+'-dot input-picture-'+a+'-dot" id="input-picture-'+a+'-dot" onclick="currentSlide('+i+')"></span>');
-    }
-     if ($(".dot").length==1) {
-      $(".dot").parent().hide();
-      $('.prev').hide();
-      $('.next').hide();
-    }
-  }
 
  
     // $(document).on('click','.marker',function(){

@@ -464,16 +464,6 @@ hr.own {
  font-size: smaller;
  color: #000000 ;
 }
-.outlinedview .txthov{
-  color: #fff;
-  font-size: smaller;
-}
-
-.outlinedview .txthov:hover{
- background: #ffff;
- font-size: smaller;
- color: #000000 ;
-}
 .rows{
   margin-top: -15px;
 }
