@@ -7,7 +7,8 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-      var chart = new CanvasJS.Chart("chartContainer", {
+    refresh_page();
+      /*var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             axisX:{
               valueFormatString: "DD",
@@ -26,7 +27,7 @@
               type: "area",       
               xValueType: "dateTime",
               xValueFormatString: "DD-MM-YYYY",
-              dataPoints: <?php echo json_encode($data['chart'], JSON_NUMERIC_CHECK); ?>,
+              dataPoints: <?php /*echo json_encode($data['chart'], JSON_NUMERIC_CHECK)*/; ?>,
             }]
           });
 
@@ -40,9 +41,63 @@
             e.dataSeries.visible = true;
           }
           chart.render();
-        }
+        }*/
   });
 
+  function refresh_page(){
+    
+    $.ajax({                                      
+      url: "<?php echo url('/dash-detail/load-content'); ?>",
+      type: 'get',
+      data : {
+        bulan : $('#bulan').val(),
+        tahun : $('#tahun').val(),
+        pageid : "{{$pageid}}",
+        id: "{{$id}}",
+        mode: "{{$mode}}",
+      },
+      dataType: 'json',
+      success: function(data) {
+        chart = new CanvasJS.Chart("chartContainer", {
+              animationEnabled: true,
+              axisX:{
+                valueFormatString: "DD",
+                title: "Hari",
+              },
+              axisY:{
+                title: "Total Click",
+              },
+              legend:{
+                cursor: "pointer",
+                dockInsidePlotArea: true,
+                itemclick: toggleDataSeries
+              },              
+              data: [
+              {
+                type: "area",       
+                xValueType: "dateTime",
+                xValueFormatString: "DD-MM-YYYY",
+                dataPoints: data.chart,
+              }]
+            });
+
+          chart.render();
+
+          function toggleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              e.dataSeries.visible = false;
+            }
+            else{
+              e.dataSeries.visible = true;
+            }
+            chart.render();
+          }
+
+          $('#total-click').html(data.total_click);
+          $('#content').html(data.view);
+      }
+    });
+  }
 </script>
 
 <div class="container">
@@ -90,38 +145,38 @@
         <div class="row mb-4 mt-5">
           <div class="col-md-6">
             <div class="input-group">
-              <input type="text" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">
-
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">
-                  <i class="fas fa-search"></i>
-                </span>
-              </div>
+              <?php  
+                $category = $data['title'];
+                if($mode=='link' or $mode=='banner'){
+                  $category = $mode;
+                } 
+              ?>
+              <h4>Kategori : {{ ucfirst($category) }}</h4>
             </div>  
           </div>
           
           <div class="col-md-6 text-md-right text-left">
-            <select name="bulan" class="custom-select form-controll">
+            <select id="bulan" name="bulan" class="custom-select form-controll">
               <?php 
               $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 
               for($a=1;$a<=12;$a++) {
-                if($a==date("m")) { 
+                if($a==$bulann) { 
                   $pilih="selected";
                 } else {
                   $pilih="";
                 }
-                echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
+                echo("<option value=\"".sprintf('%02d', $a)."\" $pilih>$bulan[$a]</option>"."\n");
               }
               ?>
             </select>
 
-            <select name="tahun" class="custom-select form-controll">
+            <select id="tahun" name="tahun" class="custom-select form-controll">
               <?php
               $thn_skr = date('Y');
               for ($x = $thn_skr; $x >= 1980; $x--) {
                 ?>
-                <option value="<?php echo $x ?>">
+                <option value="<?php echo $x ?>" <?php if($x==$tahun) echo 'selected' ?>>
                   <?php echo $x ?>    
                 </option>
                 <?php
@@ -148,7 +203,7 @@
         </div>
         
         <div class="col-md-3" align="right"> 
-          <a href="{{url('pdf/'.$pageid.'/'.$id.'/'.$mode)}}" target="_blank" style="float: right;">
+          <a href="{{url('pdf/'.$pageid.'/'.$id.'/'.$mode.'/'.$bulann.'/'.$tahun)}}" target="_blank" style="float: right;">
             <button class="btn btn-primary">
               <i class="far fa-file-pdf"></i>
               Save As PDF
@@ -164,27 +219,20 @@
         <div class="col-md-4 div-click" align="center">
           <span class="span-click">
             Total Click <br>
-            <span id="total-click">{{$data['total_click']}}</span> <br> 
+            <span id="total-click"></span> <br> 
             dalam 30 hari
           </span>
         </div>
 
       </div>
 
-      <div id="content">
+      <div>
         <table class="table mb-5"> 
           <thead>
             <th>Days</th>
             <th>Total Clicks</th>
           </thead>
-          <tbody>
-            @foreach($data['chart'] as $arr)
-              <tr> 
-                <td>{{date('l, d F Y',$arr['x']/1000)}}</td>
-                <td>{{$arr['y']}}</td> 
-              </tr>
-            @endforeach
-          </tbody>
+          <tbody id="content"></tbody>
         </table>
       </div>
 
@@ -220,6 +268,16 @@
 </div>
 
 <script type="text/javascript">
+  $('body').on('change','#bulan',function(e) 
+  {
+    refresh_page();
+  });
+
+  $('body').on('change','#tahun',function(e) 
+  {
+    refresh_page();
+  });
+
   $('body').on('click','.btncreate-bio',function(e){
     e.preventDefault();
     $('#confirm-create').modal('show');

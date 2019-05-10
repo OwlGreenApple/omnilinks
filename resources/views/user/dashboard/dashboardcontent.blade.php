@@ -41,7 +41,7 @@
 
       $dashcont = new DashboardController;
 
-      $arr = $dashcont->counter_click_month($page,$banners,$links);
+      $arr = $dashcont->counter_click_month($page,$banners,$links,$bulan,$tahun);
 
     ?>
 
@@ -137,8 +137,8 @@
                 <i class="fas fa-pencil-alt"></i>
               </button>
 
-              <a href="{{url('pdf/'.$page->id.'/biolinks')}}" target="_blank">
-                <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;" data-url="{{url('pdf/'.$page->id.'/biolinks')}}">
+              <a href="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}" target="_blank">
+                <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;" data-url="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}">
                   <i class="far fa-file-pdf"></i>
                   Saved AS PDF
                 </button>
@@ -162,7 +162,7 @@
                 <span>Banner</span><br>
                  @foreach($banners as $banner)
                     <span class="tooltipstered" title="Click To View Details">
-                      <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner')}}" data-url="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner')}}">
+                      <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner/'.$bulan.'/'.$tahun)}}">
                         <i class="fab fa-font-awesome-flag"></i>
                         <span> {{$banner->title}}</span>
                       </a><br>
@@ -202,7 +202,7 @@
             <span>MESSENGERS</span><br>
             @if($page->wa_pixel_id!=0 and !is_null($page->wa_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
-                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/wa')}}" data-url="{{url('dash-detail/'.$page->id.'/0/wa')}}">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/wa/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/wa/'.$bulan.'/'.$tahun)}}">
                   <i class='fab fa-whatsapp'></i>
                   <span> Whatsapp</span>
                 </a>
@@ -211,7 +211,7 @@
             @endif
             @if($page->telegram_pixel_id!=0 and !is_null($page->telegram_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
-                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/telegram')}}" data-url="{{url('dash-detail/'.$page->id.'/0/telegram')}}">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/telegram/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/telegram/'.$bulan.'/'.$tahun)}}">
                   <i class='fab fa-telegram'></i>
                   <span> Telegram</span>
                 </a>
@@ -220,7 +220,7 @@
             @endif
             @if($page->skype_pixel_id!=0 and !is_null($page->skype_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
-                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/skype')}}" data-url="{{url('dash-detail/'.$page->id.'/0/skype')}}">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/skype/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/skype/'.$bulan.'/'.$tahun)}}">
                   <i class='fab fa-skype'></i>
                   <span> Skype</span>
                 </a>
@@ -278,7 +278,7 @@
                 <span>Links</span><br>
                 @foreach($links as $link)
                   <span class="tooltipstered" title="Click To View Details">
-                    <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link')}}" data-url="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link')}}">
+                    <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link/'.$bulan.'/'.$tahun)}}">
                       <i class="fas fa-link"></i>
                       <span>{{$link->title}}</span>
                     </a>
@@ -318,7 +318,7 @@
 
             @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
-                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/fb')}}" data-url="{{url('dash-detail/'.$page->id.'/0/fb')}}">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/fb/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/fb/'.$bulan.'/'.$tahun)}}">
                   <i class="fab fa-facebook-square"></i>
                   <span> Facebook</span>
                 </a>
@@ -328,7 +328,7 @@
 
             @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
-                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/ig')}}" data-url="{{url('dash-detail/'.$page->id.'/0/ig')}}">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/ig/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/ig/'.$bulan.'/'.$tahun)}}">
                   <i class='fab fa-instagram'></i>
                   <span> Instagram</span>
                 </a>
@@ -338,7 +338,7 @@
 
             @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
-                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/twitter')}}" data-url="{{url('dash-detail/'.$page->id.'/0/twitter')}}">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/twitter/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/twitter/'.$bulan.'/'.$tahun)}}">
                   <i class='fab fa-twitter'></i>
                   <span> Twitter</span>
                 </a>
@@ -348,7 +348,7 @@
 
             @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
-                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/youtube')}}" data-url="{{url('dash-detail/'.$page->id.'/0/youtube')}}">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/youtube/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/youtube/'.$bulan.'/'.$tahun)}}">
                   <i class='fab fa-youtube'></i>
                   <span> Youtube</span><br>
                 </a>

@@ -14,37 +14,63 @@ use PDF;
 
 class DashboardController extends Controller
 {
-    public function loadDashboard()
+    public function loadDashboard(Request $request)
     {
-    	$page = Page::where('user_id',Auth::user()->id)
-      				->orderBy('created_at','ascend')
-      				->paginate(10);
+      if($request->keywords==''){
+        $page = Page::where('user_id',Auth::user()->id)
+              ->orderBy('created_at','ascend')
+              ->paginate(10);
+      } else {
+        $page = Page::where('user_id',Auth::user()->id)
+              ->where('page_title','like','%'.$request->keywords.'%')
+              ->orderBy('created_at','ascend')
+              ->paginate(10);  
+      }
+    	
 
     	$arr['view']=(string) view('user.dashboard.dashboardcontent')
-    	 				      ->with('pages',$page);
+    	 				      ->with('pages',$page)
+                    ->with('bulan',$request->bulan)
+                    ->with('tahun',$request->tahun);
       $arr['pager'] = (string) view('user.dashboard.dash_pagination')
                       ->with('pages',$page);
 
     	return $arr;
     }
 
-    public function dashboard_detail($pageid,$id,$mode) {
-      $data = $this->detail_report($pageid,$id,$mode);
+    public function dashboard_detail($pageid,$id,$mode,$bulan,$tahun) {
+      $data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
 
       return view('user.dashboard.dashboard-detail.index')
               ->with('data',$data)
               ->with('pageid',$pageid)
               ->with('id',$id)
-              ->with('mode',$mode);
+              ->with('mode',$mode)
+              ->with('bulann',$bulan)
+              ->with('tahun',$tahun);
     }
     
+    public function load_dash_detail(Request $request){
+      $data = $this->detail_report($request->pageid,$request->id,$request->mode,$request->bulan,$request->tahun);
+
+      $arr['chart'] = $data['chart'];
+      $arr['view'] = (string) view('user.dashboard.dashboard-detail.content')
+                      ->with('data',$data);
+      $arr['total_click'] = $data['total_click'];
+
+      return $arr;
+    }
+
     public function load_chart(Request $request){
-      $query_date = date('d-m-Y');
-      $first_date = date('01-m-Y', strtotime($query_date));
+      $bulan = $request->bulan;
+      $tahun = $request->tahun;
+      $query_date = date('t-'.$bulan.'-'.$tahun);
+
+      $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
       $arr = array();
 
       $total_click = 0;
-      while($first_date <= $query_date){
+      while(strtotime($first_date) <= strtotime($query_date)){
         $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/all/total-click/counter.txt';
 
         $click = $this->check_file($filename);
@@ -79,14 +105,14 @@ class DashboardController extends Controller
   		return $arr;
     } 
 
-    public function pdf_page($id){
+    public function pdf_page($id,$bulan,$tahun){
       $page = Page::find($id);
       $banners = Banner::where('pages_id',$id)->get();
       $links = Link::where('pages_id',$id)->get();
 
-      $click = $this->counter_click_month($page,$banners,$links);
+      $click = $this->counter_click_month($page,$banners,$links,$bulan,$tahun);
 
-      $chart = $this->chart_day($page,$banners,$links);
+      $chart = $this->chart_day($page,$banners,$links,$bulan,$tahun);
 
       $data = array(
         'page' => $page, 
@@ -111,10 +137,10 @@ class DashboardController extends Controller
       return $pdf->stream();
     }
 
-    public function detail_report($pageid,$id,$mode){
+    public function detail_report($pageid,$id,$mode,$bulan,$tahun){
       if($mode=='link'){
         $link = Link::find($id); 
-        $arr = $this->chart_link($pageid,'link-'.$link->title); 
+        $arr = $this->chart_link($pageid,'link-'.$link->title,$bulan,$tahun); 
     
         $data = array(
           'title' => $link->title,
@@ -125,7 +151,7 @@ class DashboardController extends Controller
         );
       } else if($mode=='banner') {
         $banner = Banner::find($id);
-        $arr = $this->chart_link($pageid,'banner-'.$banner->title);
+        $arr = $this->chart_link($pageid,'banner-'.$banner->title,$bulan,$tahun);
 
         $data = array(
           'title' => $banner->title,
@@ -168,7 +194,7 @@ class DashboardController extends Controller
           break;
         }
 
-        $arr = $this->chart_link($pageid,$mode);
+        $arr = $this->chart_link($pageid,$mode,$bulan,$tahun);
 
         $data = array(
           'title' => $title,
@@ -182,8 +208,8 @@ class DashboardController extends Controller
       return $data;
     }
 
-    public function pdf_single($pageid,$id,$mode){
-      $data = $this->detail_report($pageid,$id,$mode);
+    public function pdf_single($pageid,$id,$mode,$bulan,$tahun){
+      $data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
 
       $pdf = PDF::loadView('user.pdf.pdf-single', $data)
             ->setPaper('a4')
@@ -212,14 +238,14 @@ class DashboardController extends Controller
       return $content;
     }
 
-    public function counter_click_month($page,$banners,$links){
-      $query_date = date('d-m-Y');
-      $first_date = date('01-m-Y', strtotime($query_date));
+    public function counter_click_month($page,$banners,$links,$bulan,$tahun){
+      $query_date = date('t-'.$bulan.'-'.$tahun);
+      $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
       $arr = array();
 
       foreach ($banners as $banner) {
-        $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/'.$page->id.'/banner-'.$banner->title.'/counter.txt';
+        $filename = 'clicked/'.Auth::user()->email.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/banner-'.$banner->title.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -227,7 +253,7 @@ class DashboardController extends Controller
       }
 
       foreach ($links as $link) {
-        $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/'.$page->id.'/link-'.$link->title.'/counter.txt';
+        $filename = 'clicked/'.Auth::user()->email.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/link-'.$link->title.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -237,7 +263,7 @@ class DashboardController extends Controller
       $key = ['wa','telegram','skype','fb','ig','twitter','youtube'];
         
       foreach ($key as $k) {
-        $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/'.$page->id.'/'.$k.'/counter.txt';
+        $filename = 'clicked/'.Auth::user()->email.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/'.$k.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -289,13 +315,13 @@ class DashboardController extends Controller
       return $arr;
     }
 
-    public function chart_day($page,$banners,$links){
-      $query_date = date('d-m-Y');
-      $first_date = date('01-m-Y', strtotime($query_date));
+    public function chart_day($page,$banners,$links,$bulan,$tahun){
+      $query_date = date('t-'.$bulan.'-'.$tahun);
+      $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
       $arr = [];
 
-      while($first_date <= $query_date){
+      while(strtotime($first_date) <= strtotime($query_date)){
         $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/'.$page->id.'/total-click/counter.txt';
 
         $click = $this->check_file($filename);
@@ -341,14 +367,14 @@ class DashboardController extends Controller
       return $arr;
     }
 
-    public function chart_link($pageid,$name){
-      $query_date = date('d-m-Y');
-      $first_date = date('01-m-Y', strtotime($query_date));
+    public function chart_link($pageid,$name,$bulan,$tahun){
+      $query_date = date('t-'.$bulan.'-'.$tahun);
+      $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
       $arr = [];
       $total_click = 0;
 
-      while($first_date <= $query_date){
+      while(strtotime($first_date) <= strtotime($query_date)){
         $filename = 'clicked/'.Auth::user()->email.'/'.$first_date.'/'.$pageid.'/'.$name.'/counter.txt';
 
         $click = $this->check_file($filename);

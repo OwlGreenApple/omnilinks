@@ -13,6 +13,10 @@
     $.ajax({                                      
       url: "<?php echo url('/dash/load-chart'); ?>",
       type: 'get',
+      data : {
+        bulan : $('#bulan').val(),
+        tahun : $('#tahun').val(),
+      },
       dataType: 'json',
       success: function(data) {
         chart = new CanvasJS.Chart("chartContainer", {
@@ -63,6 +67,11 @@
     $.ajax({
       type: 'GET',
       url: currentPage,
+      data : {
+        keywords : $('#keywords').val(),
+        bulan : $('#bulan').val(),
+        tahun : $('#tahun').val(),
+      },
       dataType: 'text',
       success: function(result) {
         var data = jQuery.parseJSON(result);
@@ -133,7 +142,7 @@
         <div class="row mb-4 mt-5">
           <div class="col-md-6">
             <div class="input-group">
-              <input type="text" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">
+              <input type="text" id="keywords" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">
 
               <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">
@@ -144,7 +153,7 @@
           </div>
           
           <div class="col-md-6 text-md-right text-left">
-            <select name="bulan" class="custom-select form-controll">
+            <select id="bulan" name="bulan" class="custom-select form-controll">
               <?php 
                 $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 
@@ -154,12 +163,12 @@
                   } else {
                     $pilih="";
                   }
-                  echo("<option value=\"$a\" $pilih>$bulan[$a]</option>"."\n");
+                  echo("<option value=\"".sprintf('%02d', $a)."\" $pilih>$bulan[$a]</option>"."\n");
                 }
               ?>
             </select>
 
-            <select name="tahun" class="custom-select form-controll">
+            <select id="tahun" name="tahun" class="custom-select form-controll">
               <?php
                 $thn_skr = date('Y');
                 for ($x = $thn_skr; $x >= 1980; $x--) {
@@ -289,10 +298,29 @@
 </div>
 
 <script type="text/javascript">
+  $('#keywords').keypress(function (e) {
+    if (e.which == 13) {
+      refreshDashboard();
+      return false;    //<---- Add this line
+    }
+  });
+
   $(document).on('click', '.pagination a', function (e) {
     e.preventDefault();
     currentPage = $(this).attr('href');
     refreshDashboard();
+  });
+
+  $('body').on('change','#bulan',function(e) 
+  {
+    refreshDashboard();
+    load_chart();
+  });
+
+  $('body').on('change','#tahun',function(e) 
+  {
+    refreshDashboard();
+    load_chart();
   });
 
   $('body').on('click','.btn-deletePage',function(e) 
