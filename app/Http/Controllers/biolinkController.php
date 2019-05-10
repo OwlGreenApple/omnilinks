@@ -259,7 +259,7 @@ class BiolinkController extends Controller
     $deletelink=$request->deletelink;
     $sort_link = '';
     for ($i=0; $i <count($title); $i++)
-     { 
+    { 
       if($id[$i]=='new')
       {
         $url=new Link();
@@ -267,10 +267,10 @@ class BiolinkController extends Controller
       else
       {
         if ($deletelink[$i]=='delete') {
-        $linkku=Link::find($id[$i])->delete();
-        continue;
-      }
-         $url=Link::where('id','=',$id[$i])->first();
+          $linkku=Link::find($id[$i])->delete();
+          continue;
+        }
+        $url=Link::where('id','=',$id[$i])->first();
       }
 
        $url->pages_id=$page->id;

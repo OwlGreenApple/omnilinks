@@ -4,23 +4,6 @@
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
-<style type="text/css">
-  .form-control{
-    border-radius: unset;
-  }
-  .messengers.links-num-2 .link 
-  {
-    max-width: 49%; 
-  }
-  .messengers.links-num-1 .link
-  {
-    max-width: 99%; 
-  }
-  .messengers.links-num-3 .link 
-  {
-    max-width: 32.33333%; 
-  }
-</style>
 <script type="text/javascript">
   var picker;
   function tambahTemp() {
@@ -1039,9 +1022,9 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   <div class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                 <div class="link shown-mes" id="waviewid" >
-                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
-                      width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
+                    <div class="link shown-mes" id="waviewid" >
+                        <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                        width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
                     </div>
                     <div class="link hiddens" id="telegramviewid" style="display: none;">
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
@@ -1051,39 +1034,47 @@
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
                     </div>
-                </div>
-                <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
-                <div class="col-md-12" id="viewLink">
-                  @if($links->count())
-                  <?php $utlq=0  ?>
-                  @foreach($links as $link)
-                  <?php $utlq+=1 ?>
-                    <div class="txthov">
-                      <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                  </div>
+                  <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
+                    <div class="col-md-12" id="viewLink">
+                      @if($links->count())
+                      <?php $utlq=0  ?>
+                      @foreach($links as $link)
+                      <?php $utlq+=1 ?>
+                        <!--
+                          <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
+                          -->
+                        <div class="">
+                          <a href="#" class="btn btn-md btnview btn-light title-<?=$utlq?>-view-update-get txthov" style="
+                          width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-<?=$utlq?>-get" >{{$link->title}}</a>
+                        </div>
+                      @endforeach
+                      @else
+                        <!--
+                        <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                        -->
+                        <div class="txthov">
+                          <a href="#" class="btn btn-md btnview btn-light title-1-view-update-get txthov" style="
+                          width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a>
+                        </div>
+                      @endif
                     </div>
-                  @endforeach
-                  @else
-                    <div class="txthov">
-                      <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                  </div>
+                  <div class="row rows " style="padding-left: 27px; padding-right: 44px;">
+                    <div class="col-md-3 linked shown-sm" id="youtubeviewid">
+                      <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
                     </div>
-                  @endif
-                </div>
-                </div>
-                    <div class="row rows " style="padding-left: 27px; padding-right: 44px;">
-                     <div class="col-md-3 linked shown-sm" id="youtubeviewid">
-                       <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
-                     </div>
-                     <div class="col-md-3 linked hiddensm " id="facebookviewid" style="display: none;">
-                       <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
-                     </div>
-                     <div class="col-md-3 linked hiddensm" id="twitterviewid" style=" display: none;">
-                       <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
-                     </div>
-                      <div class="col-md-3 linked hiddensm" id="instagramviewid"  style=" display: none;">
-                       <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
-                      </div>  
-                   </div>
-                   <div class="col-md-12" align="center" id="poweredview">
+                    <div class="col-md-3 linked hiddensm " id="facebookviewid" style="display: none;">
+                      <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
+                    </div>
+                    <div class="col-md-3 linked hiddensm" id="twitterviewid" style=" display: none;">
+                      <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
+                    </div>
+                    <div class="col-md-3 linked hiddensm" id="instagramviewid"  style=" display: none;">
+                     <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
+                    </div>  
+                  </div>
+                  <div class="col-md-12" align="center" id="poweredview">
                     <div class="powered-omnilinks">
                       <a href="#">
                         <span style="font-size: small; color: #fff;">
@@ -1092,18 +1083,17 @@
                         <br>&nbsp;&nbsp;
                         <img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
                       </a>
-                   </div>
-                 </div>
-           
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+
 </section>
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
@@ -1337,12 +1327,10 @@
       $('.btnview').css("border-color",color);
       
       if ($('input[name="outlined"]')=="1") {
-        console.log("a");
         $(".mobile1").addClass("outlinedview");
         $('.btnview').css("background-color","transparent");
         $('.btnview').css("color",color);
       } else {
-        console.log("b");
         $('.btnview').css("background-color",color);
         $('.btnview').css("color","#fff");
       }
