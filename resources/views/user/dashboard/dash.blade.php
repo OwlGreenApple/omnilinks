@@ -18,7 +18,15 @@
         tahun : $('#tahun').val(),
       },
       dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(data) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -73,10 +81,18 @@
         tahun : $('#tahun').val(),
       },
       dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        $('#pager').html(data.pager);
+        $('.pager').html(data.pager);
       }
     });
   }
@@ -89,7 +105,15 @@
       data: {
         deletedataid: deletedataid,
       },
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         if (data.status == 'success') {
           refreshDashboard();
@@ -125,19 +149,29 @@
       @endif
     </div>
 
+    <div class="col-md-12 pr-0 div-btn">
+      <div class="row">
+        <div class="col-md-2 col-6 pl-md-3 pl-0 pr-0">
+          <button class="btnbio btn-block btncreate btncreate-bio">
+            BIO LINK  
+          </button>
+        </div>
+        <div class="col-md-2 col-6 pr-md-3 pl-0 pr-0">
+          <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
+            <button class="btnsingle btn-block btncreate">
+              SINGLE LINK  
+            </button>
+          </a>
+        </div>  
+      </div>
+    </div>
+
     <div class="col-md-12">
-        <button class="btnbio btncreate btncreate-bio">
-          BIO LINK  
-        </button>
-
-      <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
-        <button class="btnsingle btncreate">
-          SINGLE LINK  
-        </button>
-      </a>
-
-      <div style="padding-top: 49px; font-size: 25px; padding-bottom: 5px">
-        <p>Omnilinkz Chart</p>
+      <div class="pt-md-5 pt-0" style="font-size: 25px; padding-bottom: 5px">
+        <div class="text-md-left text-center">
+          <p>Omnilinkz Chart</p>  
+        </div>
+        
 
         <div class="row mb-4 mt-5">
           <div class="col-md-6">
@@ -152,7 +186,8 @@
             </div>  
           </div>
           
-          <div class="col-md-6 text-md-right text-left">
+          <div class="col-md-6 text-md-right text-left mt-md-0 mt-3">
+            <span style="font-size: 20px">Periode :</span><br class="menu-mobile">
             <select id="bulan" name="bulan" class="custom-select form-controll">
               <?php 
                 $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
@@ -192,22 +227,24 @@
       <hr style="margin-bottom: 45px">
 
     <div class="row">
-      <div class="col-md-8">
-        <div id="chartContainer" style="height:300px; width:100%;"></div>    
+      <div class="col-md-8 order-md-1 order-2">
+        <div id="chartContainer" style="height:300px; width:100%; margin-bottom:40px"></div>    
       </div>
-      <div class="col-md-4 div-click" align="center">
+      <div class="col-md-4 div-click order-md-2 order-1 text-md-center mb-5">
         <span class="span-click">
-          Total Click <br>
-          <span id="total-click"></span> <br> 
+          Total Click <br class="menu-nomobile">
+          <span id="total-click" class="float-md-none float-right"></span> <br> 
           dalam 30 hari
         </span>
       </div>
       
     </div>
 
+    <div class="pager menu-mobile"></div>
+
     <div class="" id="content"></div>
 
-    <div id="pager"></div>
+    <div class="pager"></div>
 
     </div>
   </div>

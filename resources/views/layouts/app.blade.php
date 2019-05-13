@@ -27,6 +27,7 @@
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -119,7 +120,7 @@
     </main>
 
     <footer class="infooter font-small">
-      <div class="container text-md-left">
+      <div class="container text-md-left menu-nomobile">
         <div class="row">
           <div class="col-md-3 mx-auto">
             <ul class="list-unstyled">
@@ -153,8 +154,19 @@
           </div>
         </div>
       </div>
+
+      <div class="menu-mobile text-center linkfooter">
+        Omnilinkz © 2019<br>
+        Privacy Policy &nbsp; Terms Of Use &nbsp; Legal
+      </div>
     </footer>
-  </div>  
+  </div> 
+
+  <!--Loading Bar-->
+  <div class="div-loading">
+    <div id="loader" style="display: none;"></div>  
+  </div> 
+
 </body>
 
 </html>

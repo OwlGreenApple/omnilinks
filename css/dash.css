@@ -8,6 +8,36 @@
   src: url("../fonts/SourceSansPro-Bold.otf");
 } 
 
+.container {
+  margin-top: 80px;
+}
+
+.menu-mobile {
+  display: none;
+}
+
+.pagination {
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    margin-top: 110px;
+  }
+
+  .menu-nomobile{
+    display: none;
+  }
+
+  .menu-mobile {
+    display: block;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+}
+
 .invalid-feedback {
   display: none;
   width: 100%;
@@ -31,12 +61,21 @@
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+  width: 100%;
 }
 
 #total-click {
   font-size: 70px;
   color: #106BC8;
   font-family: SourceSansPro-Bold; 
+}
+
+@media screen and (max-width: 767px) {
+  .div-click{
+    font-size: 20px;
+    height: auto;
+    line-height: normal;
+  }
 }
 
 .click-page {
@@ -199,6 +238,22 @@
   margin-left: 10px;
   background-color: #FBCE2D;
   color: #505050;
+}
+
+@media screen and (max-width: 767px) {
+  .div-btn {
+    position: fixed;
+    top: 80px;
+    z-index: 20;
+  }
+
+  .btncreate {
+    border-radius: 0px;
+  }
+
+  .btnsingle {
+    margin-left: 0px;
+  }
 }
 
 .btn-copylink:hover, .btn-copy:hover{

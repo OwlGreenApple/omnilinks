@@ -704,7 +704,26 @@
                   <span class="blue-txt">
                     Pixel Retargetting
                   </span>
+
                   <textarea class="form-control mt-3" name="script" id="script" style="height:100px"></textarea>
+
+                  <div class="form-inline mt-3">
+                    <span class="mr-2">
+                      Jenis
+                    </span>
+
+                    <select class="form-control" name="jenis_pixel" id="jenis_pixel">
+                      <option value="fb">
+                        FB Pixel
+                      </option>
+                      <option value="twitter">
+                        Twitter Retargetting
+                      </option>
+                      <option value="google">
+                        Google Retargetting
+                      </option>
+                    </select>
+                  </div>
 
                   <div class="title form-inline mb-5 mt-3">
                     <span class="mr-2">
@@ -1614,10 +1633,13 @@
       var script = $(this).attr("datascriptpixel");
       var title = $(this).attr("dataedittitle");
       var editidpixel = $(this).attr("dataeditpixelid");
+      var jenis = $(this).attr("datajenis");
+
       $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
       $('#script').val(script);
       $('#judul').val(title);
       $('#editidpixel').val(editidpixel);
+      $('#jenis_pixel').val(jenis);
     });
   });
 

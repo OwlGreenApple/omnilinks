@@ -270,6 +270,22 @@ table tr:nth-child(even) td
                     <input id="titlepixel" type="text" class="col-md-6 form-control" name="titlepixel" placeholder="" required>
                   </div>
                   <div class="form-group row">
+                    <label class="col-md-2 float-right col-form-label labell gray-txt text-right">
+                      Jenis
+                    </label>
+                    <select name="jenis_pixel" id="jenis_pixel" class="col-md-6 form-control">
+                      <option value="fb">
+                        FB Pixel
+                      </option>
+                      <option value="twitter">
+                        Twitter Retargetting
+                      </option>
+                      <option value="google">
+                        Google Retargetting
+                      </option>
+                    </select>    
+                  </div>
+                  <div class="form-group row">
                     <label for="password-confirm" class="col-md-2 float-right col-form-label labell gray-txt text-right">
                       Pixel
                     </label>
@@ -610,10 +626,13 @@ table tr:nth-child(even) td
     var ideditpixel = $(this).attr('dataeditid');
     var title = $(this).attr('datatitle');
     var script = $(this).attr('datascript');
+    var jenis = $(this).attr('datajenis');
+
     $('#pesan').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
     console.log(ideditpixel);
     $('#hiddenid').val(ideditpixel);
     $('#titlepixel').val(title);
+    $('#jenis_pixel').val(jenis);
     $('#script').val(script);
   });
 

@@ -75,6 +75,7 @@ class SingleLinkController extends Controller
  		$pixel->users_id=$user->id;
  		$pixel->pages_id=0;
  		$pixel->title=$request->titlepixel;
+    $pixel->jenis_pixel=$request->jenis_pixel;
   	$pixel->script=$request->script;
   	$pixel->save();
   	return redirect('/dash/newsingle')->with('ok','pixel telah Ditambahkan');

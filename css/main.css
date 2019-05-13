@@ -1,4 +1,4 @@
-@font-face { 
+/*@font-face { 
   font-family: SourceSansPro-Light; 
   src: url("../fonts/SourceSansPro-Light.otf");
 } 
@@ -34,7 +34,7 @@ body {
   min-height: 100%;
 }
 
-/* .alert {
+ .alert {
   display: none;
 }*/
 
@@ -95,135 +95,3 @@ body {
   from{ bottom:-100px; opacity:0 } 
   to{ bottom:0; opacity:1 }
 }
-
-/* Pop Up */
-.modal-header {
-  background-image: linear-gradient(-228deg, #0BB2D6 0%, #1094C2 100%);
-  color: #fff;
-}
-
-/* Notifications */
-.icon-notif {
-  position:relative;
-}
-
-.icon-notif.new[data-badge]:after {
-   content:attr(data-badge);
-   position:absolute;
-   top:-6px;
-   right:1px;
-   font-size:.6em;
-   background:#6BFFDC;
-   color:black;
-   width:16px;height:16px;
-   text-align:center;
-   line-height:16px;
-   border-radius:50%;
-   box-shadow:0 0 1px #333;
-}
-
-.notif {
-  font-size: 17px;  
-  font-weight: 600;
-}
-
-.notif-promo { 
-  color: #1E88F5;
-}
-
-.notif-point {
-  color: #079D2F;
-}
-
-/* Mobile */
-@media (max-width:769px){
-  .center-mobile {
-    text-align: center !important;
-    justify-content: center !important;
-  }
-
-  .none-mobile {
-    display: none;
-  }
-}
-
-/* Miscellaneous */
-.mb-20 {
-  margin-bottom: 20px;
-}
-
-.mb-10 {
-  margin-bottom: 10px;
-}
-
-.no-padding {
-  padding: 0;
-  margin: 0;
-}
-
-.fl {
-  float: left;
-}
-
-.fr {
-  float: right;
-}
-
-/* Tooltipstered */
-  span.tooltipstered.txt{
-    text-decoration: underline dotted;
-    cursor: pointer;
-  }
-
-/* Profpic navbar */
-.profpic-header {
-  width:40px;
-  height:40px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #505050;
-}
-
-.profpic-header-big {
-  width:60px;
-  height:60px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-/* Dropdown profpic */
-.profpic-menu {
-  min-width:340px;
-  padding-bottom:0;
-}
-
-.profpic-menu.prof {
-  min-width:270px;
-}
-
-.menu-signout {
-  background-color: #EFEFEF;
-  padding: 5px;
-  text-align: right;
-}
-
-a.menu-pass {
-  color: #212529 !important;
-}
-
-a.menu-pass:hover {
-  color: #1E6CC6 !important;
-}
-
-/* Dropdown notification */
-.menu-viewnotif {
-  background-color: #66B4FF;
-  padding: 5px;
-  color: #fff;
-  text-align: center;
-}
-
-.menu-viewnotif > a:hover {
-  color: black;
-}
-
