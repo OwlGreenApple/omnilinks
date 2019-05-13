@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('dantemustdie'),
             'gender'=> 1, //male
             'point' => 0,
+            'membership' => "",
             'is_admin' => 1, //admin
             'is_confirm' => 1,
             'confirm_code' => null,
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
             'password'=>bcrypt('areyouhappy'),
             'gender'=>0, //female
             'point'=>0,
+            'membership' => "",
             'is_admin'=>1,//admin
             'is_confirm'=>1,
             'confirm_code'=>null,
@@ -47,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('dantemustdie'),
             'gender'=> 0, //female
             'point' => 0,
+            'membership' => "",
             'is_admin' => 0, //user
             'is_confirm' => 1,
             'confirm_code' => null,
@@ -62,6 +65,7 @@ class DatabaseSeeder extends Seeder
             'password'=>bcrypt('noamnot'),
             'gender'=>1, //male
             'point'=>0,
+            'membership' => "",
             'is_admin'=>0,//user
             'is_confirm'=>1,
             'confirm_code'=>null,
@@ -77,6 +81,7 @@ class DatabaseSeeder extends Seeder
             'password'=>bcrypt('cobadeh'),
             'gender'=>0, //female
             'point'=>0,
+            'membership' => "",
             'is_admin'=>1,//admin
             'is_confirm'=>1,
             'confirm_code'=>null,

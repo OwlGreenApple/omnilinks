@@ -1021,20 +1021,20 @@
 
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
-                  <div class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                    <div class="link shown-mes" id="waviewid" >
+                  <ul class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
+                    <li class="link shown-mes" id="waviewid" >
                         <a href="#" class="btn btn-md btnview btn-light txthov" style="
                         width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
-                    </div>
-                    <div class="link hiddens" id="telegramviewid" style="display: none;">
+                    </li>
+                    <li class="link hiddens" id="telegramviewid" style="display: none;">
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
-                    </div> 
-                    <div class="link hiddens" id="skypeviewid" style="display: none;">
+                    </li> 
+                    <li class="link hiddens" id="skypeviewid" style="display: none;">
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
-                    </div>
-                  </div>
+                    </li>
+                  </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                     <div class="col-md-12" id="viewLink">
                       @if($links->count())
@@ -1253,9 +1253,22 @@
       handle: '.handle',
       cursor: 'move',
       axis: 'y',
-      stop: function(event, ui) {
+      start: function(e, ui) {
+          // creates a temporary attribute on the element with the old index
+          $(this).attr('data-previndex', ui.item.index());
+      },
+      update: function(event, ui) {
         var data = $(this).sortable('serialize');
         //save_order(data);
+        var index =  ui.item.index();
+        var start_pos = $(this).attr('data-previndex');
+
+        // console.log(index);
+        // console.log(start_pos);
+        // console.log(event);
+        // console.log(ui);
+        // console.log(data);
+        $("#getview li:eq("+start_pos+")").insertAfter($("#getview li:eq("+index+")"));
       }
     });
     $(".sortable-msg").disableSelection();
