@@ -683,3 +683,19 @@ hr.own {
     font-weight: 700; 
   }
 
+
+  .form-control{
+    border-radius: unset;
+  }
+  .messengers.links-num-2 .link 
+  {
+    max-width: 49%; 
+  }
+  .messengers.links-num-1 .link
+  {
+    max-width: 99%; 
+  }
+  .messengers.links-num-3 .link 
+  {
+    max-width: 32.33333%; 
+  }
