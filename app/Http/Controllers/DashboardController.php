@@ -19,12 +19,12 @@ class DashboardController extends Controller
       if($request->keywords==''){
         $page = Page::where('user_id',Auth::user()->id)
               ->orderBy('created_at','ascend')
-              ->paginate(10);
+              ->paginate(1);
       } else {
         $page = Page::where('user_id',Auth::user()->id)
               ->where('page_title','like','%'.$request->keywords.'%')
               ->orderBy('created_at','ascend')
-              ->paginate(10);  
+              ->paginate(1);  
       }
     	
 

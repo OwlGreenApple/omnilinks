@@ -14,7 +14,7 @@ class AddJenisPixelPixelsTable extends Migration
     public function up()
     {
         Schema::table('pixels',function(Blueprint $table){
-          $table->string('jenis_pixel')->nullable()->after('type');
+          $table->string('jenis_pixel')->after('type');
         });
     }
 

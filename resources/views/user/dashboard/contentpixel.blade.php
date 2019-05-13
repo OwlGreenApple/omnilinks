@@ -13,7 +13,7 @@
         <i class="fas fa-trash-alt"></i>
       </button>
 
-      <button type="button" class="btn btn-sm btn-primary float-right btn-editpixel" dataeditpixelid="{{$pixel->id}}" datascriptpixel="{{$pixel->script}}" dataedittitle="{{$pixel->title}}" style="margin-right:5px; ">
+      <button type="button" class="btn btn-sm btn-primary float-right btn-editpixel" dataeditpixelid="{{$pixel->id}}" datascriptpixel="{{$pixel->script}}" dataedittitle="{{$pixel->title}}" datajenis="{{$pixel->jenis_pixel}}" style="margin-right:5px; ">
         <i class="fas fa-pencil-alt"></i>
       </button>
       
