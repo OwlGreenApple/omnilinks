@@ -7,14 +7,27 @@
 <script type="text/javascript">
   var picker;
   
-  /*
-  * function untuk menggambar preview HP. Function ini dipanggil pada event drag 
-  */
-  function drawPreview() {
-    // draw banner 
-    // draw messenger  
-    // draw link 
-    // draw sosial 
+  // https://www.shift8web.ca/2017/01/use-jquery-sort-reorganize-content/
+  function sortMeBy(arg, sel, elem, order) {
+    var $selector = $(sel),
+    $element = $selector.children(elem);
+    $element.sort(function(a, b) {
+            var an = parseInt(a.getAttribute(arg)),
+            bn = parseInt(b.getAttribute(arg));
+            if (order == "asc") {
+                    if (an > bn)
+                    return 1;
+                    if (an < bn)
+                    return -1;
+            } else if (order == "desc") {
+                    if (an < bn)
+                    return 1;
+                    if (an > bn)
+                    return -1;
+            }
+            return 0;
+    });
+    $element.detach().appendTo($selector);
   }
   
   function tambahTemp() {
@@ -29,14 +42,14 @@
       processData: false,
       url: "<?php echo url('/save-template');?>",
       success: function(data) {
-                //var data=jQuery.parseJSON(result);
+        //var data=jQuery.parseJSON(result);
         if (data.status == "success") {
-            $("#pesan").html(data.message);
-            $("#pesan").addClass("alert-success");
-            $("#pesan").show();
-                }
-              }
-            });
+          $("#pesan").html(data.message);
+          $("#pesan").addClass("alert-success");
+          $("#pesan").show();
+        }
+      }
+    });
   }
 
   function tambahPages() {
@@ -299,7 +312,7 @@
 
                   <!--messengers!-->
                   <input type="hidden" name="uuid" value="{{$uuid}}">
-             
+
                   <label class="mb-3 blue-txt">
                     Messenger
                   </label>
@@ -309,7 +322,7 @@
 
                   <div class="hid">
                     <ul class="sortable-msg">
-                      <li id="msg">
+                      <li id="msg-li-wa"> <!-- wa -->
                         <div id="wa" class="messengers div-table">
                           <div class="div-cell">
                             <span class="handle">
@@ -318,7 +331,7 @@
                           </div>
 
                           <div class="div-cell">
-                            <div class="col-md-12 col-12 pr-0  pl-0">
+                            <div class="col-md-12 col-12 pr-0 pl-0">
                               <div class="input-group">
                                 <div class="input-group-prepend">
                                   <div class="input-group-text">
@@ -326,6 +339,7 @@
                                   </div>
                                 </div>
                                 <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+                                <input type="hidden" name="sortmsg[]" value="wa">
                               </div>
                             </div>
 
@@ -342,8 +356,8 @@
                         </div>
                       </li>
 
-                      <li id="msg">
-                        <div id="telegram" class="messengers div-table hidden" style=" display:none;">
+                      <li id="msg-li-telegram"> <!-- telegram -->
+                        <div id="telegram" class="messengers div-table hide">
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -359,6 +373,7 @@
                                   </div>
                                 </div>
                                 <input type="text" name="telegram" class="form-control telegram-input" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
+                                <input type="hidden" name="sortmsg[]" value="telegram">
                               </div>
 
                               <div class="col-md-12 col-12 pr-0 pl-0">
@@ -375,8 +390,8 @@
                         </div>
                       </li>
 
-                      <li id="msg">
-                        <div id="skype" class="messengers div-table hidden" style=" display:none;">
+                      <li id="msg-li-skype"> <!-- skype -->
+                        <div id="skype" class="messengers div-table hide">
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -392,6 +407,7 @@
                                   </div>
                                 </div>
                                 <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control skype-input" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
+                                <input type="hidden" name="sortmsg[]" value="skype">
                               </div>
                             </div>
 
@@ -421,11 +437,12 @@
 
                   <div>
                     <ul class="sortable-link a">
-                      @if($links->count())
-                      <?php $utl=0; ?>
-                        @foreach($links as $link)
-                        <?php 
-                        $utl+=1; ?>
+                      <?php 
+                      if($links->count()) {
+                        $utl=0; 
+                        foreach($links as $link) {
+                          $utl+=1; 
+                      ?>
                           <li class="link-list" link-id="link-url-update-<?=$utl?>">
                             <div class="div-table mb-4">
                               <div class="div-cell">
@@ -438,7 +455,7 @@
                                 <div class="col-md-12 col-12 pr-0 pl-0">
                                   <div class="input-stack">
                                     <input type="hidden" name="idlink[]" value="{{$link->id}}">
-                                    <input type="hidden" name="deletelink[]" class="delete-link" value="">
+                                    <input type="hidden" name="deletelink[]" value="">
                                     <input type="text" name="title[]" value="{{$link->title}}" id="title-<?=$utl?>-view-update" placeholder="Title" class="form-control focuslink-update">
                                     <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
                                   </div>
@@ -452,8 +469,11 @@
                               </div>
                             </div>
                           </li>
-                        @endforeach
-                      @else
+                      <?php 
+                        }
+                      }
+                      else {
+                      ?>
 
                         <li class="link-list" link-id="link-url-1">
                           <div class="div-table mb-4">
@@ -467,7 +487,7 @@
                               <div class="col-md-12 col-12 pr-0 pl-0">
                                 <div class="input-stack">
                                   <input type="hidden" name="idlink[]" value="new">
-                                  <input type="hidden" name="deletelink[]" class="deletelink" value="">
+                                  <input type="hidden" name="deletelink[]" value="">
                                   <input type="text" name="title[]" value="" id="title-1-view" placeholder="Title" class="form-control focuslink">
                                   <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
                                 </div>
@@ -482,7 +502,7 @@
 
                           </div>
                         </li>
-                      @endif
+                      <?php } ?>
                     </ul>
                   </div>
 
@@ -1067,7 +1087,7 @@
                     </li>
                   </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
-                    <div class="col-md-12" id="viewLink">
+                    <ul class="col-md-12" id="viewLink" style="list-style: none;">
                       @if($links->count())
                       <?php $utlq=0  ?>
                       @foreach($links as $link)
@@ -1075,36 +1095,37 @@
                         <!--
                           <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
                           -->
-                        <div class="">
+                        <li class="">
                           <a href="#" class="btn btn-md btnview btn-light title-<?=$utlq?>-view-update-get txthov" style="
                           width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-<?=$utlq?>-get" >{{$link->title}}</a>
-                        </div>
+                        </li>
                       @endforeach
                       @else
                         <!--
                         <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
                         -->
-                        <div class="txthov">
+                        <li class="txthov">
                           <a href="#" class="btn btn-md btnview btn-light title-1-view-update-get txthov" style="
                           width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a>
-                        </div>
+                        </li>
                       @endif
-                    </div>
+                    </ul>
                   </div>
-                  <div class="row rows " style="padding-left: 27px; padding-right: 44px;">
-                    <div class="col-md-3 linked shown-sm" id="youtubeviewid">
+                  <!-- SM preview -->
+                  <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
+                    <li class="col-md-3 linked shown-sm" id="youtubeviewid">
                       <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
-                    </div>
-                    <div class="col-md-3 linked hiddensm " id="facebookviewid" style="display: none;">
+                    </li>
+                    <li class="col-md-3 linked hiddensm " id="facebookviewid" style="display: none;">
                       <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
-                    </div>
-                    <div class="col-md-3 linked hiddensm" id="twitterviewid" style=" display: none;">
+                    </li>
+                    <li class="col-md-3 linked hiddensm" id="twitterviewid" style=" display: none;">
                       <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
-                    </div>
-                    <div class="col-md-3 linked hiddensm" id="instagramviewid"  style=" display: none;">
+                    </li>
+                    <li class="col-md-3 linked hiddensm" id="instagramviewid"  style=" display: none;">
                      <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
-                    </div>  
-                  </div>
+                    </li>  
+                  </ul>
                   <div class="col-md-12" align="center" id="poweredview">
                     <div class="powered-omnilinks">
                       <a href="#">
@@ -1289,17 +1310,15 @@
           $(this).attr('data-previndex', ui.item.index());
       },
       update: function(event, ui) {
-        var data = $(this).sortable('serialize');
-        //save_order(data);
         var index =  ui.item.index();
         var start_pos = $(this).attr('data-previndex');
-
-        // console.log(index);
-        // console.log(start_pos);
-        // console.log(event);
-        // console.log(ui);
-        // console.log(data);
-        $("#getview li:eq("+start_pos+")").insertAfter($("#getview li:eq("+index+")"));
+        
+        if (start_pos<index) {
+          $("#getview li:eq("+start_pos+")").insertAfter($("#getview li:eq("+index+")"));
+        }
+        else {
+          $("#getview li:eq("+start_pos+")").insertBefore($("#getview li:eq("+index+")"));
+        }
       }
     });
     $(".sortable-msg").disableSelection();
@@ -1309,10 +1328,27 @@
       handle: '.handle',
       cursor: 'move',
       axis: 'y',
+      /* for example 
       stop: function(event, ui) {
         var data = $(this).sortable('serialize');
         //save_order(data);
+      }*/
+      start: function(e, ui) {
+          // creates a temporary attribute on the element with the old index
+          $(this).attr('data-previndex', ui.item.index());
+      },
+      update: function(event, ui) {
+        var index =  ui.item.index();
+        var start_pos = $(this).attr('data-previndex');
+        
+        if (start_pos<index) {
+          $("#viewLink li:eq("+start_pos+")").insertAfter($("#viewLink li:eq("+index+")"));
+        }
+        else {
+          $("#viewLink li:eq("+start_pos+")").insertBefore($("#viewLink li:eq("+index+")"));
+        }
       }
+      
     });
     $(".sortable-link").disableSelection();
     //$( ".sortable-link" ).draggable();
@@ -1321,12 +1357,20 @@
       handle: '.handle',
       cursor: 'move',
       axis: 'y',
-      stop: function(event, ui) {
-        var data = $(this).sortable('serialize');
-        console.log(data);
-        console.log(event);
-        console.log(ui);
-        //save_order(data);
+      start: function(e, ui) {
+          // creates a temporary attribute on the element with the old index
+          $(this).attr('data-previndex', ui.item.index());
+      },
+      update: function(event, ui) {
+        var index =  ui.item.index();
+        var start_pos = $(this).attr('data-previndex');
+        
+        if (start_pos<index) {
+          $("#sm-preview li:eq("+start_pos+")").insertAfter($("#sm-preview li:eq("+index+")"));
+        }
+        else {
+          $("#sm-preview li:eq("+start_pos+")").insertBefore($("#sm-preview li:eq("+index+")"));
+        }
       }
     });
     $(".sortable-sosmed").disableSelection();
@@ -1628,6 +1672,7 @@
       tambahTemp();
       $('#pesanAlert').removeClass('alert-danger');
       $('#pesanAlert').children().remove();
+      $(window).scrollTop(0);
     });
 
     $('.btn-reset').click(function() {
@@ -1657,6 +1702,20 @@
       $('#editidpixel').val(editidpixel);
       $('#jenis_pixel').val(jenis);
     });
+    
+    <?php 
+    //hidden class masi salah, perlu dicari
+    if (!is_null($pages->sort_msg)) {
+      $arr = explode(";",$pages->sort_msg);
+      $counter = 1;
+      foreach($arr as $data){ 
+    ?>
+        $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+        $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
+    <?php 
+        $counter += 1;
+      }
+    } ?>
   });
 
   let slideIndex = 1;
