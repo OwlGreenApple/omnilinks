@@ -6,6 +6,17 @@
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
 <script type="text/javascript">
   var picker;
+  
+  /*
+  * function untuk menggambar preview HP. Function ini dipanggil pada event drag 
+  */
+  function drawPreview() {
+    // draw banner 
+    // draw messenger  
+    // draw link 
+    // draw sosial 
+  }
+  
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
@@ -214,6 +225,7 @@
     //slides[slideIndex-1].value='block';   
     dots[slideIndex-1].className +=" activated";
   }
+  
   function dotsok()
   {
     let i,a=0,dotselement,slidesid;
@@ -1279,6 +1291,9 @@
       axis: 'y',
       stop: function(event, ui) {
         var data = $(this).sortable('serialize');
+        console.log(data);
+        console.log(event);
+        console.log(ui);
         //save_order(data);
       }
     });
