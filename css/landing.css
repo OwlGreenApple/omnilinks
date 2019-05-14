@@ -73,7 +73,7 @@ p,span {
   display: none;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 767px) {
   .menu-nomobile {
     display: none;
   }
@@ -92,8 +92,15 @@ p,span {
   padding-bottom: 30px;*/
   background-color: #ffffff;
   min-height: 80px;
-  top: 0;
-  z-index: 20;
+  z-index: 30;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+  }
 }
 
 .navlog {
@@ -281,6 +288,12 @@ p,span {
   padding-top: 58px;
   padding-bottom: 18px;
   background-color: #505050;
+}
+
+@media screen and (max-width: 767px) {
+  .infooter {
+    padding-top: 18px;
+  }
 }
 
 .linkfooter {

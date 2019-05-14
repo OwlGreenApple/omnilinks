@@ -699,7 +699,26 @@
                   <span class="blue-txt">
                     Pixel Retargetting
                   </span>
+
                   <textarea class="form-control mt-3" name="script" id="script" style="height:100px"></textarea>
+
+                  <div class="form-inline mt-3">
+                    <span class="mr-2">
+                      Jenis
+                    </span>
+
+                    <select class="form-control" name="jenis_pixel" id="jenis_pixel">
+                      <option value="fb">
+                        FB Pixel
+                      </option>
+                      <option value="twitter">
+                        Twitter Retargetting
+                      </option>
+                      <option value="google">
+                        Google Retargetting
+                      </option>
+                    </select>
+                  </div>
 
                   <div class="title form-inline mb-5 mt-3">
                     <span class="mr-2">
@@ -1033,20 +1052,20 @@
 
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
-                  <div class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                    <div class="link shown-mes" id="waviewid" >
+                  <ul class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
+                    <li class="link shown-mes" id="waviewid" >
                         <a href="#" class="btn btn-md btnview btn-light txthov" style="
                         width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
-                    </div>
-                    <div class="link hiddens" id="telegramviewid" style="display: none;">
+                    </li>
+                    <li class="link hiddens" id="telegramviewid" style="display: none;">
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
-                    </div> 
-                    <div class="link hiddens" id="skypeviewid" style="display: none;">
+                    </li> 
+                    <li class="link hiddens" id="skypeviewid" style="display: none;">
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
-                    </div>
-                  </div>
+                    </li>
+                  </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                     <div class="col-md-12" id="viewLink">
                       @if($links->count())
@@ -1265,9 +1284,22 @@
       handle: '.handle',
       cursor: 'move',
       axis: 'y',
-      stop: function(event, ui) {
+      start: function(e, ui) {
+          // creates a temporary attribute on the element with the old index
+          $(this).attr('data-previndex', ui.item.index());
+      },
+      update: function(event, ui) {
         var data = $(this).sortable('serialize');
         //save_order(data);
+        var index =  ui.item.index();
+        var start_pos = $(this).attr('data-previndex');
+
+        // console.log(index);
+        // console.log(start_pos);
+        // console.log(event);
+        // console.log(ui);
+        // console.log(data);
+        $("#getview li:eq("+start_pos+")").insertAfter($("#getview li:eq("+index+")"));
       }
     });
     $(".sortable-msg").disableSelection();
@@ -1617,10 +1649,13 @@
       var script = $(this).attr("datascriptpixel");
       var title = $(this).attr("dataedittitle");
       var editidpixel = $(this).attr("dataeditpixelid");
+      var jenis = $(this).attr("datajenis");
+
       $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
       $('#script').val(script);
       $('#judul').val(title);
       $('#editidpixel').val(editidpixel);
+      $('#jenis_pixel').val(jenis);
     });
   });
 

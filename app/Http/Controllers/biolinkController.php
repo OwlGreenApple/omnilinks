@@ -402,10 +402,12 @@ class BiolinkController extends Controller
   	$pixel->pages_id=$page->id;
   	$pixel->users_id=$user->id;
   	$pixel->title=$request->title;
+    $pixel->jenis_pixel=$request->jenis_pixel;
   	$pixel->script=$request->script;
   	$pixel->save();
   	return redirect('/dash/new/'.$uuid);
   }
+
   public function loadpixel(Request $request)
   {
   	$idpage=$request->idpage;
