@@ -34,7 +34,7 @@
   <div class="col-xs-6" align="right">
     Periode : 
     <div class="date-box">
-      <b>{{ date("F Y") }}</b>
+      <b>{{ date("F Y",strtotime('01-'.$bulan.'-'.$tahun)) }}</b>
     </div>
   </div>
 </div>
@@ -50,7 +50,25 @@
         <span class="titel">
           <b>omn.lkz/{{$page->names}}</b> <br>
           Title : <b>{{$page->page_title}}</b> <br>
-          Pixels : <br>
+
+          Pixels : 
+          @if($pixels->count())
+            @foreach($pixels as $pixel)
+              @if($pixel->jenis_pixel=='fb')
+                <i class="fab fa-facebook-f">&nbsp;</i>
+              @endif
+
+              @if($pixel->jenis_pixel=='twitter')
+                <i class='fab fa-twitter'>&nbsp;</i>
+              @endif
+
+              @if($pixel->jenis_pixel=='google')
+                <i class="fab fa-google">&nbsp;</i>
+              @endif
+            @endforeach
+          @endif
+          <br>
+
           Created on : {{ date("F d, Y", strtotime($page->created_at))  }} 
         </span>
       </div>

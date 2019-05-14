@@ -38,6 +38,24 @@ body {
   display: none;
 }*/
 
+/* table */
+.table td, .table th{
+  border: none;
+}
+
+.table thead th {
+  background-color: #F0F0F0;
+  border: none;
+}
+
+table tr:nth-child(odd) td {
+  background-color:#F6F6F6;
+}
+
+table tr:nth-child(even) td {
+ background-color:#F0F0F0;
+}
+
 /* loader */
 .background-load {
   background-color: #a39f9f;

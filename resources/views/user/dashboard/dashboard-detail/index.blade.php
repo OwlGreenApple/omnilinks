@@ -57,7 +57,15 @@
         mode: "{{$mode}}",
       },
       dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(data) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -120,18 +128,25 @@
       @endif
     </div>
 
+    <div class="col-md-12 pr-0 div-btn">
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-6 pl-md-3 pl-0 pr-0">
+          <button class="btnbio btn-block btncreate btncreate-bio">
+            BIO LINK  
+          </button>
+        </div>
+        <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
+          <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
+            <button class="btnsingle btn-block btncreate">
+              SINGLE LINK  
+            </button>
+          </a>
+        </div>  
+      </div>
+    </div>
+
     <div class="col-md-12">
-      <button class="btnbio btncreate btncreate-bio">
-        BIO LINK  
-      </button>
-
-      <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
-        <button class="btnsingle btncreate">
-          SINGLE LINK  
-        </button>
-      </a>
-
-      <div style="padding-top: 49px; padding-bottom: 5px">
+      <div class="pt-md-5 pt-0" style="padding-bottom: 5px">
         <h4 style="color: #106BC8">
           <i class="fas fa-arrow-left"></i>&nbsp;
           <a href="{{url('dash')}}">
@@ -140,10 +155,12 @@
         </h4>
         <br>  
 
-        <h2>Omnilinkz Chart</h2>
+        <div class="text-md-left text-center">
+          <h2>Omnilinkz Detailed Chart</h2>
+        </div>
 
         <div class="row mb-4 mt-5">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-2">
             <div class="input-group">
               <?php  
                 $category = $data['title'];
@@ -156,6 +173,8 @@
           </div>
           
           <div class="col-md-6 text-md-right text-left">
+            <h4 style="display: inline;">Periode : </h4>
+
             <select id="bulan" name="bulan" class="custom-select form-controll">
               <?php 
               $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
@@ -195,15 +214,15 @@
       <hr style="margin-bottom: 45px">
 
       <div class="row" style="margin-bottom: 45px">
-        <div class="col-md-9"> 
+        <div class="col-md-9 mb-2"> 
           <h2>{{$data['title']}}</h2>
           URL : {{$data['link']}}<br> 
           <br>  
           Created on : {{date('d F Y',strtotime($data['created_at']))}}
         </div>
         
-        <div class="col-md-3" align="right"> 
-          <a href="{{url('pdf/'.$pageid.'/'.$id.'/'.$mode.'/'.$bulann.'/'.$tahun)}}" target="_blank" style="float: right;">
+        <div class="col-md-3 text-md-right text-left"> 
+          <a id="link-savepdf" href="{{url('pdf/'.$pageid.'/'.$id.'/'.$mode.'/'.$bulann.'/'.$tahun)}}" target="_blank">
             <button class="btn btn-primary">
               <i class="far fa-file-pdf"></i>
               Save As PDF
@@ -212,18 +231,17 @@
         </div>
       </div>
 
-      <div class="row" style="margin-bottom: 45px">
-        <div class="col-md-8">
-          <div id="chartContainer" style="height:300px; width:100%;"></div>    
+      <div class="row">
+        <div class="col-md-8 order-md-1 order-2">
+          <div id="chartContainer" style="height:300px; width:100%; margin-bottom:40px"></div>    
         </div>
-        <div class="col-md-4 div-click" align="center">
+        <div class="col-md-4 div-click order-md-2 order-1 text-md-center mb-5">
           <span class="span-click">
-            Total Click <br>
-            <span id="total-click"></span> <br> 
+            Total Click <br class="menu-nomobile">
+            <span id="total-click" class="float-md-none float-right"></span> <br> 
             dalam 30 hari
           </span>
         </div>
-
       </div>
 
       <div>
@@ -271,11 +289,17 @@
   $('body').on('change','#bulan',function(e) 
   {
     refresh_page();
+    var link = "{{url('pdf/'.$pageid.'/'.$id.'/'.$mode)}}";
+    link = link + '/' + $(this).val() + '/' + $('#tahun').val();
+    $('#link-savepdf').attr('href',link);
   });
 
   $('body').on('change','#tahun',function(e) 
   {
     refresh_page();
+    var link = "{{url('pdf/'.$pageid.'/'.$id.'/'.$mode)}}";
+    link = link + '/' +$('#bulan').val() + '/' + $(this).val();
+    $('#link-savepdf').attr('href',link);
   });
 
   $('body').on('click','.btncreate-bio',function(e){

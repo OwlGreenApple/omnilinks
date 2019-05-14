@@ -19,12 +19,12 @@ class DashboardController extends Controller
       if($request->keywords==''){
         $page = Page::where('user_id',Auth::user()->id)
               ->orderBy('created_at','ascend')
-              ->paginate(1);
+              ->paginate(10);
       } else {
         $page = Page::where('user_id',Auth::user()->id)
               ->where('page_title','like','%'.$request->keywords.'%')
               ->orderBy('created_at','ascend')
-              ->paginate(1);  
+              ->paginate(10);  
       }
     	
 
@@ -107,8 +107,20 @@ class DashboardController extends Controller
 
     public function pdf_page($id,$bulan,$tahun){
       $page = Page::find($id);
-      $banners = Banner::where('pages_id',$id)->get();
-      $links = Link::where('pages_id',$id)->get();
+
+      $banners = Banner::where('pages_id',$id)
+                        ->where('users_id',Auth::user()->id)
+                        ->get();
+
+      $links = Link::where('pages_id',$id)
+                    ->where('users_id',Auth::user()->id)
+                    ->get();
+
+      $pixels = Pixel::where('users_id',Auth::user()->id)
+                ->select('jenis_pixel')
+                ->where('pages_id',$id)
+                ->groupBy('jenis_pixel')
+                ->get();
 
       $click = $this->counter_click_month($page,$banners,$links,$bulan,$tahun);
 
@@ -120,6 +132,9 @@ class DashboardController extends Controller
         'links' => $links,
         'click' => $click,
         'chart' => $chart,
+        'pixels' => $pixels,
+        'bulan' => $bulan,
+        'tahun' => $tahun,
       );
 
       $pdf = PDF::loadView('user.pdf.pdf-all', $data)
@@ -148,6 +163,8 @@ class DashboardController extends Controller
           'created_at' => $link->created_at,
           'chart' => $arr['chart'],
           'total_click' => $arr['total_click'],
+          'bulanpdf' => $bulan,
+          'tahunpdf' => $tahun,
         );
       } else if($mode=='banner') {
         $banner = Banner::find($id);
@@ -159,6 +176,8 @@ class DashboardController extends Controller
           'created_at' => $banner->created_at,
           'chart' => $arr['chart'],
           'total_click' => $arr['total_click'],
+          'bulanpdf' => $bulan,
+          'tahunpdf' => $tahun,
         );
       } else {
         $page = Page::find($pageid);  
@@ -202,6 +221,8 @@ class DashboardController extends Controller
           'created_at' => $page->created_at,
           'chart' => $arr['chart'],
           'total_click' => $arr['total_click'],
+          'bulanpdf' => $bulan,
+          'tahunpdf' => $tahun,
         );
       }
 
