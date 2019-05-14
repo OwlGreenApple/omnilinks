@@ -154,22 +154,6 @@
   margin-left: 20px;
 }
 
-.table td, .table th{
-  border: none;
-}
-.table thead th {
-  background-color: #F0F0F0;
-  border: none;
-}
-table tr:nth-child(odd) td
-{
-  background-color:#F6F6F6;
-
-}
-table tr:nth-child(even) td
-{
- background-color:#F0F0F0;
-}
 .btn-primary{
   background-color: #106BC8;
 }

@@ -151,12 +151,12 @@
 
     <div class="col-md-12 pr-0 div-btn">
       <div class="row">
-        <div class="col-md-2 col-6 pl-md-3 pl-0 pr-0">
+        <div class="col-lg-2 col-md-3 col-6 pl-md-3 pl-0 pr-0">
           <button class="btnbio btn-block btncreate btncreate-bio">
             BIO LINK  
           </button>
         </div>
-        <div class="col-md-2 col-6 pr-md-3 pl-0 pr-0">
+        <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
           <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
             <button class="btnsingle btn-block btncreate">
               SINGLE LINK  
@@ -237,7 +237,6 @@
           dalam 30 hari
         </span>
       </div>
-      
     </div>
 
     <div class="pager menu-mobile"></div>

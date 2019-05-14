@@ -1,9 +1,9 @@
 <?php 
-    use App\Link;
-    use App\Banner;
-    use App\Pixel;
-    use App\Http\Controllers\DashboardController;
- ?>
+  use App\Link;
+  use App\Banner;
+  use App\Pixel;
+  use App\Http\Controllers\DashboardController;
+?>
 
 <script>
   $(document).ready(function() {
@@ -22,40 +22,40 @@
 
 @if(!$pages->count())
   <div class="card noshow">
-    <div class="card-body">
-      <h1 class="textdash">
+    <div class="card-body text-center">
+      <span class="textdash">
         Buat Omnilinkz pertama Anda<br>Pilih <span style="color:#106BC8;">"BIO LINK"</span> atau <span style="color:#106BC8;">"SINGLE LINK"
-          </span>
-      </h1>
+        </span>
+      </span>
     </div>
   </div>
 @else
   @foreach($pages as $page)
     <?php
-      $links=Link::where('users_id',Auth::user()->id)
+    $links = Link::where('users_id',Auth::user()->id)
               ->where('pages_id',$page->id)
               ->get();
 
-      $banners=Banner::where('users_id',Auth::user()->id)
+    $banners = Banner::where('users_id',Auth::user()->id)
                 ->where('pages_id',$page->id)
                 ->get();
 
-      $pixels = Pixel::where('users_id',Auth::user()->id)
+    $pixels = Pixel::where('users_id',Auth::user()->id)
                 ->select('jenis_pixel')
                 ->where('pages_id',$page->id)
                 ->groupBy('jenis_pixel')
                 ->get();
 
-      $dashcont = new DashboardController;
+    $dashcont = new DashboardController;
 
-      $arr = $dashcont->counter_click_month($page,$banners,$links,$bulan,$tahun);
+    $arr = $dashcont->counter_click_month($page,$banners,$links,$bulan,$tahun);
 
     ?>
 
     <div class="card carddash">
       <div class="card-body link-header" id="linkHeader" dataid="{{$page->id}}" style="cursor:pointer;">
         <div class="row">
-          <div class="col-md-1 menu-nomobile">
+          <div class="col-lg-1 col-md-2 menu-nomobile">
             <div class="photo p-2 bd-highlight justify-content-center">
               <div class="imga">
                 @if(is_null($page->image_pages))
@@ -67,7 +67,7 @@
             </div>
           </div>
 
-          <div class="col-8 col-md-6">
+          <div class="col-8 col-md-4 col-lg-6">
             <a href="omn.lkz/{{$page->shorten}}" class="getLink">
               omn.lkz/{{$page->names}} 
               <span class="menu-mobile float-right">
@@ -95,21 +95,21 @@
 
             <span class="menu-nomobile">
               Pixels : 
-                @if($pixels->count())
-                  @foreach($pixels as $pixel)
-                    @if($pixel->jenis_pixel=='fb')
-                      <i class="fab fa-facebook-f">&nbsp;</i>
-                    @endif
+              @if($pixels->count())
+                @foreach($pixels as $pixel)
+                  @if($pixel->jenis_pixel=='fb')
+                    <i class="fab fa-facebook-f">&nbsp;</i>
+                  @endif
 
-                    @if($pixel->jenis_pixel=='twitter')
-                      <i class='fab fa-twitter'>&nbsp;</i>
-                    @endif
+                  @if($pixel->jenis_pixel=='twitter')
+                    <i class='fab fa-twitter'>&nbsp;</i>
+                  @endif
 
-                    @if($pixel->jenis_pixel=='google')
-                      <i class="fab fa-google">&nbsp;</i>
-                    @endif
-                  @endforeach
-                @endif
+                  @if($pixel->jenis_pixel=='google')
+                    <i class="fab fa-google">&nbsp;</i>
+                  @endif
+                @endforeach
+              @endif
             </span>
 
             <p class="menu-nomobile">
@@ -119,7 +119,7 @@
           </div>
 
           <div class="col-md-2 menu-nomobile">
-            <div class="p-4 bd-highlight" align="center">
+            <div class="pt-4 pb-4 bd-highlight" align="center">
               <span class="click-page">
                 {{array_sum($arr)}}
               </span><br>
@@ -127,8 +127,8 @@
             </div>
           </div>
 
-          <div class="col-4 col-md-3">
-            <div class="p-md-4 bd-highlight">
+          <div class="col-4 col-lg-3 col-md-4">
+            <div class="pt-md-4 pb-md-4 bd-highlight">
 
               <div class="buton">
                 <button type="button" deletedataid="{{$page->id}}" class="btn btn-sm btn-danger float-right btn-deletePage">
@@ -165,38 +165,36 @@
               <hr class="">
             </div>
 
-           
-              <div class="col-md-7 col-6">
-                <span>Banner</span><br>
+            <div class="col-lg-7 col-md-6 col-6">
+              <span>Banner</span><br>
+              @foreach($banners as $banner)
+                <span class="tooltipstered" title="Click To View Details">
+                  <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner/'.$bulan.'/'.$tahun)}}">
+                    <i class="fab fa-font-awesome-flag"></i>
+                    <span> {{$banner->title}}</span>
+                  </a><br>
+                </span>
+              @endforeach
+              <br>
+            </div>
+
+            <div class="col-md-2 col-6 text-md-center text-right">
+              <div class="pt-4 pb-4 bd-highlight">
                 @foreach($banners as $banner)
-                    <span class="tooltipstered" title="Click To View Details">
-                      <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/'.$banner->id.'/banner/'.$bulan.'/'.$tahun)}}">
-                        <i class="fab fa-font-awesome-flag"></i>
-                        <span> {{$banner->title}}</span>
-                      </a><br>
-                    </span>
+                  <span>
+                    {{$arr[$banner->title]}} clicks
+                  </span><br>
                 @endforeach
-                <br>
               </div>
+            </div>
 
-              <div class="col-md-2 col-6 text-md-left text-right">
-                <div class="p-4 bd-highlight">
-                  @foreach($banners as $banner)
-                    <span>
-                      {{$arr[$banner->title]}} clicks
-                    </span><br>
-                  @endforeach
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <div class="p-4 bd-highlight menu-nomobile float-right">
-                  @foreach($banners as $banner)
+            <div class="col-lg-3 col-md-4">
+              <div class="pt-4 pb-4 bd-highlight menu-nomobile float-right">
+                @foreach($banners as $banner)
                   <input type="text" name="" value="{{$banner->link}}" readonly="" style="margin-bottom: 2px;"><br>
-                  @endforeach
-                </div>       
-              </div> 
-             
+                @endforeach
+              </div>       
+            </div> 
           </div>
         @endif
 
@@ -206,7 +204,7 @@
             <hr class="">
           </div>
 
-          <div class="col-md-7 col-6">
+          <div class="col-lg-7 col-md-6 col-6">
             <span>MESSENGERS</span><br>
             @if($page->wa_pixel_id!=0 and !is_null($page->wa_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
@@ -217,6 +215,7 @@
               </span>
               <br>
             @endif
+
             @if($page->telegram_pixel_id!=0 and !is_null($page->telegram_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/telegram/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/telegram/'.$bulan.'/'.$tahun)}}">
@@ -226,6 +225,7 @@
               </span>
               <br>
             @endif
+
             @if($page->skype_pixel_id!=0 and !is_null($page->skype_pixel_id))
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/skype/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/skype/'.$bulan.'/'.$tahun)}}">
@@ -237,14 +237,15 @@
             @endif
           </div>
 
-          <div class="col-md-2 col-6 text-md-left text-right">
-            <div class="p-4 bd-highlight">
+          <div class="col-md-2 col-6 text-md-center text-right">
+            <div class="pt-4 pb-4 bd-highlight">
               @if($page->wa_pixel_id!=0 &&  !is_null($page->wa_pixel_id))
-              <span>
-                {{$arr['wa']}} clicks
-              </span><br>
+                <span>
+                  {{$arr['wa']}} clicks
+                </span><br>
               @endif
-             @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
+
+              @if($page->telegram_pixel_id!=0 && !is_null($page->telegram_pixel_id))
                 <span>
                   {{$arr['telegram']}} clicks
                 </span><br>
@@ -258,8 +259,8 @@
             </div>
           </div>
 
-          <div class="col-md-3 menu-nomobile">
-            <div class="p-4 bd-highlight float-right">
+          <div class="col-lg-3 col-md-4 menu-nomobile">
+            <div class="pt-4 pb-4 bd-highlight float-right">
               @if($page->wa_pixel_id!=0 &&  !is_null($page->wa_pixel_id))
                 <input type="text" name="" value="{{$page->wa_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
@@ -277,43 +278,42 @@
 
         <!--Links-->
         @if($links->count())
-          <div class="row">
-            <div class="col-md-12">
-              <hr class="">
-            </div>
-            
-              <div class="col-md-7 col-6">
-                <span>Links</span><br>
-                @foreach($links as $link)
-                  <span class="tooltipstered" title="Click To View Details">
-                    <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link/'.$bulan.'/'.$tahun)}}">
-                      <i class="fas fa-link"></i>
-                      <span>{{$link->title}}</span>
-                    </a>
-                  </span>
-                  <br>
-                @endforeach
-              </div>
-
-              <div class="col-md-2 col-6 text-md-left text-right">
-                <div class="p-4 bd-highlight">
-                  @foreach($links as $link)
-                    <span>
-                      {{$arr[$link->title]}} clicks
-                    </span><br>
-                  @endforeach
-                </div>
-              </div>
-                  
-              <div class="col-md-3 menu-nomobile">
-                <div class="p-4 bd-highlight float-right">
-                  @foreach($links as $link)
-                  <input type="text" name="" value="{{$link->link}}" readonly="" style="margin-bottom: 2px;"><br>
-                  @endforeach 
-                </div>       
-              </div> 
-            
+        <div class="row">
+          <div class="col-md-12">
+            <hr class="">
           </div>
+
+          <div class="col-lg-7 col-md-6 col-6">
+            <span>Links</span><br>
+            @foreach($links as $link)
+            <span class="tooltipstered" title="Click To View Details">
+              <a class="single-report" href="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/'.$link->id.'/link/'.$bulan.'/'.$tahun)}}">
+                <i class="fas fa-link"></i>
+                <span>{{$link->title}}</span>
+              </a>
+            </span>
+            <br>
+            @endforeach
+          </div>
+
+          <div class="col-md-2 col-6 text-md-center text-right">
+            <div class="pt-4 pb-4 bd-highlight">
+              @foreach($links as $link)
+              <span>
+                {{$arr[$link->title]}} clicks
+              </span><br>
+              @endforeach
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 menu-nomobile">
+            <div class="pt-4 pb-4 bd-highlight float-right">
+              @foreach($links as $link)
+              <input type="text" name="" value="{{$link->link}}" readonly="" style="margin-bottom: 2px;"><br>
+              @endforeach 
+            </div>       
+          </div> 
+        </div>
         @endif
 
         <!--Social Media-->
@@ -321,7 +321,7 @@
           <div class="col-md-12">
             <hr class="">
           </div>
-          <div class="col-md-7 col-6">
+          <div class="col-lg-7 col-md-6 col-6">
             <span>Social-Media</span><br>
 
             @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
@@ -364,23 +364,26 @@
             @endif
           </div>
 
-          <div class="col-md-2 col-6 text-md-left text-right">
-            <div class="p-4 bd-highlight">
+          <div class="col-md-2 col-6 text-md-center text-right">
+            <div class="pt-4 pb-4 bd-highlight">
               @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
                 <span>
                   {{$arr['fb']}} clicks
                 </span><br>
               @endif
+
               @if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
                 <span>
                   {{$arr['ig']}} clicks
                 </span><br>
               @endif
+
               @if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))
                 <span>
                   {{$arr['twitter']}} clicks
                 </span><br>
               @endif
+
               @if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
                 <span>
                   {{$arr['youtube']}} clicks
@@ -389,8 +392,8 @@
             </div>
           </div>
 
-          <div class="col-md-3 menu-nomobile">
-            <div class="p-4 bd-highlight float-right">
+          <div class="col-lg-3 col-md-4 menu-nomobile">
+            <div class="pt-4 pb-4 bd-highlight float-right">
               @if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
                 <input type="text" name="" value="{{$page->fb_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif

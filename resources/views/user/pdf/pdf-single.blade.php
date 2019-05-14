@@ -36,7 +36,7 @@
       <div class="col-xs-6" align="right">
         Periode : 
         <div class="date-box">
-          <b>{{ date("F Y") }}</b>
+          <b>{{ date("F Y",strtotime('01-'.$bulanpdf.'-'.$tahunpdf)) }}</b>
         </div>
       </div>
     </div>  

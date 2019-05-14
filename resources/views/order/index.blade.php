@@ -2,34 +2,22 @@
 
 @section('content')
 <script type="text/javascript">
-  var table;
-
   $(document).ready(function() {
-    // table = $('#myTable').DataTable({
-    //   destroy: true,
-    //   "order": [],
-    // });
-    // $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
-
     refresh_page();
-
-    // $('.formatted-date').datepicker({
-    //   dateFormat: 'yy/mm/dd',
-    // });
   });
+
   function refresh_page(){
     $.ajax({
       type : 'GET',
       url : "<?php echo url('/orders/load-order') ?>",
       dataType: 'text',
-    //   beforeSend: function()
-    //   {
-    //     $('#loader').show();
-    //     $('.div-loading').addClass('background-load');
-    //   },
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
-        // $('#loader').hide();
-        // $('.div-loading').removeClass('background-load');
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
@@ -38,37 +26,6 @@
     });
   }
 
-
-  function delete_order(){
-    $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/list-order/delete') ?>",
-      data: {
-        id : $('#id_delete').val(),
-      },
-      dataType: 'text',
-    //   beforeSend: function()
-    //   {
-    //     $('#loader').show();
-    //     $('.div-loading').addClass('background-load');
-    //   },
-      success: function(result) {
-        // $('#loader').hide();
-        // $('.div-loading').removeClass('background-load');
-
-        // var data = jQuery.parseJSON(result);
-
-        if(data.status=='success'){
-          refresh_page();
-        } else {
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-success');
-          $('#pesan').addClass('alert-warning');
-          $('#pesan').show();
-        }
-      }
-    });
-  }
   function confirm_payment()
   {
     var form = $('#formUpload')[0];
@@ -81,16 +38,13 @@
       cache: false,
       contentType: false,
       processData: false,
-    //   beforeSend: function()s
-    //   {
-    //     $('#loader').show();
-    //     $('.div-loading').addClass('background-load');
-    //   },
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(data) {
-        // $('#loader').hide();
-        // $('.div-loading').removeClass('background-load');
-
-       // var data = jQuery.parseJSON(result);
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
         
         if(data.status=='success'){
           $('#pesan').html(data.message);
@@ -110,7 +64,18 @@
   }
 </script>
 
-<div class="col-md-10 offset-md-1" style="height:100%; margin-top:30px">
+<style type="text/css">
+  /*@media screen and (max-width: 768px){
+    .menu-mobile {
+      display: block;
+    }
+    .menu-nomobile {
+      display: none;
+    }
+  } */ 
+</style>
+
+<div class="col-md-10 offset-md-1" style="height:100%; margin-top:110px">
   <div class="row justify-content-center">
     <div class="col-md-12">
 
