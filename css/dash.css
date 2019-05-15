@@ -708,3 +708,7 @@ hr.own {
   {
     max-width: 32.33333%; 
   }
+
+.hide {
+  display : none;
+}

@@ -43,7 +43,8 @@ class BiolinkController extends Controller
                     ->with('walink',$walink);
      return $arr;
   }
-    public function deletewalink(Request $request)
+  
+  public function deletewalink(Request $request)
   {
    $walink=Whatsapplink::find($request->idwalink);
    $walink->delete();
@@ -273,33 +274,34 @@ class BiolinkController extends Controller
         $url=Link::where('id','=',$id[$i])->first();
       }
 
-       $url->pages_id=$page->id;
-        $url->names=null;
-        $url->users_id=$user->id;
-        $url->title=$title[$i];
-        $url->link=$link[$i];
-        $url->save();
+      $url->pages_id=$page->id;
+      $url->names=null;
+      $url->users_id=$user->id;
+      $url->title=$title[$i];
+      $url->link=$link[$i];
+      $url->save();
 
-        if($sort_link=='')
-        {
-          $sort_link = $url->id.'-12';
-        } else
-         {
-          $sort_link = $sort_link.';'.$url->id.'-12';
-        }
+      if($sort_link=='')
+      {
+        $sort_link = $url->id.'-12';
+      } else
+      {
+        $sort_link = $sort_link.';'.$url->id.'-12';
+      }
     }
 
     $sort_msg = '';
-    if($request->has('msg'))
+    if($request->has('sortmsg'))
     {
-      $countmsg = 12/count($request->msg);
+      $countmsg = 12/count($request->sortmsg);
 
-      foreach ($request->msg as $msg) {
-        if($sort_msg==''){
+      foreach ($request->sortmsg as $msg) {
+        /*if($sort_msg==''){
           $sort_msg = $msg.'-'.$countmsg;
         } else {
           $sort_msg = $sort_msg.';'.$msg.'-'.$countmsg;
-        }
+        }*/
+        $sort_msg .= $msg.';';
       }
     }
       

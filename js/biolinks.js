@@ -75,10 +75,10 @@ if ($('.wa-input').val()!='') {
     }
     $(document).on('click', '#tambah', function (e) {
         $('.messengers').each(function () {
-            if ($(this).hasClass('hidden')) {
+            if ($(this).hasClass('hide')) {
                 // console.log('remove hidden');
                 $(this).show();
-                $(this).removeClass('hidden');
+                $(this).removeClass('hide');
                 $(this).parent().attr("id", "msg-" + $(this).attr('data-type'));
                 return false;
             }
@@ -134,7 +134,7 @@ if ($('.wa-input').val()!='') {
         $('.sortable-link').append('<li class="link-list" link-id="link-url-' + counterLink + '"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div></div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
 
         // $("#viewLink").append(' <button type="button" class="btn btn-light btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
-        $("#viewLink").append('<div class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></div>');
+        $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');
     });
     $(document).on('click', '.deletelink', function (e) {
       let   idLink = $(this).parent().parent().attr("link-id");
