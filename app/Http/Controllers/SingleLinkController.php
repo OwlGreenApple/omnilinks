@@ -88,7 +88,7 @@ class SingleLinkController extends Controller
                   ->orderBy('created_at','ascend');
 
       $total=$pixels->count();
-      $pixels=$pixels->paginate(3);
+      $pixels=$pixels->paginate(15);
 
       $arr['view'] =(string) view('user.dashboard.contentsinglepixel')
                     ->with('pixels',$pixels);
@@ -116,7 +116,7 @@ class SingleLinkController extends Controller
                 ->orderBy('links.created_at','ascend');
                 
     $total=$link->count();
-    $link=$link->paginate(3);
+    $link=$link->paginate(15);
 
     $array['view']=(string) view('user.dashboard.contentsinglelink')
                     ->with('links',$link);

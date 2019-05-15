@@ -8,7 +8,7 @@
     <tr align="center">
       <td>
         <div class="menu-mobile">
-          <div class="view-details" data-id="{{$link->id}}">
+          <div class="view-details" data-id="{{$link->idlink}}">
             <span class="menu-mobile icon-dropdown">
               <i class="fas fa-sort-down"></i>
             </span>  
@@ -42,7 +42,7 @@
       </td>
     </tr>
 
-    <tr class="details-{{$link->id}} d-none">
+    <tr class="details-{{$link->idlink}} d-none">
       <td colspan="2">
         Link : <b>Omn.lkz/{{$link->shorten}}&nbsp;</b><br>
         Pixel : {{$link->judul}} <br>

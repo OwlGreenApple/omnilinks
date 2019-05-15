@@ -1,8 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
-<div class="container" style="padding-top: 50px; padding-bottom:50px;">
+<div class="container" style="padding-top: 120px; padding-bottom:50px;">
   <div class="row justify-content-center">
+    <div class="col-md-12" style="margin-bottom: 50px">
+      <img class="mx-auto d-block" src="image/omnilinkz-logo-wh.png" width="240px;" height="auto">
+    </div>
+
     <div class="col-md-6 col-12">
       <div class="card-custom-register">
         <div class="card cardpadreg">

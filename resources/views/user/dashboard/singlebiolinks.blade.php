@@ -61,6 +61,7 @@
     if (currentPageLink == "") {
       currentPageLink = "<?php echo url('/dash/newsingle/load-singlelink')?>";
     }
+
     $.ajax({
       type: 'GET',
       data: {
@@ -213,7 +214,7 @@
 
 </style>
 
-<section id="tabs" class="offset-md-1 col-md-10">
+<section id="tabs" class="offset-md-1 col-md-10" style="margin-bottom: 50px;">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -249,7 +250,7 @@
                 <form method="post" id="formlink" novalidate>
                   {{ csrf_field() }}
                   <div class="form-group row">
-                    <label for="title" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
+                    <label for="title" class="col-lg-2 col-md-3 col-form-label labell gray-txt text-md-right text-left">
                       Your Title
                     </label>
                     <div class="col-md-6 col-12">
@@ -258,7 +259,7 @@
                   </div>
 
                   <div class="form-group row">
-                    <label for="url" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
+                    <label for="url" class="col-lg-2 col-md-3 col-form-label labell gray-txt text-md-right text-left">
                       URL
                     </label>
                     <div class="col-md-6 col-12">
@@ -268,7 +269,7 @@
 
                   @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                     <div class="form-group row">
-                      <label for="password-confirm" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
+                      <label for="password-confirm" class="col-lg-2 col-md-3 col-form-label labell gray-txt text-md-right text-left">
                         Pixel
                       </label>
 
@@ -300,7 +301,7 @@
                   <form method="post" id="formpixel" novalidate>
                     {{ csrf_field() }}
                     <div class="form-group row">
-                      <label for="password-confirm" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
+                      <label for="password-confirm" class="col-lg-2 col-md-3 col-form-label labell gray-txt text-md-right text-left">
                         Your Title
                       </label>
                       <div class="col-md-6 col-12">
@@ -308,7 +309,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-md-2 float-right col-form-label labell gray-txt text-md-right text-left">
+                      <label class="col-lg-2 col-md-3 float-right col-form-label labell gray-txt text-md-right text-left">
                         Jenis
                       </label>
                       <div class="col-md-6 col-12">
@@ -326,7 +327,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="password-confirm" class="col-md-2 float-right col-form-label labell gray-txt text-md-right text-left">
+                      <label for="password-confirm" class="col-lg-2 col-md-3 float-right col-form-label labell gray-txt text-md-right text-left">
                         Pixel
                       </label>
                       <div class="col-md-6 col-12">
