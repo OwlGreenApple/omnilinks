@@ -14,7 +14,14 @@
       type: 'GET',
       url: '<?php echo url('/pixel/loadPixelLink'); ?>',
       dataType:'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success:function(result){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data=jQuery.parseJSON(result);
         $('#idpixel').html(data.view);
       }
@@ -34,7 +41,14 @@
       },
       url: currentPagePixel,
       dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         $('#contentpixel').html(data.view);
         $('#pager').html(data.pager);
@@ -54,7 +68,14 @@
       },
       url: currentPageLink,
       dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         $('#contentlink').html(data.view);
         $('#pageer').html(data.pager);
@@ -71,8 +92,14 @@
     },
     url:"<?php echo url('/link/deletesinglelink');?>",
     dataType:'text',
-    success:function(result)
-    {
+    beforeSend: function() {
+      $('#loader').show();
+      $('.div-loading').addClass('background-load');
+    },
+    success:function(result) {
+      $('#loader').hide();
+      $('.div-loading').removeClass('background-load');
+
       var data = jQuery.parseJSON(result);
       if(data.status=="success"){
         loadSingleLinks();
@@ -89,7 +116,14 @@
       },
       url: "<?php echo url('/pixel/deletesinglepixel');?>",
       dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         if (data.status == "success") {
           loadSinglePixel();
@@ -107,19 +141,25 @@
       url: "<?php echo url('/save-singlelink'); ?>",
       data: $("#formlink").serialize(),
       dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
-         var data = jQuery.parseJSON(result);
-         if (data.status=="success") {
-           $("#message").html(data.message);
-          $("#message").addClass("alert-success");
-            loadSingleLinks();
-         }
-         else if(data.status=="gagal"){
-           $("#confirm-error").modal('show');
-           // loadSingleLinks();
-         }
-          
-       }
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        if (data.status=="success") {
+          $("#pesan").html(data.message);
+          $("#pesan").addClass("alert-success");
+          loadSingleLinks();
+        }
+        else if(data.status=="gagal"){
+          $("#confirm-error").modal('show');
+            // loadSingleLinks();
+          }
+        }
      });
   }
 
@@ -132,7 +172,14 @@
       url: "<?php echo url('/save-singlepixel'); ?>",
       data: $("#formpixel").serialize(),
       dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         $('#titlepixel').val("");
         $('#script').val("");
         loadSinglePixel();
@@ -166,35 +213,35 @@
 
 </style>
 
-<section id="tabs" class="project-tab">
+<section id="tabs" class="offset-md-1 col-md-10">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="notif">
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <button type="button" class="close" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>Masa trial anda akan berakhir dalam 5 hari. <span style="color:#2C8EF2;">Subscribe</span>
-            untuk terus menggunakan Omnilinks
-          </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+          </button>
+          Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
+          untuk terus menggunakan Omnilinks
         </div>
-        <div id="pesan" class="alert"></div>
-        <div id="message" class="alert"></div>
 
+        <div id="pesan" class="alert"></div>
+        
         <div class="card carddash" style="margin-bottom:50px;">
           <div class="card-body">
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
               <a class="nav-link active" href=".links" data-target=".links" role="tab" data-toggle="tab" id="link-tab">
                 Link
               </a>
-            @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
 
-              <a class="nav-link" href=".pixels" data-target=".pixels" role="tab" data-toggle="tab" id="pixel-tab">
-                Pixel
-              </a>
+              @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                <a class="nav-link" href=".pixels" data-target=".pixels" role="tab" data-toggle="tab" id="pixel-tab">
+                  Pixel
+                </a>
               @endif
+
             </div>
-         
+
             <!-- Tab panes -->
             <div class="tab-content mt-4" id="nav-tabContent">
               <!--Tab Link-->
@@ -202,32 +249,38 @@
                 <form method="post" id="formlink" novalidate>
                   {{ csrf_field() }}
                   <div class="form-group row">
-                    <label for="title" class="col-md-2 col-form-label labell gray-txt text-right">
+                    <label for="title" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
                       Your Title
                     </label>
-                    <input id="titlelink" type="text" class="col-md-6  form-control" name="title" placeholder="" required>
+                    <div class="col-md-6 col-12">
+                      <input id="titlelink" type="text" class="col-md-12  form-control" name="title" placeholder="" required>
+                    </div>
                   </div>
 
                   <div class="form-group row">
-                    <label for="url" class="col-md-2 col-form-label labell gray-txt text-right">
+                    <label for="url" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
                       URL
                     </label>
-                    <input type="text" class="col-md-6 form-control" name="url" placeholder="" required id="urllink">
+                    <div class="col-md-6 col-12">
+                      <input type="text" class="col-md-12 form-control" name="url" placeholder="" required id="urllink">  
+                    </div>
                   </div>
-                @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
 
-                  <div class="form-group row">
-                    <label for="password-confirm" class="col-md-2 col-form-label labell gray-txt text-right">
-                      Pixel
-                    </label>
-                  
-                    <select name="idpixel" id="idpixel" class="col-md-6 form-control">
+                  @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                    <div class="form-group row">
+                      <label for="password-confirm" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
+                        Pixel
+                      </label>
 
-                    </select>
+                      <div class="col-md-6 col-12">
+                        <select name="idpixel" id="idpixel" class="col-md-12 form-control">
+                        </select>  
+                      </div>
+                    </div>
+                  @endif
 
-                  </div>
-                   @endif
                   <input type="text" hidden="" name="idlink" id="idlink"> 
+
                   <div class="form-group row">
                     <div class="col-md-10 offset-md-2">
                       <button type="reset" class="btn btn-danger btn-console btn-reset btncreate">
@@ -241,55 +294,59 @@
                 </form>
               </div>
 
-          @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
-
-              <!--Tab Pixel-->
-              <div role="tabpanel" class="tab-pane fade pixels" id="pixel">
-                <form method="post" id="formpixel" novalidate>
-                  {{ csrf_field() }}
-                  <div class="form-group row">
-                    <label for="password-confirm" class="col-md-2 col-form-label labell gray-txt text-right">
-                      Your Title
-                    </label>
-                    <input id="titlepixel" type="text" class="col-md-6 form-control" name="titlepixel" placeholder="" required>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-2 float-right col-form-label labell gray-txt text-right">
-                      Jenis
-                    </label>
-                    <select name="jenis_pixel" id="jenis_pixel" class="col-md-6 form-control">
-                      <option value="fb">
-                        FB Pixel
-                      </option>
-                      <option value="twitter">
-                        Twitter Retargetting
-                      </option>
-                      <option value="google">
-                        Google Retargetting
-                      </option>
-                    </select>    
-                  </div>
-                  <div class="form-group row">
-                    <label for="password-confirm" class="col-md-2 float-right col-form-label labell gray-txt text-right">
-                      Pixel
-                    </label>
-                    <textarea name="script" id="script" class="col-md-6 form-control" required=""></textarea>
-
-                  </div>
-                  <input type="text" id="hiddenid" hidden="" name="hiddenid">
-                  <div class="form-group row">
-                    <div class="col-md-3 offset-md-2">  
-                      <button type="reset" class="btn btn-danger btncreate btn-reset">
-                        RESET
-                      </button>
-                      <button id="submitpixel" type="button" class="btn btn-primary btncreate btnbio">
-                        CREATE
-                      </button>
+              @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                <!--Tab Pixel-->
+                <div role="tabpanel" class="tab-pane fade pixels" id="pixel">
+                  <form method="post" id="formpixel" novalidate>
+                    {{ csrf_field() }}
+                    <div class="form-group row">
+                      <label for="password-confirm" class="col-md-2 col-form-label labell gray-txt text-md-right text-left">
+                        Your Title
+                      </label>
+                      <div class="col-md-6 col-12">
+                        <input id="titlepixel" type="text" class="col-md-12 form-control" name="titlepixel" placeholder="" required>  
+                      </div>
                     </div>
-                  </div>
-                </form>
-              </div>
-           @endif
+                    <div class="form-group row">
+                      <label class="col-md-2 float-right col-form-label labell gray-txt text-md-right text-left">
+                        Jenis
+                      </label>
+                      <div class="col-md-6 col-12">
+                        <select name="jenis_pixel" id="jenis_pixel" class="col-md-12 form-control">
+                          <option value="fb">
+                            FB Pixel
+                          </option>
+                          <option value="twitter">
+                            Twitter Retargetting
+                          </option>
+                          <option value="google">
+                            Google Retargetting
+                          </option>
+                        </select>  
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="password-confirm" class="col-md-2 float-right col-form-label labell gray-txt text-md-right text-left">
+                        Pixel
+                      </label>
+                      <div class="col-md-6 col-12">
+                        <textarea name="script" id="script" class="col-md-12 form-control" required=""></textarea>  
+                      </div>
+                    </div>
+                    <input type="text" id="hiddenid" hidden="" name="hiddenid">
+                    <div class="form-group row">
+                      <div class="col-md-3 offset-md-2">  
+                        <button type="reset" class="btn btn-danger btncreate btn-reset btn-console">
+                          RESET
+                        </button>
+                        <button id="submitpixel" type="button" class="btn btn-primary btncreate btnbio btn-console">
+                          CREATE
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              @endif
             </div>
 
           </div>
@@ -302,7 +359,7 @@
               <span class="blue-txt" style="font-size: 24px">
                 Recent
               </span>
-              <div style="float: right;">
+              <div class="float-none float-md-right">
                 <input type="search" name="carilink" placeholder="Search Link" class="carilink form-controll form-control" arial-label="Search" style="background-color: #fff;">
                 <button class="btn btn-success" id="carilink" type="button">Search</button>
               </div>
@@ -317,13 +374,12 @@
                     <th class="">
                       Title
                     </th>
-                  @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
-
-                    <th class="">
-                      Pixel
-                    </th>
+                    @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                      <th class="menu-nomobile">
+                        Pixel
+                      </th>
                     @endif
-                    <th class="">
+                    <th class="menu-nomobile">
                       Link
                     </th>
                     <th>
@@ -334,46 +390,46 @@
 
                   </tbody>
                 </table>
-                <div id="pageer">
 
+                <div id="pageer"></div>
+
+              </div>
+            </div>
+          </div>
+
+          @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+            <div class="pixels2">
+              <div id="search-pixel" style="margin-bottom: 20px">
+                <span class="blue-txt" style="font-size: 24px">
+                  Recent
+                </span>
+                <div class="float-none float-md-right">
+                  <input type="search" name="cari" placeholder="Search Pixel" style="background-color: #fff;" class="cari form-controll form-control" arial-label="Search">
+                  <button class="btn btn-success" id="caripixel" type="button">Search</button>
+                </div>
+              </div>
+
+              <!--table pixel-->
+              <div id="table-pixel-save">
+                <div id="table-pixel">
+                  <table class="table">
+                    <thead align="center">
+                      <th class="">
+                        Title
+                      </th>
+                      <th class="menu-nomobile">
+                        Last Modified
+                      </th>
+                      <th class="">
+                        Action
+                      </th>
+                    </thead>
+                    <tbody id="contentpixel"></tbody>
+                  </table>
+                  <div id="pager"></div>
                 </div>
               </div>
             </div>
-          </div>
-         @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
-
-          <div class="pixels2">
-            <div id="search-pixel" style="margin-bottom: 20px">
-              <span class="blue-txt" style="font-size: 24px">
-                Recent
-              </span>
-              <div style="float: right;">
-                <input type="search" name="cari" placeholder="Search Pixel" style="background-color: #fff;" class="cari form-controll form-control" arial-label="Search">
-                <button class="btn btn-success" id="caripixel" type="button">Search</button>
-              </div>
-            </div>
-
-            <!--table pixel-->
-            <div id="table-pixel-save">
-              <div id="table-pixel">
-                <table class="table">
-                  <thead align="center">
-                    <th class="">
-                      Title
-                    </th>
-                    <th class="">
-                      Last Modified
-                    </th>
-                    <th class="">
-                      Action
-                    </th>
-                  </thead>
-                  <tbody id="contentpixel"></tbody>
-                </table>
-                <div id="pager"></div>
-              </div>
-            </div>
-          </div>
           @endif
         </div>
 
@@ -463,7 +519,7 @@
 <!-- Modal Copy Link -->
 <div class="modal fade" id="copy-link" role="dialog">
   <div class="modal-dialog">
-    
+
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -484,11 +540,23 @@
         </button>
       </div>
     </div>
-      
+
   </div>
 </div>
 
 <script type="text/javascript">
+  $( "body" ).on( "click", ".view-details", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-'+id).toggleClass('d-none');
+  });
+
+  $( "body" ).on( "click", ".view-details-pixel", function() {
+    var id = $(this).attr('data-id');
+
+    $('.details-pixel-'+id).toggleClass('d-none');
+  });
+
   $( "body" ).on( "click", ".btn-copy", function(e) 
   {
     e.preventDefault();
@@ -525,7 +593,7 @@
     $('#search-pixel').addClass('hidden');
     $("#search-link").show();
     $("#search-link").removeClass('hidden');
-        //return false;*/
+    //return false;*/
     $('.links2').show();
     $('.pixels2').hide();
   });
@@ -540,7 +608,7 @@
     $('#search-link').addClass('hidden');
     $("#search-pixel").show();
     $("#search-pixel").removeClass('hidden');
-        //return false;*/
+    //return false;*/
     $('.pixels2').show();
     $('.links2').hide();
   });
