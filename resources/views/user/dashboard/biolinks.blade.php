@@ -1579,7 +1579,7 @@
         style="block";
       }
       else{
-       style="none"; 
+        style="none"; 
       }
       $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
       let slidesi=$('.mySlides');
@@ -1587,7 +1587,7 @@
       let slidesiLength=slidesi.length-1;
       //console.log(slidesiLength);
         dotselementt.append('<span class="dot picture-id-'+idpic+'-dot input-picture-'+idpic+'-dot" id="input-picture-'+idpic+'-dot" onclick="currentSlide('+slidesiLength+')" style="display:none"></span>');
-         if ($(".dot").length==1) 
+      if ($(".dot").length==1) 
       {
         $(".dot").parent().hide();
         $('.prev').hide();
