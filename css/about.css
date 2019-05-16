@@ -14,9 +14,26 @@ h6 {
   font-weight: 700;
 }
 
+.blue-icon {
+  color: #106AC7;
+}
+
+.btn-faq {
+  white-space: normal;
+}
+
+.btn-email {
+  color: #106BC8;
+  background-color: #fff;
+  border: 2px solid #106BC8;
+  border-radius: 50px;
+  padding: 8px 55px;
+  font-weight: 700;
+}
+
 .content-header {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 150px;
 }
 
 .omni-title {
@@ -62,17 +79,17 @@ h6 {
   text-decoration: none !important;
   font-size: 20px;
   font-weight: 400;
-  padding-left: 25px;
+  /*padding-left: 25px;*/`
 }
 
-.btn-link:hover {
+/*.btn-link:hover {
   color: #106AC7;
   background-color: transparent;
   text-decoration: none !important;
   font-size: 20px;
   font-weight: 400;
   padding-left: 25px;
-}
+}*/
 
 .overflow-wrap {
   display: inline-block;
@@ -88,8 +105,8 @@ h6 {
   background: #FCFCFC;
   border: 1px solid #DCDCDC;
   box-shadow: 0 1px 2px 0 rgba(176, 176, 176, 0.3);
-  padding: 20px;
-  margin-bottom: 50px;
+  /*padding: 10px;*/
+  margin-bottom: 30px;
 }
 
 .card-header {
@@ -117,4 +134,27 @@ h6 {
 
 .hover:hover {
   background-color: red;
+}
+
+@media screen and (max-width: 767px) {
+  .faq-head {
+    font-size: 14px;
+  }
+  .faq-txt, .textabout {
+    font-size: 13px;
+  }
+  .omni-title{
+    font-size: 30px;
+  }
+  .omni-sub {
+    font-size: 16px;
+  }
+  .omni-about {
+    font-size: 23px;
+  }
+  .content-header {
+    padding-top: 150px;
+    padding-bottom: 100px;
+  }
+
 }

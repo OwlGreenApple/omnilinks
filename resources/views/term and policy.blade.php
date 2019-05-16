@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-bottom: 120px;">
   <div class="row justify-content-center">
     <div class="col-md-8 col-12">
       <div class="card">

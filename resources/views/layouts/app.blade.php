@@ -125,31 +125,74 @@
           <div class="col-md-3 mx-auto">
             <ul class="list-unstyled">
               <h5 style="color:#ffffff;">Omnilinkz </h5>
-              <li><a href="{{asset('/about')}}" class="linkfooter">About Us</a></li>
-              <li><a href="{{asset('/pricing')}}" class="linkfooter">Pricing</a></li>
-              <li><a href="{{asset('/faq')}}" class="linkfooter">Faq</a></li>
+              <li>
+                <a href="{{asset('/about')}}" class="linkfooter">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="{{asset('/pricing')}}" class="linkfooter">
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="{{asset('/faq')}}" class="linkfooter">
+                  FAQ
+                </a>
+              </li>
             </ul>
           </div>
           <div class="col-md-3 mx-auto">
             <ul class="list-unstyled">
-              <h5 style="color:#ffffff;">Helps</h5>
-              <li><a href="{{asset('/helps')}}" class="linkfooter">Terms And Condition</a></li>
-              <li><a href="{{asset('/helps')}}" class="linkfooter">Privacy And Policy</a></li>
-              <li><a href="#" class="linkfooter">Blog</a></li>
+              <h5 style="color:#ffffff;">
+                Helps
+              </h5>
+              <li>
+                <a href="{{asset('/helps')}}" class="linkfooter">
+                  Terms And Condition
+                </a>
+              </li>
+              <li>
+                <a href="{{asset('/helps')}}" class="linkfooter">
+                  Privacy And Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" class="linkfooter">Blog</a>
+              </li>
             </ul>
           </div>
           <div class="col-md-3 mx-auto">
             <ul class="list-unstyled">
-              <h5 style="color:#ffffff;">Contact us</h5>
-              <li class="linkfooter"><a onclick="window.location.href='mailto:support@omnilinkz.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">support@omnilinkz.com</a></li>
-              <li><a href="#" onclick='window.open("http://facebook.com");return false;'><i class="fab fa-facebook linkfooter"></i></a><a href="#" onclick='window.open("http://instagram.com");return false;'><i class="fab fa-instagram linkfooter" style="margin-left:5px;"></i></a></li>
+              <h5 style="color:#ffffff;">
+                Contact us
+              </h5>
+              <li class="linkfooter">
+                <a onclick="window.location.href='mailto:support@omnilinkz.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
+                  support@omnilinkz.com
+                </a>
+              </li>
+              <li>
+                <a href="#" onclick='window.open("http://facebook.com");return false;'>
+                  <i class="fab fa-facebook linkfooter"></i>
+                </a>
+                <a href="#" onclick='window.open("http://instagram.com");return false;'>
+                  <i class="fab fa-instagram linkfooter" style="margin-left:5px;"></i>
+                </a>
+              </li>
             </ul>
           </div>
           <div class="col-md-3 mx-auto">
             <ul class="list-unstyled">
-              <h5 style="color:#ffffff;">Copyright</h5>
-              <li class="linkfooter">© 2019 Omnilinkz</li>
-              <li class="linkfooter">All Right Reserved</li>
+              <h5 style="color:#ffffff;">
+                Copyright
+              </h5>
+              <li class="linkfooter">
+                © 2019 Omnilinkz
+              </li>
+              <li class="linkfooter">
+                All Right Reserved
+              </li>
             </ul>
           </div>
         </div>

@@ -12,7 +12,13 @@
         <div class="h-100 d-flex justify-content-center flex-column">
           <h1 class="title-top">All-In-One Instagram<br>Bio Link</h1>
           <h3 class="sub-title">Sub Heading Title Goes Here</h3>
-          <button type="button" class="btn btn-lg btn-primary btn-custom">GET STARTED</button>
+
+          <a href="{{url('register')}}">
+            <button type="button" class="btn btn-lg btn-primary btn-custom">
+              GET STARTED
+            </button>  
+          </a>
+          
         </div>
       </div>
     </div>
@@ -29,7 +35,13 @@
         <div class="h-100 d-flex justify-content-center flex-column text-content-one">
           <h2 class="title-top-content-one">MULTIPLE LINK ON<br>YOUR BIO</h2>
           <h3 class="sub-title-content-one">Sub Heading Title Goes Here</h3>
-          <button type="button" class="btn btn-lg btn-primary btn-custom">GET STARTED</button>
+
+          <a href="{{url('register')}}">  
+            <button type="button" class="btn btn-lg btn-primary btn-custom">
+              GET STARTED
+            </button>
+          </a>
+
         </div>
       </div>
     </div>
@@ -46,7 +58,12 @@
         <div class="h-100 d-flex justify-content-center flex-column text-content-two">
           <h2 class="title-top-content-two">OMNILINKZ DATA<br>ANALYTICS</h2>
           <h3 class="sub-title-content-two">Sub Heading Title Goes Here</h3>
-          <button type="button" class="btn btn-lg btn-primary btn-custom">GET STARTED</button>
+
+          <a href="{{url('register')}}">
+            <button type="button" class="btn btn-lg btn-primary btn-custom">
+              GET STARTED
+            </button>
+          </a>
         </div>
       </div>
     </div>
@@ -60,7 +77,11 @@
         <h2 class="title-btm mx-auto d-block">START MAKE YOUR OWN NOW</h2>
       </div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-lg btn-primary btn-custom mx-auto d-block">GET STARTED</button>
+        <a href="{{url('register')}}">
+          <button type="button" class="btn btn-lg btn-primary btn-custom mx-auto d-block">
+            GET STARTED
+          </button>
+        </a>
       </div>
     </div>
   </div>
