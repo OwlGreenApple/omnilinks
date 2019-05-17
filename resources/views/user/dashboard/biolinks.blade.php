@@ -259,15 +259,27 @@
 
 </script>
 
-<section id="tabs" class="project-tab">
+<section id="tabs" class="col-md-10 offset-md-1 project-tab">
   <div class="container">
     <div class="row notif">
       <div class="col-md-12">
+        <h4 style="color: #106BC8">
+          <i class="fas fa-arrow-left"></i>&nbsp;
+          <a class="back-link" href="{{url('dash')}}">
+            KEMBALI
+          </a>
+        </h4>
+        <br>
+
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span> untuk terus menggunakan Omnilinks
+          Masa trial anda akan berakhir dalam 5 hari. 
+          <a class="back-link" href="{{url('pricing')}}">
+            Subscribe
+          </a>
+         untuk terus menggunakan Omnilinkz
         </div>
       </div>
 

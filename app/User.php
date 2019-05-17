@@ -31,8 +31,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-     public function sendPasswordResetNotification($token)
+
+    public function sendPasswordResetNotification($token)
     {
-      Mail::to($this->email)->queue(new resetPassword($token));
+        Mail::to($this->email)->queue(new resetPassword($token));
+
+        return redirect('/password/reset')->with("success","We have e-mailed your password reset link!"); 
     }
 }

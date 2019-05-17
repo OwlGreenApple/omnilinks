@@ -24,8 +24,13 @@
   <div class="card noshow">
     <div class="card-body text-center">
       <span class="textdash">
-        Buat Omnilinkz pertama Anda<br>Pilih <span style="color:#106BC8;">"BIO LINK"</span> atau <span style="color:#106BC8;">"SINGLE LINK"
-        </span>
+        Buat Omnilinkz pertama Anda<br>Pilih 
+        <a href="" class="btncreate-bio" style="color:#106BC8;">
+          "BIO LINK"
+        </a> atau 
+        <a href="{{url('dash/newsingle')}}" style="color:#106BC8;">
+          "SINGLE LINK"
+        </a>
       </span>
     </div>
   </div>

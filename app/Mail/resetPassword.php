@@ -19,7 +19,7 @@ class resetPassword extends Mailable
       protected $token;
     public function __construct($token)
     {
-           $this->token = url('/password/reset/'.$token);
+        $this->token = url('/password/reset/'.$token);
     }
 
     /**
@@ -29,8 +29,8 @@ class resetPassword extends Mailable
      */
     public function build()
     {
-       return $this->from('omnilinks@gmail.com', 'Omnilinks')
-        ->subject('[Omnilinks] Reset Password')
+       return $this->from('omnilinkz@gmail.com', 'Omnilinkz')
+        ->subject('[Omnilinkz] Reset Password')
         ->view('emails.forgot-password')
         ->with('linkReset',$this->token);
     }

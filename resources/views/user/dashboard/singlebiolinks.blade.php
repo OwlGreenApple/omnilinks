@@ -218,12 +218,23 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <h4 style="color: #106BC8">
+          <i class="fas fa-arrow-left"></i>&nbsp;
+          <a href="{{url('dash')}}">
+            KEMBALI
+          </a>
+        </h4>
+        <br>
+
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <button type="button" class="close" aria-label="Close" data-dismiss="alert">
             <span aria-hidden="true">×</span>
           </button>
-          Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
-          untuk terus menggunakan Omnilinks
+          Masa trial anda akan berakhir dalam 5 hari. 
+          <a href="{{url('pricing')}}">
+            Subscribe
+          </a>
+          untuk terus menggunakan Omnilinkz
         </div>
 
         <div id="pesan" class="alert"></div>

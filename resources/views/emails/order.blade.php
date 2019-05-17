@@ -1,4 +1,4 @@
-Terima kasih, anda telah melakukan pemesanan Omnilinks service.<br>
+Terima kasih, anda telah melakukan pemesanan Omnilinkz service.<br>
 Info Order anda adalah sebagai berikut <br>
 <br>
 <strong>No Order :</strong> {{$no_order}} <br>
@@ -25,4 +25,4 @@ Anda telah memesan paket
 
 <br> Salam hangat, 
 <br>
-Omnilinks
+Omnilinkz

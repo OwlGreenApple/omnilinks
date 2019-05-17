@@ -73,6 +73,11 @@
             <ul class="navbar-nav ml-auto">
               @guest
                 <li class="nav-item">
+                  <a class="nav-link navlog" href="{{ url('pricing') }}">
+                    {{ __('Pricing') }}
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link navlog" href="{{ route('login') }}">{{ __('LOG IN') }}</a>
                 </li>
                 @if (Route::has('register'))
@@ -81,6 +86,11 @@
                   </li>
                 @endif
               @else
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url('pricing') }}" style="color: #116BC7">
+                    {{ __('Upgrade Account') }}
+                  </a>
+                </li>
 
                 <div class="dropdown pull-right">
                   <a class="nav-link dropdown-toggle blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">

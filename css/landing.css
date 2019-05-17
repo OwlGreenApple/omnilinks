@@ -150,7 +150,7 @@ p,span {
 }
 
 .row-property {
-  width: 1000px;
+  /*width: 1000px;*/
   margin: 0 auto;
 }
 
@@ -317,7 +317,8 @@ p,span {
   }
 
   .heads h1,
-  h3 {
+  h3,
+  .heads a {
     text-align: center;
   }
 
@@ -340,7 +341,8 @@ p,span {
   }
 
   .content-one h2,
-  h3 {
+  h3,
+  .content-one a {
     text-align: center;
   }
 
@@ -355,11 +357,12 @@ p,span {
   }
 
   .content-two h2,
-  h3 {
+  h3,
+  .content-two a {
     text-align: center;
   }
 
-  .content-three h2 {
+  .content-three h2, .content-three a {
     text-align: center;
     margin-bottom: 25px;
   }
@@ -371,7 +374,8 @@ p,span {
   }
 
   .heads h1,
-  h3 {
+  h3,
+  .heads a {
     text-align: center;
   }
 
@@ -394,7 +398,8 @@ p,span {
   }
 
   .content-one h2,
-  h3 {
+  h3, 
+  .content-one a {
     text-align: center;
   }
 
@@ -409,11 +414,12 @@ p,span {
   }
 
   .content-two h2,
-  h3 {
+  h3,
+  .content-two a {
     text-align: center;
   }
 
-  .content-three h2 {
+  .content-three h2, .content-three a {
     text-align: center;
     margin-bottom: 25px;
   }
@@ -425,7 +431,8 @@ p,span {
   }
 
   .heads h1,
-  h3 {
+  h3,
+  .heads a {
     text-align: center;
   }
 
@@ -438,7 +445,7 @@ p,span {
   }
 
   .img-content-one {
-    width: 380px;
+    width: 360px;
   }
 
   .text-content-one {
@@ -448,12 +455,13 @@ p,span {
   }
 
   .content-one h2,
-  h3 {
+  h3,
+  .content-one a {
     text-align: center;
   }
 
   .img-content-two {
-    width: 380px;
+    width: 360px;
   }
 
   .text-content-two {
@@ -463,7 +471,8 @@ p,span {
   }
 
   .content-two h2,
-  h3 {
+  h3,
+  .content-two a {
     text-align: center;
   }
 
@@ -471,7 +480,7 @@ p,span {
     margin-top: 0;
   }
 
-  .content-three h2 {
+  .content-three h2, .content-three a {
     text-align: center;
     margin-bottom: 25px;
   }

@@ -1,5 +1,5 @@
 <center>
-Terimakasih atas registrasinya di Omnilinks <br>
+Terimakasih atas registrasinya di Omnilinkz <br>
 </center>
 <br>
 Silahkan klik link dibawah untuk mengkonfirmasi registrasi Anda <br>
@@ -8,4 +8,4 @@ Silahkan klik link dibawah untuk mengkonfirmasi registrasi Anda <br>
 <br>
 Terima kasih,<br>
 <br>
-Omnilinlks
+Omnilinkz

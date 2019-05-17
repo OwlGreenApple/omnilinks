@@ -76,6 +76,10 @@
     height: auto;
     line-height: normal;
   }
+
+  .notif {
+    padding:50px 0 0 0 !important;
+  }
 }
 
 .click-page {
@@ -83,10 +87,6 @@
   font-family: SourceSansPro-Bold;   
 }
 
-.notif
-{
-  padding:50px 0 0 0 !important;
-}
 .card-gray {
   background-color: #EBEBEB;
 }
@@ -122,7 +122,7 @@
 }
 
 .textdash {
-  font-size: 35px;
+  font-size: 28px;
   font-weight: 600;  
 }
 
@@ -351,8 +351,8 @@ hr.own {
 }
 
 .project-tab {
-  padding: 10%;
-  margin-top: -8%;
+  /*padding: 10%;
+  margin-top: -8%;*/
 }
 .project-tab #tabs{
   background: #007b5e;
@@ -395,6 +395,19 @@ hr.own {
   color: #333;
   font-weight: 600;
 }
+
+.back-link {
+  color: #3490dc !important;
+  text-decoration: none !important;
+  background-color: transparent !important;
+  -webkit-text-decoration-skip: objects !important;
+}
+
+.back-link:hover {
+  color: #1d68a7 !important;
+  text-decoration: underline !important;
+}
+
 .nav-tabs{
   border-bottom: none;
 }

@@ -136,8 +136,11 @@
         <button type="button" class="close" aria-label="Close" data-dismiss="alert">
           <span aria-hidden="true">×</span>
         </button>
-        Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
-        untuk terus menggunakan Omnilinks
+        Masa trial anda akan berakhir dalam 5 hari. 
+        <a href="{{url('pricing')}}">
+          Subscribe
+        </a>
+        untuk terus menggunakan Omnilinkz
       </div>
       @if (session('error'))
         <div class="alert alert-danger">

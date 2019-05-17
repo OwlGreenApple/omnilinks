@@ -28,8 +28,8 @@ class confirm_email extends Mailable
      */
     public function build()
     {
-        return $this->from('omnilinks@gmail.com', 'Omnilinks')
-                  ->subject('[Omnilinks] Confirm Email')
+        return $this->from('omnilinkz@gmail.com', 'Omnilinkz')
+                  ->subject('[Omnilinkz] Confirm Email')
                   ->view('emails.confirm-email')
                    ->with($this->emaildata);
     }

@@ -31,8 +31,8 @@ class confirm_order extends Mailable
      */
     public function build()
     {
-        return $this->from('omnilinks@gmail.com', 'Omnilinks')
-        ->subject('[Omnilinks] Konfirmasi Order')
+        return $this->from('omnilinkz@gmail.com', 'Omnilinkz')
+        ->subject('[Omnilinkz] Konfirmasi Order')
         ->view('emails.confirm-order')
         ->with('user',$this->user)
         ->with('order',$this->order);
