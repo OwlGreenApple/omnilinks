@@ -1,0 +1,52 @@
+.imagetitle{
+  border-radius: 50%; 
+  width: 100px; 
+  height: 100px; 
+  /*margin-left: 118px;*/
+}
+
+.header-txt {
+  display: block;
+}
+
+.header-txt.title {
+  margin-bottom: 1px; 
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.header-txt.txt {
+  font-size:15px;
+}
+
+.galleryContainer{
+  width: 100%;
+  height: 240px;
+  max-width: 974px;
+  margin: auto;
+  user-select: none;
+  padding: 9px;
+  box-sizing: border-box;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.btn {
+  background-color: #fff;
+}
+
+.btn-rounded {
+  border-radius: 50px;
+}
+
+.btn-outlined {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.icon-sosmed {
+  font-size: 35px;
+}

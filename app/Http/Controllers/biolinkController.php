@@ -118,9 +118,32 @@ class BiolinkController extends Controller
   
   public function link($names)
   {
-    $page=Page::where('names',$names)  
+    $page = Page::where('names',$names)  
               ->first();
-    return view('user.link.link')->with('pages',$page);
+
+    $links = Link::where('pages_id','=',$page->id)
+              ->orderBy('created_at','descend')
+              ->get();
+
+    $banner = Banner::where('pages_id','=',$page->id)
+                ->orderBy('created_at','ascend')
+                ->get();
+
+    $sort_msg = array_filter(explode(';', $page->sort_msg));
+    $sort_link = array_filter(explode(';', $page->sort_link));
+    $sort_sosmed = array_filter(explode(';', $page->sort_sosmed));
+
+    $links = $links->sortBy(function($model) use ($sort_link){
+              return array_search($model->getKey(), $sort_link);
+            });
+
+    return view('user.link.link')
+            ->with('pages',$page)
+            ->with('links',$links)
+            ->with('banner',$banner)
+            ->with('sort_msg',$sort_msg)
+            ->with('sort_link',$sort_link)
+            ->with('sort_sosmed',$sort_sosmed);
   }
 
   public function pixelpage()
