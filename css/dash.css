@@ -723,5 +723,5 @@ hr.own {
   }
 
 .hide {
-  display : none;
+  display : none!important;
 }
