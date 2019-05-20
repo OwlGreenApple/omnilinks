@@ -335,7 +335,7 @@
                   <div class="hid">
                     <ul class="sortable-msg">
                       <li id="msg-li-wa"> <!-- wa -->
-                        <div id="wa" class="messengers div-table">
+                        <div id="wa" class="messengers div-table hide">
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -451,11 +451,9 @@
                     <ul class="sortable-link a">
                       <?php 
                       if($links->count()) {
-                        $utl=0; 
                         foreach($links as $link) {
-                          $utl+=1; 
                       ?>
-                          <li class="link-list" link-id="link-url-update-<?=$utl?>">
+                          <li class="link-list" id="link-url-update-{{$link->id}}">
                             <div class="div-table mb-4">
                               <div class="div-cell">
                                 <span class="handle">
@@ -468,7 +466,7 @@
                                   <div class="input-stack">
                                     <input type="hidden" name="idlink[]" value="{{$link->id}}">
                                     <input type="hidden" name="deletelink[]" value="">
-                                    <input type="text" name="title[]" value="{{$link->title}}" id="title-<?=$utl?>-view-update" placeholder="Title" class="form-control focuslink-update">
+                                    <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" placeholder="Title" class="form-control focuslink-update">
                                     <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
                                   </div>
                                 </div>
@@ -487,7 +485,7 @@
                       else {
                       ?>
 
-                        <li class="link-list" link-id="link-url-1">
+                        <li class="link-list" id="link-url-1">
                           <div class="div-table mb-4">
                             <div class="div-cell">
                               <span class="handle">
@@ -561,8 +559,8 @@
                       </div>                      
                     </li>
 
-                    <li id="sosmed">
-                      <div id="fb" class="socialmedia div-table hidden" style="display: none;" data-type="fb">
+                    <li id="sosmed-fb">
+                      <div id="fb" class="socialmedia div-table hide" data-type="fb">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -594,8 +592,8 @@
                       </div>
                     </li>
 
-                    <li id="sosmed">
-                      <div id="twitter" class="socialmedia div-table hidden" style="display: none;" data-type="twitter">
+                    <li id="sosmed-twitter">
+                      <div id="twitter" class="socialmedia div-table hide" data-type="twitter">
               
                         <div class="div-cell">
                           <span class="handle">
@@ -628,9 +626,9 @@
                       </div>
                     </li>
 
-                    <li id="sosmed">
-                      <div id="ig" class="socialmedia div-table hidden" style="display: none;" data-type="ig">
-              
+                    <li id="sosmed-ig">
+                      <div id="ig" class="socialmedia div-table hide" data-type="ig">
+
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -1085,15 +1083,15 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   <ul class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                    <li class="link shown-mes" id="waviewid" >
+                    <li class="link shown-mes hide" id="waviewid">
                         <a href="#" class="btn btn-md btnview btn-light txthov" style="
                         width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
                     </li>
-                    <li class="link hiddens" id="telegramviewid" style="display: none;">
+                    <li class="link hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
                     </li> 
-                    <li class="link hiddens" id="skypeviewid" style="display: none;">
+                    <li class="link hide" id="skypeviewid" >
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
                     </li>
@@ -1107,7 +1105,7 @@
                         <!--
                           <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
                           -->
-                        <li class="">
+                        <li id="link-preview-{{$link->id}}">
                           <a href="#" class="btn btn-md btnview btn-light title-<?=$utlq?>-view-update-get txthov" style="
                           width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-<?=$utlq?>-get" >{{$link->title}}</a>
                         </li>
@@ -1715,19 +1713,81 @@
       $('#jenis_pixel').val(jenis);
     });
     
+    // buat sort msg
     <?php 
-    //hidden class masi salah, perlu dicari
     if (!is_null($pages->sort_msg)) {
       $arr = explode(";",$pages->sort_msg);
       $counter = 1;
-      foreach($arr as $data){ 
+      foreach($arr as $data){
     ?>
         $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
+        
+        $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
+        $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
     <?php 
         $counter += 1;
-      }
-    } ?>
+      } ?>
+      sortMeBy("data-category", "ul.sortable-msg", "li", "asc");
+      sortMeBy("data-category", "ul#getview", "li", "asc");
+    <?php }
+    else {
+    ?>
+        $("#msg-li-wa>div").removeClass("hide");
+        
+        $("#waviewid").removeClass("hide");
+    <?php } ?>
+
+
+    
+    // buat sort link
+    <?php 
+    if (!is_null($pages->sort_link)) {
+      $arr = explode(";",$pages->sort_link);
+      $counter = 1;
+      foreach($arr as $data){
+    ?>
+        $("#link-url-update-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+        
+        $("#link-preview-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+    <?php 
+        $counter += 1;
+      } ?>
+      sortMeBy("data-category", "ul.sortable-link", "li", "asc");
+      sortMeBy("data-category", "ul#viewLink", "li", "asc");
+    <?php }
+    else {
+    ?>
+    <?php } ?>
+    
+    
+    // buat sort sosmed
+    <?php 
+    if (!is_null($pages->sort_sosmed)) {
+      $arr = explode(";",$pages->sort_sosmed);
+      $counter = 1;
+      foreach($arr as $data){
+    ?>
+        $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+        $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
+        
+        $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
+        $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
+    <?php 
+        $counter += 1;
+      } ?>
+      sortMeBy("data-category", "ul.sortable-sosmed", "li", "asc");
+      sortMeBy("data-category", "ul#getview", "li", "asc");
+    <?php }
+    else {
+    ?>
+        $("#msg-li-wa>div").removeClass("hide");
+        
+        $("#waviewid").removeClass("hide");
+    <?php } ?>
+
+    
+    
   });
 
   let slideIndex = 1;

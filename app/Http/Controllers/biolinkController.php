@@ -304,13 +304,14 @@ class BiolinkController extends Controller
       $url->link=$link[$i];
       $url->save();
 
-      if($sort_link=='')
+      /*if($sort_link=='')
       {
         $sort_link = $url->id.'-12';
-      } else
-      {
+      } 
+      else {
         $sort_link = $sort_link.';'.$url->id.'-12';
-      }
+      }*/
+      $sort_link .= $url->id.';';
     }
 
     $sort_msg = '';
@@ -345,7 +346,7 @@ class BiolinkController extends Controller
       $count = 0;
       $countdiv = 0;
       foreach ($request->sosmed as $sosmed) {
-        if($sort_sosmed==''){
+        /*if($sort_sosmed==''){
           if($countdiv==$div){
             $sort_sosmed = $sosmed.'-'.$colmod;
           } else {
@@ -357,8 +358,9 @@ class BiolinkController extends Controller
           } else {
             $sort_sosmed = $sort_sosmed.';'.$sosmed.'-'.$col;
           }
-        }
-
+        }*/
+        $sort_sosmed .= $sosmed.';';
+        
         $count = $count+1;
         if($count>=3)
         {

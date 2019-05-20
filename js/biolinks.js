@@ -38,11 +38,11 @@ $(document).ready(function () {
 
     changeLength();
     changeLengthMedia();
-if ($('.wa-input').val()!='') {
+    /*if ($('.wa-input').val()!='') {
       $('#wa').show();
       $('#waviewid').addClass('shown-mes').show();
         changeLength();
-    }
+    }*/
     if ($('.telegram-input').val()!='') {
       $('#telegram').show();
       $('#telegramviewid').addClass('shown-mes').show();
@@ -84,9 +84,9 @@ if ($('.wa-input').val()!='') {
             }
         });
         $('.link').each(function () {
-            if ($(this).hasClass('hiddens')) {
+            if ($(this).hasClass('hidden')) {
                 $(this).show();
-                $(this).removeClass('hiddens');
+                $(this).removeClass('hidden');
                 $(this).addClass('shown-mes');
                 return false;
             }
@@ -99,7 +99,7 @@ if ($('.wa-input').val()!='') {
         $('#wa').addClass('hidden');
         $('#wa').find("input").val('');
         $('#waviewid').hide();
-        $('#waviewid').addClass('hiddens');
+        $('#waviewid').addClass('hidden');
         $('#waviewid').removeClass('shown-mes');
         changeLength();
         return false;
@@ -110,7 +110,7 @@ if ($('.wa-input').val()!='') {
         $('#telegram').addClass('hidden');
         $('#telegram').find("input").val('');
         $('#telegramviewid').hide();
-        $('#telegramviewid').addClass('hiddens');
+        $('#telegramviewid').addClass('hidden');
         $('#telegramviewid').removeClass('shown-mes');
         changeLength();
         return false;
@@ -121,7 +121,7 @@ if ($('.wa-input').val()!='') {
         $('#skype').addClass('hidden');
         $('#skype').find("input").val('');
         $('#skypeviewid').hide();
-        $('#skypeviewid').addClass('hiddens');
+        $('#skypeviewid').addClass('hidden');
         $('#skypeviewid').removeClass('shown-mes');
         changeLength();
         return false;
@@ -131,19 +131,21 @@ if ($('.wa-input').val()!='') {
     $(document).on('click', '#addlink', function (e) {
         var $el;
         counterLink += 1;
-        $('.sortable-link').append('<li class="link-list" link-id="link-url-' + counterLink + '"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div></div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
+        $('.sortable-link').append('<li class="link-list" id="link-url-' + counterLink + '"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div></div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
 
         // $("#viewLink").append(' <button type="button" class="btn btn-light btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
         $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');
     });
     $(document).on('click', '.deletelink', function (e) {
-      let   idLink = $(this).parent().parent().attr("link-id");
+      //let idLink = $(this).parent().parent().attr("link-id");
+      var idLink = $(this).parent().parent().attr("id");
       $("#" + idLink + "-preview").remove();
       $(this).parent().parent().remove();
     });
 
     $(document).on('click','.deletelink-update',function(e){
-        let idlinkDel=$(this).parent().parent().attr("link-id");
+        //let idlinkDel=$(this).parent().parent().attr("link-id");
+        var idlinkDel=$(this).parent().parent().attr("id");
         $("#" + idlinkDel + "-get").remove();
         let deleteval=$(this).parent();
         deleteval.find(".delete-link").val('delete');
