@@ -490,7 +490,7 @@
 }
 
 .galleryContainer .slideShowContainer .leftArrow,.galleryContainer .slideShowContainer .rightArrow{
-  width: 50px;
+  width: 30px;
   background: #00000036;
   position: absolute;
   left: 0;

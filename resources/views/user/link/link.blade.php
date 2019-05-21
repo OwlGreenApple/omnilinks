@@ -28,14 +28,14 @@
   
   <div class="col-md-12 col-12 mt-5">
     <div class="row justify-content-center">
-      <div class="col-md-7 col-7 mb-4 row">
-        <div class="offset-md-1 offset-1 col-md-5 col-5 text-right">
+      <div class="col-lg-7 col-md-8 col-12 mb-4 row">
+        <div class="offset-md-1 col-md-5 col-5 text-right">
           @if(!is_null($pages->image_pages))
             <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" class="imagetitle" >
           @endif
         </div>
         
-        <div class="col-md-5 col-5">
+        <div class="col-md-5 col-7">
           @if(!is_null($pages->page_title))
             <span class="header-txt title">
               {{$pages->page_title}}
@@ -54,7 +54,7 @@
         </div>
       </div>
 
-      <div class="col-md-7 mb-5 row">
+      <div class="col-lg-7 col-md-8 mb-5 row">
         <div class="galleryContainer">
           <div class="slideShowContainer">
             <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow">
@@ -85,14 +85,16 @@
         </div>
       </div>
 
-      <div class="col-md-7 mb-3 row">
+      <div class="col-lg-7 col-md-8 mb-3 row" style="padding-left: 24px; padding-right: 24px;">
         <?php foreach ($sort_msg as $msg) { ?>
-          <div class="col">
+          <div class="col pl-1 pr-1">
             @if($msg=='wa' and !is_null($pages->wa_link))
               <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank">
                 <button class="btn btn-block">
-                  <i class="fab fa-whatsapp"></i>
-                  <span class="textbutton"> WhatsApp</span>
+                  <i class="fab fa-whatsapp icon-msg"></i>
+                  @if(count($sort_msg)<3)
+                    <span class="textbutton"> WhatsApp</span>
+                  @endif
                 </button>
               </a>
             @endif 
@@ -100,8 +102,10 @@
             @if($msg=='skype' and !is_null($pages->skype_link))
               <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" target="_blank">
                 <button class="btn btn-block">
-                  <i class="fab fa-skype"></i>
-                  <span class="textbutton"> Skype</span>
+                  <i class="fab fa-skype icon-msg"></i>
+                  @if(count($sort_msg)<3)
+                    <span class="textbutton"> Skype</span>
+                  @endif
                 </button>
               </a>
             @endif  
@@ -109,8 +113,10 @@
             @if($msg=='telegram' and !is_null($pages->telegram_link))
               <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank">
                 <button class="btn btn-block">
-                  <i class="fab fa-telegram"></i>
-                  <span class="textbutton" > Telegram</span>
+                  <i class="fab fa-telegram icon-msg"></i>
+                  @if(count($sort_msg)<3)
+                    <span class="textbutton" > Telegram</span>
+                  @endif
                 </button>
               </a>
             @endif  
@@ -118,7 +124,7 @@
         <?php } ?>
       </div>
 
-      <div class="col-md-7 mb-4">
+      <div class="col-lg-7 col-md-8 mb-4">
         @if($links->count())
           @foreach($links as $link)
             <div class="col-md-12 col-12 mb-3"> 
@@ -134,7 +140,7 @@
         @endif
       </div>
 
-      <div class="col-md-7 mb-5 row">
+      <div class="col-lg-7 col-md-8 mb-5 row">
         <?php foreach ($sort_sosmed as $sosmed) { ?>
           <div class="col text-center icon-sosmed">
             @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))
@@ -164,7 +170,7 @@
         <?php } ?>
       </div>
 
-      <div class="col-md-7 text-center">
+      <div class="col-lg-7 col-md-8 text-center">
         @if(!is_null($pages->powered))
           <span style="font-size: small;">powered by</span>
           <br>
