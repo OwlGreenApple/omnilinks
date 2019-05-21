@@ -1482,7 +1482,7 @@
 
             $("."+inputthis+"-get").attr("value","ada");
             $("#"+inputthis+"-dot").show();
-             if ($(".dot").length==1) {
+            if ($(".dot").length==1) {
               $(".dot").parent().hide();
               $('.prev').hide();
               $('.next').hide();

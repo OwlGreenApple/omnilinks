@@ -155,9 +155,9 @@ $(document).ready(function () {
     /* biolink social-media */
     $(document).on('click', '#sm', function (e) {
         $('.socialmedia').each(function () {
-            if ($(this).hasClass('hidden')) {
+            if ($(this).hasClass('hide')) {
                 $(this).show();
-                $(this).removeClass('hidden');
+                $(this).removeClass('hide');
                 $(this).parent().attr("id", "sosmed-" + $(this).attr('data-type'));
                 return false;
             }
