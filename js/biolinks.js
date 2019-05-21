@@ -65,41 +65,42 @@ $(document).ready(function () {
     }
     if ($('.fb-input').val()!='') {
       $('#fb').show();
-      $('#facebookviewid').addClass('shown-sm').show();
+      $('#fbviewid').addClass('shown-sm').show();
       changeLengthMedia();
     }
     if ($('.ig-input').val()!='') {
       $('#ig').show();
-      $('#instagramviewid').addClass('shown-sm').show();
+      $('#igid').addClass('shown-sm').show();
       changeLengthMedia();
     }
     $(document).on('click', '#tambah', function (e) {
-        $('.messengers').each(function () {
-            if ($(this).hasClass('hide')) {
-                // console.log('remove hidden');
-                $(this).show();
-                $(this).removeClass('hide');
-                $(this).parent().attr("id", "msg-" + $(this).attr('data-type'));
-                return false;
-            }
-        });
-        $('.link').each(function () {
-            if ($(this).hasClass('hidden')) {
-                $(this).show();
-                $(this).removeClass('hidden');
-                $(this).addClass('shown-mes');
-                return false;
-            }
-        });
-        changeLength();
+      $('.messengers').each(function () {
+        if ($(this).hasClass('hide')) {
+          // console.log('remove hidden');
+          $(this).show();
+          $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
+          $(this).removeClass('hide');
+          $(this).parent().attr("id", "msg-" + $(this).attr('data-type'));
+          return false;
+        }
+      });
+      $('.link').each(function () {
+        if ($(this).hasClass('hide')) {
+          $(this).show();
+          $(this).removeClass('hide');
+          $(this).addClass('shown-mes');
+          return false;
+        }
+      });
+      changeLength();
     });
 
     $('#deletewa').on('click', function () {
         $('#wa').hide();
-        $('#wa').addClass('hidden');
+        $('#wa').addClass('hide');
         $('#wa').find("input").val('');
         $('#waviewid').hide();
-        $('#waviewid').addClass('hidden');
+        $('#waviewid').addClass('hide');
         $('#waviewid').removeClass('shown-mes');
         changeLength();
         return false;
@@ -107,10 +108,10 @@ $(document).ready(function () {
 
     $('#deletetelegram').on('click', function () {
         $('#telegram').hide();
-        $('#telegram').addClass('hidden');
+        $('#telegram').addClass('hide');
         $('#telegram').find("input").val('');
         $('#telegramviewid').hide();
-        $('#telegramviewid').addClass('hidden');
+        $('#telegramviewid').addClass('hide');
         $('#telegramviewid').removeClass('shown-mes');
         changeLength();
         return false;
@@ -118,10 +119,10 @@ $(document).ready(function () {
 
     $('#deleteskype').on('click', function () {
         $('#skype').hide();
-        $('#skype').addClass('hidden');
+        $('#skype').addClass('hide');
         $('#skype').find("input").val('');
         $('#skypeviewid').hide();
-        $('#skypeviewid').addClass('hidden');
+        $('#skypeviewid').addClass('hide');
         $('#skypeviewid').removeClass('shown-mes');
         changeLength();
         return false;
@@ -154,61 +155,62 @@ $(document).ready(function () {
 
     /* biolink social-media */
     $(document).on('click', '#sm', function (e) {
-        $('.socialmedia').each(function () {
-            if ($(this).hasClass('hide')) {
-                $(this).show();
-                $(this).removeClass('hide');
-                $(this).parent().attr("id", "sosmed-" + $(this).attr('data-type'));
-                return false;
-            }
-        });
-         $('.linked').each(function () {
-            if ($(this).hasClass('hiddensm')) {
-                $(this).show();
-                $(this).removeClass('hiddensm');
-                $(this).addClass('shown-sm');
-                return false;
-            }
-        });
-        changeLengthMedia();
+      $('.socialmedia').each(function () {
+        if ($(this).hasClass('hide')) {
+          $(this).show();
+          $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
+          $(this).removeClass('hide');
+          $(this).parent().attr("id", "sosmed-" + $(this).attr('data-type'));
+          return false;
+        }
+      });
+      $('.linked').each(function () {
+        if ($(this).hasClass('hide')) {
+          $(this).show();
+          $(this).removeClass('hide');
+          $(this).addClass('shown-sm');
+          return false;
+        }
+      });
+      changeLengthMedia();
     });
 
     $('#deleteyoutube').on('click', function () {
         $('#youtube').hide();
-        $('#youtube').addClass('hidden');
+        $('#youtube').addClass('hide');
         $('#youtube').find("input").val('');
         $('#youtubeviewid').hide();
-        $('#youtubeviewid').addClass('hiddensm');
+        $('#youtubeviewid').addClass('hide');
         $('#youtubeviewid').removeClass('shown-sm');
         changeLengthMedia();
         return false;
     });
     $('#deleteig').on('click', function (e) {
         $('#ig').hide();
-        $('#ig').addClass('hidden');
+        $('#ig').addClass('hide');
         $('#ig').find("input").val('');
-        $('#instagramviewid').hide();
-        $('#instagramviewid').addClass('hiddensm');
-        $('#instagramviewid').removeClass('shown-sm');
+        $('#igviewid').hide();
+        $('#igviewid').addClass('hide');
+        $('#igviewid').removeClass('shown-sm');
         changeLengthMedia();
         return false;
     });
     $('#deletefb').on('click', function (e) {
         $('#fb').hide();
-        $('#fb').addClass('hidden');
+        $('#fb').addClass('hide');
         $('#fb').find("input").val('');
-        $('#facebookviewid').hide();
-        $('#facebookviewid').addClass('hiddensm');
-        $('#facebookviewid').removeClass('shown-sm');
+        $('#fbviewid').hide();
+        $('#fbviewid').addClass('hide');
+        $('#fbviewid').removeClass('shown-sm');
         changeLengthMedia();
         return false;
     });
     $('#deletetwitter').on('click', function (e) {
         $('#twitter').hide();
-        $('#twitter').addClass('hidden');
+        $('#twitter').addClass('hide');
         $('#twitter').find("input").val('');
         $('#twitterviewid').hide();
-        $('#twitterviewid').addClass('hiddensm');
+        $('#twitterviewid').addClass('hide');
         $('#twitterviewid').removeClass('shown-sm');
         changeLengthMedia();
         return false;

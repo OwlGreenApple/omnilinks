@@ -335,7 +335,7 @@
                   <div class="hid">
                     <ul class="sortable-msg">
                       <li id="msg-li-wa"> <!-- wa -->
-                        <div id="wa" class="messengers div-table hide">
+                        <div id="wa" class="messengers div-table hide" style="display:none;">
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -351,7 +351,7 @@
                                   </div>
                                 </div>
                                 <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
-                                <input type="hidden" name="sortmsg[]" value="wa">
+                                <input type="hidden" name="sortmsg[]" value="" data-val="wa" class="input-hidden">
                               </div>
                             </div>
 
@@ -369,7 +369,7 @@
                       </li>
 
                       <li id="msg-li-telegram"> <!-- telegram -->
-                        <div id="telegram" class="messengers div-table hide">
+                        <div id="telegram" class="messengers div-table hide" style="display:none;">
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -385,7 +385,7 @@
                                   </div>
                                 </div>
                                 <input type="text" name="telegram" class="form-control telegram-input" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
-                                <input type="hidden" name="sortmsg[]" value="telegram">
+                                <input type="hidden" name="sortmsg[]" value="" data-val="telegram" class="input-hidden">
                               </div>
 
                               <div class="col-md-12 col-12 pr-0 pl-0">
@@ -403,7 +403,7 @@
                       </li>
 
                       <li id="msg-li-skype"> <!-- skype -->
-                        <div id="skype" class="messengers div-table hide">
+                        <div id="skype" class="messengers div-table hide" style="display:none;">
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -419,7 +419,7 @@
                                   </div>
                                 </div>
                                 <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control skype-input" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
-                                <input type="hidden" name="sortmsg[]" value="skype">
+                                <input type="hidden" name="sortmsg[]" value="" data-val="skype" class="input-hidden">
                               </div>
                             </div>
 
@@ -526,7 +526,8 @@
 
                   <ul class="sortable-sosmed">
                     <li id="sosmed-youtube">
-                      <div id="youtube" class="socialmedia div-table mb-4">
+                      <div id="youtube" class="socialmedia div-table mb-4 hide" style="display:none;">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="youtube" class="input-hidden">
       
                         <div class="div-cell">
                           <span class="handle">
@@ -560,7 +561,8 @@
                     </li>
 
                     <li id="sosmed-fb">
-                      <div id="fb" class="socialmedia div-table hide" data-type="fb">
+                      <div id="fb" class="socialmedia div-table hide" data-type="fb" style="display:none;">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="fb" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -593,8 +595,8 @@
                     </li>
 
                     <li id="sosmed-twitter">
-                      <div id="twitter" class="socialmedia div-table hide" data-type="twitter">
-              
+                      <div id="twitter" class="socialmedia div-table hide" data-type="twitter" style="display:none;">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="twitter" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -627,8 +629,8 @@
                     </li>
 
                     <li id="sosmed-ig">
-                      <div id="ig" class="socialmedia div-table hide" data-type="ig">
-
+                      <div id="ig" class="socialmedia div-table hide" data-type="ig" style="display:none;">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="ig" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -692,7 +694,7 @@
                       </div>
                     </div>
                   </div>
-                
+
                   <div class="card">
                     <span class="card-header card-gray">
                       Masukkan Pesan
@@ -1097,7 +1099,7 @@
                     </li>
                   </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
-                    <ul class="col-md-12" id="viewLink" style="list-style: none;">
+                    <ul class="col-md-12" id="viewLink" >
                       @if($links->count())
                       <?php $utlq=0  ?>
                       @foreach($links as $link)
@@ -1123,16 +1125,16 @@
                   </div>
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
-                    <li class="col-md-3 linked shown-sm" id="youtubeviewid">
+                    <li class="linked hide" id="youtubeviewid">
                       <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hiddensm " id="facebookviewid" style="display: none;">
+                    <li class="col-md-3 linked hide" id="fbviewid" >
                       <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hiddensm" id="twitterviewid" style=" display: none;">
+                    <li class="col-md-3 linked hide" id="twitterviewid">
                       <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hiddensm" id="instagramviewid"  style=" display: none;">
+                    <li class="col-md-3 linked hide" id="igviewid" >
                      <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
                     </li>  
                   </ul>
@@ -1722,6 +1724,8 @@
     ?>
         $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
+        $("#msg-li-"+"<?php echo $data; ?>>div").show();
+        $("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
         
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
@@ -1734,6 +1738,7 @@
     else {
     ?>
         $("#msg-li-wa>div").removeClass("hide");
+        $("#msg-li-wa>div").show();
         
         $("#waviewid").removeClass("hide");
     <?php } ?>
@@ -1768,22 +1773,26 @@
       $counter = 1;
       foreach($arr as $data){
     ?>
-        $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
-        $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
+        $("#sosmed-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+        $("#sosmed-"+"<?php echo $data; ?>>div").removeClass("hide");
+        $("#sosmed-"+"<?php echo $data; ?>>div").show();
+        $("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
         
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
+        $("#"+"<?php echo $data; ?>"+"viewid").addClass("shown-sm");
+        changeLengthMedia();
     <?php 
         $counter += 1;
       } ?>
       sortMeBy("data-category", "ul.sortable-sosmed", "li", "asc");
-      sortMeBy("data-category", "ul#getview", "li", "asc");
+      sortMeBy("data-category", "ul#sm-preview", "li", "asc");
     <?php }
     else {
     ?>
-        $("#msg-li-wa>div").removeClass("hide");
+        $("#sosmed-youtube>div").removeClass("hide");
         
-        $("#waviewid").removeClass("hide");
+        $("#youtubeviewid").removeClass("hide");
     <?php } ?>
 
     

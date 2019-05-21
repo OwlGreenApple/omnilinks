@@ -311,7 +311,9 @@ class BiolinkController extends Controller
       else {
         $sort_link = $sort_link.';'.$url->id.'-12';
       }*/
-      $sort_link .= $url->id.';';
+      if($url->id<>''){
+        $sort_link .= $url->id.';';
+      }
     }
 
     $sort_msg = '';
@@ -325,15 +327,17 @@ class BiolinkController extends Controller
         } else {
           $sort_msg = $sort_msg.';'.$msg.'-'.$countmsg;
         }*/
-        $sort_msg .= $msg.';';
+        if($msg<>''){
+          $sort_msg .= $msg.';';
+        }
       }
     }
       
     $sort_sosmed = '';
-    if($request->has('sosmed')){
-      $countsosmed = count($request->sosmed);
-      $mod = count($request->sosmed)%3;
-      $div = floor(count($request->sosmed)/3);
+    if($request->has('sortsosmed')){
+      $countsosmed = count($request->sortsosmed);
+      $mod = count($request->sortsosmed)%3;
+      $div = floor(count($request->sortsosmed)/3);
       $col = 0;
       $colmod = 0;
       if($mod>0){
@@ -345,7 +349,7 @@ class BiolinkController extends Controller
 
       $count = 0;
       $countdiv = 0;
-      foreach ($request->sosmed as $sosmed) {
+      foreach ($request->sortsosmed as $sosmed) {
         /*if($sort_sosmed==''){
           if($countdiv==$div){
             $sort_sosmed = $sosmed.'-'.$colmod;
@@ -359,7 +363,9 @@ class BiolinkController extends Controller
             $sort_sosmed = $sort_sosmed.';'.$sosmed.'-'.$col;
           }
         }*/
-        $sort_sosmed .= $sosmed.';';
+        if($sosmed<>''){
+          $sort_sosmed .= $sosmed.';';
+        }
         
         $count = $count+1;
         if($count>=3)
