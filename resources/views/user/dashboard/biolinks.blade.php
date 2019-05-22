@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
 <script type="text/javascript">
   var picker;
-  
+  var color_picker,rounded,outline;
   // https://www.shift8web.ca/2017/01/use-jquery-sort-reorganize-content/
   function sortMeBy(arg, sel, elem, order) {
     var $selector = $(sel),
@@ -253,6 +253,32 @@
       $(".dot").parent().hide();
       $('.prev').hide();
       $('.next').hide();
+    }
+  }
+
+  function check_outlined(){
+    if ($('.outlined').prop("checked") == true) {
+      $(".mobile1").addClass("outlinedview");
+      $('.outlined').val(1);
+      
+      $('.btnview').css("background-color","transparent");
+      $('.btnview').css("color",$("#colorOutlineButton").val());
+    } else if ($('.outlined').prop("checked") == false) {
+      $(".mobile1").removeClass("outlinedview");
+      $('.outlined').val(0);
+      
+      $('.btnview').css("background-color",$("#colorOutlineButton").val());
+      $('.btnview').css("color","#fff");
+    }
+  }
+
+  function check_rounded(){
+    if ($('.rounded').prop("checked") == true) {
+      $(".mobile1").addClass("roundedview");
+      $('.rounded').val(1);
+    } else if ($('.rounded').prop("checked") == false) {
+      $(".mobile1").removeClass("roundedview");
+      $('.rounded').val(0);
     }
   }
 
@@ -1229,35 +1255,15 @@
 
 
     $('.outlined').click(function() {
-      if ($(this).prop("checked") == true) {
-        $(".mobile1").addClass("outlinedview");
-        $(this).val(1);
-        
-        $('.btnview').css("background-color","transparent");
-        $('.btnview').css("color",$("#colorOutlineButton").val());
-      } else if ($(this).prop("checked") == false) {
-        $(".mobile1").removeClass("outlinedview");
-        $(this).val(0);
-        
-        $('.btnview').css("background-color",$("#colorOutlineButton").val());
-        $('.btnview').css("color","#fff");
-      }
+      check_outlined();
     });
-
     <?php if($pages->is_rounded) {?>
       $(".mobile1").addClass("roundedview");
     <?php } ?>
 
     $('.rounded').click(function() {
-      if ($(this).prop("checked") == true) {
-        $(".mobile1").addClass("roundedview");
-        $(this).val(1);
-      } else if ($(this).prop("checked") == false) {
-        $(".mobile1").removeClass("roundedview");
-        $(this).val(0);
-      }
+      check_rounded();
     });
-
     $("#powered").click(function(){
       if ($(this).prop("checked")==true) {
         $("#poweredview").children().show();
@@ -1280,7 +1286,8 @@
       // $("#backtheme").val();
     });
     <?php if (!is_null($pages->color_picker)) { ?>
-      $('#color').val("<?php echo $pages->color_picker; ?>");
+      color_picker = "<?php echo $pages->color_picker; ?>";
+      $('#color').val(color_picker);
       $("#solid").click();
     <?php } ?>
     <?php if (!is_null($pages->template)) { ?>
@@ -1294,16 +1301,17 @@
       // $('.btnview').css("background-color","<?php echo $pages->rounded; ?>");
     <?php } ?>
     <?php if (!is_null($pages->outline)) { ?>
-      $('#colorOutlineButton').val("<?php echo $pages->outline; ?>");
-      $('.btnview').css("border-color","<?php echo $pages->outline; ?>");
+      outline = "<?php echo $pages->outline; ?>";
+      $('#colorOutlineButton').val(outline);
+      $('.btnview').css("border-color",outline);
     <?php } ?>
 
     <?php if($pages->is_outlined) {?>
       $(".mobile1").addClass("outlinedview");
       $('.btnview').css("background-color","transparent");
-      $('.btnview').css("color","<?php echo $pages->outline; ?>");
+      $('.btnview').css("color",outline);
     <?php } else {?>
-      $('.btnview').css("background-color","<?php echo $pages->outline; ?>");
+      $('.btnview').css("background-color",outline);
       $('.btnview').css("color","#fff");
     <?php } ?>
     
@@ -1504,17 +1512,16 @@
      
     $(".txthov").hover(
       function() {
-          temp1 = $(this).css("color");
-          temp2 = $(this).css("background-color");
-         
-          $(this).parent().children().css("background-color",temp1);
-          $(this).parent().children().css("color",temp2);
+        check_outlined();
+        check_rounded();
+        temp1 = $(this).css("color");
+        temp2 = $(this).css("background-color");
+
+        $(this).parent().children().css("background-color",temp1);
+        $(this).parent().children().css("color",temp2);
       }, function() {
-          temp1 = $(this).css("color");
-          temp2 = $(this).css("background-color");
-         
-          $(this).parent().children().css("background-color",temp1);
-          $(this).parent().children().css("color",temp2);
+        check_outlined();
+        check_rounded();
       }
     );     
 

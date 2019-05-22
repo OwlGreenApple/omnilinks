@@ -89,7 +89,7 @@
         <?php foreach ($sort_msg as $msg) { ?>
           <li class="col pl-1 pr-1">
             @if($msg=='wa' and !is_null($pages->wa_link))
-              <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank">
+              <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-whatsapp icon-msg"></i>
                   @if(count($sort_msg)<3)
@@ -100,7 +100,7 @@
             @endif 
 
             @if($msg=='skype' and !is_null($pages->skype_link))
-              <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" target="_blank">
+              <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-skype icon-msg"></i>
                   @if(count($sort_msg)<3)
@@ -111,7 +111,7 @@
             @endif  
 
             @if($msg=='telegram' and !is_null($pages->telegram_link))
-              <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank">
+              <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-telegram icon-msg"></i>
                   @if(count($sort_msg)<3)
@@ -128,7 +128,7 @@
         @if($links->count())
           @foreach($links as $link)
             <li class="col-md-12 col-12 mb-3"> 
-              <a href="{{url('click/link/'.$link->id)}}" title=""  target="_blank">
+              <a href="{{url('click/link/'.$link->id)}}" title=""  target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <span class="textbutton">
                     {{$link->title}}
@@ -182,6 +182,38 @@
 
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
+  function check_outlined(){
+    // if ($('.outlined').prop("checked") == true) {
+    <?php if($pages->is_outlined) { ?>  
+      $(".mobile1").addClass("outlinedview");
+      $('.outlined').val(1);
+      
+      $('.txthov').find("button").css("background-color","transparent");
+      // $('.btnview').css("color",$("#colorOutlineButton").val());
+      $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+    <?php } else  { ?>  
+    // } else if ($('.outlined').prop("checked") == false) {
+      $(".mobile1").removeClass("outlinedview");
+      $('.outlined').val(0);
+      
+      // $('.btnview').css("background-color",$("#colorOutlineButton").val());
+      $('.txthov').find("button").css("background-color","<?php echo $pages->outline ?>");
+      $('.txthov').find("button").css("color","#fff");
+    // }
+    <?php } ?>  
+  }
+
+  function check_rounded(){
+    if ($('.rounded').prop("checked") == true) {
+      $(".mobile1").addClass("roundedview");
+      $('.rounded').val(1);
+    } else if ($('.rounded').prop("checked") == false) {
+      $(".mobile1").removeClass("roundedview");
+      $('.rounded').val(0);
+    }
+  }
+
+
   $(document).ready(function() {
     <?php if($pages->is_rounded) {?>
       $(".btn").addClass("btn-rounded");
@@ -198,6 +230,21 @@
     <?php if (!is_null($pages->outline)) { ?>
       $('.btn').css("border-color","<?php echo $pages->outline; ?>");
     <?php } ?>
+    
+    $(".txthov").hover(
+      function() {
+        check_outlined();
+        // check_rounded();
+        temp1 = $(this).css("color");
+        temp2 = $(this).css("background-color");
+
+        $(this).parent().children().css("background-color",temp1);
+        $(this).parent().children().css("color",temp2);
+      }, function() {
+        check_outlined();
+        // check_rounded();
+      }
+    );     
   });
 </script>
 
