@@ -231,12 +231,14 @@
       $('.btn').css("border-color","<?php echo $pages->outline; ?>");
     <?php } ?>
     
+    check_outlined();
     $(".txthov").hover(
       function() {
+        console.log("wwwww");
         check_outlined();
         // check_rounded();
-        temp1 = $(this).css("color");
-        temp2 = $(this).css("background-color");
+        temp1 = $(this).find("button").css("color");
+        temp2 = $(this).find("button").css("background-color");
 
         $(this).parent().children().css("background-color",temp1);
         $(this).parent().children().css("color",temp2);
