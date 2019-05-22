@@ -85,9 +85,9 @@
         </div>
       </div>
 
-      <div class="col-lg-7 col-md-8 mb-3 row" style="padding-left: 24px; padding-right: 24px;">
+      <ul class="col-lg-7 col-md-8 mb-3 row" style="padding-left: 24px; padding-right: 24px;">
         <?php foreach ($sort_msg as $msg) { ?>
-          <div class="col pl-1 pr-1">
+          <li class="col pl-1 pr-1">
             @if($msg=='wa' and !is_null($pages->wa_link))
               <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank">
                 <button class="btn btn-block">
@@ -120,14 +120,14 @@
                 </button>
               </a>
             @endif  
-          </div>
+          </li>
         <?php } ?>
-      </div>
+      </ul>
 
-      <div class="col-lg-7 col-md-8 mb-4">
+      <ul class="col-lg-7 col-md-8 mb-4">
         @if($links->count())
           @foreach($links as $link)
-            <div class="col-md-12 col-12 mb-3"> 
+            <li class="col-md-12 col-12 mb-3"> 
               <a href="{{url('click/link/'.$link->id)}}" title=""  target="_blank">
                 <button class="btn btn-block">
                   <span class="textbutton">
@@ -135,14 +135,14 @@
                   </span>
                 </button>
               </a>
-            </div>
+            </li>
           @endforeach
         @endif
-      </div>
+      </ul>
 
-      <div class="col-lg-7 col-md-8 mb-5 row">
+      <ul class="col-lg-7 col-md-8 mb-5 row">
         <?php foreach ($sort_sosmed as $sosmed) { ?>
-          <div class="col text-center icon-sosmed">
+          <li class="col text-center icon-sosmed">
             @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))
               <a href="{{url('click/fb/'.$pages->id)}}" title="fb" target="_blank">
                 <i class="fab fa-facebook-square"></i>
@@ -166,9 +166,9 @@
                 <i class="fab fa-youtube"></i>
               </a>
             @endif 
-          </div>
+          </li>
         <?php } ?>
-      </div>
+      </ul>
 
       <div class="col-lg-7 col-md-8 text-center">
         @if(!is_null($pages->powered))

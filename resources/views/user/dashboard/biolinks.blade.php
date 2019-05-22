@@ -1084,16 +1084,16 @@
 
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
-                  <ul class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                    <li class="link shown-mes hide" id="waviewid">
+                  <ul class="row links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
+                    <li class="link col pl-1 pr-1 shown-mes hide" id="waviewid"> 
                         <a href="#" class="btn btn-md btnview btn-light txthov" style="
                         width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
                     </li>
-                    <li class="link hide" id="telegramviewid" >
+                    <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
                     </li> 
-                    <li class="link hide" id="skypeviewid" >
+                    <li class="link col pl-1 pr-1 hide" id="skypeviewid" >
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
                     </li>
@@ -1125,17 +1125,17 @@
                   </div>
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
-                    <li class="linked hide" id="youtubeviewid">
+                    <li class="col linked hide" id="youtubeviewid">
                       <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hide" id="fbviewid" >
+                    <li class="col linked hide" id="fbviewid" >
                       <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hide" id="twitterviewid">
+                    <li class="col linked hide" id="twitterviewid">
                       <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hide" id="igviewid" >
-                     <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
+                    <li class="col linked hide" id="igviewid">
+                      <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
                     </li>  
                   </ul>
                   <div class="col-md-12" align="center" id="poweredview">
@@ -1724,7 +1724,8 @@
     ?>
         $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
-        $("#msg-li-"+"<?php echo $data; ?>>div").show();
+        // $("#msg-li-"+"<?php echo $data; ?>>div").show();
+        $("#msg-li-"+"<?php echo $data; ?>>div").css("display","table");
         $("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
         
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
@@ -1738,7 +1739,8 @@
     else {
     ?>
         $("#msg-li-wa>div").removeClass("hide");
-        $("#msg-li-wa>div").show();
+        // $("#msg-li-wa>div").show();
+        $("#msg-li-wa>div").css("display","table");
         
         $("#waviewid").removeClass("hide");
     <?php } ?>
@@ -1775,13 +1777,14 @@
     ?>
         $("#sosmed-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         $("#sosmed-"+"<?php echo $data; ?>>div").removeClass("hide");
-        $("#sosmed-"+"<?php echo $data; ?>>div").show();
+        // $("#sosmed-"+"<?php echo $data; ?>>div").show();
+        $("#sosmed-"+"<?php echo $data; ?>>div").css("display","table");
         $("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
         
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
         $("#"+"<?php echo $data; ?>"+"viewid").addClass("shown-sm");
-        changeLengthMedia();
+        // changeLengthMedia();
     <?php 
         $counter += 1;
       } ?>
