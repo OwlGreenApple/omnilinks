@@ -77,10 +77,11 @@ $(document).ready(function () {
       $('.messengers').each(function () {
         if ($(this).hasClass('hide')) {
           // console.log('remove hidden');
-          $(this).show();
+          //$(this).show();
+          $(this).css("display","table");
           $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
           $(this).removeClass('hide');
-          $(this).parent().attr("id", "msg-" + $(this).attr('data-type'));
+          $(this).parent().attr("id", "msg-" + $(this).attr('id'));
           return false;
         }
       });
@@ -157,7 +158,8 @@ $(document).ready(function () {
     $(document).on('click', '#sm', function (e) {
       $('.socialmedia').each(function () {
         if ($(this).hasClass('hide')) {
-          $(this).show();
+          //$(this).show();
+          $(this).css("display","table");
           $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
           $(this).removeClass('hide');
           $(this).parent().attr("id", "sosmed-" + $(this).attr('data-type'));
