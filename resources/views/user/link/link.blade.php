@@ -71,7 +71,7 @@
                 @foreach($banner as $banner)
                   <div class="imageHolder">
                     <a href="{{url('click/banner/'.$banner->id)}}" target="_blank">
-                      <img src="<?php echo url(Storage::disk('local')->url('app/'.$banner->images_banner));?>">
+                      <img src="<?php echo url(Storage::disk('local')->url('app/'.$banner->images_banner));?>" class="">
                       <p class="captionText"></p> 
                     </a>
                   </div>
