@@ -36,8 +36,8 @@ function changeLengthMedia() {
 
 $(document).ready(function () {
 
-    changeLength();
-    changeLengthMedia();
+    //changeLength();
+    //changeLengthMedia();
     /*if ($('.wa-input').val()!='') {
       $('#wa').show();
       $('#waviewid').addClass('shown-mes').show();
@@ -45,33 +45,33 @@ $(document).ready(function () {
     }*/
     if ($('.telegram-input').val()!='') {
       $('#telegram').show();
-      $('#telegramviewid').addClass('shown-mes').show();
-        changeLength();
+      //$('#telegramviewid').addClass('shown-mes').show();
+        //changeLength();
     }
     if ($('.skype-input').val()!='') {
       $('#skype').show();
       $('#skypeviewid').addClass('shown-mes').show();
-        changeLength();
+        //changeLength();
     }
     if ($('.youtube-input').val()!='') {
       $('#youtube').show();
       $('#youtubeviewid').addClass('shown-sm').show();
-      changeLengthMedia();
+      //changeLengthMedia();
     }
     if ($('.twitter-input').val()!='') {
       $('#twitter').show();
       $('#twitterviewid').addClass('shown-sm').show();
-      changeLengthMedia();
+      //changeLengthMedia();
     }
     if ($('.fb-input').val()!='') {
       $('#fb').show();
       $('#fbviewid').addClass('shown-sm').show();
-      changeLengthMedia();
+      //changeLengthMedia();
     }
     if ($('.ig-input').val()!='') {
       $('#ig').show();
       $('#igid').addClass('shown-sm').show();
-      changeLengthMedia();
+      //changeLengthMedia();
     }
     $(document).on('click', '#tambah', function (e) {
       $('.messengers').each(function () {
@@ -93,7 +93,7 @@ $(document).ready(function () {
           return false;
         }
       });
-      changeLength();
+      //changeLength();
     });
 
     $('#deletewa').on('click', function () {
@@ -103,7 +103,7 @@ $(document).ready(function () {
         $('#waviewid').hide();
         $('#waviewid').addClass('hide');
         $('#waviewid').removeClass('shown-mes');
-        changeLength();
+        //changeLength();
         return false;
     });
 
@@ -114,7 +114,7 @@ $(document).ready(function () {
         $('#telegramviewid').hide();
         $('#telegramviewid').addClass('hide');
         $('#telegramviewid').removeClass('shown-mes');
-        changeLength();
+        //changeLength();
         return false;
     });
 
@@ -125,7 +125,7 @@ $(document).ready(function () {
         $('#skypeviewid').hide();
         $('#skypeviewid').addClass('hide');
         $('#skypeviewid').removeClass('shown-mes');
-        changeLength();
+        //changeLength();
         return false;
     });
 
@@ -174,7 +174,7 @@ $(document).ready(function () {
           return false;
         }
       });
-      changeLengthMedia();
+      //changeLengthMedia();
     });
 
     $('#deleteyoutube').on('click', function () {
@@ -184,7 +184,7 @@ $(document).ready(function () {
         $('#youtubeviewid').hide();
         $('#youtubeviewid').addClass('hide');
         $('#youtubeviewid').removeClass('shown-sm');
-        changeLengthMedia();
+        //changeLengthMedia();
         return false;
     });
     $('#deleteig').on('click', function (e) {
@@ -194,7 +194,7 @@ $(document).ready(function () {
         $('#igviewid').hide();
         $('#igviewid').addClass('hide');
         $('#igviewid').removeClass('shown-sm');
-        changeLengthMedia();
+        //changeLengthMedia();
         return false;
     });
     $('#deletefb').on('click', function (e) {
@@ -204,7 +204,7 @@ $(document).ready(function () {
         $('#fbviewid').hide();
         $('#fbviewid').addClass('hide');
         $('#fbviewid').removeClass('shown-sm');
-        changeLengthMedia();
+        //changeLengthMedia();
         return false;
     });
     $('#deletetwitter').on('click', function (e) {
@@ -214,7 +214,7 @@ $(document).ready(function () {
         $('#twitterviewid').hide();
         $('#twitterviewid').addClass('hide');
         $('#twitterviewid').removeClass('shown-sm');
-        changeLengthMedia();
+        //changeLengthMedia();
         return false;
     });
 });

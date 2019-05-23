@@ -85,11 +85,11 @@
         </div>
       </div>
 
-      <div class="col-lg-7 col-md-8 mb-3 row" style="padding-left: 24px; padding-right: 24px;">
+      <ul class="col-lg-7 col-md-8 mb-3 row" style="padding-left: 24px; padding-right: 24px;">
         <?php foreach ($sort_msg as $msg) { ?>
-          <div class="col pl-1 pr-1">
+          <li class="col pl-1 pr-1">
             @if($msg=='wa' and !is_null($pages->wa_link))
-              <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank">
+              <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-whatsapp icon-msg"></i>
                   @if(count($sort_msg)<3)
@@ -100,7 +100,7 @@
             @endif 
 
             @if($msg=='skype' and !is_null($pages->skype_link))
-              <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" target="_blank">
+              <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-skype icon-msg"></i>
                   @if(count($sort_msg)<3)
@@ -111,7 +111,7 @@
             @endif  
 
             @if($msg=='telegram' and !is_null($pages->telegram_link))
-              <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank">
+              <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-telegram icon-msg"></i>
                   @if(count($sort_msg)<3)
@@ -120,29 +120,29 @@
                 </button>
               </a>
             @endif  
-          </div>
+          </li>
         <?php } ?>
-      </div>
+      </ul>
 
-      <div class="col-lg-7 col-md-8 mb-4">
+      <ul class="col-lg-7 col-md-8 mb-4">
         @if($links->count())
           @foreach($links as $link)
-            <div class="col-md-12 col-12 mb-3"> 
-              <a href="{{url('click/link/'.$link->id)}}" title=""  target="_blank">
+            <li class="col-md-12 col-12 mb-3"> 
+              <a href="{{url('click/link/'.$link->id)}}" title=""  target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <span class="textbutton">
                     {{$link->title}}
                   </span>
                 </button>
               </a>
-            </div>
+            </li>
           @endforeach
         @endif
-      </div>
+      </ul>
 
-      <div class="col-lg-7 col-md-8 mb-5 row">
+      <ul class="col-lg-7 col-md-8 mb-5 row">
         <?php foreach ($sort_sosmed as $sosmed) { ?>
-          <div class="col text-center icon-sosmed">
+          <li class="col text-center icon-sosmed">
             @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))
               <a href="{{url('click/fb/'.$pages->id)}}" title="fb" target="_blank">
                 <i class="fab fa-facebook-square"></i>
@@ -166,9 +166,9 @@
                 <i class="fab fa-youtube"></i>
               </a>
             @endif 
-          </div>
+          </li>
         <?php } ?>
-      </div>
+      </ul>
 
       <div class="col-lg-7 col-md-8 text-center">
         @if(!is_null($pages->powered))
@@ -182,6 +182,23 @@
 
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
+  function check_outlined(){
+    <?php if($pages->is_outlined) { ?>  
+      $(".mobile1").addClass("outlinedview");
+      $('.outlined').val(1);
+
+      $('.txthov').find("button").css("background-color","transparent");
+      $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+    <?php } else  { ?>  
+      $(".mobile1").removeClass("outlinedview");
+      $('.outlined').val(0);
+
+      $('.txthov').find("button").css("background-color","<?php echo $pages->outline ?>");
+      $('.txthov').find("button").css("color","#fff");
+    <?php } ?>  
+  }
+
+
   $(document).ready(function() {
     <?php if($pages->is_rounded) {?>
       $(".btn").addClass("btn-rounded");
@@ -198,6 +215,21 @@
     <?php if (!is_null($pages->outline)) { ?>
       $('.btn').css("border-color","<?php echo $pages->outline; ?>");
     <?php } ?>
+    
+    check_outlined();
+    $(".txthov").hover(
+      function() {
+        check_outlined();
+        temp1 = $(this).find("button").css("color");
+        temp2 = $("body").css("background-color");
+
+        $(this).find("button").css("background-color",temp1);
+        $(this).find("button").css("color",temp2);
+      }, function() {
+        check_outlined();
+      }
+    ); 
+    moveSlide(0);
   });
 </script>
 

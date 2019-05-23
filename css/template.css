@@ -1,214 +1,255 @@
 .colorgradient1
 {
   background-image: linear-gradient(339deg, #21d4fd, #b721ff);
+  background-color :#21d4fd!important;
   color:#fff;
-}
-.outlined .btn{
-	background: transparent;
-	color: #fff;
-	border-color: #fff;
-}
-.outlined .btn:hover{
-	background: #ffff;
-	color: #000000;
 }
 .colorgradient2
 {
-	color:#fff;
+  color:#fff;
   background-image: linear-gradient(134deg, #00b4db, #1094c2);
+  background-color :#00b4db!important;
 }
 .colorgradient3
 {
-	color:#fff;
-	background-image: linear-gradient(139deg, #25b7b2, #3b9893);
+  color:#fff;
+  background-image: linear-gradient(139deg, #25b7b2, #3b9893);
+  background-color :#25b7b2!important;
 }
 .colorgradient4{
-	color:#fff;
-	background-image: linear-gradient(133deg, #fc7a3c, #ed4d55);
+  color:#fff;
+  background-image: linear-gradient(133deg, #fc7a3c, #ed4d55);
+  background-color :#fc7a3c!important;
 }
 .colorgradient5{
-	color:#fff;
-	background-image: linear-gradient(312deg, #aa19e7, #2333bf);
+  color:#fff;
+  background-image: linear-gradient(312deg, #aa19e7, #2333bf);
+  background-color :#aa19e7!important;
 }
 .colorgradient6{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #ae92d3, rgba(153, 85, 242, 0.99));
+  color:#fff;
+  background-image: linear-gradient(133deg, #ae92d3, rgba(153, 85, 242, 0.99));
+  background-color :#ae92d3!important;
 }
 .colorgradient7{
-	color:#fff;
-	  background-image: linear-gradient(to bottom, #f7971e, #ffd200);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #f7971e, #ffd200);
+  background-color :#f7971e!important;
 }
 .colorgradient8{
-	color:#fff;
-	 background-image: linear-gradient(45deg, #05a907, #17abaa);
+  color:#fff;
+  background-image: linear-gradient(45deg, #05a907, #17abaa);
+  background-color :#05a907!important;
 }
 .colorgradient9{
-	color:#fff;
-	 background-image: linear-gradient(229deg, #ff4e50, #ff8158 41%, #f9d423);
+  color:#fff;
+  background-image: linear-gradient(229deg, #ff4e50, #ff8158 41%, #f9d423);
+  background-color :#ff4e50!important;
 }
 .colorgradient10{
-	color:#fff;
-	 background-image: linear-gradient(229deg, #1353b9, #38aee9 44%, #0ae68f);
+  color:#fff;
+  background-image: linear-gradient(229deg, #1353b9, #38aee9 44%, #0ae68f);
+  background-color :#1353b9!important;
 }
 .colorgradient11{
-	color:#fff;
-	 background-image: linear-gradient(to bottom, #fe8c00, #f83600);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #fe8c00, #f83600);
+  background-color :#fe8c00!important;
 }
 .colorgradient12{
-	color:#fff;
-	background-image: linear-gradient(134deg, #0e76ef, #4497f1 52%, #137bf5);
+  color:#fff;
+  background-image: linear-gradient(134deg, #0e76ef, #4497f1 52%, #137bf5);
+  background-color :#0e76ef!important;
 }
 .colorgradient13{
-	color:#fff;
-	background-image: linear-gradient(45deg, #2c1872, rgba(186, 55, 143, 0.98) 38%, rgba(235, 96, 79, 0.97) 66%, rgba(250, 218, 93, 0.95));
+  color:#fff;
+  background-image: linear-gradient(45deg, #2c1872, rgba(186, 55, 143, 0.98) 38%, rgba(235, 96, 79, 0.97) 66%, rgba(250, 218, 93, 0.95));
+  background-color :#2c1872!important;
 }
 .colorgradient14{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #1a2980, #26d0ce);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #1a2980, #26d0ce);
+  background-color :#1a2980!important;
 }
 .colorgradient15{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #52c234, #061700);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #52c234, #061700);
+  background-color :#52c234!important;
 }
 .colorgradient16{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #e65c00, #f9d423);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #e65c00, #f9d423);
+  background-color :#e65c00!important;
 }
 .colorgradient17{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #4ecdc4, #556270);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #4ecdc4, #556270);
+  background-color :#4ecdc4!important;
 }
 .colorgradient18{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #f7ff00, #db36a4);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #f7ff00, #db36a4);
+  background-color :#f7ff00!important;
 }
 .colorgradient19{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #1e3c72, #2a5298);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #1e3c72, #2a5298);
+  background-color :#1e3c72!important;
 }
 .colorgradient20{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #1d976c, #93f9b9);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #1d976c, #93f9b9);
+  background-color :#1d976c!important;
 }
 .colorgradient21{
-	color:#fff;
-	background-image: linear-gradient(133deg, #c2ffd8, #465efb);
+  color:#fff;
+  background-image: linear-gradient(133deg, #c2ffd8, #465efb);
+  background-color :#c2ffd8!important;
 }
 .colorgradient22{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #97abff, #123597);
+  color:#fff;
+  background-image: linear-gradient(133deg, #97abff, #123597);
+  background-color :#97abff!important;
 }
 .colorgradient23{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #3b2667, #bc78ec);
+  color:#fff;
+  background-image: linear-gradient(133deg, #3b2667, #bc78ec);
+  background-color :#3b2667!important;
 }
 .colorgradient24{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #dac72c, #49c628);
+  color:#fff;
+  background-image: linear-gradient(133deg, #dac72c, #49c628);
+  background-color :#dac72c!important;
 }
 .colorgradient25{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #f761a1, #8c1bab);
+  color:#fff;
+  background-image: linear-gradient(133deg, #f761a1, #8c1bab);
+  background-color :#f761a1!important;
 }
 .colorgradient26{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #ffdb01, #0e197d);
+  color:#fff;
+  background-image: linear-gradient(133deg, #ffdb01, #0e197d);
+  background-color :#ffdb01!important;
 }
 .colorgradient27{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #f05f57, #360940);
+  color:#fff;
+  background-image: linear-gradient(133deg, #f05f57, #360940);
+  background-color :#f05f57!important;
 }
 .colorgradient28{
-	color:#fff;
-	background-image: linear-gradient(133deg, #ff6fd8, #3813c2);
+  color:#fff;
+  background-image: linear-gradient(133deg, #ff6fd8, #3813c2);
+  background-color :#ff6fd8!important;
 }
 .colorgradient29{
-	color:#fff;
-	background-image: linear-gradient(133deg, #ffa8a8, #fcff00);
+  color:#fff;
+  background-image: linear-gradient(133deg, #ffa8a8, #fcff00);
+  background-color :#ffa8a8!important;
 }
 .colorgradient30{
-	color:#fff;
-	 background-image: linear-gradient(133deg, #3c8ce7, #00eaff);
+  color:#fff;
+  background-image: linear-gradient(133deg, #3c8ce7, #00eaff);
+  background-color :#3c8ce7!important;
 }
 .colorgradient31{
-	color:#fff;
-	 background-image: linear-gradient(to top, #7028e4, #e5b2ca);
+  color:#fff;
+  background-image: linear-gradient(to top, #7028e4, #e5b2ca);
+  background-color :#7028e4!important;
 }
 .colorgradient32{
-	color:#fff;
-	 background-image: linear-gradient(to bottom, #fbc2eb, #a18cd1);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #fbc2eb, #a18cd1);
+  background-color :#fbc2eb!important;
 }
 .colorgradient33{
-	color:#fff;
-	 background-image: linear-gradient(to top, #ffb199, #ff0844);
+  color:#fff;
+  background-image: linear-gradient(to top, #ffb199, #ff0844);
+  background-color :#ffb199!important;
 }
 .colorgradient34{
-	color:#fff;
-	 background-image: linear-gradient(296deg, #fbab7e, #f7ce68);
+  color:#fff;
+  background-image: linear-gradient(296deg, #fbab7e, #f7ce68);
+  background-color :#fbab7e!important;
 }
 .colorgradient35{
-	color:#fff;
-	  background-image: linear-gradient(227deg, #ae8b9c, #8baaaa);
+  color:#fff;
+  background-image: linear-gradient(227deg, #ae8b9c, #8baaaa);
+  background-color :#ae8b9c!important;
 }
 .colorgradient36{
-	color:#fff;
-	 background-image: linear-gradient(227deg, #7de2fc, #b9b6e5);
+  color:#fff;
+  background-image: linear-gradient(227deg, #7de2fc, #b9b6e5);
+  background-color :#7de2fc!important;
 }
 .colorgradient37{
-	color:#fff;
-	 background-image: linear-gradient(to left, #b12a5b, #cf556c 25%, #ff8c7f 63%, #ff8177);
+  color:#fff;
+  background-image: linear-gradient(to left, #b12a5b, #cf556c 25%, #ff8c7f 63%, #ff8177);
+  background-color :#b12a5b!important;
 }
 .colorgradient38{
-	color:#fff;
-	 background-image: linear-gradient(to left, #f9d423, #f83600);
+  color:#fff;
+  background-image: linear-gradient(to left, #f9d423, #f83600);
+  background-color :#f9d423!important;
 }
 .colorgradient39{
-	color:#fff;
-	 background-image: linear-gradient(to top, #009efd, #2af598);
+  color:#fff;
+  background-image: linear-gradient(to top, #009efd, #2af598);
+  background-color :#009efd!important;
 }
 .colorgradient40{
-	color:#fff;
-	 background-image: linear-gradient(to top, #04befe, #4481eb);
+  color:#fff;
+  background-image: linear-gradient(to top, #04befe, #4481eb);
+  background-color :#04befe!important;
 }
 .colorgradient41{
-	color:#fff;
-	 background-image: linear-gradient(to bottom, #f857a6, #ff5858);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #f857a6, #ff5858);
+  background-color :#f857a6!important;
 }
 .colorgradient42{
-	color: #fff;
-	 background-image: linear-gradient(to left, #517fa4, #243949);
+  color: #fff;
+  background-image: linear-gradient(to left, #517fa4, #243949);
+  background-color :#517fa4!important;
 }
 .colorgradient43{
-	color: #fff;
-	 background-image: linear-gradient(to top, #fa71cd, #c471f5);
+  color: #fff;
+  background-image: linear-gradient(to top, #fa71cd, #c471f5);
+  background-color :#fa71cd!important;
 }
 .colorgradient44{
-	color:#fff;
-	 background-image: radial-gradient(circle at 50% 50%, #16d9e3, #46aef7);
+  color:#fff;
+  background-image: radial-gradient(circle at 50% 50%, #16d9e3, #46aef7);
+  background-color :#16d9e3!important;
 }
 .colorgradient45{
-	color:#fff;
-	background-image: linear-gradient(to left, #6a11cb, #2575fc);
+  color:#fff;
+  background-image: linear-gradient(to left, #6a11cb, #2575fc);
+  background-color :#6a11cb!important;
 }
 .colorgradient46{
-	color:#fff;
-	background-image: linear-gradient(to left, #6a11cb, #2575fc);
+  color:#fff;
+  background-image: linear-gradient(to left, #6a11cb, #2575fc);
+  background-color :#6a11cb!important;
 }
 .colorgradient47{
-	color:#fff;
-	background-image: linear-gradient(to top, #f9f047, #0fd850);
+  color:#fff;
+  background-image: linear-gradient(to top, #f9f047, #0fd850);
+  background-color :#f9f047!important;
 }
 .colorgradient48{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #00ecbc, #007adf);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #00ecbc, #007adf);
+  background-color :#00ecbc!important;
 }
 .colorgradient49{
-	color:#fff;
-	 background-image: linear-gradient(227deg, #a445b2, #d41872 52%, #ff0066);
+  color:#fff;
+  background-image: linear-gradient(227deg, #a445b2, #d41872 52%, #ff0066);
+  background-color :#a445b2!important;
 }
 .colorgradient50{
-	color:#fff;
-	background-image: linear-gradient(to bottom, #56ab2f, #a8e063);
+  color:#fff;
+  background-image: linear-gradient(to bottom, #56ab2f, #a8e063);
+  background-color :#56ab2f!important;
 }
 
 .rounded-p .btn {

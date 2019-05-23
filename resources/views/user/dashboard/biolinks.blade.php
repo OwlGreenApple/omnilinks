@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
 <script type="text/javascript">
   var picker;
-  
+  var color_picker,rounded,outline;
   // https://www.shift8web.ca/2017/01/use-jquery-sort-reorganize-content/
   function sortMeBy(arg, sel, elem, order) {
     var $selector = $(sel),
@@ -216,9 +216,11 @@
   }
 
   function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
+    var i;
+    // let slides = document.getElementsByClassName("mySlides");
+    // let slides = document.getElementsByClassName("mySlides");
+    var dots = $(".dot");
+    var slides = $(".mySlides");
     if (n > slides.length) {
       slideIndex = 1;
     }    
@@ -234,9 +236,12 @@
     {
       dots[i].className = dots[i].className.replace("activated","");
     }
-    slides[slideIndex-1].style.display = "block";
-    //slides[slideIndex-1].value='block';   
-    dots[slideIndex-1].className +=" activated";
+    if (slides.length>0) {
+      slides[slideIndex-1].style.display = "block";
+    }
+    if (dots.length>0) {
+      dots[n].className +=" activated";
+    }
   }
   
   function dotsok()
@@ -253,6 +258,32 @@
       $(".dot").parent().hide();
       $('.prev').hide();
       $('.next').hide();
+    }
+  }
+
+  function check_outlined(){
+    if ($('.outlined').prop("checked") == true) {
+      $(".mobile1").addClass("outlinedview");
+      $('.outlined').val(1);
+      
+      $('.btnview').css("background-color","transparent");
+      $('.btnview').css("color",$("#colorOutlineButton").val());
+    } else if ($('.outlined').prop("checked") == false) {
+      $(".mobile1").removeClass("outlinedview");
+      $('.outlined').val(0);
+      
+      $('.btnview').css("background-color",$("#colorOutlineButton").val());
+      $('.btnview').css("color","#fff");
+    }
+  }
+
+  function check_rounded(){
+    if ($('.rounded').prop("checked") == true) {
+      $(".mobile1").addClass("roundedview");
+      $('.rounded').val(1);
+    } else if ($('.rounded').prop("checked") == false) {
+      $(".mobile1").removeClass("roundedview");
+      $('.rounded').val(0);
     }
   }
 
@@ -1084,16 +1115,16 @@
 
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
-                  <ul class="links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                    <li class="link shown-mes hide" id="waviewid">
+                  <ul class="row links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
+                    <li class="link col pl-1 pr-1 shown-mes hide" id="waviewid"> 
                         <a href="#" class="btn btn-md btnview btn-light txthov" style="
                         width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
                     </li>
-                    <li class="link hide" id="telegramviewid" >
+                    <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
                     </li> 
-                    <li class="link hide" id="skypeviewid" >
+                    <li class="link col pl-1 pr-1 hide" id="skypeviewid" >
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
                     </li>
@@ -1125,17 +1156,17 @@
                   </div>
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
-                    <li class="linked hide" id="youtubeviewid">
+                    <li class="col linked hide" id="youtubeviewid">
                       <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hide" id="fbviewid" >
+                    <li class="col linked hide" id="fbviewid" >
                       <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hide" id="twitterviewid">
+                    <li class="col linked hide" id="twitterviewid">
                       <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
                     </li>
-                    <li class="col-md-3 linked hide" id="igviewid" >
-                     <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
+                    <li class="col linked hide" id="igviewid">
+                      <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
                     </li>  
                   </ul>
                   <div class="col-md-12" align="center" id="poweredview">
@@ -1229,35 +1260,15 @@
 
 
     $('.outlined').click(function() {
-      if ($(this).prop("checked") == true) {
-        $(".mobile1").addClass("outlinedview");
-        $(this).val(1);
-        
-        $('.btnview').css("background-color","transparent");
-        $('.btnview').css("color",$("#colorOutlineButton").val());
-      } else if ($(this).prop("checked") == false) {
-        $(".mobile1").removeClass("outlinedview");
-        $(this).val(0);
-        
-        $('.btnview').css("background-color",$("#colorOutlineButton").val());
-        $('.btnview').css("color","#fff");
-      }
+      check_outlined();
     });
-
     <?php if($pages->is_rounded) {?>
       $(".mobile1").addClass("roundedview");
     <?php } ?>
 
     $('.rounded').click(function() {
-      if ($(this).prop("checked") == true) {
-        $(".mobile1").addClass("roundedview");
-        $(this).val(1);
-      } else if ($(this).prop("checked") == false) {
-        $(".mobile1").removeClass("roundedview");
-        $(this).val(0);
-      }
+      check_rounded();
     });
-
     $("#powered").click(function(){
       if ($(this).prop("checked")==true) {
         $("#poweredview").children().show();
@@ -1280,7 +1291,8 @@
       // $("#backtheme").val();
     });
     <?php if (!is_null($pages->color_picker)) { ?>
-      $('#color').val("<?php echo $pages->color_picker; ?>");
+      color_picker = "<?php echo $pages->color_picker; ?>";
+      $('#color').val(color_picker);
       $("#solid").click();
     <?php } ?>
     <?php if (!is_null($pages->template)) { ?>
@@ -1294,16 +1306,17 @@
       // $('.btnview').css("background-color","<?php echo $pages->rounded; ?>");
     <?php } ?>
     <?php if (!is_null($pages->outline)) { ?>
-      $('#colorOutlineButton').val("<?php echo $pages->outline; ?>");
-      $('.btnview').css("border-color","<?php echo $pages->outline; ?>");
+      outline = "<?php echo $pages->outline; ?>";
+      $('#colorOutlineButton').val(outline);
+      $('.btnview').css("border-color",outline);
     <?php } ?>
 
     <?php if($pages->is_outlined) {?>
       $(".mobile1").addClass("outlinedview");
       $('.btnview').css("background-color","transparent");
-      $('.btnview').css("color","<?php echo $pages->outline; ?>");
+      $('.btnview').css("color",outline);
     <?php } else {?>
-      $('.btnview').css("background-color","<?php echo $pages->outline; ?>");
+      $('.btnview').css("background-color",outline);
       $('.btnview').css("color","#fff");
     <?php } ?>
     
@@ -1500,21 +1513,21 @@
       }
       //showSlides();
       readThis(this);
-     });
+    });
      
     $(".txthov").hover(
       function() {
-          temp1 = $(this).css("color");
-          temp2 = $(this).css("background-color");
-         
-          $(this).parent().children().css("background-color",temp1);
-          $(this).parent().children().css("color",temp2);
+        check_outlined();
+        check_rounded();
+        temp1 = $(this).css("color");
+        // temp2 = $(this).css("background-color");
+        temp2 = $("#phonecolor").css("background-color");
+
+        $(this).parent().children().css("background-color",temp1);
+        $(this).parent().children().css("color",temp2);
       }, function() {
-          temp1 = $(this).css("color");
-          temp2 = $(this).css("background-color");
-         
-          $(this).parent().children().css("background-color",temp1);
-          $(this).parent().children().css("color",temp2);
+        check_outlined();
+        check_rounded();
       }
     );     
 
@@ -1724,7 +1737,8 @@
     ?>
         $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
-        $("#msg-li-"+"<?php echo $data; ?>>div").show();
+        // $("#msg-li-"+"<?php echo $data; ?>>div").show();
+        $("#msg-li-"+"<?php echo $data; ?>>div").css("display","table");
         $("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
         
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
@@ -1738,7 +1752,8 @@
     else {
     ?>
         $("#msg-li-wa>div").removeClass("hide");
-        $("#msg-li-wa>div").show();
+        // $("#msg-li-wa>div").show();
+        $("#msg-li-wa>div").css("display","table");
         
         $("#waviewid").removeClass("hide");
     <?php } ?>
@@ -1775,13 +1790,14 @@
     ?>
         $("#sosmed-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         $("#sosmed-"+"<?php echo $data; ?>>div").removeClass("hide");
-        $("#sosmed-"+"<?php echo $data; ?>>div").show();
+        // $("#sosmed-"+"<?php echo $data; ?>>div").show();
+        $("#sosmed-"+"<?php echo $data; ?>>div").css("display","table");
         $("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
         
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
         $("#"+"<?php echo $data; ?>"+"viewid").addClass("shown-sm");
-        changeLengthMedia();
+        // changeLengthMedia();
     <?php 
         $counter += 1;
       } ?>
@@ -1797,10 +1813,9 @@
 
     
     
+    currentSlide(0);
   });
 
-  let slideIndex = 1;
-  showSlides(slideIndex);
 
  
     // $(document).on('click','.marker',function(){
