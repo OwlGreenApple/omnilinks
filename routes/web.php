@@ -116,4 +116,10 @@ Route::group(['middleware'=>['web','auth','thisadmin']],function(){
     Route::get('/list-coupon/add','CouponController@add_coupon');
     Route::get('/list-coupon/edit','CouponController@edit_coupon');
     Route::get('/list-coupon/delete','CouponController@delete_coupon');
+
+    //List User 
+    Route::get('/list-user','UserController@index');
+    Route::get('/list-user/load-user','UserController@load_user');  
+    Route::get('/list-user/add-user','UserController@add_user');
+    Route::get('/list-user/edit-user','UserController@edit_user');
 });

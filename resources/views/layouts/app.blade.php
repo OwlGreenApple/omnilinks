@@ -98,6 +98,9 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @if(Auth::user()->is_admin==1)
+                      <a class="dropdown-item <?php if(Request::is('list-user')) echo 'active' ?>" href="{{ url('list-user') }}">
+                        List User
+                      </a>
                       <a class="dropdown-item <?php if(Request::is('list-order')) echo 'active' ?>" href="{{ url('list-order') }}">
                         List Order
                       </a>

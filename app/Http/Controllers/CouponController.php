@@ -21,10 +21,12 @@ class CouponController extends Controller
     }
 
     public function index(){
+      //halaman list kupon admin
       return view('admin.list-coupon.index');
     }
 
     public function load_coupon(Request $request){
+      //halaman list kupon admin
       $coupons = Coupon::All();
 
       $arr['view'] = (string) view('admin.list-coupon.content')
@@ -33,6 +35,7 @@ class CouponController extends Controller
     }
 
     public function add_coupon(Request $request){
+      //tambah kupon
       $validator = $this->validator($request->all());
 
       if(!$validator->fails()){
@@ -57,6 +60,7 @@ class CouponController extends Controller
     }
 
     public function edit_coupon(Request $request){
+      //edit kupon
       $validator = $this->validator($request->all());
 
       if($validator->fails()){
@@ -86,6 +90,7 @@ class CouponController extends Controller
     }
 
     public function delete_coupon(Request $request){
+      //hapus kupon
       $coupon = Coupon::find($request->id)
                   ->delete();
 

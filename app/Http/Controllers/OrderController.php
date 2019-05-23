@@ -20,6 +20,7 @@ use Auth,Mail,Validator,Storage,DateTime;
 class OrderController extends Controller
 {   
     public function cekharga($namapaket, $price){
+      //cek paket dengan harga
       $paket = array(
         'Basic Monthly' => 197000,
         'Elite Monthly' => 297000,
@@ -39,6 +40,7 @@ class OrderController extends Controller
     }
 
     public function cek_kupon($kodekupon,$harga,$idpaket){
+      //cek kodekupon
       $arr['status'] = 'success';
       $arr['message'] = '';
       $arr['total'] = $harga;
@@ -94,6 +96,7 @@ class OrderController extends Controller
     }
 
     public function register(Request $request) {
+      //register dengan order
       $stat = $this->cekharga($request->namapaket,$request->price);
 
       if($stat==false){
@@ -116,15 +119,18 @@ class OrderController extends Controller
 
     public function index_order()
     {
+      //halaman order user
       return view('order.index');
     }
 
     public function thankyou()
     {
+      //halaman thankyou
       return view('pricing.thankyou');
     }
 
     public function checkout($id){
+      //halaman checkout
       return view('pricing.checkout')->with(array(
                 'id'=>$id,    
               ));
@@ -132,6 +138,7 @@ class OrderController extends Controller
 
     public function load_order(Request $request)
     {
+      //halaman order user
       $orders = Order::where('user_id',Auth::user()->id)
                   ->orderBy('created_at','descend')
                   ->paginate(15);
@@ -145,6 +152,7 @@ class OrderController extends Controller
 
     public function load_list_order(Request $request)
     {
+      //halaman list order admin
       $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
                   ->select('orders.*','users.email')
                   ->orderBy('created_at','descend')
@@ -157,12 +165,14 @@ class OrderController extends Controller
     }
     
     public function check_kupon(Request $request){
+      //cek kodekupon
       $arr = $this->cek_kupon($request->kupon,$request->harga,$request->idpaket);
       return $arr;
     }
 
     public function confirm_payment_order(Request $request)
     {
+        //konfirmasi pembayaran user
         $order = Order::find($request->id_confirm);
         $folder = Auth::user()->email.'/buktibayar';
   
@@ -194,6 +204,7 @@ class OrderController extends Controller
     }
 
     public function confirm_payment(Request $request){
+      //buat order user lama
       $stat = $this->cekharga($request->namapaket,$request->price);
 
       if($stat==false){
@@ -283,6 +294,7 @@ class OrderController extends Controller
     }
 
     public static function add_time($user,$time){
+      //tambah waktu valid until
       if(is_null($user->valid_until)){
         $valid = new DateTime($time);
       } else {
@@ -325,6 +337,7 @@ class OrderController extends Controller
     }
 
     public function confirm_order(Request $request){
+      //konfirmasi pembayaran admin
       $order = Order::find($request->id);
       $order->status = 2;
       

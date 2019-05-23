@@ -1,0 +1,349 @@
+@extends('layouts.app')
+
+@section('content')
+<script type="text/javascript">
+  var table;
+
+  $(document).ready(function() {
+    table = $('#myTable').DataTable({
+                responsive : true,
+                destroy: true,
+                "order": [],
+            });
+    $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
+
+    refresh_page();
+
+    $('.formatted-date').datepicker({
+      dateFormat: 'yy/mm/dd',
+    });
+  });
+
+  function refresh_page(){
+    table.destroy();
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/list-user/load-user') ?>",
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $('#content').html(data.view);
+        
+        table = $('#myTable').DataTable({
+                  responsive : true,
+                  destroy: true,
+                  "order": [],
+                });
+
+      }
+    });
+  }
+
+  function add_user(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/list-user/add-user') ?>",
+      data : $('#formUser').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        
+        if(data.status=='success'){
+          refresh_page();
+
+          $('#pesan').html(data.message);
+          $('#pesan').addClass('alert-success');
+          $('#pesan').removeClass('alert-warning');
+          $('#pesan').show();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+
+  function edit_user(){
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/list-user/edit-user') ?>",
+      data : $('#formUser').serialize(),
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        
+        if(data.status=='success'){
+          refresh_page();
+
+          $('#pesan').html(data.message);
+          $('#pesan').addClass('alert-success');
+          $('#pesan').removeClass('alert-warning');
+          $('#pesan').show();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }
+      }
+    });
+  }
+</script>
+
+<div class="col-md-12" style="height:100%; margin-top:30px;margin-bottom: 120px;">
+  <div class="row justify-content-center">
+    <div class="col-md-11">
+
+      <h2><b>Users</b></h2>  
+      
+      <h5>
+        Show you all users
+      </h5>
+      
+      <hr>
+
+      <div id="pesan" class="alert"></div>
+
+      <br>  
+
+      <button class="btn btn-primary btn-add mb-4" data-toggle="modal" data-target="#add-user">
+        Add User
+      </button>
+
+      <form>
+        <table class="table" id="myTable">
+          <thead align="center">
+            <th>
+              Name
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Username
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Membership
+            </th>
+            <th>
+              Valid Until
+            </th>
+            <th>
+              Action
+            </th>
+          </thead>
+          <tbody id="content"></tbody>
+        </table>
+
+        <div id="pager"></div>    
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add User -->
+<div class="modal fade" id="add-user" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Add User
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="formUser">
+          @csrf
+
+          <input type="hidden" name="id_edit" id="id_edit">
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12">
+              <b>Full Name</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <input type="text" class="form-control" name="name" id="name">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12">
+              <b>Email</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <input type="text" class="form-control" name="email" id="email">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12">
+              <b>Username</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <input type="text" class="form-control" name="username" id="username">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12">
+              <b>Status</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <select class="form-control" name="is_admin" id="is_admin">
+                <option value="1">Admin</option>
+                <option value="0">User</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12">
+              <b>Membership</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <select class="form-control" name="membership" id="membership">
+                <option value="free">Free</option>
+                <option value="basic">Basic</option>
+                <option value="elite">Elite</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12">
+              <b>Valid Until</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <input type="text" class="form-control formatted-date" name="valid_until" id="valid_until">
+              <input type="checkbox" name="unlimited" id="unlimited"> Unlimited
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12 password-field">
+              <b>Password</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <input type="password" class="form-control password-field" name="password" id="password">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-3 col-12 password-field">
+              <b>Confirm Password</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <input id="password-confirm" type="password" class="form-control password-field" name="password_confirmation"  required>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" id="btn-add-user" data-dismiss="modal">
+          Add
+        </button>
+        <button class="btn" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<script type="text/javascript">
+  $( "body" ).on( "click", ".btn-edit", function() {
+    $('#modaltitle').html('Edit User');
+
+    $('#name').val($(this).attr('data-name'));
+    $('#email').val($(this).attr('data-email'));
+    $('#username').val($(this).attr('data-username'));
+    $('#is_admin').val($(this).attr('data-is_admin'));
+    $('#membership').val($(this).attr('data-membership'));
+
+    if($(this).attr('data-valid_until')==null || $(this).attr('data-valid_until')==''){
+      $('#valid_until').prop('disabled', true);
+      $('#valid_until').val('');
+      $('#unlimited').prop('checked', true);
+    } else {
+      $('#valid_until').prop('disabled', false);
+      $('#valid_until').val($(this).attr('data-valid_until'));
+      $('#unlimited').prop('checked', false);
+    }
+    
+    $('.password-field').hide();
+    
+    $('#id_edit').val($(this).attr('data-id'));
+
+    $('#add-user').modal('show');
+  });
+
+  $( "body" ).on( "click", ".btn-add", function() 
+  {
+    $('#modaltitle').html('Add User');
+    
+    $('#name').val('');
+    $('#email').val('');
+    $('#username').val('');
+    $('#is_admin').val('Admin');
+    $('#membership').val('Free');
+    $('#valid_until').val('');
+    $('#valid_until').prop('disabled', false);
+    $('.password-field').show();
+    $('#password').val('');
+    $('#password-confirm').val('');
+
+    $('#id_edit').val('');
+
+    $('#add-user').modal('show');
+  });
+
+  $( "body" ).on( "click", "#btn-add-user", function() {
+    if($('#id_edit').val()==''){
+      add_user();
+    } else {
+      edit_user();
+    }
+  });
+
+  $( "body" ).on( "change", "#unlimited", function() {
+    if(this.checked) {
+      $('#valid_until').val('');
+      $('#valid_until').prop('disabled', true);
+    } else {
+      $('#valid_until').prop('disabled', false);
+    }
+  });
+</script>
+@endsection

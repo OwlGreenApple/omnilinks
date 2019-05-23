@@ -16,6 +16,7 @@ class DashboardController extends Controller
 {
     public function loadDashboard(Request $request)
     {
+      //halaman dashboard user
       if($request->keywords==''){
         $page = Page::where('user_id',Auth::user()->id)
               ->orderBy('created_at','ascend')
@@ -39,6 +40,7 @@ class DashboardController extends Controller
     }
 
     public function dashboard_detail($pageid,$id,$mode,$bulan,$tahun) {
+      //halaman dashboard detail user
       $data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
 
       return view('user.dashboard.dashboard-detail.index')
@@ -51,6 +53,7 @@ class DashboardController extends Controller
     }
     
     public function load_dash_detail(Request $request){
+      //halaman dashboard detail user
       $data = $this->detail_report($request->pageid,$request->id,$request->mode,$request->bulan,$request->tahun);
 
       $arr['chart'] = $data['chart'];
@@ -62,6 +65,7 @@ class DashboardController extends Controller
     }
 
     public function load_chart(Request $request){
+      //generate chart all page
       $bulan = $request->bulan;
       $tahun = $request->tahun;
       $query_date = date('t-'.$bulan.'-'.$tahun);
@@ -106,6 +110,7 @@ class DashboardController extends Controller
     } 
 
     public function pdf_page($id,$bulan,$tahun){
+      //generate pdf 1 page
       $page = Page::find($id);
 
       $banners = Banner::where('pages_id',$id)
@@ -153,6 +158,7 @@ class DashboardController extends Controller
     }
 
     public function detail_report($pageid,$id,$mode,$bulan,$tahun){
+      //generate data pdf detail
       if($mode=='link'){
         $link = Link::find($id); 
         $arr = $this->chart_link($pageid,'link-'.$link->title,$bulan,$tahun); 
@@ -230,6 +236,7 @@ class DashboardController extends Controller
     }
 
     public function pdf_single($pageid,$id,$mode,$bulan,$tahun){
+      //generate pdf detail
       $data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
 
       $pdf = PDF::loadView('user.pdf.pdf-single', $data)
@@ -248,6 +255,7 @@ class DashboardController extends Controller
     }
 
     public function check_file($filename){
+      //check isi file total click
       $content = 0;
 
       if(file_exists('storage/app/'.$filename)){
@@ -260,6 +268,7 @@ class DashboardController extends Controller
     }
 
     public function counter_click_month($page,$banners,$links,$bulan,$tahun){
+      //hitung click perbulan
       $query_date = date('t-'.$bulan.'-'.$tahun);
       $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
@@ -337,6 +346,7 @@ class DashboardController extends Controller
     }
 
     public function chart_day($page,$banners,$links,$bulan,$tahun){
+      //generate chart dalam 30 hari 1 page
       $query_date = date('t-'.$bulan.'-'.$tahun);
       $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
@@ -389,6 +399,7 @@ class DashboardController extends Controller
     }
 
     public function chart_link($pageid,$name,$bulan,$tahun){
+      //generate chart dalam 30 hari detail
       $query_date = date('t-'.$bulan.'-'.$tahun);
       $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
       //$last_date = date('t-m-Y', strtotime($query_date));
