@@ -183,34 +183,19 @@
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
   function check_outlined(){
-    // if ($('.outlined').prop("checked") == true) {
     <?php if($pages->is_outlined) { ?>  
       $(".mobile1").addClass("outlinedview");
       $('.outlined').val(1);
-      
+
       $('.txthov').find("button").css("background-color","transparent");
-      // $('.btnview').css("color",$("#colorOutlineButton").val());
       $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
     <?php } else  { ?>  
-    // } else if ($('.outlined').prop("checked") == false) {
       $(".mobile1").removeClass("outlinedview");
       $('.outlined').val(0);
-      
-      // $('.btnview').css("background-color",$("#colorOutlineButton").val());
+
       $('.txthov').find("button").css("background-color","<?php echo $pages->outline ?>");
       $('.txthov').find("button").css("color","#fff");
-    // }
     <?php } ?>  
-  }
-
-  function check_rounded(){
-    if ($('.rounded').prop("checked") == true) {
-      $(".mobile1").addClass("roundedview");
-      $('.rounded').val(1);
-    } else if ($('.rounded').prop("checked") == false) {
-      $(".mobile1").removeClass("roundedview");
-      $('.rounded').val(0);
-    }
   }
 
 
@@ -234,20 +219,17 @@
     check_outlined();
     $(".txthov").hover(
       function() {
-        console.log("wwwww");
         check_outlined();
-        // check_rounded();
         temp1 = $(this).find("button").css("color");
-        // temp2 = $(this).find("button").css("background-color");
         temp2 = $("body").css("background-color");
 
         $(this).find("button").css("background-color",temp1);
         $(this).find("button").css("color",temp2);
       }, function() {
         check_outlined();
-        // check_rounded();
       }
-    );     
+    ); 
+    moveSlide(0);
   });
 </script>
 

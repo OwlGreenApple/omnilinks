@@ -216,9 +216,11 @@
   }
 
   function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
+    var i;
+    // let slides = document.getElementsByClassName("mySlides");
+    // let slides = document.getElementsByClassName("mySlides");
+    var dots = $(".dot");
+    var slides = $(".mySlides");
     if (n > slides.length) {
       slideIndex = 1;
     }    
@@ -234,9 +236,12 @@
     {
       dots[i].className = dots[i].className.replace("activated","");
     }
-    slides[slideIndex-1].style.display = "block";
-    //slides[slideIndex-1].value='block';   
-    dots[slideIndex-1].className +=" activated";
+    if (slides.length>0) {
+      slides[slideIndex-1].style.display = "block";
+    }
+    if (dots.length>0) {
+      dots[n].className +=" activated";
+    }
   }
   
   function dotsok()
@@ -1808,10 +1813,9 @@
 
     
     
+    currentSlide(0);
   });
 
-  let slideIndex = 1;
-  showSlides(slideIndex);
 
  
     // $(document).on('click','.marker',function(){
