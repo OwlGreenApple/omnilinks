@@ -238,10 +238,11 @@
         check_outlined();
         // check_rounded();
         temp1 = $(this).find("button").css("color");
-        temp2 = $(this).find("button").css("background-color");
+        // temp2 = $(this).find("button").css("background-color");
+        temp2 = $("body").css("background-color");
 
-        $(this).parent().children().css("background-color",temp1);
-        $(this).parent().children().css("color",temp2);
+        $(this).find("button").css("background-color",temp1);
+        $(this).find("button").css("color",temp2);
       }, function() {
         check_outlined();
         // check_rounded();

@@ -1508,14 +1508,15 @@
       }
       //showSlides();
       readThis(this);
-     });
+    });
      
     $(".txthov").hover(
       function() {
         check_outlined();
         check_rounded();
         temp1 = $(this).css("color");
-        temp2 = $(this).css("background-color");
+        // temp2 = $(this).css("background-color");
+        temp2 = $("#phonecolor").css("background-color");
 
         $(this).parent().children().css("background-color",temp1);
         $(this).parent().children().css("color",temp2);
