@@ -36,6 +36,16 @@
   <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
 
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+   gtag('config', 'UA-81228145-4');
+  </script>
 
   <script>
     $(document).ready(function() {
