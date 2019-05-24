@@ -271,9 +271,6 @@
         <button class="btn btn-primary" data-dismiss="modal">
           OK
         </button>
-        <button class="btn" data-dismiss="modal">
-          Cancel
-        </button>
       </div>
     </div>
       

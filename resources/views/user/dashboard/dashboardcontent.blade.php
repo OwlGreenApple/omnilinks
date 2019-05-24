@@ -81,7 +81,7 @@
               <input type="hidden" class="link-{{$page->id}}" value="omn.lkz/{{$page->names}}">
             </a>
             &nbsp;
-            <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{'http://'.env('SHORT_LINK').'/'.$page->names}}">
+            <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{'https://'.env('SHORT_LINK').'/'.$page->names}}">
               <i class="far fa-clone"></i>  
             </span>
 
