@@ -1095,7 +1095,10 @@
                        @foreach($banner as $ban)
                        <?php $ut+=1; ?>
                         <div class="mySlides mylides fit" id="picture-id-<?=$ut?>-get">
-                          <img src="<?php  echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
+                          <img src="<?php  
+                          // echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); 
+                          echo Storage::disk('s3')->url($ban->images_banner); 
+                          ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
                         </div>                       
                        @endforeach
                         @else

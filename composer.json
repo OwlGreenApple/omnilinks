@@ -16,6 +16,8 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "ramsey/uuid": "^3.8",
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "aws/aws-sdk-php": "~3.0",
         "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
     },
     "require-dev": {

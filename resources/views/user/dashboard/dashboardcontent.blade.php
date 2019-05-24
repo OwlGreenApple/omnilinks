@@ -73,15 +73,15 @@
           </div>
 
           <div class="col-8 col-md-4 col-lg-6">
-            <a href="omn.lkz/{{$page->shorten}}" class="getLink">
-              omn.lkz/{{$page->names}} 
+            <a href="{{'http://'.env('SHORT_LINK').'/'.$page->names}}" class="getLink">
+              {{env('SHORT_LINK')}}/{{$page->names}} 
               <span class="menu-mobile float-right">
                 <i class="fas fa-sort-down"></i>
               </span>
               <input type="hidden" class="link-{{$page->id}}" value="omn.lkz/{{$page->names}}">
             </a>
             &nbsp;
-            <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{url('omn.lkz/'.$page->names)}}">
+            <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{'https://'.env('SHORT_LINK').'/'.$page->names}}">
               <i class="far fa-clone"></i>  
             </span>
 

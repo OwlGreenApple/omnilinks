@@ -118,32 +118,37 @@ class BiolinkController extends Controller
   
   public function link($names)
   {
-    $page = Page::where('names',$names)  
-              ->first();
+    if ($names == "blog"){
+      return redirect("blog");
+    }
+    else {
+      $page = Page::where('names',$names)  
+                ->first();
 
-    $links = Link::where('pages_id','=',$page->id)
-              ->orderBy('created_at','descend')
-              ->get();
-
-    $banner = Banner::where('pages_id','=',$page->id)
-                ->orderBy('created_at','ascend')
+      $links = Link::where('pages_id','=',$page->id)
+                ->orderBy('created_at','descend')
                 ->get();
 
-    $sort_msg = array_filter(explode(';', $page->sort_msg));
-    $sort_link = array_filter(explode(';', $page->sort_link));
-    $sort_sosmed = array_filter(explode(';', $page->sort_sosmed));
+      $banner = Banner::where('pages_id','=',$page->id)
+                  ->orderBy('created_at','ascend')
+                  ->get();
 
-    $links = $links->sortBy(function($model) use ($sort_link){
-              return array_search($model->getKey(), $sort_link);
-            });
+      $sort_msg = array_filter(explode(';', $page->sort_msg));
+      $sort_link = array_filter(explode(';', $page->sort_link));
+      $sort_sosmed = array_filter(explode(';', $page->sort_sosmed));
 
-    return view('user.link.link')
-            ->with('pages',$page)
-            ->with('links',$links)
-            ->with('banner',$banner)
-            ->with('sort_msg',$sort_msg)
-            ->with('sort_link',$sort_link)
-            ->with('sort_sosmed',$sort_sosmed);
+      $links = $links->sortBy(function($model) use ($sort_link){
+                return array_search($model->getKey(), $sort_link);
+              });
+
+      return view('user.link.link')
+              ->with('pages',$page)
+              ->with('links',$links)
+              ->with('banner',$banner)
+              ->with('sort_msg',$sort_msg)
+              ->with('sort_link',$sort_link)
+              ->with('sort_sosmed',$sort_sosmed);
+    }
   }
 
   public function pixelpage()
@@ -159,6 +164,7 @@ class BiolinkController extends Controller
 
   public function savetemp(Request $request)
   {
+    $user=Auth::user();
     $uuid=$request->uuidtemp;
     $page=Page::where('uid','=',$uuid)->first();
     $page->page_title=$request->judul;
@@ -195,47 +201,59 @@ class BiolinkController extends Controller
     
     $page->save();
     $names=$page->names;
-    if (Auth::user()->membership=='basic' or  Auth::user()->membership=='elite') 
+    if ($user->membership=='basic' or  $user->membership=='elite') 
     {
       $idbanner=$request->idBanner;
       $statusbanner=$request->statusBanner;
       //dd($request->all());
       for($i=0;$i<count($request->judulBanner);$i++) 
       { 
-        
-        
+        if($request->hasFile('bannerImage.'.$i)) {
+          $arr_size = getimagesize( $request->file('bannerImage')[$i] );
+          $ratio_img = $arr_size[0] / $arr_size[1];
+          if ($ratio_img<1.2)  {
+            $arr['status'] = 'error';
+            $temp = $i+1;
+            $arr['message'] ='Image ke-'. $temp .' ratio width / height harus lebih besar dari 1.2';
+            return $arr;
+          }
+        }
+
         if($idbanner[$i]==""){
           $banner= new Banner(); 
         } else {
-          if ($statusbanner[$i]=="delete") 
-        {
-          $bannerde= Banner::find($request->idBanner[$i])->delete();
-          continue;
-        }
+          if ($statusbanner[$i]=="delete"){
+            $bannerde= Banner::find($request->idBanner[$i])->delete();
+            continue;
+          }
           $banner= Banner::where('id','=',$request->idBanner[$i])->first();
         }
-        $user=Auth::user();
         $banner->users_id=$user->id;
         $banner->pages_id=$page->id;
         $banner->title=$request->judulBanner[$i];
         $banner->link=$request->linkBanner[$i];
         $banner->pixel_id=$request->bannerpixel[$i];
 
+        $banner->save(); 
         if($request->hasFile('bannerImage.'.$i)) {
-          $dir = 'banner/'.Auth::user()->email.'/'.$banner->title;
-          //$filename = $request->file('bannerImage')[$i]->getClientOriginalName();
-          $filename = $banner->title.'.jpg';
-
-          $path1=Storage::putFileAs($dir,$request->file('bannerImage')[$i],$filename);  
-          $banner->images_banner=$path1;
+          $dt = Carbon::now();
+          $dir = 'banner/'.$user->email;
+          $filename = $dt->format('ymdHi').$banner->id.'.jpg';
+          if($idbanner[$i]==""){
+            Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('bannerImage')[$i]), 'public');
+            $banner->images_banner=$dir."/".$filename;
+            $banner->save(); 
+          } else {
+            Storage::disk('s3')->put($banner->images_banner, file_get_contents($request->file('bannerImage')[$i]), 'public');
+          }
         } 
         
-        $banner->save(); 
       }
     }
 
     $arr['status'] = 'success';
-    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a>';
+    $short_link =env('SHORT_LINK');
+    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'">'.$short_link.'/'.$names.'</a>';
     return $arr;
   }
   
@@ -414,7 +432,8 @@ class BiolinkController extends Controller
 
     $arr['status'] = 'success';
 
-    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="omn.lkz/'.$names.'">omn.lkz/'.$names.'</a><i class="fas fa-file"></i';
+    $short_link = env('SHORT_LINK');
+    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'">'.$short_link.'/'.$names.'</a><i class="fas fa-file"></i';
   	return $arr;
   }
 
@@ -492,15 +511,22 @@ class BiolinkController extends Controller
       $this->make_file(date('m-Y'),'all','total-click');
 
       $pixel = Pixel::find($link->pixel_id);
+      $script = "";
+      if (!is_null($pixel)) {
+        //jalanin pixel
+        //echo "<script>";
+        $script =  $pixel->script;
+        //echo "</script>";
 
-      //jalanin pixel
-      //echo "<script>";
-      echo $pixel->script;
-      //echo "</script>";
+      }
+      // return redirect($link->link);
+      return view('user.script')->with([
+        'script'=>$script,
+        'link'=>$link->link,
+      ]);
 
-      return redirect($link->link);
-
-    } else if($mode=='banner'){
+    } 
+    else if($mode=='banner'){
       $banner = Banner::find($id);
       $banner->counter = $banner->counter+1;
       $banner->save();
@@ -513,15 +539,20 @@ class BiolinkController extends Controller
       $this->make_file(date('m-Y'),'all','total-click');
 
       $pixel = Pixel::find($banner->pixel_id);
-
-      //jalanin pixel
-      //echo "<script>";
-      echo $pixel->script;
-      //echo "</script>";
-
-      return redirect($banner->link);
-
-    } else {
+      $script = "";
+      if (!is_null($pixel)) {
+        //jalanin pixel
+        //echo "<script>";
+        $script = $pixel->script;
+        //echo "</script>";
+      }
+      // return redirect($banner->link);
+      return view('user.script')->with([
+        'script'=>$script,
+        'link'=>$banner->link,
+      ]);
+    } 
+    else {
       $pages = Page::find($id);
 
       switch ($mode) {
@@ -571,13 +602,18 @@ class BiolinkController extends Controller
       $this->make_file(date('m-Y'),'all','total-click');
 
       $pixel = Pixel::find($idpixel);
-      //jalanin pixel
-      //echo "<script>";
-      echo $pixel->script;
-      //echo "</script>";
-
-      return redirect($link);
-
+      $script = "";
+      if (!is_null($pixel)) {
+        //jalanin pixel
+        //echo "<script>";
+        $script = $pixel->script;
+        //echo "</script>";
+      }
+      // return redirect($link);
+      return view('user.script')->with([
+        'script'=>$script,
+        'link'=>$link,
+      ]);
     }
   }
 
