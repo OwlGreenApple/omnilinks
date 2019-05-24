@@ -48,7 +48,11 @@ Route::get('click/{mode}/{id}', 'BiolinkController@click');
     Route::get('/thankyou','OrderController@thankyou');
 
 
-    Route::group(['middleware' => ['web','auth']], function () {
+Route::group(['middleware' => ['web','auth']], function () {
+    //Edit Profile
+    Route::get('/edit-profile','UserController@index_edit');
+    Route::post('/edit-profile/edit','UserController@edit_profile');
+
     Route::get('/orders','OrderController@index_order');
     Route::get('/orders/load-order','OrderController@load_order');
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');

@@ -468,6 +468,26 @@ hr.own {
 
 }
 
+@media screen and (max-width: 767px) {
+  .mobile {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .project-tab .nav-link, .nav-tabs .nav-link.active {
+    font-size: 15px;
+  }
+
+  .card-body {
+    padding:10px;
+  }
+
+  .nav-link {
+    padding: 5px;
+  }
+}
+
 /*.powered-omnilinks {
   text-align: center;
   font-size: large;

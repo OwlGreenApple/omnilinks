@@ -44,9 +44,9 @@
       success: function(data) {
         //var data=jQuery.parseJSON(result);
         if (data.status == "success") {
-          $("#pesan").html(data.message);
-          $("#pesan").addClass("alert-success");
-          $("#pesan").show();
+          $("#pesanAlert").html(data.message);
+          $("#pesanAlert").addClass("alert-success");
+          $("#pesanAlert").show();
         }
       }
     });
@@ -66,9 +66,9 @@
         refreshpixel();
         var data = jQuery.parseJSON(result);
         if (data.status == "success") {
-          $("#pesan").html(data.message);
-          $("#pesan").addClass("alert-success");
-          $("#pesan").show();
+          $("#pesanAlert").html(data.message);
+          $("#pesanAlert").addClass("alert-success");
+          $("#pesanAlert").show();
         }
       }
     });
@@ -290,9 +290,9 @@
 
 </script>
 
-<section id="tabs" class="col-md-10 offset-md-1 project-tab">
+<section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
   <div class="container">
-    <div class="row notif">
+    <div class="row">
       <div class="col-md-12">
         <h4 style="color: #106BC8">
           <i class="fas fa-arrow-left"></i>&nbsp;
@@ -315,7 +315,7 @@
       </div>
 
       <div class="col-md-6">
-        <div id="pesan" class="alert"></div>
+        
         <div id="pesanAlert" class="alert"></div>
 
         <div class="card carddash" style="margin-bottom:20px;">
@@ -694,7 +694,7 @@
                     </li>
                   </ul>
 
-                  <div class="as col-md-12 text-right">
+                  <div class="as text-right">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks ">
                       <i class="far fa-save" style="margin-right:5px;"></i>
                       SAVE
