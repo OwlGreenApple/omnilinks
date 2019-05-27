@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-use DateTime,Hash,Validator;
+use DateTime,Hash,Validator,Auth;
 
 class UserController extends Controller
 { 
@@ -77,20 +77,28 @@ class UserController extends Controller
 
     public function edit_user(Request $request){
       //edit user via admin
+      $user = User::find($request->id_edit);
+
       $validator = $this->validator($request->all());
 
       if($validator->fails()){
         $failedRules = $validator->failed();
 
-        if(isset($failedRules['password'])){
-        } else {
+        if(!isset($failedRules['password']) or !isset($failedRules['email']['Unique'])){
           $arr['status'] = 'error';
           $arr['message'] = $validator->errors()->first();
           return $arr;
+        } else if(isset($failedRules['email']['Unique'])){
+          if($user->email==$request->email){
+          } else {
+            $arr['status'] = 'error';
+            $arr['message'] = $validator->errors()->first();
+            return $arr;
+          }
+        } else if(isset($failedRules['password'])){
         }
       }
 
-      $user = User::find($request->id_edit);
       $user->name = $request->name;
       $user->email = $request->email;
       $user->username = $request->username;
@@ -116,6 +124,68 @@ class UserController extends Controller
 
       return $arr;
     }
+
+    public function index_edit(){
+      //halaman edit profile user
+      $user = Auth::user();
+      return view('user.edit-profile.index')
+              ->with('user',$user); 
+    }
+
+    public function edit_profile(Request $request){
+      //edit profile via user
+      $user = User::find(Auth::user()->id);
+
+      $validator = $this->validator($request->all());
+
+      if($validator->fails()){
+        $failedRules = $validator->failed();
+        
+        if(!isset($failedRules['password']) or !isset($failedRules['email']['Unique'])){
+          $arr['status'] = 'error';
+          $arr['message'] = $validator->errors()->first();
+          return $arr;
+        } else if(isset($failedRules['email']['Unique'])){
+          if($user->email==$request->email){
+            if(isset($failedRules['password'])){
+              if($request->password=='' or $request->password==null){
+              } else {
+                $arr['status'] = 'error';
+                $arr['message'] = $validator->errors()->first();
+                return $arr;
+              }    
+            }
+          } else {
+            $arr['status'] = 'error';
+            $arr['message'] = $validator->errors()->first();
+            return $arr;
+          }
+        } else if(isset($failedRules['password'])){
+          if($request->password=='' or $request->password==null){
+          } else {
+            $arr['status'] = 'error';
+            $arr['message'] = $validator->errors()->first();
+            return $arr;
+          }
+        }
+      }
+
+      $user->name = $request->name;
+      $user->username = $request->username;
+      $user->email = $request->email;
+
+      if($request->password=='' or $request->password!=null){
+        $user->password = Hash::make($request->password);
+      }
+
+      $user->save();
+
+      $arr['status'] = 'success';
+      $arr['message'] = 'Edit User berhasil';
+
+      return $arr;
+    }
+
 
     /*public function index(Request $request)
     {

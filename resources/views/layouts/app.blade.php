@@ -123,6 +123,10 @@
                       </a>
                     @endif
 
+                    <a class="dropdown-item <?php if(Request::is('edit-profile')) echo 'active' ?>" href="{{ url('edit-profile') }}">
+                      Edit Profile
+                    </a>
+                    
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
                       Log Out

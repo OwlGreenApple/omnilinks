@@ -75,7 +75,7 @@
   } */ 
 </style>
 
-<div class="col-md-10 offset-md-1" style="height:100%; margin-top:110px">
+<div class="col-md-10 offset-md-1 mb-5" style="height:100%; margin-top:45px">
   <div class="row justify-content-center">
     <div class="col-md-12">
 

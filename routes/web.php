@@ -50,7 +50,12 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('/confirm-payment','OrderController@confirm_payment');
   Route::get('/thankyou','OrderController@thankyou');
 
-  Route::group(['middleware' => ['web','auth']], function () {
+Route::group(['middleware' => ['web','auth']], function () {
+    //Edit Profile
+    Route::get('/edit-profile','UserController@index_edit');
+    Route::post('/edit-profile/edit','UserController@edit_profile');
+
+    //Orders 
     Route::get('/orders','OrderController@index_order');
     Route::get('/orders/load-order','OrderController@load_order');
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
