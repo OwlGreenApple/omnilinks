@@ -41,7 +41,7 @@ class BiolinkController extends Controller
   					->orderBy('created_at','ascend')->get();
   	$arr['viewer'] =(string) view('user.dashboard.contentwa')
                     ->with('walink',$walink);
-     return $arr;
+    return $arr;
   }
   
   public function deletewalink(Request $request)
