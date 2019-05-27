@@ -25,7 +25,10 @@
       @if($order->buktibayar=='' or $order->buktibayar==null)
         -
       @else
-        <a class="popup-newWindow" href="<?php echo Storage::disk('public')->url('app/'.$order->buktibayar) ?>">
+        <a class="popup-newWindow" href="<?php 
+          // echo Storage::disk('public')->url('app/'.$order->buktibayar);
+            echo Storage::disk('s3')->url($order->buktibayar); 
+          ?>">
           View
         </a>
       @endif

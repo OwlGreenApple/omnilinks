@@ -53,11 +53,15 @@
           <span class="harga harga-small free">
             <sup>Rp</sup> 0 <sub>/bln</sub>
           </span><br>
+          @if(!Auth::check())
           <a class="link-free" href="{{url('register')}}">
+          @endif
             <button class="btn btn-block btn-upgrade-big small free">
               DAFTAR
             </button>
+          @if(!Auth::check())
           </a>
+          @endif
         </div>
       </div>
     </div>
@@ -128,11 +132,15 @@
             </p>
           </div>
 
+          @if(!Auth::check())
           <a class="link-free" href="{{url('register')}}">
+          @endif
             <button class="btn btn-block btn-upgrade-big free">
               DAFTAR SEKARANG
             </button>
+          @if(!Auth::check())
           </a>
+          @endif
 
           <div class="upgrade-details2">
             <div class="row mb-2">

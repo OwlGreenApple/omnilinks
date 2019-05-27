@@ -41,7 +41,7 @@ class BiolinkController extends Controller
   					->orderBy('created_at','ascend')->get();
   	$arr['viewer'] =(string) view('user.dashboard.contentwa')
                     ->with('walink',$walink);
-     return $arr;
+    return $arr;
   }
   
   public function deletewalink(Request $request)
@@ -124,6 +124,9 @@ class BiolinkController extends Controller
     else {
       $page = Page::where('names',$names)  
                 ->first();
+      if (is_null($page)) {
+        return "Page not found";
+      }
 
       $links = Link::where('pages_id','=',$page->id)
                 ->orderBy('created_at','descend')
@@ -172,8 +175,13 @@ class BiolinkController extends Controller
     
     if(!is_null($request->file('imagepages')))
     {
-      $path = Storage::putFile('template',$request->file('imagepages')); 
-      $page->image_pages = $path;
+      // $path = Storage::putFile('template',$request->file('imagepages')); 
+      // $page->image_pages = $path;
+      $dt = Carbon::now();
+      $dir = 'photo_page/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+      $filename = $dt->format('ymdHi').'-'.$page->id.'.jpg';
+      Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('imagepages')), 'public');
+      $page->image_pages = $dir."/".$filename;
     }
 
     $page->telpon_utama=$request->nomor;
@@ -237,8 +245,8 @@ class BiolinkController extends Controller
         $banner->save(); 
         if($request->hasFile('bannerImage.'.$i)) {
           $dt = Carbon::now();
-          $dir = 'banner/'.$user->email;
-          $filename = $dt->format('ymdHi').$banner->id.'.jpg';
+          $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+          $filename = $dt->format('ymdHi').'-'.$banner->id.'.jpg';
           if($idbanner[$i]==""){
             Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('bannerImage')[$i]), 'public');
             $banner->images_banner=$dir."/".$filename;

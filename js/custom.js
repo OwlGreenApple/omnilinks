@@ -34,6 +34,6 @@ $(document).ready(function () {
 
  });
 
-$(window).load(function () {
+// $(window).load(function () {
   // $('a.nav-link.smooth-scroll').removeClass('active');
-});
+// });

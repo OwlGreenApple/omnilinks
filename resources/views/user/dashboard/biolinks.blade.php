@@ -310,7 +310,7 @@
           <a class="back-link" href="{{url('pricing')}}">
             Subscribe
           </a>
-         untuk terus menggunakan Omnilinkz
+          untuk terus menggunakan Omnilinkz
         </div>
       </div>
 
@@ -844,7 +844,10 @@
                             @if(is_null($pages->image_pages))
                             <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
                             @else
-                            <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); ?>" class="picture-src" id="wizardPicturePreview" title="">
+                            <img src="<?php 
+                            // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                            echo Storage::disk('s3')->url($pages->image_pages);
+                            ?>" class="picture-src" id="wizardPicturePreview" title="">
                             @endif
                             <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg">
                           </div>
@@ -1091,7 +1094,10 @@
                         @if(is_null($pages->image_pages))
                         <img id="viewpicture" src="" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px; display: none;">
                         @else
-                        <img id="viewpicture" src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
+                        <img id="viewpicture" src="<?php 
+                        // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                        echo Storage::disk('s3')->url($pages->image_pages);
+                        ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
                         @endif
                       </div>
                       <div class="col-md-10 col-8 p-2">
@@ -1112,29 +1118,34 @@
                   <div class="col-md-12">
                     <div class="slideshow-container">
                       <div class="ap" id="viewbanner">
-                      @if($banner->count())
-                      <?php $ut=0 ?>
-                       @foreach($banner as $ban)
-                       <?php $ut+=1; ?>
+                      <?php 
+                      if($banner->count()){
+                        $ut=0;
+                        foreach($banner as $ban) {
+                          $ut+=1; 
+                          if (!is_null($ban->images_banner)){
+                      ?>
                         <div class="mySlides mylides fit" id="picture-id-<?=$ut?>-get">
                           <img src="<?php  
                           // echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); 
                           echo Storage::disk('s3')->url($ban->images_banner); 
                           ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
-                        </div>                       
-                       @endforeach
-                        @else
-                        @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                        </div>
+                      <?php 
+                        }}
+                      } else {
+                        if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite')) {
+                      ?>
                         <div class="mySlides mylides fit " id="picture-id-6-get">
                           <img id="picture-6" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-6-get" value="ada" >
                         </div>
-                        @endif
-                      @endif
+                      <?php }
+                      }?>
                       </div>
-                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                      @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                       <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    @endif
+                      @endif
                     </div>
                     <br>
 
