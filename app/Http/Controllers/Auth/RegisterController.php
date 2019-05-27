@@ -112,7 +112,7 @@ class RegisterController extends Controller
             $order->coupon_id = $kuponid;
             $order->total = $data["price"];
             $order->discount = $diskon;
-            $order->grand_total = $total;
+            $order->total = $total;
             $order->status = 0;
             $order->buktibayar = "";
             $order->keterangan = "";
