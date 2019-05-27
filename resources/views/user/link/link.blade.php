@@ -76,7 +76,9 @@
                     <a href="{{url('click/banner/'.$banner->id)}}" target="_blank">
                       <img src="<?php 
                       // echo url(Storage::disk('local')->url('app/'.$banner->images_banner));
-                      echo Storage::disk('s3')->url($banner->images_banner);
+                        if(is_null($banner->images_banner)){
+                          echo Storage::disk('s3')->url($banner->images_banner);
+                        }
                       ?>" class="">
                       <p class="captionText"></p> 
                     </a>

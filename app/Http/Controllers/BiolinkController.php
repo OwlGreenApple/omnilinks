@@ -124,6 +124,9 @@ class BiolinkController extends Controller
     else {
       $page = Page::where('names',$names)  
                 ->first();
+      if (is_null($page)) {
+        return "Page not found";
+      }
 
       $links = Link::where('pages_id','=',$page->id)
                 ->orderBy('created_at','descend')
