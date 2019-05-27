@@ -31,7 +31,10 @@
       <div class="col-lg-7 col-md-8 col-12 mb-4 row">
         <div class="offset-md-1 col-md-5 col-5 text-right">
           @if(!is_null($pages->image_pages))
-            <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages));?>" class="imagetitle" >
+            <img src="<?php 
+            // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
+            echo Storage::disk('s3')->url($pages->image_pages);
+            ?>" class="imagetitle" >
           @endif
         </div>
         

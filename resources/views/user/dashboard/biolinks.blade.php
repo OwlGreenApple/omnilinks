@@ -822,7 +822,10 @@
                             @if(is_null($pages->image_pages))
                             <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
                             @else
-                            <img src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); ?>" class="picture-src" id="wizardPicturePreview" title="">
+                            <img src="<?php 
+                            // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                            echo Storage::disk('s3')->url($pages->image_pages);
+                            ?>" class="picture-src" id="wizardPicturePreview" title="">
                             @endif
                             <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg">
                           </div>
@@ -1069,7 +1072,10 @@
                         @if(is_null($pages->image_pages))
                         <img id="viewpicture" src="" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px; display: none;">
                         @else
-                        <img id="viewpicture" src="<?php echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
+                        <img id="viewpicture" src="<?php 
+                        // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                        echo Storage::disk('s3')->url($pages->image_pages);
+                        ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
                         @endif
                       </div>
                       <div class="col-md-10 col-8 p-2">

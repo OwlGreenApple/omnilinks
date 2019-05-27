@@ -172,8 +172,12 @@ class BiolinkController extends Controller
     
     if(!is_null($request->file('imagepages')))
     {
-      $path = Storage::putFile('template',$request->file('imagepages')); 
-      $page->image_pages = $path;
+      // $path = Storage::putFile('template',$request->file('imagepages')); 
+      // $page->image_pages = $path;
+      $dir = 'photo_page/'.$user->email;
+      $filename = $page->id.'.jpg';
+      Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('imagepages')), 'public');
+      $page->image_pages = $dir."/".$filename;
     }
 
     $page->telpon_utama=$request->nomor;
