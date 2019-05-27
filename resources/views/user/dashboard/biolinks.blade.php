@@ -310,7 +310,7 @@
           <a class="back-link" href="{{url('pricing')}}">
             Subscribe
           </a>
-         untuk terus menggunakan Omnilinkz
+          untuk terus menggunakan Omnilinkz
         </div>
       </div>
 
@@ -1096,29 +1096,34 @@
                   <div class="col-md-12">
                     <div class="slideshow-container">
                       <div class="ap" id="viewbanner">
-                      @if($banner->count())
-                      <?php $ut=0 ?>
-                       @foreach($banner as $ban)
-                       <?php $ut+=1; ?>
+                      <?php 
+                      if($banner->count()){
+                        $ut=0;
+                        foreach($banner as $ban) {
+                          $ut+=1; 
+                          if (!is_null($ban->images_banner)){
+                      ?>
                         <div class="mySlides mylides fit" id="picture-id-<?=$ut?>-get">
                           <img src="<?php  
                           // echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); 
                           echo Storage::disk('s3')->url($ban->images_banner); 
                           ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
-                        </div>                       
-                       @endforeach
-                        @else
-                        @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                        </div>
+                      <?php 
+                        }}
+                      } else {
+                        if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite')) {
+                      ?>
                         <div class="mySlides mylides fit " id="picture-id-6-get">
                           <img id="picture-6" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-6-get" value="ada" >
                         </div>
-                        @endif
-                      @endif
+                      <?php }
+                      }?>
                       </div>
-                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                      @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                       <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    @endif
+                      @endif
                     </div>
                     <br>
 

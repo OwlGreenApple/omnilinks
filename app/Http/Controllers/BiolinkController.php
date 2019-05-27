@@ -174,8 +174,9 @@ class BiolinkController extends Controller
     {
       // $path = Storage::putFile('template',$request->file('imagepages')); 
       // $page->image_pages = $path;
-      $dir = 'photo_page/'.$user->email;
-      $filename = $page->id.'.jpg';
+      $dt = Carbon::now();
+      $dir = 'photo_page/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+      $filename = $dt->format('ymdHi').'-'.$page->id.'.jpg';
       Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('imagepages')), 'public');
       $page->image_pages = $dir."/".$filename;
     }
@@ -241,8 +242,8 @@ class BiolinkController extends Controller
         $banner->save(); 
         if($request->hasFile('bannerImage.'.$i)) {
           $dt = Carbon::now();
-          $dir = 'banner/'.$user->email;
-          $filename = $dt->format('ymdHi').$banner->id.'.jpg';
+          $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+          $filename = $dt->format('ymdHi').'-'.$banner->id.'.jpg';
           if($idbanner[$i]==""){
             Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('bannerImage')[$i]), 'public');
             $banner->images_banner=$dir."/".$filename;

@@ -184,7 +184,7 @@ class OrderController extends Controller
       if($request->hasFile('buktibayar'))
       {
         // $path = Storage::putFile('bukti',$request->file('buktibayar'));
-        $dir = 'bukti_bayar/'.$user->email;
+        $dir = 'bukti_bayar/'.explode(' ',trim($user->name))[0].'-'.$user->id;
         $filename = $order->no_order.'.jpg';
         Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('buktibayar')), 'public');
         $order->buktibayar = $dir."/".$filename;
