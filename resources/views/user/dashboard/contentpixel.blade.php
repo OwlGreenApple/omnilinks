@@ -1,6 +1,6 @@
 <?php $x=0; ?>
 @foreach($pixels as $pixel)
-  <div class="card card-none">
+  <div class="card card-none mb-3">
     <div class="card-header card-gray" id="headingOne">
       <span class="view-wa" data-toggle="collapse" data-target="#detail-{{$pixel->id}}" aria-expanded="true" aria-controls="detail-{{$pixel->id}}">
         {{$pixel->title}}

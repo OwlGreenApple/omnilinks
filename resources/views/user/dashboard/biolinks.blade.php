@@ -705,7 +705,7 @@
       @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
               <!-- TAB 2 -->
               <div role="tabpanel" class="tab-pane fade " id="walink">
-                <form id="savewalink" method="post">
+                <form id="savewalink" method="post" style="margin-bottom: 40px;margin-top: 40px;">
                   {{ csrf_field() }}
                   <input type="hidden" name="uuidpixel" value="{{$uuid}}">
                   <span class="blue-txt">
@@ -713,16 +713,20 @@
                   </span>
                   
                   <div class="form-group mt-3 mb-4 row">
-                    <label for="nomorwa" class="control-label col-md-5">
-                       Masukkan Nomor WA
-                    </label>
-                    <div class="col-md-7 row">
-                      <input type="text" name="nomorwa" id="nomorwa" class="form-control col-md-9" onkeypress="return hanyaAngka(event)">
-                      <div class="col-md-3">
-                        <button type="reset" class="btn btn-danger btn-reset">
-                          Reset
-                        </button>
-                      </div>
+                    <div class="col-md-5">
+                      <label for="nomorwa" class="control-label">
+                        Masukkan Nomor WA
+                      </label>  
+                    </div>
+                    
+                    <div class="col-md-5 col-9 pr-1">
+                      <input type="text" name="nomorwa" id="nomorwa" class="form-control col-md-12" onkeypress="return hanyaAngka(event)">
+                    </div>
+
+                    <div class="col-md-2 col-3 pl-0 text-right">
+                      <button type="reset" class="btn btn-danger btn-reset">
+                        Reset
+                      </button>
                     </div>
                   </div>
 
@@ -736,14 +740,19 @@
                   <input type="text" name="editidwa" hidden="" id="editidwa">
                   <textarea id="demo" hidden="" name="textlink"></textarea>
 
-                  <div class="col-md-12 pr-0 text-right">
-                    <button type="button" class="btn btn-primary btn-biolinks" id="generate" style="margin-top: 20px;">
+       
+                  <div class="offset-md-6 col-md-6 pl-0 pr-0 text-right">
+                    <button type="button" class="btn btn-primary btn-block btn-biolinks" id="generate" style="margin-top: 20px;">
                       SAVE & CREATE LINK
                     </button>  
-                  </div>
+                  </div>  
+                  
+                  
                 </form>
 
-                <div class="margin" style="margin-top: 47px;">
+                <hr>
+
+                <div class="margin" style="margin-top: 20px;">
                   <span class="blue-txt mb-4">
                     Recent WhatsApp Link Creator
                   </span>
@@ -755,7 +764,7 @@
 
               <!-- TAB 3 -->
               <div class="tab-pane fade" id="pixel">
-                <form id="savepixel" method="post">
+                <form id="savepixel" method="post" style="margin-bottom: 40px;margin-top: 40px;">
                   {{ csrf_field() }}
                   <input type="hidden" name="uuidpixel" value="{{$uuid}}">
                   <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
@@ -765,40 +774,53 @@
 
                   <textarea class="form-control mt-3" name="script" id="script" style="height:100px"></textarea>
 
-                  <div class="form-inline mt-3">
-                    <span class="mr-2">
-                      Jenis
-                    </span>
-
-                    <select class="form-control" name="jenis_pixel" id="jenis_pixel">
-                      <option value="fb">
-                        FB Pixel
-                      </option>
-                      <option value="twitter">
-                        Twitter Retargetting
-                      </option>
-                      <option value="google">
-                        Google Retargetting
-                      </option>
-                    </select>
+                  <div class="form-group mt-3 mb-4 row">
+                    <div class="col-md-2">
+                      <label class="control-label">
+                        Jenis
+                      </label>  
+                    </div>
+                    
+                    <div class="col-md-6 col-12">
+                      <select class="form-control col-md-12" name="jenis_pixel" id="jenis_pixel">
+                        <option value="fb">
+                          FB Pixel
+                        </option>
+                        <option value="twitter">
+                          Twitter Retargetting
+                        </option>
+                        <option value="google">
+                          Google Retargetting
+                        </option>
+                      </select>
+                    </div>
                   </div>
 
-                  <div class="title form-inline mb-5 mt-3">
-                    <span class="mr-2">
-                      Title
-                    </span>
+                  <div class="form-group mt-3 mb-4 row">
+                    <div class="col-md-2">
+                      <label class="control-label">
+                        Title
+                      </label>  
+                    </div>
+                    
+                    <div class="col-md-6 col-12 mb-3">
+                      <input type="text" class="form-control col-md-12" name="title" placeholder="Masukkan Judul" id="judul">
+                      <input type="text" name="editidpixel" hidden id="editidpixel">
+                    </div>
 
-                    <input type="text" class="form-control col-md-5 mr-2" name="title" placeholder="Masukkan Judul" id="judul">
-                    <input type="text" name="editidpixel" hidden id="editidpixel">
-
-                    <button type="button" id="btnpixel" class="btn btn-primary mr-2">
-                      Save
-                    </button>
-                    <button type="reset" class="btn btn-danger btn-reset">
-                      Reset
-                    </button>
+                    <div class="col-md-4 text-center">
+                      <button type="button" id="btnpixel" class="btn btn-primary mr-2" style="width:45%">
+                        Save
+                      </button>
+                      <button type="reset" class="btn btn-danger btn-reset" style="width:45%">
+                        Reset
+                      </button>
+                    </div>
                   </div>
+
                 </form>
+
+                <hr>
 
                 <span class="blue-txt">
                   Recent Pixel Retargetting
@@ -815,9 +837,9 @@
                   {{ csrf_field() }}
                   <input type="hidden" name="uuidtemp" value="{{$uuid}}">
                   <div class="form-group">
-                    <div class="container">
+                    <div class="col-md-12">
                       <div class="row mt-5">
-                        <div class="col-md-4 picture-container">
+                        <div class="col-md-4 mb-3 picture-container">
                           <div class="picture">
                             @if(is_null($pages->image_pages))
                             <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
@@ -927,20 +949,20 @@
                     </p>
                     
                     <div class="row">
-                      <div class="col-md-2">
+                      <div class="col-md-2 col-3">
                         <label class="switch">
                           <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
                           <span class="slider round"></span>
                         </label>
                         
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-4">
                         <label class="caption">
                           Rounded buttons
                         </label>
                       </div>
-                      <div class="col-md-4">
-                        <a href="" id="link-custom-background-color" class="nav-link">Custom Color</a>
+                      <div class="col-md-4 col-4">
+                        <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Color</a>
                       </div>
                     </div>
                     <!-- Modal For Color Picker Button-->
@@ -967,20 +989,20 @@
                       </div>
                     </div>	
 
-                    <div class="row">
-                      <div class="col-md-2">
+                    <div class="row mb-5">
+                      <div class="col-md-2 col-3">
                         <label class="switch">
                           <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
                           <span class="slider round"></span>
                         </label>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-4">
                         <label class="caption">
                           Outlined buttons
                         </label>
                       </div>
-                      <div class="col-md-4">
-                        <a href="" id="link-custom-outline-color" class="nav-link">Custom Color</a>
+                      <div class="col-md-4 col-4">
+                        <a href="" id="link-custom-outline-color" class="nav-link p-0">Custom Color</a>
                       </div>
                     </div>
                     <!-- Modal For Color Picker Button-->
@@ -1024,7 +1046,7 @@
                         <!--theme color -->
                         <div role="tabpanel" class="tab-pane fade in active show" id="buzz">
 
-                          <div class="theme mrgtp">
+                          <div class="theme mrgtp text-center">
                             @include('user.dashboard.theme-page')
                           </div>
                         </div>
