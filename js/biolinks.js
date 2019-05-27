@@ -137,6 +137,9 @@ $(document).ready(function () {
 
         // $("#viewLink").append(' <button type="button" class="btn btn-light btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
         $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');
+        check_outlined();
+        check_rounded();
+        
     });
     $(document).on('click', '.deletelink', function (e) {
       //let idLink = $(this).parent().parent().attr("link-id");

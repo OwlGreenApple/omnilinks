@@ -1551,7 +1551,7 @@
       readThis(this);
     });
      
-    $(".txthov").hover(
+    /*$(".txthov").hover(
       function() {
         check_outlined();
         check_rounded();
@@ -1565,7 +1565,23 @@
         check_outlined();
         check_rounded();
       }
-    );     
+    );*/
+    $(document).on({
+      mouseenter: function () {
+        check_outlined();
+        check_rounded();
+        temp1 = $(this).css("color");
+        // temp2 = $(this).css("background-color");
+        temp2 = $("#phonecolor").css("background-color");
+
+        $(this).parent().children().css("background-color",temp1);
+        $(this).parent().children().css("color",temp2);
+      },
+      mouseleave: function () {
+        check_outlined();
+        check_rounded();
+      }
+    }, ".txthov"); //pass the element as an argument to .on    
 
 
     // Add the following code if you want the name of the file appear on select
