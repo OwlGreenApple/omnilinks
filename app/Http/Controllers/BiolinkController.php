@@ -168,6 +168,22 @@ class BiolinkController extends Controller
   public function savetemp(Request $request)
   {
     $user=Auth::user();
+    
+    $validator = Validator::make($request->all(), [
+      'judul' => ['required', 'string',  'max:255'],
+      'link' => ['required', 'string', 'max:255'],
+      'phone_no' => ['required', 'string', 'max:255'],
+      'imagepages' => ['required', 'file'],
+      'judulBanner.*' => ['required', 'string', 'max:255'],
+      'linkBanner.*' => ['required', 'active_url', 'max:255'],
+    ]); 
+    
+    if($validator->fails()) {
+      $arr['status'] = 'error';
+      $arr['message'] = $validator->errors()->first();
+      return $arr;
+    }
+    
     $uuid=$request->uuidtemp;
     $page=Page::where('uid','=',$uuid)->first();
     $page->page_title=$request->judul;
@@ -184,7 +200,7 @@ class BiolinkController extends Controller
       $page->image_pages = $dir."/".$filename;
     }
 
-    $page->telpon_utama=$request->nomor;
+    $page->telpon_utama=$request->phone_no;
 
     // if ($request->backtheme=="") 
     if ($request->modeBackground=="solid") 
@@ -278,6 +294,22 @@ class BiolinkController extends Controller
 
   public function savelink(Request $request)
   {
+    $validator = Validator::make($request->all(), [
+      'judul' => ['required', 'string',  'max:255'],
+      'link' => ['required', 'string', 'max:255'],
+      'phone_no' => ['required', 'string', 'max:255'],
+      'imagepages' => ['required', 'file'],
+      'judulBanner.*' => ['required', 'string', 'max:255'],
+      'linkBanner.*' => ['required', 'active_url', 'max:255'],
+    ]); 
+    
+    if($validator->fails()) {
+      $arr['status'] = 'error';
+      $arr['message'] = $validator->errors()->first();
+      return $arr;
+    }
+    
+    
   	$uuid=$request->uuid;
   	$page=Page::where('uid','=',$uuid)->first();
   	$user=Auth::user();

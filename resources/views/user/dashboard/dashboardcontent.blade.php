@@ -66,7 +66,9 @@
                 @if(is_null($page->image_pages))
                   <div class="picture-sm"></div>
                 @else
-                  <img src="<?php echo url(Storage::disk('local')->url('app/'.$page->image_pages)); ?>" class="imga" style="width: 70px;">
+                  <img src="<?php 
+                    echo Storage::disk('s3')->url($page->image_pages);
+                  ?>" class="imga" style="width: 70px;">
                 @endif
               </div>
             </div>
