@@ -29,7 +29,7 @@ $x++; ?>
       </div>
 
       <div class="offset-md-8 col-md-4 text-right">
-        <button type="button" class="btn btn-success btn-block btn-biolinks" onclick="copyTO('#{{$walinks->id}}')">
+        <button type="button" class="btn btn-success pl-0 pr-0 btn-block btn-biolinks" onclick="copyTO('#{{$walinks->id}}')">
           COPY LINK
         </button>  
       </div>

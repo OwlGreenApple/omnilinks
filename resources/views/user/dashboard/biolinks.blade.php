@@ -314,7 +314,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
         
         <div id="pesanAlert" class="alert"></div>
 
@@ -363,7 +363,7 @@
                     <i class="fas fa-plus"></i>
                   </button>
 
-                  <div class="hid">
+                  <div class="hid mb-5">
                     <ul class="sortable-msg">
                       <li id="msg-li-wa"> <!-- wa -->
                         <div id="wa" class="messengers div-table hide" style="display:none;">
@@ -478,7 +478,7 @@
                   </button>
                   <br>
 
-                  <div>
+                  <div class="mb-5">
                     <ul class="sortable-link a">
                       <?php 
                       if($links->count()) {
@@ -694,12 +694,28 @@
                     </li>
                   </ul>
 
-                  <div class="as text-right">
-                    <button type="button" id="btn-save-link" class="btn btn-primary btn-biolinks ">
-                      <i class="far fa-save" style="margin-right:5px;"></i>
+                  <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
+                    <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks ">
+                      <!--<i class="far fa-save" style="margin-right:5px;"></i>-->
                       SAVE
                     </button>
                   </div>
+
+                  <div class="menu-mobile">
+                    <div class="col-12 row" style="position: fixed; bottom: 0;">
+                      <div class="col-6">
+                        <button class="btn btn-default btn-block">
+                          Preview
+                        </button>
+                      </div>
+                      <div class="col-6">
+                        <button type="button" class="btn btn-primary btn-block">
+                          SAVE
+                        </button>  
+                      </div>
+                    </div>  
+                  </div>
+                  
                 </form>
               </div>
       @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
@@ -808,7 +824,7 @@
                       <input type="text" name="editidpixel" hidden id="editidpixel">
                     </div>
 
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 pl-md-0 pl-3 text-center">
                       <button type="button" id="btnpixel" class="btn btn-primary mr-2" style="width:45%">
                         Save
                       </button>
@@ -1065,9 +1081,10 @@
                         <input type="checkbox" name="powered" id="powered" value="powered" checked="">
                         <span class="slider round"></span>
                       </label> &nbsp; Powered By Omnilinks<br>
-                      <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-primary btn-biolinks" id="savetemp">
-                          <i class="far fa-save" style="margin-right:5px;"></i>
+
+                      <div class="offset-md-8 col-md-4 pr-0">
+                        <button type="button" class="btn btn-primary btn-block btn-biolinks" id="savetemp">
+                          <!--<i class="far fa-save" style="margin-right:5px;"></i>-->
                           SAVE
                         </button>  
                       </div>
@@ -1081,14 +1098,14 @@
         </div>
       </div>
       <!--phone-->
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="fixed">
           <div class="center">
             <div class="mobile">
               <div class="mobile1">
                 <div class="screen colorgradient1" id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
-                  <header class="container" style="padding-top: 17px; padding-bottom: 12px;">
+                  <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
                         @if(is_null($pages->image_pages))
@@ -1115,6 +1132,7 @@
                       </div>
                     </div>
                   </header>
+
                   <div class="col-md-12">
                     <div class="slideshow-container">
                       <div class="ap" id="viewbanner">
@@ -1143,18 +1161,21 @@
                       }?>
                       </div>
                       @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
-                      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
                       @endif
                     </div>
                     <br>
 
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
+
                   <ul class="row links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 shown-mes hide" id="waviewid"> 
-                        <a href="#" class="btn btn-md btnview btn-light txthov" style="
-                        width: 100%;  padding-left: 2px;" id="walinkview"><i class="fab fa-whatsapp"></i><label class="" style="font-size: xx-small;">&nbsp Whatsapp</label></a>
+                      <a href="#" class="btn btn-md btnview btn-light txthov" style="width: 100%;  padding-left: 2px;" id="walinkview">
+                        <i class="fab fa-whatsapp"></i>
+                        <label class="" style="font-size: xx-small;">&nbsp Whatsapp</label>
+                      </a>
                     </li>
                     <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview btn-light txthov" style="
@@ -1193,26 +1214,34 @@
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
                     <li class="col linked hide" id="youtubeviewid">
-                      <a href="#" title="Youtube"><i class="fab fa-youtube" style="color: #fff;"></i></a>
+                      <a href="#" title="Youtube">
+                        <i class="fab fa-youtube" style="color: #fff;"></i>
+                      </a>
                     </li>
                     <li class="col linked hide" id="fbviewid" >
-                      <a href="#" title="fb" ><i class="fab fa-facebook-f" style="color: #fff;"></i></a>
+                      <a href="#" title="fb" >
+                        <i class="fab fa-facebook-square" style="color: #fff;"></i>
+                      </a>
                     </li>
                     <li class="col linked hide" id="twitterviewid">
-                      <a href="#" title="Twitter"  ><i class="fab fa-twitter-square" style="color: #fff;"></i></a>
+                      <a href="#" title="Twitter">
+                        <i class="fab fa-twitter-square" style="color: #fff;"></i>
+                      </a>
                     </li>
                     <li class="col linked hide" id="igviewid">
-                      <a href="#" title="ig" ><i class="fab fa-instagram" style="color: #fff; "></i></a>  
+                      <a href="#" title="ig" >
+                        <i class="fab fa-instagram" style="color: #fff; "></i>
+                      </a>  
                     </li>  
                   </ul>
-                  <div class="col-md-12" align="center" id="poweredview">
+                  <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
                     <div class="powered-omnilinks">
                       <a href="#">
-                        <span style="font-size: small; color: #fff;">
-                          Powered by
+                        <span style="font-size:11px; color: #fff;">
+                          powered by
                         </span>
                         <br>&nbsp;&nbsp;
-                        <img style="width: 100px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
+                        <img style="width: 110px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
                       </a>
                     </div>
                   </div>

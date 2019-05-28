@@ -121,7 +121,7 @@
             @if($msg=='telegram' and !is_null($pages->telegram_link))
               <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank" class="txthov">
                 <button class="btn btn-block">
-                  <i class="fab fa-telegram icon-msg"></i>
+                  <i class="fab fa-telegram-plane"></i>
                   @if(count($sort_msg)<3)
                     <span class="textbutton" > Telegram</span>
                   @endif
