@@ -43,10 +43,16 @@
       url: "<?php echo url('/save-template');?>",
       success: function(data) {
         //var data=jQuery.parseJSON(result);
+        $("#pesanAlert").html(data.message);
+        $("#pesanAlert").show();
+        $(window).scrollTop(0);
         if (data.status == "success") {
-          $("#pesanAlert").html(data.message);
           $("#pesanAlert").addClass("alert-success");
-          $("#pesanAlert").show();
+          $("#pesanAlert").removeClass("alert-danger");
+        }
+        if (data.status == "error") {
+          $("#pesanAlert").addClass("alert-danger");
+          $("#pesanAlert").removeClass("alert-success");
         }
       }
     });
@@ -62,13 +68,19 @@
       data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'),
       url: "<?php echo url('/save-link');?>",
       success: function(result) {
-        refreshwa();
-        refreshpixel();
+        $("#pesanAlert").html(data.message);
+        $("#pesanAlert").show();
+        $(window).scrollTop(0);
         var data = jQuery.parseJSON(result);
         if (data.status == "success") {
-          $("#pesanAlert").html(data.message);
           $("#pesanAlert").addClass("alert-success");
-          $("#pesanAlert").show();
+          $("#pesanAlert").removeClass("alert-danger");
+          refreshwa();
+          refreshpixel();
+        }
+        if (data.status == "error") {
+          $("#pesanAlert").addClass("alert-danger");
+          $("#pesanAlert").removeClass("alert-success");
         }
       }
     });
@@ -87,6 +99,7 @@
         $('#script').val("");
         $('#judul').val("");
         $('#editidpixel').val("");
+        $(window).scrollTop(0);
         refreshpixel();
         loadPixelPage();
         tambahBanner();
@@ -171,6 +184,7 @@
       success: function(result) {
         $('#nomorwa').val("");
         $('#pesan-wa').val("");
+        $(window).scrollTop(0);
         ///$('#demo').val("");
         refreshwa();
       }
@@ -496,7 +510,7 @@
                                 <div class="col-md-12 col-12 pr-0 pl-0">
                                   <div class="input-stack">
                                     <input type="hidden" name="idlink[]" value="{{$link->id}}">
-                                    <input type="hidden" name="deletelink[]" value="">
+                                    <input class="delete-link" type="hidden" name="deletelink[]" value="">
                                     <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" placeholder="Title" class="form-control focuslink-update">
                                     <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
                                   </div>
@@ -880,7 +894,7 @@
                           <input type="text" name="link" id="pagelink" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
                           @endif
                           @if(is_null($pages->telpon_utama))
-                          <input type="number" name="nomor" id="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                          <input type="number" name="phone_no" id="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
                           @else
                           <input type="number" name="nomor" id="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
                           @endif
@@ -1178,34 +1192,29 @@
                       </a>
                     </li>
                     <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
-                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      <a href="#" class="btn btn-md btnview txthov" style="
                       width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
                     </li> 
                     <li class="link col pl-1 pr-1 hide" id="skypeviewid" >
-                      <a href="#" class="btn btn-md btnview btn-light txthov" style="
+                      <a href="#" class="btn btn-md btnview txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
                     </li>
                   </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                     <ul class="col-md-12" id="viewLink" >
                       @if($links->count())
-                      <?php $utlq=0  ?>
                       @foreach($links as $link)
-                      <?php $utlq+=1 ?>
-                        <!--
-                          <button type="button" class="btn btn-light btnview title-<?=$utlq?>-view-update-get" id="link-url-update-<?=$utlq?>-get" style="width:100%; margin-bottom: 12px;">{{$link->title}}</button>
-                          -->
                         <li id="link-preview-{{$link->id}}">
-                          <a href="#" class="btn btn-md btnview btn-light title-<?=$utlq?>-view-update-get txthov" style="
-                          width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-<?=$utlq?>-get" >{{$link->title}}</a>
+                          <a href="#" class="btn btn-md btnview txthov" style="
+                          width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a>
                         </li>
                       @endforeach
                       @else
                         <!--
-                        <button type="button" class="btn btn-light btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
+                        <button type="button" class="btn btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
                         -->
-                        <li class="txthov">
-                          <a href="#" class="btn btn-md btnview btn-light title-1-view-update-get txthov" style="
+                        <li class="">
+                          <a href="#" class="btn btn-md btnview txthov" style="
                           width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a>
                         </li>
                       @endif
@@ -1505,7 +1514,7 @@
     function onOutlineColorButtonChange(color) {
       // console.log(color);
       $("#colorOutlineButton").val(color);
-      $('.btnview').css("border-color",color);
+      // $('.btnview').css("border-color",color);
       
       if ($('input[name="outlined"]')=="1") {
         $(".mobile1").addClass("outlinedview");
@@ -1580,7 +1589,7 @@
       readThis(this);
     });
      
-    $(".txthov").hover(
+    /*$(".txthov").hover(
       function() {
         check_outlined();
         check_rounded();
@@ -1594,7 +1603,23 @@
         check_outlined();
         check_rounded();
       }
-    );     
+    );*/
+    $(document).on({
+      mouseenter: function () {
+        check_outlined();
+        check_rounded();
+        temp1 = $(this).css("color");
+        // temp2 = $(this).css("background-color");
+        temp2 = $("#phonecolor").css("background-color");
+
+        $(this).parent().children().css("background-color",temp1);
+        $(this).parent().children().css("color",temp2);
+      },
+      mouseleave: function () {
+        check_outlined();
+        check_rounded();
+      }
+    }, ".txthov"); //pass the element as an argument to .on    
 
 
     // Add the following code if you want the name of the file appear on select
@@ -1879,6 +1904,8 @@
     
     
     currentSlide(0);
+    check_outlined();
+    check_rounded();
   });
 
 
