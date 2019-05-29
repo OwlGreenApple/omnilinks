@@ -4,6 +4,17 @@
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
+<style type="text/css">
+  @media screen and (max-width: 768px) {
+    .menu-nomobile{
+      display: none;
+    }
+
+    .menu-mobile {
+      display: block;
+    }
+  }
+</style>
 <script type="text/javascript">
   var picker;
   var color_picker,rounded,outline;
@@ -277,13 +288,15 @@
 
   function check_outlined(){
     if ($('.outlined').prop("checked") == true) {
-      $(".mobile1").addClass("outlinedview");
+      //$(".mobile1").addClass("outlinedview");
+      $(".screen").addClass("outlinedview");
       $('.outlined').val(1);
       
       $('.btnview').css("background-color","transparent");
       $('.btnview').css("color",$("#colorOutlineButton").val());
     } else if ($('.outlined').prop("checked") == false) {
-      $(".mobile1").removeClass("outlinedview");
+      //$(".mobile1").removeClass("outlinedview");
+      $(".screen").removeClass("outlinedview");
       $('.outlined').val(0);
       
       $('.btnview').css("background-color",$("#colorOutlineButton").val());
@@ -293,10 +306,12 @@
 
   function check_rounded(){
     if ($('.rounded').prop("checked") == true) {
-      $(".mobile1").addClass("roundedview");
+      //$(".mobile1").addClass("roundedview");
+      $(".screen").addClass("roundedview");
       $('.rounded').val(1);
     } else if ($('.rounded').prop("checked") == false) {
-      $(".mobile1").removeClass("roundedview");
+      //$(".mobile1").removeClass("roundedview");
+      $(".screen").removeClass("roundedview");
       $('.rounded').val(0);
     }
   }
@@ -709,21 +724,21 @@
                   </ul>
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
-                    <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks ">
+                    <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks btn-save-link">
                       <!--<i class="far fa-save" style="margin-right:5px;"></i>-->
                       SAVE
                     </button>
                   </div>
 
                   <div class="menu-mobile">
-                    <div class="col-12 row" style="position: fixed; bottom: 0;">
-                      <div class="col-6">
-                        <button class="btn btn-default btn-block">
-                          Preview
+                    <div class="row btn-mobile">
+                      <div class="col-6 pl-0 pr-0">
+                        <button type="button" class="btn btn-default btn-block btn-preview">
+                          PREVIEW
                         </button>
                       </div>
-                      <div class="col-6">
-                        <button type="button" class="btn btn-primary btn-block">
+                      <div class="col-6 pl-0 pr-0">
+                        <button type="button" class="btn btn-primary btn-block btn-save-preview btn-save-link">
                           SAVE
                         </button>  
                       </div>
@@ -1096,12 +1111,28 @@
                         <span class="slider round"></span>
                       </label> &nbsp; Powered By Omnilinks<br>
 
-                      <div class="offset-md-8 col-md-4 pr-0">
-                        <button type="button" class="btn btn-primary btn-block btn-biolinks" id="savetemp">
+                      <div class="offset-md-8 col-md-4 pr-0 menu-nomobile">
+                        <button type="button" class="btn btn-primary btn-block btn-biolinks savetemp" id="savetemp">
                           <!--<i class="far fa-save" style="margin-right:5px;"></i>-->
                           SAVE
                         </button>  
                       </div>
+
+                      <div class="menu-mobile">
+                        <div class="row btn-mobile">
+                          <div class="col-6 pl-0 pr-0">
+                            <button type="button" class="btn btn-default btn-block btn-preview">
+                              PREVIEW
+                            </button>
+                          </div>
+                          <div class="col-6 pl-0 pr-0">
+                            <button type="button" class="btn btn-primary btn-block btn-save-preview savetemp">
+                              SAVE
+                            </button>  
+                          </div>
+                        </div>  
+                      </div>
+
                     </div>
                   </div>
                 </form>
@@ -1115,7 +1146,7 @@
       <div class="col-md-5">
         <div class="fixed">
           <div class="center">
-            <div class="mobile">
+            <div class="mobile d-none d-lg-block">
               <div class="mobile1">
                 <div class="screen colorgradient1" id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
@@ -1260,6 +1291,11 @@
           </div>
         </div>
       </div>
+
+      <!-- untuk preview di mobile -->
+      <div class="preview-mobile preview-none">
+      </div>
+
     </div>
   </div>
 
@@ -1272,6 +1308,11 @@
   let idpic=6;
   let counterBanner=0;
   
+  $('body').on('click', '.btn-preview', function() {
+    $('.preview-mobile').html($('.mobile1').html());
+    $('.preview-mobile').toggleClass('preview-none');
+  });
+
   $(document).ready(function() {
      // dotview();
     
@@ -1337,7 +1378,8 @@
       check_outlined();
     });
     <?php if($pages->is_rounded) {?>
-      $(".mobile1").addClass("roundedview");
+      //$(".mobile1").addClass("roundedview");
+      $(".screen").addClass("roundedview");
     <?php } ?>
 
     $('.rounded').click(function() {
@@ -1386,7 +1428,8 @@
     <?php } ?>
 
     <?php if($pages->is_outlined) {?>
-      $(".mobile1").addClass("outlinedview");
+      //$(".mobile1").addClass("outlinedview");
+      $(".screen").addClass("outlinedview");
       $('.btnview').css("background-color","transparent");
       $('.btnview').css("color",outline);
     <?php } else {?>
@@ -1517,7 +1560,8 @@
       // $('.btnview').css("border-color",color);
       
       if ($('input[name="outlined"]')=="1") {
-        $(".mobile1").addClass("outlinedview");
+        //$(".mobile1").addClass("outlinedview");
+        $(".screen").addClass("outlinedview");
         $('.btnview').css("background-color","transparent");
         $('.btnview').css("color",color);
       } else {
@@ -1628,7 +1672,7 @@
       $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 
-    $("body").on("click", "#savetemp", function() {
+    $("body").on("click", ".savetemp", function() {
       tambahTemp();
       //tambahPages();
       $('#pesanAlert').removeClass('alert-danger');
@@ -1782,7 +1826,7 @@
       $('#pesanAlert').children().remove();
     });
 
-    $(document).on("click", "#btn-save-link", function(e) {
+    $(document).on("click", ".btn-save-link", function(e) {
       tambahPages();
       tambahTemp();
       $('#pesanAlert').removeClass('alert-danger');
