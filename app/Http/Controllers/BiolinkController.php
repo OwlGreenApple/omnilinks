@@ -172,7 +172,7 @@ class BiolinkController extends Controller
     $validator = Validator::make($request->all(), [
       'judul' => ['required', 'string',  'max:255'],
       'link' => ['required', 'string', 'max:255'],
-      'phone_no' => ['required', 'string', 'max:255'],
+      //'phone_no' => ['required', 'string', 'max:255'],
       'imagepages' => ['required', 'file'],
       'judulBanner.*' => ['required', 'string', 'max:255'],
       'linkBanner.*' => ['required', 'active_url', 'max:255'],
@@ -538,6 +538,7 @@ class BiolinkController extends Controller
   }
 
   public function click($mode,$id){
+    //function redirect link
     if($mode=='link'){
       $link = Link::find($id);
       $link->counter = $link->counter+1;
