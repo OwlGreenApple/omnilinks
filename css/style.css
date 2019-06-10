@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@font-face { 
+  font-family: OpenSans-Regular; 
+  src: url("../fonts/OpenSans-Regular.ttf");
+} 
 
 body,
 html {
@@ -18,7 +21,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: OpenSans-Regular;
   font-weight: 600;
 }
 

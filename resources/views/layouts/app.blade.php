@@ -10,11 +10,13 @@
   <title>Omnilinkz</title>
 
   <!-- Scripts -->
-  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
+  <!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
   <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+  <script src="{{ asset('js/angular.js') }}"></script>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
   <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
   <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
   <script src="{{ asset('datatables/datatables/js/jquery.dataTables.min.js') }}"></script>
@@ -22,15 +24,17 @@
   <script src="{{ asset('js/moment.js') }}"></script>
   <script src="{{ asset('js/datetime-moment.js') }}"></script>
   <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
+  <script src="{{asset('js/all.js')}}"></script>
 
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
   <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
   <link href="{{ asset('datatables/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
   <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>

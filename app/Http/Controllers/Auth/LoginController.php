@@ -40,6 +40,7 @@ class LoginController extends Controller
     }
     
     public function verifyEmail($cryptedcode){
+      //Verifikasi email
         try {
           $decryptedcode = Crypt::decrypt($cryptedcode);
           $data = json_decode($decryptedcode);

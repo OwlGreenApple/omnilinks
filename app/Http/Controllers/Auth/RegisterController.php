@@ -73,6 +73,7 @@ class RegisterController extends Controller
   {       
     $ordercont = new OrderController;
 
+    //create user register
     $user = User::create([
       'email' => $data['email'],
       'name' => $data['name'],
