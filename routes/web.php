@@ -80,6 +80,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::post('/save-template','BiolinkController@savetemp');
     Route::get('/banner/load-banner','BiolinkController@addBanner');
     Route::post('/save-link','BiolinkController@savelink');
+    Route::get('/delete-photo','BiolinkController@delete_photo');
     Route::get('/load/pixelpage','BiolinkController@pixelpage');
     Route::get('/view/biolinks',function(){
         return view('user.link.link');

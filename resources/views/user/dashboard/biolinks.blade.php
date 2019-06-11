@@ -82,19 +82,21 @@
       data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'),
       url: "<?php echo url('/save-link');?>",
       success: function(result) {
-        $("#pesanAlert").html(data.message);
-        $("#pesanAlert").show();
         $(window).scrollTop(0);
         var data = jQuery.parseJSON(result);
+        $("#pesanAlert").html(data.message);
+        $("#pesanAlert").show();
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
           refreshwa();
           refreshpixel();
+          return true;
         }
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-success");
+          return false;
         }
       }
     });
@@ -319,6 +321,37 @@
     }
   }
 
+  function delete_photo(){
+    $.ajax({
+      type : 'get',
+      url : "<?php echo url('/delete-photo') ?>",
+      dataType: 'text',
+      data : {
+        id: "<?php echo $uuid; ?>",
+      },
+      beforeSend: function()
+      {
+      },
+      success: function(result) {
+        var data = jQuery.parseJSON(result);
+        
+        $('#pesanAlert').html(data.message);
+        $('#pesanAlert').show();
+        if(data.status=='success'){
+          $('#pesanAlert').removeClass('alert-warning');
+          $('#pesanAlert').addClass('alert-success');
+          
+          //
+          $('#wizardPicturePreview').attr('src', "<?php echo asset('image/no-photo.jpg'); ?>").fadeIn('slow');
+          // $('#viewpicture').attr('src', "<?php echo asset('image/no-photo.jpg'); ?>").fadeIn('slow');
+          $('#viewpicture').attr('src', "").fadeIn('slow');
+        } else {
+          $('#pesanAlert').removeClass('alert-success');
+          $('#pesanAlert').addClass('alert-warning');
+        }
+      }
+    });  
+  }
 
 </script>
 
@@ -895,16 +928,17 @@
                       <div class="row mt-5">
                         <div class="col-md-4 mb-3 picture-container">
                           <div class="picture">
-                            @if(is_null($pages->image_pages))
-                            <img src="https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg" class="picture-src" id="wizardPicturePreview" title="">
-                            @else
                             <img src="<?php 
-                            // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
-                            echo Storage::disk('s3')->url($pages->image_pages);
+                            if(is_null($pages->image_pages)){
+                              echo asset('image/no-photo.jpg');
+                            } 
+                            else {
+                              echo Storage::disk('s3')->url($pages->image_pages);
+                            }
                             ?>" class="picture-src" id="wizardPicturePreview" title="">
-                            @endif
-                            <input type="file" name="imagepages" id="wizard-picture" class="" accept=".png, .jpg">
+                            <input type="file" name="imagepages" id="file-wizard-picture" class="" accept=".png, .jpg">
                           </div>
+                          <i class="fa fa-trash" id="wizardPicturePreview-delete" aria-hidden="true"></i>
                         </div>
                         <div class="col-md-8">
                           @if(is_null($pages->page_title))
@@ -1163,12 +1197,12 @@
                     <div class="row">
                       <div class="col-md-2 col-3">
                         @if(is_null($pages->image_pages))
-                        <img id="viewpicture" src="" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px; display: none;">
+                          <img id="viewpicture" src="" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px; display: none;">
                         @else
-                        <img id="viewpicture" src="<?php 
-                        // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
-                        echo Storage::disk('s3')->url($pages->image_pages);
-                        ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
+                          <img id="viewpicture" src="<?php 
+                          // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                          echo Storage::disk('s3')->url($pages->image_pages);
+                          ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
                         @endif
                       </div>
                       <div class="col-md-10 col-8 p-2">
@@ -1245,7 +1279,7 @@
                       @if($links->count())
                       @foreach($links as $link)
                         <li id="link-preview-{{$link->id}}">
-                          <a href="#" class="btn btn-md btnview txthov" style="
+                          <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="
                           width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a>
                         </li>
                       @endforeach
@@ -1254,7 +1288,7 @@
                         <button type="button" class="btn btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
                         -->
                         <li class="">
-                          <a href="#" class="btn btn-md btnview txthov" style="
+                          <a href="#" class="btn btn-md btnview title-1-view-get txthov" style="
                           width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a>
                         </li>
                       @endif
@@ -1351,20 +1385,11 @@
       outputlink.text(inputlink.val());
       outputnomor.text(inputtelpon.val());
 
-      // let inputtitlelink=$('input[name="title[]"]');
-      // let output=$('input[name="[titlelinkoutput[]"]');
-      // if (inputtitlelink.length==output.length) 
-      // {
-
-      // }
       
-      // console.log(inputtitlelink[0]);
-    //let idlinkview=$('#title-'+execute+'-view');
     $(document).on('focus','.focuslink',function(){
       let inputlinkview=$(this);
       let getoutputviewlink=inputlinkview.attr('id');
       let outputviewlink=$('.'+getoutputviewlink+'-get');
-      //console(outputviewlink);
       $(document).on('keyup',inputlinkview,function(){
          outputviewlink.text(inputlinkview.val());
          if (inputlinkview.val()=='') {
@@ -1372,11 +1397,10 @@
          }
       });
     });
-
     $(document).on('focus','.focuslink-update',function(){
       let inputlinkview=$(this);
       let getoutputviewlink=inputlinkview.attr('id');
-      let outputviewlink=$('.'+getoutputviewlink+'-get');
+      let outputviewlink=$('.'+getoutputviewlink);
       $(document).on('keyup',inputlinkview,function(){
         outputviewlink.text(inputlinkview.val());
         if (inputlinkview.val()=='') {
@@ -1384,8 +1408,6 @@
         }
       });
     });
-
-
 
     $('.outlined').click(function() {
       check_outlined();
@@ -1608,8 +1630,14 @@
       }
     }
 
-    $("#wizard-picture").on('change', function() {
+    $("#wizardPicturePreview").on('click', function() {
+      $('#file-wizard-picture').trigger('click');
+    });
+    $(document).on('change', "#file-wizard-picture", function (e) {
       readURL(this);
+    });
+    $("#wizardPicturePreview-delete").on('click', function() {
+      delete_photo();
     });
     $(document).on('change','.pictureClass',function(){
       let inputthis=$(this).attr('id');
@@ -1776,7 +1804,7 @@
       $("#"+idthis+"-get").remove();
       $("."+idthis+"-dot").remove();
       // if () {}  
-        if($('.list-banner').length<=1){
+      if($('.list-banner').length<=1){
         elhtml = $('.div-banner').html();
         $('.prev').hide();
         $('.next').hide();
@@ -1840,8 +1868,9 @@
     });
 
     $(document).on("click", ".btn-save-link", function(e) {
-      tambahPages();
-      tambahTemp();
+      if (tambahPages()) {
+        tambahTemp();
+      }
       $('#pesanAlert').removeClass('alert-danger');
       $('#pesanAlert').children().remove();
       $(window).scrollTop(0);

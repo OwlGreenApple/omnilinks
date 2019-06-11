@@ -234,14 +234,16 @@
   border-color: #ff3b30;
 }
 .picture input[type="file"] {
+  display: none;
+/*
   cursor: pointer;
-  display: block;
   height: 100%;
   left: 0;
   opacity: 0 !important;
   position: absolute;
   top: 0;
   width: 100%;
+  */
 }
 
 .picture-src{
@@ -825,4 +827,7 @@ hr.own {
 }
 ul {
   list-style: none;
+}
+#wizardPicturePreview-delete{
+  z-index:999!important;
 }
