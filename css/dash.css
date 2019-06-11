@@ -476,7 +476,8 @@ hr.own {
 
 .mobile{
   width: 301px;
-  height: 586px;
+  /*height: 586px;*/
+  height: 100%;
   background:#F0F1F1;
   border-radius: 30px;
   border:2px solid rgba(0,0,0,.3);
@@ -484,7 +485,8 @@ hr.own {
 }
 .mobile1{
   width: 296px;
-  height: 580px;
+  /*height: 580px;*/
+  height: calc(100% - 3px);
   background:#000000;
   border-radius: 30px;
   border:2px solid rgba(0,0,0,.3);
@@ -496,7 +498,8 @@ hr.own {
   position: relative;
   background: #ffffff;
   width: 288px;
-  height: 568px;
+  /*height: 568px;*/
+  height: calc(100% - 5px);
   top: -54px;
   margin:58px auto;
   overflow: hidden;
@@ -522,9 +525,20 @@ hr.own {
   position: fixed;
   top: 50%;
   left: 50%;
+  height: 90%;
   margin-left: 130px;
   margin-top: -290px;
   z-index: 40;
+}
+
+.preview-center {
+  height: 100%;
+}
+
+@media screen and (min-height: 1180px) {
+  .fixed { 
+    height: 50%;
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -59,14 +59,21 @@ class BiolinkController extends Controller
                       ->count();
     if ($user->membership=='free') {
       if ($pageCheck>=1) {
-        return redirect('/dash')->with("error","maaf anda sudah tidak bisa membuat pages lagi,silahkan upgrade terlebih dahulu");
+        return redirect('/dash')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu");
       }
     }
     else if ($user->membership=='basic') {
-      if ($pageCheck>=5) {
-        return redirect('/dash')->with("error","maaf anda sudah tidak bisa membuat pages lagi,silahkan upgrade terlebih dahulu"); 
+      if ($pageCheck>=3) {
+        return redirect('/dash')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu"); 
       }
     }
+    else if ($user->membership=='elite') {
+      if ($pageCheck>=10) {
+        return redirect('/dash')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink"); 
+      }
+    }
+
+
     $num=7;
     do
     {
@@ -172,7 +179,7 @@ class BiolinkController extends Controller
     $validator = Validator::make($request->all(), [
       'judul' => ['required', 'string',  'max:255'],
       'link' => ['required', 'string', 'max:255'],
-      //'phone_no' => ['required', 'string', 'max:255'],
+      'phone_no' => ['required', 'string', 'max:255'],
       'imagepages' => ['required', 'file'],
       'judulBanner.*' => ['required', 'string', 'max:255'],
       'linkBanner.*' => ['required', 'active_url', 'max:255'],
@@ -219,7 +226,13 @@ class BiolinkController extends Controller
     $page->is_rounded=$request->rounded;
     $page->is_outlined=$request->outlined;
     
-    if($request->powered=='powered'){
+    /*if($request->powered=='powered'){
+      $page->powered=1;
+    }*/
+
+    if(Auth::user()->membership=='elite'){
+      $page->powered=0;
+    } else {
       $page->powered=1;
     }
     

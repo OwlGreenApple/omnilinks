@@ -10,11 +10,14 @@ use Ramsey\Uuid\Uuid;
 
 class SingleLinkController extends Controller
 {
-  public function newsingle()
-	 {
-	 
-		return view('user.dashboard.singlebiolinks');
-	 }
+  public function newsingle() {
+	  if(Auth::user()->membership=='free') {
+      return abort(404);
+    } else {
+      return view('user.dashboard.singlebiolinks');
+    }
+	}
+
  	public function single(Request $request)
  	{
     if(is_null($request->idlink))

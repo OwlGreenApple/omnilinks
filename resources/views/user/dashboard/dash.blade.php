@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<?php use App\Helpers\Helper; ?>
+
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/sb-admin.css')}}">
 
@@ -63,6 +65,10 @@
           }
 
           $('#total-click').html(data.total_click);
+
+          <?php if(Auth::user()->membership=='free') { ?>
+            $('.show-chart').hide();
+          <?php } ?>
       }
     });
   }
@@ -132,16 +138,24 @@
 <div class="container mb-5">
   <div class="row notif">
     <div class="col-md-12 mb-3">
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-          <span aria-hidden="true">×</span>
-        </button>
-        Masa trial anda akan berakhir dalam 5 hari. 
-        <a href="{{url('pricing')}}">
-          Subscribe
-        </a>
-        untuk terus menggunakan Omnilinkz
-      </div>
+
+      <!--@if(Auth::user()->membership=='free')
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+          </button>
+          <?php  
+            $time = Helper::get_trial_time();
+            echo $time;
+          ?>
+          
+          <a href="{{url('pricing')}}">
+            Subscribe
+          </a>
+          untuk terus menggunakan Omnilinkz
+        </div>
+      @endif-->
+
       @if (session('error'))
         <div class="alert alert-danger">
           <button type="button" class="close" aria-label="Close" data-dismiss="alert">
@@ -159,13 +173,16 @@
             BIO LINK  
           </button>
         </div>
-        <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
-          <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
-            <button class="btnsingle btn-block btncreate">
-              SINGLE LINK  
-            </button>
-          </a>
-        </div>  
+
+        @if(Auth::user()->membership!='free')
+          <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
+            <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
+              <button class="btnsingle btn-block btncreate">
+                SINGLE LINK  
+              </button>
+            </a>
+          </div> 
+        @endif 
       </div>
     </div>
 
@@ -229,7 +246,7 @@
 
       <hr style="margin-bottom: 45px">
 
-    <div class="row">
+    <div class="row show-chart">
       <div class="col-md-8 order-md-1 order-2">
         <div id="chartContainer" style="height:300px; width:100%; margin-bottom:40px"></div>    
       </div>

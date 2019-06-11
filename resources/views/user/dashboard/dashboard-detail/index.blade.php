@@ -103,6 +103,10 @@
 
           $('#total-click').html(data.total_click);
           $('#content').html(data.view);
+
+          <?php if(Auth::user()->membership=='free') { ?>
+            $('.show-chart').hide();
+          <?php } ?>
       }
     });
   }
@@ -231,7 +235,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row show-chart">
         <div class="col-md-8 order-md-1 order-2">
           <div id="chartContainer" style="height:300px; width:100%; margin-bottom:40px"></div>    
         </div>

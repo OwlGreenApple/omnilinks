@@ -47,11 +47,11 @@
         <div class="card-body pricing">
           <h5 class="gray-color">
             <b class="sbold small">
-              FREE TRIAL
+              FREE
             </b>  
           </h5>
           <span class="harga harga-small free">
-            <sup>Rp</sup> 0 <sub>/bln</sub>
+            <sup>Rp</sup> 0<sub> /bln</sub>
           </span><br>
           @if(!Auth::check())
           <a class="link-free" href="{{url('register')}}">
@@ -113,7 +113,7 @@
             <span class="gray-color">
               <h3>
                 <b class="sbold">
-                  FREE TRIAL
+                  FREE
                 </b>  
               </h3>
             </span>
@@ -121,10 +121,10 @@
 
           <div class="col-md-12 pb-3">
             <span class="harga free">
-              <sup>Rp</sup> 0 <sub>/bln</sub>
+              <sup>Rp</sup> 0<sub> /bln</sub>
             </span><br>
             <span class="harga-real free">
-              7 Hari Gratis
+              selamanya
             </span><br>
             <p class="hemat monthly mt-4">
               <i class="fas fa-redo-alt"></i>
@@ -148,7 +148,7 @@
                 1
               </div>  
               <div class="col-md-9 col-9 text-left">
-                Omnilinkz 
+                Omnilinkz URL
                 &nbsp;
                 <span class="tooltipstered" title="Omnilinkz">
                   <i class="fas fa-question-circle icon-reflink"></i>
@@ -157,8 +157,25 @@
             </div>
 
             <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2">
+                <span class="red-color">
+                  <i class="fas fa-times-circle"></i>
+                </span>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Premium ID
+                &nbsp;
+                <span class="tooltipstered" title="Premium ID">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                5
+                <span class="red-color">
+                  <i class="fas fa-times-circle"></i>
+                </span>
               </div>
               <div class="col-md-9 col-9 text-left">
                 Single Link
@@ -170,13 +187,13 @@
             </div>
 
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                10
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
+                1000
               </div>
               <div class="col-md-9 col-9 text-left">
-                Click/Hari
+                Clicks/Bulan
                 &nbsp;
-                <span class="tooltipstered" title="Click/Hari">
+                <span class="tooltipstered" title="Clicks/Bulan">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -214,18 +231,48 @@
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                5
+                <span class="red-color">
+                  <i class="fas fa-times-circle"></i>
+                </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Themes
+                Banner Promo
                 &nbsp;
-                <span class="tooltipstered" title="Themes">
+                <span class="tooltipstered" title="Banner Promo">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
             </div>
 
-            
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
+                </span>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Omnlinkz Brand
+                &nbsp;
+                <span class="tooltipstered" title="Omnilinkz Brand">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1  col-md-2 col-2">
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
+                </span>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Click to WA Creator
+                &nbsp;
+                <span class="tooltipstered" title="Click to WA Creator">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2">
@@ -294,21 +341,6 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                WeChat
-                &nbsp;
-                <span class="tooltipstered" title="WeChat">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
                 Telegram
                 &nbsp;
                 <span class="tooltipstered" title="Telegram">
@@ -319,8 +351,8 @@
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
@@ -334,8 +366,8 @@
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
@@ -349,8 +381,8 @@
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
@@ -364,8 +396,8 @@
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
@@ -378,10 +410,8 @@
             </div>
 
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
+                Email
               </div>
               <div class="col-md-9 col-9 text-left">
                 Priority Support
@@ -393,15 +423,13 @@
             </div>
 
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                5
               </div>
               <div class="col-md-9 col-9 text-left">
-                Banner Promo
+                Themes
                 &nbsp;
-                <span class="tooltipstered" title="Banner Promo">
+                <span class="tooltipstered" title="Themes">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -409,29 +437,14 @@
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Click to WA Creator
+                Jumlah Klik
                 &nbsp;
-                <span class="tooltipstered" title="Click to WA Creator">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Report Analytics
-                &nbsp;
-                <span class="tooltipstered" title="Report Analytics">
+                <span class="tooltipstered" title="Jumlah Klik">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -444,9 +457,9 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                With Label
+                Chart Analytic
                 &nbsp;
-                <span class="tooltipstered" title="White Label">
+                <span class="tooltipstered" title="Chart Analytic">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -500,10 +513,10 @@
           <div class="upgrade-details2">
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                5
+                3
               </div>  
               <div class="col-md-9 col-9 text-left">
-                Omnilinkz
+                Omnilinkz URL
                 &nbsp;
                 <span class="tooltipstered" title="Omnilinkz">
                   <i class="fas fa-question-circle icon-reflink"></i>
@@ -513,7 +526,20 @@
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                5
+                3
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Premium ID
+                &nbsp;
+                <span class="tooltipstered" title="Premium ID">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-infinity"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
                 Single Link
@@ -529,9 +555,9 @@
                 <i class="fas fa-infinity"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Click/Hari
+                Clicks/Bulan
                 &nbsp;
-                <span class="tooltipstered" title="Click/Hari">
+                <span class="tooltipstered" title="Clicks/Bulan">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -581,6 +607,21 @@
             </div>
 
             <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
+                </span>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Omnlinkz Brand
+                &nbsp;
+                <span class="tooltipstered" title="Omnilinkz Brand">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2">
                 <span class="green-color">
                   <i class="fas fa-check-circle"></i>
@@ -662,21 +703,6 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                WeChat
-                &nbsp;
-                <span class="tooltipstered" title="WeChat">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
                 Telegram
                 &nbsp;
                 <span class="tooltipstered" title="Telegram">
@@ -746,10 +772,8 @@
             </div>
 
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
+                Chat
               </div>
               <div class="col-md-9 col-9 text-left">
                 Priority Support
@@ -780,24 +804,24 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Report Analytics
+                Jumlah Klik
                 &nbsp;
-                <span class="tooltipstered" title="Report Analytics">
+                <span class="tooltipstered" title="Jumlah Klik">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
             </div>
-
+            
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
+              <div class="offset-md-1 offset-1 col-md-2 col-2">
+                <span class="green-color">
+                  <i class="fas fa-check-circle"></i>
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                With Label
+                Chart Analytic
                 &nbsp;
-                <span class="tooltipstered" title="White Label">
+                <span class="tooltipstered" title="Chart Analytic">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -842,12 +866,25 @@
           <div class="upgrade-details2">
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-infinity"></i>
+                10
               </div>  
               <div class="col-md-9 col-9 text-left">
-                Omnilinkz
+                Omnilinkz URL
                 &nbsp;
                 <span class="tooltipstered" title="Omnilinkz">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                10
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Premium ID
+                &nbsp;
+                <span class="tooltipstered" title="Premium ID">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -871,9 +908,9 @@
                 <i class="fas fa-infinity"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Click/Hari
+                Clicks/Bulan
                 &nbsp;
-                <span class="tooltipstered" title="Click/Hari">
+                <span class="tooltipstered" title="Clicks/Bulan">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
@@ -923,6 +960,21 @@
             </div>
 
             <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <span class="red-color">
+                  <i class="fas fa-times-circle"></i>
+                </span>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Omnilinkz Brand
+                &nbsp;
+                <span class="tooltipstered" title="Omnilinkz Brand">
+                  <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2">
                 <span class="green-color">
                   <i class="fas fa-check-circle"></i>
@@ -1004,21 +1056,6 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                WeChat
-                &nbsp;
-                <span class="tooltipstered" title="WeChat">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
                 Telegram
                 &nbsp;
                 <span class="tooltipstered" title="Telegram">
@@ -1088,10 +1125,8 @@
             </div>
 
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
+                Chat
               </div>
               <div class="col-md-9 col-9 text-left">
                 Priority Support
@@ -1122,28 +1157,28 @@
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Report Analytics
+                Jumlah Klik
                 &nbsp;
-                <span class="tooltipstered" title="Report Analytics">
+                <span class="tooltipstered" title="Jumlah Klik">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
             </div>
-
+            
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2">
                 <span class="green-color">
                   <i class="fas fa-check-circle"></i>
                 </span>
               </div>
               <div class="col-md-9 col-9 text-left">
-                With Label
+                Chart Analytic
                 &nbsp;
-                <span class="tooltipstered" title="White Label">
+                <span class="tooltipstered" title="Chart Analytic">
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
-            </div>                   
+            </div>                 
           </div>
         </div>
       </div>

@@ -179,7 +179,7 @@
       </ul>
 
       <div class="col-lg-7 col-md-8 text-center">
-        @if(!is_null($pages->powered))
+        @if($pages->powered==1)
           <span style="font-size: small;">powered by</span>
           <br>
           <img style="width: 150px; margin-bottom: 50px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">

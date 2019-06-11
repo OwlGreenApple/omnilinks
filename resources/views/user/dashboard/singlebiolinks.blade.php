@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<?php use App\Helpers\Helper; ?>
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 
 <script type="text/javascript">
@@ -226,16 +227,22 @@
         </h4>
         <br>
 
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-            <span aria-hidden="true">×</span>
-          </button>
-          Masa trial anda akan berakhir dalam 5 hari. 
-          <a href="{{url('pricing')}}">
-            Subscribe
-          </a>
-          untuk terus menggunakan Omnilinkz
-        </div>
+        <!--@if(Auth::user()->membership=='free')
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+              <span aria-hidden="true">×</span>
+            </button>
+            <?php  
+              $time = Helper::get_trial_time();
+              echo $time;
+            ?>
+            
+            <a href="{{url('pricing')}}">
+              Subscribe
+            </a>
+            untuk terus menggunakan Omnilinkz
+          </div>
+        @endif-->
 
         <div id="pesan" class="alert"></div>
         

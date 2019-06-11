@@ -5,7 +5,7 @@ namespace App\Helpers;
 * 
 */
 use Carbon;
-use DB, Crypt, App;
+use DB, Crypt, App, DateTime, Auth;
 
 class Helper
 {
@@ -75,6 +75,30 @@ class Helper
 		return $search.str_pad($ctr, $pad_length, $pad_string, STR_PAD_LEFT);
   }
 	
+  public static function get_trial_time(){
+    $user = Auth::user();
+    $now = new DateTime();
+    $time = -1;
+
+    if($user->valid_until!=null){
+      $date = new DateTime($user->valid_until);
+      $interval = $date->diff($now)->format('%d');
+
+      if($date<$now){
+        $time = -1;
+      } else {
+        $time = $interval;  
+      }
+    } 
+
+    if($time>0){
+      return 'Masa trial anda akan berakhir dalam '.$time.' hari. ';
+    } else if($time==0) {
+      return 'Masa trial anda akan berakhir besok. ';
+    } else {
+      return 'Masa trial anda telah berakhir. ';
+    }
+  }
 }
 
 ?>

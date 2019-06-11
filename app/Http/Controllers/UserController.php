@@ -141,11 +141,7 @@ class UserController extends Controller
       if($validator->fails()){
         $failedRules = $validator->failed();
         
-        if(!isset($failedRules['password']) or !isset($failedRules['email']['Unique'])){
-          $arr['status'] = 'error';
-          $arr['message'] = $validator->errors()->first();
-          return $arr;
-        } else if(isset($failedRules['email']['Unique'])){
+        if(isset($failedRules['email']['Unique'])){
           if($user->email==$request->email){
             if(isset($failedRules['password'])){
               if($request->password=='' or $request->password==null){
@@ -167,6 +163,10 @@ class UserController extends Controller
             $arr['message'] = $validator->errors()->first();
             return $arr;
           }
+        } else if(!isset($failedRules['password']) or !isset($failedRules['email']['Unique'])){
+          $arr['status'] = 'error';
+          $arr['message'] = $validator->errors()->first();
+          return $arr;
         }
       }
 

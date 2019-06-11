@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<?php use App\Helpers\Helper; ?>
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
+
 <style type="text/css">
   @media screen and (max-width: 768px) {
     .menu-nomobile{
@@ -15,6 +17,7 @@
     }
   }
 </style>
+
 <script type="text/javascript">
   var picker;
   var color_picker,rounded,outline;
@@ -331,16 +334,22 @@
         </h4>
         <br>
 
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-          Masa trial anda akan berakhir dalam 5 hari. 
-          <a class="back-link" href="{{url('pricing')}}">
-            Subscribe
-          </a>
-          untuk terus menggunakan Omnilinkz
-        </div>
+        <!--@if(Auth::user()->membership=='free')
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+              <span aria-hidden="true">×</span>
+            </button>
+            <?php  
+              $time = Helper::get_trial_time();
+              echo $time;
+            ?>
+            
+            <a class="back-link" href="{{url('pricing')}}">
+              Subscribe
+            </a>
+            untuk terus menggunakan Omnilinkz
+          </div>
+        @endif-->
       </div>
 
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
@@ -355,7 +364,7 @@
                   Link
                 </a>
               </li>
-              @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+
               <li class="nav-item">
                 <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
                   WA Link Creator
@@ -367,7 +376,7 @@
                   Pixel
                 </a>
               </li>
-              @endif
+              
               <li class="nav-item">
                 <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
                   Tampilan
@@ -911,7 +920,7 @@
                           @if(is_null($pages->telpon_utama))
                           <input type="number" name="phone_no" id="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
                           @else
-                          <input type="number" name="nomor" id="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
+                          <input type="number" name="phone_no" id="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
                           @endif
                         </div>
                         <div class="col-md-12 mt-4">
@@ -1106,10 +1115,10 @@
                           </div>
                         </div>
                       </div>
-                      <label class="switch mb-4">
+                      <!--<label class="switch mb-4">
                         <input type="checkbox" name="powered" id="powered" value="powered" checked="">
                         <span class="slider round"></span>
-                      </label> &nbsp; Powered By Omnilinks<br>
+                      </label> &nbsp; Powered By Omnilinks<br>-->
 
                       <div class="offset-md-8 col-md-4 pr-0 menu-nomobile">
                         <button type="button" class="btn btn-primary btn-block btn-biolinks savetemp" id="savetemp">
@@ -1145,7 +1154,7 @@
       <!--phone-->
       <div class="col-md-5">
         <div class="fixed">
-          <div class="center">
+          <div class="center preview-center">
             <div class="mobile d-none d-lg-block">
               <div class="mobile1">
                 <div class="screen colorgradient1" id="phonecolor" style="border:none; overflow-y:auto; ">
@@ -1274,17 +1283,21 @@
                       </a>  
                     </li>  
                   </ul>
-                  <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
-                    <div class="powered-omnilinks">
-                      <a href="#">
-                        <span style="font-size:11px; color: #fff;">
-                          powered by
-                        </span>
-                        <br>&nbsp;&nbsp;
-                        <img style="width: 110px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
-                      </a>
+
+                  @if(Auth::user()->membership!='elite')
+                    <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
+                      <div class="powered-omnilinks">
+                        <a href="#">
+                          <span style="font-size:11px; color: #fff;">
+                            powered by
+                          </span>
+                          <br>&nbsp;&nbsp;
+                          <img style="width: 110px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  @endif
+
                 </div>
               </div>
             </div>
