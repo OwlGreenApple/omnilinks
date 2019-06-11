@@ -172,10 +172,10 @@ class BiolinkController extends Controller
     $validator = Validator::make($request->all(), [
       'judul' => ['required', 'string',  'max:255'],
       'link' => ['required', 'string', 'max:255'],
-      //'phone_no' => ['required', 'string', 'max:255'],
-      'imagepages' => ['required', 'file'],
-      'judulBanner.*' => ['required', 'string', 'max:255'],
-      'linkBanner.*' => ['required', 'active_url', 'max:255'],
+      // 'phone_no' => ['required', 'string', 'max:255'],
+      // 'imagepages' => ['required', 'file'],
+      // 'judulBanner.*' => ['required', 'string', 'max:255'],
+      // 'linkBanner.*' => ['required', 'active_url', 'max:255'],
     ]); 
     
     if($validator->fails()) {
@@ -252,6 +252,18 @@ class BiolinkController extends Controller
           }
           $banner= Banner::where('id','=',$request->idBanner[$i])->first();
         }
+        
+        //pengecekan banner 
+        $validator = Validator::make($request->all(), [
+          'judulBanner.'.$i => ['required', 'string', 'max:255'],
+          'linkBanner.'.$i => ['required', 'active_url', 'max:255'],
+        ]); 
+        if($validator->fails()) {
+          $arr['status'] = 'error';
+          $arr['message'] = $validator->errors()->first();
+          return $arr;
+        }
+        
         $banner->users_id=$user->id;
         $banner->pages_id=$page->id;
         $banner->title=$request->judulBanner[$i];
@@ -295,12 +307,9 @@ class BiolinkController extends Controller
   public function savelink(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'judul' => ['required', 'string',  'max:255'],
-      'link' => ['required', 'string', 'max:255'],
-      'phone_no' => ['required', 'string', 'max:255'],
-      'imagepages' => ['required', 'file'],
-      'judulBanner.*' => ['required', 'string', 'max:255'],
-      'linkBanner.*' => ['required', 'active_url', 'max:255'],
+      'wa' => [ 'max:255'],
+      'telegram' => ['max:255'],
+      'skype' => ['max:255'],
     ]); 
     
     if($validator->fails()) {
@@ -355,11 +364,24 @@ class BiolinkController extends Controller
         $url=Link::where('id','=',$id[$i])->first();
       }
 
+      // Pengecekan Link
+      $validator = Validator::make($request->all(), [
+        'title.'.$i => ['required', 'string', 'max:255'],
+        'url.'.$i => ['required', 'active_url', 'max:255'],
+      ]); 
+      if($validator->fails()) {
+        $arr['status'] = 'error';
+        $arr['message'] = $validator->errors()->first();
+        return $arr;
+      }
+
       $url->pages_id=$page->id;
       $url->names=null;
       $url->users_id=$user->id;
-      $url->title=$title[$i];
-      $url->link=$link[$i];
+      $url->title=$request->title[$i];
+      $url->link=$request->url[$i];
+      // $url->title=$title[$i];
+      // $url->link=$link[$i];
       $url->save();
 
       /*if($sort_link=='')
@@ -658,4 +680,18 @@ class BiolinkController extends Controller
     }
   }
 
+  public function delete_photo(Request $request){
+    $page=Page::where('uid','=',$request->id)->first();
+
+    if($page->image_pages!=''){
+      Storage::disk('s3')->delete($page->image_pages);
+      $page->image_pages = null;
+      $page->save();
+    }
+
+    $arr['status'] = 'success';
+    $arr['message'] = 'Delete picture berhasil';
+
+    return $arr;
+  }
 }
