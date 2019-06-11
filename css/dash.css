@@ -537,6 +537,12 @@ hr.own {
   height: 100%;
 }
 
+@media screen and (min-height: 945px) {
+  .fixed { 
+    height: 65%;
+  }
+}
+
 @media screen and (min-height: 1180px) {
   .fixed { 
     height: 50%;
