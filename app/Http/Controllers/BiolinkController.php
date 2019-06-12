@@ -6,7 +6,10 @@ use App\User;
 use App\Pixel;
 use App\Banner;
 use App\Whatsapplink;
+
 use App\Helpers\Helper;
+use App\Http\Controllers\DashboardController;
+
 use Illuminate\Http\Request;
 use Auth,Carbon,Validator,Storage;
 use Ramsey\Uuid\Uuid;
@@ -335,13 +338,17 @@ class BiolinkController extends Controller
   	$uuid=$request->uuid;
   	$page=Page::where('uid','=',$uuid)->first();
   	$user=Auth::user();
-    $wa=$request->wapixel;
-    $twitter=$request->twitterpixel;
-    $telegram=$request->telegrampixel;
-    $youtube=$request->youtubepixel;
-    $ig=$request->igpixel;
-    $skype=$request->skypepixel;
-    $fb=$request->fbpixel;
+
+    $wa = $request->wapixel;
+    $twitter = $request->twitterpixel;
+    $telegram = $request->telegrampixel;
+    $youtube = $request->youtubepixel;
+    $ig = $request->igpixel;
+    $skype = $request->skypepixel;
+    $fb = $request->fbpixel;
+    $line = $request->linepixel;
+    $messenger = $request->messengerpixel;
+
     $page->wa_pixel_id=$wa;
     $page->twitter_pixel_id=$twitter;
     $page->ig_pixel_id=$ig;
@@ -349,6 +356,9 @@ class BiolinkController extends Controller
     $page->youtube_pixel_id=$youtube;
     $page->skype_pixel_id=$skype;
     $page->fb_pixel_id=$fb;
+    $page->line_pixel_id=$line;
+    $page->messenger_pixel_id=$messenger;
+
   	$page->wa_link=$request->wa;
   	$page->fb_link=$request->fb;
   	$page->twitter_link=$request->twitter;
@@ -356,6 +366,9 @@ class BiolinkController extends Controller
   	$page->skype_link=$request->skype;
   	$page->youtube_link=$request->youtube;
   	$page->ig_link=$request->ig;
+    $page->line_link=$request->line;
+    $page->messenger_link=$request->messenger;
+
   	$names=$page->names;
   	$title=$request->title;
   	$link=$request->url;
@@ -573,6 +586,17 @@ class BiolinkController extends Controller
   }
 
   public function click($mode,$id){
+    $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/all/total-click/counter.txt';
+
+    $dash = new DashboardController;
+    $clicks = $dash->check_file($filename);
+
+    if(Auth::user()->membership=='free'){
+      if($clicks>=1000){
+        return abort(404);
+      }
+    }
+
     //function redirect link
     if($mode=='link'){
       $link = Link::find($id);
@@ -647,6 +671,16 @@ class BiolinkController extends Controller
           $link = $pages->skype_link;
           $idpixel = $pages->skype_pixel_id;
         break;
+        case "line":
+          $pages->line_link_counter = $pages->line_link_counter+1;
+          $link = $pages->line_link;
+          $idpixel = $pages->line_pixel_id;
+        break;
+        case "messenger":
+          $pages->messenger_link_counter = $pages->messenger_link_counter+1;
+          $link = $pages->messenger_link;
+          $idpixel = $pages->messenger_pixel_id;
+        break;
         case "youtube":
           $pages->youtube_link_counter = $pages->youtube_link_counter+1;
           $link = $pages->youtube_link;
@@ -686,6 +720,7 @@ class BiolinkController extends Controller
         //echo "</script>";
       }
       // return redirect($link);
+
       return view('user.script')->with([
         'script'=>$script,
         'link'=>$link,

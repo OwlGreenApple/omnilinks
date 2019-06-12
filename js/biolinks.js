@@ -129,6 +129,29 @@ $(document).ready(function () {
         return false;
     });
 
+    $('#deleteline').on('click', function () {
+        $('#line').hide();
+        $('#line').addClass('hide');
+        $('#line').find("input").val('');
+        $('#lineviewid').hide();
+        $('#lineviewid').addClass('hide');
+        $('#lineviewid').removeClass('shown-mes');
+        //changeLength();
+        return false;
+    });
+
+    $('#deletemessenger').on('click', function () {
+        $('#messenger').hide();
+        $('#messenger').addClass('hide');
+        $('#messenger').find("input").val('');
+        $('#messengerviewid').hide();
+        $('#messengerviewid').addClass('hide');
+        $('#messengerviewid').removeClass('shown-mes');
+        //changeLength();
+        return false;
+    });
+
+
     /* biolink link */
     $(document).on('click', '#addlink', function (e) {
         var $el;

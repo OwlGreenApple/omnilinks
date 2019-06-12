@@ -179,6 +179,9 @@
         $('#wapixel').html(data.view);
         $('#telegrampixel').html(data.view);
         $('#skypepixel').html(data.view);
+        $('#linepixel').html(data.view);
+        $('#messengerpixel').html(data.view);
+
         $('#youtubepixel').html(data.view);
         $('#fbpixel').html(data.view);
         $('#igpixel').html(data.view);
@@ -538,6 +541,74 @@
                             <span>
                               <i class="far fa-trash-alt"></i>
                             </span> 
+                          </div>
+                        </div>
+                      </li>
+
+                      <li id="msg-li-line"> <!-- line -->
+                        <div id="line" class="messengers div-table hide" style="display:none;">
+                          <div class="div-cell">
+                            <span class="handle">
+                              <i class="fas fa-bars"></i>
+                            </span>
+                          </div>
+
+                          <div class="div-cell">
+                            <div class="col-md-12 col-12 pr-0 pl-0">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-line"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="line" class="form-control line-input" value="{{$pages->line_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor Line">
+                                <input type="hidden" name="sortmsg[]" value="" data-val="line" class="input-hidden">
+                              </div>
+                            </div>
+
+                            <div class="col-md-12 col-12 pr-0 pl-0">
+                              <select name="linepixel" class="form-control" id="linepixel"></select>
+                            </div>
+                          </div>
+
+                          <div class="div-cell cell-btn" id="deleteline">
+                            <span>
+                              <i class="far fa-trash-alt"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li id="msg-li-messenger"> <!-- messenger -->
+                        <div id="messenger" class="messengers div-table hide" style="display:none;">
+                          <div class="div-cell">
+                            <span class="handle">
+                              <i class="fas fa-bars"></i>
+                            </span>
+                          </div>
+
+                          <div class="div-cell">
+                            <div class="col-md-12 col-12 pr-0 pl-0">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="fab fa-facebook-messenger"></i>
+                                  </div>
+                                </div>
+                                <input type="text" name="messenger" class="form-control messenger-input" value="{{$pages->messenger_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor Messenger">
+                                <input type="hidden" name="sortmsg[]" value="" data-val="messenger" class="input-hidden">
+                              </div>
+                            </div>
+
+                            <div class="col-md-12 col-12 pr-0 pl-0">
+                              <select name="messengerpixel" class="form-control" id="messengerpixel"></select>
+                            </div>
+                          </div>
+
+                          <div class="div-cell cell-btn" id="deletemessenger">
+                            <span>
+                              <i class="far fa-trash-alt"></i>
+                            </span>
                           </div>
                         </div>
                       </li>
@@ -1277,6 +1348,14 @@
                     <li class="link col pl-1 pr-1 hide" id="skypeviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
                       width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
+                    </li>
+                    <li class="link col pl-1 pr-1 hide" id="lineviewid" >
+                      <a href="#" class="btn btn-md btnview txthov" style="
+                      width: 100%;  padding-left: 2px;" id="linelinkview"><i class="fab fa-line"></i><label class="" style="font-size: xx-small;">&nbsp Line</label></a>
+                    </li>
+                    <li class="link col pl-1 pr-1 hide" id="messengerviewid" >
+                      <a href="#" class="btn btn-md btnview txthov" style="
+                      width: 100%;  padding-left: 2px;" id="messengerlinkview"><i class="fab fa-facebook-messenger"></i><label class="" style="font-size: xx-small;">&nbsp Messenger</label></a>
                     </li>
                   </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
