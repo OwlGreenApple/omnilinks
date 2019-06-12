@@ -254,7 +254,7 @@ class BiolinkController extends Controller
           if ($ratio_img<1.2)  {
             $arr['status'] = 'error';
             $temp = $i+1;
-            $arr['message'] ='Image ke-'. $temp .' ratio width / height harus lebih besar dari 1.2';
+            $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih besar dari 1.2';
             return $arr;
           }
         }

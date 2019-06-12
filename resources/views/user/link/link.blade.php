@@ -21,20 +21,22 @@
 </head>
 
 @if(is_null($pages->template))
-<body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a ">
+<body style=" color:#fff; background-color:{{$pages->color_picker}};height : 100vh;" class="a ">
 @else
-<body class="{{$pages->template}} " >
+<body class="{{$pages->template}} " style="height : 100vh;">
 @endif
   
   <div class="col-md-12 col-12 mt-5">
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-8 col-12 mb-4 row">
-        <div class="offset-md-1 col-md-5 col-5 text-right">
+        <div class="offset-md-1 col-md-5 col-5">
           @if(!is_null($pages->image_pages))
-            <img src="<?php 
-            // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
-            echo Storage::disk('s3')->url($pages->image_pages);
-            ?>" class="imagetitle" >
+            <div class="div-imagetitle">
+              <img src="<?php 
+              // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
+              echo Storage::disk('s3')->url($pages->image_pages);
+              ?>" class="imagetitle">
+            </div>
           @endif
         </div>
         
@@ -71,13 +73,13 @@
             </div>
             @if($banner->count())
               @if(!is_null($banner[0]->images_banner))
-                @foreach($banner as $banner)
+                @foreach($banner as $banner1)
                   <div class="imageHolder">
-                    <a href="{{url('click/banner/'.$banner->id)}}" target="_blank">
+                    <a href="{{url('click/banner/'.$banner1->id)}}" target="_blank">
                       <img src="<?php 
                       // echo url(Storage::disk('local')->url('app/'.$banner->images_banner));
-                        if(is_null($banner->images_banner)){
-                          echo Storage::disk('s3')->url($banner->images_banner);
+                        if(!is_null($banner1->images_banner)){
+                          echo Storage::disk('s3')->url($banner1->images_banner);
                         }
                       ?>" class="">
                       <p class="captionText"></p> 

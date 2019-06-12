@@ -208,7 +208,7 @@
 }
 .picture{
   width: 106px;
-  height: 106px;
+  height: auto;//ganti ke 106px supaya ada background gray 
   background-color: #999999;
   border: 4px solid #CCCCCC;
   color: #FFFFFF;

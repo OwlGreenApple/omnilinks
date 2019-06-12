@@ -348,6 +348,8 @@
           $('#wizardPicturePreview').attr('src', "<?php echo asset('image/no-photo.jpg'); ?>").fadeIn('slow');
           // $('#viewpicture').attr('src', "<?php echo asset('image/no-photo.jpg'); ?>").fadeIn('slow');
           $('#viewpicture').attr('src', "").fadeIn('slow');
+          
+          $("#wizardPicturePreview-delete").hide();
         } else {
           $('#pesanAlert').removeClass('alert-success');
           $('#pesanAlert').addClass('alert-warning');
@@ -1006,7 +1008,7 @@
                             else {
                               echo Storage::disk('s3')->url($pages->image_pages);
                             }
-                            ?>" class="picture-src" id="wizardPicturePreview" title="">
+                            ?>" class="picture-src img-responsive" id="wizardPicturePreview" title="">
                             <input type="file" name="imagepages" id="file-wizard-picture" class="" accept=".png, .jpg">
                           </div>
                           <i class="fa fa-trash" id="wizardPicturePreview-delete" aria-hidden="true"></i>
@@ -1267,14 +1269,15 @@
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
-                        @if(is_null($pages->image_pages))
-                          <img id="viewpicture" src="" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px; display: none;">
-                        @else
-                          <img id="viewpicture" src="<?php 
-                          // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
-                          echo Storage::disk('s3')->url($pages->image_pages);
-                          ?>" style="border-radius: 50%; width: 82px; height: 82px; margin-left: 13px;">
-                        @endif
+                        <div style="width: 82px; height: 82px; margin-left: 13px; <?php if(is_null($pages->image_pages)) { echo 'display: none;'; } ?>">
+                          @if(is_null($pages->image_pages))
+                          @else
+                            <img id="viewpicture" src="<?php 
+                            // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                            echo Storage::disk('s3')->url($pages->image_pages);
+                            ?>" style="width:100%;height:auto;border-radius: 50%;">
+                          @endif
+                        </div>
                       </div>
                       <div class="col-md-10 col-8 p-2">
                         <ul style="margin-left: 23px; font-size: 11px;">
@@ -1704,6 +1707,7 @@
           $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
 
           $('#viewpicture').show();
+          $("#wizardPicturePreview-delete").show();
         }
         reader.readAsDataURL(input.files[0]);
       }
@@ -2071,6 +2075,13 @@
     currentSlide(0);
     check_outlined();
     check_rounded();
+    <?php 
+      if(is_null($pages->image_pages)){
+    ?>
+      $("#wizardPicturePreview-delete").hide();
+    <?php }
+    ?>
+    
   });
 
 
