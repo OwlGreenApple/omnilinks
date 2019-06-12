@@ -93,43 +93,99 @@
         </div>
       </div>
 
-      <ul class="col-lg-7 col-md-8 mb-3 row" style="padding-left: 24px; padding-right: 24px;">
-        <?php foreach ($sort_msg as $msg) { ?>
-          <li class="col pl-1 pr-1">
-            @if($msg=='wa' and !is_null($pages->wa_link))
+      <ul class="col-lg-7 col-md-8 mb-0 row" style="padding-left: 24px; padding-right: 24px;">
+        <?php 
+          $div = floor(count($sort_msg)/3);
+          $mod = count($sort_msg)%3;
+
+          $colsisa = 0;
+          if($mod>0){
+            $colsisa = 12/$mod;
+          }
+        
+          $col = 0;
+          $count_3 = 0;
+          
+          foreach ($sort_msg as $msg) { 
+            if($div<=0){
+              $col = $colsisa;
+            } else {
+              $col = 4;
+            }
+        ?>  
+      
+          @if($msg=='wa' and !is_null($pages->wa_link))
+            <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-whatsapp icon-msg"></i>
-                  @if(count($sort_msg)<3)
+                  @if($div==0)
                     <span class="textbutton"> WhatsApp</span>
                   @endif
                 </button>
               </a>
-            @endif 
+            </li>
+          @endif 
 
-            @if($msg=='skype' and !is_null($pages->skype_link))
+          @if($msg=='skype' and !is_null($pages->skype_link))
+            <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-skype icon-msg"></i>
-                  @if(count($sort_msg)<3)
+                  @if($div==0)
                     <span class="textbutton"> Skype</span>
                   @endif
                 </button>
               </a>
-            @endif  
+            </li>
+          @endif  
 
-            @if($msg=='telegram' and !is_null($pages->telegram_link))
+          @if($msg=='telegram' and !is_null($pages->telegram_link))
+            <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-telegram-plane"></i>
-                  @if(count($sort_msg)<3)
+                  @if($div==0)
                     <span class="textbutton" > Telegram</span>
                   @endif
                 </button>
               </a>
-            @endif  
-          </li>
-        <?php } ?>
+            </li>
+          @endif  
+
+          @if($msg=='line' and !is_null($pages->line_link))
+            <li class="col-{{$col}} pl-1 pr-1 mb-3">
+              <a href="{{url('click/line/'.$pages->id)}}" title="Line" target="_blank" class="txthov">
+                <button class="btn btn-block">
+                  <i class="fab fa-line"></i>
+                  @if($div==0)
+                    <span class="textbutton" > Line</span>
+                  @endif
+                </button>
+              </a>
+            </li>
+          @endif
+
+          @if($msg=='messenger' and !is_null($pages->messenger_link))
+            <li class="col-{{$col}} pl-1 pr-1 mb-3">
+              <a href="{{url('click/messenger/'.$pages->id)}}" title="Messenger" target="_blank" class="txthov">
+                <button class="btn btn-block">
+                  <i class="fab fa-facebook-messenger"></i>
+                  @if($div==0)
+                    <span class="textbutton" > Messenger</span>
+                  @endif
+                </button>
+              </a>
+            </li>
+          @endif
+          
+        <?php 
+          $count_3 = $count_3 + 1;
+          if($count_3>=3){
+            $div = $div-1;
+            $count_3 = 0;
+          } 
+        } ?>
       </ul>
 
       <ul class="col-lg-7 col-md-8 mb-4">
