@@ -1,7 +1,12 @@
 .imagetitle{
   border-radius: 50%; 
+  width:100%;
+  height:auto;
+}
+.div-imagetitle{
   width: 100px; 
   height: 100px; 
+  float:right;
   /*margin-left: 118px;*/
 }
 
