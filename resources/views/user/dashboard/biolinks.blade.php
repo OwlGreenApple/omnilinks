@@ -238,7 +238,7 @@
 
   
   function plusSlides(n) {
-    showSlides(slideIndex += n);
+    showSlides(slideIndex += n );
   }
 
   function currentSlide(n) {
@@ -246,12 +246,14 @@
   }
 
   function showSlides(n) {
+    console.log(n);
+    console.log($(".mySlides").length);
     var i;
     // let slides = document.getElementsByClassName("mySlides");
     // let slides = document.getElementsByClassName("mySlides");
     var dots = $(".dot");
     var slides = $(".mySlides");
-    if (n > slides.length) {
+    if (n > slides.length) {// need to be fix
       slideIndex = 1;
     }    
     if (n < 1) {
@@ -1992,8 +1994,8 @@
     <?php } ?>
 
     
-    
     currentSlide(0);
+    slideIndex=0;
     check_outlined();
     check_rounded();
     <?php 
