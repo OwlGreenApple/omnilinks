@@ -8,10 +8,11 @@ use App\Banner;
 use App\Whatsapplink;
 
 use App\Helpers\Helper;
+use App\Mail\NotifClickFreeUser; 
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
-use Auth,Carbon,Validator,Storage;
+use Auth,Carbon,Validator,Storage,Mail;
 use Ramsey\Uuid\Uuid;
 
 class BiolinkController extends Controller
@@ -164,14 +165,20 @@ class BiolinkController extends Controller
     }
   }
 
-  public function pixelpage()
+  public function pixelpage(Request $request)
   {
+    $id = 0;
+    if($request->has('id')){
+      $id = $request->id;
+    }
+
     $pixel=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
                   ->get();
 
     $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
-                  ->with('data_pixel',$pixel);
+                  ->with('data_pixel',$pixel)
+                  ->with('id',$id);
     return $arr;
   }
 
@@ -568,8 +575,8 @@ class BiolinkController extends Controller
   	return $arr;
   }
 
-  public function make_file($date,$pageid,$name){
-    $filename = 'clicked/'.Auth::user()->email.'/'.$date.'/'.$pageid.'/'.$name.'/counter.txt';
+  public function make_file($date,$pageid,$name,$email){
+    $filename = 'clicked/'.$email.'/'.$date.'/'.$pageid.'/'.$name.'/counter.txt';
 
     $counter = 0;
 
@@ -586,12 +593,28 @@ class BiolinkController extends Controller
   }
 
   public function click($mode,$id){
-    $filename = 'clicked/'.Auth::user()->email.'/'.date('m-Y').'/all/total-click/counter.txt';
+
+    if($mode=='link'){
+      $link = Link::find($id);
+      $user = User::find($link->user_id);
+    } else if($mode=='banner'){
+      $banner = Banner::find($id);
+      $user = User::find($banner->user_id);
+    } else {
+      $pages = Page::find($id);
+      $user = User::find($pages->user_id);
+    }
+
+    $filename = 'clicked/'.$user->email.'/'.date('m-Y').'/all/total-click/counter.txt';
 
     $dash = new DashboardController;
     $clicks = $dash->check_file($filename);
 
-    if(Auth::user()->membership=='free'){
+    if($user->membership=='free'){
+      if($clicks==800){
+        Mail::to($user->email)->queue(new NotifClickFreeUser($user->email,$user,$clicks));
+      }
+
       if($clicks>=1000){
         return abort(404);
       }
@@ -599,16 +622,16 @@ class BiolinkController extends Controller
 
     //function redirect link
     if($mode=='link'){
-      $link = Link::find($id);
+      //$link = Link::find($id);
       $link->counter = $link->counter+1;
       $link->save();
 
-      $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->title);
-      $this->make_file(date('d-m-Y'),$link->pages_id,'total-click');
-      $this->make_file(date('d-m-Y'),'all','total-click');
-      $this->make_file(date('m-Y'),$link->pages_id,'link-'.$link->title);
-      $this->make_file(date('m-Y'),$link->pages_id,'total-click');
-      $this->make_file(date('m-Y'),'all','total-click');
+      $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->title,$user->email);
+      $this->make_file(date('d-m-Y'),$link->pages_id,'total-click',$user->email);
+      $this->make_file(date('d-m-Y'),'all','total-click',$user->email);
+      $this->make_file(date('m-Y'),$link->pages_id,'link-'.$link->title,$user->email);
+      $this->make_file(date('m-Y'),$link->pages_id,'total-click',$user->email);
+      $this->make_file(date('m-Y'),'all','total-click',$user->email);
 
       $pixel = Pixel::find($link->pixel_id);
       $script = "";
@@ -621,22 +644,23 @@ class BiolinkController extends Controller
       }
       // return redirect($link->link);
       return view('user.script')->with([
-        'script'=>$script,
-        'link'=>$link->link,
+        'mode' => $mode,
+        'script' => $script,
+        'link' => $link->link,
       ]);
 
     } 
     else if($mode=='banner'){
-      $banner = Banner::find($id);
+      //$banner = Banner::find($id);
       $banner->counter = $banner->counter+1;
       $banner->save();
 
-      $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->title);
-      $this->make_file(date('d-m-Y'),$banner->pages_id,'total-click');
-      $this->make_file(date('d-m-Y'),'all','total-click');
-      $this->make_file(date('m-Y'),$banner->pages_id,'banner-'.$banner->title);
-      $this->make_file(date('m-Y'),$banner->pages_id,'total-click');
-      $this->make_file(date('m-Y'),'all','total-click');
+      $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->email);
+      $this->make_file(date('d-m-Y'),$banner->pages_id,'total-click',$user->email);
+      $this->make_file(date('d-m-Y'),'all','total-click',$user->email);
+      $this->make_file(date('m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->email);
+      $this->make_file(date('m-Y'),$banner->pages_id,'total-click',$user->email);
+      $this->make_file(date('m-Y'),'all','total-click',$user->email);
 
       $pixel = Pixel::find($banner->pixel_id);
       $script = "";
@@ -648,37 +672,38 @@ class BiolinkController extends Controller
       }
       // return redirect($banner->link);
       return view('user.script')->with([
-        'script'=>$script,
-        'link'=>$banner->link,
+        'mode' => $mode,
+        'script' => $script,
+        'link' => $banner->link,
       ]);
     } 
     else {
-      $pages = Page::find($id);
+      //$pages = Page::find($id);
 
       switch ($mode) {
         case "wa":
           $pages->wa_link_counter = $pages->wa_link_counter+1;
-          $link = $pages->wa_link;
+          $link = 'https://api.whatsapp.com/send?phone='.$pages->wa_link;
           $idpixel = $pages->wa_pixel_id;
         break;
         case "telegram":
           $pages->telegram_link_counter = $pages->telegram_link_counter+1;
-          $link = $pages->telegram_link;
+          $link = 'https://t.me/'.$pages->telegram_link;
           $idpixel = $pages->telegram_pixel_id;
         break;
         case "skype":
           $pages->skype_link_counter = $pages->skype_link_counter+1;
-          $link = $pages->skype_link;
+          $link = 'skype:'.$pages->skype_link.'?chat';
           $idpixel = $pages->skype_pixel_id;
         break;
         case "line":
           $pages->line_link_counter = $pages->line_link_counter+1;
-          $link = $pages->line_link;
+          $link = 'https://line.me/ti/p/~'.$pages->line_link;
           $idpixel = $pages->line_pixel_id;
         break;
         case "messenger":
           $pages->messenger_link_counter = $pages->messenger_link_counter+1;
-          $link = $pages->messenger_link;
+          $link = 'http://m.me/'.$pages->messenger_link;
           $idpixel = $pages->messenger_pixel_id;
         break;
         case "youtube":
@@ -704,12 +729,12 @@ class BiolinkController extends Controller
       }
       $pages->save();
 
-      $this->make_file(date('d-m-Y'),$pages->id,$mode);
-      $this->make_file(date('d-m-Y'),$pages->id,'total-click');
-      $this->make_file(date('d-m-Y'),'all','total-click');
-      $this->make_file(date('m-Y'),$pages->id,$mode);
-      $this->make_file(date('m-Y'),$pages->id,'total-click');
-      $this->make_file(date('m-Y'),'all','total-click');
+      $this->make_file(date('d-m-Y'),$pages->id,$mode,$user->email);
+      $this->make_file(date('d-m-Y'),$pages->id,'total-click',$user->email);
+      $this->make_file(date('d-m-Y'),'all','total-click',$user->email);
+      $this->make_file(date('m-Y'),$pages->id,$mode,$user->email);
+      $this->make_file(date('m-Y'),$pages->id,'total-click',$user->email);
+      $this->make_file(date('m-Y'),'all','total-click',$user->email);
 
       $pixel = Pixel::find($idpixel);
       $script = "";
@@ -722,8 +747,9 @@ class BiolinkController extends Controller
       // return redirect($link);
 
       return view('user.script')->with([
-        'script'=>$script,
-        'link'=>$link,
+        'mode' => $mode,
+        'script' => $script,
+        'link' => $link,
       ]);
     }
   }

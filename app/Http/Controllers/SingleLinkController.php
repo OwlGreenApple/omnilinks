@@ -143,7 +143,8 @@ class SingleLinkController extends Controller
                           ->where('pages_id',0)
                           ->get();
     $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
-                  ->with('data_pixel',$data_pixel);
+                  ->with('data_pixel',$data_pixel)
+                  ->with('id',0);
     return $arr;
   }
 }

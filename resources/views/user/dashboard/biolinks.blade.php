@@ -55,7 +55,15 @@
       contentType: false,
       processData: false,
       url: "<?php echo url('/save-template');?>",
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(data) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         //var data=jQuery.parseJSON(result);
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
@@ -81,7 +89,15 @@
       dataType: 'text',
       data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'),
       url: "<?php echo url('/save-link');?>",
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         $(window).scrollTop(0);
         var data = jQuery.parseJSON(result);
         $("#pesanAlert").html(data.message);
@@ -111,7 +127,15 @@
       url: "<?php echo url ('/save-pixel')?>",
       dataType: 'text',
       data: $("#savepixel").serialize(),
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         $('#script').val("");
         $('#judul').val("");
         $('#editidpixel').val("");
@@ -128,7 +152,15 @@
       type: 'GET',
       dataType: 'text',
       url: "<?php echo url('/banner/load-banner') ;?>",
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         $('.contentBanner').append(data.view);
       }
@@ -144,7 +176,15 @@
       },
       url: "<?php echo url('/pixel/load-pixel'); ?>",
       dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
         //$('.pixellink').html(data.pixelink);
@@ -160,7 +200,15 @@
       },
       url: "<?php echo url ('/pixel/deletepixel'); ?>",
       dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         if (data.status == 'success') {
           refreshpixel();
@@ -169,26 +217,41 @@
     });
   }
 
-  function loadPixelPage() {
+  function loadPixel(id,selector){
+    var view =''
     $.ajax({
       type: 'GET',
       url: "<?php echo url('/load/pixelpage');?>",
+      data: { id:id },
       dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
-        var data = jQuery.parseJSON(result);
-        $('#wapixel').html(data.view);
-        $('#telegrampixel').html(data.view);
-        $('#skypepixel').html(data.view);
-        $('#linepixel').html(data.view);
-        $('#messengerpixel').html(data.view);
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
 
-        $('#youtubepixel').html(data.view);
-        $('#fbpixel').html(data.view);
-        $('#igpixel').html(data.view);
-        $('#twitterpixel').html(data.view);
-        $('.bannerpixel').html(data.view);
+        var data = jQuery.parseJSON(result);
+        $(selector).html(data.view);
       }
     });
+  }
+
+  function loadPixelPage() {
+    loadPixel('{{$pages->wa_pixel_id}}','#wapixel');
+    loadPixel('{{$pages->telegram_pixel_id}}','#telegrampixel');
+    loadPixel('{{$pages->skype_pixel_id}}','#skypepixel');
+    loadPixel('{{$pages->line_pixel_id}}','#linepixel');
+    loadPixel('{{$pages->messenger_pixel_id}}','#messengerpixel');
+    
+    loadPixel('{{$pages->youtube_pixel_id}}','#youtubepixel');
+    loadPixel('{{$pages->fb_pixel_id}}','#fbpixel');
+    loadPixel('{{$pages->ig_pixel_id}}','#igpixel');
+    loadPixel('{{$pages->twitter_pixel_id}}','#twitterpixel');
+    
+    loadPixel(0,'.bannerpixel');
   }
 
   function tambahwalink() {
@@ -200,7 +263,15 @@
       data: $("#savewalink").serialize(),
       url: "<?php echo url('/save-walink');?>",
       dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         $('#nomorwa').val("");
         $('#pesan-wa').val("");
         $(window).scrollTop(0);
@@ -215,7 +286,15 @@
       type: 'GET',
       url: "<?php echo url('/walink/loadwalink');?>",
       dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         $('#contentwa').html(data.viewer);
       }
@@ -230,7 +309,15 @@
       },
       url: "<?php echo url('/walink/deletewalink');?>",
       dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         if (data.status == 'success') {
           refreshwa();
@@ -336,8 +423,13 @@
       },
       beforeSend: function()
       {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
       },
       success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         
         $('#pesanAlert').html(data.message);
@@ -459,7 +551,7 @@
                                     <i class="fab fa-whatsapp"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor whatsapp">
+                                <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="Masukkan nomor WhatsApp">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="wa" class="input-hidden">
                               </div>
                             </div>
@@ -493,7 +585,7 @@
                                     <i class="fab fa-telegram-plane"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="telegram" class="form-control telegram-input" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="masukkan nomor telegram">
+                                <input type="text" name="telegram" class="form-control telegram-input" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="Masukkan username Telegram">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="telegram" class="input-hidden">
                               </div>
 
@@ -527,7 +619,7 @@
                                     <i class="fab fa-skype"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="skype" onkeypress="return hanyaAngka(event)" class="form-control skype-input" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="masukkan nomor Skype">
+                                <input type="text" name="skype" class="form-control skype-input" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="Masukkan username Skype">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="skype" class="input-hidden">
                               </div>
                             </div>
@@ -561,7 +653,7 @@
                                     <i class="fab fa-line"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="line" class="form-control line-input" value="{{$pages->line_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor Line">
+                                <input type="text" name="line" class="form-control line-input" value="{{$pages->line_link}}" id="inlineFormInputGroupUsername" placeholder="Masukkan username Line">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="line" class="input-hidden">
                               </div>
                             </div>
@@ -595,7 +687,7 @@
                                     <i class="fab fa-facebook-messenger"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="messenger" class="form-control messenger-input" value="{{$pages->messenger_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="masukkan nomor Messenger">
+                                <input type="text" name="messenger" class="form-control messenger-input" value="{{$pages->messenger_link}}" id="inlineFormInputGroupUsername" placeholder="Masukkan username Messenger">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="messenger" class="input-hidden">
                               </div>
                             </div>
@@ -703,7 +795,7 @@
 
                   <ul class="sortable-sosmed">
                     <li id="sosmed-youtube">
-                      <div id="youtube" class="socialmedia div-table mb-4 hide" style="display:none;">
+                      <div id="youtube" class="socialmedia div-table mb-4 hide">
                         <input type="hidden" name="sortsosmed[]" value="" data-val="youtube" class="input-hidden">
       
                         <div class="div-cell">
@@ -1319,7 +1411,7 @@
                         if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite')) {
                       ?>
                         <div class="mySlides mylides fit " id="picture-id-6-get">
-                          <img id="picture-6" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNL6cJAzJjtpG83icr-1rMhNvRDAp1eDH80z826LwYjmgFo8XQ" class="imagesize input-picture-6-get" value="ada" >
+                          <img id="picture-6" src="{{asset('image/739x218.png')}}" class="imagesize input-picture-6-get" value="ada" >
                         </div>
                       <?php }
                       }?>

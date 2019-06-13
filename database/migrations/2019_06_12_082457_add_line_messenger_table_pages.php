@@ -14,14 +14,14 @@ class AddLineMessengerTablePages extends Migration
     public function up()
     {
         Schema::table('pages',function(Blueprint $table){
-          $table->string('line_title');
-          $table->string('line_link');
-          $table->integer('line_pixel_id');
-          $table->string('line_logo');
-          $table->string('messenger_title');
-          $table->string('messenger_link');
-          $table->integer('messenger_pixel_id');
-          $table->string('messenger_logo');
+          $table->string('line_title')->nullable();
+          $table->string('line_link')->nullable();
+          $table->integer('line_pixel_id')->default(0);
+          $table->string('line_logo')->nullable();
+          $table->string('messenger_title')->nullable();
+          $table->string('messenger_link')->nullable();
+          $table->integer('messenger_pixel_id')->default(0);
+          $table->string('messenger_logo')->nullable();
           $table->integer('line_link_counter')->default(0);
           $table->integer('messenger_link_counter')->default(0);
         });
