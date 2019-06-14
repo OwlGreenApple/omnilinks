@@ -18,7 +18,8 @@
         "ramsey/uuid": "^3.8",
         "league/flysystem-aws-s3-v3": "~1.0",
         "aws/aws-sdk-php": "~3.0",
-        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
+        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3",
+        "rap2hpoutre/laravel-log-viewer": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

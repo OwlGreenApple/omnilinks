@@ -3,6 +3,7 @@
 @section('content')
 <script type="text/javascript">
   var table;
+  var tableLog;
 
   $(document).ready(function() {
     table = $('#myTable').DataTable({
@@ -10,6 +11,13 @@
                 destroy: true,
                 "order": [],
             });
+
+    tableLog = $('#tableLog').DataTable({
+                responsive : true,
+                destroy: true,
+                "order": [],
+            });
+
     $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
 
     refresh_page();
@@ -114,6 +122,34 @@
       }
     });
   }
+
+  function get_log(){
+    tableLog.destroy();
+
+    $.ajax({
+      type : 'GET',
+      url : "<?php echo url('/list-user/view-log') ?>",
+      data : { id : $('#idlog').val() },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $('#content-log').html(data.view);
+
+        tableLog = $('#tableLog').DataTable({
+                      destroy: true,
+                      "order": [],
+                  });
+      }
+    });
+  }
 </script>
 
 <div class="col-md-12" style="height:100%; margin-top:30px;margin-bottom: 120px;">
@@ -167,6 +203,37 @@
         <div id="pager"></div>    
       </form>
     </div>
+  </div>
+</div>
+
+<!-- Modal View Log -->
+<div class="modal fade" id="view-log" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Log
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="table" id="tableLog">
+
+          <input type="hidden" name="idlog" id="idlog">
+
+          <thead align="center">
+            <th>Type</th>
+            <th>Value</th>
+            <th>Keterangan</th>
+            <th>Created_at</th>
+          </thead>
+          <tbody id="content-log"></tbody>
+        </table>
+      </div>
+    </div>
+      
   </div>
 </div>
 
@@ -344,6 +411,11 @@
     } else {
       $('#valid_until').prop('disabled', false);
     }
+  });
+
+  $( "body" ).on( "click", ".btn-log", function() {
+    $('#idlog').val($(this).attr('data-id'));
+    get_log();
   });
 </script>
 @endsection

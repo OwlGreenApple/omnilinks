@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use App\User;
+use App\UserLog;
 use App\Order;
 use App\Mail\Confirm_Email;
 
@@ -143,6 +144,13 @@ class RegisterController extends Controller
             $valid = $ordercont->add_time($user,"+12 months");
           }
 
+          $userlog = new UserLog;
+          $userlog->user_id = $user->id;
+          $userlog->type = 'membership';
+          $userlog->value = 'basic';
+          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to basic('.$valid->format('Y-m-d h:i:s').')';
+          $userlog->save();
+
           $user->valid_until = $valid;
           $user->membership = 'basic';
 
@@ -152,6 +160,13 @@ class RegisterController extends Controller
           } else if($order->package=='Elite Yearly'){
             $valid = $ordercont->add_time($user,"+12 months");
           }
+
+          $userlog = new UserLog;
+          $userlog->user_id = $user->id;
+          $userlog->type = 'membership';
+          $userlog->value = 'elite';
+          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
+          $userlog->save();
 
           $user->valid_until = $valid;
           $user->membership = 'elite';

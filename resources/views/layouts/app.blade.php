@@ -189,6 +189,11 @@
                 </a>
               </li>
               <li>
+                <a href="{{asset('/helps')}}" class="linkfooter">
+                  Earnings And Legal Disclaimers
+                </a>
+              </li>
+              <li>
                 <a href="#" class="linkfooter">Blog</a>
               </li>
             </ul>
@@ -199,8 +204,8 @@
                 Contact us
               </h5>
               <li class="linkfooter">
-                <a onclick="window.location.href='mailto:support@omnilinkz.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
-                  support@omnilinkz.com
+                <a onclick="window.location.href='mailto:omnilinkzcom@gmail.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
+                  omnilinkzcom@gmail.com
                 </a>
               </li>
               <li>

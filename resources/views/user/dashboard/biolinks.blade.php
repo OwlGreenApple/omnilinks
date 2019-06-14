@@ -251,7 +251,7 @@
     loadPixel('{{$pages->ig_pixel_id}}','#igpixel');
     loadPixel('{{$pages->twitter_pixel_id}}','#twitterpixel');
     
-    loadPixel(0,'.bannerpixel');
+    //loadPixel(0,'.bannerpixel');
   }
 
   function tambahwalink() {
@@ -1102,7 +1102,7 @@
                             else {
                               echo Storage::disk('s3')->url($pages->image_pages);
                             }
-                            ?>" class="picture-src img-responsive" id="wizardPicturePreview" title="">
+                            ?>" class="picture-src img-responsive" id="wizardPicturePreview" title="" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
                             <input type="file" name="imagepages" id="file-wizard-picture" class="" accept=".png, .jpg">
                           </div>
                           <i class="fa fa-trash" id="wizardPicturePreview-delete" aria-hidden="true"></i>
@@ -1147,8 +1147,12 @@
                                     <input type="hidden" name="idBanner[]" value="{{$ban->id}}">
                                     <input type="hidden" name="statusBanner[]" class="statusBanner" value="">
                                     <input type="text" name="linkBanner[]" value="{{$ban->link}}" class="form-control" placeholder="masukkan link">
-                                    <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
+
+                                    <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel bannerpixel-{{$ban->id}}">
                                     </select>
+                                    <script type="text/javascript">
+                                      loadPixel('{{$ban->pixel_id}}','.bannerpixel-{{$ban->id}}');
+                                    </script>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
                                       <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01">
@@ -1369,7 +1373,7 @@
                             <img id="viewpicture" src="<?php 
                             // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
                             echo Storage::disk('s3')->url($pages->image_pages);
-                            ?>" style="width:100%;height:auto;border-radius: 50%;">
+                            ?>" style="width:100%;height:auto;border-radius: 50%;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
                           @endif
                         </div>
                       </div>
@@ -1403,7 +1407,7 @@
                           <img src="<?php  
                           // echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); 
                           echo Storage::disk('s3')->url($ban->images_banner); 
-                          ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada"> 
+                          ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada" altSrc="{{asset('/image/739x218.png')}}" onerror="this.src = $(this).attr('altSrc')"> 
                         </div>
                       <?php 
                         }}
@@ -1769,8 +1773,8 @@
       // console.log(color);
       $("#colorOutlineButton").val(color);
       // $('.btnview').css("border-color",color);
-      
-      if ($('input[name="outlined"]')=="1") {
+      console.log($('input[name="outlined"]'));
+      if ($('input[name="outlined"]').val()=="1") {
         //$(".mobile1").addClass("outlinedview");
         $(".screen").addClass("outlinedview");
         $('.btnview').css("background-color","transparent");
@@ -1929,9 +1933,9 @@
       //  else {
       //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
       // }
-        elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+        elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
        $el = $(".div-banner").append(elhtml);
-       loadPixelPage();
+       loadPixel(0,'.banner-new');
       if ($('.list-banner').length==5) {
          $(this).attr('disabled', 'disabled'); 
         }

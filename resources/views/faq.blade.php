@@ -13,12 +13,14 @@
 
 <link rel="stylesheet" href="{{asset('css/about.css')}}">
 
-<header class="content-header">
+<header class="content-header" style="padding-bottom: 80px;">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <h1 class="omni-title mb-5">OMNILINKZ FAQ PAGES</h1>
-        <h3 class="omni-sub">Sub Heading Title Goes Here</h3>
+        <p class="col-md-10 col-12 mx-auto" style="font-size: 19px; font-weight: 400;text-align: justify;">
+          &emsp;Berikut ini daftar serangkaian pertanyaan umum yang terkait dengan Omnilinkz. Lihat dan baca pertanyaan di sini terlebih dahulu sebelum menanyakan ke admin supaya Anda bisa menghemat banyak waktu.
+        </p>
       </div>
     </div>
   </div>
@@ -37,16 +39,16 @@
                     <span class="blue-icon">
                       <i class="fa fa-caret-right"></i>&nbsp;
                     </span>
-                    Nailing It On The Head With Free Internet Advertising?
+                    Apa itu Omnilinkz?
                   </b>
                 </button>
               </h5>
             </div>
             <div id="collapseOne" class="fade collapse" aria-labelledby="headingOne" data-parent="#faqExample">
               <div class="card-body faq-txt">
-                Having a baby can be a nerve wracking experience for new parents – not the nine months of pregnancy, I’m talking about after the infant is brought home from the hospital. It’s always the same thing, by the time they have their third child they have it all figured out, but with number one it’s a learning thing.<br><br>
-
-                Baby monitors help you hear your baby’s needs without you having to be in the room with the baby. Some baby monitors are portable, or “mobile” and are small enough that you can carry it in your pocket as you do your daily chores around the house. Depending on your price range it’s best to have a base unit that plugs into the wall. The receiving unit can be like your portable phone, you can carry it around with you, and plug it back into the base unit to be recharged.
+                Omnilinkz adalah tools yang membantu Anda mencantumkan banyak link hanya pada 1 link saja pada bio Instagram. 
+                <br><br>
+                Anda bisa menambahkan banyak channel media chat seperti WhatsApp, LINE, Telegram dan lain sebagainya. Anda juga bisa menambahkan news terkini hingga link check out produk yang sedang promo diskon.
               </div>
             </div>
           </div>
@@ -58,18 +60,14 @@
                     <span class="blue-icon">
                       <i class="fa fa-caret-right"></i>&nbsp;
                     </span>
-
-                    The Skinny On Lcd Monitors?
+                    Siapa Pengguna Omnilinkz?
                   </b>
                 </button>
               </h5>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqExample">
               <div class="card-body faq-txt">
-                Having a baby can be a nerve wracking experience for new parents – not the nine months of pregnancy, I’m talking about after the infant is brought home from the hospital. It’s always the same thing, by the time they have their third child they have it all figured out, but with number one it’s a learning thing.<br><br>
-
-                Baby monitors help you hear your baby’s needs without you having to be in the room with the baby. Some baby monitors are portable, or “mobile” and are small enough that you can carry it in your pocket as you do your daily chores around the house. Depending on your price range it’s best to have a base unit that plugs into the wall. The receiving unit can be like your portable phone, you can carry it around with you, and plug it back into the base unit to be recharged.
-
+                Omnilinkz cocok dipakai untuk selebgram, pebisnis, vloger, blogger dan siapapun yang menekuni dunia iklan, endorse, dan Instagram.
               </div>
             </div>
           </div>
@@ -81,18 +79,19 @@
                     <span class="blue-icon">
                       <i class="fa fa-caret-right"></i>&nbsp;
                     </span>
-
-                    Hotels How To Get Free Gifts?
+                    Bagaimana cara menggunakan Omnilinkz?
                   </b>
                 </button>
               </h5>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
               <div class="card-body faq-txt">
-                Having a baby can be a nerve wracking experience for new parents – not the nine months of pregnancy, I’m talking about after the infant is brought home from the hospital. It’s always the same thing, by the time they have their third child they have it all figured out, but with number one it’s a learning thing.<br><br>
-
-                Baby monitors help you hear your baby’s needs without you having to be in the room with the baby. Some baby monitors are portable, or “mobile” and are small enough that you can carry it in your pocket as you do your daily chores around the house. Depending on your price range it’s best to have a base unit that plugs into the wall. The receiving unit can be like your portable phone, you can carry it around with you, and plug it back into the base unit to be 
-
+                Klik alamat laman Omnilinkz. Pilih registrasi di kanan atas. <br>
+                Isi data lengkap, klik registrasi. <br>
+                Cek email untuk Dapatkan username & password <br>
+                Gunakan username & password untuk login <br>
+                <br>
+                Selamat, registrasi Anda telah sukses.
               </div>
             </div>
           </div>
@@ -104,38 +103,18 @@
                     <span class="blue-icon">
                       <i class="fa fa-caret-right"></i>&nbsp;
                     </span>
-                    Advertise No Matter If You Are Big Or Small?
+                    Apa saja kemudahan yang didapat dari penggunaan Omnilinkz?
                   </b>
                 </button>
               </h5>
             </div>
             <div id="collapsefour" class="fade collapse" aria-labelledby="headingfour" data-parent="#faqExample">
               <div class="card-body faq-txt">
-                Having a baby can be a nerve wracking experience for new parents – not the nine months of pregnancy, I’m talking about after the infant is brought home from the hospital. It’s always the same thing, by the time they have their third child they have it all figured out, but with number one it’s a learning thing.<br><br>
-
-                Baby monitors help you hear your baby’s needs without you having to be in the room with the baby. Some baby monitors are portable, or “mobile” and are small enough that you can carry it in your pocket as you do your daily chores around the house. Depending on your price range it’s best to have a base unit that plugs into the wall. The receiving unit can be like your portable phone, you can carry it around with you, and plug it back into the base unit to be recharged.
-
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="headingfive">
-              <h5 class="mb-0">
-                <button class="btx btn btn-link btn-block text-left collapsed btn-faq" type="button" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
-                  <b class="faq-head">
-                    <span class="blue-icon">
-                      <i class="fa fa-caret-right"></i>&nbsp;
-                    </span>
-                    Video Games Playing With Imagination?
-                  </b>
-                </button>
-              </h5>
-            </div>
-            <div id="collapsefive" class="fade collapse" aria-labelledby="headingfive" data-parent="#faqExample">
-              <div class="card-body faq-txt">
-                Having a baby can be a nerve wracking experience for new parents – not the nine months of pregnancy, I’m talking about after the infant is brought home from the hospital. It’s always the same thing, by the time they have their third child they have it all figured out, but with number one it’s a learning thing.<br><br>
-
-                Baby monitors help you hear your baby’s needs without you having to be in the room with the baby. Some baby monitors are portable, or “mobile” and are small enough that you can carry it in your pocket as you do your daily chores around the house. Depending on your price range it’s best to have a base unit that plugs into the wall. The receiving unit can be like your portable phone, you can carry it around with you, and plug it back into the base unit to be recharged.
+                - Anda bisa menambahkan chaneel media komunikasi seperti WhatsApp, LINE, Telegram dan lain-lain. <br>
+                - Anda bisa menaruh link news terkini maupun konten video terbaru. <br>
+                - Link memiliki tracking dengan google retargeting. <br>
+                - Media promosi melalui media visual pada banner dan headlines. <br>
+                - Mempermudah konsumen maupun followers dalam proses check out produk di online shop Anda. 
               </div>
             </div>
           </div>
@@ -152,7 +131,7 @@
       <div class="col-md-12 text-center">
         <h2>Can’t find what you’re looking for?</h2>
 
-        <a href="mailto:support@omnilinkz.com?subject=Mail from Our Site"> 
+        <a href="mailto:omnilinkzcom@gmail.com?subject=Mail from Our Site"> 
           <button type="button" class="btn btn-primary btn-lg btn-email">
             EMAIL US
           </button>

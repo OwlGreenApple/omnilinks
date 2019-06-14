@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\User;
+use App\UserLog;
 
 use App\Mail\ExpiredMembershipMail;
 
@@ -57,6 +58,13 @@ class CheckMembership extends Command
 
         if($date < $now){
           Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
+
+          $userlog = new UserLog;
+          $userlog->user_id = $user->id;
+          $userlog->type = 'membership';
+          $userlog->value = $user->membership;
+          $userlog->keterangan = 'Cron check membership valid_until';
+          $userlog->save();
 
           $user->membership = 'free';
           $user->valid_until = null;

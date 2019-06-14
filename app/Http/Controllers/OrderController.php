@@ -276,6 +276,13 @@ class OrderController extends Controller
           $valid = $this->add_time($user,"+12 months");
         }
 
+        $userlog = new UserLog;
+        $userlog->user_id = $user->id;
+        $userlog->type = 'membership';
+        $userlog->value = 'basic';
+        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to basic('.$valid->format('Y-m-d h:i:s').')';
+        $userlog->save();
+
         $user->valid_until = $valid;
         $user->membership = 'basic';
 
@@ -285,6 +292,13 @@ class OrderController extends Controller
         } else if($order->package=='Elite Yearly'){
           $valid = $this->add_time($user,"+12 months");
         }
+
+        $userlog = new UserLog;
+        $userlog->user_id = $user->id;
+        $userlog->type = 'membership';
+        $userlog->value = 'elite';
+        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
+        $userlog->save();
 
         $user->valid_until = $valid;
         $user->membership = 'elite';
@@ -356,6 +370,13 @@ class OrderController extends Controller
         $valid = $this->add_time($user,"+12 months");
       }
 
+      $userlog = new UserLog;
+      $userlog->user_id = $user->id;
+      $userlog->type = 'membership';
+      $userlog->value = 'basic';
+      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to basic('.$valid->format('Y-m-d h:i:s').')';
+      $userlog->save();
+
       $user->valid_until = $valid;
       $user->membership = 'basic';
     } else if(substr($order->package,0,5) === "Elite"){
@@ -366,6 +387,13 @@ class OrderController extends Controller
         //$valid = new DateTime("+12 months");
         $valid = $this->add_time($user,"+12 months");
       }
+
+      $userlog = new UserLog;
+      $userlog->user_id = $user->id;
+      $userlog->type = 'membership';
+      $userlog->value = 'elite';
+      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
+      $userlog->save();
 
       $user->valid_until = $valid;
       $user->membership = 'elite';

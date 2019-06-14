@@ -15,6 +15,7 @@
 */
 if(env('DOMAIN_TYPE')=='main'){
   Route::get('/', 'HomeController@index');
+  Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
   // Route::get('/use','UserController@index');
   // Route::post('/user/create','UserController@create');
   // Route::get('/use/{id}/edit','UserController@edit');
@@ -127,6 +128,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/list-user/load-user','UserController@load_user');  
     Route::get('/list-user/add-user','UserController@add_user');
     Route::get('/list-user/edit-user','UserController@edit_user');
+    Route::get('list-user/view-log','UserController@load_log');
   });
 }
 
