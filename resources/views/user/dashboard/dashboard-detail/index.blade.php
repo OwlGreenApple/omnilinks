@@ -140,7 +140,7 @@
           </button>
         </div>
         <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
-          <a href="{{asset('/dash/newsingle')}}" style="text-decoration: none;">
+          <a href="{{asset('/singlelink')}}" style="text-decoration: none;">
             <button class="btnsingle btn-block btncreate">
               SINGLE LINK  
             </button>
@@ -277,7 +277,7 @@
       Are you sure you want to Create a Bio?
     </div>
     <div class="modal-footer" id="foot">
-      <button href="{{asset('/dash/new')}}" class="btn btn-primary btn-create-ok" data-dismiss="modal">
+      <button href="{{asset('/biolinks')}}" class="btn btn-primary btn-create-ok" data-dismiss="modal">
         Yes
       </button>
       <button class="btn" data-dismiss="modal">
@@ -312,7 +312,7 @@
   });
   $('body').on('click','.btn-create-ok',function(e){
 
-    let urla="<?php echo e(asset('/dash/new'))?>";
+    let urla="<?php echo e(asset('/biolinks'))?>";
     window.location.href=urla;
   });
   

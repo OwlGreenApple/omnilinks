@@ -62,7 +62,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
 
     //dashboard
-    Route::get('/dash',function(){
+    Route::get('/',function(){
         return view('user.dashboard.dash');
     });
     Route::get('/dash/load-dashboard','DashboardController@loadDashboard');
@@ -75,8 +75,8 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/dash-detail/load-content','DashboardController@load_dash_detail');
     
     //makebio
-    Route::get('/dash/new/','BiolinkController@newbio');
-    Route::get('/dash/new/{names}','BiolinkController@viewpage');
+    Route::get('/biolinks/','BiolinkController@newbio');
+    Route::get('/biolinks/{names}','BiolinkController@viewpage');
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
     Route::post('/save-template','BiolinkController@savetemp');
     Route::get('/banner/load-banner','BiolinkController@addBanner');
@@ -97,7 +97,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 
     //makesinglelink
-    Route::get('/dash/newsingle','SinglelinkController@newsingle');
+    Route::get('/singlelink','SinglelinkController@newsingle');
     Route::post('/save-singlelink','SinglelinkController@single');
     Route::get('/dash/newsingle/load-singlelink','SinglelinkController@loadsinglelink');
     Route::post('/save-singlepixel','SinglelinkController@singlepixel');
