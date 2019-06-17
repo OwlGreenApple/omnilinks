@@ -105,6 +105,9 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
     Route::get('/pixel/loadPixelLink','SinglelinkController@loadPixelLink');
     Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
+
+    //premium ID
+    Route::get('/premium-id/tambah','PremiumIDController@tambah_premiumid');    
   });
 
 

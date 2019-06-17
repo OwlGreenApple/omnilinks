@@ -452,6 +452,38 @@
     });  
   }
 
+  function tambah_premiumid() {
+    $.ajax({
+      type: 'GET',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'text',
+      data: $('#form-premiumID').serialize(),
+      url: "<?php echo url('/premium-id/tambah');?>",
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $("#pesanAlert").html(data.message);
+        $("#pesanAlert").show();
+        if (data.status == "success") {
+          $("#pesanAlert").addClass("alert-success");
+          $("#pesanAlert").removeClass("alert-danger");
+        }
+        if (data.status == "error") {
+          $("#pesanAlert").addClass("alert-danger");
+          $("#pesanAlert").removeClass("alert-success");
+        }
+      }
+    });
+  }
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
@@ -487,6 +519,10 @@
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
         
         <div id="pesanAlert" class="alert"></div>
+
+        <button class="btn btn-success mb-3 btn-premium">
+          <i class="fas fa-star"></i> Get Premium ID
+        </button>
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">
@@ -1527,6 +1563,123 @@
   </div>
 
 </section>
+
+<!-- Modal Copy Link -->
+<div class="modal fade" id="premium-id" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <h5 class="modal-title font-premiumid big" id="modaltitle">
+          Custom Premium ID
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-premiumID">
+          @csrf
+
+          <input type="hidden" name="id" value="{{$pages->id}}">  
+
+          <div class="form-group">
+            <div class="col-12">
+              ID Default
+            </div>
+            <div class="col-12">
+              <input class="col-12 form-control" type="text" name="id_default" id="id_default" value="<?php echo env('SHORT_LINK').'/'.$pages->names ?>" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-12 font-premiumid">
+              <b>Custom Premium ID</b>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <?php echo env('SHORT_LINK').'/'; ?>
+                  </div>
+                </div>
+                <input class="form-control" type="text" name="custom_id" id="custom_id" placeholder="YOURLINK"> 
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="col-12 mb-4" style="margin-top: 30px">
+          <button class="btn btn-success btn-block btn-premiumid" data-dismiss="modal">
+            UPDATE LINK
+          </button>  
+        </div>
+        
+        <div class="col-12 text-center mb-4">
+          <a href="#" data-dismiss="modal">
+            Kembali
+          </a>  
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Copy Link -->
+<div class="modal fade" id="premium-id-beli" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{{asset('image/icon-premium-id.png')}}">
+        <h5 class="font-premiumid big mt-3 mb-4">
+          Custom Premium ID
+        </h5>
+        <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan custom premium ID</p>
+
+        <div class="row col-12 offset-md-1 col-md-10 mt-5 mb-5">
+          <div class="col-4 text-left">
+            ID Default <br>
+            <?php echo env('SHORT_LINK').'/YtBu8L' ?>
+          </div>
+          <div class="col-4">
+            <img src="{{asset('image/arrow-green.png')}}">
+          </div>
+          <div class="col-4 text-left">
+            <span class="font-premiumid">
+              Custom Premium ID
+            </span> <br>
+            <b><?php echo env('SHORT_LINK').'/YOURLINK' ?></b>
+          </div>
+        </div>
+        <div class="col-12 col-md-10 offset-md-1 mb-4" style="margin-top: 30px">
+          <a href="{{url('pricing')}}" target="_blank">
+            <button class="btn btn-success btn-block btn-beli-premium">
+              BELI SEKARANG
+            </button>    
+          </a>
+          
+        </div>
+        
+        <div class="col-12 text-center mb-4">
+          <a href="#" data-dismiss="modal">
+            Lain Kali
+          </a>  
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
 <noscript>Jalankan Javascript di browser anda</noscript>
@@ -1620,6 +1773,17 @@
       $("#phonecolor").addClass("screen");
       $("#phonecolor").css("background-color",$("#color").val());
       // $("#backtheme").val();
+    });
+    $(document).on('click', '.btn-premiumid', function() {
+      tambah_premiumid();
+    });
+    $(document).on('click', '.btn-premium', function() 
+    {
+      <?php if(Auth::user()->membership=='free') { ?>
+        $('#premium-id-beli').modal('show');
+      <?php } else { ?>
+        $('#premium-id').modal('show');
+      <?php } ?>
     });
     <?php if (!is_null($pages->color_picker)) { ?>
       color_picker = "<?php echo $pages->color_picker; ?>";

@@ -8,6 +8,31 @@
   src: url("../fonts/SourceSansPro-Bold.otf");
 } 
 
+.content-premiumid {
+  border-radius:0px;
+}
+
+.header-premiumid {
+  border-bottom: none;
+  border-top: 7px solid #106BC8;
+  border-radius: 0px;
+}
+
+.btn-premiumid, .btn-beli-premium {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.font-premiumid {
+  font-family: SourceSansPro-Bold; 
+  font-size: 17px;
+  color: #106BC8;
+}
+
+.font-premiumid.big {
+  font-size: 25px;
+}
+
 .btn-preview {
   background-color: #fff;
   color: #106BC8;
