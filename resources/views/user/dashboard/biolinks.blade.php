@@ -492,7 +492,7 @@
       <div class="col-md-12">
         <h4 style="color: #106BC8">
           <i class="fas fa-arrow-left"></i>&nbsp;
-          <a class="back-link" href="{{url('dash')}}">
+          <a class="back-link" href="{{url('/')}}">
             KEMBALI
           </a>
         </h4>
@@ -1184,7 +1184,7 @@
                                     <input type="hidden" name="statusBanner[]" class="statusBanner" value="">
                                     <input type="text" name="linkBanner[]" value="{{$ban->link}}" class="form-control" placeholder="masukkan link">
 
-                                    <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel bannerpixel-{{$ban->id}}">
+                                    <select name="bannerpixel[]" class="form-control bannerpixel bannerpixel-{{$ban->id}}">
                                     </select>
                                     <script type="text/javascript">
                                       loadPixel('{{$ban->pixel_id}}','.bannerpixel-{{$ban->id}}');
@@ -1215,7 +1215,7 @@
                                     <input type="hidden" name="idBanner[]" value="">
                                     <input type="hidden" name="statusBanner[]" class="statusBanner" value="">
                                     <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
-                                    <select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel">
+                                    <select name="bannerpixel[]" class="form-control bannerpixel">
                                     </select>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
@@ -2097,7 +2097,7 @@
       //  else {
       //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
       // }
-        elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" id="bannerpixel" class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+        elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
        $el = $(".div-banner").append(elhtml);
        loadPixel(0,'.banner-new');
       if ($('.list-banner').length==5) {

@@ -58,7 +58,7 @@ class SingleLinkController extends Controller
       $arr['status'] = 'success';
       $arr['message']='anda sudah menambahkan link';
       return $arr;
-  		//return redirect('/dash/newsingle')->with('ok','Link telah Ditambahkan');
+  		//return redirect('/singlelink')->with('ok','Link telah Ditambahkan');
  	}
 
  	public function singlepixel(Request $request)
@@ -81,7 +81,7 @@ class SingleLinkController extends Controller
     $pixel->jenis_pixel=$request->jenis_pixel;
   	$pixel->script=$request->script;
   	$pixel->save();
-  	return redirect('/dash/newsingle')->with('ok','pixel telah Ditambahkan');
+  	return redirect('/singlelink')->with('ok','pixel telah Ditambahkan');
  	}
   public function loadsinglepixel(Request $request)
   {

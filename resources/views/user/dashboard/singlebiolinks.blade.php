@@ -221,7 +221,7 @@
       <div class="col-md-12">
         <h4 style="color: #106BC8">
           <i class="fas fa-arrow-left"></i>&nbsp;
-          <a href="{{url('dash')}}">
+          <a href="{{url('/')}}">
             KEMBALI
           </a>
         </h4>

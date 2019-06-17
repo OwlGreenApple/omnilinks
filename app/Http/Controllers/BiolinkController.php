@@ -36,7 +36,7 @@ class BiolinkController extends Controller
   	$walink->pesan=$request->pesan;
   	$walink->linkgenerator=$request->textlink;
   	$walink->save();	  
-  	return redirect('/dash/new/'.$uuid);
+  	return redirect('/biolinks/'.$uuid);
   }
 
   public function loadwalink(Request $request)
@@ -63,17 +63,17 @@ class BiolinkController extends Controller
                       ->count();
     if ($user->membership=='free') {
       if ($pageCheck>=1) {
-        return redirect('/dash')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu");
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu");
       }
     }
     else if ($user->membership=='basic') {
       if ($pageCheck>=3) {
-        return redirect('/dash')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu"); 
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu"); 
       }
     }
     else if ($user->membership=='elite') {
       if ($pageCheck>=10) {
-        return redirect('/dash')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink"); 
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink"); 
       }
     }
 
@@ -100,7 +100,7 @@ class BiolinkController extends Controller
   	$page->names=$generated_string; 
   	$page->save();
 
-    return redirect('/dash/new/'.$uuid);  
+    return redirect('/biolinks/'.$uuid);  
   }
 
   public function viewpage($uuid)
@@ -552,7 +552,7 @@ class BiolinkController extends Controller
     $pixel->jenis_pixel=$request->jenis_pixel;
   	$pixel->script=$request->script;
   	$pixel->save();
-  	return redirect('/dash/new/'.$uuid);
+  	return redirect('/biolinks/'.$uuid);
   }
 
   public function loadpixel(Request $request)
