@@ -178,6 +178,7 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         Barryvdh\Snappy\ServiceProvider::class,
+        'Maatwebsite\Excel\ExcelServiceProvider',
     ],
 
     /*
@@ -231,6 +232,7 @@ return [
         
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
     ],
 
 ];
