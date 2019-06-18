@@ -107,7 +107,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
 
     //premium ID
-    Route::get('/premium-id/tambah','PremiumIDController@tambah_premiumid');    
+    Route::get('/premium-id-biolinks/tambah','PremiumIDController@premiumid_biolinks');    
   });
 
 

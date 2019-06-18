@@ -563,6 +563,125 @@
   </div>
 </div>
 
+<!-- Modal Update Premium ID -->
+<div class="modal fade" id="premium-id" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <h5 class="modal-title font-premiumid big" id="modaltitle">
+          Custom Premium ID
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-premiumID">
+          @csrf
+
+          <input type="hidden" name="id">  
+
+          <div class="form-group">
+            <div class="col-12">
+              ID Default
+            </div>
+            <div class="col-12">
+              <input class="col-12 form-control" type="text" name="id_default" id="id_default" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-12 font-premiumid">
+              <b>Custom Premium ID</b>
+            </div>
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <?php echo env('SHORT_LINK').'/'; ?>
+                  </div>
+                </div>
+                <input class="form-control" type="text" name="custom_id" id="custom_id" placeholder="YOURLINK"> 
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="col-12 mb-4" style="margin-top: 30px">
+          <button class="btn btn-success btn-block btn-premiumid" data-dismiss="modal">
+            UPDATE LINK
+          </button>  
+        </div>
+        
+        <div class="col-12 text-center mb-4">
+          <a href="#" data-dismiss="modal">
+            Kembali
+          </a>  
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Beli Premium ID -->
+<div class="modal fade" id="premium-id-beli" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{{asset('image/icon-premium-id.png')}}">
+        <h5 class="font-premiumid big mt-3 mb-4">
+          Custom Premium ID
+        </h5>
+        <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan custom premium ID</p>
+
+        <div class="col-12 offset-lg-1 col-lg-10 mt-5 mb-5">
+          <div class="row">
+            <div class="col-lg-4 col-12 text-lg-left text-center">
+              ID Default <br>
+              <?php echo env('SHORT_LINK').'/YtBu8L' ?>
+            </div>
+            <div class="col-lg-4 col-12">
+              <img class="arrow" src="{{asset('image/arrow-green.png')}}">
+            </div>
+            <div class="col-lg-4 col-12 text-lg-left text-center">
+              <span class="font-premiumid">
+                Custom Premium ID
+              </span> <br>
+              <b><?php echo env('SHORT_LINK').'/YOURLINK' ?></b>
+            </div>  
+          </div>
+          
+        </div>
+        <div class="col-12 col-md-10 offset-md-1 mb-4" style="margin-top: 30px">
+          <a href="{{url('pricing')}}" target="_blank">
+            <button class="btn btn-success btn-block btn-beli-premium">
+              BELI SEKARANG
+            </button>    
+          </a>
+          
+        </div>
+        
+        <div class="col-12 text-center mb-4">
+          <a href="#" data-dismiss="modal">
+            Lain Kali
+          </a>  
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script type="text/javascript">
   $( "body" ).on( "click", ".view-details", function() {
     var id = $(this).attr('data-id');

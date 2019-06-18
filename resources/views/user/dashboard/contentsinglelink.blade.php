@@ -26,8 +26,8 @@
       @endif
 
       <td class="menu-nomobile">
-        Omn.lkz/{{$link->shorten}}&nbsp;
-        <span class="btn-copy" data-copy="Omn.lkz/{{$link->shorten}}">
+        {{env('SHORT_LINK')}}/{{$link->shorten}}&nbsp;
+        <span class="btn-copy" data-copy="{{env('SHORT_LINK')}}/{{$link->shorten}}">
           <i class="far fa-copy"></i>  
         </span>
       </td>
@@ -38,6 +38,9 @@
         </button>
         <button type="button" class="btn btn-sm btn-danger btn-deletelink" datadeleteid="{{$link->idlink}}">
           <i class="fas fa-trash-alt"></i>
+        </button>
+        <button type="button" class="btn btn-sm btn-success">
+          Premium ID
         </button>
       </td>
     </tr>

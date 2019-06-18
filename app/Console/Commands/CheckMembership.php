@@ -6,6 +6,9 @@ use Illuminate\Console\Command;
 
 use App\User;
 use App\UserLog;
+use App\Page;
+use App\Link;
+use App\PremiumID;
 
 use App\Mail\ExpiredMembershipMail;
 
@@ -52,11 +55,43 @@ class CheckMembership extends Command
         $interval = $date->diff($now)->format('%d');
         var_dump($interval);
         var_dump($date<$now);
-        if($interval==5){
+        if($date>$now and $interval==5){
           Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
         }
 
-        if($date < $now){
+        //check premium id 
+        if($date<$now and $interval==5){
+            $pages = Page::where('user_id',$user->id)
+                        ->where('premium_id','!=',0)
+                        ->get();
+
+            if(!is_null($pages)){
+                foreach ($pages as $page) {
+                    $page->premium_id = 0;
+                    $page->premium_names = null;
+                    $page->save();
+                }
+            }
+
+            $links = Link::where('user_id',$user->id)
+                        ->where('premium_id','!=',0)
+                        ->get();
+
+            if(!is_null($links)){
+                foreach ($links as $link) {
+                    $link->premium_id = 0;
+                    $link->premium_names = null;
+                    $link->save();
+                }
+            }
+
+            $premiumid = PremiumID::where('user_id',$user->id)->delete();
+
+            //$user->valid_until = null;
+            //$user->save();
+        }
+
+        if($date < $now and $user->membership!='free'){
           Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
 
           $userlog = new UserLog;
@@ -67,7 +102,7 @@ class CheckMembership extends Command
           $userlog->save();
 
           $user->membership = 'free';
-          $user->valid_until = null;
+          //$user->valid_until = null;
           $user->save();
         }
       }

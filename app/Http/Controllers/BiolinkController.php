@@ -133,7 +133,8 @@ class BiolinkController extends Controller
       return redirect("blog");
     }
     else {
-      $page = Page::where('names',$names)  
+      $page = Page::where('names',$names) 
+                ->orwhere('premium_names',$names) 
                 ->first();
       if (is_null($page)) {
         return "Page not found";
