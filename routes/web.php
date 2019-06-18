@@ -132,6 +132,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/list-user/add-user','UserController@add_user');
     Route::get('/list-user/edit-user','UserController@edit_user');
     Route::get('list-user/view-log','UserController@load_log');
+    Route::post('/import-excel-user','UserController@import_excel_user');
   });
 }
 
