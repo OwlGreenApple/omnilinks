@@ -136,6 +136,7 @@ class BiolinkController extends Controller
       $page = Page::where('names',$names) 
                 ->orwhere('premium_names',$names) 
                 ->first();
+
       if (is_null($page)) {
         return "Page not found";
       }
@@ -597,10 +598,12 @@ class BiolinkController extends Controller
 
     if($mode=='link'){
       $link = Link::find($id);
-      $user = User::find($link->user_id);
+      //$user = User::find($link->user_id);
+      $user = User::find($link->users_id);
     } else if($mode=='banner'){
       $banner = Banner::find($id);
-      $user = User::find($banner->user_id);
+      //$user = User::find($banner->user_id);
+      $user = User::find($banner->users_id);
     } else {
       $pages = Page::find($id);
       $user = User::find($pages->user_id);

@@ -25,6 +25,7 @@
   <script src="{{ asset('js/datetime-moment.js') }}"></script>
   <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
   <script src="{{asset('js/all.js')}}"></script>
+  <script src="{{asset('selectize/selectize.js')}}"></script>
 
   <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 
@@ -40,6 +41,7 @@
   <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
 
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
+  <link rel="stylesheet" href="{{asset('selectize/selectize.css')}}">
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>

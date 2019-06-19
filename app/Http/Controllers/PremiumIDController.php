@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 use App\PremiumID;
 use App\Page;
+use App\Link;
 
 use Auth, Validator; 
 
@@ -15,7 +16,7 @@ class PremiumIDController extends Controller
     protected function validator_pages(array $data)
     {
       return Validator::make($data, [
-        'custom_id' => ['required', 'string','unique:pages,premium_names','unique:pages,names',
+        'custom_id' => ['required', 'string','unique:premium_id,links','unique:pages,names',
         ],
       ]);
     }
@@ -23,7 +24,7 @@ class PremiumIDController extends Controller
     protected function validator_links(array $data)
     {
       return Validator::make($data, [
-        'custom_id' => ['required', 'string','unique:links,premium_names','unique:links,names',
+        'custom_id' => ['required', 'string','unique:premium_id,links','unique:links,names',
         ],
       ]);
     }
@@ -101,11 +102,17 @@ class PremiumIDController extends Controller
       $validator = $this->validator_links($request->all());
 
       if(!$validator->fails()){
-        $link = Link::find($request->id);
+        if($request->id_title==0){
+          $arr['status'] = 'error';
+          $arr['message'] = 'Pilih link terlebih dahulu';
+          return $arr;
+        }
+
+        $link = Link::find($request->id_title);
 
         $premiumid = PremiumID::where('user_id',Auth::user()->id)
                     ->where('link_id',$link->id)
-                    ->where('type','biolinks')
+                    ->where('type','singlelinks')
                     ->first();
 
         if(is_null($premiumid)){
@@ -118,9 +125,9 @@ class PremiumIDController extends Controller
         $premiumid->links = $request->custom_id;
         $premiumid->save();
 
-        $page->premium_id = $premiumid->id;
-        $page->premium_names = $request->custom_id;
-        $page->save();
+        $link->premium_id = $premiumid->id;
+        $link->premium_names = $request->custom_id;
+        $link->save();
 
         $arr['status'] = 'success';
         $arr['message'] = 'Premium ID berhasil dibuat. Letakkan link berikut di Bio Instagram <a href="https://'.env('SHORT_LINK').'/'. $link->premium_names.'">'.env('SHORT_LINK').'/'. $link->premium_names.'</a>';

@@ -105,9 +105,11 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
     Route::get('/pixel/loadPixelLink','SinglelinkController@loadPixelLink');
     Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
+    Route::get('/singlelinks/load-link-title','SinglelinkController@load_link_title');
 
     //premium ID
-    Route::get('/premium-id-biolinks/tambah','PremiumIDController@premiumid_biolinks');    
+    Route::get('/premium-id-biolinks/tambah','PremiumIDController@premiumid_biolinks');
+    Route::get('/premium-id-singlelinks/tambah','PremiumIDController@premiumid_singlelinks');    
   });
 
 

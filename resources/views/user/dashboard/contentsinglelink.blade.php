@@ -26,8 +26,16 @@
       @endif
 
       <td class="menu-nomobile">
-        {{env('SHORT_LINK')}}/{{$link->shorten}}&nbsp;
-        <span class="btn-copy" data-copy="{{env('SHORT_LINK')}}/{{$link->shorten}}">
+        <?php 
+          if($link->premium_id==0) {
+            $linkclick = env('SHORT_LINK').'/'.$link->shorten;
+          } else {
+            $linkclick = env('SHORT_LINK').'/'.$link->premium_names;
+          }
+        ?>
+
+        {{$linkclick}}&nbsp;
+        <span class="btn-copy" data-copy="{{$linkclick}}">
           <i class="far fa-copy"></i>  
         </span>
       </td>
@@ -39,7 +47,7 @@
         <button type="button" class="btn btn-sm btn-danger btn-deletelink" datadeleteid="{{$link->idlink}}">
           <i class="fas fa-trash-alt"></i>
         </button>
-        <button type="button" class="btn btn-sm btn-success">
+        <button type="button" class="btn btn-sm btn-success btn-premium" data-id="{{$link->idlink}}" data-default="{{env('SHORT_LINK')}}/{{$link->shorten}}" data-premiumid="{{$link->premium_id}}" data-premiumnames="{{$link->premium_names}}">
           Premium ID
         </button>
       </td>

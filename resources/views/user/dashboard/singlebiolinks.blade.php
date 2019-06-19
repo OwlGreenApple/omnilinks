@@ -8,6 +8,49 @@
   var currentPageLink = "";
   var currentPagePixel = "";
   var groupTab = "link";
+  var selectize_tags='';
+
+  $(document).ready(function() {
+    $('.pixels2').hide();
+    loadSinglePixel();
+    loadSingleLinks();
+    loadPixelLink();
+    loadLinkTitle();
+
+    $('#id_title').selectize({
+        create: false,
+    });
+
+    selectize_tags = $("#id_title")[0].selectize;
+  });
+
+  function loadLinkTitle()
+  {
+    $.ajax({
+      type: 'GET',
+      url: '<?php echo url('/singlelinks/load-link-title'); ?>',
+      dataType:'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success:function(result){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data=jQuery.parseJSON(result);
+        
+        selectize_tags.addOption({ text:"-- Select Created Title --", value:"0" });
+
+        $(data.links).each(function(index, element) {
+          selectize_tags.addOption({ text:element.title, value:element.id });
+                    
+        });
+
+        selectize_tags.setValue("0");
+      }
+    });      
+  }
 
   function loadPixelLink()
   {
@@ -191,12 +234,40 @@
     });
   }
 
-  $(document).ready(function() {
-    $('.pixels2').hide();
-    loadSinglePixel();
-    loadSingleLinks();
-    loadPixelLink();
-  });
+  function tambah_premiumid() {
+    $.ajax({
+      type: 'GET',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'text',
+      data: $('#form-premiumID').serialize(),
+      url: "<?php echo url('/premium-id-singlelinks/tambah');?>",
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $("#pesan").html(data.message);
+        $("#pesan").show();
+        if (data.status == "success") {
+          $("#pesan").addClass("alert-success");
+          $("#pesan").removeClass("alert-danger");
+
+          loadSingleLinks();
+        }
+        if (data.status == "error") {
+          $("#pesan").addClass("alert-danger");
+          $("#pesan").removeClass("alert-success");
+        }
+      }
+    });
+  }
 </script>
 <style type="text/css">
 .text-card{
@@ -579,7 +650,7 @@
         <form id="form-premiumID">
           @csrf
 
-          <input type="hidden" name="id">  
+          <input type="hidden" name="id" id="id-premium">  
 
           <div class="form-group">
             <div class="col-12">
@@ -603,6 +674,16 @@
                 </div>
                 <input class="form-control" type="text" name="custom_id" id="custom_id" placeholder="YOURLINK"> 
               </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-12 font-premiumid">
+              Select Created Title
+            </div>
+            <div class="col-12 pl-0 pr-0">
+              <select class="col-12" name="id_title" id="id_title">
+              </select>
             </div>
           </div>
         </form>
@@ -683,6 +764,29 @@
 </div>
 
 <script type="text/javascript">
+  $(document).on('click', '.btn-premiumid', function() {
+    tambah_premiumid();
+  });
+
+  $(document).on('click', '.btn-premium', function() {
+      <?php if(Auth::user()->membership=='free') { ?>
+        $('#premium-id-beli').modal('show');
+      <?php } else { ?>
+        var id = $(this).attr('data-id');
+        var iddefault = $(this).attr('data-default');
+        var premiumid = $(this).attr('data-premiumid');
+        var premiumnames = $(this).attr('data-premiumnames');
+
+        selectize_tags.setValue(id);
+        $('#id-premium').val(id);
+        $('#id_default').val(iddefault);
+        if(premiumid!=0){
+          $('#custom_id').val(premiumnames);
+        }
+        $('#premium-id').modal('show');
+      <?php } ?>
+  });
+
   $( "body" ).on( "click", ".view-details", function() {
     var id = $(this).attr('data-id');
 
