@@ -330,7 +330,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .div-btn {
+  .div-btn{
     position: fixed;
     top: 80px;
     z-index: 20;

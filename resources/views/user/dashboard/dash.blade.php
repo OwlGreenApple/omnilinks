@@ -183,6 +183,40 @@
             </a>
           </div> 
         @endif 
+        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-3 col-md-3 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3">
+          <p class="text-md-right text-lg-right ">
+            @if($user->membership=="free")
+              <span class="text-success header-status-account">
+                <i class="fas fa-flag"></i>
+                Free Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Upgrade</a>
+              </span>
+            @endif
+            @if($user->membership=="basic")
+              <span class="text-success header-status-account">
+                <i class="fas fa-trophy"></i>
+                Basic Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
+            @if($user->membership=="elite")
+              <span class="text-warning header-status-account">
+                <i class="fas fa-star"></i>
+                Elite Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
+          </p>
+        </div>
       </div>
     </div>
 
