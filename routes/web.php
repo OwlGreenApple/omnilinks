@@ -62,9 +62,10 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
 
     //dashboard
-    Route::get('/',function(){
-        return view('user.dashboard.dash');
-    });
+    // Route::get('/',function(){
+        // return view('user.dashboard.dash');
+    // });
+    Route::get('/','DashboardController@viewDashboard');
     Route::get('/dash/load-dashboard','DashboardController@loadDashboard');
     Route::get('/dash/load-chart','DashboardController@load_chart');
     Route::get('/dash/load-link','DashboardController@loadlink');

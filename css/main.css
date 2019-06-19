@@ -113,3 +113,21 @@ table tr:nth-child(even) td {
   from{ bottom:-100px; opacity:0 } 
   to{ bottom:0; opacity:1 }
 }
+
+@media only screen and (max-width: 1700px) {
+  .header-status-account{
+    font-size:25px;
+  }
+  .content-status-account{
+    font-size:17px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header-status-account{
+    font-size:20px;
+  }
+  .content-status-account{
+    font-size:12px;
+  }
+}
