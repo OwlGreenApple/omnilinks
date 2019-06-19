@@ -75,15 +75,25 @@
           </div>
 
           <div class="col-8 col-md-4 col-lg-6">
-            <a href="{{'http://'.env('SHORT_LINK').'/'.$page->names}}" class="getLink">
-              {{env('SHORT_LINK')}}/{{$page->names}} 
+            <?php 
+                $names = '';
+                if($page->premium_id!=0){
+                  $names = env('SHORT_LINK').'/'.$page->premium_names;
+                } else {
+                  $names = env('SHORT_LINK').'/'.$page->names;
+                }
+            ?>
+
+            <a href="{{'http://'.$names}}" class="getLink">
+              {{$names}}
+              <!--{{env('SHORT_LINK')}}/{{$page->names}} -->
               <span class="menu-mobile float-right">
                 <i class="fas fa-sort-down"></i>
               </span>
-              <input type="hidden" class="link-{{$page->id}}" value="omn.lkz/{{$page->names}}">
+              <input type="hidden" class="link-{{$page->id}}" value="{{$names}}">
             </a>
             &nbsp;
-            <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{'https://'.env('SHORT_LINK').'/'.$page->names}}">
+            <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{'https://'.$names}}">
               <i class="far fa-clone"></i>  
             </span>
 

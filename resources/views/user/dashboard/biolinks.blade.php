@@ -460,7 +460,7 @@
       },
       dataType: 'text',
       data: $('#form-premiumID').serialize(),
-      url: "<?php echo url('/premium-id/tambah');?>",
+      url: "<?php echo url('/premium-id-biolinks/tambah');?>",
       beforeSend: function()
       {
         $('#loader').show();
@@ -1564,7 +1564,7 @@
 
 </section>
 
-<!-- Modal Copy Link -->
+<!-- Modal Update Premium ID -->
 <div class="modal fade" id="premium-id" role="dialog">
   <div class="modal-dialog">
 
@@ -1602,7 +1602,7 @@
                     <?php echo env('SHORT_LINK').'/'; ?>
                   </div>
                 </div>
-                <input class="form-control" type="text" name="custom_id" id="custom_id" placeholder="YOURLINK"> 
+                <input class="form-control" type="text" name="custom_id" id="custom_id" placeholder="YOURLINK" value="<?php if($pages->premium_id!=0) echo $pages->premium_names ?>"> 
               </div>
             </div>
           </div>
@@ -1627,7 +1627,7 @@
   </div>
 </div>
 
-<!-- Modal Copy Link -->
+<!-- Modal Beli Premium ID -->
 <div class="modal fade" id="premium-id-beli" role="dialog">
   <div class="modal-dialog modal-lg">
 
@@ -1643,20 +1643,23 @@
         </h5>
         <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan custom premium ID</p>
 
-        <div class="row col-12 offset-md-1 col-md-10 mt-5 mb-5">
-          <div class="col-4 text-left">
-            ID Default <br>
-            <?php echo env('SHORT_LINK').'/YtBu8L' ?>
+        <div class="col-12 offset-lg-1 col-lg-10 mt-5 mb-5">
+          <div class="row">
+            <div class="col-lg-4 col-12 text-lg-left text-center">
+              ID Default <br>
+              <?php echo env('SHORT_LINK').'/YtBu8L' ?>
+            </div>
+            <div class="col-lg-4 col-12">
+              <img class="arrow" src="{{asset('image/arrow-green.png')}}">
+            </div>
+            <div class="col-lg-4 col-12 text-lg-left text-center">
+              <span class="font-premiumid">
+                Custom Premium ID
+              </span> <br>
+              <b><?php echo env('SHORT_LINK').'/YOURLINK' ?></b>
+            </div>  
           </div>
-          <div class="col-4">
-            <img src="{{asset('image/arrow-green.png')}}">
-          </div>
-          <div class="col-4 text-left">
-            <span class="font-premiumid">
-              Custom Premium ID
-            </span> <br>
-            <b><?php echo env('SHORT_LINK').'/YOURLINK' ?></b>
-          </div>
+          
         </div>
         <div class="col-12 col-md-10 offset-md-1 mb-4" style="margin-top: 30px">
           <a href="{{url('pricing')}}" target="_blank">

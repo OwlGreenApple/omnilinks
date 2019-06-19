@@ -66,11 +66,12 @@
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
       <div class="container-fluid">
-        <?php if(Auth::check()){?>
+        <!--<?php if(Auth::check()){?>
           <a class="navbar-brand" href="{{ url('/dash') }}">
         <?php } else{?>
           <a class="navbar-brand" href="{{ url('/') }}">
-        <?php }?>
+        <?php }?>-->
+          <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{asset('image/omnilinkz-logo.png')}}" width="180px;" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
