@@ -100,7 +100,7 @@
 }
 
 .container {
-  margin-top: 80px;
+  /*margin-top: 80px;*/
 }
 
 .menu-mobile {
@@ -113,7 +113,14 @@
 
 @media screen and (max-width: 767px) {
   .container {
-    margin-top: 110px;
+    /*margin-top: 110px;*/
+  }
+  .body-content-mobile{
+    margin-top: 100px;
+  }
+
+  .status-account-info{
+    margin-top: 70px;
   }
 
   .menu-nomobile{

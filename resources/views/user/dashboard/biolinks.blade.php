@@ -487,7 +487,7 @@
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
-  <div class="container">
+  <div class="container body-content-mobile">
     <div class="row">
       <div class="col-md-12">
         <h4 style="color: #106BC8">

@@ -135,8 +135,9 @@
 
 </script>
 
-<div class="container mb-5">
-  <div class="row notif">
+<div class="container mt-5 mb-5">
+  <div class="row">
+    @if (session('error'))
     <div class="col-md-12 mb-3">
 
       <!--@if(Auth::user()->membership=='free')
@@ -156,15 +157,14 @@
         </div>
       @endif-->
 
-      @if (session('error'))
         <div class="alert alert-danger">
           <button type="button" class="close" aria-label="Close" data-dismiss="alert">
             <span aria-hidden="true">×</span>
           </button>
           {{ session('error') }} <a href="{{asset('/pricing')}}">Subscribe</a>
         </div>
-      @endif
     </div>
+    @endif
 
     <div class="col-md-12 pr-0 div-btn">
       <div class="row">
@@ -183,6 +183,44 @@
             </a>
           </div> 
         @endif 
+        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-3 col-md-3 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3 menu-nomobile">
+          <p class="text-md-right text-lg-right ">
+            @if($user->membership=="free")
+              <span class="text-success header-status-account">
+                <i class="fas fa-flag"></i>
+                Free Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Upgrade</a>
+              </span>
+            @endif
+            @if($user->membership=="basic")
+              <span class="text-success header-status-account">
+                <i class="fas fa-trophy"></i>
+                Basic Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
+            @if($user->membership=="elite")
+              <span class="text-warning header-status-account">
+                <i class="fas fa-star"></i>
+                Elite Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 pr-0 menu-mobile status-account-info">
+      <div class="row">
         <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-3 col-md-3 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3">
           <p class="text-md-right text-lg-right ">
             @if($user->membership=="free")
