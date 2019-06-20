@@ -212,10 +212,10 @@
                 </a>
               </li>
               <li>
-                <a href="#" onclick='window.open("http://facebook.com");return false;'>
+                <a href="https://www.facebook.com/Omnilinkz" target="_blank">
                   <i class="fab fa-facebook linkfooter"></i>
                 </a>
-                <a href="#" onclick='window.open("http://instagram.com");return false;'>
+                <a href="https://www.instagram.com/omnilinkz/" target="_blank">
                   <i class="fab fa-instagram linkfooter" style="margin-left:5px;"></i>
                 </a>
               </li>

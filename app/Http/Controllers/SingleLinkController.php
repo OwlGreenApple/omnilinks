@@ -28,7 +28,8 @@ class SingleLinkController extends Controller
       if ((Auth::user()->membership=='basic') OR (Auth::user()->membership=='free')) {
          if($linkCheck>=5) {
           $arr['status'] = 'gagal';
-          $arr['message']='maaf anda sudah tidak bisa menambahkan link lagi';
+          $arr['message'] = 'maaf anda sudah tidak bisa menambahkan link lagi';
+          $arr['link'] = '';
           return $arr;
         } 
       }         
@@ -55,8 +56,10 @@ class SingleLinkController extends Controller
   		$link->link=$request->url;
   		$link->title=$request->title;
   		$link->save();
+
       $arr['status'] = 'success';
       $arr['message']='anda sudah menambahkan link';
+      $arr['link'] = $link;
       return $arr;
   		//return redirect('/singlelink')->with('ok','Link telah Ditambahkan');
  	}
