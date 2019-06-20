@@ -67,7 +67,7 @@
 <body>
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-      <div class="container-fluid">
+      <div class="container">
         <!--<?php if(Auth::check()){?>
           <a class="navbar-brand" href="{{ url('/dash') }}">
         <?php } else{?>
@@ -149,9 +149,9 @@
       </div>
     </nav>
 
-    <main>
+    
       @yield('content')  
-    </main>
+    
 
     <footer class="infooter font-small">
       <div class="container text-md-left menu-nomobile">

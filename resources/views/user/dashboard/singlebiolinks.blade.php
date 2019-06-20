@@ -287,7 +287,7 @@
 </style>
 
 <section id="tabs" class="offset-md-1 col-md-10" style="margin-bottom: 50px;">
-  <div class="container">
+  <div class="container body-content-mobile">
     <div class="row">
       <div class="col-md-12">
         <h4 style="color: #106BC8">
