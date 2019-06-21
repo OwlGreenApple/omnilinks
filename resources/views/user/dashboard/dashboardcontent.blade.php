@@ -157,7 +157,7 @@
                 <i class="fas fa-pencil-alt"></i>
               </button>
 
-              <a class="menu-nomobile" href="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}" target="_blank">
+              <a class="menu-nomobile" href="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}" >
                 <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;" data-url="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}">
                   <i class="far fa-file-pdf"></i>
                   Saved AS PDF

@@ -91,27 +91,41 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link navlog" href="{{ url('/') }}">
+                  {{ __('Home') }}
+                </a>
+              </li>
+
+              <li class="nav-item dropdown pull-right">
+                <a class="nav-link dropdown-toggle navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ __('Pricing') }} <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item <?php if(Request::is('pricing')) echo 'active' ?>" href="{{ url('pricing') }}">
+                    Daftar Harga
+                  </a>
+                  <a class="dropdown-item <?php if(Request::is('orders')) echo 'active' ?>" href="{{ url('orders') }}">
+                    Konfirmasi Pembayaran
+                  </a>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link navlog" href="#">
+                  {{ __('Blog') }}
+                </a>
+              </li>
               @guest
                 <li class="nav-item">
-                  <a class="nav-link navlog" href="{{ url('pricing') }}">
-                    {{ __('Pricing') }}
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link navlog" href="{{ route('login') }}">{{ __('LOG IN') }}</a>
+                  <a class="nav-link navlog" href="{{ route('login') }}">{{ __('Log in') }}</a>
                 </li>
                 @if (Route::has('register'))
                   <li class="nav-item">
-                    <a class="btn btn-md btn-primary btn-prim-custom" href="{{ route('register') }}">{{ __('GET STARTED FOR FREE') }}</a>
+                    <a class="btn btn-md btn-primary btn-prim-custom" href="{{ route('register') }}">{{ __('STARTED FREE') }}</a>
                   </li>
                 @endif
               @else
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ url('pricing') }}" style="color: #116BC7">
-                    {{ __('Upgrade Account') }}
-                  </a>
-                </li>
-
                 <div class="dropdown pull-right">
                   <a class="nav-link dropdown-toggle blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">
                     Halo, {{ Auth::user()->username }} <span class="caret"></span>
