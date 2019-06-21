@@ -11,7 +11,6 @@ use App\Coupon;
 use App\Order;
 use App\UserLog;
 use App\Notification;
-use App\Mail\ConfirmOrderMail;
 
 use App\Helpers\Helper;
 use Carbon, Crypt;
@@ -402,7 +401,6 @@ class OrderController extends Controller
     $user->save();
     $order->save();
 
-    // Mail::to($user->email)->queue(new ConfirmOrderMail($user,$order));
     $emaildata = [
       'order' => $order,
       'user' => $user,
