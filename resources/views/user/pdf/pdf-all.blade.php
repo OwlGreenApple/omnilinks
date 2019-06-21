@@ -42,7 +42,7 @@
 <div class="container">
   <div class="col-xs-12 content-txt">
     <div class="row sub" style="margin-bottom: 50px">
-      <div class="col-xs-3" align="center">
+      <div class="col-xs-3" align="center"> 
         @if($page->image_pages!=null)
           <img class="pageimg" src="<?php echo Storage::disk('s3')->url($page->image_pages); ?>">
         @else 

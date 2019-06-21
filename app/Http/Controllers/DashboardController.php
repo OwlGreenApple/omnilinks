@@ -157,11 +157,11 @@ class DashboardController extends Controller
           ->setOption('margin-bottom', 10)
           ->setOption('margin-right', '0mm')
           ->setOption('margin-left', '0mm')
-          ->setOption('enable-javascript', true)
+          /*->setOption('enable-javascript', true)
           ->setOption('images', true)
           ->setOption('javascript-delay', 13000)
           ->setOption('enable-smart-shrinking', true)
-          ->setOption('no-stop-slow-scripts', true);
+          ->setOption('no-stop-slow-scripts', true)*/;
 
     return $pdf->stream();
   }
@@ -254,11 +254,11 @@ class DashboardController extends Controller
           ->setOption('margin-bottom', 10)
           ->setOption('margin-right', '0mm')
           ->setOption('margin-left', '0mm')
-          ->setOption('enable-javascript', true)
+          /*->setOption('enable-javascript', true)
           ->setOption('images', true)
           ->setOption('javascript-delay', 13000)
           ->setOption('enable-smart-shrinking', true)
-          ->setOption('no-stop-slow-scripts', true);
+          ->setOption('no-stop-slow-scripts', true)*/;
 
     return $pdf->stream();
   }

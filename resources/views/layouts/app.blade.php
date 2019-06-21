@@ -9,6 +9,9 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Omnilinkz</title>
 
+  <!-- Icon -->
+  <link rel='shortcut icon' type='image/png' href="{{ asset('image/favicon.png') }}">
+
   <!-- Scripts -->
   <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
   <!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
