@@ -160,8 +160,11 @@
             <ul class="list-unstyled">
               <h5 style="color:#ffffff;">Omnilinkz </h5>
               <li>
-                <a href="{{asset('/about')}}" class="linkfooter">
+                <!--<a href="{{asset('/about')}}" class="linkfooter">
                   About Us
+                </a>-->
+                <a href="{{asset('/')}}" class="linkfooter">
+                  Home
                 </a>
               </li>
               <li>
@@ -170,8 +173,11 @@
                 </a>
               </li>
               <li>
-                <a href="{{asset('/faq')}}" class="linkfooter">
+                <!--<a href="{{asset('/faq')}}" class="linkfooter">
                   FAQ
+                </a>-->
+                <a href="#" class="linkfooter">
+                  Blog
                 </a>
               </li>
             </ul>
@@ -183,22 +189,22 @@
               </h5>
               <li>
                 <a href="{{asset('/helps')}}" class="linkfooter">
-                  Terms And Condition
+                  Terms & Conditions
                 </a>
               </li>
               <li>
                 <a href="{{asset('/helps')}}" class="linkfooter">
-                  Privacy And Policy
+                  Privacy Policy
                 </a>
               </li>
               <li>
                 <a href="{{asset('/helps')}}" class="linkfooter">
-                  Earnings And Legal Disclaimers
+                  Earnings & Legal Disclaimers
                 </a>
               </li>
-              <li>
+              <!--<li>
                 <a href="#" class="linkfooter">Blog</a>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="col-md-3 mx-auto">
@@ -227,19 +233,40 @@
                 Copyright
               </h5>
               <li class="linkfooter">
-                © 2019 Omnilinkz
+                Omnilinkz.com | 2019
               </li>
               <li class="linkfooter">
-                All Right Reserved
+                All Rights Reserved
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="menu-mobile text-center linkfooter">
-        Omnilinkz © 2019<br>
-        Privacy Policy &nbsp; Terms Of Use &nbsp; Legal
+      <div class="menu-mobile text-center linkfooter p-3">
+        <b>Omnilinkz</b><br>
+        <a href="{{url('/')}}" class="linkfooter">
+          Home
+        </a> | 
+        <a href="{{url('pricing')}}" class="linkfooter">
+          Pricing
+        </a> | 
+        <a href="#" class="linkfooter">
+          Blog
+        </a> | 
+        <a href="{{url('/helps')}}" class="linkfooter">
+          Terms & Conditions
+        </a> | 
+        <a href="{{url('/helps')}}" class="linkfooter">
+          Privacy Policy
+        </a>
+        <br>
+        <br>
+        <b>Copyright</b><br>
+        Omnilinkz.com | 2019 All Rights Reserved. | 
+        <a onclick="window.location.href='mailto:omnilinkzcom@gmail.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
+          omnilinkzcom@gmail.com
+        </a>
       </div>
     </footer>
   </div> 

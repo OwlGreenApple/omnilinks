@@ -30,9 +30,9 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/about',function(){
     return view('aboutus');
   });
-  Route::get('/faq',function(){
+  /*Route::get('/faq',function(){
     return view('faq');
-  });
+  });*/
   Route::get('/helps',function(){
     return view('term and policy');
   });

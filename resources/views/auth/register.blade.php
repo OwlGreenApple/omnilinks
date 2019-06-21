@@ -95,7 +95,7 @@
                   <label for="agree-term" class="label-agree-term">
                     <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" required />
                     I agree with
-                    <a href="{{url('statics/terms-conditions')}}" class="term-service">
+                    <a href="{{url('/helps')}}" class="term-service">
                       Terms and Conditions
                     </a>
                   </label>

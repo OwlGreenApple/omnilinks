@@ -29,7 +29,7 @@
             <br>
 
             <p class="pg-title small pt-0 mt-3">
-              Hemat <b>Hingga 80%</b> Dengan Paket Tahunan
+              Hemat <b>Hingga 52%</b> Dengan Paket Tahunan
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@
             </b>  
           </h5>
           <span class="harga harga-small pro">
-            <sup>Rp</sup> 55.000<sub> /bln</sub>
+            <sup>Rp</sup> 85.000<sub> /bln</sub>
           </span><br>
           <a class="link-pro" href="{{url('checkout/2')}}">
             <button class="btn btn-block btn-upgrade-big small pro">
@@ -93,7 +93,7 @@
             </b>    
           </h5>
           <span class="harga harga-small premium">
-            <sup>Rp</sup> 75.000<sub> /bln</sub>
+            <sup>Rp</sup> 95.000<sub> /bln</sub>
           </span><br>
           <a class="link-premium" href="{{url('checkout/4')}}">
             <button class="btn btn-block btn-upgrade-big small premium">
@@ -493,10 +493,10 @@
 
           <div class="col-md-12 pb-3">
             <span class="harga pro">
-              <sup>Rp</sup> 55.000<sub> /bln</sub>
+              <sup>Rp</sup> 85.000<sub> /bln</sub>
             </span><br>
             <span class="harga-real pro">
-              Biaya Per Tahun @ Rp 660.000
+              Biaya Per Tahun @ Rp 1.020.000
             </span><br>
             <p class="hemat monthly mt-4">
               <i class="fas fa-redo-alt"></i>
@@ -846,10 +846,10 @@
                 
           <div class="col-md-12 pb-3">
             <span class="harga premium">
-              <sup>Rp</sup> 75.000<sub> /bln</sub>
+              <sup>Rp</sup> 95.000<sub> /bln</sub>
             </span><br>
             <span class="harga-real premium">
-              Biaya Per Tahun @ 900.000
+              Biaya Per Tahun @ 1.140.000
             </span><br>
             <p class="hemat monthly mt-4">
               <i class="fas fa-redo-alt"></i>
@@ -1214,10 +1214,10 @@
     $('.btn-pricing.month').addClass('active');
     $('.btn-pricing.year').removeClass('active');
 
-    $('.harga.pro').html('<sup>Rp</sup> 197.000 <sub>/bln</sub>');
+    $('.harga.pro').html('<sup>Rp</sup> 155.000 <sub>/bln</sub>');
     $('.harga-real.pro').html('<b>Dibayar Per Bulan</b>');
 
-    $('.harga.premium').html('<sup>Rp</sup> 297.000 <sub>/bln</sub>');
+    $('.harga.premium').html('<sup>Rp</sup> 195.000 <sub>/bln</sub>');
     $('.harga-real.premium').html('<b>Dibayar Per Bulan</b>');
 
     $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Tahunan');
@@ -1233,11 +1233,11 @@
     $('.btn-pricing.month').removeClass('active');
     $('.btn-pricing.year').addClass('active');
 
-    $('.harga.pro').html('<sup>Rp</sup> 55.000 <sub>/bln</sub>');
-    $('.harga-real.pro').html('Biaya Per Tahun @ Rp 660.000');
+    $('.harga.pro').html('<sup>Rp</sup> 85.000 <sub>/bln</sub>');
+    $('.harga-real.pro').html('Biaya Per Tahun @ Rp 1.020.000');
 
-    $('.harga.premium').html('<sup>Rp</sup> 75.000 <sub>/bln</sub>');
-    $('.harga-real.premium').html('Biaya Per Tahun @ Rp 900.000');
+    $('.harga.premium').html('<sup>Rp</sup> 95.000 <sub>/bln</sub>');
+    $('.harga-real.premium').html('Biaya Per Tahun @ Rp 1.140.000');
 
     $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Bulanan');
 
@@ -1302,7 +1302,7 @@
           </div>
         </th>
         <th class="price-info ">
-          <div class="price-now"><span class="nprice price_pro">197,000,-</span></div>
+          <div class="price-now"><span class="nprice price_pro">155,000,-</span></div>
 
           <div class="monthly-button">
             <a href="{{url('checkout/1')}}">
@@ -1320,7 +1320,7 @@
           </div>
         </th>
         <th class="price-info ">
-          <div class="price-now"><span class="nprice price_premium">297,000,-</span></div>
+          <div class="price-now"><span class="nprice price_premium">195,000,-</span></div>
 
           <div class="monthly-button">
             <a href="{{url('checkout/3')}}">
