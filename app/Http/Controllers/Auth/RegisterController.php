@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\UserLog;
 use App\Order;
-use App\Mail\Confirm_Email;
+use App\Mail\ConfirmEmail;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
@@ -216,7 +216,7 @@ class RegisterController extends Controller
         'password' => $request->password,
       ];
       
-       Mail::to($user->email)->send(new Confirm_Email($emaildata));
+       Mail::to($user->email)->send(new ConfirmEmail($emaildata));
 
       if ($request->price<>"") {
         return redirect('thankyou');
