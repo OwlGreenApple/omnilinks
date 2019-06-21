@@ -183,7 +183,7 @@
             </a>
           </div> 
         @endif 
-        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-3 col-md-3 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3 menu-nomobile">
+        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3 menu-nomobile">
           <p class="text-md-right text-lg-right ">
             @if($user->membership=="free")
               <span class="text-success header-status-account">
@@ -192,7 +192,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Upgrade</a>
+              ~ Valid until No Expired. <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="basic")
@@ -220,9 +220,7 @@
       </div>
     </div>
     <div class="col-md-12 pr-0 menu-mobile status-account-info">
-      <div class="row">
-        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-3 col-md-3 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3">
-          <p class="text-md-right text-lg-right ">
+      <p class="text-md-right text-lg-right ">
             @if($user->membership=="free")
               <span class="text-success header-status-account">
                 <i class="fas fa-flag"></i>
@@ -230,7 +228,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Upgrade</a>
+              ~ Valid until No Expired. <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="basic")
@@ -254,8 +252,6 @@
               </span>
             @endif
           </p>
-        </div>
-      </div>
     </div>
 
     <div class="col-md-12">

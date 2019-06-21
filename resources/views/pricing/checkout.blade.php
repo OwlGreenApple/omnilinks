@@ -75,17 +75,17 @@
                 <div class="col-12 col-md-12">
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
                   <select class="form-control" name="idpaket" id="select-auto-manage">
-                    <option class="" data-price="197000" data-paket="Basic Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
-                      Basic Monthly - IDR 197.000,-/mo
+                    <option class="" data-price="155000" data-paket="Basic Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
+                      Basic Monthly - IDR 155.000,-/mo
                     </option>
-                    <option class="" data-price="297000" data-paket="Elite Monthly" value="3" <?php if ($id==3) echo "selected" ; ?>>
-                      Elite Monthly - IDR 297.000,-/mo
+                    <option class="" data-price="195000" data-paket="Elite Monthly" value="3" <?php if ($id==3) echo "selected" ; ?>>
+                      Elite Monthly - IDR 195.000,-/mo
                     </option>
-                    <option class="" data-price="660000" data-paket="Basic Yearly" value="2" <?php if ($id==2) echo "selected" ; ?>>
-                      Basic Yearly - IDR 660.000,-/year
+                    <option class="" data-price="1020000" data-paket="Basic Yearly" value="2" <?php if ($id==2) echo "selected" ; ?>>
+                      Basic Yearly - IDR 1.020.000,-/year
                     </option>
-                    <option class="" data-price="900000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
-                      Elite Yearly - IDR 900.000,-/year
+                    <option class="" data-price="1140000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
+                      Elite Yearly - IDR 1.140.000,-/year
                     </option>
                   </select>
                 </div>
@@ -127,7 +127,7 @@
               <div class="form-group">
                 <div class="col-12 col-md-12">
                   <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
-                  <label for="agree-term" class="label-agree-term text">I agree all statements in <a href="#" class="term-service">Terms of service</a></label>
+                  <label for="agree-term" class="label-agree-term text">I agree all statements in <a href="{{url('/helps')}}" class="term-service">Terms of service</a></label>
                 </div>
               </div>
               <div class="form-group">

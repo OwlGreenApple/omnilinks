@@ -8,7 +8,7 @@
   var currentPageLink = "";
   var currentPagePixel = "";
   var groupTab = "link";
-  var selectize_tags='';
+  var selectize_tags = '';
 
   $(document).ready(function() {
     $('.pixels2').hide();
@@ -43,8 +43,7 @@
         selectize_tags.addOption({ text:"-- Select Created Title --", value:"0" });
 
         $(data.links).each(function(index, element) {
-          selectize_tags.addOption({ text:element.title, value:element.id });
-                    
+          selectize_tags.addOption({ text:element.title, value:element.id });    
         });
 
         selectize_tags.setValue("0");
@@ -147,6 +146,7 @@
 
       var data = jQuery.parseJSON(result);
       if(data.status=="success"){
+        selectize_tags.removeOption(idlink);
         loadSingleLinks();
       }
     }
@@ -198,6 +198,8 @@
         if (data.status=="success") {
           $("#pesan").html(data.message);
           $("#pesan").addClass("alert-success");
+          
+          selectize_tags.addOption({ text:data.link.title, value:data.link.id });    
           loadSingleLinks();
         }
         else if(data.status=="gagal"){

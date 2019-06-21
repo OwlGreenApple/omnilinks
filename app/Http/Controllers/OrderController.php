@@ -21,10 +21,10 @@ class OrderController extends Controller
   public function cekharga($namapaket, $price){
     //cek paket dengan harga
     $paket = array(
-      'Basic Monthly' => 197000,
-      'Elite Monthly' => 297000,
-      'Basic Yearly' => 660000,
-      'Elite Yearly' => 900000,
+      'Basic Monthly' => 155000,
+      'Elite Monthly' => 195000,
+      'Basic Yearly' => 1020000,
+      'Elite Yearly' => 1140000,
     );
 
     if(isset($paket[$namapaket])){

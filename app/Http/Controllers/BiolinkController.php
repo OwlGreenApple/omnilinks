@@ -136,9 +136,33 @@ class BiolinkController extends Controller
       $page = Page::where('names',$names) 
                 ->orwhere('premium_names',$names) 
                 ->first();
-
       if (is_null($page)) {
-        return "Page not found";
+        $link = Link::where('names',$names)
+                ->orwhere('premium_names',$names)
+                ->first();
+
+        /*if(is_null($link)){
+          return "Page not found";
+        } else {
+          $pixel = Pixel::find($link->pixel_id);
+          $script = "";
+          if (!is_null($pixel)) {  
+            $script = $pixel->script;  
+          }
+
+          return view('user.script')->with([
+            'mode' => 'singlelinks',
+            'script' => $script,
+            'link' => $link->link,
+          ]);
+        }*/
+
+        if(is_null($link)){
+          return "Page not found";
+        } else {
+          $tes = $this->click('link',$link->id);
+          return $tes;
+        }
       }
 
       $links = Link::where('pages_id','=',$page->id)

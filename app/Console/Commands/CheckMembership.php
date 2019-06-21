@@ -11,6 +11,7 @@ use App\Link;
 use App\PremiumID;
 
 use App\Mail\ExpiredMembershipMail;
+use App\Mail\ExpiredPremiumIDMail;
 
 use Mail,DateTime;
 
@@ -73,7 +74,7 @@ class CheckMembership extends Command
                 }
             }
 
-            $links = Link::where('user_id',$user->id)
+            $links = Link::where('users_id',$user->id)
                         ->where('premium_id','!=',0)
                         ->get();
 
@@ -85,8 +86,13 @@ class CheckMembership extends Command
                 }
             }
 
-            $premiumid = PremiumID::where('user_id',$user->id)->delete();
-
+            $premiumid = PremiumID::where('user_id',$user->id);
+            
+            if($premiumid->exists()){
+              $premiumid->delete();
+              Mail::to($user->email)->queue(new ExpiredPremiumIDMail($user->email,$user));
+            }
+            
             //$user->valid_until = null;
             //$user->save();
         }

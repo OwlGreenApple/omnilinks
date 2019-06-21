@@ -35,7 +35,7 @@
         ?>
 
         {{$linkclick}}&nbsp;
-        <span class="btn-copy" data-copy="{{$linkclick}}">
+        <span class="btn-copy" data-copy="{{'https://'.$linkclick}}">
           <i class="far fa-copy"></i>  
         </span>
       </td>
@@ -55,7 +55,7 @@
 
     <tr class="details-{{$link->idlink}} d-none">
       <td colspan="2">
-        Link : <b>Omn.lkz/{{$link->shorten}}&nbsp;</b><br>
+        Link : <b>{{env('SHORT_LINK')}}/{{$link->shorten}}&nbsp;</b><br>
         Pixel : {{$link->judul}} <br>
       </td>
     </tr>

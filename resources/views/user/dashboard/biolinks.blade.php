@@ -251,7 +251,9 @@
     loadPixel('{{$pages->ig_pixel_id}}','#igpixel');
     loadPixel('{{$pages->twitter_pixel_id}}','#twitterpixel');
     
-    //loadPixel(0,'.bannerpixel');
+    <?php if(!$banner->count()) { ?>
+      loadPixel(0,'.bannerpixel');
+    <?php } ?>
   }
 
   function tambahwalink() {
@@ -487,7 +489,7 @@
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
-  <div class="container body-content-mobile">
+  <div class="container body-content-mobile" style="margin-top: 80px">
     <div class="row">
       <div class="col-md-12">
         <h4 style="color: #106BC8">
@@ -992,7 +994,7 @@
                   
                 </form>
               </div>
-      @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+      
               <!-- TAB 2 -->
               <div role="tabpanel" class="tab-pane fade " id="walink">
                 <form id="savewalink" method="post" style="margin-bottom: 40px;margin-top: 40px;">
@@ -1119,7 +1121,7 @@
                   <div id="content"></div>
                 </div>
               </div>
-              @endif
+              
               <!-- TAB 4 -->
               <div role="tabpanel" class="tab-pane fade in active show" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
@@ -1698,7 +1700,7 @@
 
   $(document).ready(function() {
      // dotview();
-    
+      //loadPixel(0,'.bannerpixel');
       dotsok();
       let inputtitle=$('#pagetitle');
       let inputlink=$('#pagelink');

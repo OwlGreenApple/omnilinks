@@ -43,7 +43,11 @@
   <div class="col-xs-12 content-txt">
     <div class="row sub" style="margin-bottom: 50px">
       <div class="col-xs-3" align="center">
-        <img class="pageimg" src="<?php echo url(Storage::disk('local')->url('app/'.$page->image_pages)); ?>">
+        @if($page->image_pages!=null)
+          <img class="pageimg" src="<?php echo Storage::disk('s3')->url($page->image_pages); ?>">
+        @else 
+          <img class="pageimg" src="{{asset('image/no-photo.jpg')}}">
+        @endif
       </div>
 
       <div class="col-xs-9">
