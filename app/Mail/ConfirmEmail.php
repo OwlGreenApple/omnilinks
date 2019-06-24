@@ -29,7 +29,7 @@ class ConfirmEmail extends Mailable
     public function build()
     {
         return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
-                  ->subject('[Omnilinkz] Confirm Email')
+                  ->subject('[Omnilinkz] Your New User Login info')
                   ->view('emails.confirm-email')
                    ->with($this->emaildata);
     }
