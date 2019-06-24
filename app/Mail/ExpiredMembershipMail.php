@@ -32,7 +32,7 @@ class ExpiredMembershipMail extends Mailable
      */
     public function build()
     {
-        return $this->from('omnilinkz@gmail.com', 'Omnilinkz')
+        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
                   ->subject('[Omnilinkz] Membership')
                   ->view('emails.expired-membership')
                   ->with('user',$this->user)
