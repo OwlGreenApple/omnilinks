@@ -35,7 +35,7 @@ class NotifClickFreeUser extends Mailable
      */
     public function build()
     {
-        return $this->from('omnilinkz@gmail.com', 'Omnilinkz')
+        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
                   ->subject('[Omnilinkz] Notif Click Free User')
                   ->view('emails.notifclick-free-user')
                   ->with('user',$this->user)
