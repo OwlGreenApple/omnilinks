@@ -2,6 +2,7 @@ Hi {{$user->name}}, <br>
 <br>
 Ini adalah data login anda : <br>
 email : {{$user->email}}
+<br>
 pass  : {{$password}}
 <br>
 <br>
