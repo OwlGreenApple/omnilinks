@@ -392,14 +392,20 @@
       $('.outlined').val(1);
       
       $('.btnview').css("background-color","transparent");
+      $('.btnview').css("border-color",$("#colorOutlineButton").val());
       $('.btnview').css("color",$("#colorOutlineButton").val());
+
+      /*$('.btnview').css("border-color",$("#colorButton").val());
+      $('.btnview').css("color",$("#colorOutlineButton").val());*/
     } else if ($('.outlined').prop("checked") == false) {
       //$(".mobile1").removeClass("outlinedview");
       $(".screen").removeClass("outlinedview");
       $('.outlined').val(0);
       
-      $('.btnview').css("background-color",$("#colorOutlineButton").val());
-      $('.btnview').css("color","#fff");
+      $('.btnview').css("background-color",$("#colorButton").val());
+      $('.btnview').css("border-color",'transparent');
+      //$('.btnview').css("color","#fff");
+      $('.btnview').css("color",$("#colorOutlineButton").val());
     }
   }
 
@@ -541,11 +547,13 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
-                  Pixel
-                </a>
-              </li>
+              @if(Auth::user()->membership!='free')
+                <li class="nav-item">
+                  <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
+                    Pixel
+                  </a>
+                </li>
+              @endif
               
               <li class="nav-item">
                 <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
@@ -1317,7 +1325,7 @@
                                   <div class="col-md-4 col-xs-4">
                                     <div align="center">
                                       <div id="colorpickerOutlineButton"></div>
-                                      <input type="text" id="colorOutlineButton" name="colorOutlineButton" value="#123456">
+                                      <input type="text" id="colorOutlineButton" name="colorOutlineButton" value="#ffffff">
                                     </div>
                                   </div>
                                 </div>
@@ -1354,7 +1362,7 @@
                         <div role="tabpanel" class="tab-pane fade" id="references">
                           <div align="center">
                             <div id="colorpicker"></div>
-                            <input type="text" id="color" name="color" value="#123456">
+                            <input type="text" id="color" name="color" value="#ffffff">
                           </div>
                         </div>
                       </div>
@@ -1470,7 +1478,7 @@
 
                   <ul class="row links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 shown-mes hide" id="waviewid"> 
-                      <a href="#" class="btn btn-md btnview btn-light txthov" style="width: 100%;  padding-left: 2px;" id="walinkview">
+                      <a href="#" class="btn btn-md btnview txthov" style="width: 100%;  padding-left: 2px;" id="walinkview">
                         <i class="fab fa-whatsapp"></i>
                         <label class="" style="font-size: xx-small;">&nbsp Whatsapp</label>
                       </a>
@@ -1907,30 +1915,38 @@
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen");
       $("#phonecolor").css("background-color",color);
+      console.log('tes-background');
+      console.log($("#phonecolor").css("background-color"));
       $("#backtheme").val();
       $("#color").val(color);
     }
     $('#colorpicker').farbtastic('#color');
-    picker = $.farbtastic('#colorpicker');
+    pickerbg = $.farbtastic('#colorpicker');
     // picker.setColor("#b6b6ff");
     $("#color").on('keyup', function() {
-      picker.setColor($(this).val());
+      pickerbg.setColor($(this).val());
     });
-    picker.linkTo(onColorChange);
+    pickerbg.linkTo(onColorChange);
     
     //for background color button purpose 
     function onColorButtonChange(color) {
-      // console.log(color);
+      /*$("#colorButton").val(color);
+      $('.btnview').css("background-color",color);*/
       $("#colorButton").val(color);
-      $('.btnview').css("background-color",color);
+      if ($('input[name="outlined"]').val()=="1") {
+        $('.btnview').css("background-color",'transparent');
+      } else {
+        $('.btnview').css("background-color",color);
+      }
+      
     }
     $('#colorpickerButton').farbtastic('#colorButton');
-    picker = $.farbtastic('#colorpickerButton');
+    pickerbtn = $.farbtastic('#colorpickerButton');
     // picker.setColor("#b6b6ff");
     $("#colorButton").on('keyup', function() {
-      picker.setColor($(this).val());
+      pickerbtn.setColor($(this).val());
     });
-    picker.linkTo(onColorButtonChange);
+    pickerbtn.linkTo(onColorButtonChange);
     $("#link-custom-background-color").on('click', function(e) {
       e.preventDefault();
       $('#modal-color-picker-button').modal('toggle');
@@ -1942,25 +1958,26 @@
       // console.log(color);
       $("#colorOutlineButton").val(color);
       // $('.btnview').css("border-color",color);
-      console.log($('input[name="outlined"]'));
       if ($('input[name="outlined"]').val()=="1") {
         //$(".mobile1").addClass("outlinedview");
         $(".screen").addClass("outlinedview");
-        $('.btnview').css("background-color","transparent");
-        $('.btnview').css("color",color);
+        //$('.btnview').css("background-color","transparent");
+        //$('.btnview').css("color",color);
+        $('.btnview').css("border-color",color);
       } else {
-        $('.btnview').css("background-color",color);
-        $('.btnview').css("color","#fff");
+        //$('.btnview').css("background-color",color);
+        //$('.btnview').css("color","#fff");
+        $('.btnview').css("border-color","transparent");
       }
-      
+      $('.btnview').css("color",color);
     }
     $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
-    picker = $.farbtastic('#colorpickerOutlineButton');
+    pickerout = $.farbtastic('#colorpickerOutlineButton');
     // picker.setColor("#b6b6ff");
     $("#colorOutlineButton").on('keyup', function() {
-      picker.setColor($(this).val());
+      pickerout.setColor($(this).val());
     });
-    picker.linkTo(onOutlineColorButtonChange);
+    pickerout.linkTo(onOutlineColorButtonChange);
     $("#link-custom-outline-color").on('click', function(e) {
       e.preventDefault();
       $('#modal-color-picker-outline-button').modal('toggle');

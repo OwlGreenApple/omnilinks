@@ -256,13 +256,15 @@
       $('.outlined').val(1);
 
       $('.txthov').find("button").css("background-color","transparent");
+      $('.txthov').find("button").css("border-color","<?php echo $pages->outline ?>");
       $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
     <?php } else  { ?>  
       $(".mobile1").removeClass("outlinedview");
       $('.outlined').val(0);
 
-      $('.txthov').find("button").css("background-color","<?php echo $pages->outline ?>");
-      $('.txthov').find("button").css("color","#fff");
+      $('.txthov').find("button").css("background-color","<?php echo $pages->rounded ?>");
+      $('.txthov').find("button").css("border-color","transparent");
+      $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
     <?php } ?>  
   }
 

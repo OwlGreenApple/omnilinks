@@ -288,7 +288,7 @@
 
 </style>
 
-<section id="tabs" class="offset-md-1 col-md-10" style="margin-bottom: 50px;">
+<section id="tabs" class="offset-md-1 col-md-10" style="margin-bottom: 50px;margin-top: 80px;">
   <div class="container body-content-mobile">
     <div class="row">
       <div class="col-md-12">

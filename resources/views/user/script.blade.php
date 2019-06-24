@@ -12,7 +12,9 @@
   <title>Script</title>
   <script type="text/javascript">
     <?php 
-      echo $script;
+      if(Auth::user()->membership!='free'){
+        echo $script;  
+      }
     ?>
   </script>
   <script type="text/javascript">

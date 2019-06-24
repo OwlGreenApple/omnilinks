@@ -55,21 +55,23 @@
           <b>omn.lkz/{{$page->names}}</b> <br>
           Title : <b>{{$page->page_title}}</b> <br>
 
-          Pixels : 
-          @if($pixels->count())
-            @foreach($pixels as $pixel)
-              @if($pixel->jenis_pixel=='fb')
-                <i class="fab fa-facebook-f">&nbsp;</i>
-              @endif
+          @if(Auth::user()->membership!='free')
+            Pixels : 
+            @if($pixels->count())
+              @foreach($pixels as $pixel)
+                @if($pixel->jenis_pixel=='fb')
+                  <i class="fab fa-facebook-f">&nbsp;</i>
+                @endif
 
-              @if($pixel->jenis_pixel=='twitter')
-                <i class='fab fa-twitter'>&nbsp;</i>
-              @endif
+                @if($pixel->jenis_pixel=='twitter')
+                  <i class='fab fa-twitter'>&nbsp;</i>
+                @endif
 
-              @if($pixel->jenis_pixel=='google')
-                <i class="fab fa-google">&nbsp;</i>
-              @endif
-            @endforeach
+                @if($pixel->jenis_pixel=='google')
+                  <i class="fab fa-google">&nbsp;</i>
+                @endif
+              @endforeach
+            @endif
           @endif
           <br>
 
