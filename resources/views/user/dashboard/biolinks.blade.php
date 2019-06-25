@@ -450,6 +450,7 @@
           $('#wizardPicturePreview').attr('src', "<?php echo asset('image/no-photo.jpg'); ?>").fadeIn('slow');
           // $('#viewpicture').attr('src', "<?php echo asset('image/no-photo.jpg'); ?>").fadeIn('slow');
           $('#viewpicture').attr('src', "").fadeIn('slow');
+          $('.div-picture').hide();
           
           $("#wizardPicturePreview-delete").hide();
         } else {
@@ -1413,14 +1414,15 @@
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
-                        <div style="width: 82px; height: 82px; margin-left: 13px; <?php if(is_null($pages->image_pages)) { echo 'display: none;'; } ?>">
-                          @if(is_null($pages->image_pages))
-                          @else
-                            <img id="viewpicture" src="<?php 
-                            // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
-                            echo Storage::disk('s3')->url($pages->image_pages);
-                            ?>" style="width:100%;height:auto;border-radius: 50%;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
-                          @endif
+                        <div class="div-picture" style="width: 82px; height: 82px; margin-left: 13px;<?php if(is_null($pages->image_pages)) echo 'display: none' ?>">
+                          <?php  
+                            $viewpicture = asset('/image/no-photo.jpg');
+                            if(!is_null($pages->image_pages)){
+                              // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                              $viewpicture = Storage::disk('s3')->url($pages->image_pages);
+                            }
+                          ?>
+                          <img id="viewpicture" src="<?php echo $viewpicture ?>" style="width:100%;height:auto;border-radius: 50%;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
                         </div>
                       </div>
                       <div class="col-md-10 col-8 p-2">
@@ -1990,6 +1992,7 @@
           $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
           $('#viewpicture').attr('src', e.target.result).fadeIn('slow');
 
+          $('.div-picture').show();
           $('#viewpicture').show();
           $("#wizardPicturePreview-delete").show();
         }

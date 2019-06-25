@@ -278,9 +278,27 @@ class BiolinkController extends Controller
     {
       $idbanner=$request->idBanner;
       $statusbanner=$request->statusBanner;
-      //dd($request->all());
+    
       for($i=0;$i<count($request->judulBanner);$i++) 
       { 
+        //pengecekan banner 
+        $validator = Validator::make($request->all(), [
+          'judulBanner.'.$i => ['required', 'string', 'max:255'],
+          'linkBanner.'.$i => ['required', 'active_url', 'max:255'],
+        ]); 
+
+        if($validator->fails()) {
+          $failedRules = $validator->failed();
+        
+          if(isset($failedRules['judulBanner.'.$i]['Required']) and isset($failedRules['linkBanner.'.$i]['Required'])){
+            continue;
+          } else {
+            $arr['status'] = 'error';
+            $arr['message'] = $validator->errors()->first();
+            return $arr;
+          }
+        }
+        
         if($request->hasFile('bannerImage.'.$i)) {
           $arr_size = getimagesize( $request->file('bannerImage')[$i] );
           $ratio_img = $arr_size[0] / $arr_size[1];
@@ -293,7 +311,12 @@ class BiolinkController extends Controller
         }
 
         if($idbanner[$i]==""){
-          $banner= new Banner(); 
+          $banner= new Banner();
+          if(!$request->hasFile('bannerImage.'.$i)) {
+            $arr['status'] = 'error';
+            $arr['message'] = 'Banner image is required';
+            return $arr;
+          }
         } else {
           if ($statusbanner[$i]=="delete"){
             $bannerde= Banner::find($request->idBanner[$i])->delete();
@@ -301,18 +324,7 @@ class BiolinkController extends Controller
           }
           $banner= Banner::where('id','=',$request->idBanner[$i])->first();
         }
-        
-        //pengecekan banner 
-        $validator = Validator::make($request->all(), [
-          'judulBanner.'.$i => ['required', 'string', 'max:255'],
-          'linkBanner.'.$i => ['required', 'active_url', 'max:255'],
-        ]); 
-        if($validator->fails()) {
-          $arr['status'] = 'error';
-          $arr['message'] = $validator->errors()->first();
-          return $arr;
-        }
-        
+
         $banner->users_id=$user->id;
         $banner->pages_id=$page->id;
         $banner->title=$request->judulBanner[$i];
