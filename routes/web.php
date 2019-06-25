@@ -23,9 +23,6 @@ if(env('DOMAIN_TYPE')=='main'){
   // Route::get('/use/{id}/delete','UserController@delete');
   Auth::routes();
 
-  //redirect
-  Route::get('click/{mode}/{id}', 'BiolinkController@click');
-
   //information
   Route::get('/about',function(){
     return view('aboutus');
@@ -144,4 +141,5 @@ if((env('DOMAIN_TYPE')=='shortlink')||(env('APP_ENV')=='local')){
   // Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
   // Route::get('/omn.lkz/{names}','BiolinkController@link');
   Route::get('/{names}','BiolinkController@link');
+  Route::get('click/{mode}/{id}', 'BiolinkController@click');
 }
