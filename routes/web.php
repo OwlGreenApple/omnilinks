@@ -22,6 +22,8 @@ if(env('DOMAIN_TYPE')=='main'){
   // Route::post('/use/{id}/update','UserController@update');
   // Route::get('/use/{id}/delete','UserController@delete');
   Auth::routes();
+  
+  Route::get('click/{mode}/{id}', 'BiolinkController@click');
 
   //information
   Route::get('/about',function(){
