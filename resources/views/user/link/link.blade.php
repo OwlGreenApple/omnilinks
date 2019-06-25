@@ -77,7 +77,8 @@
               @if(!is_null($banner[0]->images_banner))
                 @foreach($banner as $banner1)
                   <div class="imageHolder">
-                    <a href="{{url('click/banner/'.$banner1->id)}}" target="_blank">
+                    <!--<a href="{{url('click/banner/'.$banner1->id)}}" target="_blank">-->
+                    <a href="{{env('APP_URL').'/click/banner/'.$banner1->id}}" target="_blank">
                       <img src="<?php 
                       // echo url(Storage::disk('local')->url('app/'.$banner->images_banner));
                         if(!is_null($banner1->images_banner)){
@@ -120,7 +121,7 @@
       
           @if($msg=='wa' and !is_null($pages->wa_link))
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="{{url('click/wa/'.$pages->id)}}" title="wa" target="_blank" class="txthov">
+              <a href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-whatsapp icon-msg"></i>
                   @if($div==0)
@@ -133,7 +134,7 @@
 
           @if($msg=='skype' and !is_null($pages->skype_link))
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="{{url('click/skype/'.$pages->id)}}" title="Skype" target="_blank" class="txthov">
+              <a href="{{env('APP_URL').'/click/skype/'.$pages->id}}" title="Skype" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-skype icon-msg"></i>
                   @if($div==0)
@@ -146,7 +147,7 @@
 
           @if($msg=='telegram' and !is_null($pages->telegram_link))
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="{{url('click/telegram/'.$pages->id)}}" title="Telegram" target="_blank" class="txthov">
+              <a href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-telegram-plane"></i>
                   @if($div==0)
@@ -159,7 +160,7 @@
 
           @if($msg=='line' and !is_null($pages->line_link))
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="{{url('click/line/'.$pages->id)}}" title="Line" target="_blank" class="txthov">
+              <a href="{{env('APP_URL').'/click/line/'.$pages->id}}" title="Line" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-line"></i>
                   @if($div==0)
@@ -172,7 +173,7 @@
 
           @if($msg=='messenger' and !is_null($pages->messenger_link))
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="{{url('click/messenger/'.$pages->id)}}" title="Messenger" target="_blank" class="txthov">
+              <a href="{{env('APP_URL').'/click/messenger/'.$pages->id}}" title="Messenger" target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <i class="fab fa-facebook-messenger"></i>
                   @if($div==0)
@@ -196,7 +197,7 @@
         @if($links->count())
           @foreach($links as $link)
             <li class="col-md-12 col-12 mb-3"> 
-              <a href="{{url('click/link/'.$link->id)}}" title=""  target="_blank" class="txthov">
+              <a href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov">
                 <button class="btn btn-block">
                   <span class="textbutton">
                     {{$link->title}}
@@ -212,25 +213,25 @@
         <?php foreach ($sort_sosmed as $sosmed) { ?>
           <li class="col text-center icon-sosmed">
             @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))
-              <a href="{{url('click/fb/'.$pages->id)}}" title="fb" target="_blank">
+              <a href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank">
                 <i class="fab fa-facebook-square"></i>
               </a>
             @endif
           
             @if($sosmed=='ig' and (!is_null($pages->ig_link) || $pages->ig_pixel_id!=0))
-              <a href="{{url('click/ig/'.$pages->id)}}" title="ig" target="_blank">
+              <a href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank">
                 <i class="fab fa-instagram"></i>
               </a> 
             @endif
 
             @if($sosmed=='twitter' and (!is_null($pages->twitter_link) || $pages->twitter_pixel_id!=0))
-              <a href="{{url('click/twitter/'.$pages->id)}}" title="Twitter" target="_blank">
+              <a href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank">
                 <i class="fab fa-twitter-square"></i>
               </a>
             @endif
 
             @if($sosmed=='youtube' and (!is_null($pages->youtube_link) || $pages->youtube_pixel_id!=0))
-              <a href="{{url('click/youtube/'.$pages->id)}}" title="Youtube" target="_blank">
+              <a href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank">
                 <i class="fab fa-youtube"></i>
               </a>
             @endif 
