@@ -142,4 +142,5 @@ if((env('DOMAIN_TYPE')=='shortlink')||(env('APP_ENV')=='local')){
   // Route::get('/omn.lkz/{names}','BiolinkController@link');
   Route::get('/{names}','BiolinkController@link');
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
+  Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 }
