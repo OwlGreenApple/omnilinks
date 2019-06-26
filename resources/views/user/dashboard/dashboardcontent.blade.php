@@ -27,10 +27,13 @@
         Buat Omnilinkz pertama Anda<br>Pilih 
         <a href="" class="btncreate-bio" style="color:#106BC8;">
           "BIO LINK"
-        </a> atau 
-        <a href="{{url('dash/newsingle')}}" style="color:#106BC8;">
-          "SINGLE LINK"
-        </a>
+        </a> 
+        @if(Auth::user()->membership!='free')
+          atau 
+          <a href="{{url('dash/newsingle')}}" style="color:#106BC8;">
+            "SINGLE LINK"
+          </a>
+        @endif
       </span>
     </div>
   </div>

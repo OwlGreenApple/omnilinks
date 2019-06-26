@@ -168,7 +168,13 @@
 
     <div class="col-md-12 pr-0 div-btn">
       <div class="row">
-        <div class="col-lg-2 col-md-3 col-6 pl-md-3 pl-0 pr-0">
+        <?php  
+          $colbio = 'col-6';
+          if(Auth::user()->membership=='free'){
+            $colbio = 'col-12';
+          }
+        ?>
+        <div class="col-lg-2 col-md-3 {{$colbio}} pl-md-3 pl-0 pr-0">
           <button class="btnbio btn-block btncreate btncreate-bio">
             BIO LINK  
           </button>
@@ -192,7 +198,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until No Expired. <a href="{{url('pricing')}}">Upgrade</a>
+              ~ Forever free. <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="basic")
@@ -228,7 +234,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until No Expired. <a href="{{url('pricing')}}">Upgrade</a>
+              ~ Forever free. <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="basic")

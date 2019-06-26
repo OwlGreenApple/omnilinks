@@ -92,14 +92,15 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link navlog" href="{{ url('/') }}">
+                <a class="nav-link navlog" href="{{env('APP_URL2')}}">
                   {{ __('Home') }}
                 </a>
               </li>
 
               <li class="nav-item dropdown pull-right">
-                <a class="nav-link dropdown-toggle navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  {{ __('Pricing') }} <span class="caret"></span>
+                <a class="nav-link navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ __('Pricing') }} &nbsp;
+                  <i class="fas fa-angle-down"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item <?php if(Request::is('pricing')) echo 'active' ?>" href="{{ url('pricing') }}">
@@ -112,7 +113,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link navlog" href="#">
+                <a class="nav-link navlog" href="{{env('APP_URL2').'/blog'}}">
                   {{ __('Blog') }}
                 </a>
               </li>
@@ -122,13 +123,14 @@
                 </li>
                 @if (Route::has('register'))
                   <li class="nav-item">
-                    <a class="btn btn-md btn-primary btn-prim-custom" href="{{ route('register') }}">{{ __('STARTED FREE') }}</a>
+                    <a class="btn btn-md btn-primary btn-prim-custom" href="{{ route('register') }}">{{ __('START FREE') }}</a>
                   </li>
                 @endif
               @else
                 <div class="dropdown pull-right">
-                  <a class="nav-link dropdown-toggle blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">
-                    Halo, {{ Auth::user()->username }} <span class="caret"></span>
+                  <a class="nav-link blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">
+                    Halo, {{ Auth::user()->username }} &nbsp;
+                    <i class="fas fa-angle-down"></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @if(Auth::user()->is_admin==1)
@@ -180,7 +182,7 @@
                 <!--<a href="{{asset('/about')}}" class="linkfooter">
                   About Us
                 </a>-->
-                <a href="{{asset('/')}}" class="linkfooter">
+                <a href="{{env('APP_URL2')}}" class="linkfooter">
                   Home
                 </a>
               </li>
@@ -193,7 +195,7 @@
                 <!--<a href="{{asset('/faq')}}" class="linkfooter">
                   FAQ
                 </a>-->
-                <a href="#" class="linkfooter">
+                <a href="{{env('APP_URL2').'/blog'}}" class="linkfooter">
                   Blog
                 </a>
               </li>
@@ -262,13 +264,13 @@
 
       <div class="menu-mobile text-center linkfooter p-3">
         <b>Omnilinkz</b><br>
-        <a href="{{url('/')}}" class="linkfooter">
+        <a href="{{env('APP_URL2')}}" class="linkfooter">
           Home
         </a> | 
         <a href="{{url('pricing')}}" class="linkfooter">
           Pricing
         </a> | 
-        <a href="#" class="linkfooter">
+        <a href="{{env('APP_URL2').'/blog'}}" class="linkfooter">
           Blog
         </a> | 
         <a href="{{url('/helps')}}" class="linkfooter">

@@ -4,7 +4,7 @@
 
 <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
   window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: false,
@@ -25,7 +25,7 @@
     });
     chart.render();  
   };
-</script>
+</script>-->
 
 <div class="row content-txt" style="padding-right: 45px; padding-left: 45px">
   <div class="col-xs-6" align="left" >
@@ -81,9 +81,9 @@
     </div>
 
     <div class="row sub" style="margin-bottom: 50px">
-      <div class="col-xs-9" align="center">
+      <!--<div class="col-xs-9" align="center">
         <div id="chartContainer" style="height:300px; width:600px"></div>
-      </div>
+      </div>-->
 
       <div class="col-xs-3" align="center" style="padding-top: 40px">
         <span class="click-txt">
