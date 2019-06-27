@@ -29,8 +29,8 @@
 </script>
 
 <div class="row content-txt" style="padding-right: 45px; padding-left: 45px">
-  <div class="col-xs-6" align="left" >
-    <img src="{{asset('image/omnilinkz-logo.png')}}">
+  <div class="col-xs-6" align="left">
+    <img src="{{asset('image/omnilinkz-logo.png')}}" style="max-width: 200px">
   </div>
   <div class="col-xs-6" align="right">
     Periode : 
@@ -83,7 +83,7 @@
 
     <div class="row sub" style="margin-bottom: 50px">
       <div class="col-xs-9" align="center">
-        <div id="chartContainer" style="height:200px; width:400px"></div>
+        <div id="chartContainer" style="height:250px; width:500px"></div>
       </div>
 
       <div class="col-xs-3" align="center" style="padding-top: 40px">
