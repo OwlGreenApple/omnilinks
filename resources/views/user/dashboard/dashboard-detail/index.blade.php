@@ -112,7 +112,7 @@
   }
 </script>
 
-<div class="container">
+<div class="container main-cont">
   <div class="row notif">
     <div class="col-md-12 mb-3">
       <div class="alert alert-warning alert-dismissible fade show" role="alert">

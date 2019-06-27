@@ -18,6 +18,12 @@
     page-break-inside: avoid;
   }
 
+  .box-link {
+    border:1px solid black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .container {
     padding:45px;
   }

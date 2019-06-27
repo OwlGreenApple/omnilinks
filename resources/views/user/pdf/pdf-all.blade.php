@@ -117,13 +117,13 @@
             <div class="col-xs-4" align="center">
               <b>{{$click[$banner->title]}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black;word-wrap:normal;white-space: initial;">
+            <div class="col-xs-4 box-link">
               {{$banner->link}}        
             </div>
           </div>
         @endforeach
       @endif
-    </div>
+    </div>  
 
     <div class="sub">
       <!-- Messenger -->
@@ -143,7 +143,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['wa']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->wa_link}}        
             </div>
           </div>        
@@ -158,7 +158,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['telegram']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->telegram_link}}        
             </div>
           </div>          
@@ -173,7 +173,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['skype']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->skype_link}}        
             </div>
           </div>
@@ -199,7 +199,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click[$link->title]}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$link->link}}        
             </div>
           </div>
@@ -225,7 +225,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['fb']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->fb_link}}        
             </div>
           </div>
@@ -240,7 +240,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['ig']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->ig_link}}        
             </div>
           </div>
@@ -255,7 +255,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['twitter']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->twitter_link}}        
             </div>
           </div>
@@ -270,7 +270,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['youtube']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->youtube_link}}        
             </div>
           </div>
