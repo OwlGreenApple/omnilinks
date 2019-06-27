@@ -82,11 +82,11 @@
     </div>
 
     <div class="row sub" style="margin-bottom: 50px">
-      <div class="col-xs-9" align="center">
-        <div id="chartContainer" style="height:250px; width:500px"></div>
+      <div class="col-xs-8" align="center">
+        <div id="chartContainer" style="height:220px; width:440px"></div>
       </div>
 
-      <div class="col-xs-3" align="center" style="padding-top: 40px">
+      <div class="col-xs-4" align="center" style="padding-top: 40px">
         <span class="click-txt">
           Total Click
         </span> <br>
