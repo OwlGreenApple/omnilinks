@@ -83,7 +83,7 @@
 
     <div class="row sub" style="margin-bottom: 50px">
       <div class="col-xs-9" align="center">
-        <div id="chartContainer" style="height:300px; width:600px"></div>
+        <div id="chartContainer" style="height:200px; width:400px"></div>
       </div>
 
       <div class="col-xs-3" align="center" style="padding-top: 40px">
@@ -117,7 +117,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click[$banner->title]}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4" style="border:1px solid black;word-wrap:normal;white-space: initial;">
               {{$banner->link}}        
             </div>
           </div>
