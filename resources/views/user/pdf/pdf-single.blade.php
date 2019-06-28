@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
+<link href="{{ asset('css/all.css') }}" rel="stylesheet">
 <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 <link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 
@@ -31,7 +32,7 @@
   <div class="col-xs-12 content-txt">
     <div class="row" style="margin-bottom: 100px">
       <div class="col-xs-6" align="left" >
-        <img src="{{asset('image/omnilinkz-logo.png')}}">
+        <img src="{{asset('image/omnilinkz-logo.png')}}" style="max-width: 200px">
       </div>
       <div class="col-xs-6" align="right">
         Periode : 
@@ -44,7 +45,7 @@
     <div class="row" style="margin-bottom: 50px">
       <div class="col-xs-12">
         <span class="titel">
-          <span style="font-size:40px">
+          <span style="font-size:35px">
             <b>{{$title}}</b>  
           </span>
           <br>
@@ -56,11 +57,11 @@
     </div>
 
     <div class="row sub" style="margin-bottom: 50px">
-      <div class="col-xs-9" align="center">
-        <div id="chartContainer" style="height:300px; width:600px"></div>
+      <div class="col-xs-8" align="center">
+        <div id="chartContainer" style="height:220px; width:440px"></div>
       </div>
 
-      <div class="col-xs-3" align="center" style="padding-top: 40px">
+      <div class="col-xs-4" align="center" style="padding-top: 40px">
         <span class="click-txt">
           Total Click
         </span> <br>

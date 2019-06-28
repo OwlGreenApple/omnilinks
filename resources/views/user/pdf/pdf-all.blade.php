@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
+<link href="{{ asset('css/all.css') }}" rel="stylesheet">
 <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 <link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 
@@ -28,8 +29,8 @@
 </script>
 
 <div class="row content-txt" style="padding-right: 45px; padding-left: 45px">
-  <div class="col-xs-6" align="left" >
-    <img src="{{asset('image/omnilinkz-logo.png')}}">
+  <div class="col-xs-6" align="left">
+    <img src="{{asset('image/omnilinkz-logo.png')}}" style="max-width: 200px">
   </div>
   <div class="col-xs-6" align="right">
     Periode : 
@@ -81,11 +82,11 @@
     </div>
 
     <div class="row sub" style="margin-bottom: 50px">
-      <div class="col-xs-9" align="center">
-        <div id="chartContainer" style="height:300px; width:600px"></div>
+      <div class="col-xs-8" align="center">
+        <div id="chartContainer" style="height:220px; width:440px"></div>
       </div>
 
-      <div class="col-xs-3" align="center" style="padding-top: 40px">
+      <div class="col-xs-4" align="center" style="padding-top: 40px">
         <span class="click-txt">
           Total Click
         </span> <br>
@@ -116,13 +117,13 @@
             <div class="col-xs-4" align="center">
               <b>{{$click[$banner->title]}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$banner->link}}        
             </div>
           </div>
         @endforeach
       @endif
-    </div>
+    </div>  
 
     <div class="sub">
       <!-- Messenger -->
@@ -142,7 +143,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['wa']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->wa_link}}        
             </div>
           </div>        
@@ -157,7 +158,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['telegram']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->telegram_link}}        
             </div>
           </div>          
@@ -172,7 +173,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['skype']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->skype_link}}        
             </div>
           </div>
@@ -198,7 +199,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click[$link->title]}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$link->link}}        
             </div>
           </div>
@@ -224,7 +225,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['fb']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->fb_link}}        
             </div>
           </div>
@@ -239,7 +240,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['ig']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->ig_link}}        
             </div>
           </div>
@@ -254,7 +255,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['twitter']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->twitter_link}}        
             </div>
           </div>
@@ -269,7 +270,7 @@
             <div class="col-xs-4" align="center">
               <b>{{$click['youtube']}} clicks</b>        
             </div>
-            <div class="col-xs-4" style="border:1px solid black">
+            <div class="col-xs-4 box-link">
               {{$page->youtube_link}}        
             </div>
           </div>

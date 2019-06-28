@@ -1,16 +1,6 @@
-/*@font-face { 
-  font-family: SourceSansPro-Light; 
-  src: url("../fonts/SourceSansPro-Light.otf");
-} 
-
 @font-face { 
   font-family: SourceSansPro-Regular; 
   src: url("../fonts/SourceSansPro-Regular.otf");
-} 
-
-@font-face { 
-  font-family: SourceSansPro-Semibold; 
-  src: url("../fonts/SourceSansPro-Semibold.otf");
 } 
 
 @font-face { 
@@ -18,6 +8,7 @@
   src: url("../fonts/SourceSansPro-Bold.otf");
 } 
 
+/*
 * {
   font-family: SourceSansPro-Regular;  
 }
@@ -37,6 +28,33 @@ body {
  .alert {
   display: none;
 }*/
+
+.main-cont {
+  margin-top:45px;
+}
+
+@media only screen and (max-width: 767px) {
+  .main-cont {
+    margin-top:105px;
+  }  
+}
+
+/* Navbar */
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  border-radius: 0px;
+  border:none;
+  background-color: #F2F2F2;
+  font-family: SourceSansPro-Regular; 
+}
+
+.dropdown-item.active, .dropdown-item:active, .dropdown-item:hover {
+  background-color: #056728;
+  color: #fff;
+}
 
 /* table */
 .table td, .table th{
@@ -116,7 +134,7 @@ table tr:nth-child(even) td {
 
 @media only screen and (max-width: 1700px) {
   .header-status-account{
-    font-size:25px;
+    font-size:23px;
   }
   .content-status-account{
     font-size:17px;

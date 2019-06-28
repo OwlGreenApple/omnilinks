@@ -3,6 +3,18 @@
 <link href="{{ asset('css/style-pricing.css') }}" rel="stylesheet">
 <script src="{{ asset('js/custom.js') }}"></script>
 
+<script type="text/javascript">
+  $(document).ready(function() {
+    setTimeout(function(){
+      var right = $('.right-div').css('height');
+      var left = $('.left-div').css('height');
+      $('.left-div').css('height',right);
+    }, 100);
+  });
+
+  
+</script>
+
 <section class="page-title">
   <div class="container">
     <div class="row">
@@ -107,7 +119,7 @@
 
   <div class="row mb-md-0 mb-5 pricing-box">
     <div class="col-lg-4 col-md-12 col-12 pl-md-0 pr-md-0">
-      <div class="card secondary">
+      <div class="card secondary left-div">
         <div class="card-body upgrade-details">
           <div class="col-md-12" align="center">
             <span class="gray-color">
@@ -143,7 +155,7 @@
           @endif
 
           <div class="upgrade-details2">
-            <div class="row mb-2">
+            <!--<div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 1
               </div>  
@@ -463,8 +475,52 @@
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
+            </div>-->
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Limit 1 link url saja
+              </div>
             </div>
 
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Tersedia hanya 5 variasi tema, membuat background lebih berwarna
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Kontak CS hanya via email
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Limit terbatas hanya hingga 1000 klik saja
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Penggunaan FB Pixel terbatas hanya sebulan saja
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -511,7 +567,7 @@
           </a>
 
           <div class="upgrade-details2">
-            <div class="row mb-2">
+            <!--<div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 3
               </div>  
@@ -825,6 +881,114 @@
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
+            </div>-->
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Bisa gunakan 3 url
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Tersedia 1 slide banner saja 
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Ubah id akunmu sesuai kebutuhan
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Tersedia 50 variasi tema, membuat background lebih berwarna
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Hubungi CS via email & chat 
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Respon klik pada penggunaan link tidak terhingga
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Ketahui rekam jejak link dengan fitur analytic
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Gunakan FB Pixel sampai kapan pun 
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Gunakan Google retargetting sampai kapan pun
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Bisa hapus logo Omnilinkz
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Display akun Omnilinkz bebas iklan
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Tersedia 10 link tunggal 
+              </div>
             </div>
           </div>
         </div>
@@ -832,7 +996,7 @@
     </div>
 
     <div class="col-lg-4 col-md-12 col-12 pl-md-0 pr-md-0">
-      <div class="card secondary card-ribbon">
+      <div class="card secondary card-ribbon right-div">
         <div class="card-body upgrade-details">
           <div class="col-md-12" align="center">
             <span class="orange-color">
@@ -864,7 +1028,7 @@
           </a>
 
           <div class="upgrade-details2">
-            <div class="row mb-2">
+            <!--<div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 10
               </div>  
@@ -1178,7 +1342,115 @@
                   <i class="fas fa-question-circle icon-reflink"></i>
                 </span>
               </div>
+            </div>-->
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Slot link hingga 10 url
+              </div>
             </div>                 
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Tersedia 5 slide banner
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Ubah id akunmu sesuai kebutuhan
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Tersedia 50 variasi tema, membuat background lebih berwarna
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Hubungi CS via email & chat
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Respon klik pada penggunaan link tidak terhingga
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Ketahui rekam jejak link dengan fitur analytic
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Gunakan FB Pixel sampai kapan pun
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Gunakan Google retargetting sampai kapan pun
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Bisa hapus logo Omnilinkz
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Display akun Omnilinkz bebas iklan
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
+              </div>
+              <div class="col-md-9 col-9 text-left">
+                Link tunggal tak terhingga
+              </div>
+            </div>
           </div>
         </div>
       </div>
