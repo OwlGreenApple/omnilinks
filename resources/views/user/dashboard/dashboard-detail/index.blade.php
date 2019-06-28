@@ -153,7 +153,7 @@
       <div class="pt-md-5 pt-0" style="padding-bottom: 5px">
         <h4 style="color: #106BC8">
           <i class="fas fa-arrow-left"></i>&nbsp;
-          <a href="{{url('dash')}}">
+          <a href="{{url('/')}}">
             KEMBALI
           </a>
         </h4>

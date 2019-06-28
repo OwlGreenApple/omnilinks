@@ -84,7 +84,7 @@
                 }
             ?>
 
-            <a href="{{'http://'.$names}}" class="getLink">
+            <a href="{{'https://'.$names}}" class="getLink">
               {{$names}}
               <!--{{env('SHORT_LINK')}}/{{$page->names}} -->
               <span class="menu-mobile float-right">

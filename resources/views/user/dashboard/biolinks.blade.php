@@ -1478,28 +1478,50 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
 
-                  <ul class="row links messengers links-num-1 "id="getview" style="font-size: xx-small; margin-top: 12px; margin-left: 15px; margin-right: 10px;">
+                  <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 shown-mes hide" id="waviewid"> 
-                      <a href="#" class="btn btn-md btnview txthov" style="width: 100%;  padding-left: 2px;" id="walinkview">
-                        <i class="fab fa-whatsapp"></i>
-                        <label class="" style="font-size: xx-small;">&nbsp Whatsapp</label>
+                      <a href="#" class="btn btn-md btnview txthov" style="width: 100%;font-size:11px;height: 40px;padding: 10px;" id="walinkview">
+                        <i class="fab fa-whatsapp" style="font-size:14px;"></i>
+                        <label class="" style="font-size:11px;">
+                          Whatsapp
+                        </label>
                       </a>
                     </li>
                     <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
-                      width: 100%;  padding-left: 2px;" id="telegramlinkview"><i class="fab fa-telegram-plane"></i><label class="" style="font-size: xx-small;">&nbsp Telegram</label></a>
+                      width: 100%;font-size:11px;height: 40px;padding: 10px;" id="telegramlinkview">
+                        <i class="fab fa-telegram-plane" style="font-size:14px;"></i>
+                        <label class="" style="font-size:11px;">
+                          Telegram
+                        </label>
+                      </a>
                     </li> 
                     <li class="link col pl-1 pr-1 hide" id="skypeviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
-                      width: 100%;  padding-left: 2px;" id="skypelinkview"><i class="fab fa-skype"></i><label class="" style="font-size: xx-small;">&nbsp Skype</label></a>
+                      width: 100%;font-size:11px;height: 40px;padding: 10px;" id="skypelinkview">
+                        <i class="fab fa-skype" style="font-size:14px;"></i>
+                        <label class="" style="font-size:11px;">
+                          Skype
+                        </label>
+                      </a>
                     </li>
                     <li class="link col pl-1 pr-1 hide" id="lineviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
-                      width: 100%;  padding-left: 2px;" id="linelinkview"><i class="fab fa-line"></i><label class="" style="font-size: xx-small;">&nbsp Line</label></a>
+                      width: 100%;font-size:11px;height: 40px;padding: 10px;" id="linelinkview">
+                        <i class="fab fa-line" style="font-size:14px;"></i>
+                        <label class="" style="font-size:11px;">
+                          Line
+                        </label>
+                      </a>
                     </li>
                     <li class="link col pl-1 pr-1 hide" id="messengerviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
-                      width: 100%;  padding-left: 2px;" id="messengerlinkview"><i class="fab fa-facebook-messenger"></i><label class="" style="font-size: xx-small;">&nbsp Messenger</label></a>
+                      width: 100%;font-size:11px;height: 40px;padding: 10px;" id="messengerlinkview">
+                        <i class="fab fa-facebook-messenger" style="font-size:14px;"></i>
+                        <label class="" style="font-size:11px;">
+                          Messenger
+                        </label>
+                      </a>
                     </li>
                   </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
