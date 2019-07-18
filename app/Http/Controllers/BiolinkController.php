@@ -5,6 +5,8 @@ use App\Link;
 use App\User;
 use App\Pixel;
 use App\Banner;
+use App\Ads;
+use App\AdsHistory;
 use App\Whatsapplink;
 
 use App\Helpers\Helper;
@@ -181,13 +183,32 @@ class BiolinkController extends Controller
                 return array_search($model->getKey(), $sort_link);
               });
 
+      $ads = Ads::where('credit','>=','2')
+              ->inRandomOrder()->first();
+
+      if(!is_null($ads)){
+        $adshistory = new AdsHistory;
+        $adshistory->user_id = $ads->user_id;
+        $adshistory->ads_id = $ads->id;
+        $adshistory->credit_before = $ads->credit;
+        $adshistory->credit_after = $ads->credit - 1;
+        $adshistory->jml_credit = 1;
+        $adshistory->is_view = 1;
+        $adshistory->description = 'view';
+        $adshistory->save();
+
+        $ads->credit = $ads->credit-1;
+        $ads->save();
+      }
+
       return view('user.link.link')
               ->with('pages',$page)
               ->with('links',$links)
               ->with('banner',$banner)
               ->with('sort_msg',$sort_msg)
               ->with('sort_link',$sort_link)
-              ->with('sort_sosmed',$sort_sosmed);
+              ->with('sort_sosmed',$sort_sosmed)
+              ->with('ads',$ads);
     }
   }
 

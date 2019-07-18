@@ -11,6 +11,8 @@ use App\Coupon;
 use App\Order;
 use App\UserLog;
 use App\Notification;
+use App\Ads;
+use App\AdsHistory;
 
 use App\Helpers\Helper;
 use Carbon, Crypt;
@@ -25,6 +27,13 @@ class OrderController extends Controller
       'Elite Monthly' => 195000,
       'Basic Yearly' => 1020000,
       'Elite Yearly' => 1140000,
+      'Top Up 5000' => 62500,
+      'Top Up 10000' => 115000,
+      'Top Up 20000' => 210000,
+      'Top Up 25000' => 237500,
+      'Top Up 50000' => 425000,
+      'Top Up 75000' => 562000,
+      'Top Up 100000' => 650000,
     );
 
     if(isset($paket[$namapaket])){
@@ -33,6 +42,25 @@ class OrderController extends Controller
       } else {
         return true;
       }
+    } else {
+      return false;
+    }
+  }
+
+  public function cekpoin($namapaket){
+    //cek paket dengan harga
+    $paket = array(
+      'Top Up 5000' => 5000,
+      'Top Up 10000' => 10000,
+      'Top Up 20000' => 20000,
+      'Top Up 25000' => 25000,
+      'Top Up 50000' => 50000,
+      'Top Up 75000' => 75000,
+      'Top Up 100000' => 100000,
+    );
+
+    if(isset($paket[$namapaket])){
+      return $paket[$namapaket];
     } else {
       return false;
     }
@@ -214,6 +242,13 @@ class OrderController extends Controller
       return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
+    if(substr($request->namapaket,0,6) === "Top Up"){
+      $ads = Ads::where('user_id',Auth::user()->id)->first();
+      if(is_null($ads)){
+        return redirect("checkout/5")->with("error", "Buat Ads terlebih dahulu sebelum melakukan Top Up.");   
+      } 
+    }
+
     $user = Auth::user();
 
     $diskon = 0;
@@ -304,6 +339,14 @@ class OrderController extends Controller
       }
 
       $user->save();
+    }
+
+    if(substr($order->package,0,6) === "Top Up"){
+      $poin = $this->cekpoin($order->package);
+      $order->jmlpoin = $poin;
+      $order->ads_id = $ads->id;
+  
+      $order->save();
     }
 
     return view('pricing.thankyou');
@@ -400,6 +443,22 @@ class OrderController extends Controller
 
     $user->save();
     $order->save();
+
+    if(substr($order->package,0,6) === "Top Up"){
+      $ads = Ads::find($order->ads_id);
+
+      $adshistory = new AdsHistory;
+      $adshistory->user_id = $order->user_id;
+      $adshistory->ads_id = $ads->id;
+      $adshistory->credit_before = $ads->credit;
+      $adshistory->credit_after = $ads->credit + $order->jmlpoin;
+      $adshistory->jml_credit = $order->jmlpoin;
+      $adshistory->description = 'top up';
+      $adshistory->save();
+
+      $ads->credit = $order->jmlpoin;
+      $ads->save();
+    }
 
     $emaildata = [
       'order' => $order,

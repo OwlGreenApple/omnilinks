@@ -50,9 +50,8 @@ table tr {
 
 /*HR*/
 hr.orn {
-  border-top: 3px solid #fff;
-  width: 10%;
-  margin-top: 30px;
+  border-top: 3px solid #2D7CCE;
+  width: 25%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -72,6 +71,14 @@ span {
   background-color: #F8F8F8;
 }
 
+.card.primary.ads {
+  top: -30px;
+}
+
+.card.primary.ads > .card-body {
+  padding-top: 50px;
+}
+
 /*PAGE TITLE*/
 .page-title {
   /*background-image: url(../design/new-bg.jpg);*/
@@ -88,6 +95,11 @@ span {
   padding-bottom: 300px;
   margin-bottom: 0px;
   margin-top: 0px;
+}
+
+.page-title.ads {
+  padding-top: 50px; 
+  padding-bottom: 120px;
 }
 
 .page-title h1 {
@@ -199,6 +211,30 @@ sup {
 }
 
 .corner-ribbon.orange {
+  background: #F6A82A;
+}
+
+.bg-blue {
+  background: #106BC8;
+}
+
+.bg-light-green {
+  background: #7FBB01;
+}
+
+.bg-tosca {
+  background: #00A482;
+}
+
+.bg-purple {
+  background: #9D43FB;
+}
+
+.bg-pink {
+  background: #FF5152;
+}
+
+.bg-orange {
   background: #F6A82A;
 }
 
@@ -328,6 +364,10 @@ sup {
   font-size: 41px;
 }
 
+.harga.ads {
+  font-size: 50px;
+}
+
 .header-1 {
   font-size: 19px;
 }
@@ -338,6 +378,12 @@ sup {
 
 @media screen and (min-width: 1024px) {
   .harga {
+    font-size: 35px;
+  }
+} 
+
+@media screen and (max-width: 1026px) {
+  .harga.ads {
     font-size: 35px;
   }
 } 
@@ -361,6 +407,15 @@ sup {
 }
 
 @media screen and (max-width: 769px) {
+  .page-title.ads {
+    padding-top: 130px;
+    padding-bottom: 40px;
+  }
+
+  .card.primary.ads {
+    top: 0px;
+  }
+
   .card-body.pricing {
     padding: 10px;
   }

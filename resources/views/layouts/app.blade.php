@@ -91,11 +91,19 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link navlog" href="{{env('APP_URL2')}}">
-                  {{ __('Home') }}
-                </a>
-              </li>
+              @if(Auth::check())
+                <li class="nav-item">
+                  <a class="nav-link navlog" href="{{url('/')}}">
+                    {{ __('Dashboard') }}
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link navlog" href="{{url('ads-manager')}}">
+                    {{ __('Ads') }}
+                  </a>
+                </li>                
+              @endif
 
               <li class="nav-item dropdown pull-right">
                 <a class="nav-link navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

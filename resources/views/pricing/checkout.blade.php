@@ -62,6 +62,12 @@
 
           <div id="pesan" class="alert"></div>
 
+          @if (session('error') )
+            <div class="col-md-12 alert alert-danger">
+              {{session('error')}}
+            </div>
+          @endif
+
           <?php if (Auth::check()) {?>
           <form method="POST" action="{{url('confirm-payment')}}">
             <?php } else {?>
@@ -87,6 +93,29 @@
                     <option class="" data-price="1140000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
                       Elite Yearly - IDR 1.140.000,-/year
                     </option>
+                    @if(Auth::check())
+                      <option class="" data-price="62500" data-paket="Top Up 5000" value="5" <?php if ($id==5) echo "selected" ; ?>>
+                        Top Up 5000 points
+                      </option>
+                      <option class="" data-price="115000" data-paket="Top Up 10000" value="6" <?php if ($id==6) echo "selected" ; ?>>
+                        Top Up 10000 points
+                      </option>
+                      <option class="" data-price="210000" data-paket="Top Up 20000" value="7" <?php if ($id==7) echo "selected" ; ?>>
+                        Top Up 20000 points
+                      </option>
+                      <option class="" data-price="237000" data-paket="Top Up 25000" value="8" <?php if ($id==8) echo "selected" ; ?>>
+                        Top Up 25000 points
+                      </option>
+                      <option class="" data-price="425000" data-paket="Top Up 50000" value="9" <?php if ($id==9) echo "selected" ; ?>>
+                        Top Up 50000 points
+                      </option>
+                      <option class="" data-price="562000" data-paket="Top Up 75000" value="10" <?php if ($id==10) echo "selected" ; ?>>
+                        Top Up 75000 points
+                      </option>
+                      <option class="" data-price="650000" data-paket="Top Up 100000" value="11" <?php if ($id==10) echo "selected" ; ?>>
+                        Top Up 100000 points
+                      </option>
+                    @endif
                   </select>
                 </div>
               </div>

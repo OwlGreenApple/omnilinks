@@ -500,9 +500,11 @@
     <div class="row">
       <div class="col-md-12">
         <h4 style="color: #106BC8">
-          <i class="fas fa-arrow-left"></i>&nbsp;
-          <a class="back-link" href="{{url('/')}}">
-            KEMBALI
+          <a href="{{url('/')}}">
+            <button class="btn btn-default btn-back">
+              <i class="fas fa-arrow-circle-left"></i>
+              Back
+            </button>
           </a>
         </h4>
         <br>

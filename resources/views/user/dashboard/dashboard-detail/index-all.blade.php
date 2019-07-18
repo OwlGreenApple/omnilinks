@@ -9,53 +9,17 @@
 <script type="text/javascript">
   $(document).ready(function() {
     refresh_page();
-      /*var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            axisX:{
-              valueFormatString: "DD",
-              title: "Hari",
-            },
-            axisY:{
-              title: "Total Click",
-            },
-            legend:{
-              cursor: "pointer",
-              dockInsidePlotArea: true,
-              itemclick: toggleDataSeries
-            },              
-            data: [
-            {
-              type: "area",       
-              xValueType: "dateTime",
-              xValueFormatString: "DD-MM-YYYY",
-              dataPoints: <?php /*echo json_encode($data['chart'], JSON_NUMERIC_CHECK)*/; ?>,
-            }]
-          });
-
-        chart.render();
-
-        function toggleDataSeries(e){
-          if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-          }
-          else{
-            e.dataSeries.visible = true;
-          }
-          chart.render();
-        }*/
   });
 
   function refresh_page(){
     
     $.ajax({                                      
-      url: "<?php echo url('/dash-detail/load-content'); ?>",
+      url: "<?php echo url('/dash-detail/load-content-all'); ?>",
       type: 'get',
       data : {
         bulan : $('#bulan').val(),
         tahun : $('#tahun').val(),
         pageid : "{{$pageid}}",
-        id: "{{$id}}",
-        mode: "{{$mode}}",
       },
       dataType: 'json',
       beforeSend: function()
@@ -112,14 +76,13 @@
     });
   }
 
-  function deleteLink() {
+  function deletePages() {
     $.ajax({
       type: 'GET',
-      url: "<?php echo url('/dash/delete-link'); ?>",
+      url: "<?php echo url('/dash/delete-pages'); ?>",
       dataType: 'text',
       data: {
-        id: "{{$data['id']}}",
-        mode: "{{$data['mode']}}",
+        deletedataid: "{{$page->id}}",
       },
       beforeSend: function()
       {
@@ -144,21 +107,14 @@
     });
   }
 
-  function editLink() {
-    var title = $('#title').val();
-    var link = $('#link').val();
-    var pixel = $('#pixel').val();
-
+  function deleteLink() {
     $.ajax({
       type: 'GET',
-      url: "<?php echo url('/dash/edit-link'); ?>",
+      url: "<?php echo url('/dash/delete-link'); ?>",
       dataType: 'text',
       data: {
-        id: "{{$data['id']}}",
-        mode: "{{$data['mode']}}",
-        title: title,
-        link: link,
-        pixel: pixel,
+        id: $('#id_delete').val(),
+        mode: $('#mode').val(),
       },
       beforeSend: function()
       {
@@ -170,32 +126,14 @@
         $('.div-loading').removeClass('background-load');
 
         var data = jQuery.parseJSON(result);
-
-        $("#pesanAlert").html(data.message);
-        $("#pesanAlert").show();
-
         if (data.status == 'success') {
-          $("#pesanAlert").addClass("alert-success");
-          $("#pesanAlert").removeClass("alert-danger");
-
-          $('#link-title').html(title);
-          $('#link-link').html(link);
-          $('#link-linkhref').attr('href',link);
-          $('.btn-copylink').attr('data-link',link);
-
-          if(data.pixel==null){
-            $('#link-pixel').html('');
-          } else if(data.pixel.jenis_pixel=='fb'){
-            $('#link-pixel').html('<i class="fab fa-facebook-f">&nbsp;</i>');
-          } else if(data.pixel.jenis_pixel=='twitter'){
-            $('#link-pixel').html('<i class="fab fa-twitter">&nbsp;</i>');
-          } else if(data.pixel.jenis_pixel=='google'){
-            $('#link-pixel').html('<i class="fab fa-google">&nbsp;</i>');
-          } 
-          
-        } else {
-          $("#pesanAlert").addClass("alert-danger");
-          $("#pesanAlert").removeClass("alert-success");
+          refresh_page();
+          var src = "{{asset('image/success.gif')}}"+"?a="+Math.random();;
+          $('#img-success').attr('src',src);
+          $('#delete-success').modal('show');
+          setTimeout(function(){
+            $('#delete-success').modal('hide')
+          }, 3000);
         }
       }
     });
@@ -204,24 +142,6 @@
 
 <div class="container main-cont">
   <div class="row notif">
-    <div class="col-md-12 mb-3">
-      <!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-          <span aria-hidden="true">×</span>
-        </button>
-        Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
-        untuk terus menggunakan Omnilinks
-      </div>-->
-      @if (session('error'))
-      <div class="alert alert-danger">
-        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-          <span aria-hidden="true">×</span>
-        </button>
-        {{ session('error') }} <a href="{{asset('/pricing')}}">Subscribe</a>
-      </div>
-      @endif
-    </div>
-
     <div class="col-md-12 pr-0 div-btn">
       <div class="row">
         <?php  
@@ -283,7 +203,7 @@
       </div>
     </div>
 
-    <div class="col-md-12 pr-0 menu-mobile status-account-info" style="margin-top: 0px;">
+    <div class="col-md-12 pr-0 menu-mobile status-account-info" style="margin-top: 0px">
       <p class="text-md-right text-lg-right ">
             @if(Auth::user()->membership=="free")
               <span class="txt-free header-status-account">
@@ -333,45 +253,43 @@
           </div>
 
           <div class="col-12 col-md-6 text-md-right">
-            Last update : {{date('F d, Y',strtotime($data['updated_at']))}}
+            Last update : {{date('F d, Y',strtotime($page->updated_at))}}
           </div>
         </div>
       
         <div class="row mb-4 mt-5">
           <div class="col-md-6 mb-2">
-            <!--<div class="input-group">
-              <?php  
-                $category = $data['title'];
-                if($mode=='link' or $mode=='banner'){
-                  $category = $mode;
-                } 
-              ?>
-              <h4>Kategori : {{ ucfirst($category) }}</h4>
-            </div>-->
-
-            <h2>{{$data['pagetitle']}}</h2>
-            <h2>
-              <span id="link-title">
-                {{$data['title']}}
-              </span>  
-            </h2>
+        
+            <h2>{{$page->page_title}}</h2>
             
-            <a href="{{$data['link']}}" target="_blank" id="link-linkhref">
+            <?php 
+                $names = '';
+                if($page->premium_id!=0){
+                  $names = env('SHORT_LINK').'/'.$page->premium_names;
+                } else {
+                  $names = env('SHORT_LINK').'/'.$page->names;
+                }
+            ?>
+
+            <a href="{{'https://'.$names}}" target="_blank" id="link-linkhref">
               <span id="link-link" style="color:#3490dc">
-                {{$data['link']}}
+                {{$names}}
               </span>
             </a> &nbsp;
-            <span class="btn-copylink" data-link="{{$data['link']}}" style="cursor: pointer;">
+            <span class="btn-copylink" data-link="{{'https://'.$names}}" style="cursor: pointer;">
               <i class="far fa-clone"></i>  
             </span>
             <br>   
           </div>
           
           <div class="col-md-6 text-md-right text-left">
-            <button class="btn btn-success btn-edit" data-toggle="modal" data-target="#edit-link">
-              <i class="fas fa-pencil-alt"></i>
-              Edit
-            </button>
+            <a href="{{url('biolinks').'/'.$page->uid}}">
+              <button class="btn btn-success btn-edit">
+                <i class="fas fa-pencil-alt"></i>
+                Edit
+              </button>  
+            </a>
+            
             <button class="btn btn-danger btn-delete">
               <i class="fas fa-trash-alt"></i>
               Delete
@@ -389,15 +307,20 @@
 
       <hr style="margin-bottom: 45px">
 
-      <?php 
-        $pixel = Pixel::find($data['pixel_id']);
-      ?>
+      
       <div class="row" style="margin-bottom: 45px">
+        <?php  
+          $pixels = Pixel::where('users_id',Auth::user()->id)
+                ->select('jenis_pixel')
+                //->where('pages_id',$page->id)
+                ->groupBy('jenis_pixel')
+                ->get();
+        ?>
         <div class="col-md-6 mb-2"> 
-          Created on : {{date('F d, Y',strtotime($data['created_at']))}} <br>
+          Created on : {{date('F d, Y',strtotime($page->created_at))}} <br>
           Pixels : 
-            <span id="link-pixel">
-              @if(!is_null($pixel))
+            @if($pixels->count())
+              @foreach($pixels as $pixel)
                 @if($pixel->jenis_pixel=='fb')
                   <i class="fab fa-facebook-f">&nbsp;</i>
                 @endif
@@ -409,17 +332,12 @@
                 @if($pixel->jenis_pixel=='google')
                   <i class="fab fa-google">&nbsp;</i>
                 @endif
-              @endif
-            </span>
+              @endforeach
+            @endif
         </div>
         
         <div class="col-md-6 text-md-right text-left"> 
-          <!--<a id="link-savepdf" href="{{url('pdf/'.$pageid.'/'.$id.'/'.$mode.'/'.$bulann.'/'.$tahun)}}" target="_blank">
-            <button class="btn btn-primary">
-              <i class="far fa-file-pdf"></i>
-              Save As PDF
-            </button>
-          </a>-->
+         
           <p style="display: inline;">Periode : </p>
 
             <select id="bulan" name="bulan" class="custom-select form-controll">
@@ -465,15 +383,7 @@
         </div>
       </div>
 
-      <div>
-        <table class="table mb-5"> 
-          <thead>
-            <th>Days</th>
-            <th>Total Clicks</th>
-          </thead>
-          <tbody id="content"></tbody>
-        </table>
-      </div>
+      <div id="content"></div>
 
     </div>
   </div>
@@ -493,9 +403,12 @@
       </div>
       <div class="modal-body text-center">
         <input type="hidden" name="id_delete" id="id_delete">
-        Apa Anda yakin untuk <i>menghapus</i> link berikut ?
+        <input type="hidden" name="mode" id="mode">
+        <input type="hidden" name="type" id="type">
+
+        Apa Anda yakin untuk <i>menghapus</i> <span class="txt-mode"></span> berikut ?
         <br><br>
-        <span class="txt-title">{{$data['title']}}</span> 
+        <span class="txt-title">{{$page->page_title}}</span> 
         <br>
         
         <div class="col-12 mb-4" style="margin-top: 30px">
@@ -529,85 +442,16 @@
       </div>
       <div class="modal-body text-center">
         <img id="img-success" src="{{asset('image/success.gif')}}" style="max-width: 100px"><br>
-        Link Title : <span class="txt-title">{{$data['title']}}</span>, berhasil <b>dihapus!</b><br>
-        Anda akan diarahkan ke <i>halaman sebelumnya</i> dalam 3 detik
-
+        <span class="txt-delete-success"></span>
+    
         <div class="col-12 text-center mb-4" style="margin-top: 30px">
-          <a href="{{url('/')}}">
+          <a id="link-modal" href="{{url('/')}}">
             Ke Halaman Sebelumnya
           </a>  
         </div>
       </div>
 
     </div>   
-  </div>
-</div>
-
-<!-- Modal Add User -->
-<div class="modal fade" id="edit-link" role="dialog">
-  <div class="modal-dialog">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modaltitle">
-          Edit Link
-        </h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="formEdit">
-          @csrf
-
-          @if($data['mode']=='link' or $data['mode']=='banner')
-            <div class="form-group row">
-              <label class="col-md-3 col-12">
-                <b>Title</b> 
-              </label>
-              <div class="col-md-9 col-12">
-                <input type="text" class="form-control" name="title" id="title" value="{{$data['title']}}">
-              </div>
-            </div>
-          @endif
-
-          <div class="form-group row">
-            <label class="col-md-3 col-12">
-              <b>Link</b> 
-            </label>
-            <div class="col-md-9 col-12">
-              <input type="text" class="form-control" name="link" id="link" value="{{$data['link']}}">
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-md-3 col-12">
-              <b>Pixel</b> 
-            </label>
-            <div class="col-md-9 col-12">
-              <select class="form-control" name="pixel" id="pixel">
-                <option <?php if($data['pixel_id']==0 or is_null($data['pixel_id'])) echo 'selected' ?> value="0">
-                  -- Pilih Pixel Retargetting --
-                </option>
-                @foreach($pixels as $pixel)
-                  <option <?php if($pixel->id==$data['pixel_id']) echo 'selected' ?> value="{{$pixel->id}}">
-                    {{$pixel->title}}
-                  </option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer" id="foot">
-        <button class="btn btn-primary" id="btn-edit-ok" data-dismiss="modal">
-          Edit
-        </button>
-        <button class="btn" data-dismiss="modal">
-          Cancel
-        </button>
-      </div>
-    </div>
-      
   </div>
 </div>
 
@@ -639,17 +483,44 @@
 <script type="text/javascript">
   $('body').on('click','.btn-delete',function(e) 
   {
+    $('#type').val('page');
+    $('.txt-title').html('{{$page->page_title}}');
+    $('.txt-mode').html('page');
+    $('#link-modal').html('Ke Halaman Sebelumnya');
+    $('#link-modal').removeAttr("data-dismiss");  
+    $('#link-modal').attr("href","<?php echo url('/') ?>");  
+
+    var txt = 'Page Title : {{$page->page_title}}, berhasil <b>dihapus!</b><br>Anda akan diarahkan ke <i>halaman sebelumnya</i> dalam 3 detik';
+    $('.txt-delete-success').html(txt);
+
+    $('#confirm-delete').modal('show');
+  });
+
+  $('body').on('click','.btn-delete-link',function(e) 
+  {
+    $('#id_delete').val($(this).attr('data-id'));
+    $('#mode').val($(this).attr('data-mode'));
+    $('#type').val('link');
+
+    $('.txt-title').html($(this).attr('data-title'));
+    $('.txt-mode').html('link');
+    $('#link-modal').html('Kembali ke Dashboard');
+    $('#link-modal').attr("data-dismiss","modal");  
+    $('#link-modal').attr("href","#");  
+
+    var txt = 'Link Title : '+$(this).attr('data-title')+', berhasil <b>dihapus!</b><br>Anda akan diarahkan ke <i>Dashboard</i> dalam 3 detik';
+    $('.txt-delete-success').html(txt);
+
     $('#confirm-delete').modal('show');
   });
 
   $('body').on('click','.btn-delete-ok',function(e) 
   {
-    deleteLink();
-  });
-
-  $('body').on('click','#btn-edit-ok',function(e) 
-  {
-    editLink();
+    if($('#type').val()=='page'){
+      deletePages();
+    } else {
+      deleteLink();
+    }
   });
 
   $( "body" ).on( "click", ".btn-copylink", function(e) 
@@ -675,17 +546,13 @@
   $('body').on('change','#bulan',function(e) 
   {
     refresh_page();
-    var link = "{{url('pdf/'.$pageid.'/'.$id.'/'.$mode)}}";
-    link = link + '/' + $(this).val() + '/' + $('#tahun').val();
-    $('#link-savepdf').attr('href',link);
+    
   });
 
   $('body').on('change','#tahun',function(e) 
   {
     refresh_page();
-    var link = "{{url('pdf/'.$pageid.'/'.$id.'/'.$mode)}}";
-    link = link + '/' +$('#bulan').val() + '/' + $(this).val();
-    $('#link-savepdf').attr('href',link);
+    
   });
 
   $('body').on('click','.btncreate-bio',function(e){

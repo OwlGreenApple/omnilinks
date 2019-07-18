@@ -51,6 +51,16 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/thankyou','OrderController@thankyou');
 
 Route::group(['middleware' => ['web','auth']], function () {
+    //Ads Pricing 
+    Route::get('/ads-pricing','AdsController@ads_pricing');
+    Route::get('/ads-pricing/{id}','AdsController@ads_checkout');
+
+    //Ads 
+    Route::get('/ads-manager','AdsController@ads_manager');
+    Route::get('/save-ads','AdsController@save_ads');
+    Route::get('/load-credit-history','AdsController@load_credit_history');
+    Route::get('/click-ads/{id}','AdsController@click_ads');
+
     //Edit Profile
     Route::get('/edit-profile','UserController@index_edit');
     Route::post('/edit-profile/edit','UserController@edit_profile');
@@ -69,10 +79,15 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/dash/load-chart','DashboardController@load_chart');
     Route::get('/dash/load-link','DashboardController@loadlink');
     Route::get('/dash/delete-pages','DashboardController@deletePage');
+    Route::get('/dash/delete-link','DashboardController@deleteLink');
+    Route::get('/dash/edit-link','DashboardController@editLink');
+
     Route::get('/pdf/{id}/biolinks/{bulan}/{tahun}','DashboardController@pdf_page');
     Route::get('/pdf/{pageid}/{id}/{mode}/{bulan}/{tahun}','DashboardController@pdf_single');
+    Route::get('/dash-detail/{pageid}/{bulan}/{tahun}','DashboardController@dashboard_detail_all');
     Route::get('/dash-detail/{pageid}/{id}/{mode}/{bulan}/{tahun}','DashboardController@dashboard_detail');
     Route::get('/dash-detail/load-content','DashboardController@load_dash_detail');
+    Route::get('/dash-detail/load-content-all','DashboardController@load_dash_detail_all');
     
     //makebio
     Route::get('/biolinks/','BiolinkController@newbio');

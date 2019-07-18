@@ -123,6 +123,12 @@
         var data = jQuery.parseJSON(result);
         if (data.status == 'success') {
           refreshDashboard();
+          var src = "{{asset('image/success.gif')}}"+"?a="+Math.random();;
+          $('#img-success').attr('src',src);
+          $('#delete-success').modal('show');
+          setTimeout(function(){
+            $('#delete-success').modal('hide')
+          }, 3000);
         }
       }
     });
@@ -175,16 +181,16 @@
           }
         ?>
         <div class="col-lg-2 col-md-3 {{$colbio}} pl-md-3 pl-0 pr-0">
-          <button class="btnbio btn-block btncreate btncreate-bio">
-            BIO LINK  
+          <button class="btnbio btncreate btn-block btncreate-bio">
+            + BIO LINK  
           </button>
         </div>
 
         @if(Auth::user()->membership!='free')
           <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
             <a href="{{asset('/singlelink')}}" style="text-decoration: none;">
-              <button class="btnsingle btn-block btncreate">
-                SINGLE LINK  
+              <button class="btnsingle btncreate btn-block">
+                + SINGLE LINK  
               </button>
             </a>
           </div> 
@@ -192,13 +198,13 @@
         <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3 menu-nomobile">
           <p class="text-md-right text-lg-right ">
             @if($user->membership=="free")
-              <span class="text-success header-status-account">
+              <span class="txt-free header-status-account">
                 <i class="fas fa-flag"></i>
                 Free Account
               </span>
               <br>
               <span class="content-status-account">
-              ~ Forever free. <a href="{{url('pricing')}}">Upgrade</a>
+              <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="basic")
@@ -208,33 +214,34 @@
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="elite")
-              <span class="text-warning header-status-account">
+              <span class="txt-elite header-status-account">
                 <i class="fas fa-star"></i>
                 Elite Account
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
           </p>
         </div>
       </div>
     </div>
+
     <div class="col-md-12 pr-0 menu-mobile status-account-info">
       <p class="text-md-right text-lg-right ">
             @if($user->membership=="free")
-              <span class="text-success header-status-account">
+              <span class="txt-free header-status-account">
                 <i class="fas fa-flag"></i>
                 Free Account
               </span>
               <br>
               <span class="content-status-account">
-              ~ Forever free. <a href="{{url('pricing')}}">Upgrade</a>
+              <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="basic")
@@ -244,21 +251,23 @@
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="elite")
-              <span class="text-warning header-status-account">
+              <span class="txt-elite header-status-account">
                 <i class="fas fa-star"></i>
                 Elite Account
               </span>
               <br>
               <span class="content-status-account">
-              ~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>. <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
           </p>
     </div>
+
+    <hr>
 
     <div class="col-md-12">
       <div class="pt-md-5 pt-0" style="font-size: 25px; padding-bottom: 5px">
@@ -270,7 +279,7 @@
         <div class="row mb-4 mt-5">
           <div class="col-md-6">
             <div class="input-group">
-              <input type="text" id="keywords" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">
+              <input type="text" id="keywords" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul / Kategori" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">
 
               <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">
@@ -373,27 +382,66 @@
   <div class="modal-dialog">
     
     <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
         <h5 class="modal-title" id="modaltitle">
-          Delete Confirmation
+          Confirmation Delete
         </h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <div class="modal-body">
-        Are you sure you want to delete?
+      <div class="modal-body text-center">
         <input type="hidden" name="id_delete" id="id_delete">
+        Apa Anda yakin untuk <i>menghapus</i> link berikut beserta detail didalamnya?
+        <br><br>
+        <img id="img-pic" src="">
+        <div id="img-default" class="picture-sm" style="margin: 0 auto;display: none;"></div>
+        <br><br>
+        Page Title : <span class="txt-title"></span> <br>
+        <span id="txt-link"></span><br>
+        Created on : <span id="txt-created"></span>
+
+        <div class="col-12 mb-4" style="margin-top: 30px">
+          <button class="btn btn-danger btn-block btn-delete-ok" data-dismiss="modal">
+            YA, HAPUS SEKARANG
+          </button>
+        </div>
+        
+        <div class="col-12 text-center mb-4">
+          <a href="#" data-dismiss="modal">
+            Kembali ke Dashboard
+          </a>  
+        </div>
       </div>
-      <div class="modal-footer" id="foot">
-        <button class="btn btn-primary btn-delete-ok" data-dismiss="modal">
-          Yes
-        </button>
-        <button class="btn" data-dismiss="modal">
-          Cancel
-        </button>
+
+    </div>   
+  </div>
+</div>
+
+<!-- Modal Delete Success -->
+<div class="modal fade" id="delete-success" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <h5 class="modal-title" id="modaltitle">
+          Delete Success
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-    </div>
-      
+      <div class="modal-body text-center">
+        <img id="img-success" src="{{asset('image/success.gif')}}" style="max-width: 100px"><br>
+        Page Title : <span class="txt-title"></span>, berhasil <b>dihapus!</b><br>
+        Anda akan diarahkan ke <i>Dashboard</i> dalam 3 detik
+
+        <div class="col-12 text-center mb-4" style="margin-top: 30px">
+          <a href="#" data-dismiss="modal">
+            Ke Dashboard
+          </a>  
+        </div>
+      </div>
+
+    </div>   
   </div>
 </div>
 
@@ -454,7 +502,22 @@
   {
     e.preventDefault();
     e.stopPropagation();
-    $('#id_delete').val($(this).attr('deletedataid'));
+    var deleteid = $(this).attr('deletedataid');
+    $('#id_delete').val(deleteid);
+    $('.txt-title').html($(this).attr('data-title'));
+    $('#txt-link').html($(this).attr('data-link'));
+    $('#txt-created').html($(this).attr('data-created'));
+    var imgsrc = $('.img-'+deleteid).attr('src');
+    if(imgsrc){
+      $('#img-default').hide();
+      $('#img-pic').show();
+      $('#img-pic').attr('src',imgsrc);
+    } else {
+      $('#img-default').show();
+      $('#img-pic').hide();
+    }
+    
+
     $('#confirm-delete').modal('show');
   });
 
@@ -478,6 +541,13 @@
     e.stopPropagation();
     var uid = $(this).attr('data-id');
     window.location.href="{{url('/biolinks/')}}"+'/'+uid;
+  });
+
+  $('body').on('click','.btn-viewall',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var uid = $(this).attr('data-id');
+    window.location.href="{{url('/dash-detail/')}}"+'/'+uid;
   });
 
   $('body').on('click','.btn-pdf',function(e){

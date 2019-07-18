@@ -23,23 +23,60 @@ class DashboardController extends Controller
   public function loadDashboard(Request $request)
   {
     $user=Auth::user();
+    $search = false;
     //halaman dashboard user
     if($request->keywords==''){
       $page = Page::where('user_id',$user->id)
             ->orderBy('created_at','ascend')
             ->paginate(10);
     } else {
-      $page = Page::where('user_id',$user->id)
-            ->where('page_title','like','%'.$request->keywords.'%')
-            ->orderBy('created_at','ascend')
-            ->paginate(10);  
+      $search = true;
+      $page = Page::where('user_id',$user->id);
+
+      if(strtolower($request->keywords)=='whatsapp'){
+        $page = $page->where('wa_pixel_id','!=',null)
+                  ->where('wa_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='skype'){
+        $page = $page->where('skype_pixel_id','!=',null)
+                  ->where('skype_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='telegram'){
+        $page = $page->where('telegram_pixel_id','!=',null)
+                  ->where('telegram_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='line'){
+        $page = $page->where('line_pixel_id','!=',null)
+                  ->where('line_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='messenger'){
+        $page = $page->where('messenger_pixel_id','!=',null)
+                  ->where('messenger_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='facebook'){
+        $page = $page->where('fb_pixel_id','!=',null)
+                  ->where('fb_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='youtube'){
+        $page = $page->where('youtube_pixel_id','!=',null)
+                  ->where('youtube_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='twitter'){
+        $page = $page->where('twitter_pixel_id','!=',null)
+                  ->where('twitter_pixel_id','!=',0);
+      } else if(strtolower($request->keywords)=='instagram'){
+        $page = $page->where('ig_pixel_id','!=',null)
+                  ->where('ig_pixel_id','!=',0);
+      } else {
+        $page = $page->where('page_title','like','%'.$request->keywords.'%')
+                  ->orwhere('names','like','%'.$request->keywords.'%')
+                  ->orwhere('premium_names','like','%'.$request->keywords.'%');
+      }
+      
+      $page = $page->orderBy('created_at','ascend')
+                ->paginate(10);    
     }
     
 
     $arr['view']=(string) view('user.dashboard.dashboardcontent')
                   ->with('pages',$page)
                   ->with('bulan',$request->bulan)
-                  ->with('tahun',$request->tahun);
+                  ->with('tahun',$request->tahun)
+                  ->with('search',$search);
+
     $arr['pager'] = (string) view('user.dashboard.dash_pagination')
                     ->with('pages',$page);
 
@@ -50,15 +87,31 @@ class DashboardController extends Controller
     //halaman dashboard detail user
     $data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
 
+    $pixels = Pixel::where('pages_id',$pageid)->get();
+
     return view('user.dashboard.dashboard-detail.index')
             ->with('data',$data)
             ->with('pageid',$pageid)
             ->with('id',$id)
             ->with('mode',$mode)
             ->with('bulann',$bulan)
-            ->with('tahun',$tahun);
+            ->with('tahun',$tahun)
+            ->with('pixels',$pixels);
   }
   
+  public function dashboard_detail_all($pageid,$bulan,$tahun) {
+    //halaman dashboard detail user
+    //$data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
+    $page = Page::find($pageid);
+
+    return view('user.dashboard.dashboard-detail.index-all')
+            //->with('data',$data)
+            ->with('pageid',$pageid)
+            ->with('page',$page)
+            ->with('bulann',$bulan)
+            ->with('tahun',$tahun);
+  }
+
   public function load_dash_detail(Request $request){
     //halaman dashboard detail user
     $data = $this->detail_report($request->pageid,$request->id,$request->mode,$request->bulan,$request->tahun);
@@ -67,6 +120,44 @@ class DashboardController extends Controller
     $arr['view'] = (string) view('user.dashboard.dashboard-detail.content')
                     ->with('data',$data);
     $arr['total_click'] = $data['total_click'];
+
+    return $arr;
+  }
+
+  public function load_dash_detail_all(Request $request){
+    //halaman dashboard detail user
+    $page = Page::find($request->pageid);
+
+    $links = Link::where('users_id',Auth::user()->id)
+              ->where('pages_id',$page->id)
+              ->get();
+
+    $banners = Banner::where('users_id',Auth::user()->id)
+                ->where('pages_id',$page->id)
+                ->get();
+
+    $pixels = Pixel::where('users_id',Auth::user()->id)
+                ->select('jenis_pixel')
+                ->where('pages_id',$page->id)
+                ->groupBy('jenis_pixel')
+                ->get();
+
+    $array = $this->counter_click_month($page,$banners,$links,$request->bulan,$request->tahun);
+
+    $chart = $this->chart_day($page,$banners,$links,$request->bulan,$request->tahun);
+
+    $arr['chart'] = $chart;
+    $arr['data'] = $array;
+    $arr['view'] = (string) view('user.dashboard.dashboard-detail.content-all')
+                    ->with('page',$page)
+                    ->with('links',$links)
+                    ->with('banners',$banners)
+                    ->with('pixels',$pixels)
+                    ->with('arr',$array)
+                    ->with('bulan',$request->bulan)
+                    ->with('tahun',$request->tahun);
+
+    $arr['total_click'] = array_sum($array);
 
     return $arr;
   }
@@ -116,6 +207,131 @@ class DashboardController extends Controller
     $arr['status']="success";
     return $arr;
   } 
+
+  public function deleteLink(Request $request){
+    if($request->mode=='link'){
+      $link = Link::find($request->id)->delete();
+    } else if($request->mode=='banner'){
+      $banner = Banner::find($request->id)->delete();
+    } else {
+      $page = Page::find($request->id);
+      switch($request->mode){
+        case 'wa':
+          $page->wa_title = null;
+          $page->wa_link = null;
+          $page->wa_pixel_id = 0;
+          $page->wa_logo = null;
+          $page->wa_link_counter = 0;
+        break;
+        case 'telegram':
+          $page->telegram_title = null;
+          $page->telegram_link = null;
+          $page->telegram_pixel_id = 0;
+          $page->telegram_logo = null;
+          $page->telegram_link_counter = 0;
+        break;
+        case 'skype':
+          $page->skype_title = null;
+          $page->skype_link = null;
+          $page->skype_pixel_id = 0;
+          $page->skype_logo = null;
+          $page->skype_link_counter = 0;
+        break;
+        case 'fb':
+          $page->fb_title = null;
+          $page->fb_link = null;
+          $page->fb_pixel_id = 0;
+          $page->fb_logo = null;
+          $page->fb_link_counter = 0;
+        break;
+        case 'ig':
+          $page->ig_title = null;
+          $page->ig_link = null;
+          $page->ig_pixel_id = 0;
+          $page->ig_logo = null;
+          $page->ig_link_counter = 0;
+        break;
+        case 'twitter':
+          $page->twitter_title = null;
+          $page->twitter_link = null;
+          $page->twitter_pixel_id = 0;
+          $page->twitter_logo = null;
+          $page->twitter_link_counter = 0;
+        break;
+        case 'youtube':
+          $page->youtube_title = null;
+          $page->youtube_link = null;
+          $page->youtube_pixel_id = 0;
+          $page->youtube_logo = null;
+          $page->youtube_link_counter = 0;
+        break;
+      }
+
+      $page->save();
+    }
+
+    $arr['status']="success";
+    return $arr;
+  }
+
+  public function editLink(Request $request){
+    if($request->mode=='link'){
+      $link = Link::find($request->id);
+      $link->title = $request->title;
+      $link->link = $request->link;
+      $link->pixel_id = $request->pixel;
+      $link->save();
+    } else if($request->mode=='banner'){
+      $banner = Banner::find($request->id);
+      $banner->title = $request->title;
+      $banner->link = $request->link;
+      $banner->pixel_id = $request->pixel;
+      $banner->save();
+    } else {
+      $page = Page::find($request->id);
+
+      switch($request->mode){
+        case 'wa':
+          $page->wa_link = $request->link;
+          $page->wa_pixel_id = $request->pixel;
+        break;
+        case 'telegram':
+          $page->telegram_link = $request->link;
+          $page->telegram_pixel_id = $request->pixel;
+        break;
+        case 'skype':
+          $page->skype_link = $request->link;
+          $page->skype_pixel_id = $request->pixel;
+        break;
+        case 'fb':
+          $page->fb_link = $request->link;
+          $page->fb_pixel_id = $request->pixel;
+        break;
+        case 'ig':
+          $page->ig_link = $request->link;
+          $page->ig_pixel_id = $request->pixel;
+        break;
+        case 'twitter':
+          $page->twitter_link = $request->link;
+          $page->twitter_pixel_id = $request->pixel;
+        break;
+        case 'youtube':
+          $page->youtube_link = $request->link;
+          $page->youtube_pixel_id = $request->pixel;
+        break;
+      }
+
+      $page->save();
+    }
+
+    $pixel = Pixel::find($request->pixel);
+
+    $arr['status'] = 'success';
+    $arr['message'] = 'Edit link berhasil';
+    $arr['pixel'] = $pixel;
+
+    return $arr;
+  }
 
   public function pdf_page($id,$bulan,$tahun){
     $user=Auth::user();
@@ -168,76 +384,111 @@ class DashboardController extends Controller
 
   public function detail_report($pageid,$id,$mode,$bulan,$tahun){
     //generate data pdf detail
+
+    $page = Page::find($pageid);  
+    if(is_null($page)){
+      return abort(404);
+    }
+
     if($mode=='link'){
       $link = Link::find($id); 
+      if(is_null($link)){
+        return abort(404);
+      }
       $arr = $this->chart_link($pageid,'link-'.$link->title,$bulan,$tahun); 
   
       $data = array(
+        'id' => $link->id,
+        'pageid' => $page->id,
         'title' => $link->title,
+        'pagetitle' => $page->page_title,
         'link' => $link->link,
         'created_at' => $link->created_at,
+        'updated_at' => $link->updated_at,
+        'pixel_id' => $link->pixel_id,
         'chart' => $arr['chart'],
         'total_click' => $arr['total_click'],
         'bulanpdf' => $bulan,
         'tahunpdf' => $tahun,
+        'mode' => $mode,
       );
     } else if($mode=='banner') {
       $banner = Banner::find($id);
+      if(is_null($banner)){
+        return abort(404);
+      }
       $arr = $this->chart_link($pageid,'banner-'.$banner->title,$bulan,$tahun);
 
       $data = array(
+        'id' => $banner->id,
+        'pageid' => $page->id,
         'title' => $banner->title,
+        'pagetitle' => $page->page_title,
         'link' => $banner->link,
         'created_at' => $banner->created_at,
+        'updated_at' => $banner->updated_at,
+        'pixel_id' => $banner->pixel_id,
         'chart' => $arr['chart'],
         'total_click' => $arr['total_click'],
         'bulanpdf' => $bulan,
         'tahunpdf' => $tahun,
+        'mode' => $mode,
       );
     } else {
-      $page = Page::find($pageid);  
-
       switch($mode){
         case 'wa':
           $title = 'WhatsApp';
           $link = $page->wa_link;
+          $pixelid = $page->wa_pixel_id;
         break;
         case 'telegram':
           $title = 'Telegram';
           $link = $page->telegram_link;
+          $pixelid = $page->telegram_pixel_id;
         break;
         case 'skype':
           $title = 'Skype';
           $link = $page->skype_link;
+          $pixelid = $page->skype_pixel_id;
         break;
         case 'fb':
           $title = 'Facebook';
           $link = $page->fb_link;
+          $pixelid = $page->fb_pixel_id;
         break;
         case 'ig':
           $title = 'Instagram';
           $link = $page->ig_link;
+          $pixelid = $page->ig_pixel_id;
         break;
         case 'twitter':
           $title = 'Twitter';
           $link = $page->twitter_link;
+          $pixelid = $page->twitter_pixel_id;
         break;
         case 'youtube':
           $title = 'Youtube';
           $link = $page->youtube_link;
+          $pixelid = $page->youtube_pixel_id;
         break;
       }
 
       $arr = $this->chart_link($pageid,$mode,$bulan,$tahun);
 
       $data = array(
+        'id' => $page->id,
+        'pageid' => $page->id,
         'title' => $title,
+        'pagetitle' => $page->page_title,
         'link' => $link,
         'created_at' => $page->created_at,
+        'updated_at' => $page->updated_at,
+        'pixel_id' => $pixelid,
         'chart' => $arr['chart'],
         'total_click' => $arr['total_click'],
         'bulanpdf' => $bulan,
         'tahunpdf' => $tahun,
+        'mode' => $mode,
       );
     }
 
@@ -300,7 +551,7 @@ class DashboardController extends Controller
       $arr[$link->title] = $click;
     } 
 
-    $key = ['wa','telegram','skype','fb','ig','twitter','youtube'];
+    $key = ['wa','telegram','skype','line','messenger','fb','ig','twitter','youtube'];
       
     foreach ($key as $k) {
       $filename = 'clicked/'.$user->email.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/'.$k.'/counter.txt';

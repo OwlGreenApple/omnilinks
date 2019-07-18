@@ -18,11 +18,18 @@
   .tooltipstered > a {
     color: #505050;
   }  
+  .big-icon {
+    color: #BFBFBF;
+    font-size: 55px;
+    display: inline-block;
+  }
 </style>
 
-@if(!$pages->count())
+@if(!$pages->count() and $search==false)
   <div class="card noshow">
     <div class="card-body text-center">
+      <span class="big-icon"><i class="fas fa-link"></i></span>
+      <br>
       <span class="textdash">
         Buat Omnilinkz pertama Anda<br>Pilih 
         <a href="" class="btncreate-bio" style="color:#106BC8;">
@@ -37,7 +44,22 @@
       </span>
     </div>
   </div>
-@else
+@elseif(!$pages->count() and $search==true)
+  <div class="card noshow">
+    <div class="card-body text-center">
+      <span class="big-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <br>
+      <div class="textdash" style="margin-top: 30px;">
+        Data tidak ditemukan.
+      </div>
+      <span style="font-size: 17px;">
+        Hasil pencarian tidak ditemukan. Coba keyword lain?
+      </span>
+    </div>
+  </div>
+@else 
   @foreach($pages as $page)
     <?php
     $links = Link::where('users_id',Auth::user()->id)
@@ -50,7 +72,7 @@
 
     $pixels = Pixel::where('users_id',Auth::user()->id)
                 ->select('jenis_pixel')
-                ->where('pages_id',$page->id)
+                //->where('pages_id',$page->id)
                 ->groupBy('jenis_pixel')
                 ->get();
 
@@ -71,13 +93,13 @@
                 @else
                   <img src="<?php 
                     echo Storage::disk('s3')->url($page->image_pages);
-                  ?>" class="imga" style="width: 70px;">
+                  ?>" class="imga img-{{$page->id}}" style="width: 70px;">
                 @endif
               </div>
             </div>
           </div>
 
-          <div class="col-8 col-md-4 col-lg-6">
+          <div class="col-7 col-md-4 col-lg-6">
             <?php 
                 $names = '';
                 if($page->premium_id!=0){
@@ -149,25 +171,35 @@
             </div>
           </div>
 
-          <div class="col-4 col-lg-3 col-md-4">
+          <div class="col-5 col-lg-3 col-md-4">
             <div class="pt-md-4 pb-md-4 bd-highlight">
 
               <div class="buton">
-                <button type="button" deletedataid="{{$page->id}}" class="btn btn-sm btn-danger float-right btn-deletePage">
+                
+                <button type="button" deletedataid="{{$page->id}}" data-title="
+                {{$page->page_title}}" data-link="{{$names}}" data-created="
+                {{date('F d, Y', strtotime($page->created_at))}}" class="btn btn-sm btn-danger float-right btn-deletePage">
                   <i class="fas fa-trash-alt"></i>
+                  <span class="menu-nomobile" style="color:#fff">Delete</span>
                 </button>
               </div>
 
               <button class="btn btn-sm btn-success float-right btn-editPage" data-id="{{$page->uid}}" style="margin-right:5px;">
                 <i class="fas fa-pencil-alt"></i>
+                <span class="menu-nomobile" style="color:#fff">Edit</span>
               </button>
 
-              <a class="menu-nomobile" href="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}" >
+              <button class="btn btn-sm btn-primary btn-viewall float-right" style="margin-right:5px;" data-id="{{$page->id}}/{{$bulan}}/{{$tahun}}">
+                <i class="far fa-eye"></i>
+                <span class="menu-nomobile" style="color:#fff">View</span>
+              </button>
+
+              <!--<a class="menu-nomobile" href="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}" >
                 <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;" data-url="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}">
                   <i class="far fa-file-pdf"></i>
                   Saved AS PDF
                 </button>
-              </a>
+              </a>-->
 
             </div>
           </div>
@@ -257,6 +289,26 @@
               </span>
               <br>
             @endif
+
+            @if($page->line_pixel_id!=0 and !is_null($page->line_pixel_id))
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/line/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/line/'.$bulan.'/'.$tahun)}}">
+                  <i class='fab fa-line'></i>
+                  <span> Line</span>
+                </a>
+              </span>
+              <br>
+            @endif
+
+            @if($page->skype_pixel_id!=0 and !is_null($page->skype_pixel_id))
+              <span class="tooltipstered" title="Click To View Details">
+                <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/messenger/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/messenger/'.$bulan.'/'.$tahun)}}">
+                  <i class='fab fa-skype'></i>
+                  <span> Messenger</span>
+                </a>
+              </span>
+              <br>
+            @endif
           </div>
 
           <div class="col-md-2 col-6 text-md-center text-right">
@@ -277,7 +329,19 @@
                 <span>
                   {{$arr['skype']}} clicks
                 </span><br>
-              @endif              
+              @endif   
+
+              @if($page->line_pixel_id!=0 && !is_null($page->line_pixel_id))
+                <span>
+                  {{$arr['line']}} clicks
+                </span><br>
+              @endif 
+
+              @if($page->messenger_pixel_id!=0 && !is_null($page->messenger_pixel_id))
+                <span>
+                  {{$arr['messenger']}} clicks
+                </span><br>
+              @endif            
             </div>
           </div>
 
@@ -293,6 +357,14 @@
 
               @if($page->skype_pixel_id!=0 && !is_null($page->skype_pixel_id))
                 <input type="text" name="" value="{{$page->skype_link}}" readonly="" style="margin-bottom: 2px;"><br>
+              @endif
+
+              @if($page->line_pixel_id!=0 && !is_null($page->line_pixel_id))
+                <input type="text" name="" value="{{$page->line_link}}" readonly="" style="margin-bottom: 2px;"><br>
+              @endif
+
+              @if($page->messenger_pixel_id!=0 && !is_null($page->messenger_pixel_id))
+                <input type="text" name="" value="{{$page->messenger_link}}" readonly="" style="margin-bottom: 2px;"><br>
               @endif
             </div>
           </div>

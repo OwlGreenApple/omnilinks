@@ -17,6 +17,20 @@
   }
 }
 
+.txt-elite {
+  color: #FEB340;
+}
+
+.btn-orange {
+  background: 
+}
+
+#btn-upgrades {
+  color: #393939 !important;
+  background-color: #FEB340 !important;  
+}
+
+/* Premium ID */
 .content-premiumid {
   border-radius:0px;
 }
@@ -334,15 +348,65 @@
   box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
 }
 
+.btn-back{
+  background-color: #FAFAFA;
+  border: 1px solid #ced4da;
+  font-size: 17px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 6px;
+  color: #505050;
+}
+
 .btnbio {
-  background-color: #106BC8;
-  color: #ffffff;
+  /*background-color: #106BC8;
+  color: #ffffff;*/
+  background-color: #fff;
+  color: #106BC8;  
+  border: 1px solid #106BC8;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.btnbiodash {
+  background-color: transparent;
+  color: #106BC8;  
+  border: 1px solid #106BC8;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .btnsingle{
-  margin-left: 10px;
+  /*margin-left: 10px;
   background-color: #FBCE2D;
-  color: #505050;
+  color: #505050;*/
+  margin-left: 10px;
+  background-color: #fff;
+  color: #E39D31;  
+  border: 1px solid #E39D31;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.btnsingledash {
+  margin-left: 10px;
+  background-color: transparent;
+  color: #E39D31;  
+  border: 1px solid #E39D31;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 @media screen and (max-width: 767px) {
@@ -549,6 +613,41 @@ hr.own {
   border-radius: 30px;
   box-shadow: inset 0 0 8px rgba(0,0,0,.3);
 }
+.screen.ads {
+  height: 100%;
+  top: -3px;
+  width: 321px;
+  margin: 0px;
+}
+.mobile.ads, .mobile1.ads, .screen.ads {
+  height: auto;
+  border-radius: 0px 0px 30px 30px;
+}
+.redirect-ads {
+  background: #fff;
+  padding: 5px;
+  border-radius: 20px 20px 0px 0px;
+  word-break: break-word;
+}
+.redirect-ads.big{
+  padding: 10px;
+  position: absolute;
+  bottom: 0px;
+}
+.headads {
+  font-size: 15px;
+  display: block;
+  color: #1E88F5;
+}
+.headads:hover {
+  text-decoration: underline;
+}
+.desc-ads {
+  font-size: 13px; 
+  font-weight: 200;
+  display: block;
+  color: black;
+}
 .home{
   position: absolute;
   bottom: 15px;
@@ -601,6 +700,18 @@ hr.own {
 
   .mobile {
     /*display: none;*/
+  }
+
+  .mobile.ads {
+    width: 300px;
+  }
+
+  .mobile1.ads {
+    width: 295px;
+  }
+
+  .screen.ads {
+    width: 290px;
   }
 
   .project-tab .nav-link, .nav-tabs .nav-link.active, label.caption {

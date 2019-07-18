@@ -177,8 +177,14 @@ class UserController extends Controller
       $user->username = $request->username;
       $user->email = $request->email;
 
-      if($request->password=='' or $request->password!=null){
-        $user->password = Hash::make($request->password);
+      if($request->password!='' or $request->password!=null){
+        if(Hash::check($request->oldpassword, $user->password)){
+          $user->password = Hash::make($request->password);
+        } else {
+          $arr['status'] = 'error';
+          $arr['message'] = 'Password lama tidak sesuai';
+          return $arr;
+        }
       }
 
       $user->save();

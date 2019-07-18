@@ -56,6 +56,25 @@ body {
   color: #fff;
 }
 
+/* Sorter */
+th.header {   
+  background-image: url("../image/sorter.png");
+  cursor: pointer; 
+  background-repeat: no-repeat; 
+  background-position: center right;
+  background-size: 10px 15px; 
+}
+
+th.desc { 
+  background-image: url("../image/sorterdesc.png"); 
+  background-size: 10px 9px; 
+}  
+
+th.asc { 
+  background-image: url("../image/sorterasc.png"); 
+  background-size: 10px 9px; 
+}
+
 /* table */
 .table td, .table th{
   border: none;
@@ -134,10 +153,10 @@ table tr:nth-child(even) td {
 
 @media only screen and (max-width: 1700px) {
   .header-status-account{
-    font-size:23px;
+    font-size:20px;
   }
   .content-status-account{
-    font-size:17px;
+    font-size:15px;
   }
 }
 

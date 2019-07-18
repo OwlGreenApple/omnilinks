@@ -28,7 +28,7 @@
 <body class="{{$pages->template}} " style="height : 100vh;">
 @endif
   
-  <div class="col-md-12 col-12 mt-5">
+  <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-8 col-12 mb-4 row">
         <div class="offset-md-1 col-md-5 col-5">
@@ -49,7 +49,7 @@
             </span>
           @endif
           @if(!is_null($pages->link_utama))
-            <span class="header-txt txt">
+            <span class="header-txt txt" style="word-break: break-all;">
               {{$pages->link_utama}}
             </span>
           @endif
@@ -239,12 +239,25 @@
         <?php } ?>
       </ul>
 
-      <div class="col-lg-7 col-md-8 text-center">
+      <div class="col-lg-7 col-md-8 mb-5 text-center">
         @if($pages->powered==1)
           <span style="font-size: small;">powered by</span>
           <br>
           <img style="width: 150px; margin-bottom: 50px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
         @endif
+      </div>
+
+      <div class="col-lg-7 col-md-8 text-center redirect-ads big">
+        @if(!is_null($ads))
+          <a href="{{url('click-ads/'.$ads->id)}}" target="_blank">
+            <span href="#" class="headline-1-view-get headads">
+                {{$ads->headline}}  
+            </span>
+          </a>
+          <span href="#" class="desc-1-view-get desc-ads">
+              {{$ads->description}}
+          </span>
+        @endif  
       </div>
     </div>
   </div>
