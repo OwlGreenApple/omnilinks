@@ -34,7 +34,7 @@ class BiolinkController extends Controller
   	$page=Page::where('uid','=',$uuid)->first();
   	$walink->users_id=$user->id; 
   	$walink->pages_id=$page->id;
-  	$walink->nomor=$request->nomorwa;
+  	$walink->nomor='0'.$request->nomorwa;
   	$walink->pesan=$request->pesan;
   	$walink->linkgenerator=$request->textlink;
   	$walink->save();	  
@@ -371,7 +371,7 @@ class BiolinkController extends Controller
 
     $arr['status'] = 'success';
     $short_link =env('SHORT_LINK');
-    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'">'.$short_link.'/'.$names.'</a>';
+    $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
     return $arr;
   }
   
@@ -587,7 +587,7 @@ class BiolinkController extends Controller
     $arr['status'] = 'success';
 
     $short_link = env('SHORT_LINK');
-    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'">'.$short_link.'/'.$names.'</a><i class="fas fa-file"></i';
+    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
   	return $arr;
   }
 

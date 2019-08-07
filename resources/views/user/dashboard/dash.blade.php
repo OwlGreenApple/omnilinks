@@ -473,7 +473,7 @@
 </div>
 
 <script type="text/javascript">
-  $('#keywords').keypress(function (e) {
+  $('#keywords').on('keypress touchend', function (e) {
     if (e.which == 13) {
       refreshDashboard();
       return false;    //<---- Add this line

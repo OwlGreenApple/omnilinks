@@ -16,6 +16,14 @@
       display: block;
     }
   }
+
+  .btn-copy {
+    cursor: pointer;
+  }
+
+  .themes.selected {
+    border: 3px solid #0062CC;
+  }
 </style>
 
 <script type="text/javascript">
@@ -213,6 +221,11 @@
         if (data.status == 'success') {
           refreshpixel();
         }
+
+        $('#delete-success').modal('show');
+        setTimeout(function(){
+          $('#delete-success').modal('hide')
+        }, 3000);
       }
     });
   }
@@ -324,6 +337,11 @@
         if (data.status == 'success') {
           refreshwa();
         }
+
+        $('#delete-success').modal('show');
+        setTimeout(function(){
+          $('#delete-success').modal('hide')
+        }, 3000);
       }
     });
   }
@@ -496,20 +514,21 @@
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
-  <div class="container body-content-mobile" style="margin-top: 80px">
+  <div class="container body-content-mobile main-cont">
     <div class="row">
       <div class="col-md-12">
         <h4 style="color: #106BC8">
           <a href="{{url('/')}}">
-            <button class="btn btn-default btn-back">
+            <button class="btn btn-default btn-back mb-2">
               <i class="fas fa-arrow-circle-left"></i>
               Back
             </button>
           </a>
         </h4>
+      
+        <!--
         <br>
-
-        <!--@if(Auth::user()->membership=='free')
+        @if(Auth::user()->membership=='free')
           <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <button type="button" class="close" aria-label="Close" data-dismiss="alert">
               <span aria-hidden="true">×</span>
@@ -529,9 +548,9 @@
 
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
         
-        <div id="pesanAlert" class="alert"></div>
+        <div id="pesanAlert" class="alert mb-0" style="display: none;"></div>
 
-        <button class="btn btn-success mb-3 btn-premium">
+        <button class="btn btn-success mt-3 mb-3 btn-premium">
           <i class="fas fa-star"></i> Get Premium ID
         </button>
 
@@ -1023,7 +1042,14 @@
                     </div>
                     
                     <div class="col-md-5 col-9 pr-1">
-                      <input type="text" name="nomorwa" id="nomorwa" class="form-control col-md-12" onkeypress="return hanyaAngka(event)">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            +62
+                          </div>
+                        </div>
+                        <input type="text" name="nomorwa" id="nomorwa" class="form-control col-md-12" onkeypress="return hanyaAngka(event)">
+                      </div>
                     </div>
 
                     <div class="col-md-2 col-3 pl-0 text-right">
@@ -1143,7 +1169,7 @@
                     <div class="col-md-12">
                       <div class="row mt-5">
                         <div class="col-md-4 mb-3 picture-container">
-                          <div class="picture">
+                          <div class="picture" style="width: 106px;height: 106px;">
                             <img src="<?php 
                             if(is_null($pages->image_pages)){
                               echo asset('image/no-photo.jpg');
@@ -1151,10 +1177,11 @@
                             else {
                               echo Storage::disk('s3')->url($pages->image_pages);
                             }
-                            ?>" class="picture-src img-responsive" id="wizardPicturePreview" title="" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
+                            ?>" class="picture-src img-responsive" id="wizardPicturePreview" title="" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')" style="width:100%;height:100%;object-fit: cover;object-position: center;">
                             <input type="file" name="imagepages" id="file-wizard-picture" class="" accept=".png, .jpg">
                           </div>
-                          <i class="fa fa-trash" id="wizardPicturePreview-delete" aria-hidden="true"></i>
+                          <!--<i class="fa fa-trash" id="wizardPicturePreview-delete" aria-hidden="true"></i>-->
+                          <span id="wizardPicturePreview-delete" aria-hidden="true" style="color: red">Delete</span>
                         </div>
                         <div class="col-md-8">
                           @if(is_null($pages->page_title))
@@ -1184,7 +1211,7 @@
                             Banner Promo
                           </span>
                         @endif
-                          <div class="contentBanner mb-5">
+                          <div class="contentBanner mb-4">
                             <div class="c div-banner">
                               @if($banner->count())
                               <?php $uc=0; ?>
@@ -1253,93 +1280,94 @@
                       </div>
                     </div>
 
-                    <input type="text" name="modeBackground" id="modeBackground" hidden="" readonly="true"  value="gradient">
-                    <input type="text" name="backtheme" id="backtheme" hidden="" readonly="true"  value="colorgradient1">
-                    <p class="blue-txt">
-                      Theme
-                    </p>
-                    
-                    <div class="row">
-                      <div class="col-md-2 col-3">
-                        <label class="switch">
-                          <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
-                          <span class="slider round"></span>
-                        </label>
-                        
+                    <div class="col-md-12">
+                      <input type="text" name="modeBackground" id="modeBackground" hidden="" readonly="true"  value="gradient">
+                      <input type="text" name="backtheme" id="backtheme" hidden="" readonly="true"  value="colorgradient1">
+                      <p class="blue-txt">
+                        Theme
+                      </p>
+                      
+                      <div class="row">
+                        <div class="col-md-2 col-3">
+                          <label class="switch">
+                            <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
+                            <span class="slider round"></span>
+                          </label>
+                          
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <label class="caption">
+                            Rounded buttons
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Color</a>
+                        </div>
                       </div>
-                      <div class="col-md-4 col-4">
-                        <label class="caption">
-                          Rounded buttons
-                        </label>
-                      </div>
-                      <div class="col-md-4 col-4">
-                        <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Color</a>
-                      </div>
-                    </div>
-                    <!-- Modal For Color Picker Button-->
-                    <div class="modal fade" id="modal-color-picker-button" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  Choose Background Color For The Buttons
-                              </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <div class="col-md-4 col-xs-4">
-                                    <div align="center">
-                                      <div id="colorpickerButton"></div>
-                                      <input type="text" id="colorButton" name="colorButton" value="#123456">
+                      <!-- Modal For Color Picker Button-->
+                      <div class="modal fade" id="modal-color-picker-button" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Choose Background Color For The Buttons
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                      <div align="center">
+                                        <div id="colorpickerButton"></div>
+                                        <input type="text" id="colorButton" name="colorButton" value="#123456">
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn" >Close </button>
-                              </div>
-                          </div>
-                      </div>
-                    </div>	
+                                <div class="modal-footer">
+                                  <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>  
 
-                    <div class="row mb-5">
-                      <div class="col-md-2 col-3">
-                        <label class="switch">
-                          <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
-                          <span class="slider round"></span>
-                        </label>
+                      <div class="row mb-4">
+                        <div class="col-md-2 col-3">
+                          <label class="switch">
+                            <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <label class="caption">
+                            Outlined buttons
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <a href="" id="link-custom-outline-color" class="nav-link p-0">Custom Color</a>
+                        </div>
                       </div>
-                      <div class="col-md-4 col-4">
-                        <label class="caption">
-                          Outlined buttons
-                        </label>
-                      </div>
-                      <div class="col-md-4 col-4">
-                        <a href="" id="link-custom-outline-color" class="nav-link p-0">Custom Color</a>
-                      </div>
-                    </div>
-                    <!-- Modal For Color Picker Button-->
-                    <div class="modal fade" id="modal-color-picker-outline-button" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  Choose Outline Color For The Buttons
-                              </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <div class="col-md-4 col-xs-4">
-                                    <div align="center">
-                                      <div id="colorpickerOutlineButton"></div>
-                                      <input type="text" id="colorOutlineButton" name="colorOutlineButton" value="#ffffff">
+                      <!-- Modal For Color Picker Button-->
+                      <div class="modal fade" id="modal-color-picker-outline-button" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Choose Outline Color For The Buttons
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                      <div align="center">
+                                        <div id="colorpickerOutlineButton"></div>
+                                        <input type="text" id="colorOutlineButton" name="colorOutlineButton" value="#ffffff">
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn" >Close </button>
-                              </div>
-                          </div>
-                      </div>
-                    </div>	
-
+                                <div class="modal-footer">
+                                  <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>  
+                    </div>
                     
                     <div class="as">
                       <!-- Bootstrap CSS -->
@@ -1424,7 +1452,7 @@
                               $viewpicture = Storage::disk('s3')->url($pages->image_pages);
                             }
                           ?>
-                          <img id="viewpicture" src="<?php echo $viewpicture ?>" style="width:100%;height:auto;border-radius: 50%;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
+                          <img id="viewpicture" src="<?php echo $viewpicture ?>" style="width:100%;height:100%;border-radius: 50%;object-fit: cover;object-position: center;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
                         </div>
                       </div>
                       <div class="col-md-10 col-8 p-2">
@@ -1719,6 +1747,98 @@
   </div>
 </div>
 
+<!-- Modal Delete Confirmation -->
+<div class="modal fade" id="confirm-delete" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <h5 class="modal-title" id="modaltitle">
+          Confirmation Delete
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <input type="hidden" name="id_delete_link" id="id_delete_link">
+        <input type="hidden" name="id_delete_pixel" id="id_delete_pixel">
+        <input type="hidden" name="type" id="type">
+
+        Apa Anda yakin untuk <i>menghapus</i> data berikut ?
+        <br><br>
+        <span class="txt-mode"></span>
+        <br>
+        
+        <div class="col-12 mb-4" style="margin-top: 30px">
+          <button class="btn btn-danger btn-block btn-delete-ok" data-dismiss="modal">
+            YA, HAPUS SEKARANG
+          </button>
+        </div>
+        
+        <div class="col-12 text-center mb-4">
+          <a href="#" data-dismiss="modal">
+            Kembali ke Dashboard
+          </a>  
+        </div>
+      </div>
+
+    </div>   
+  </div>
+</div>
+
+<!-- Modal Delete Success -->
+<div class="modal fade" id="delete-success" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <h5 class="modal-title" id="modaltitle">
+          Delete Success
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="img-success" src="{{asset('image/success.gif')}}" style="max-width: 100px"><br>
+        <span class="txt-mode"></span>, berhasil <b>dihapus!</b><br>
+        Anda akan diarahkan ke <i>Dashboard</i> dalam 3 detik
+
+        <div class="col-12 text-center mb-4" style="margin-top: 30px">
+          <a href="#" data-dismiss="modal">
+            Ke Dashboard
+          </a>  
+        </div>
+      </div>
+
+    </div>   
+  </div>
+</div>
+
+<!-- Modal Copy Link -->
+<div class="modal fade" id="copy-link" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaltitle">
+          Copy Link
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        Copy link berhasil!
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" data-dismiss="modal">
+          OK
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
 <noscript>Jalankan Javascript di browser anda</noscript>
@@ -1730,6 +1850,38 @@
   $('body').on('click', '.btn-preview', function() {
     $('.preview-mobile').html($('.mobile1').html());
     $('.preview-mobile').toggleClass('preview-none');
+  });
+
+  $('body').on('click', '.themes', function() {
+    $('.themes').removeClass('selected');
+    $(this).addClass('selected');
+  });  
+
+  $('body').on('click', 'ul.nav-tabs', function() {
+    if(!$('#pesanAlert').hasClass('alert-success')){
+      $('#pesanAlert').hide();
+    }
+  });
+
+  $( "body" ).on( "click", ".btn-copy", function(e) 
+  {
+    e.preventDefault();
+    e.stopPropagation();
+
+    //var id = $(this).attr("data-id");
+    var link = $(this).attr("data-link");
+
+    var tempInput = document.createElement("input");
+    tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+    tempInput.value = link;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+
+    /*$(".link-"+id).select();
+    document.execCommand("copy");*/
+    $('#copy-link').modal('show');
   });
 
   $(document).ready(function() {
@@ -2232,21 +2384,37 @@
     });
 
     $("body").on("click", ".btn-delete", function() {
-      if (confirm('anda yakin ingin menghapus pixel ini')) {
+      /*if (confirm('anda yakin ingin menghapus pixel ini')) {
         var idpixel = $(this).attr('dataid');
         delete_pixel(idpixel);
-      }
+      }*/
+      $('#id_delete_pixel').val($(this).attr('dataid'));
+      $('#type').val('pixel');
+      $('.txt-mode').html('Pixel');
+      $('#confirm-delete').modal('show');
     });
 
     $("body").on("click", ".btn-deletewa", function() {
-      if (confirm('anda yakin ingin menghapus walink ini')) {
+      /*if (confirm('anda yakin ingin menghapus walink ini')) {
         var idwalink = $(this).attr('dataidwa');
         deletewalink(idwalink);
+      }*/
+      $('#id_delete_link').val($(this).attr('dataidwa'));
+      $('#type').val('wa');
+      $('.txt-mode').html('WhatsApp');
+      $('#confirm-delete').modal('show');
+    });
+
+    $("body").on("click", ".btn-delete-ok", function() {
+      if($('#type').val()=='pixel'){
+        delete_pixel($('#id_delete_pixel').val());
+      } else {
+        deletewalink($('#id_delete_link').val());
       }
     });
 
     $(document).on('click', '#generate', function(e) {
-      var nomor = $('#nomorwa').val();
+      var nomor = '0'+$('#nomorwa').val();
       var message = $('#pesan-wa').val();
       var convert = encodeURI(message);
       var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";

@@ -8,6 +8,7 @@
   padding: 9px;
   box-sizing: border-box;
 }
+
 .ultitle{
   font-size: large; 
   /*margin-left: 22px;*/
@@ -483,7 +484,8 @@
 }
 .galleryContainer .slideShowContainer .imageHolder img{
   width: 100%;
-  height: auto;
+  /*height: auto;*/
+  height: 100%;
 }
 .galleryContainer .slideShowContainer .imageHolder .captionText{
   display: none;

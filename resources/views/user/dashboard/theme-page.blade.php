@@ -1,5 +1,5 @@
 <div class="theme-take">
-  <div class="theme1 themes"></div>
+  <div class="theme1 themes selected"></div>
 </div>
 <div class="theme-take">
   <div class="theme2 themes"></div>

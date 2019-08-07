@@ -258,6 +258,8 @@ function copyTO(element) {
     $temp.val($(element).text()).select();
     document.execCommand('copy');
     $temp.remove();
+
+    $('#copy-link').modal('show');
 }
 
 //
