@@ -22,6 +22,10 @@
   <title>Link</title>
 </head>
 
+<script type="text/javascript">
+  var urlbanner = [];
+</script>
+
 @if(is_null($pages->template))
 <body style=" color:#fff; background-color:{{$pages->color_picker}};height : 100vh;" class="a ">
 @else
@@ -62,6 +66,7 @@
       </div>
 
       <div class="col-lg-7 col-md-8 mb-5 row">
+        @if($banner->count())
         <div class="galleryContainer">
           <div class="slideShowContainer">
             <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow">
@@ -73,29 +78,33 @@
             <div class="captionTextHolder">
               <p class="captionText slideTextFromTop"></p>
             </div>
-            @if($banner->count())
+            
               @if(!is_null($banner[0]->images_banner))
-                @foreach($banner as $banner1)
+                @foreach($banner as $ban)
                   <div class="imageHolder">
-                    <!--<a href="{{url('click/banner/'.$banner1->id)}}" target="_blank">-->
-                    <a href="{{env('APP_URL').'/click/banner/'.$banner1->id}}" target="_blank">
+                    <!--<a href="{{url('click/banner/'.$ban->id)}}" target="_blank">-->
+                    <!--<a href="<?php echo env('APP_URL').'/click/banner/'.$ban->id ?>" target="_blank">-->
+                      <script type="text/javascript">
+                        urlbanner.push('<?php echo env('APP_URL').'/click/banner/'.$ban->id ?>');
+                      </script>
                       <img src="<?php 
                       // echo url(Storage::disk('local')->url('app/'.$banner->images_banner));
-                        if(!is_null($banner1->images_banner)){
-                          echo Storage::disk('s3')->url($banner1->images_banner);
+                        if(!is_null($ban->images_banner)){
+                          echo Storage::disk('s3')->url($ban->images_banner);
                         }
                       ?>" class="">
                       <p class="captionText"></p> 
-                    </a>
+                    <!--</a>-->
                   </div>
                 @endforeach
               @else
                 <div></div>
               @endif
-            @endif
+            
           </div>
           <div id="dotsContainer"></div>
         </div>
+        @endif
       </div>
 
       <ul class="col-lg-7 col-md-8 mb-0 row" style="padding-left: 24px; padding-right: 24px;">
@@ -247,9 +256,9 @@
         @endif
       </div>
 
-      <div class="col-lg-7 col-md-8 text-center redirect-ads big">
-        @if(!is_null($ads))
-          <a href="{{url('click-ads/'.$ads->id)}}" target="_blank">
+      @if(!is_null($ads))
+        <div class="col-lg-7 col-md-8 text-center redirect-ads big">
+          <a href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" target="_blank">
             <span href="#" class="headline-1-view-get headads">
                 {{$ads->headline}}  
             </span>
@@ -257,13 +266,18 @@
           <span href="#" class="desc-1-view-get desc-ads">
               {{$ads->description}}
           </span>
-        @endif  
-      </div>
+        </div>
+      @endif  
     </div>
   </div>
 
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
+  $('body').on('click','.imageHolder', function(e) {
+    var url = urlbanner[slideIndex];
+    window.open(url,'_blank');
+  });
+
   function check_outlined(){
     <?php if($pages->is_outlined) { ?>  
       $(".mobile1").addClass("outlinedview");

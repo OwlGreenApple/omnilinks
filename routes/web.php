@@ -112,15 +112,15 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 
     //makesinglelink
-    Route::get('/singlelink','SinglelinkController@newsingle');
-    Route::post('/save-singlelink','SinglelinkController@single');
-    Route::get('/dash/newsingle/load-singlelink','SinglelinkController@loadsinglelink');
-    Route::post('/save-singlepixel','SinglelinkController@singlepixel');
-    Route::get('/pixel/load-singlepixel','SinglelinkController@loadsinglepixel');
-    Route::get('/pixel/deletesinglepixel','SinglelinkController@deletesinglepixel');
-    Route::get('/pixel/loadPixelLink','SinglelinkController@loadPixelLink');
-    Route::get('/link/deletesinglelink','SinglelinkController@deletesinglelink');
-    Route::get('/singlelinks/load-link-title','SinglelinkController@load_link_title');
+    Route::get('/singlelink','SingleLinkController@newsingle');
+    Route::post('/save-singlelink','SingleLinkController@single');
+    Route::get('/dash/newsingle/load-singlelink','SingleLinkController@loadsinglelink');
+    Route::post('/save-singlepixel','SingleLinkController@singlepixel');
+    Route::get('/pixel/load-singlepixel','SingleLinkController@loadsinglepixel');
+    Route::get('/pixel/deletesinglepixel','SingleLinkController@deletesinglepixel');
+    Route::get('/pixel/loadPixelLink','SingleLinkController@loadPixelLink');
+    Route::get('/link/deletesinglelink','SingleLinkController@deletesinglelink');
+    Route::get('/singlelinks/load-link-title','SingleLinkController@load_link_title');
 
     //premium ID
     Route::get('/premium-id-biolinks/tambah','PremiumIDController@premiumid_biolinks');

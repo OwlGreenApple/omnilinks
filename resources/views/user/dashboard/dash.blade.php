@@ -141,7 +141,7 @@
 
 </script>
 
-<div class="container mt-5 mb-5">
+<div class="container mb-5" style="margin-top: 150px">
   <div class="row">
     @if (session('error'))
     <div class="col-md-12 mb-3">
@@ -232,7 +232,7 @@
       </div>
     </div>
 
-    <div class="col-md-12 pr-0 menu-mobile status-account-info">
+    <div class="col-md-12 pr-0 menu-mobile">
       <p class="text-md-right text-lg-right ">
             @if($user->membership=="free")
               <span class="txt-free header-status-account">
@@ -281,7 +281,7 @@
             <div class="input-group">
               <input type="text" id="keywords" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul / Kategori" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">
 
-              <div class="input-group-append">
+              <div class="btn-search input-group-append" style="cursor:pointer;">
                 <span class="input-group-text" id="basic-addon2">
                   <i class="fas fa-search"></i>
                 </span>
@@ -478,6 +478,10 @@
       refreshDashboard();
       return false;    //<---- Add this line
     }
+  });
+
+  $('body').on('click','.btn-search',function(e){
+    refreshDashboard();
   });
 
   $(document).on('click', '.pagination a', function (e) {

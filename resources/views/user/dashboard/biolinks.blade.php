@@ -1618,12 +1618,11 @@
           </div>
         </div>
       </div>
-
-      <!-- untuk preview di mobile -->
-      <div class="preview-mobile preview-none">
-      </div>
-
     </div>
+  </div>
+
+  <!-- untuk preview di mobile -->
+  <div class="preview-mobile preview-none">
   </div>
 
 </section>

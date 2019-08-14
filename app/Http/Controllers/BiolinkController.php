@@ -489,6 +489,7 @@ class BiolinkController extends Controller
     }
 
     $sort_msg = '';
+    
     if($request->has('sortmsg'))
     {
       $countmsg = 12/count($request->sortmsg);
@@ -503,7 +504,11 @@ class BiolinkController extends Controller
           $sort_msg .= $msg.';';
         }
       }
-    }
+
+      if(strpos($sort_msg, 'wa')==false and $page->wa_link!=''){
+        $sort_msg .= 'wa;';
+      }
+    } 
       
     $sort_sosmed = '';
     if($request->has('sortsosmed')){
@@ -545,6 +550,10 @@ class BiolinkController extends Controller
           $count=0;
           $countdiv=1;
         }
+      }
+
+      if(strpos($sort_sosmed, 'youtube')==false and $page->youtube_link!=''){
+        $sort_sosmed .= 'youtube;';
       }
     }
 
