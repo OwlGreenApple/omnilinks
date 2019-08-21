@@ -1322,6 +1322,7 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
+                                  <button class="btn btn-primary btn-apply-btn" type="button" data-dismiss="modal">Apply</button>
                                   <button type="button" data-dismiss="modal" class="btn" >Close </button>
                                 </div>
                             </div>
@@ -1362,6 +1363,7 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
+                                  <button class="btn btn-primary btn-apply-out" type="button" data-dismiss="modal" >Apply </button>
                                   <button type="button" data-dismiss="modal" class="btn" >Close </button>
                                 </div>
                             </div>
@@ -1567,7 +1569,7 @@
                         <!--
                         <button type="button" class="btn btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
                         -->
-                        <li class="">
+                        <li id="link-url-1-preview" class="">
                           <a href="#" class="btn btn-md btnview title-1-view-get txthov" style="
                           width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a>
                         </li>
@@ -2123,10 +2125,13 @@
     $("#colorButton").on('keyup', function() {
       pickerbtn.setColor($(this).val());
     });
-    pickerbtn.linkTo(onColorButtonChange);
+    //pickerbtn.linkTo(onColorButtonChange);
     $("#link-custom-background-color").on('click', function(e) {
       e.preventDefault();
       $('#modal-color-picker-button').modal('toggle');
+    });
+    $(document).on('click', '.btn-apply-btn', function() {
+      onColorButtonChange($("#colorButton").val());
     });
 
     //modal-color-picker-outline-button colorpickerOutlineButton colorOutlineButton
@@ -2154,12 +2159,16 @@
     $("#colorOutlineButton").on('keyup', function() {
       pickerout.setColor($(this).val());
     });
-    pickerout.linkTo(onOutlineColorButtonChange);
+    //pickerout.linkTo(onOutlineColorButtonChange);
     $("#link-custom-outline-color").on('click', function(e) {
       e.preventDefault();
       $('#modal-color-picker-outline-button').modal('toggle');
     });
+    $(document).on('click', '.btn-apply-out', function() {
+      onOutlineColorButtonChange($("#colorOutlineButton").val());
+    });
     
+
     function readURL(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();

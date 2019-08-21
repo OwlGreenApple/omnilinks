@@ -167,6 +167,7 @@ $(document).ready(function () {
     $(document).on('click', '.deletelink', function (e) {
       //let idLink = $(this).parent().parent().attr("link-id");
       var idLink = $(this).parent().parent().attr("id");
+      console.log(idLink);
       $("#" + idLink + "-preview").remove();
       $(this).parent().parent().remove();
     });
