@@ -139,8 +139,6 @@ class BiolinkController extends Controller
                 ->orwhere('premium_names',$names) 
                 ->first();
 
-      $user = User::find($page->user_id);
-
       if (is_null($page)) {
         $link = Link::where('names',$names)
                 ->orwhere('premium_names',$names)
@@ -170,6 +168,8 @@ class BiolinkController extends Controller
         }
       }
 
+      $user = User::find($page->user_id);
+      
       $links = Link::where('pages_id','=',$page->id)
                 ->orderBy('created_at','descend')
                 ->get();

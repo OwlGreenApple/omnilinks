@@ -112,7 +112,7 @@
                       <option class="" data-price="562000" data-paket="Top Up 75000" value="10" <?php if ($id==10) echo "selected" ; ?>>
                         Top Up 75000 points
                       </option>
-                      <option class="" data-price="650000" data-paket="Top Up 100000" value="11" <?php if ($id==10) echo "selected" ; ?>>
+                      <option class="" data-price="650000" data-paket="Top Up 100000" value="11" <?php if ($id==11) echo "selected" ; ?>>
                         Top Up 100000 points
                       </option>
                     @endif

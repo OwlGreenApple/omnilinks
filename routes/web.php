@@ -24,6 +24,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Auth::routes();
   
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
+  Route::get('/click-ads/{id}','AdsController@click_ads');
 
   //information
   Route::get('/about',function(){
@@ -59,7 +60,6 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/ads-manager','AdsController@ads_manager');
     Route::get('/save-ads','AdsController@save_ads');
     Route::get('/load-credit-history','AdsController@load_credit_history');
-    Route::get('/click-ads/{id}','AdsController@click_ads');
 
     //Edit Profile
     Route::get('/edit-profile','UserController@index_edit');
