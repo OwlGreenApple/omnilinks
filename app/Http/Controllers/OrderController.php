@@ -456,7 +456,7 @@ class OrderController extends Controller
       $adshistory->description = 'top up';
       $adshistory->save();
 
-      $ads->credit = $order->jmlpoin;
+      $ads->credit = $ads->credit + $order->jmlpoin;
       $ads->save();
     }
 

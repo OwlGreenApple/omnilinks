@@ -256,18 +256,20 @@
         @endif
       </div>
 
-      @if(!is_null($ads))
-        <div class="col-lg-7 col-md-8 text-center redirect-ads big">
-          <a href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" target="_blank">
-            <span href="#" class="headline-1-view-get headads">
-                {{$ads->headline}}  
+      @if($membership=='free')
+        @if(!is_null($ads))
+          <div class="col-lg-7 col-md-8 text-center redirect-ads big">
+            <a href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" target="_blank">
+              <span href="#" class="headline-1-view-get headads">
+                  {{$ads->headline}}  
+              </span>
+            </a>
+            <span href="#" class="desc-1-view-get desc-ads">
+                {{$ads->description}}
             </span>
-          </a>
-          <span href="#" class="desc-1-view-get desc-ads">
-              {{$ads->description}}
-          </span>
-        </div>
-      @endif  
+          </div>
+        @endif  
+      @endif
     </div>
   </div>
 

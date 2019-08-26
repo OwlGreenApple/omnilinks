@@ -138,6 +138,9 @@ class BiolinkController extends Controller
       $page = Page::where('names',$names) 
                 ->orwhere('premium_names',$names) 
                 ->first();
+
+      $user = User::find($page->user_id);
+
       if (is_null($page)) {
         $link = Link::where('names',$names)
                 ->orwhere('premium_names',$names)
@@ -183,26 +186,32 @@ class BiolinkController extends Controller
                 return array_search($model->getKey(), $sort_link);
               });
 
-      $ads = Ads::where('credit','>=','2')
+      if($user->membership=='free'){
+        $ads = Ads::where('credit','>=','2')
               ->inRandomOrder()->first();
 
-      if(!is_null($ads)){
-        $adshistory = new AdsHistory;
-        $adshistory->user_id = $ads->user_id;
-        $adshistory->ads_id = $ads->id;
-        $adshistory->credit_before = $ads->credit;
-        $adshistory->credit_after = $ads->credit - 1;
-        $adshistory->jml_credit = 1;
-        $adshistory->is_view = 1;
-        $adshistory->description = 'view';
-        $adshistory->save();
+        if(!is_null($ads)){
+          $adshistory = new AdsHistory;
+          $adshistory->user_id = $ads->user_id;
+          $adshistory->ads_id = $ads->id;
+          $adshistory->credit_before = $ads->credit;
+          $adshistory->credit_after = $ads->credit - 1;
+          $adshistory->jml_credit = 1;
+          $adshistory->is_view = 1;
+          $adshistory->description = 'view';
+          $adshistory->save();
 
-        $ads->credit = $ads->credit-1;
-        $ads->save();
+          $ads->credit = $ads->credit-1;
+          $ads->save();
+        }  
+      } else {
+        $ads = null;
       }
+      
 
       return view('user.link.link')
               ->with('pages',$page)
+              ->with('membership',$user->membership)
               ->with('links',$links)
               ->with('banner',$banner)
               ->with('sort_msg',$sort_msg)
