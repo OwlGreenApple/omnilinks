@@ -21,7 +21,7 @@
     cursor: pointer;
   }
 
-  .themes.selected {
+  .themes.selected, .wallpapers.selected{
     border: 3px solid #0062CC;
   }
 </style>
@@ -1281,8 +1281,9 @@
                     </div>
 
                     <div class="col-md-12">
-                      <input type="text" name="modeBackground" id="modeBackground" hidden="" readonly="true"  value="gradient">
-                      <input type="text" name="backtheme" id="backtheme" hidden="" readonly="true"  value="colorgradient1">
+                      <input type="hidden" name="modeBackground" id="modeBackground" value="gradient">
+                      <input type="hidden" name="backtheme" id="backtheme" value="colorgradient1">
+                      <input type="hidden" name="wallpaperclass" id="wallpaperclass" value="">
                       <p class="blue-txt">
                         Theme
                       </p>
@@ -1380,6 +1381,9 @@
                         <li class="nav-item sub-nav">
                           <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">SOLID</a>
                         </li>
+                        <li class="nav-item sub-nav">
+                          <a class="nav-link" href="#wallpaper" id="wallpaper-tab" role="tab" data-toggle="tab">Wallpaper</a>
+                        </li>
                       </ul>
                       <!-- Tab panes -->
                       <div class="tab-content mt-4 mb-4">
@@ -1398,6 +1402,15 @@
                             <input type="text" id="color" name="color" value="#ffffff">
                           </div>
                         </div>
+                        
+
+                        <div role="tabpanel" class="tab-pane fade" id="wallpaper">
+                          <div align="center">
+                            @include('user.dashboard.wallpaper-page')
+                          </div>
+                        </div>
+
+                        
                       </div>
                       <!--<label class="switch mb-4">
                         <input type="checkbox" name="powered" id="powered" value="powered" checked="">
@@ -1858,6 +1871,11 @@
     $(this).addClass('selected');
   });  
 
+  $('body').on('click', '.wallpapers', function() {
+    $('.wallpapers').removeClass('selected');
+    $(this).addClass('selected');
+  });  
+
   $('body').on('click', 'ul.nav-tabs', function() {
     if(!$('#pesanAlert').hasClass('alert-success')){
       $('#pesanAlert').hide();
@@ -1965,6 +1983,11 @@
       $("#phonecolor").addClass("screen");
       $("#phonecolor").css("background-color",$("#color").val());
       // $("#backtheme").val();
+    });
+    $(document).on('click', '#wallpaper-tab', function() {
+      $('#modeBackground').val('wallpaper');
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen "+$('#wallpaperclass').val());
     });
     $(document).on('click', '.btn-premiumid', function() {
       tambah_premiumid();

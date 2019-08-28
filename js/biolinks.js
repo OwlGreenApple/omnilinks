@@ -264,6 +264,31 @@ function copyTO(element) {
 }
 
 //
+$('.thumb-wallpaper1').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper1');
+    $('#wallpaperclass').val('wallpaper1');
+});
+$('.thumb-wallpaper2').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper2');
+    $('#wallpaperclass').val('wallpaper2');
+});
+$('.thumb-wallpaper3').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper3');
+    $('#wallpaperclass').val('wallpaper3');
+});
+$('.thumb-wallpaper4').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper4');
+    $('#wallpaperclass').val('wallpaper4');
+});
+$('.thumb-wallpaper5').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper5');
+    $('#wallpaperclass').val('wallpaper5');
+});
 $('.theme1').click(function () {
     $('#phonecolor').removeAttr("class");
     $('#phonecolor').addClass('screen colorgradient1');
