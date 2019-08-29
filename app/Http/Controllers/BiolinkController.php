@@ -280,11 +280,19 @@ class BiolinkController extends Controller
     {
        $page->template=null;
        $page->color_picker=$request->color;
+       $page->wallpaper=null;
     }
-    else if ( ($request->modeBackground=="gradient") or ($request->modeBackground=="wallpaper")  )
+    else if ($request->modeBackground=="gradient")  
     {
       $page->color_picker=null;
-      $page->template=$request->wallpaperclass;  
+      $page->template=$request->backtheme;
+      $page->wallpaper=null;
+    }
+    else if ($request->modeBackground=="wallpaper") 
+    {
+      $page->color_picker=null;
+      $page->template=null;
+      $page->wallpaper=$request->wallpaperclass;  
     }
 
     $page->rounded=$request->colorButton;

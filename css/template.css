@@ -1,3 +1,48 @@
+.wallpaper1
+{
+  background-image: url('../image/wallpaper/bg-1.jpg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.wallpaper2
+{
+  background-image: url('../image/wallpaper/bg-2.jpg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.wallpaper3
+{
+  background-image: url('../image/wallpaper/bg-3.jpg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.wallpaper4
+{
+  background-image: url('../image/wallpaper/bg-4.jpg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.wallpaper5
+{
+  background-image: url('../image/wallpaper/bg-5.jpg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
 .colorgradient1
 {
   background-image: linear-gradient(339deg, #21d4fd, #b721ff);

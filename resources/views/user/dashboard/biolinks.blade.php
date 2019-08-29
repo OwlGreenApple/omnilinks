@@ -1283,7 +1283,7 @@
                     <div class="col-md-12">
                       <input type="hidden" name="modeBackground" id="modeBackground" value="gradient">
                       <input type="hidden" name="backtheme" id="backtheme" value="colorgradient1">
-                      <input type="hidden" name="wallpaperclass" id="wallpaperclass" value="">
+                      <input type="hidden" name="wallpaperclass" id="wallpaperclass" value="wallpaper1">
                       <p class="blue-txt">
                         Theme
                       </p>
@@ -2008,6 +2008,10 @@
     <?php if (!is_null($pages->template)) { ?>
       $('#backtheme').val("<?php echo $pages->template; ?>");
       $("#gradient").click();
+    <?php } ?>
+    <?php if (!is_null($pages->wallpaper)) { ?>
+      $('#wallpaperclass').val("<?php echo $pages->wallpaper; ?>");
+      $("#wallpaper-tab").click();
     <?php } ?>
 
     //for bacground, outline color 

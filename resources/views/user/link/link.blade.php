@@ -26,10 +26,12 @@
   var urlbanner = [];
 </script>
 
-@if(is_null($pages->template))
-<body style=" color:#fff; background-color:{{$pages->color_picker}};height : 100vh;" class="a ">
-@else
-<body class="{{$pages->template}} " style="height : 100vh;">
+@if(!is_null($pages->color_picker))
+  <body style=" color:#fff; background-color:{{$pages->color_picker}};height : 100vh;" class="a ">
+@elseif(!is_null($pages->template))
+  <body class="{{$pages->template}} " style="height : 100vh;">
+@elseif(!is_null($pages->wallpaper))
+  <body class="{{$pages->wallpaper}} " style="height : 100vh;">
 @endif
   
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
@@ -300,6 +302,7 @@
 
 
   $(document).ready(function() {
+    initGallery();
     <?php if($pages->is_rounded) {?>
       $(".btn").addClass("btn-rounded");
     <?php } ?>
