@@ -760,6 +760,7 @@ class BiolinkController extends Controller
       }
       // return redirect($banner->link);
       return view('user.script')->with([
+        'user' => $user,
         'mode' => $mode,
         'script' => $script,
         'link' => $banner->link,
@@ -835,6 +836,7 @@ class BiolinkController extends Controller
       // return redirect($link);
 
       return view('user.script')->with([
+        'user' => $user,
         'mode' => $mode,
         'script' => $script,
         'link' => $link,
