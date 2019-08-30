@@ -731,6 +731,7 @@ class BiolinkController extends Controller
       }
       // return redirect($link->link);
       return view('user.script')->with([
+        'user' => $user,
         'mode' => $mode,
         'script' => $script,
         'link' => $link->link,
