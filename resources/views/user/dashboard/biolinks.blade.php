@@ -1284,6 +1284,7 @@
                       <input type="hidden" name="modeBackground" id="modeBackground" value="gradient">
                       <input type="hidden" name="backtheme" id="backtheme" value="colorgradient1">
                       <input type="hidden" name="wallpaperclass" id="wallpaperclass" value="wallpaper1">
+                      <input type="hidden" name="animationclass" id="animationclass" value="animation1">
                       <p class="blue-txt">
                         Theme
                       </p>
@@ -1384,6 +1385,9 @@
                         <li class="nav-item sub-nav">
                           <a class="nav-link" href="#wallpaper" id="wallpaper-tab" role="tab" data-toggle="tab">Wallpaper</a>
                         </li>
+                        <li class="nav-item sub-nav">
+                          <a class="nav-link" href="#animation" id="animation-tab" role="tab" data-toggle="tab">Animation</a>
+                        </li>
                       </ul>
                       <!-- Tab panes -->
                       <div class="tab-content mt-4 mb-4">
@@ -1392,7 +1396,7 @@
                         <div role="tabpanel" class="tab-pane fade in active show" id="buzz">
 
                           <div class="theme mrgtp text-center">
-                            @include('user.dashboard.theme-page')
+                            @include('user.dashboard.background.theme-page')
                           </div>
                         </div>
 
@@ -1406,7 +1410,13 @@
 
                         <div role="tabpanel" class="tab-pane fade" id="wallpaper">
                           <div align="center">
-                            @include('user.dashboard.wallpaper-page')
+                            @include('user.dashboard.background.wallpaper-page')
+                          </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="animation">
+                          <div align="center">
+                            @include('user.dashboard.background.animation-page')
                           </div>
                         </div>
 
@@ -1989,6 +1999,11 @@
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen "+$('#wallpaperclass').val());
     });
+    $(document).on('click', '#animation-tab', function() {
+      $('#modeBackground').val('animation');
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen "+$('#animationclass').val());
+    });
     $(document).on('click', '.btn-premiumid', function() {
       tambah_premiumid();
     });
@@ -2012,6 +2027,10 @@
     <?php if (!is_null($pages->wallpaper)) { ?>
       $('#wallpaperclass').val("<?php echo $pages->wallpaper; ?>");
       $("#wallpaper-tab").click();
+    <?php } ?>
+    <?php if (!is_null($pages->gif_template)) { ?>
+      $('#animationclass').val("<?php echo $pages->gif_template; ?>");
+      $("#animation-tab").click();
     <?php } ?>
 
     //for bacground, outline color 

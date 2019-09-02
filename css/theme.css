@@ -1,4 +1,13 @@
-.svg-cover1
+.thumb-animation1
+{
+  background-image: url('../image/wallpaper/bg-thumb/bg-1.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation1
 {
   background-image: url('../image/svg/output.svg');
   background-color :#21d4fd!important;

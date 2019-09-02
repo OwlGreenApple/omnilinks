@@ -263,6 +263,11 @@ function copyTO(element) {
     $('#copy-link').modal('show');
 }
 
+$('.thumb-animation').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation1');
+    $('#animationclass').val('animation1');
+});
 //
 $('.thumb-wallpaper1').click(function () {
     $('#phonecolor').removeAttr("class");

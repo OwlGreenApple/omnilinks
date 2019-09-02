@@ -1,3 +1,13 @@
+.animation1
+{
+  background-image: url('../image/svg/output.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+
 .wallpaper1
 {
   background-image: url('../image/wallpaper/bg-1.jpg');

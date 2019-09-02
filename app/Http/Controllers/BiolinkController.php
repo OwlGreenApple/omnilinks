@@ -281,18 +281,28 @@ class BiolinkController extends Controller
        $page->template=null;
        $page->color_picker=$request->color;
        $page->wallpaper=null;
+       $page->gif_template=null;
     }
     else if ($request->modeBackground=="gradient")  
     {
       $page->color_picker=null;
       $page->template=$request->backtheme;
       $page->wallpaper=null;
+      $page->gif_template=null;
     }
     else if ($request->modeBackground=="wallpaper") 
     {
       $page->color_picker=null;
       $page->template=null;
       $page->wallpaper=$request->wallpaperclass;  
+      $page->gif_template=null;
+    }
+    else if ($request->modeBackground=="animation") 
+    {
+      $page->color_picker=null;
+      $page->template=null;
+      $page->wallpaper=null;  
+      $page->gif_template=$request->animationclass;  
     }
 
     $page->rounded=$request->colorButton;
@@ -802,17 +812,17 @@ class BiolinkController extends Controller
         break;
         case "fb":
           $pages->fb_link_counter = $pages->fb_link_counter+1;
-          $link = $pages->fb_link;
+          $link = "https://facebook.com/".$pages->fb_link;
           $idpixel = $pages->fb_pixel_id;
         break;
         case "twitter":
           $pages->twitter_link_counter = $pages->twitter_link_counter+1;
-          $link = $pages->twitter_link;
+          $link = "https://twitter.com/".$pages->twitter_link;
           $idpixel = $pages->twitter_pixel_id;
         break;
         case "ig":
           $pages->ig_link_counter = $pages->ig_link_counter+1;
-          $link = $pages->ig_link;
+          $link = "https://instagram.com/".$pages->ig_link;
           $idpixel = $pages->ig_pixel_id;
         break;
       }

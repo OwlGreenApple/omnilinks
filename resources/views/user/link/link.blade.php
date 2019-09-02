@@ -32,6 +32,8 @@
   <body class="{{$pages->template}} " style="height : 100vh;">
 @elseif(!is_null($pages->wallpaper))
   <body class="{{$pages->wallpaper}} " style="height : 100vh;">
+@elseif(!is_null($pages->gif_template))
+  <body class="{{$pages->gif_template}} " style="height : 100vh;">
 @endif
   
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
