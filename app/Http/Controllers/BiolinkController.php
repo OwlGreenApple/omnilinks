@@ -532,9 +532,9 @@ class BiolinkController extends Controller
         }
       }
 
-      if(strpos($sort_msg, 'wa')==false and $page->wa_link!=''){
-        $sort_msg .= 'wa;';
-      }
+      // if(strpos($sort_msg, 'wa')==false and $page->wa_link!=''){
+        // $sort_msg .= 'wa;';
+      // }
     } 
       
     $sort_sosmed = '';
@@ -579,9 +579,9 @@ class BiolinkController extends Controller
         }
       }
 
-      if(strpos($sort_sosmed, 'youtube')==false and $page->youtube_link!=''){
-        $sort_sosmed .= 'youtube;';
-      }
+      // if(strpos($sort_sosmed, 'youtube')==false and $page->youtube_link!=''){
+        // $sort_sosmed .= 'youtube;';
+      // }
     }
 
     $page->sort_link = $sort_link;
