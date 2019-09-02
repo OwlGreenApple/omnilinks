@@ -619,7 +619,7 @@
                                     <i class="fab fa-whatsapp"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="Masukkan nomor WhatsApp">
+                                <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="Masukkan nomor WhatsApp ex : 6281...">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="wa" class="input-hidden">
                               </div>
                             </div>
