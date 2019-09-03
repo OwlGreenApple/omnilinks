@@ -293,6 +293,26 @@ class UserController extends Controller
       return $arr;
     }
 
+    public function user_list(){
+      $user = Auth::user();
+      if ($user->is_admin) {
+          $users = User::all();
+        return view('user.superadmin')->with('users',$users);
+      } else {
+        return "NOT AUTHORIZED";
+      }
+    }
+
+    public function check_super($id){
+      $admin = Auth::user();
+      if ($admin->is_admin) {
+        Auth::loginUsingId($id);
+        return redirect("home");
+      } else {
+        return "NOT AUTHORIZED";
+      }
+    }
+
     /*public function index(Request $request)
     {
        if($request->has('cari'))

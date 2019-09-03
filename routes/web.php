@@ -51,7 +51,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('/confirm-payment','OrderController@confirm_payment');
   Route::get('/thankyou','OrderController@thankyou');
 
-Route::group(['middleware' => ['web','auth']], function () {
+  Route::group(['middleware' => ['web','auth']], function () {
     //Ads Pricing 
     Route::get('/ads-pricing','AdsController@ads_pricing');
     Route::get('/ads-pricing/{id}','AdsController@ads_checkout');
@@ -129,6 +129,10 @@ Route::group(['middleware' => ['web','auth']], function () {
 
 
   Route::group(['middleware'=>['web','auth','thisadmin']],function(){
+    /* Super Admin page */
+    Route::get('super-admin', 'UserController@user_list');
+    Route::get('check-super/{id}', 'UserController@check_super');
+  
     //admin order
     Route::get('/list-order',function(){
       return view('admin.list-order.index');
