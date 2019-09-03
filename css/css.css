@@ -525,7 +525,7 @@
   border-bottom: none;
   margin: auto;
   position: absolute;
-  left: 0;
+  left: -8px;
   right: 0;
   top: 0;
   bottom: 0;

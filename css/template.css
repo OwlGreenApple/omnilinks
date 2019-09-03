@@ -1,6 +1,15 @@
 .animation1
 {
-  background-image: url('../image/svg/output.svg');
+  background-image: url('../image/svg/cloud.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation2
+{
+  background-image: url('../image/svg/heart.svg');
   background-color :#21d4fd!important;
   color:#fff;
   background-repeat:no-repeat;

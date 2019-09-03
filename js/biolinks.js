@@ -263,9 +263,14 @@ function copyTO(element) {
     $('#copy-link').modal('show');
 }
 
-$('.thumb-animation').click(function () {
+$('.thumb-animation1').click(function () {
     $('#phonecolor').removeAttr("class");
     $('#phonecolor').addClass('screen animation1');
+    $('#animationclass').val('animation1');
+});
+$('.thumb-animation2').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation2');
     $('#animationclass').val('animation1');
 });
 //
