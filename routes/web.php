@@ -98,6 +98,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::post('/save-link','BiolinkController@savelink');
     Route::get('/delete-photo','BiolinkController@delete_photo');
     Route::get('/load/pixelpage','BiolinkController@pixelpage');
+    Route::get('/load/link-bio','BiolinkController@loadLinkBio');
     Route::get('/view/biolinks',function(){
         return view('user.link.link');
     });

@@ -18,6 +18,8 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/template.css')}}">
   <link rel="stylesheet" href="{{asset('css/dash.css')}}">
   <link rel="stylesheet" href="{{asset('css/redirect.css')}}">
+  <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+  <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
 
   <title>Link</title>
 </head>
@@ -37,7 +39,7 @@
 @endif
   
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center service">
       <div class="col-lg-7 col-md-8 col-12 mb-4 row">
         <div class="offset-md-1 col-md-5 col-5">
           @if(!is_null($pages->image_pages))
@@ -207,11 +209,14 @@
       </ul>
 
       <ul class="col-lg-7 col-md-8 mb-4">
+        <?php
+        $ctr = 0;
+        ?>
         @if($links->count())
           @foreach($links as $link)
             <li class="col-md-12 col-12 mb-3"> 
               <a href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov">
-                <button class="btn btn-block">
+                <button class="btn btn-block <?php if ($ctr==0) { echo 'animate-buzz'; } $ctr += 1; ?> ">
                   <span class="textbutton">
                     {{$link->title}}
                   </span>

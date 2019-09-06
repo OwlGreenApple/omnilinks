@@ -310,15 +310,15 @@ class BiolinkController extends Controller
     $page->is_rounded=$request->rounded;
     $page->is_outlined=$request->outlined;
     
-    /*if($request->powered=='powered'){
-      $page->powered=1;
-    }*/
+    // if($request->powered=='powered'){
+    $page->powered=$request->powered;
+    // }
 
-    if(Auth::user()->membership=='elite'){
+    /*if(Auth::user()->membership=='elite'){
       $page->powered=0;
     } else {
       $page->powered=1;
-    }
+    }*/
     
     $page->save();
     $names=$page->names;
@@ -367,7 +367,10 @@ class BiolinkController extends Controller
           }
         } else {
           if ($statusbanner[$i]=="delete"){
-            $bannerde= Banner::find($request->idBanner[$i])->delete();
+            $bannerde= Banner::find($request->idBanner[$i]);
+            if (!is_null($bannerde)){
+              $bannerde->delete();
+            }
             continue;
           }
           $banner= Banner::where('id','=',$request->idBanner[$i])->first();
@@ -477,7 +480,10 @@ class BiolinkController extends Controller
       else
       {
         if ($deletelink[$i]=='delete') {
-          $linkku=Link::find($id[$i])->delete();
+          $linkku=Link::find($id[$i]);
+          if (!is_null($linkku)){
+            $linkku->delete();
+          }
           continue;
         }
         $url=Link::where('id','=',$id[$i])->first();
@@ -652,7 +658,6 @@ class BiolinkController extends Controller
 
   public function loadpixel(Request $request)
   {
-  	$idpage=$request->idpage;
   	$pixels=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
   					->orderBy('created_at','ascend')->get();
@@ -867,5 +872,15 @@ class BiolinkController extends Controller
     $arr['message'] = 'Delete picture berhasil';
 
     return $arr;
+  }
+
+  public function loadLinkBio(Request $request){
+  	$links=Link::where('users_id',Auth::user()->id)
+                  ->where('pages_id',$request->id)
+  					->orderBy('created_at','ascend')->get();
+  					//dd($pixels);
+  	$arr['view'] =(string) view('user.dashboard.load.link')
+                    ->with('links',$links);
+     return $arr;
   }
 }

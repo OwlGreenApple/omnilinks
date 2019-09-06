@@ -52,6 +52,28 @@
     $element.detach().appendTo($selector);
   }
   
+  function loadLinkBio(){
+    $.ajax({
+      type: 'GET',
+      url: "<?php echo url('/load/link-bio');?>",
+      data: { id: <?php echo $pages->id; ?>},
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+        $('.sortable-link').html(data.view);
+        
+      }
+    });
+  }
+  
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
@@ -113,6 +135,14 @@
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
+          loadLinkBio();
+          //new 
+          // $(".delete-link").parents("li").each(function( index ) {
+            // if ($(this).val() != ''){
+              // $(this).remove();
+            // }
+          // });
+          
           refreshwa();
           refreshpixel();
           return true;
@@ -432,10 +462,23 @@
       //$(".mobile1").addClass("roundedview");
       $(".screen").addClass("roundedview");
       $('.rounded').val(1);
-    } else if ($('.rounded').prop("checked") == false) {
+    } 
+    else if ($('.rounded').prop("checked") == false) {
       //$(".mobile1").removeClass("roundedview");
       $(".screen").removeClass("roundedview");
       $('.rounded').val(0);
+    }
+  }
+  
+  function check_powered(){
+    if ($('#powered').prop("checked") == true) {
+      $(".screen").addClass("poweredview");
+      $('#powered').val(1);
+    }
+    else if ($('#powered').prop("checked") == false) {
+      //$(".mobile1").removeClass("roundedview");
+      $(".screen").removeClass("poweredview");
+      $('#powered').val(0);
     }
   }
 
@@ -786,70 +829,7 @@
 
                   <div class="mb-5">
                     <ul class="sortable-link a">
-                      <?php 
-                      if($links->count()) {
-                        foreach($links as $link) {
-                      ?>
-                          <li class="link-list" id="link-url-update-{{$link->id}}">
-                            <div class="div-table mb-4">
-                              <div class="div-cell">
-                                <span class="handle">
-                                  <i class="fas fa-bars"></i>
-                                </span>
-                              </div>
-
-                              <div class="div-cell">
-                                <div class="col-md-12 col-12 pr-0 pl-0">
-                                  <div class="input-stack">
-                                    <input type="hidden" name="idlink[]" value="{{$link->id}}">
-                                    <input class="delete-link" type="hidden" name="deletelink[]" value="">
-                                    <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" placeholder="Title" class="form-control focuslink-update">
-                                    <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
-                                  </div>
-                                </div>
-                              </div>
-                              
-                              <div class="div-cell cell-btn deletelink-update">
-                                <span>
-                                  <i class="far fa-trash-alt"></i>
-                                </span>
-                              </div>
-                            </div>
-                          </li>
-                      <?php 
-                        }
-                      }
-                      else {
-                      ?>
-
-                        <li class="link-list" id="link-url-1">
-                          <div class="div-table mb-4">
-                            <div class="div-cell">
-                              <span class="handle">
-                                <i class="fas fa-bars"></i>
-                              </span>
-                            </div>
-
-                            <div class="div-cell">
-                              <div class="col-md-12 col-12 pr-0 pl-0">
-                                <div class="input-stack">
-                                  <input type="hidden" name="idlink[]" value="new">
-                                  <input type="hidden" name="deletelink[]" value="">
-                                  <input type="text" name="title[]" value="" id="title-1-view" placeholder="Title" class="form-control focuslink">
-                                  <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <div class="div-cell cell-btn deletelink">
-                              <span>
-                                <i class="far fa-trash-alt"></i>
-                              </span>
-                            </div>
-
-                          </div>
-                        </li>
-                      <?php } ?>
+                      
                     </ul>
                   </div>
 
@@ -1422,10 +1402,10 @@
 
                         
                       </div>
-                      <!--<label class="switch mb-4">
-                        <input type="checkbox" name="powered" id="powered" value="powered" checked="">
+                      <label class="switch mb-4">
+                        <input type="checkbox" name="powered" id="powered">
                         <span class="slider round"></span>
-                      </label> &nbsp; Powered By Omnilinks<br>-->
+                      </label> &nbsp; Powered By Omnilinks<br>
 
                       <div class="offset-md-8 col-md-4 pr-0 menu-nomobile">
                         <button type="button" class="btn btn-primary btn-block btn-biolinks savetemp" id="savetemp">
@@ -1623,7 +1603,6 @@
                     </li>  
                   </ul>
 
-                  @if(Auth::user()->membership!='elite')
                     <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
                       <div class="powered-omnilinks">
                         <a href="#">
@@ -1635,7 +1614,6 @@
                         </a>
                       </div>
                     </div>
-                  @endif
 
                 </div>
               </div>
@@ -1916,6 +1894,7 @@
   $(document).ready(function() {
      // dotview();
       //loadPixel(0,'.bannerpixel');
+      loadLinkBio();
       dotsok();
       let inputtitle=$('#pagetitle');
       let inputlink=$('#pagelink');
@@ -1973,14 +1952,17 @@
     $('.rounded').click(function() {
       check_rounded();
     });
-    $("#powered").click(function(){
+    $('#powered').click(function() {
+      check_powered();
+    });
+    /*$("#powered").click(function(){
       if ($(this).prop("checked")==true) {
         $("#poweredview").children().show();
       }
       else if($(this).prop("checked")==false){
         $("#poweredview").children().hide(); 
       }
-    });
+    });*/
     $(document).on('click', '#gradient', function() {
       $('#modeBackground').val('gradient');
       // $('#backtheme').val('colorgradient1');
@@ -2608,6 +2590,7 @@
     slideIndex=0;
     check_outlined();
     check_rounded();
+    check_powered();
     <?php 
       if(is_null($pages->image_pages)){
     ?>
