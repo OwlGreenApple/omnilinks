@@ -310,9 +310,9 @@ class BiolinkController extends Controller
     $page->is_rounded=$request->rounded;
     $page->is_outlined=$request->outlined;
     
-    // if($request->powered=='powered'){
     $page->powered=$request->powered;
-    // }
+    $page->text_color=$request->textColor;
+    $page->is_text_color=$request->is_text_color;
 
     /*if(Auth::user()->membership=='elite'){
       $page->powered=0;
@@ -464,6 +464,8 @@ class BiolinkController extends Controller
   	$page->ig_link=$request->ig;
     $page->line_link=$request->line;
     $page->messenger_link=$request->messenger;
+
+    $page->is_click_bait=$request->is_click_bait;
 
   	$names=$page->names;
   	$title=$request->title;

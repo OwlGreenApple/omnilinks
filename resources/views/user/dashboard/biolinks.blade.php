@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/farbtastic.css')}}">
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
+<link rel="stylesheet" href="{{asset('css/animate.css')}}">
+<link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
 
 <style type="text/css">
   @media screen and (max-width: 768px) {
@@ -472,13 +474,34 @@
   
   function check_powered(){
     if ($('#powered').prop("checked") == true) {
-      $(".screen").addClass("poweredview");
+      $("#poweredview").children().show();
       $('#powered').val(1);
     }
     else if ($('#powered').prop("checked") == false) {
-      //$(".mobile1").removeClass("roundedview");
-      $(".screen").removeClass("poweredview");
+      $("#poweredview").children().hide();
       $('#powered').val(0);
+    }
+  }
+
+  function check_click_bait(){
+    if ($('#is_click_bait').prop("checked") == true) {
+      $("#phonecolor").addClass("service");
+      $("#viewLink li").first().addClass("animate-buzz");
+      $('#is_click_bait').val(1);
+    }
+    else if ($('#is_click_bait').prop("checked") == false) {
+      $("#phonecolor").removeClass("service");
+      $("#viewLink li").first().removeClass("animate-buzz");
+      $('#is_click_bait').val(0);
+    }
+  }
+  
+  function check_text_color(){
+    if ($('#is_text_color').prop("checked") == true) {
+      $('#is_text_color').val(1);
+    }
+    else if ($('#is_text_color').prop("checked") == false) {
+      $('#is_text_color').val(0);
     }
   }
 
@@ -818,6 +841,22 @@
                     </ul>
                   </div>
 
+                  <div class="row">
+                    <div class="col-md-2 col-3">
+                      <label class="switch">
+                        <input type="checkbox" name="is_click_bait" id="is_click_bait" value="<?php if($pages->is_click_bait) echo '1'; ?>" <?php if($pages->is_click_bait) echo 'checked'; ?>>
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-4">
+                      <label class="caption">
+                        Click bait ?
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-4">
+                    </div>
+                  </div>
+                  
                   <!--Links-->
                   <label class="mb-3 blue-txt">
                     Link
@@ -1351,6 +1390,62 @@
                             </div>
                         </div>
                       </div>  
+                      
+                      <div class="row mb-4">
+                        <div class="col-md-2 col-3">
+                          <label class="switch">
+                            <input type="checkbox" name="is_text_color" class="is_text_color" value="<?php if($pages->is_text_color) echo '1'; ?>" <?php if($pages->is_text_color) echo 'checked'; ?>>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <label class="caption">
+                            Text Color
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <a href="" id="link-text-color" class="nav-link p-0">Custom Color</a>
+                        </div>
+                      </div>
+                      <!-- Modal For Color Picker Button-->
+                      <div class="modal fade" id="modal-color-picker-text-color" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Choose Text Color 
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                      <div align="center">
+                                        <div id="colorpickerTextColor"></div>
+                                        <input type="text" id="textColor" name="textColor" value="#ffffff">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-primary btn-apply-text" type="button" data-dismiss="modal" >Apply </button>
+                                  <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>  
+                      <div class="row">
+                        <div class="col-md-2 col-3">
+                          <label class="switch">
+                            <input type="checkbox" name="powered" id="powered" value="<?php if($pages->powered) echo '1'; ?>" <?php if($pages->powered) echo 'checked'; ?>>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <label class="caption">
+                            Powered By Omnilinks
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                        </div>
+                      </div>
                     </div>
                     
                     <div class="as">
@@ -1402,10 +1497,6 @@
 
                         
                       </div>
-                      <label class="switch mb-4">
-                        <input type="checkbox" name="powered" id="powered">
-                        <span class="slider round"></span>
-                      </label> &nbsp; Powered By Omnilinks<br>
 
                       <div class="offset-md-8 col-md-4 pr-0 menu-nomobile">
                         <button type="button" class="btn btn-primary btn-block btn-biolinks savetemp" id="savetemp">
@@ -1955,6 +2046,12 @@
     $('#powered').click(function() {
       check_powered();
     });
+    $('#is_click_bait').click(function() {
+      check_click_bait();
+    });
+    $('#is_text_color').click(function() {
+      check_text_color();
+    });
     /*$("#powered").click(function(){
       if ($(this).prop("checked")==true) {
         $("#poweredview").children().show();
@@ -2145,7 +2242,6 @@
       } else {
         $('.btnview').css("background-color",color);
       }
-      
     }
     $('#colorpickerButton').farbtastic('#colorButton');
     pickerbtn = $.farbtastic('#colorpickerButton');
@@ -2161,7 +2257,7 @@
     $(document).on('click', '.btn-apply-btn', function() {
       onColorButtonChange($("#colorButton").val());
     });
-
+    
     //modal-color-picker-outline-button colorpickerOutlineButton colorOutlineButton
     //for button purpose colorpickerButton colorButton
     function onOutlineColorButtonChange(color) {
@@ -2196,6 +2292,32 @@
       onOutlineColorButtonChange($("#colorOutlineButton").val());
     });
     
+    // colorpickerTextColor textColor
+    function onTextColorChange(color) {
+      console.log(color);
+      $("#textColor").val(color);
+      if ($('input[name="is_text_color"]').val()=="1") {
+        //perlu diisi
+        $('#phonecolor').children().css("color",color);
+      } else {
+        //perlu diisi
+        $('#phonecolor').children().css("color",'#fff');
+      }
+    }
+    $('#colorpickerTextColor').farbtastic('#textColor');
+    pickerbtn = $.farbtastic('#colorpickerTextColor');
+    // picker.setColor("#b6b6ff");
+    $("#textColor").on('keyup', function() {
+      pickerbtn.setColor($(this).val());
+    });
+    //pickerbtn.linkTo(onTextColorChange);
+    $("#link-text-color").on('click', function(e) {
+      e.preventDefault();
+      $('#modal-color-picker-text-color').modal('toggle');
+    });
+    $(document).on('click', '.btn-apply-text', function() {
+      onTextColorChange($("#textColor").val());
+    });
 
     function readURL(input) {
       if (input.files && input.files[0]) {
@@ -2591,6 +2713,9 @@
     check_outlined();
     check_rounded();
     check_powered();
+    check_click_bait();
+    check_text_color();
+
     <?php 
       if(is_null($pages->image_pages)){
     ?>
