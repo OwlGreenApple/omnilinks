@@ -1394,7 +1394,7 @@
                       <div class="row mb-4">
                         <div class="col-md-2 col-3">
                           <label class="switch">
-                            <input type="checkbox" name="is_text_color" class="is_text_color" value="<?php if($pages->is_text_color) echo '1'; ?>" <?php if($pages->is_text_color) echo 'checked'; ?>>
+                            <input type="checkbox" name="is_text_color" id="is_text_color" class="is_text_color" value="<?php if($pages->is_text_color) echo '1'; ?>" <?php if($pages->is_text_color) echo 'checked'; ?>>
                             <span class="slider round"></span>
                           </label>
                         </div>
@@ -2051,6 +2051,7 @@
     });
     $('#is_text_color').click(function() {
       check_text_color();
+      onTextColorChange($("#textColor").val());
     });
     /*$("#powered").click(function(){
       if ($(this).prop("checked")==true) {
@@ -2130,6 +2131,14 @@
       $('.btnview').css("color",outline);
     <?php } else {?>
       $('.btnview').css("background-color",outline);
+      $('.btnview').css("color","#fff");
+    <?php } ?>
+    
+    <?php if($pages->is_text_color) {?>
+      //$(".mobile1").addClass("outlinedview");
+      $("#textColor").val("<?php echo $pages->text_color; ?>");
+      $('.btnview').css("color","<?php echo $pages->text_color; ?>");
+    <?php } else {?>
       $('.btnview').css("color","#fff");
     <?php } ?>
     
@@ -2249,7 +2258,7 @@
     $("#colorButton").on('keyup', function() {
       pickerbtn.setColor($(this).val());
     });
-    //pickerbtn.linkTo(onColorButtonChange);
+    // pickerbtn.linkTo(onColorButtonChange);
     $("#link-custom-background-color").on('click', function(e) {
       e.preventDefault();
       $('#modal-color-picker-button').modal('toggle');
@@ -2292,16 +2301,14 @@
       onOutlineColorButtonChange($("#colorOutlineButton").val());
     });
     
-    // colorpickerTextColor textColor
+    // for all text color purpose
     function onTextColorChange(color) {
-      console.log(color);
+      console.log($('#is_text_color').val());
       $("#textColor").val(color);
-      if ($('input[name="is_text_color"]').val()=="1") {
-        //perlu diisi
-        $('#phonecolor').children().css("color",color);
+      if ($('#is_text_color').val()=="1") {
+        $('.btnview').css("color",color);
       } else {
-        //perlu diisi
-        $('#phonecolor').children().css("color",'#fff');
+        $('.btnview').css("color","#fff");
       }
     }
     $('#colorpickerTextColor').farbtastic('#textColor');
