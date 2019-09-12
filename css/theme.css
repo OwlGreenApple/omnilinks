@@ -1,24 +1,1164 @@
-.thumb-animation1
+/*
+Bubble folder
+*/
+.thumb-bubble-bg-blue
 {
-  background-image: url('../image/wallpaper/bg-thumb/bg-1.png');
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-bg-blue.png');
   background-color :#21d4fd!important;
   color:#fff;
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center;
 }
-.animation1
+.animation-bubble-bg-blue
 {
-  background-image: url('../image/svg/cloud.svg');
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-blue.svg');
   background-color :#21d4fd!important;
   color:#fff;
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center;
 }
-.animation2
+.thumb-bubble-bg-orange
 {
-  background-image: url('../image/svg/heart.svg');
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-bg-orange.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-bg-orange
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-orange.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-bg-pink
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-bg-pink.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-bg-pink
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-pink.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-bg-purple
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-bg-purple.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-bg-purple
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-purple.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-bg-yellow
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-bg-yellow.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-bg-yellow
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-yellow.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-bg-red
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-bg-red.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-bg-red
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-red.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-blue
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-blue.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-blue
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-blue.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-brown
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-brown.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-brown
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-brown.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-colorful
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-colorful.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-colorful
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-colorful.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-green
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-green.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-green
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-green.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-orange
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-orange.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-orange
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-orange.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-purple
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-purple.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-purple
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-purple.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-red
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-red.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-red
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-red.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-soft
+{
+  background-image: url('../image/svg/bubble/thumbnail-bubble/thumb-bubble-soft.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-soft
+{
+  background-image: url('../image/svg/bubble/bg-bubble/bubble-soft.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+
+/*
+Bubble-up folder
+*/
+.thumb-bubble-up-bg-blue
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-bg-blue.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-bg-blue
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-blue.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-bg-brown
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-bg-brown.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-bg-brown
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-brown.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-bg-green
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-bg-green.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-bg-green
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-green.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-bg-pink
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-bg-pink.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-bg-pink
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-pink.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-bg-purple
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-bg-purple.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-bg-purple
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-purple.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-bg-red
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-bg-red.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-bg-red
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-red.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-blue
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-blue.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-blue
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-blue.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-green
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-green.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-green
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-green.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-lilac
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-lilac.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-lilac
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-lilac.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-mocca
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-mocca.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-mocca
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-mocca.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-orange
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-orange.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-orange
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-orange.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-pink
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-pink.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-pink
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-pink.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-red
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-red.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-red
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-red.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-bubble-up-soft-color
+{
+  background-image: url('../image/svg/bubble-up/thumbnail-bubble-up/thumb-bubble-up-soft-color.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-bubble-up-soft-color
+{
+  background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-soft-color.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+
+/*
+Cloud folder
+*/
+.thumb-cloud-bg-blue
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-blue.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-blue
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-blue.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-bg-cyan
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-cyan.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-cyan
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-cyan.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-bg-green
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-green.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-green
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-green.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-bg-orange
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-orange.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-orange
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-orange.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-bg-pink
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-pink.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-pink
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-pink.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-bg-purple
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-purple.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-purple
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-purple.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-bg-red
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-red.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-red
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-red.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-bg-yellow
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-bg-yellow.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-bg-yellow
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-yellow.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-blue-orang
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-yellow.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-blue-orang
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-blue-orang.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-brown
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-brown.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-brown
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-brown.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-gold
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-gold.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-gold
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-gold.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-gray
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-gray.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-gray
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-gray.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-green
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-green.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-green
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-green.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-green-yellow
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-green-yellow.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-green-yellow
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-green-yellow.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-light-blue
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-light-blue.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-light-blue
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-light-blue.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-orange
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-orange.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-orange
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-orange.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-pastel
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-pastel.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-pastel
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-pastel.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-pink
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-pink.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-pink
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-pink.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-purple
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-purple.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-purple
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-purple.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-purple-yellow
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-purple-yellow.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-purple-yellow
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-purple-yellow.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-red
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-red.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-red
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-red.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-cloud-soft
+{
+  background-image: url('../image/svg/cloud/thumbnail-cloud/thumb-cloud-soft.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-cloud-soft
+{
+  background-image: url('../image/svg/cloud/bg-cloud/cloud-soft.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+
+/*
+Confetti folder
+*/
+.thumb-confetti-bg-blue
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-bg-blue.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-bg-blue
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-blue.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-bg-latte
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-bg-latte.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-bg-latte
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-latte.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-bg-orange
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-bg-orange.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-bg-orange
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-orange.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-bg-pink
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-bg-pink.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-bg-pink
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-pink.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-bg-white
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-bg-white.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-bg-white
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-white.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-bg-yellow
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-bg-yellow.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-bg-yellow
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-yellow.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-blue
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-blue.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-blue
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-blue.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-brown
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-brown.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-brown
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-brown.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-gray
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-gray.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-gray
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-gray.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-green
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-green.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-green
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-green.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-pink
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-pink.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-pink
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-pink.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-purple
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-purple.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-purple
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-purple.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-red
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-red.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-red
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-red.svg');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.thumb-confetti-soft
+{
+  background-image: url('../image/svg/confetti/thumbnail-confetti/thumb-confetti-soft.png');
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
+.animation-confetti-soft
+{
+  background-image: url('../image/svg/confetti/bg-confetti/confetti-soft.svg');
   background-color :#21d4fd!important;
   color:#fff;
   background-repeat:no-repeat;
