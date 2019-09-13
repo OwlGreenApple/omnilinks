@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(241, 242, 243); display: block; z-index: 1; position: relative; shape-rendering: auto;" width="1680" height="948" preserveAspectRatio="xMidYMid" viewBox="0 0 1680 948">
+<g transform=""><circle cx="0" cy="0" r="1929.0163296353921" fill="#13a365" fill-opacity="0.4" transform="scale(1.0045 1.0045)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-7.692307692307692s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="1753.6512087594474" fill="#129e62" fill-opacity="0.4" transform="scale(1.00498 1.00498)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-6.9930069930069925s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="1578.2860878835027" fill="#129a5e" fill-opacity="0.4" transform="scale(1.00404 1.00404)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-6.293706293706293s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="1402.920967007558" fill="#11955b" fill-opacity="0.4" transform="scale(1.00174 1.00174)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-5.594405594405594s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="1227.5558461316132" fill="#109058" fill-opacity="0.4" transform="scale(0.998771 0.998771)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-4.895104895104895s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="1052.1907252556684" fill="#0f8c55" fill-opacity="0.4" transform="scale(0.996283 0.996283)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-4.195804195804195s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="876.8256043797237" fill="#0f8751" fill-opacity="0.4" transform="scale(0.99508 0.99508)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-3.4965034965034962s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="701.460483503779" fill="#0e834e" fill-opacity="0.4" transform="scale(0.995308 0.995308)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-2.797202797202797s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="526.0953626278342" fill="#0d7e4b" fill-opacity="0.4" transform="scale(0.996965 0.996965)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-2.0979020979020975s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="350.7302417518895" fill="#0c7a48" fill-opacity="0.4" transform="scale(0.999729 0.999729)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-1.3986013986013985s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="175.36512087594474" fill="#0b7545" fill-opacity="0.4" transform="scale(1.0026 1.0026)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="-0.6993006993006993s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle><circle cx="0" cy="0" r="0" fill="#0a7142" fill-opacity="0.4" transform="scale(1.0045 1.0045)">
+  <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="7.692307692307692s" begin="0s" keyTimes="0;0.5;1" values="0.995;1.005;0.995" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" calcMode="spline"></animateTransform>
+</circle></g>
+<style type="text/css">.lded > .content, .lded > .content > .inner { height: 100%; }
+.lded > .content > .inner > .viewer { width: 100%; height: 100%; max-width: 100%; overflow: hidden }
+.lded > .content > .inner > .panel {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  opacity: 0.3;
+}
+.lded > .content > .inner > .panel:hover { opacity: 1; }
+.lded > .content > .inner > .ctrl {
+  position: absolute;
+  bottom: 13px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.lded > .content > .inner > .ctrl:hover {
+  z-index: 10;
+}
+#editor > .inner > .title {
+  position: absolute;
+  bottom: 195px;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+#editor > .inner > .title > a:first-child {
+  margin-left: 0!important;
+#editor .lded .viewer { border-radius: 0 }</style></svg>

@@ -266,8 +266,8 @@ function copyTO(element) {
 //bubble
 $('.thumb-bubble-bg-blue').click(function () {
     $('#phonecolor').removeAttr("class");
-    $('#phonecolor').addClass('screen animation-bubble-bg-blue');
-    $('#animationclass').val('animation-bubble-bg-blue');
+    $('#phonecolor').addClass('screen animation-bubble-bg-blue animation-core');
+    $('#animationclass').val('animation-bubble-bg-blue animation-core');
 });
 $('.thumb-bubble-bg-orange').click(function () {
     $('#phonecolor').removeAttr("class");
@@ -517,6 +517,368 @@ $('.thumb-cloud-soft').click(function () {
     $('#phonecolor').removeAttr("class");
     $('#phonecolor').addClass('screen animation-cloud-soft');
     $('#animationclass').val('animation-cloud-soft');
+});
+
+//confetti
+$('.thumb-confetti-bg-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-bg-blue');
+    $('#animationclass').val('animation-confetti-bg-blue');
+});
+$('.thumb-confetti-bg-latte').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-bg-latte');
+    $('#animationclass').val('animation-confetti-bg-latte');
+});
+$('.thumb-confetti-bg-orange').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-bg-orange');
+    $('#animationclass').val('animation-confetti-bg-orange');
+});
+$('.thumb-confetti-bg-pink').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-bg-pink');
+    $('#animationclass').val('animation-confetti-bg-pink');
+});
+$('.thumb-confetti-bg-white').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-bg-white');
+    $('#animationclass').val('animation-confetti-bg-white');
+});
+$('.thumb-confetti-bg-yellow').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-bg-yellow');
+    $('#animationclass').val('animation-confetti-bg-yellow');
+});
+$('.thumb-confetti-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-blue');
+    $('#animationclass').val('animation-confetti-blue');
+});
+$('.thumb-confetti-brown').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-brown');
+    $('#animationclass').val('animation-confetti-brown');
+});
+$('.thumb-confetti-gray').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-gray');
+    $('#animationclass').val('animation-confetti-gray');
+});
+$('.thumb-confetti-green').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-green');
+    $('#animationclass').val('animation-confetti-green');
+});
+$('.thumb-confetti-pink').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-pink');
+    $('#animationclass').val('animation-confetti-pink');
+});
+$('.thumb-confetti-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-purple');
+    $('#animationclass').val('animation-confetti-purple');
+});
+$('.thumb-confetti-red').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-red');
+    $('#animationclass').val('animation-confetti-red');
+});
+$('.thumb-confetti-soft').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-confetti-soft');
+    $('#animationclass').val('animation-confetti-soft');
+});
+
+//disk
+$('.thumb-disk-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-blue');
+    $('#animationclass').val('animation-disk-blue');
+});
+$('.thumb-disk-dual-color').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-dual-color');
+    $('#animationclass').val('animation-disk-dual-color');
+});
+$('.thumb-disk-green').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-green');
+    $('#animationclass').val('animation-disk-green');
+});
+$('.thumb-disk-orange').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-orange');
+    $('#animationclass').val('animation-disk-orange');
+});
+$('.thumb-disk-pink').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-pink');
+    $('#animationclass').val('animation-disk-pink');
+});
+$('.thumb-disk-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-purple');
+    $('#animationclass').val('animation-disk-purple');
+});
+$('.thumb-disk-red').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-red');
+    $('#animationclass').val('animation-disk-red');
+});
+$('.thumb-disk-yellow').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-disk-yellow');
+    $('#animationclass').val('animation-disk-yellow');
+});
+
+//gradient
+$('.thumb-gradient-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-blue');
+    $('#animationclass').val('animation-gradient-blue');
+});
+$('.thumb-gradient-blue-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-blue-purple');
+    $('#animationclass').val('animation-gradient-blue-purple');
+});
+$('.thumb-gradient-cyan').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-cyan');
+    $('#animationclass').val('animation-gradient-cyan');
+});
+$('.thumb-gradient-green').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-green');
+    $('#animationclass').val('animation-gradient-green');
+});
+$('.thumb-gradient-orange').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-orange');
+    $('#animationclass').val('animation-gradient-orange');
+});
+$('.thumb-gradient-peach').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-peach');
+    $('#animationclass').val('animation-gradient-peach');
+});
+$('.thumb-gradient-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-purple');
+    $('#animationclass').val('animation-gradient-purple');
+});
+$('.thumb-gradient-soft-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-gradient-soft-blue');
+    $('#animationclass').val('animation-gradient-soft-blue');
+});
+
+//leaves
+$('.thumb-leaves-bg-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-bg-blue');
+    $('#animationclass').val('animation-leaves-bg-blue');
+});
+$('.thumb-leaves-bg-green').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-bg-green');
+    $('#animationclass').val('animation-leaves-bg-green');
+});
+$('.thumb-leaves-bg-moca').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-bg-moca');
+    $('#animationclass').val('animation-leaves-bg-moca');
+});
+$('.thumb-leaves-bg-orange').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-bg-orange');
+    $('#animationclass').val('animation-leaves-bg-orange');
+});
+$('.thumb-leaves-bg-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-bg-purple');
+    $('#animationclass').val('animation-leaves-bg-purple');
+});
+$('.thumb-leaves-bg-red').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-bg-red');
+    $('#animationclass').val('animation-leaves-bg-red');
+});
+$('.thumb-leaves-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-blue');
+    $('#animationclass').val('animation-leaves-blue');
+});
+$('.thumb-leaves-gray').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-gray');
+    $('#animationclass').val('animation-leaves-gray');
+});
+$('.thumb-leaves-green').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-green');
+    $('#animationclass').val('animation-leaves-green');
+});
+$('.thumb-leaves-pastel').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-pastel');
+    $('#animationclass').val('animation-leaves-pastel');
+});
+$('.thumb-leaves-pink').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-pink');
+    $('#animationclass').val('animation-leaves-pink');
+});
+$('.thumb-leaves-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-purple');
+    $('#animationclass').val('animation-leaves-purple');
+});
+$('.thumb-leaves-red').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-red');
+    $('#animationclass').val('animation-leaves-red');
+});
+$('.thumb-leaves-yellow').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-leaves-yellow');
+    $('#animationclass').val('animation-leaves-yellow');
+});
+
+//wave
+$('.thumb-wave-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-blue');
+    $('#animationclass').val('animation-wave-blue');
+});
+$('.thumb-wave-brown').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-brown');
+    $('#animationclass').val('animation-wave-brown');
+});
+$('.thumb-wave-dual-tone').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-dual-tone');
+    $('#animationclass').val('animation-wave-dual-tone');
+});
+$('.thumb-wave-green').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-green');
+    $('#animationclass').val('animation-wave-green');
+});
+$('.thumb-wave-mocca').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-mocca');
+    $('#animationclass').val('animation-wave-mocca');
+});
+$('.thumb-wave-orange').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-orange');
+    $('#animationclass').val('animation-wave-orange');
+});
+$('.thumb-wave-peach').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-peach');
+    $('#animationclass').val('animation-wave-peach');
+});
+$('.thumb-wave-pink').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-pink');
+    $('#animationclass').val('animation-wave-pink');
+});
+$('.thumb-wave-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-purple');
+    $('#animationclass').val('animation-wave-purple');
+});
+$('.thumb-wave-red').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-red');
+    $('#animationclass').val('animation-wave-red');
+});
+$('.thumb-wave-soft-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-soft-blue');
+    $('#animationclass').val('animation-wave-soft-blue');
+});
+$('.thumb-wave-soft-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-soft-purple');
+    $('#animationclass').val('animation-wave-soft-purple');
+});
+$('.thumb-wave-yellow').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-wave-yellow');
+    $('#animationclass').val('animation-wave-yellow');
+});
+
+//waves
+$('.thumb-waves-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-blue');
+    $('#animationclass').val('animation-waves-blue');
+});
+$('.thumb-waves-chocolate').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-chocolate');
+    $('#animationclass').val('animation-waves-chocolate');
+});
+$('.thumb-waves-green').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-green');
+    $('#animationclass').val('animation-waves-green');
+});
+$('.thumb-waves-grey').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-grey');
+    $('#animationclass').val('animation-waves-grey');
+});
+$('.thumb-waves-light-blue').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-light-blue');
+    $('#animationclass').val('animation-waves-light-blue');
+});
+$('.thumb-waves-light-brown').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-light-brown');
+    $('#animationclass').val('animation-waves-light-brown');
+});
+$('.thumb-waves-ocean').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-ocean');
+    $('#animationclass').val('animation-waves-ocean');
+});
+$('.thumb-waves-orange').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-orange');
+    $('#animationclass').val('animation-waves-orange');
+});
+$('.thumb-waves-pink').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-pink');
+    $('#animationclass').val('animation-waves-pink');
+});
+$('.thumb-waves-purple').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-purple');
+    $('#animationclass').val('animation-waves-purple');
+});
+$('.thumb-waves-red').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-red');
+    $('#animationclass').val('animation-waves-red');
+});
+$('.thumb-waves-sand').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-sand');
+    $('#animationclass').val('animation-waves-sand');
+});
+$('.thumb-waves-yellow').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen animation-waves-yellow');
+    $('#animationclass').val('animation-waves-yellow');
 });
 
 $('.thumb-wallpaper1').click(function () {

@@ -1,131 +1,68 @@
+.animation-core{
+  background-color :#21d4fd!important;
+  color:#fff;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+}
 /*
 Bubble folder
 */
 .animation-bubble-bg-blue
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-bg-orange
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-orange.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-bg-pink
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-pink.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-bg-purple
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-purple.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-bg-yellow
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-yellow.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-red
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-bg-red.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-blue
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-brown
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-brown.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-colorful
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-colorful.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-green
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-green.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-orange
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-orange.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-purple
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-purple.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-red
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-red.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-soft
 {
   background-image: url('../image/svg/bubble/bg-bubble/bubble-soft.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 
 /*
@@ -134,128 +71,58 @@ Bubble-up folder
 .animation-bubble-up-bg-blue
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-bg-brown
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-brown.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-bg-green
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-green.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-bg-pink
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-pink.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-bg-purple
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-purple.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-bg-red
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-bg-red.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-blue
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-green
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-green.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-lilac
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-lilac.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-mocca
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-mocca.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-orange
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-orange.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-pink
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-pink.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-red
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-red.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-bubble-up-soft-color
 {
   background-image: url('../image/svg/bubble-up/bg-bubble-up/bubble-up-soft-color.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 
 /*
@@ -264,200 +131,90 @@ Cloud folder
 .animation-cloud-bg-blue
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-bg-cyan
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-cyan.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-bg-green
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-green.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-bg-orange
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-orange.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-bg-pink
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-pink.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-bg-purple
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-purple.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-bg-red
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-red.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-bg-yellow
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-bg-yellow.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-blue-orang
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-blue-orang.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-brown
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-brown.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-gold
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-gold.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-gray
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-gray.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-green
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-green.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-green-yellow
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-green-yellow.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-light-blue
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-light-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-orange
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-orange.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-pastel
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-pastel.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-pink
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-pink.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-purple
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-purple.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-purple-yellow
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-purple-yellow.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-red
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-red.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-cloud-soft
 {
   background-image: url('../image/svg/cloud/bg-cloud/cloud-soft.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 
 /*
@@ -466,128 +223,302 @@ Confetti folder
 .animation-confetti-bg-blue
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-bg-latte
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-latte.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-bg-orange
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-orange.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-bg-pink
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-pink.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-bg-white
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-white.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-bg-yellow
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-bg-yellow.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-blue
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-blue.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-brown
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-brown.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-gray
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-gray.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-green
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-green.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-pink
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-pink.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-purple
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-purple.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-red
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-red.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
 }
 .animation-confetti-soft
 {
   background-image: url('../image/svg/confetti/bg-confetti/confetti-soft.svg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
+}
+
+/*
+Disk folder
+*/
+.animation-disk-blue
+{
+  background-image: url('../image/svg/disk/bg-disk/disk-blue.svg');
+}
+.animation-dual-color
+{
+  background-image: url('../image/svg/disk/bg-disk/dual-color.svg');
+}
+.animation-disk-green
+{
+  background-image: url('../image/svg/disk/bg-disk/disk-green.svg');
+}
+.animation-disk-orange
+{
+  background-image: url('../image/svg/disk/bg-disk/disk-orange.svg');
+}
+.animation-disk-pink
+{
+  background-image: url('../image/svg/disk/bg-disk/disk-pink.svg');
+}
+.animation-disk-purple
+{
+  background-image: url('../image/svg/disk/bg-disk/disk-purple.svg');
+}
+.animation-disk-red
+{
+  background-image: url('../image/svg/disk/bg-disk/disk-red.svg');
+}
+.animation-disk-yellow
+{
+  background-image: url('../image/svg/disk/bg-disk/disk-yellow.svg');
+}
+
+/*
+Gradient folder
+*/
+.animation-gradient-blue
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-blue.svg');
+}
+.animation-gradient-blue-purple
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-blue-purple.svg');
+}
+.animation-gradient-cyan
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-cyan.svg');
+}
+.animation-gradient-green
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-green.svg');
+}
+.animation-gradient-orange
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-orange.svg');
+}
+.animation-gradient-peach
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-peach.svg');
+}
+.animation-gradient-purple
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-purple.svg');
+}
+.animation-gradient-soft-blue
+{
+  background-image: url('../image/svg/gradient/bg-gradient/gradient-soft-blue.svg');
+}
+
+/*
+Leaves folder
+*/
+.animation-leaves-bg-blue
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-bg-blue.svg');
+}
+.animation-leaves-bg-green
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-bg-green.svg');
+}
+.animation-leaves-bg-moca
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-bg-moca.svg');
+}
+.animation-leaves-bg-orange
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-bg-orange.svg');
+}
+.animation-leaves-bg-purple
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-bg-purple.svg');
+}
+.animation-leaves-bg-red
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-bg-blue.svg');
+}
+.animation-leaves-blue
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-blue.svg');
+}
+.animation-leaves-gray
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-gray.svg');
+}
+.animation-leaves-green
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-green.svg');
+}
+.animation-leaves-pastel
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-pastel.svg');
+}
+.animation-leaves-pink
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-pink.svg');
+}
+.animation-leaves-purple
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-purple.svg');
+}
+.animation-leaves-red
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-red.svg');
+}
+.animation-leaves-yellow
+{
+  background-image: url('../image/svg/leaves/bg-leaves/leaves-yellow.svg');
+}
+
+/*
+Wave folder
+*/
+.animation-wave-blue
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-blue.svg');
+}
+.animation-wave-brown
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-brown.svg');
+}
+.animation-wave-dual-tone
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-dual-tone.svg');
+}
+.animation-wave-green
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-green.svg');
+}
+.animation-wave-mocca
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-mocca.svg');
+}
+.animation-wave-orange
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-orange.svg');
+}
+.animation-wave-peach
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-peach.svg');
+}
+.animation-wave-pink
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-pink.svg');
+}
+.animation-wave-purple
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-purple.svg');
+}
+.animation-wave-red
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-red.svg');
+}
+.animation-wave-soft-blue
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-soft-blue.svg');
+}
+.animation-wave-soft-purple
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-soft-purple.svg');
+}
+.animation-wave-yellow
+{
+  background-image: url('../image/svg/wave/bg-wave/wave-yellow.svg');
+}
+
+/*
+Waves folder
+*/
+.animation-waves-blue
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-blue.svg');
+}
+.animation-waves-chocolate
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-chocolate.svg');
+}
+.animation-waves-green
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-green.svg');
+}
+.animation-waves-grey
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-grey.svg');
+}
+.animation-waves-light-blue
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-light-blue.svg');
+}
+.animation-waves-light-brown
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-light-brown.svg');
+}
+.animation-waves-ocean
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-ocean.svg');
+}
+.animation-waves-orange
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-orange.svg');
+}
+.animation-waves-pink
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-pink.svg');
+}
+.animation-waves-purple
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-purple.svg');
+}
+.animation-waves-red
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-red.svg');
+}
+.animation-waves-sand
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-sand.svg');
+}
+.animation-waves-yellow
+{
+  background-image: url('../image/svg/waves/bg-waves/waves-yellow.svg');
 }
 
 .wallpaper1
