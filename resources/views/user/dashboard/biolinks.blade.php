@@ -1490,6 +1490,17 @@
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade" id="animation">
+                          <select id="select-animation">
+                            <option>bubble</option>
+                            <option>bubble-up</option>
+                            <option>cloud</option>
+                            <option>confetti</option>
+                            <option>disk</option>
+                            <option>gradient</option>
+                            <option>leaves</option>
+                            <option>wave</option>
+                            <option>waves</option>
+                          </select>
                           <div align="center">
                             @include('user.dashboard.background.animation-page')
                           </div>
@@ -2730,6 +2741,50 @@
     <?php }
     ?>
     
+    $('#select-animation').selectize({
+      sortField: 'text',
+      onChange: function(value) {
+        console.log(value);
+        if (value=="bubble"){
+          $(".animation-thumb").hide();
+          $(".animation-bubble").show();
+        }
+        if (value=="bubble-up"){
+          $(".animation-thumb").hide();
+          $(".animation-bubble-up").show();
+        }
+        if (value=="cloud"){
+          $(".animation-thumb").hide();
+          $(".animation-cloud").show();
+        }
+        if (value=="confetti"){
+          $(".animation-thumb").hide();
+          $(".animation-confetti").show();
+        }
+        if (value=="disk"){
+          $(".animation-thumb").hide();
+          $(".animation-disk").show();
+        }
+        if (value=="gradient"){
+          $(".animation-thumb").hide();
+          $(".animation-gradient").show();
+        }
+        if (value=="leaves"){
+          $(".animation-thumb").hide();
+          $(".animation-leaves").show();
+        }
+        if (value=="wave"){
+          $(".animation-thumb").hide();
+          $(".animation-wave").show();
+        }
+        if (value=="waves"){
+          $(".animation-thumb").hide();
+          $(".animation-waves").show();
+        }
+      }
+    });    
+    $(".animation-thumb").hide();
+    $(".animation-bubble").show();
   });
 
 
