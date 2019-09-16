@@ -216,7 +216,7 @@
           @foreach($links as $link)
             <li class="col-md-12 col-12 mb-3"> 
               <a href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov">
-                <button class="btn btn-block <?php if ($ctr==0) { echo 'animate-buzz'; } $ctr += 1; ?> ">
+                <button class="btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
                   <span class="textbutton">
                     {{$link->title}}
                   </span>
