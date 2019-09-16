@@ -468,12 +468,10 @@ class BiolinkController extends Controller
     $page->is_click_bait=$request->is_click_bait;
 
   	$names=$page->names;
-  	$title=$request->title;
-  	$link=$request->url;
     $id=$request->idlink;
     $deletelink=$request->deletelink;
     $sort_link = '';
-    for ($i=0; $i <count($title); $i++)
+    for ($i=0; $i <count($request->title); $i++)
     { 
       if($id[$i]=='new')
       {
@@ -507,8 +505,7 @@ class BiolinkController extends Controller
       $url->users_id=$user->id;
       $url->title=$request->title[$i];
       $url->link=$request->url[$i];
-      // $url->title=$title[$i];
-      // $url->link=$link[$i];
+      $url->pixel_id = $request->linkpixel[$i];
       $url->save();
 
       /*if($sort_link=='')

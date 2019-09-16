@@ -19,6 +19,10 @@
                                     <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
                                   </div>
                                 </div>
+                                <div class="col-md-12 col-12 pr-0 pl-0">
+                                  <select name="linkpixel[]" id="linkpixel-{{$link->id}}-update" class="form-control linkpixel">
+                                  </select>
+                                </div> 
                               </div>
                               
                               <div class="div-cell cell-btn deletelink-update">
@@ -28,6 +32,9 @@
                               </div>
                             </div>
                           </li>
+                          <script>
+                            loadPixel('{{$link->pixel_id}}','#linkpixel-{{$link->id}}-update');
+                          </script>
                       <?php 
                         }
                       }
@@ -51,6 +58,10 @@
                                   <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
                                 </div>
                               </div>
+                              <div class="col-md-12 col-12 pr-0 pl-0">
+                                <select name="linkpixel[]" id="linkpixel-{{$link->id}}" class="form-control linkpixel">
+                                </select>
+                              </div> 
                             </div>
                             
                             <div class="div-cell cell-btn deletelink">
@@ -61,4 +72,7 @@
 
                           </div>
                         </li>
+                        <script>
+                          loadPixel(0,'#linkpixel-{{$link->id}}');
+                        </script>
                       <?php } ?>

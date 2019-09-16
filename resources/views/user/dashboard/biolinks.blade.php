@@ -263,7 +263,7 @@
   }
 
   function loadPixel(id,selector){
-    var view =''
+    var view ='';
     $.ajax({
       type: 'GET',
       url: "<?php echo url('/load/pixelpage');?>",
