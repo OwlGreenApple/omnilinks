@@ -521,51 +521,100 @@ Waves folder
   background-image: url('../image/svg/waves/bg-waves/waves-yellow.svg');
 }
 
-.wallpaper1
-{
-  background-image: url('../image/wallpaper/bg-1.jpg');
+.wallpaper-core{
   background-color :#21d4fd!important;
   color:#fff;
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center;
+}
+
+.wallpaper1
+{
+  background-image: url('../image/wallpaper/bg/bg-1.jpg');
 }
 .wallpaper2
 {
-  background-image: url('../image/wallpaper/bg-2.jpg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
+  background-image: url('../image/wallpaper/bg/bg-2.jpg');
 }
 .wallpaper3
 {
-  background-image: url('../image/wallpaper/bg-3.jpg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
+  background-image: url('../image/wallpaper/bg/bg-3.jpg');
 }
 .wallpaper4
 {
-  background-image: url('../image/wallpaper/bg-4.jpg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
+  background-image: url('../image/wallpaper/bg/bg-4.jpg');
 }
 .wallpaper5
 {
-  background-image: url('../image/wallpaper/bg-5.jpg');
-  background-color :#21d4fd!important;
-  color:#fff;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
+  background-image: url('../image/wallpaper/bg/bg-5.jpg');
 }
+.wallpaper6
+{
+  background-image: url('../image/wallpaper/bg/bg-6.jpg');
+}
+.wallpaper7
+{
+  background-image: url('../image/wallpaper/bg/bg-7.jpg');
+}
+.wallpaper8
+{
+  background-image: url('../image/wallpaper/bg/bg-8.jpg');
+}
+.wallpaper9
+{
+  background-image: url('../image/wallpaper/bg/bg-9.jpg');
+}
+.wallpaper10
+{
+  background-image: url('../image/wallpaper/bg/bg-10.jpg');
+}
+.wallpaper11
+{
+  background-image: url('../image/wallpaper/bg/bg-11.jpg');
+}
+.wallpaper12
+{
+  background-image: url('../image/wallpaper/bg/bg-12.jpg');
+}
+.wallpaper13
+{
+  background-image: url('../image/wallpaper/bg/bg-13.jpg');
+}
+.wallpaper14
+{
+  background-image: url('../image/wallpaper/bg/bg-14.jpg');
+}
+.wallpaper15
+{
+  background-image: url('../image/wallpaper/bg/bg-15.jpg');
+}
+.wallpaper16
+{
+  background-image: url('../image/wallpaper/bg/bg-16.jpg');
+}
+.wallpaper17
+{
+  background-image: url('../image/wallpaper/bg/bg-17.jpg');
+}
+.wallpaper18
+{
+  background-image: url('../image/wallpaper/bg/bg-18.jpg');
+}
+.wallpaper19
+{
+  background-image: url('../image/wallpaper/bg/bg-19.jpg');
+}
+.wallpaper20
+{
+  background-image: url('../image/wallpaper/bg/bg-20.jpg');
+}
+.wallpaper21
+{
+  background-image: url('../image/wallpaper/bg/bg-21.jpg');
+}
+
+
 .colorgradient1
 {
   background-image: linear-gradient(339deg, #21d4fd, #b721ff);

@@ -907,6 +907,87 @@ $('.thumb-wallpaper5').click(function () {
     $('#phonecolor').addClass('screen wallpaper5');
     $('#wallpaperclass').val('wallpaper5');
 });
+$('.thumb-wallpaper6').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper6');
+    $('#wallpaperclass').val('wallpaper6');
+});
+$('.thumb-wallpaper7').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper7');
+    $('#wallpaperclass').val('wallpaper7');
+});
+$('.thumb-wallpaper8').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper8');
+    $('#wallpaperclass').val('wallpaper8');
+});
+$('.thumb-wallpaper9').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper9');
+    $('#wallpaperclass').val('wallpaper9');
+});
+$('.thumb-wallpaper10').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper10');
+    $('#wallpaperclass').val('wallpaper10');
+});
+$('.thumb-wallpaper11').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper11');
+    $('#wallpaperclass').val('wallpaper11');
+});
+$('.thumb-wallpaper12').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper12');
+    $('#wallpaperclass').val('wallpaper12');
+});
+$('.thumb-wallpaper13').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper13');
+    $('#wallpaperclass').val('wallpaper13');
+});
+$('.thumb-wallpaper14').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper14');
+    $('#wallpaperclass').val('wallpaper14');
+});
+$('.thumb-wallpaper15').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper15');
+    $('#wallpaperclass').val('wallpaper15');
+});
+$('.thumb-wallpaper16').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper16');
+    $('#wallpaperclass').val('wallpaper16');
+});
+$('.thumb-wallpaper17').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper17');
+    $('#wallpaperclass').val('wallpaper17');
+});
+$('.thumb-wallpaper18').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper18');
+    $('#wallpaperclass').val('wallpaper18');
+});
+$('.thumb-wallpaper19').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper19');
+    $('#wallpaperclass').val('wallpaper19');
+});
+$('.thumb-wallpaper20').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper20');
+    $('#wallpaperclass').val('wallpaper20');
+});
+$('.thumb-wallpaper21').click(function () {
+    $('#phonecolor').removeAttr("class");
+    $('#phonecolor').addClass('screen wallpaper21');
+    $('#wallpaperclass').val('wallpaper21');
+});
+
 $('.theme1').click(function () {
     $('#phonecolor').removeAttr("class");
     $('#phonecolor').addClass('screen colorgradient1');
