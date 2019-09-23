@@ -180,6 +180,7 @@ $(document).ready(function () {
         let deleteval=$(this).parent();
         deleteval.find(".delete-link").val('delete');
         $(this).parent().parent().hide();
+        check_click_bait();
     });
 
     /* biolink social-media */

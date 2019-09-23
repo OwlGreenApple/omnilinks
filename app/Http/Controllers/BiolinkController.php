@@ -112,6 +112,7 @@ class BiolinkController extends Controller
   	$pageid=0;
     $links=Link::where('users_id',Auth::user()->id)
                 ->where('pages_id',$page->id)
+                ->orderBy('created_at')
                 ->get();
     $banner=Banner::where('users_id',Auth::user()->id)
                   ->where('pages_id',$page->id)
@@ -876,7 +877,7 @@ class BiolinkController extends Controller
   public function loadLinkBio(Request $request){
   	$links=Link::where('users_id',Auth::user()->id)
                   ->where('pages_id',$request->id)
-  					->orderBy('created_at','ascend')->get();
+  					->orderBy('created_at')->get();
   					//dd($pixels);
   	$arr['view'] =(string) view('user.dashboard.load.link')
                     ->with('links',$links);

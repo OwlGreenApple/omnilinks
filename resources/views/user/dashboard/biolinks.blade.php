@@ -486,12 +486,14 @@
   function check_click_bait(){
     if ($('#is_click_bait').prop("checked") == true) {
       $("#phonecolor").addClass("service");
-      $("#viewLink li").first().addClass("animate-buzz");
+      // $("#viewLink li").first().addClass("animate-buzz");
+      $("#viewLink").find('li:not(:empty):first').addClass("animate-buzz");
       $('#is_click_bait').val(1);
     }
     else if ($('#is_click_bait').prop("checked") == false) {
       $("#phonecolor").removeClass("service");
-      $("#viewLink li").first().removeClass("animate-buzz");
+      // $("#viewLink li").first().removeClass("animate-buzz");
+      $("#viewLink").find('li:not(:empty):first').removeClass("animate-buzz");
       $('#is_click_bait').val(0);
     }
   }
@@ -1665,19 +1667,13 @@
                     <ul class="col-md-12" id="viewLink" >
                       @if($links->count())
                       @foreach($links as $link)
-                        <li id="link-preview-{{$link->id}}">
-                          <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="
-                          width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a>
-                        </li>
+                        <li id="link-preview-{{$link->id}}"><a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a></li>
                       @endforeach
                       @else
                         <!--
                         <button type="button" class="btn btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
                         -->
-                        <li id="link-url-1-preview" class="">
-                          <a href="#" class="btn btn-md btnview title-1-view-get txthov" style="
-                          width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a>
-                        </li>
+                        <li id="link-url-1-preview" class=""><a href="#" class="btn btn-md btnview title-1-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a></li>
                       @endif
                     </ul>
                   </div>
