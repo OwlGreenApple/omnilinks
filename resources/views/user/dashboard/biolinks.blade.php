@@ -841,31 +841,31 @@
                     </ul>
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-2 col-3">
-                      <label class="switch">
-                        <input type="checkbox" name="is_click_bait" id="is_click_bait" value="<?php if($pages->is_click_bait) echo '1'; ?>" <?php if($pages->is_click_bait) echo 'checked'; ?>>
-                        <span class="slider round"></span>
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-4">
-                      <label class="caption">
-                        Click bait ?
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-4">
-                    </div>
-                  </div>
-                  
                   <!--Links-->
                   <label class="mb-3 blue-txt">
                     Link
+                  </label>
+                  <label class="switch" style="margin-left:33px;margin-right:15px;">
+                    <input type="checkbox" name="is_click_bait" id="is_click_bait" value="<?php if($pages->is_click_bait) echo '1'; ?>" <?php if($pages->is_click_bait) echo 'checked'; ?>>
+                    <span class="slider round"></span>
+                  </label>
+                  <label class="caption">
+                    Buzz Animation
                   </label>
                   <button type="button" class="float-right btn btn-primary btn-sm" id="addlink">
                     <i class="fas fa-plus"></i>
                   </button>
                   <br>
 
+                  <div class="row">
+                    <div class="col-md-2 col-3">
+                    </div>
+                    <div class="col-md-4 col-4">
+                    </div>
+                    <div class="col-md-4 col-4">
+                    </div>
+                  </div>
+                  
                   <div class="mb-5">
                     <ul class="sortable-link a">
                       
