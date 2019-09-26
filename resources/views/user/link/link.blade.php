@@ -58,14 +58,9 @@
               {{$pages->page_title}}
             </span>
           @endif
-          @if(!is_null($pages->link_utama))
+          @if(!is_null($pages->description))
             <span class="header-txt txt" style="word-break: break-all;">
-              {{$pages->link_utama}}
-            </span>
-          @endif
-          @if(!is_null($pages->telpon_utama))
-            <span class="header-txt txt">
-              {{$pages->telpon_utama}}
+              {{$pages->description}}
             </span>
           @endif
         </div>
@@ -295,15 +290,24 @@
       $('.outlined').val(1);
 
       $('.txthov').find("button").css("background-color","transparent");
-      $('.txthov').find("button").css("border-color","<?php echo $pages->outline ?>");
-      $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+      <?php if(!$pages->is_text_color) { ?>  
+        $('.txthov').find("button").css("border-color","<?php echo $pages->outline ?>");
+        $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+      <?php } else { ?>  
+        $('.txthov').find("button").css("border-color","<?php echo $pages->text_color ?>");
+        $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
+      <?php } ?>  
     <?php } else  { ?>  
       $(".mobile1").removeClass("outlinedview");
       $('.outlined').val(0);
 
       $('.txthov').find("button").css("background-color","<?php echo $pages->rounded ?>");
       $('.txthov').find("button").css("border-color","transparent");
-      $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+      <?php if(!$pages->is_text_color) { ?>  
+        $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+      <?php } else { ?>  
+        $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
+      <?php } ?>  
     <?php } ?>  
   }
 

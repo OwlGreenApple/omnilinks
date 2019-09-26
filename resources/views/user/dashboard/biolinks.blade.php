@@ -442,8 +442,13 @@
       $('.outlined').val(1);
       
       $('.btnview').css("background-color","transparent");
-      $('.btnview').css("border-color",$("#colorOutlineButton").val());
-      $('.btnview').css("color",$("#colorOutlineButton").val());
+      if ($('#is_text_color').prop("checked") == false) {
+        $('.btnview').css("border-color",$("#colorOutlineButton").val());
+        $('.btnview').css("color",$("#colorOutlineButton").val());
+      } else {
+        $('.btnview').css("border-color",$('#textColor').val());
+        $('.btnview').css("color",$('#textColor').val());
+      }
 
       /*$('.btnview').css("border-color",$("#colorButton").val());
       $('.btnview').css("color",$("#colorOutlineButton").val());*/
@@ -455,7 +460,11 @@
       $('.btnview').css("background-color",$("#colorButton").val());
       $('.btnview').css("border-color",'transparent');
       //$('.btnview').css("color","#fff");
-      $('.btnview').css("color",$("#colorOutlineButton").val());
+      if ($('#is_text_color').prop("checked") == false) {
+        $('.btnview').css("color",$("#colorOutlineButton").val());
+      } else {
+        $('.btnview').css("color",$("#textColor").val());
+      }
     }
   }
 
@@ -505,6 +514,7 @@
     else if ($('#is_text_color').prop("checked") == false) {
       $('#is_text_color').val(0);
     }
+    check_outlined();
   }
 
   function delete_photo(){
@@ -1210,16 +1220,9 @@
                           @else
                           <input type="text" name="judul" id="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
                           @endif
-                          @if(is_null($pages->link_utama))
-                          <input type="text" name="link" value="" id="pagelink" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
-                          @else
-                          <input type="text" name="link" id="pagelink" value="{{$pages->link_utama}}" class="form-control" placeholder="masukkan link" style="margin-bottom: 5px">
-                          @endif
-                          @if(is_null($pages->telpon_utama))
-                          <input type="number" name="phone_no" id="telpon" value="" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
-                          @else
-                          <input type="number" name="phone_no" id="telpon" value="{{$pages->telpon_utama}}" class="form-control" placeholder="masukkan nomor" style="margin-bottom: 5px">
-                          @endif
+                          <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character"><?php if(!is_null($pages->description)) { 
+                            echo $pages->description;
+                          }?></textarea>
                         </div>
                         <div class="col-md-12 mt-4">
                        @if(Auth::user()->membership=='elite') 
@@ -1570,10 +1573,7 @@
                             <p class="font-weight-bold" style="color: #fff;" id="outputtitle"></p>
                           </li>
                           <li style="display: block; margin-bottom: -15px; ">
-                            <p class="font-weight-bold" style="color: #fff; word-break: break-all;" id="outputlink"></p>
-                          </li>
-                          <li style="display: block;">
-                            <p class="font-weight-bold" style="color: #fff;" id="outputnomor"></p>
+                            <p class="font-weight-bold" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
                           </li>
                         </ul>
                       </div>
@@ -1995,25 +1995,20 @@
       loadLinkBio();
       dotsok();
       let inputtitle=$('#pagetitle');
-      let inputlink=$('#pagelink');
-      let inputtelpon=$('#telpon');
-
       let outputtitle=$('#outputtitle');
-      let outputlink=$('#outputlink');
-      let outputnomor=$('#outputnomor');
+      
+      let inputdescription=$('#description');
+      let outputdescription=$('#outputdescription');
+      
 
       inputtitle.keyup(function(){
         outputtitle.text(inputtitle.val());
       });
-       inputlink.keyup(function(){
-        outputlink.text(inputlink.val());
-      });
-        inputtelpon.keyup(function(){
-        outputnomor.text(inputtelpon.val());
-      });
       outputtitle.text(inputtitle.val());
-      outputlink.text(inputlink.val());
-      outputnomor.text(inputtelpon.val());
+      inputdescription.keyup(function(){
+        outputdescription.text(inputdescription.val());
+      });
+      outputdescription.text(inputdescription.val());
 
       
     $(document).on('focus','.focuslink',function(){
@@ -2285,7 +2280,12 @@
         $(".screen").addClass("outlinedview");
         //$('.btnview').css("background-color","transparent");
         //$('.btnview').css("color",color);
-        $('.btnview').css("border-color",color);
+        if ($('#is_text_color').prop("checked") == false) {
+          $('.btnview').css("border-color",color);
+        } else {
+          $('.btnview').css("border-color",$('#textColor').val());
+        }
+        
       } else {
         //$('.btnview').css("background-color",color);
         //$('.btnview').css("color","#fff");
@@ -2415,8 +2415,15 @@
         // temp2 = $(this).css("background-color");
         temp2 = $("#phonecolor").css("background-color");
 
-        $(this).parent().children().css("background-color",temp1);
-        $(this).parent().children().css("color",temp2);
+        
+        if ($('#is_text_color').prop("checked") == false) {
+          $(this).parent().children().css("background-color",temp1);
+          $(this).parent().children().css("color",temp2);
+        } else {
+          $(this).parent().children().css("background-color",$('#textColor').val());
+          $(this).parent().children().css("color",$("#phonecolor").css("background-color"));
+        }
+
       },
       mouseleave: function () {
         check_outlined();
@@ -2433,65 +2440,21 @@
 
     $("body").on("click", ".savetemp", function() {
       tambahTemp();
-      //tambahPages();
       $('#pesanAlert').removeClass('alert-danger');
       $('#pesanAlert').children().remove();
     });
-    // $(".prev").click(function(){
-    //  let sibli=$(this).siblings(".mySlides").css("display","block");
-    //  console.log($(this).siblings(".mySlides").children().val());
-    //  if (sibli.children().val()=='tidakada') {
-    //   plusSlides(1);
-    //  }
-    // });
-    // $(".next").click(function(){
-    //  let sibli=$(this).parent();
-    //  let find= sibli.find(".mySlides");
-    //  if (find.css("display")=='block') {
-    //   let findimage=find.children().val();
-    //   if (findimage=="tidakada") {
-    //      plusSlides(-1);
-    //   }
-    //  }
-
-    //  // siblings(".mySlides").css("display","block");
-    //  // if (sibli.children().val()=="tidakada") {
-    //  // 
-    //  // }
-    // });
+    
     $("body").on("click", "#addBanner", function() {
-      //tambahBanner();
-      
       idpic+=1;
       let $el;
-      // if($('.list-banner').length<=0){
-      //   $el = $( ".div-banner" ).append(elhtml);
-      // }
-      //  else {
-      //   $el = $('.list-banner:first').clone().appendTo('.div-banner');
-      // }
-        elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
        $el = $(".div-banner").append(elhtml);
        loadPixel(0,'.banner-new');
       if ($('.list-banner').length==5) {
          $(this).attr('disabled', 'disabled'); 
-        }
-      // if($el.find("input").val("")){
-      // $el.find("input").val("");  
-      // }
-
-      // $el.find("input").attr("value","");
-      // $el.attr("picture-id","picture-id-"+idpic+"");
-      // $el.find("input[type='file']").attr("id","input-picture-"+idpic+"");
-
-      // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
-      // $el.wrap('<form>').closest('form').trigger("reset");
-      // $el.unwrap();
-      // $el.find(".custom-file-input").siblings(".custom-file-label").addClass("selected").html('Choose file');
+      }
       let countbanner=$('.mySlides').length;
-        // if (countbanner==1) {
-
-        // }
+      
       let style=""; 
       if ($(".list-banner").length==1) {
         style="block";
@@ -2724,11 +2687,11 @@
     
     currentSlide(0);
     slideIndex=0;
-    check_outlined();
     check_rounded();
     check_powered();
     check_click_bait();
     check_text_color();
+    check_outlined();
 
     <?php 
       if(is_null($pages->image_pages)){
@@ -2792,5 +2755,6 @@
     // $(document).bind('contextmenu',function(e){
     //   e.preventDefault();
     // });
+    
 </script>
 @endsection

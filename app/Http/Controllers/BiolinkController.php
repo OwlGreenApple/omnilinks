@@ -245,7 +245,7 @@ class BiolinkController extends Controller
     
     $validator = Validator::make($request->all(), [
       'judul' => ['required', 'string',  'max:255'],
-      'link' => ['required', 'string', 'max:255'],
+      // 'link' => ['required', 'string', 'max:255'],
       // 'phone_no' => ['required', 'string', 'max:255'],
       // 'imagepages' => ['required', 'file'],
       // 'judulBanner.*' => ['required', 'string', 'max:255'],
@@ -261,7 +261,8 @@ class BiolinkController extends Controller
     $uuid=$request->uuidtemp;
     $page=Page::where('uid','=',$uuid)->first();
     $page->page_title=$request->judul;
-    $page->link_utama=$request->link;
+    $page->description=$request->description;
+    // $page->link_utama=$request->link;
     
     if(!is_null($request->file('imagepages')))
     {
@@ -274,7 +275,7 @@ class BiolinkController extends Controller
       $page->image_pages = $dir."/".$filename;
     }
 
-    $page->telpon_utama=$request->phone_no;
+    // $page->telpon_utama=$request->phone_no;
 
     // if ($request->backtheme=="") 
     if ($request->modeBackground=="solid") 
