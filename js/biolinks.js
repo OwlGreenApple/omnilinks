@@ -162,7 +162,9 @@ $(document).ready(function () {
         $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');
         check_outlined();
         check_rounded();
-        loadPixel(0,'#linkpixel-' + counterLink );
+        $('#linkpixel-' + counterLink).html(dataView);
+        $('#linkpixel-' + counterLink ).val(0);
+        //loadPixel(0,'#linkpixel-' + counterLink );
         
     });
     $(document).on('click', '.deletelink', function (e) {

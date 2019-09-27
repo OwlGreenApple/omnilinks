@@ -141,7 +141,7 @@
 
 </script>
 
-<div class="container mb-5" style="margin-top: 150px">
+<div class="container mb-5 main-cont" style="">
   <div class="row">
     @if (session('error'))
     <div class="col-md-12 mb-3">

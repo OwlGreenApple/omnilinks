@@ -97,19 +97,19 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/banner/load-banner','BiolinkController@addBanner');
     Route::post('/save-link','BiolinkController@savelink');
     Route::get('/delete-photo','BiolinkController@delete_photo');
-    Route::get('/load/pixelpage','BiolinkController@pixelpage');
-    Route::get('/load/link-bio','BiolinkController@loadLinkBio');
+    Route::get('/load-pixel-page','BiolinkController@pixelpage');
+    Route::get('/link-bio','BiolinkController@loadLinkBio');
     Route::get('/view/biolinks',function(){
         return view('user.link.link');
     });
     //make wa link creator
     Route::post('/save-walink','BiolinkController@savewa');
-    Route::get('/walink/loadwalink','BiolinkController@loadwalink');
+    Route::get('/load-wa-link','BiolinkController@loadwalink');
     Route::get('/walink/deletewalink','BiolinkController@deletewalink');
 
     //makepixel
     Route::post('/save-pixel','BiolinkController@savepixel');
-    Route::get('/pixel/load-pixel','BiolinkController@loadpixel');
+    Route::get('/load-pixel','BiolinkController@loadpixel');
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 
     //makesinglelink

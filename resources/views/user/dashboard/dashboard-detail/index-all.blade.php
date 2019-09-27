@@ -140,106 +140,10 @@
   }
 </script>
 
-<div class="container main-cont">
+<section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
+<div class="container body-content-mobile main-cont">
   <div class="row notif">
-    <div class="col-md-12 pr-0 div-btn">
-      <div class="row">
-        <?php  
-          $colbio = 'col-6';
-          if(Auth::user()->membership=='free'){
-            $colbio = 'col-12';
-          }
-        ?>
-        <div class="col-lg-2 col-md-3 {{$colbio}} pl-md-3 pl-0 pr-0">
-          <button class="btnbio btncreate btn-block btncreate-bio">
-            + BIO LINK  
-          </button>
-        </div>
-
-        @if(Auth::user()->membership!='free')
-          <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
-            <a href="{{asset('/singlelink')}}" style="text-decoration: none;">
-              <button class="btnsingle btncreate btn-block">
-                + SINGLE LINK  
-              </button>
-            </a>
-          </div> 
-        @endif 
-
-        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3 menu-nomobile">
-          <p class="text-md-right text-lg-right ">
-            @if(Auth::user()->membership=="free")
-              <span class="txt-free header-status-account">
-                <i class="fas fa-flag"></i>
-                Free Account
-              </span>
-              <br>
-              <span class="content-status-account">
-              <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
-              </span>
-            @endif
-            @if(Auth::user()->membership=="basic")
-              <span class="text-success header-status-account">
-                <i class="fas fa-trophy"></i>
-                Basic Account
-              </span>
-              <br>
-              <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse(Auth::user()->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
-              </span>
-            @endif
-            @if(Auth::user()->membership=="elite")
-              <span class="txt-elite header-status-account">
-                <i class="fas fa-star"></i>
-                Elite Account
-              </span>
-              <br>
-              <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse(Auth::user()->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
-              </span>
-            @endif
-          </p>
-        </div> 
-      </div>
-    </div>
-
-    <div class="col-md-12 pr-0 menu-mobile status-account-info" style="margin-top: 0px">
-      <p class="text-md-right text-lg-right ">
-            @if(Auth::user()->membership=="free")
-              <span class="txt-free header-status-account">
-                <i class="fas fa-flag"></i>
-                Free Account
-              </span>
-              <br>
-              <span class="content-status-account">
-              <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
-              </span>
-            @endif
-            @if(Auth::user()->membership=="basic")
-              <span class="text-success header-status-account">
-                <i class="fas fa-trophy"></i>
-                Basic Account
-              </span>
-              <br>
-              <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse(Auth::user()->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
-              </span>
-            @endif
-            @if(Auth::user()->membership=="elite")
-              <span class="txt-elite header-status-account">
-                <i class="fas fa-star"></i>
-                Elite Account
-              </span>
-              <br>
-              <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse(Auth::user()->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
-              </span>
-            @endif
-          </p>
-    </div>
-
     <div class="col-md-12">
-      <div class="pt-md-5 pt-0" style="padding-bottom: 5px">
         <div class="row">
           <div class="col-12 col-md-6">
             <h4 style="color: #106BC8">
@@ -303,7 +207,6 @@
 
         <div id="pesanAlert" class="alert" style="display: none;"></div>
 
-      </div>
 
       <hr style="margin-bottom: 45px">
 
@@ -388,7 +291,7 @@
     </div>
   </div>
 </div>
-
+</section>
 <!-- Modal Delete Confirmation -->
 <div class="modal fade" id="confirm-delete" role="dialog">
   <div class="modal-dialog">

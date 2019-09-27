@@ -225,17 +225,13 @@ class BiolinkController extends Controller
   public function pixelpage(Request $request)
   {
     $id = 0;
-    if($request->has('id')){
-      $id = $request->id;
-    }
 
     $pixel=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
                   ->get();
 
     $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
-                  ->with('data_pixel',$pixel)
-                  ->with('id',$id);
+                  ->with('data_pixel',$pixel);
     return $arr;
   }
 

@@ -33,7 +33,9 @@
                             </div>
                           </li>
                           <script>
-                            loadPixel('{{$link->pixel_id}}','#linkpixel-{{$link->id}}-update');
+                            $("#linkpixel-1").html(dataView);
+                            $("#linkpixel-{{$link->id}}-update").val('{{$link->pixel_id}}');
+                            // loadPixel('{{$link->pixel_id}}','#linkpixel-{{$link->id}}-update');
                           </script>
                       <?php 
                         }
@@ -59,7 +61,7 @@
                                 </div>
                               </div>
                               <div class="col-md-12 col-12 pr-0 pl-0">
-                                <select name="linkpixel[]" id="linkpixel-{{$link->id}}" class="form-control linkpixel">
+                                <select name="linkpixel[]" id="linkpixel-1" class="form-control linkpixel">
                                 </select>
                               </div> 
                             </div>
@@ -73,6 +75,8 @@
                           </div>
                         </li>
                         <script>
-                          loadPixel(0,'#linkpixel-{{$link->id}}');
+                          $("#linkpixel-1").html(dataView);
+                          $("#linkpixel-1").val(0);
+                          // loadPixel(0,'#linkpixel-1');
                         </script>
                       <?php } ?>

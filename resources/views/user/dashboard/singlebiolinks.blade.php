@@ -293,9 +293,11 @@
     <div class="row">
       <div class="col-md-12">
         <h4 style="color: #106BC8">
-          <i class="fas fa-arrow-left"></i>&nbsp;
           <a href="{{url('/')}}">
-            KEMBALI
+            <button class="btn btn-default btn-back mb-2">
+              <i class="fas fa-arrow-circle-left"></i>
+              Back
+            </button>
           </a>
         </h4>
         <br>
@@ -431,7 +433,7 @@
                         <button type="reset" class="btn btn-danger btncreate btn-reset btn-console">
                           RESET
                         </button>
-                        <button id="submitpixel" type="button" class="btn btn-primary btncreate btnbio btn-console">
+                        <button id="submitpixel" type="button" class="btn btn-primary btncreate btn-console">
                           CREATE
                         </button>
                       </div>

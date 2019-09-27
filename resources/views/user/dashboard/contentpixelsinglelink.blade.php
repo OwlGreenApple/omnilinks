@@ -1,8 +1,8 @@
-<option value="0" <?php if($id=='0') echo 'selected' ?>>  
+<option value="0" >  
   -- Pilih Pixel Retargetting --
 </option>
 @foreach($data_pixel as $pixel)
-  <option value="{{$pixel->id}}" <?php if($id==$pixel->id) echo 'selected' ?>>
+  <option value="{{$pixel->id}}">
     {{$pixel->title}}
   </option>
 @endforeach

@@ -29,7 +29,7 @@
 </style>
 
 <script type="text/javascript">
-  var picker;
+  var picker,dataView;
   var color_picker,rounded,outline;
   // https://www.shift8web.ca/2017/01/use-jquery-sort-reorganize-content/
   function sortMeBy(arg, sel, elem, order) {
@@ -56,8 +56,9 @@
   
   function loadLinkBio(){
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
-      url: "<?php echo url('/load/link-bio');?>",
+      url: "<?php echo url('/link-bio');?>",
       data: { id: <?php echo $pages->id; ?>},
       dataType: 'text',
       beforeSend: function()
@@ -80,6 +81,7 @@
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'POST',
       dataType: 'json',
       data: formData,
@@ -189,6 +191,7 @@
 
   function tambahBanner() {
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       dataType: 'text',
       url: "<?php echo url('/banner/load-banner') ;?>",
@@ -210,11 +213,12 @@
   function refreshpixel() {
     //console.log($('#idpage').val());
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       data: {
         idpage: $('#idpage').val(),
       },
-      url: "<?php echo url('/pixel/load-pixel'); ?>",
+      url: "<?php echo url('/load-pixel'); ?>",
       dataType: 'text',
       beforeSend: function()
       {
@@ -234,6 +238,7 @@
 
   function delete_pixel(idpixel) {
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       data: {
         idpixel: idpixel,
@@ -262,12 +267,13 @@
     });
   }
 
-  function loadPixel(id,selector){
-    var view ='';
+  function loadPixel(){
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      async:false,
       type: 'GET',
-      url: "<?php echo url('/load/pixelpage');?>",
-      data: { id:id },
+      url: "<?php echo url('/load-pixel-page'); ?>",
+      data: { id:0 },
       dataType: 'text',
       beforeSend: function()
       {
@@ -279,30 +285,55 @@
         $('.div-loading').removeClass('background-load');
 
         var data = jQuery.parseJSON(result);
-        $(selector).html(data.view);
+        // $(selector).html(data.view);
+        dataView = data.view;
       }
     });
   }
+  loadPixel();
 
   function loadPixelPage() {
-    loadPixel('{{$pages->wa_pixel_id}}','#wapixel');
-    loadPixel('{{$pages->telegram_pixel_id}}','#telegrampixel');
-    loadPixel('{{$pages->skype_pixel_id}}','#skypepixel');
-    loadPixel('{{$pages->line_pixel_id}}','#linepixel');
-    loadPixel('{{$pages->messenger_pixel_id}}','#messengerpixel');
+    $("#wapixel").html(dataView);
+    $("#wapixel").val('{{$pages->wa_pixel_id}}');
+    $("#telegrampixel").html(dataView);
+    $("#telegrampixel").val('{{$pages->telegram_pixel_id}}');
+    $("#skypepixel").html(dataView);
+    $("#skypepixel").val('{{$pages->skype_pixel_id}}');
+    $("#linepixel").html(dataView);
+    $("#linepixel").val('{{$pages->line_pixel_id}}');
+    $("#messengerpixel").html(dataView);
+    $("#messengerpixel").val('{{$pages->messenger_pixel_id}}');
+    $("#youtubepixel").html(dataView);
+    $("#youtubepixel").val('{{$pages->youtube_pixel_id}}');
+    $("#fbpixel").html(dataView);
+    $("#fbpixel").val('{{$pages->fb_pixel_id}}');
+    $("#igpixel").html(dataView);
+    $("#igpixel").val('{{$pages->ig_pixel_id}}');
+    $("#twitterpixel").html(dataView);
+    $("#twitterpixel").val('{{$pages->twitter_pixel_id}}');
+    <?php if(!$banner->count()) { ?>
+      $(".bannerpixel").html(dataView);
+      $(".bannerpixel").val(0);
+    <?php } ?>
+    // loadPixel('{{$pages->wa_pixel_id}}','#wapixel');
+    // loadPixel('{{$pages->telegram_pixel_id}}','#telegrampixel');
+    // loadPixel('{{$pages->skype_pixel_id}}','#skypepixel');
+    // loadPixel('{{$pages->line_pixel_id}}','#linepixel');
+    // loadPixel('{{$pages->messenger_pixel_id}}','#messengerpixel');
     
-    loadPixel('{{$pages->youtube_pixel_id}}','#youtubepixel');
-    loadPixel('{{$pages->fb_pixel_id}}','#fbpixel');
-    loadPixel('{{$pages->ig_pixel_id}}','#igpixel');
-    loadPixel('{{$pages->twitter_pixel_id}}','#twitterpixel');
+    // loadPixel('{{$pages->youtube_pixel_id}}','#youtubepixel');
+    // loadPixel('{{$pages->fb_pixel_id}}','#fbpixel');
+    // loadPixel('{{$pages->ig_pixel_id}}','#igpixel');
+    // loadPixel('{{$pages->twitter_pixel_id}}','#twitterpixel');
     
     <?php if(!$banner->count()) { ?>
-      loadPixel(0,'.bannerpixel');
+      // loadPixel(0,'.bannerpixel');
     <?php } ?>
   }
-
+  
   function tambahwalink() {
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'POST',
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -330,8 +361,9 @@
 
   function refreshwa() {
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
-      url: "<?php echo url('/walink/loadwalink');?>",
+      url: "<?php echo url('/load-wa-link');?>",
       dataType: 'text',
       beforeSend: function()
       {
@@ -350,6 +382,7 @@
 
   function deletewalink(idwalink) {
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       data: {
         idwalink: idwalink,
@@ -519,6 +552,7 @@
 
   function delete_photo(){
     $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type : 'get',
       url : "<?php echo url('/delete-photo') ?>",
       dataType: 'text',
@@ -1220,17 +1254,17 @@
                           @else
                           <input type="text" name="judul" id="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
                           @endif
-                          <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character"><?php if(!is_null($pages->description)) { 
+                          <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize><?php if(!is_null($pages->description)) { 
                             echo $pages->description;
                           }?></textarea>
                         </div>
                         <div class="col-md-12 mt-4">
-                       @if(Auth::user()->membership=='elite') 
+                        @if(Auth::user()->membership=='elite') 
                           <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner">
                             <i class="fas fa-plus"></i>
                           </button>
-                      @endif
-                       @if(Auth::user()->membership!='free')
+                        @endif
+                        @if(Auth::user()->membership!='free')
                           <span class="blue-txt">
                             Banner Promo
                           </span>
@@ -1251,7 +1285,9 @@
                                     <select name="bannerpixel[]" class="form-control bannerpixel bannerpixel-{{$ban->id}}">
                                     </select>
                                     <script type="text/javascript">
-                                      loadPixel('{{$ban->pixel_id}}','.bannerpixel-{{$ban->id}}');
+                                      //loadPixel('{{$ban->pixel_id}}','.bannerpixel-{{$ban->id}}');
+                                      $(".bannerpixel-{{$ban->id}}").html(dataView);
+                                      $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
                                     </script>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
@@ -1990,8 +2026,6 @@
   });
 
   $(document).ready(function() {
-     // dotview();
-      //loadPixel(0,'.bannerpixel');
       loadLinkBio();
       dotsok();
       let inputtitle=$('#pagetitle');
@@ -2448,8 +2482,10 @@
       idpic+=1;
       let $el;
       elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
-       $el = $(".div-banner").append(elhtml);
-       loadPixel(0,'.banner-new');
+      $el = $(".div-banner").append(elhtml);
+      $(".banner-new").html(dataView);
+      $(".banner-new").val(0);
+       // loadPixel(0,'.banner-new');
       if ($('.list-banner').length==5) {
          $(this).attr('disabled', 'disabled'); 
       }
