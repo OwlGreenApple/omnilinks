@@ -435,8 +435,8 @@
   }
 
   function showSlides(n) {
-    console.log(n);
-    console.log($(".mySlides").length);
+    // console.log(n);
+    // console.log($(".mySlides").length);
     var i;
     // let slides = document.getElementsByClassName("mySlides");
     // let slides = document.getElementsByClassName("mySlides");
@@ -2274,12 +2274,9 @@
 
     //picker for background device color purpose
     function onColorChange(color) {
-      // console.log(color);
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen");
       $("#phonecolor").css("background-color",color);
-      console.log('tes-background');
-      console.log($("#phonecolor").css("background-color"));
       $("#backtheme").val();
       $("#color").val(color);
     }
@@ -2320,7 +2317,6 @@
     //modal-color-picker-outline-button colorpickerOutlineButton colorOutlineButton
     //for button purpose colorpickerButton colorButton
     function onOutlineColorButtonChange(color) {
-      // console.log(color);
       $("#colorOutlineButton").val(color);
       // $('.btnview').css("border-color",color);
       if ($('input[name="outlined"]').val()=="1") {
@@ -2358,7 +2354,6 @@
     
     // for all text color purpose
     function onTextColorChange(color) {
-      console.log($('#is_text_color').val());
       $("#textColor").val(color);
       if ($('#is_text_color').val()=="1") {
         $('.btnview').css("color",color);
@@ -2516,7 +2511,6 @@
       let slidesi=$('.mySlides');
       let dotselementt=$('#dot-view');
       let slidesiLength=slidesi.length-1;
-      //console.log(slidesiLength);
         dotselementt.append('<span class="dot picture-id-'+idpic+'-dot input-picture-'+idpic+'-dot" id="input-picture-'+idpic+'-dot" onclick="currentSlide('+slidesiLength+')" style="display:none"></span>');
       if ($(".dot").length==1) 
       {
@@ -2603,7 +2597,6 @@
       var message = $('#pesan-wa').val();
       var convert = encodeURI(message);
       var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";
-          //console.log(link);
       $('#demo').html(link);
       tambahwalink();
     });
@@ -2753,7 +2746,6 @@
     $('#select-animation').selectize({
       sortField: 'text',
       onChange: function(value) {
-        console.log(value);
         if (value=="bubble"){
           $(".animation-thumb").hide();
           $(".animation-bubble").show();
