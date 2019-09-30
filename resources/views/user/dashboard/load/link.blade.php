@@ -33,8 +33,6 @@
                             </div>
                           </li>
                           <script>
-                            $("#linkpixel-1").html(dataView);
-                            $("#linkpixel-{{$link->id}}-update").val('{{$link->pixel_id}}');
                             // loadPixel('{{$link->pixel_id}}','#linkpixel-{{$link->id}}-update');
                           </script>
                       <?php 
@@ -75,8 +73,9 @@
                           </div>
                         </li>
                         <script>
-                          $("#linkpixel-1").html(dataView);
-                          $("#linkpixel-1").val(0);
                           // loadPixel(0,'#linkpixel-1');
                         </script>
                       <?php } ?>
+<script>
+  loadPixelPage();
+</script>

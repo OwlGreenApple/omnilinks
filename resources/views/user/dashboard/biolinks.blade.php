@@ -270,7 +270,6 @@
   function loadPixel(){
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-      async:false,
       type: 'GET',
       url: "<?php echo url('/load-pixel-page'); ?>",
       data: { id:0 },
@@ -325,6 +324,21 @@
     // loadPixel('{{$pages->fb_pixel_id}}','#fbpixel');
     // loadPixel('{{$pages->ig_pixel_id}}','#igpixel');
     // loadPixel('{{$pages->twitter_pixel_id}}','#twitterpixel');
+    <?php 
+    if($links->count()) {
+      foreach($links as $link) {
+    ?>
+      $("#linkpixel-{{$link->id}}-update").html(dataView);
+      $("#linkpixel-{{$link->id}}-update").val('{{$link->pixel_id}}');
+    <?php 
+      }
+    }
+    else {
+    ?>
+      $("#linkpixel-1").html(dataView);
+      $("#linkpixel-1").val(0);
+    <?php } ?>    
+    
     
     <?php if(!$banner->count()) { ?>
       // loadPixel(0,'.bannerpixel');
