@@ -874,8 +874,15 @@ class BiolinkController extends Controller
   public function loadLinkBio(Request $request){
   	$links=Link::where('users_id',Auth::user()->id)
                   ->where('pages_id',$request->id)
-  					->orderBy('created_at')->get();
+  					// ->orderBy('created_at')
+            ->get();
   					//dd($pixels);
+    $page = Page::find($request->id);
+    $sort_link = array_filter(explode(';', $page->sort_link));
+    $links = $links->sortBy(function($model) use ($sort_link){
+              return array_search($model->getKey(), $sort_link);
+            });
+            
   	$arr['view'] =(string) view('user.dashboard.load.link')
                     ->with('links',$links);
      return $arr;

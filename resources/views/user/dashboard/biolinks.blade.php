@@ -1380,8 +1380,8 @@
                             Rounded buttons
                           </label>
                         </div>
-                        <div class="col-md-4 col-4">
-                          <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Color</a>
+                        <div class="col-md-5 col-5">
+                          <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Background Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -1422,7 +1422,7 @@
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
-                          <a href="" id="link-custom-outline-color" class="nav-link p-0">Custom Color</a>
+                          <a href="" id="link-custom-outline-color" class="nav-link p-0">Custom Outline Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -1463,7 +1463,7 @@
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
-                          <a href="" id="link-text-color" class="nav-link p-0">Custom Color</a>
+                          <a href="" id="link-text-color" class="nav-link p-0">Custom Text Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -1499,7 +1499,7 @@
                         </div>
                         <div class="col-md-4 col-4">
                           <label class="caption">
-                            Powered By Omnilinks
+                            Powered By Omnilinkz
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
@@ -2256,6 +2256,8 @@
         var index =  ui.item.index();
         var start_pos = $(this).attr('data-previndex');
         
+        console.log(start_pos);
+        console.log(index);
         if (start_pos<index) {
           $("#viewLink li:eq("+start_pos+")").insertAfter($("#viewLink li:eq("+index+")"));
         }
@@ -2263,10 +2265,9 @@
           $("#viewLink li:eq("+start_pos+")").insertBefore($("#viewLink li:eq("+index+")"));
         }
       }
-      
     });
     $(".sortable-link").disableSelection();
-    //$( ".sortable-link" ).draggable();
+    // $( ".sortable-link" ).draggable();
 
     $(".sortable-sosmed").sortable({
       handle: '.handle',

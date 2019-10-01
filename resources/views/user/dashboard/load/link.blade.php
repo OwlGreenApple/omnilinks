@@ -32,9 +32,6 @@
                               </div>
                             </div>
                           </li>
-                          <script>
-                            // loadPixel('{{$link->pixel_id}}','#linkpixel-{{$link->id}}-update');
-                          </script>
                       <?php 
                         }
                       }
@@ -72,9 +69,6 @@
 
                           </div>
                         </li>
-                        <script>
-                          // loadPixel(0,'#linkpixel-1');
-                        </script>
                       <?php } ?>
 <script>
   loadPixelPage();
