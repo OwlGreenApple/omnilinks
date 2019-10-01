@@ -59,7 +59,8 @@
             </span>
           @endif
           @if(!is_null($pages->description))
-            <span class="header-txt txt" style="word-break: break-all;">
+            <input type="hidden" id="hidden-description" value="{{$pages->description}}">
+            <span class="header-txt txt" style="word-break: break-all;" id="description">
               {{$pages->description}}
             </span>
           @endif
@@ -293,9 +294,11 @@
       <?php if(!$pages->is_text_color) { ?>  
         $('.txthov').find("button").css("border-color","<?php echo $pages->outline ?>");
         $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+        $('.header-txt').css("color","<?php echo $pages->outline ?>");
       <?php } else { ?>  
         $('.txthov').find("button").css("border-color","<?php echo $pages->text_color ?>");
         $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
+        $('.header-txt')..css("color","<?php echo $pages->text_color ?>");
       <?php } ?>  
     <?php } else  { ?>  
       $(".mobile1").removeClass("outlinedview");
@@ -305,8 +308,10 @@
       $('.txthov').find("button").css("border-color","transparent");
       <?php if(!$pages->is_text_color) { ?>  
         $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
+        $('.header-txt').css("color","<?php echo $pages->outline ?>");
       <?php } else { ?>  
         $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
+        $('.header-txt').css("color","<?php echo $pages->text_color ?>");
       <?php } ?>  
     <?php } ?>  
   }
@@ -344,6 +349,8 @@
       }
     ); 
     moveSlide(0);
+    tempStr = $("#hidden-description").val().replace(/\n/g, "<br>");
+    $("#description").html(tempStr);
   });
 </script>
 

@@ -492,9 +492,11 @@
       if ($('#is_text_color').prop("checked") == false) {
         $('.btnview').css("border-color",$("#colorOutlineButton").val());
         $('.btnview').css("color",$("#colorOutlineButton").val());
+        $('.description').css("color",$("#colorOutlineButton").val());
       } else {
         $('.btnview').css("border-color",$('#textColor').val());
         $('.btnview').css("color",$('#textColor').val());
+        $('.description').css("color",$('#textColor').val());
       }
 
       /*$('.btnview').css("border-color",$("#colorButton").val());
@@ -509,8 +511,10 @@
       //$('.btnview').css("color","#fff");
       if ($('#is_text_color').prop("checked") == false) {
         $('.btnview').css("color",$("#colorOutlineButton").val());
+        $('.description').css("color",$("#colorOutlineButton").val());
       } else {
         $('.btnview').css("color",$("#textColor").val());
+        $('.description').css("color",$("#textColor").val());
       }
     }
   }
@@ -1620,10 +1624,10 @@
                       <div class="col-md-10 col-8 p-2">
                         <ul style="margin-left: 23px; font-size: 11px;">
                           <li style="display: block; margin-bottom: -15px;  ">
-                            <p class="font-weight-bold" style="color: #fff;" id="outputtitle"></p>
+                            <p class="font-weight-bold description" style="color: #fff;" id="outputtitle"></p>
                           </li>
                           <li style="display: block; margin-bottom: -15px; ">
-                            <p class="font-weight-bold" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
+                            <p class="font-weight-bold description" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
                           </li>
                         </ul>
                       </div>
@@ -2045,18 +2049,28 @@
       let inputtitle=$('#pagetitle');
       let outputtitle=$('#outputtitle');
       
-      let inputdescription=$('#description');
-      let outputdescription=$('#outputdescription');
-      
 
       inputtitle.keyup(function(){
         outputtitle.text(inputtitle.val());
       });
       outputtitle.text(inputtitle.val());
-      inputdescription.keyup(function(){
-        outputdescription.text(inputdescription.val());
+
+      $('#description').keydown(function(e){
+        newLines = $(this).val().split("\n").length;
+        if(e.keyCode == 13 && newLines >= 3) {
+          return false;
+        }
+        else {
+          tempStr = $(this).val().replace(/\n/g, "<br>");;
+          $('#outputdescription').html(tempStr);
+        }
       });
-      outputdescription.text(inputdescription.val());
+      $('#description').keyup(function(e){
+        tempStr = $(this).val().replace(/\n/g, "<br>");;
+        $('#outputdescription').html(tempStr);
+      });
+      tempStr = $('#description').val().replace(/\n/g, "<br>");;
+      $('#outputdescription').html(tempStr);
 
       
     $(document).on('focus','.focuslink',function(){
@@ -2179,17 +2193,21 @@
       $(".screen").addClass("outlinedview");
       $('.btnview').css("background-color","transparent");
       $('.btnview').css("color",outline);
+      $('.description').css("color",outline);
     <?php } else {?>
       $('.btnview').css("background-color",outline);
       $('.btnview').css("color","#fff");
+      $('.description').css("color","#fff");
     <?php } ?>
     
     <?php if($pages->is_text_color) {?>
       //$(".mobile1").addClass("outlinedview");
       $("#textColor").val("<?php echo $pages->text_color; ?>");
       $('.btnview').css("color","<?php echo $pages->text_color; ?>");
+      $('.description').css("color","<?php echo $pages->text_color; ?>");
     <?php } else {?>
       $('.btnview').css("color","#fff");
+      $('.description').css("color","#fff");
     <?php } ?>
     
     loadPixelPage();
@@ -2336,6 +2354,7 @@
         $('.btnview').css("border-color","transparent");
       }
       $('.btnview').css("color",color);
+      $('.description').css("color",color);
     }
     $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
     pickerout = $.farbtastic('#colorpickerOutlineButton');
@@ -2357,8 +2376,10 @@
       $("#textColor").val(color);
       if ($('#is_text_color').val()=="1") {
         $('.btnview').css("color",color);
+        $('.description').css("color",color);
       } else {
         $('.btnview').css("color","#fff");
+        $('.description').css("color","#fff");
       }
     }
     $('#colorpickerTextColor').farbtastic('#textColor');
