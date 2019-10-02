@@ -167,7 +167,7 @@
           <button type="button" class="close" aria-label="Close" data-dismiss="alert">
             <span aria-hidden="true">×</span>
           </button>
-          {{ session('error') }} <a href="{{asset('/pricing')}}">Subscribe</a>
+          {{ session('error') }} <a href="{{asset('/pricing')}}">Klik disini untuk upgrade</a>
         </div>
     </div>
     @endif

@@ -2615,7 +2615,7 @@
     });
 
     $(document).on('click', '#generate', function(e) {
-      var nomor = '0'+$('#nomorwa').val();
+      var nomor = '62'+$('#nomorwa').val();
       var message = $('#pesan-wa').val();
       var convert = encodeURI(message);
       var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";

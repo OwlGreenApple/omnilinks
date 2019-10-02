@@ -34,7 +34,7 @@ class BiolinkController extends Controller
   	$page=Page::where('uid','=',$uuid)->first();
   	$walink->users_id=$user->id; 
   	$walink->pages_id=$page->id;
-  	$walink->nomor='0'.$request->nomorwa;
+  	$walink->nomor=$request->nomorwa;
   	$walink->pesan=$request->pesan;
   	$walink->linkgenerator=$request->textlink;
   	$walink->save();	  
