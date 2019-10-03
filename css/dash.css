@@ -665,27 +665,46 @@ hr.own {
 
 .fixed{
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
-  height: 90%;
+  height: 80%;
   margin-left: 130px;
   margin-top: -290px;
   z-index: 40;
+  transform: translate(0%, -10%);  
 }
 
 .preview-center {
   height: 100%;
 }
 
+@media screen and (min-height: 625px) {
+  .fixed { 
+    height: 80%;
+    top: 70%;
+  }
+}
+@media screen and (min-height: 939px) {
+  .fixed { 
+    height: 80%;
+    top: 50%;
+    transform: translate(0%, -10%);  
+  }
+}
+
 @media screen and (min-height: 945px) {
   .fixed { 
     height: 65%;
+    top: 40%;
+    transform: translate(0%, -10%);  
   }
 }
 
 @media screen and (min-height: 1180px) {
   .fixed { 
     height: 50%;
+    top: 40%;
+    transform: translate(0%, -10%);  
   }
 }
 
