@@ -100,9 +100,11 @@
                   <a class="dropdown-item btncreate-bio" href="">
                     + Bio Link
                   </a>
-                  <a class="dropdown-item <?php if(Request::is('singlelink')) echo 'active' ?>" href="{{ url('singlelink') }}">
-                    + Single Link
-                  </a>
+                  @if(Auth::user()->membership!='free')
+                    <a class="dropdown-item <?php if(Request::is('singlelink')) echo 'active' ?>" href="{{ url('singlelink') }}">
+                      + Single Link
+                    </a>
+                  @endif 
                 </div>
               </li>
 

@@ -393,9 +393,11 @@
         <input type="hidden" name="id_delete" id="id_delete">
         Apa Anda yakin untuk <i>menghapus</i> link berikut beserta detail didalamnya?
         <br><br>
-        <img id="img-pic" src="">
-        <div id="img-default" class="picture-sm" style="margin: 0 auto;display: none;"></div>
+        
+                <img id="img-pic" src="" class="picture-sm">
+                <div id="img-default" class="picture-sm" style="margin: 0 auto;display: none;"></div>
         <br><br>
+        
         Page Title : <span class="txt-title"></span> <br>
         <span id="txt-link"></span><br>
         Created on : <span id="txt-created"></span>
