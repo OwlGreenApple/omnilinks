@@ -515,25 +515,17 @@ class DashboardController extends Controller
   }
 
   public function check_file($filename){
-    $filename = "clicked/celebgramme.dev@gmail.com/10-2019/16/link-omnifluencer/counter.txt";
     //check isi file total click
     $content = 0;
     
-    $root_folder = "";
-    if ( env('APP_ENV') !== "local" ) {
-      // env('SHORT_LINK')
-      // $root_folder = "/home2/omli/public_html/";
-      $root_folder = $_SERVER['DOCUMENT_ROOT'].'/../../omli/public_html/';
-    }
-    echo $root_folder.'storage/app/'.$filename;
-    echo $_SERVER['DOCUMENT_ROOT'];
-    if(file_exists($root_folder.'storage/app/'.$filename)){
-      $myfile = fopen($root_folder.'storage/app/'.$filename, "r") or die("Unable to open file!");
-      $content = (int)fread($myfile, filesize($root_folder.'storage/app/'.$filename));
+    /*if(file_exists('storage/app/'.$filename)){
+      $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
+      $content = (int)fread($myfile, filesize('storage/app/'.$filename));
       fclose($myfile);
-      // $content = file_get_contents($root_folder.'storage/app/'.$filename);
-    } 
+    } */
 
+    $content = Storage::disk('s3')->url($filename);
+    
     return $content;
   }
 
