@@ -678,7 +678,7 @@ class BiolinkController extends Controller
     
     $counter = 0;
     $root_folder = "";
-    if ( env('APP_ENV') != "local" ) {
+    if ( env('APP_ENV') !== "local" ) {
       // env('SHORT_LINK')
       $root_folder = "/home2/omnilinkz/public_html/dashboard/";
     }
@@ -692,10 +692,10 @@ class BiolinkController extends Controller
       $counter = 1;
     }
 
-    if ( env('APP_ENV') != "local" ) {
+    if ( env('APP_ENV') !== "local" ) {
       Storage::put($folder.$filename,$counter);
     }
-    else if ( env('APP_ENV') != "local" ) {
+    else if ( env('APP_ENV') !== "local" ) {
       mkdir($root_folder.$folder,0755,true);
       file_put_contents($root_folder.$folder.$filename, $counter);
     }

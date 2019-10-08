@@ -91,24 +91,24 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item dropdown pull-right">
-                <a class="nav-link navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  + Link
-                  <i class="fas fa-angle-down"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item btncreate-bio" href="">
-                    + Bio Link
-                  </a>
-                  @if(Auth::user()->membership!='free')
-                    <a class="dropdown-item <?php if(Request::is('singlelink')) echo 'active' ?>" href="{{ url('singlelink') }}">
-                      + Single Link
-                    </a>
-                  @endif 
-                </div>
-              </li>
-
               @if(Auth::check())
+                <li class="nav-item dropdown pull-right">
+                  <a class="nav-link navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    + Link
+                    <i class="fas fa-angle-down"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item btncreate-bio" href="">
+                      + Bio Link
+                    </a>
+                    @if(Auth::user()->membership!='free')
+                      <a class="dropdown-item <?php if(Request::is('singlelink')) echo 'active' ?>" href="{{ url('singlelink') }}">
+                        + Single Link
+                      </a>
+                    @endif 
+                  </div>
+                </li>
+
                 <li class="nav-item">
                   <a class="nav-link navlog" href="{{url('/')}}">
                     {{ __('Dashboard') }}
