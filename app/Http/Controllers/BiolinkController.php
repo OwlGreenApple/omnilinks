@@ -678,10 +678,10 @@ class BiolinkController extends Controller
     
     $counter = 0;
     $root_folder = "";
-    if ( env('APP_ENV') !== "local" ) {
+    // if ( env('APP_ENV') !== "local" ) {
       // env('SHORT_LINK')
-      $root_folder = "/home2/omnilinkz/public_html/dashboard/";
-    }
+      // $root_folder = "/home2/omnilinkz/public_html/dashboard/";
+    // }
     
     if(file_exists($root_folder.'storage/app/'.$folder.$filename)){
       $myfile = fopen($root_folder.'storage/app/'.$folder.$filename, "r") or die("Unable to open file!");
@@ -692,13 +692,13 @@ class BiolinkController extends Controller
       $counter = 1;
     }
 
-    if ( env('APP_ENV') == "local" ) {
+    // if ( env('APP_ENV') == "local" ) {
       Storage::put($folder.$filename,$counter);
-    }
-    else if ( env('APP_ENV') !== "local" ) {
-      mkdir($root_folder.'storage/app/'.$folder,0755,true);
-      file_put_contents($root_folder.'storage/app/'.$folder.$filename, $counter);
-    }
+    // }
+    // else if ( env('APP_ENV') !== "local" ) {
+      // mkdir($root_folder.'storage/app/'.$folder,0755,true);
+      // file_put_contents($root_folder.'storage/app/'.$folder.$filename, $counter);
+    // }
   }
 
   public function click($mode,$id){
