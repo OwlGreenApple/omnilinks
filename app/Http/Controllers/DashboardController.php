@@ -528,10 +528,10 @@ class DashboardController extends Controller
     echo $root_folder.'storage/app/'.$filename;
     echo $_SERVER['DOCUMENT_ROOT'];
     if(file_exists($root_folder.'storage/app/'.$filename)){
-      // $myfile = fopen($root_folder.'storage/app/'.$filename, "r") or die("Unable to open file!");
-      // $content = (int)fread($myfile, filesize($root_folder.'storage/app/'.$filename));
-      // fclose($myfile);
-      $content = file_get_contents($root_folder.'storage/app/'.$filename);
+      $myfile = fopen($root_folder.'storage/app/'.$filename, "r") or die("Unable to open file!");
+      $content = (int)fread($myfile, filesize($root_folder.'storage/app/'.$filename));
+      fclose($myfile);
+      // $content = file_get_contents($root_folder.'storage/app/'.$filename);
     } 
 
     return $content;
