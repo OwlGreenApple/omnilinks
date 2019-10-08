@@ -524,7 +524,7 @@ class DashboardController extends Controller
       // env('SHORT_LINK')
       $root_folder = "/home2/omli/public_html/";
     }
-
+    echo $root_folder.'storage/app/'.$filename;
     if(file_exists($root_folder.'storage/app/'.$filename)){
       $myfile = fopen($root_folder.'storage/app/'.$filename, "r") or die("Unable to open file!");
       $content = (int)fread($myfile, filesize($root_folder.'storage/app/'.$filename));
