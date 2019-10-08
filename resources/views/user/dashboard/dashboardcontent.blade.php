@@ -79,7 +79,6 @@
     $dashcont = new DashboardController;
 
     $arr = $dashcont->counter_click_month($page,$banners,$links,$bulan,$tahun);
-
     ?>
 
     <div class="card carddash">
@@ -397,7 +396,7 @@
           <div class="col-md-12">
             <span>Links</span>
           </div>
-
+          
           @foreach($links as $link)
             <div class="col-lg-7 col-md-6 col-6">
               <span class="tooltipstered" title="Click To View Details">
@@ -410,7 +409,7 @@
             <div class="col-md-2 col-6 text-md-center text-right">
               <div class="bd-highlight">
                 <span>
-                  {{$arr[$link->counter]}} clicks
+                  {{$arr[$link->title]}} clicks
                 </span>
               </div>
             </div>

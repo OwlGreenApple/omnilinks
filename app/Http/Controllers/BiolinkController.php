@@ -673,20 +673,32 @@ class BiolinkController extends Controller
   }
 
   public function make_file($date,$pageid,$name,$email){
-    $filename = 'clicked/'.$email.'/'.$date.'/'.$pageid.'/'.$name.'/counter.txt';
-
+    $folder = 'clicked/'.$email.'/'.$date.'/'.$pageid.'/'.$name.'/';
+    $filename = 'counter.txt';
+    
     $counter = 0;
-
-    if(file_exists('storage/app/'.$filename)){
-      $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
-      $content = (int)fread($myfile, filesize('storage/app/'.$filename));
+    $root_folder = "";
+    if ( env('APP_ENV') != "local" ) {
+      // env('SHORT_LINK')
+      $root_folder = "/home2/omnilinkz/public_html/dashboard/";
+    }
+    
+    if(file_exists($root_folder.'storage/app/'.$folder.$filename)){
+      $myfile = fopen($root_folder.'storage/app/'.$folder.$filename, "r") or die("Unable to open file!");
+      $content = (int)fread($myfile, filesize($root_folder.'storage/app/'.$folder.$filename));
       $counter = $content + 1;
       fclose($myfile);
     } else {
       $counter = 1;
     }
 
-    Storage::put($filename,$counter);
+    if ( env('APP_ENV') != "local" ) {
+      Storage::put($folder.$filename,$counter);
+    }
+    else if ( env('APP_ENV') != "local" ) {
+      mkdir($root_folder.$folder,0755,true);
+      file_put_contents($root_folder.$folder.$filename, $counter);
+    }
   }
 
   public function click($mode,$id){
