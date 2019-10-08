@@ -692,7 +692,7 @@ class BiolinkController extends Controller
       $counter = 1;
     }
 
-    if ( env('APP_ENV') !== "local" ) {
+    if ( env('APP_ENV') == "local" ) {
       Storage::put($folder.$filename,$counter);
     }
     else if ( env('APP_ENV') !== "local" ) {
