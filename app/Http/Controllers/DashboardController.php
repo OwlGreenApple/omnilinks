@@ -515,7 +515,7 @@ class DashboardController extends Controller
   }
 
   public function check_file($filename){
-    $filename = "clicked/celebgramme.dev@gmail.com/10-2019/16/link-omnifluencer";
+    $filename = "clicked/celebgramme.dev@gmail.com/10-2019/16/link-omnifluencer/counter.txt";
     //check isi file total click
     $content = 0;
     
