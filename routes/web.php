@@ -25,6 +25,7 @@ if(env('DOMAIN_TYPE')=='main'){
   
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');
+  Route::get('/check-file/{filename}','DashboardController@check_file');
 
   //information
   Route::get('/about',function(){
