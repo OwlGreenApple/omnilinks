@@ -551,7 +551,7 @@ class DashboardController extends Controller
     }
 
     foreach ($links as $link) {
-      $filename = 'clicked/'.$user->email.'/'.date($bulan.'-'.$ ).'/'.$page->id.'/link-'.$link->title.'/counter.txt';
+      $filename = 'clicked/'.$user->email.'/'.date($bulan.'-'.$tahun ).'/'.$page->id.'/link-'.$link->title.'/counter.txt';
 
       $click = $this->check_file($filename);
 
