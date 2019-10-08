@@ -522,7 +522,8 @@ class DashboardController extends Controller
     $root_folder = "";
     if ( env('APP_ENV') !== "local" ) {
       // env('SHORT_LINK')
-      $root_folder = "/home2/omli/public_html/";
+      // $root_folder = "/home2/omli/public_html/";
+      $root_folder = $_SERVER['DOCUMENT_ROOT'].'/../../omli/public_html/';
     }
     echo $root_folder.'storage/app/'.$filename;
     echo $_SERVER['DOCUMENT_ROOT'];
