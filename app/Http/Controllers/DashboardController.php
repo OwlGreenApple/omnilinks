@@ -523,8 +523,9 @@ class DashboardController extends Controller
       $content = (int)fread($myfile, filesize('storage/app/'.$filename));
       fclose($myfile);
     } */
-    
-    $content = file_get_contents(Storage::disk('s3')->url($filename));
+    if (Storage::disk('s3')->url($filename)->has('file.jpg')) {
+      $content = file_get_contents(Storage::disk('s3')->url($filename));
+    }
     
     return $content;
   }
