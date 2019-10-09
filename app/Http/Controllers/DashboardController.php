@@ -523,8 +523,8 @@ class DashboardController extends Controller
       $content = (int)fread($myfile, filesize('storage/app/'.$filename));
       fclose($myfile);
     } */
-
-    $content = Storage::disk('s3')->url($filename);
+    
+    $content = file_get_contents(Storage::disk('s3')->url($filename));
     
     return $content;
   }
