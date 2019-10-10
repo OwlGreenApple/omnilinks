@@ -683,12 +683,20 @@ class BiolinkController extends Controller
       // $root_folder = "/home2/omnilinkz/public_html/dashboard/";
     // }
     
-    if(file_exists($root_folder.'storage/app/'.$folder.$filename)){
+    /*if(file_exists($root_folder.'storage/app/'.$folder.$filename)){
       $myfile = fopen($root_folder.'storage/app/'.$folder.$filename, "r") or die("Unable to open file!");
       $content = (int)fread($myfile, filesize($root_folder.'storage/app/'.$folder.$filename));
       $counter = $content + 1;
       fclose($myfile);
     } else {
+      $counter = 1;
+    }*/
+    
+    if (Storage::disk('s3')->has($folder.$filename)) {
+      $counter = file_get_contents(Storage::disk('s3')->url($filename));
+      $counter += 1;
+    } 
+    else {
       $counter = 1;
     }
 
