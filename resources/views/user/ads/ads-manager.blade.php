@@ -204,7 +204,7 @@
                     </label>
 
                     <div class="col-md-12">
-                      <input type="text" name="redirect" value="<?php if(!is_null($ads)) echo $ads->link ?>" id="redirect" placeholder="Link" class="form-control">
+                      <input type="text" name="redirect" value="<?php if(!is_null($ads)) echo $ads->link ?>" id="redirect" placeholder="ex: https://some-url.com" class="form-control">
                     </div>
                   </div>
 

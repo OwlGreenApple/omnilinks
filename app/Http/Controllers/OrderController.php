@@ -70,7 +70,7 @@ class OrderController extends Controller
     //cek kodekupon
     $arr['status'] = 'success';
     $arr['message'] = '';
-    $arr['total'] = $harga;
+    $arr['total'] = number_format($harga, 0, '', '.');
     $arr['diskon'] = 0;
     $arr['coupon'] = null;
 
@@ -111,7 +111,7 @@ class OrderController extends Controller
 
             $arr['status'] = 'success';
             $arr['message'] = '';
-            $arr['total'] = $total;
+            $arr['total'] = number_format($total, 3, '.', '');
             $arr['diskon'] = $diskon;
             $arr['coupon'] = $coupon;
           }
