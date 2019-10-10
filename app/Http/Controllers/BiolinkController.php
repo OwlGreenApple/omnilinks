@@ -693,7 +693,8 @@ class BiolinkController extends Controller
     }*/
     
     if (Storage::disk('s3')->has($folder.$filename)) {
-      $counter = file_get_contents(Storage::disk('s3')->url($filename));
+      // $counter = file_get_contents(Storage::disk('s3')->url($filename));
+      $counter = Storage::disk('s3')->get($filename);
       $counter += 1;
     } 
     else {
