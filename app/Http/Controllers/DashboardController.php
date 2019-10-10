@@ -527,7 +527,7 @@ class DashboardController extends Controller
       $content = file_get_contents(Storage::disk('s3')->url($filename));
     }
     
-    return $content;
+    return $filename;
   }
 
   public function counter_click_month($page,$banners,$links,$bulan,$tahun){
