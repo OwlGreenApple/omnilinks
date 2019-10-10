@@ -605,7 +605,7 @@ class DashboardController extends Controller
         
       $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
     }*/
-    dd($arr);
+    // dd($arr);
     return $arr;
   }
 
