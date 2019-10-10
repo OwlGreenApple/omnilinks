@@ -746,10 +746,10 @@ class BiolinkController extends Controller
       $link->counter = $link->counter+1;
       $link->save();
 
-      $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->title,$user->username);
+      $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->id,$user->username);
       $this->make_file(date('d-m-Y'),$link->pages_id,'total-click',$user->username);
       $this->make_file(date('d-m-Y'),'all','total-click',$user->username);
-      $this->make_file(date('m-Y'),$link->pages_id,'link-'.$link->title,$user->username);
+      $this->make_file(date('m-Y'),$link->pages_id,'link-'.$link->id,$user->username);
       $this->make_file(date('m-Y'),$link->pages_id,'total-click',$user->username);
       $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
@@ -776,10 +776,10 @@ class BiolinkController extends Controller
       $banner->counter = $banner->counter+1;
       $banner->save();
 
-      $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->username);
+      $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->id,$user->username);
       $this->make_file(date('d-m-Y'),$banner->pages_id,'total-click',$user->username);
       $this->make_file(date('d-m-Y'),'all','total-click',$user->username);
-      $this->make_file(date('m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->username);
+      $this->make_file(date('m-Y'),$banner->pages_id,'banner-'.$banner->id,$user->username);
       $this->make_file(date('m-Y'),$banner->pages_id,'total-click',$user->username);
       $this->make_file(date('m-Y'),'all','total-click',$user->username);
 

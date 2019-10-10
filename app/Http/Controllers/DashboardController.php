@@ -395,7 +395,7 @@ class DashboardController extends Controller
       if(is_null($link)){
         return abort(404);
       }
-      $arr = $this->chart_link($pageid,'link-'.$link->title,$bulan,$tahun); 
+      $arr = $this->chart_link($pageid,'link-'.$link->id,$bulan,$tahun); 
   
       $data = array(
         'id' => $link->id,
@@ -417,7 +417,7 @@ class DashboardController extends Controller
       if(is_null($banner)){
         return abort(404);
       }
-      $arr = $this->chart_link($pageid,'banner-'.$banner->title,$bulan,$tahun);
+      $arr = $this->chart_link($pageid,'banner-'.$banner->id,$bulan,$tahun);
 
       $data = array(
         'id' => $banner->id,
@@ -539,7 +539,7 @@ class DashboardController extends Controller
     $arr = array();
 
     foreach ($banners as $banner) {
-      $filename = 'clicked/'.$user->username.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/banner-'.$banner->title.'/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/banner-'.$banner->id.'/counter.txt';
 
       $click = $this->check_file($filename);
 
@@ -547,7 +547,7 @@ class DashboardController extends Controller
     }
 
     foreach ($links as $link) {
-      $filename = 'clicked/'.$user->username.'/'.date($bulan.'-'.$tahun ).'/'.$page->id.'/link-'.$link->title.'/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.date($bulan.'-'.$tahun ).'/'.$page->id.'/link-'.$link->id.'/counter.txt';
 
       $click = $this->check_file($filename);
 
