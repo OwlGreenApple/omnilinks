@@ -539,7 +539,7 @@ class DashboardController extends Controller
     $arr = array();
 
     foreach ($banners as $banner) {
-      $filename = 'clicked/'.$user->email.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/banner-'.$banner->title.'/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/banner-'.$banner->title.'/counter.txt';
 
       $click = $this->check_file($filename);
 
@@ -547,7 +547,7 @@ class DashboardController extends Controller
     }
 
     foreach ($links as $link) {
-      $filename = 'clicked/'.$user->email.'/'.date($bulan.'-'.$tahun ).'/'.$page->id.'/link-'.$link->title.'/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.date($bulan.'-'.$tahun ).'/'.$page->id.'/link-'.$link->title.'/counter.txt';
 
       $click = $this->check_file($filename);
 
@@ -557,7 +557,7 @@ class DashboardController extends Controller
     $key = ['wa','telegram','skype','line','messenger','fb','ig','twitter','youtube'];
       
     foreach ($key as $k) {
-      $filename = 'clicked/'.$user->email.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/'.$k.'/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.date($bulan.'-'.$tahun).'/'.$page->id.'/'.$k.'/counter.txt';
 
       $click = $this->check_file($filename);
 
@@ -566,7 +566,7 @@ class DashboardController extends Controller
 
     /*while($first_date <= $query_date){
       foreach ($banners as $banner) {
-        $filename = 'clicked/'.$user->email.'/'.$first_date.'/banner-'.$banner->title.'/counter.txt';
+        $filename = 'clicked/'.$user->username.'/'.$first_date.'/banner-'.$banner->title.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -578,7 +578,7 @@ class DashboardController extends Controller
       }
       
       foreach ($links as $link) {
-        $filename = 'clicked/'.$user->email.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
+        $filename = 'clicked/'.$user->username.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -592,7 +592,7 @@ class DashboardController extends Controller
       $key = ['wa','telegram','skype','fb','ig','twitter','youtube'];
       
       foreach ($key as $k) {
-        $filename = 'clicked/'.$user->email.'/'.$first_date.'/'.$k.'/counter.txt';
+        $filename = 'clicked/'.$user->username.'/'.$first_date.'/'.$k.'/counter.txt';
 
         $click = $this->check_file($filename);
 

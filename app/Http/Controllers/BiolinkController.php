@@ -672,8 +672,8 @@ class BiolinkController extends Controller
   	return $arr;
   }
 
-  public function make_file($date,$pageid,$name,$email){
-    $folder = 'clicked/'.$email.'/'.$date.'/'.$pageid.'/'.$name.'/';
+  public function make_file($date,$pageid,$name,$username){
+    $folder = 'clicked/'.$username.'/'.$date.'/'.$pageid.'/'.$name.'/';
     $filename = 'counter.txt';
     
     $counter = 0;
@@ -716,7 +716,7 @@ class BiolinkController extends Controller
       $user = User::find($pages->user_id);
     }
 
-    $filename = 'clicked/'.$user->email.'/'.date('m-Y').'/all/total-click/counter.txt';
+    $filename = 'clicked/'.$user->username.'/'.date('m-Y').'/all/total-click/counter.txt';
 
     $dash = new DashboardController;
     $clicks = $dash->check_file($filename);
@@ -737,12 +737,12 @@ class BiolinkController extends Controller
       $link->counter = $link->counter+1;
       $link->save();
 
-      $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->title,$user->email);
-      $this->make_file(date('d-m-Y'),$link->pages_id,'total-click',$user->email);
-      $this->make_file(date('d-m-Y'),'all','total-click',$user->email);
-      $this->make_file(date('m-Y'),$link->pages_id,'link-'.$link->title,$user->email);
-      $this->make_file(date('m-Y'),$link->pages_id,'total-click',$user->email);
-      $this->make_file(date('m-Y'),'all','total-click',$user->email);
+      $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->title,$user->username);
+      $this->make_file(date('d-m-Y'),$link->pages_id,'total-click',$user->username);
+      $this->make_file(date('d-m-Y'),'all','total-click',$user->username);
+      $this->make_file(date('m-Y'),$link->pages_id,'link-'.$link->title,$user->username);
+      $this->make_file(date('m-Y'),$link->pages_id,'total-click',$user->username);
+      $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
       $pixel = Pixel::find($link->pixel_id);
       $script = "";
@@ -767,12 +767,12 @@ class BiolinkController extends Controller
       $banner->counter = $banner->counter+1;
       $banner->save();
 
-      $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->email);
-      $this->make_file(date('d-m-Y'),$banner->pages_id,'total-click',$user->email);
-      $this->make_file(date('d-m-Y'),'all','total-click',$user->email);
-      $this->make_file(date('m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->email);
-      $this->make_file(date('m-Y'),$banner->pages_id,'total-click',$user->email);
-      $this->make_file(date('m-Y'),'all','total-click',$user->email);
+      $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->username);
+      $this->make_file(date('d-m-Y'),$banner->pages_id,'total-click',$user->username);
+      $this->make_file(date('d-m-Y'),'all','total-click',$user->username);
+      $this->make_file(date('m-Y'),$banner->pages_id,'banner-'.$banner->title,$user->username);
+      $this->make_file(date('m-Y'),$banner->pages_id,'total-click',$user->username);
+      $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
       $pixel = Pixel::find($banner->pixel_id);
       $script = "";
@@ -842,12 +842,12 @@ class BiolinkController extends Controller
       }
       $pages->save();
 
-      $this->make_file(date('d-m-Y'),$pages->id,$mode,$user->email);
-      $this->make_file(date('d-m-Y'),$pages->id,'total-click',$user->email);
-      $this->make_file(date('d-m-Y'),'all','total-click',$user->email);
-      $this->make_file(date('m-Y'),$pages->id,$mode,$user->email);
-      $this->make_file(date('m-Y'),$pages->id,'total-click',$user->email);
-      $this->make_file(date('m-Y'),'all','total-click',$user->email);
+      $this->make_file(date('d-m-Y'),$pages->id,$mode,$user->username);
+      $this->make_file(date('d-m-Y'),$pages->id,'total-click',$user->username);
+      $this->make_file(date('d-m-Y'),'all','total-click',$user->username);
+      $this->make_file(date('m-Y'),$pages->id,$mode,$user->username);
+      $this->make_file(date('m-Y'),$pages->id,'total-click',$user->username);
+      $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
       $pixel = Pixel::find($idpixel);
       $script = "";
