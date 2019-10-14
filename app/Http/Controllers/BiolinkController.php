@@ -107,14 +107,14 @@ class BiolinkController extends Controller
 
   public function viewpage($uuid)
   {	
- 
+    $user=Auth::user();
   	$page=Page::where('uid','=',$uuid)->first();
   	$pageid=0;
-    $links=Link::where('users_id',Auth::user()->id)
+    $links=Link::where('users_id',$user->id)
                 ->where('pages_id',$page->id)
                 ->orderBy('created_at')
                 ->get();
-    $banner=Banner::where('users_id',Auth::user()->id)
+    $banner=Banner::where('users_id',$user->id)
                   ->where('pages_id',$page->id)
                   ->get();
   	if(!is_null($page)){
@@ -127,6 +127,7 @@ class BiolinkController extends Controller
     	'pageid'=>$pageid,
       'banner'=>$banner,
       'links'=>$links,
+      'user'=>$user,
     ]);  
   }
   
@@ -308,7 +309,13 @@ class BiolinkController extends Controller
     $page->is_rounded=$request->rounded;
     $page->is_outlined=$request->outlined;
     
-    $page->powered=$request->powered;
+    if ($user->membership=='free') {
+      $page->powered=1;
+    }
+    else {
+      $page->powered=$request->powered;
+    }
+
     $page->text_color=$request->textColor;
     $page->is_text_color=$request->is_text_color;
 

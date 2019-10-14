@@ -29,6 +29,1136 @@
 </style>
 
 <script type="text/javascript">
+  var templates = [
+    {
+     "id": 1,
+     "theme": "wallpaper1",
+     "bio_font_color": "#122B74",
+     "button_color": "#122B74",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#081F66"
+    },
+    {
+     "id": 2,
+     "theme": "wallpaper2",
+     "bio_font_color": "#740000",
+     "button_color": "#740000",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#680C0C"
+    },
+    {
+     "id": 3,
+     "theme": "wallpaper3",
+     "bio_font_color": "#393939",
+     "button_color": "#393939",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#0F0D0D"
+    },
+    {
+     "id": 4,
+     "theme": "wallpaper4",
+     "bio_font_color": "#9B4E40",
+     "button_color": "#9B4E40",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#883525"
+    },
+    {
+     "id": 5,
+     "theme": "wallpaper5",
+     "bio_font_color": "#987C15",
+     "button_color": "#987C15",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#82690E"
+    },
+    {
+     "id": 6,
+     "theme": "wallpaper6",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6422E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 7,
+     "theme": "wallpaper7",
+     "bio_font_color": "#3D0D71",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 8,
+     "theme": "wallpaper8",
+     "bio_font_color": "#393939",
+     "button_color": "#393939",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#0F0D0D"
+    },
+    {
+     "id": 9,
+     "theme": "wallpaper9",
+     "bio_font_color": "#393939",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#393939",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 10,
+     "theme": "wallpaper10",
+     "bio_font_color": "#C6670E",
+     "button_color": "#C6670E",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#974E0A"
+    },
+    {
+     "id": 11,
+     "theme": "wallpaper11",
+     "bio_font_color": "#505050",
+     "button_color": "#505050",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#393939"
+    },
+    {
+     "id": 12,
+     "theme": "wallpaper12",
+     "bio_font_color": "#3D0D71",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 13,
+     "theme": "wallpaper13",
+     "bio_font_color": "#393939",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#393939",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 14,
+     "theme": "wallpaper14",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E4582",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 15,
+     "theme": "wallpaper15",
+     "bio_font_color": "#C74A3A",
+     "button_color": "#C74A3A",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#A5463A"
+    },
+    {
+     "id": 16,
+     "theme": "wallpaper16",
+     "bio_font_color": "#800B0B",
+     "button_color": "#800B0B",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#5E0909"
+    },
+    {
+     "id": 17,
+     "theme": "wallpaper17",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#505050",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 18,
+     "theme": "wallpaper18",
+     "bio_font_color": "#034FA2",
+     "button_color": "#034FA2",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#154F8F"
+    },
+    {
+     "id": 19,
+     "theme": "wallpaper19",
+     "bio_font_color": "#BD2D8C",
+     "button_color": "#BD2D8C",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#891762"
+    },
+    {
+     "id": 20,
+     "theme": "wallpaper20",
+     "bio_font_color": "#8C1E10",
+     "button_color": "#8C1E10",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#731E13"
+    },
+    {
+     "id": 21,
+     "theme": "wallpaper21",
+     "bio_font_color": "#B707AC",
+     "button_color": "#B707AC",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#991691"
+    },
+    {
+     "id": 22,
+     "theme": "bubble-bg-blue",
+     "bio_font_color": "#034FA2",
+     "button_color": "#034FA2",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#154F8F"
+    },
+    {
+     "id": 23,
+     "theme": "bubble-bg-orange",
+     "bio_font_color": "#3D0D71",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 24,
+     "theme": "bubble-bg-pink",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E4582",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 25,
+     "theme": "bubble-bg-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#401A84",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 26,
+     "theme": "bubble-bg-red",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#EE464E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 27,
+     "theme": "bubble-bg-yellow",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C57D06",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 28,
+     "theme": "bubble-blue",
+     "bio_font_color": "#122B74",
+     "button_color": "#122B74",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#081F66"
+    },
+    {
+     "id": 29,
+     "theme": "bubble-brown",
+     "bio_font_color": "#8C1E10",
+     "button_color": "#8C1E10",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#7 31E13"
+    },
+    {
+     "id": 30,
+     "theme": "bubble-colorful",
+     "bio_font_color": "#BD2D8C",
+     "button_color": "#BD2D8C",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#891762"
+    },
+    {
+     "id": 31,
+     "theme": "bubble-green",
+     "bio_font_color": "#0 E8012",
+     "button_color": "#0 E8012",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#086A0C"
+    },
+    {
+     "id": 32,
+     "theme": "bubble-orange",
+     "bio_font_color": "#C6670E",
+     "button_color": "#C6670E",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#974E0A"
+    },
+    {
+     "id": 33,
+     "theme": "bubble-purple",
+     "bio_font_color": "#B707AC",
+     "button_color": "#B707AC",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#991691"
+    },
+    {
+     "id": 34,
+     "theme": "bubble-red",
+     "bio_font_color": "#740000",
+     "button_color": "#740000",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#680C0C"
+    },
+    {
+     "id": 35,
+     "theme": "bubble-soft",
+     "bio_font_color": "#C6670E",
+     "button_color": "#C6670E",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#974E0A"
+    },
+    {
+     "id": 36,
+     "theme": "bubble-up-bg-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E4582",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 37,
+     "theme": "bubble-up-bg-brown",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#393939",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 38,
+     "theme": "bubble-up-bg-green",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E8012",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 39,
+     "theme": "bubble-up-bg-pink",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E4582",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 40,
+     "theme": "bubble-up-bg-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#401A84",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 41,
+     "theme": "bubble-up-bg-red",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#EE464E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 42,
+     "theme": "bubble-up-blue",
+     "bio_font_color": "#122B74",
+     "button_color": "#122B74",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#081F66"
+    },
+    {
+     "id": 43,
+     "theme": "bubble-up-green",
+     "bio_font_color": "#0 E8012",
+     "button_color": "#0 E8012",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#086A0C"
+    },
+    {
+     "id": 44,
+     "theme": "bubble-up-lilac",
+     "bio_font_color": "#505050",
+     "button_color": "#505050",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#393939"
+    },
+    {
+     "id": 45,
+     "theme": "bubble-up-mocca",
+     "bio_font_color": "#8C1E10",
+     "button_color": "#8C1E10",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#7 31E13"
+    },
+    {
+     "id": 46,
+     "theme": "bubble-up-orange",
+     "bio_font_color": "#C6670E",
+     "button_color": "#C6670E",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#974E0A"
+    },
+    {
+     "id": 47,
+     "theme": "bubble-up-pink",
+     "bio_font_color": "#B707AC",
+     "button_color": "#B707AC",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#991691"
+    },
+    {
+     "id": 48,
+     "theme": "bubble-up-red",
+     "bio_font_color": "#800B0B",
+     "button_color": "#800B0B",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#5E0909"
+    },
+    {
+     "id": 49,
+     "theme": "bubble-up-soft-color",
+     "bio_font_color": "#034FA2",
+     "button_color": "#034FA2",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#154F8F"
+    },
+    {
+     "id": 50,
+     "theme": "cloud-bg-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 51,
+     "theme": "cloud-bg-cyan",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#034FA2",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 52,
+     "theme": "cloud-bg-green",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E8012",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 53,
+     "theme": "cloud-bg-orange",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 54,
+     "theme": "cloud-bg-pink",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E4582",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 55,
+     "theme": "cloud-bg-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#401A84",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 56,
+     "theme": "cloud-bg-red",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#EE464E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 57,
+     "theme": "cloud-bg-yellow",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C57D06",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 58,
+     "theme": "cloud-blue-orange",
+     "bio_font_color": "#122B74",
+     "button_color": "#122B74",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#081F66"
+    },
+    {
+     "id": 59,
+     "theme": "cloud-brown",
+     "bio_font_color": "#8C1E10",
+     "button_color": "#8C1E10",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#7 31E13"
+    },
+    {
+     "id": 60,
+     "theme": "cloud-gold",
+     "bio_font_color": "#C6670E",
+     "button_color": "#C6670E",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#974E0A"
+    },
+    {
+     "id": 61,
+     "theme": "cloud-gray",
+     "bio_font_color": "#505050",
+     "button_color": "#505050",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#393939"
+    },
+    {
+     "id": 62,
+     "theme": "cloud-green-yellow",
+     "bio_font_color": "#0 E8012",
+     "button_color": "#0 E8012",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#086A0C"
+    },
+    {
+     "id": 63,
+     "theme": "cloud-green",
+     "bio_font_color": "#0 E8012",
+     "button_color": "#0 E8012",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#086A0C"
+    },
+    {
+     "id": 64,
+     "theme": "cloud-light-blue",
+     "bio_font_color": "#122B74",
+     "button_color": "#122B74",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#081F66"
+    },
+    {
+     "id": 65,
+     "theme": "cloud-orange",
+     "bio_font_color": "#C6670E",
+     "button_color": "#C6670E",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#974E0A"
+    },
+    {
+     "id": 66,
+     "theme": "cloud-pastel",
+     "bio_font_color": "#C74A3A",
+     "button_color": "#C74A3A",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#A5463A"
+    },
+    {
+     "id": 67,
+     "theme": "cloud-pink",
+     "bio_font_color": "#BD2D8C",
+     "button_color": "#BD2D8C",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#891762"
+    },
+    {
+     "id": 68,
+     "theme": "cloud-purple-yellow",
+     "bio_font_color": "#3D0D71",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 69,
+     "theme": "cloud-purple",
+     "bio_font_color": "#B707AC",
+     "button_color": "#B707AC",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#991691"
+    },
+    {
+     "id": 70,
+     "theme": "cloud-red",
+     "bio_font_color": "#740000",
+     "button_color": "#740000",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#680C0C"
+    },
+    {
+     "id": 71,
+     "theme": "cloud-soft",
+     "bio_font_color": "#034FA2",
+     "button_color": "#034FA2",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#154F8F"
+    },
+    {
+     "id": 72,
+     "theme": "confetti-bg-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 73,
+     "theme": "confetti-bg-latte",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#393939",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 74,
+     "theme": "confetti-bg-orange",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 75,
+     "theme": "confetti-bg-pink",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#BD2D8C",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 76,
+     "theme": "confetti-bg-white",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6670E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 77,
+     "theme": "confetti-bg-yellow",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C57D06",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 78,
+     "theme": "confetti-blue",
+     "bio_font_color": "#122B74",
+     "button_color": "#122B74",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#081F66"
+    },
+    {
+     "id": 79,
+     "theme": "confetti-brown",
+     "bio_font_color": "#8C1E10",
+     "button_color": "#8C1E10",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#7 31E13"
+    },
+    {
+     "id": 80,
+     "theme": "confetti-gray",
+     "bio_font_color": "#505050",
+     "button_color": "#505050",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#393939"
+    },
+    {
+     "id": 81,
+     "theme": "confetti-green",
+     "bio_font_color": "#0 E8012",
+     "button_color": "#0 E8012",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#086A0C"
+    },
+    {
+     "id": 82,
+     "theme": "confetti-pink",
+     "bio_font_color": "#BD2D8C",
+     "button_color": "#BD2D8C",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#891762"
+    },
+    {
+     "id": 83,
+     "theme": "confetti-purple",
+     "bio_font_color": "#B707AC",
+     "button_color": "#B707AC",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#991691"
+    },
+    {
+     "id": 84,
+     "theme": "confetti-red",
+     "bio_font_color": "#740000",
+     "button_color": "#740000",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#680C0C"
+    },
+    {
+     "id": 85,
+     "theme": "confetti-soft",
+     "bio_font_color": "#034FA2",
+     "button_color": "#034FA2",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#154F8F"
+    },
+    {
+     "id": 86,
+     "theme": "disk-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 87,
+     "theme": "disk-dual-color",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 88,
+     "theme": "disk-green",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E8012",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 89,
+     "theme": "disk-orange",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6670E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 90,
+     "theme": "disk-pink",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#BD2D8C",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 91,
+     "theme": "disk-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 92,
+     "theme": "disk-red",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#740000",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 93,
+     "theme": "disk-yellow",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 94,
+     "theme": "gradient-blue-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 95,
+     "theme": "gradient-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#081F66",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 96,
+     "theme": "gradient-cyan",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#081F66",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 97,
+     "theme": "gradient-green",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E8012",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 98,
+     "theme": "gradient-orange",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 99,
+     "theme": "gradient-peach",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 100,
+     "theme": "gradient-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 101,
+     "theme": "gradient-soft-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 102,
+     "theme": "leaves-bg-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 103,
+     "theme": "leaves-bg-green",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E8012",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 104,
+     "theme": "leaves-bg-moca",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#8C1E10",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 105,
+     "theme": "leaves-bg-orange",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6670E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 106,
+     "theme": "leaves-bg-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 107,
+     "theme": "leaves-bg-red",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#740000",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 108,
+     "theme": "leaves-blue",
+     "bio_font_color": "#122B74",
+     "button_color": "#122B74",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#081F66"
+    },
+    {
+     "id": 109,
+     "theme": "leaves-gray",
+     "bio_font_color": "#505050",
+     "button_color": "#505050",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#393939"
+    },
+    {
+     "id": 110,
+     "theme": "leaves-green",
+     "bio_font_color": "#0 E8012",
+     "button_color": "#0 E8012",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#086A0C"
+    },
+    {
+     "id": 111,
+     "theme": "leaves-pastel",
+     "bio_font_color": "#B707AC",
+     "button_color": "#B707AC",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#991691"
+    },
+    {
+     "id": 112,
+     "theme": "leaves-pink",
+     "bio_font_color": "#BD2D8C",
+     "button_color": "#BD2D8C",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#891762"
+    },
+    {
+     "id": 113,
+     "theme": "leaves-purple",
+     "bio_font_color": "#B707AC",
+     "button_color": "#B707AC",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#991691"
+    },
+    {
+     "id": 114,
+     "theme": "leaves-red",
+     "bio_font_color": "#740000",
+     "button_color": "#740000",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#680C0C"
+    },
+    {
+     "id": 115,
+     "theme": "leaves-yellow",
+     "bio_font_color": "#C6670E",
+     "button_color": "#C6670E",
+     "font_button_color": "#FFFFFF",
+     "button_hover_color": "#974E0A"
+    },
+    {
+     "id": 116,
+     "theme": "wave-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#081F66",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 117,
+     "theme": "wave-brown",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#8C1E10",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 118,
+     "theme": "wave-dual-tone",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 119,
+     "theme": "wave-green",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E8012",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 120,
+     "theme": "wave-mocca",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#8C1E10",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 121,
+     "theme": "wave-orange",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6670E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 122,
+     "theme": "wave-peach",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#3D0D71",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 123,
+     "theme": "wave-pink",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#BD2D8C",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 124,
+     "theme": "wave-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 125,
+     "theme": "wave-red",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#740000",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 126,
+     "theme": "wave-soft-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#081F66",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 127,
+     "theme": "wave-soft-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 128,
+     "theme": "wave-yellow",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6670E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 129,
+     "theme": "waves-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#081F66",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 130,
+     "theme": "waves-chocolate",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#8C1E10",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 131,
+     "theme": "waves-green",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#0 E8012",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 132,
+     "theme": "waves-grey",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#505050",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 133,
+     "theme": "waves-light-blue",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#081F66",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 134,
+     "theme": "waves-light-brown",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#8C1E10",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 135,
+     "theme": "waves-ocean",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#122B74",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 136,
+     "theme": "waves-orange",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6670E",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 137,
+     "theme": "waves-pink",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#BD2D8C",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 138,
+     "theme": "waves-purple",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#B707AC",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 139,
+     "theme": "waves-red",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#740000",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 140,
+     "theme": "waves-sand",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#8C1E10",
+     "button_hover_color": "#F5F5F5"
+    },
+    {
+     "id": 141,
+     "theme": "waves-yellow",
+     "bio_font_color": "#FFFFFF",
+     "button_color": "#FFFFFF",
+     "font_button_color": "#C6670E",
+     "button_hover_color": "#F5F5F5"
+    }
+  ];
   var picker,dataView;
   var color_picker,rounded,outline;
   // https://www.shift8web.ca/2017/01/use-jquery-sort-reorganize-content/
@@ -531,7 +1661,8 @@
       $('.rounded').val(0);
     }
   }
-  
+
+  <?php if ($user->membership<>'free') { ?>  
   function check_powered(){
     if ($('#powered').prop("checked") == true) {
       $("#poweredview").children().show();
@@ -542,6 +1673,7 @@
       $('#powered').val(0);
     }
   }
+  <?php } ?>
 
   function check_click_bait(){
     if ($('#is_click_bait').prop("checked") == true) {
@@ -1490,21 +2622,23 @@
                             </div>
                         </div>
                       </div>  
-                      <div class="row">
-                        <div class="col-md-2 col-3">
-                          <label class="switch">
-                            <input type="checkbox" name="powered" id="powered" value="<?php if($pages->powered) echo '1'; ?>" <?php if($pages->powered) echo 'checked'; ?>>
-                            <span class="slider round"></span>
-                          </label>
+                      <?php if ($user->membership<>'free') { ?>  
+                        <div class="row">
+                          <div class="col-md-2 col-3">
+                            <label class="switch">
+                              <input type="checkbox" name="powered" id="powered" value="<?php if($pages->powered) echo '1'; ?>" <?php if($pages->powered) echo 'checked'; ?>>
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                          <div class="col-md-4 col-4">
+                            <label class="caption">
+                              Powered By Omnilinkz
+                            </label>
+                          </div>
+                          <div class="col-md-4 col-4">
+                          </div>
                         </div>
-                        <div class="col-md-4 col-4">
-                          <label class="caption">
-                            Powered By Omnilinkz
-                          </label>
-                        </div>
-                        <div class="col-md-4 col-4">
-                        </div>
-                      </div>
+                      <?php } ?>
                     </div>
                     
                     <div class="as">
@@ -1754,7 +2888,7 @@
                       </a>  
                     </li>  
                   </ul>
-
+                  
                     <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
                       <div class="powered-omnilinks">
                         <a href="#">
@@ -2013,6 +3147,13 @@
 
   $('body').on('click', '.wallpapers', function() {
     $('.wallpapers').removeClass('selected');
+    res = $("#phonecolor").attr("class").substr(7);
+    //cek ada ngga di json
+    $.each( templates, function( key, value ) {
+      if (res == value.theme) {
+        console.log(value);
+      }
+    });
     $(this).addClass('selected');
   });  
 
@@ -2107,9 +3248,11 @@
     $('.rounded').click(function() {
       check_rounded();
     });
-    $('#powered').click(function() {
-      check_powered();
-    });
+    <?php if ($user->membership<>'free') { ?>  
+      $('#powered').click(function() {
+        check_powered();
+      });
+    <?php } ?>
     $('#is_click_bait').click(function() {
       check_click_bait();
     });
@@ -2753,7 +3896,10 @@
     currentSlide(0);
     slideIndex=0;
     check_rounded();
-    check_powered();
+    $("#poweredview").children().show();
+    <?php if ($user->membership<>'free') { ?>  
+      check_powered();
+    <?php } ?>
     check_click_bait();
     check_text_color();
     check_outlined();

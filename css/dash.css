@@ -687,12 +687,30 @@ hr.own {
     height: 80%;
     top: 70%;
   }
+  .screen {
+    width:250px;
+  }
+  .mobile {
+    width:250px;
+  }
+  .mobile1 {
+    width:250px;
+  }
 }
 @media screen and (min-height: 939px) {
   .fixed { 
     height: 80%;
     top: 50%;
     transform: translate(0%, -10%);  
+  }
+  .screen {
+    width:318px;
+  }
+  .mobile {
+    width:331px;
+  }
+  .mobile1 {
+    width:326px;
   }
 }
 
