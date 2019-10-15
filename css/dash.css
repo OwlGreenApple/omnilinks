@@ -682,6 +682,11 @@ hr.own {
   height: 100%;
 }
 
+.powered-omnilinks{
+  color : #fff;
+  font-size:11px;
+}
+
 @media screen and (min-height: 625px) {
   .fixed { 
     height: 80%;

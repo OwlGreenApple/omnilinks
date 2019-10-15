@@ -29,6 +29,7 @@
 </style>
 
 <script type="text/javascript">
+  var button_hover_color;
   var templates = [
     {
      "id": 1,
@@ -139,7 +140,7 @@
      "theme": "wallpaper14",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E4582",
+     "font_button_color": "#0E4582",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -219,7 +220,7 @@
      "theme": "bubble-bg-pink",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E4582",
+     "font_button_color": "#0E4582",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -260,7 +261,7 @@
      "bio_font_color": "#8C1E10",
      "button_color": "#8C1E10",
      "font_button_color": "#FFFFFF",
-     "button_hover_color": "#7 31E13"
+     "button_hover_color": "#731E13"
     },
     {
      "id": 30,
@@ -273,8 +274,8 @@
     {
      "id": 31,
      "theme": "bubble-green",
-     "bio_font_color": "#0 E8012",
-     "button_color": "#0 E8012",
+     "bio_font_color": "#0E8012",
+     "button_color": "#0E8012",
      "font_button_color": "#FFFFFF",
      "button_hover_color": "#086A0C"
     },
@@ -315,7 +316,7 @@
      "theme": "bubble-up-bg-blue",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E4582",
+     "font_button_color": "#0E4582",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -331,7 +332,7 @@
      "theme": "bubble-up-bg-green",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E8012",
+     "font_button_color": "#0E8012",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -339,7 +340,7 @@
      "theme": "bubble-up-bg-pink",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E4582",
+     "font_button_color": "#0E4582",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -369,8 +370,8 @@
     {
      "id": 43,
      "theme": "bubble-up-green",
-     "bio_font_color": "#0 E8012",
-     "button_color": "#0 E8012",
+     "bio_font_color": "#0E8012",
+     "button_color": "#0E8012",
      "font_button_color": "#FFFFFF",
      "button_hover_color": "#086A0C"
     },
@@ -388,7 +389,7 @@
      "bio_font_color": "#8C1E10",
      "button_color": "#8C1E10",
      "font_button_color": "#FFFFFF",
-     "button_hover_color": "#7 31E13"
+     "button_hover_color": "#731E13"
     },
     {
      "id": 46,
@@ -443,7 +444,7 @@
      "theme": "cloud-bg-green",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E8012",
+     "font_button_color": "#0E8012",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -459,7 +460,7 @@
      "theme": "cloud-bg-pink",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E4582",
+     "font_button_color": "#0E4582",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -500,7 +501,7 @@
      "bio_font_color": "#8C1E10",
      "button_color": "#8C1E10",
      "font_button_color": "#FFFFFF",
-     "button_hover_color": "#7 31E13"
+     "button_hover_color": "#731E13"
     },
     {
      "id": 60,
@@ -521,16 +522,16 @@
     {
      "id": 62,
      "theme": "cloud-green-yellow",
-     "bio_font_color": "#0 E8012",
-     "button_color": "#0 E8012",
+     "bio_font_color": "#0E8012",
+     "button_color": "#0E8012",
      "font_button_color": "#FFFFFF",
      "button_hover_color": "#086A0C"
     },
     {
      "id": 63,
      "theme": "cloud-green",
-     "bio_font_color": "#0 E8012",
-     "button_color": "#0 E8012",
+     "bio_font_color": "#0E8012",
+     "button_color": "#0E8012",
      "font_button_color": "#FFFFFF",
      "button_hover_color": "#086A0C"
     },
@@ -660,7 +661,7 @@
      "bio_font_color": "#8C1E10",
      "button_color": "#8C1E10",
      "font_button_color": "#FFFFFF",
-     "button_hover_color": "#7 31E13"
+     "button_hover_color": "#731E13"
     },
     {
      "id": 80,
@@ -673,8 +674,8 @@
     {
      "id": 81,
      "theme": "confetti-green",
-     "bio_font_color": "#0 E8012",
-     "button_color": "#0 E8012",
+     "bio_font_color": "#0E8012",
+     "button_color": "#0E8012",
      "font_button_color": "#FFFFFF",
      "button_hover_color": "#086A0C"
     },
@@ -803,7 +804,7 @@
      "theme": "gradient-green",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E8012",
+     "font_button_color": "#0E8012",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -851,7 +852,7 @@
      "theme": "leaves-bg-green",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E8012",
+     "font_button_color": "#0E8012",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -905,8 +906,8 @@
     {
      "id": 110,
      "theme": "leaves-green",
-     "bio_font_color": "#0 E8012",
-     "button_color": "#0 E8012",
+     "bio_font_color": "#0E8012",
+     "button_color": "#0E8012",
      "font_button_color": "#FFFFFF",
      "button_hover_color": "#086A0C"
     },
@@ -979,7 +980,7 @@
      "theme": "wave-green",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E8012",
+     "font_button_color": "#0E8012",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -1075,7 +1076,7 @@
      "theme": "waves-green",
      "bio_font_color": "#FFFFFF",
      "button_color": "#FFFFFF",
-     "font_button_color": "#0 E8012",
+     "font_button_color": "#0E8012",
      "button_hover_color": "#F5F5F5"
     },
     {
@@ -1613,38 +1614,40 @@
   }
 
   function check_outlined(){
-    if ($('.outlined').prop("checked") == true) {
-      //$(".mobile1").addClass("outlinedview");
-      $(".screen").addClass("outlinedview");
-      $('.outlined').val(1);
-      
-      $('.btnview').css("background-color","transparent");
-      if ($('#is_text_color').prop("checked") == false) {
-        $('.btnview').css("border-color",$("#colorOutlineButton").val());
-        $('.btnview').css("color",$("#colorOutlineButton").val());
-        $('.description').css("color",$("#colorOutlineButton").val());
-      } else {
-        $('.btnview').css("border-color",$('#textColor').val());
-        $('.btnview').css("color",$('#textColor').val());
-        $('.description').css("color",$('#textColor').val());
-      }
+    if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+      if ($('.outlined').prop("checked") == true) {
+        //$(".mobile1").addClass("outlinedview");
+        $(".screen").addClass("outlinedview");
+        $('.outlined').val(1);
 
-      /*$('.btnview').css("border-color",$("#colorButton").val());
-      $('.btnview').css("color",$("#colorOutlineButton").val());*/
-    } else if ($('.outlined').prop("checked") == false) {
-      //$(".mobile1").removeClass("outlinedview");
-      $(".screen").removeClass("outlinedview");
-      $('.outlined').val(0);
-      
-      $('.btnview').css("background-color",$("#colorButton").val());
-      $('.btnview').css("border-color",'transparent');
-      //$('.btnview').css("color","#fff");
-      if ($('#is_text_color').prop("checked") == false) {
-        $('.btnview').css("color",$("#colorOutlineButton").val());
-        $('.description').css("color",$("#colorOutlineButton").val());
-      } else {
-        $('.btnview').css("color",$("#textColor").val());
-        $('.description').css("color",$("#textColor").val());
+        $('.btnview').css("background-color","transparent");
+        if ($('#is_text_color').prop("checked") == false) {
+          $('.btnview').css("border-color",$("#colorOutlineButton").val());
+          $('.btnview').css("color",$("#colorOutlineButton").val());
+          $('.description').css("color",$("#colorOutlineButton").val());
+        } else {
+          $('.btnview').css("border-color",$('#textColor').val());
+          $('.btnview').css("color",$('#textColor').val());
+          $('.description').css("color",$('#textColor').val());
+        }
+
+        /*$('.btnview').css("border-color",$("#colorButton").val());
+        $('.btnview').css("color",$("#colorOutlineButton").val());*/
+      } else if ($('.outlined').prop("checked") == false) {
+        //$(".mobile1").removeClass("outlinedview");
+        $(".screen").removeClass("outlinedview");
+        $('.outlined').val(0);
+        
+        $('.btnview').css("background-color",$("#colorButton").val());
+        $('.btnview').css("border-color",'transparent');
+        //$('.btnview').css("color","#fff");
+        if ($('#is_text_color').prop("checked") == false) {
+          $('.btnview').css("color",$("#colorOutlineButton").val());
+          $('.description').css("color",$("#colorOutlineButton").val());
+        } else {
+          $('.btnview').css("color",$("#textColor").val());
+          $('.description').css("color",$("#textColor").val());
+        }
       }
     }
   }
@@ -2513,7 +2516,7 @@
                           </label>
                         </div>
                         <div class="col-md-5 col-5">
-                          <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Background Color</a>
+                          <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Background Button Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -2892,11 +2895,9 @@
                     <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
                       <div class="powered-omnilinks">
                         <a href="#">
-                          <span style="font-size:11px; color: #fff;">
-                            powered by
-                          </span>
-                          <br>&nbsp;&nbsp;
-                          <img style="width: 110px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">
+                          powered by
+                          <br>Omnlinkz
+                          <!--<img style="width: 110px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">-->
                         </a>
                       </div>
                     </div>
@@ -3148,10 +3149,19 @@
   $('body').on('click', '.wallpapers', function() {
     $('.wallpapers').removeClass('selected');
     res = $("#phonecolor").attr("class").substr(7);
+    res = res.replace("animation-", "");
     //cek ada ngga di json
     $.each( templates, function( key, value ) {
+      console.log(res);
       if (res == value.theme) {
         console.log(value);
+        $('#is_text_color').prop('checked', true);
+        $('.btnview').css("border-color",value.button_color);
+        $('.btnview').css("background-color",value.button_color);
+        $('.btnview').css("color",value.font_button_color);
+        $('.description').css("color",value.bio_font_color);
+        $('.powered-omnilinks a').css("color",value.bio_font_color+" !important");
+        button_hover_color = value.button_hover_color;
       }
     });
     $(this).addClass('selected');
@@ -3210,7 +3220,7 @@
         tempStr = $(this).val().replace(/\n/g, "<br>");;
         $('#outputdescription').html(tempStr);
       });
-      tempStr = $('#description').val().replace(/\n/g, "<br>");;
+      tempStr = $('#description').val().replace(/\n/g, "<br>");
       $('#outputdescription').html(tempStr);
 
       
@@ -3621,8 +3631,14 @@
         check_rounded();
         temp1 = $(this).css("color");
         // temp2 = $(this).css("background-color");
-        temp2 = $("#phonecolor").css("background-color");
-
+        //if klo di area gradient atau solid 
+        //else klo di area wallpaper or animation 
+        if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+          temp2 = $("#phonecolor").css("background-color");
+        }
+        else if ( ($('#modeBackground').val()=="wallpaper") || ($('#modeBackground').val()=="animation") ) {
+          temp2 = button_hover_color; //pake warna hover
+        }
         
         if ($('#is_text_color').prop("checked") == false) {
           $(this).parent().children().css("background-color",temp1);
@@ -3631,7 +3647,6 @@
           $(this).parent().children().css("background-color",$('#textColor').val());
           $(this).parent().children().css("color",$("#phonecolor").css("background-color"));
         }
-
       },
       mouseleave: function () {
         check_outlined();
