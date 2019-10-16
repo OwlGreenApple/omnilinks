@@ -318,6 +318,8 @@ class BiolinkController extends Controller
 
     $page->text_color=$request->textColor;
     $page->is_text_color=$request->is_text_color;
+    $page->bio_color=$request->bioColor;
+    $page->is_bio_color=$request->is_bio_color;
 
     /*if(Auth::user()->membership=='elite'){
       $page->powered=0;

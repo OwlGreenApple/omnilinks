@@ -29,7 +29,7 @@
 </style>
 
 <script type="text/javascript">
-  var button_hover_color;
+  var template;
   var templates = [
     {
      "id": 1,
@@ -1160,6 +1160,7 @@
      "button_hover_color": "#F5F5F5"
     }
   ];
+  template = templates[0];
   var picker,dataView;
   var color_picker,rounded,outline;
   // https://www.shift8web.ca/2017/01/use-jquery-sort-reorganize-content/
@@ -1613,6 +1614,30 @@
     }
   }
 
+  //isi template dulu 
+  strTemplate = "";
+  <?php if (!is_null($pages->wallpaper)) { ?>
+    strTemplate = "<?php echo $pages->wallpaper; ?>";
+  <?php } ?>
+  <?php if (!is_null($pages->gif_template)) { ?>
+    strTemplate = "<?php echo $pages->gif_template; ?>";
+  <?php } ?>
+  res = strTemplate.replace("animation-", "");
+  //cek ada ngga di json
+  $.each( templates, function( key, value ) {
+    if (res == value.theme) {
+      template = value;
+    }
+  });
+  function check_template_wallpaper(){
+    $('#is_text_color').prop('checked', true);
+    $('.btnview').css("border-color",template.button_color);
+    $('.btnview').css("background-color",template.button_color);
+    $('.btnview').css("color",template.font_button_color);
+    $('.description').css("color",template.bio_font_color);
+    $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+  }
+
   function check_outlined(){
     if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
       if ($('.outlined').prop("checked") == true) {
@@ -1649,6 +1674,9 @@
           $('.description').css("color",$("#textColor").val());
         }
       }
+    } 
+    else if ( ($('#modeBackground').val()=="wallpaper") || ($('#modeBackground').val()=="animation") ) {
+      check_template_wallpaper();
     }
   }
 
@@ -1699,6 +1727,16 @@
     }
     else if ($('#is_text_color').prop("checked") == false) {
       $('#is_text_color').val(0);
+    }
+    check_outlined();
+  }
+
+  function check_bio_color(){
+    if ($('#is_bio_color').prop("checked") == true) {
+      $('#is_bio_color').val(1);
+    }
+    else if ($('#is_bio_color').prop("checked") == false) {
+      $('#is_bio_color').val(0);
     }
     check_outlined();
   }
@@ -2624,7 +2662,47 @@
                                 </div>
                             </div>
                         </div>
-                      </div>  
+                      </div>
+                      <div class="row mb-4">
+                        <div class="col-md-2 col-3">
+                          <label class="switch">
+                            <input type="checkbox" name="is_bio_color" id="is_bio_color" class="" value="<?php if($pages->is_bio_color) echo '1'; ?>" <?php if($pages->is_bio_color) echo 'checked'; ?>>
+                            <span class="slider round"></span>
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <label class="caption">
+                            Bio Color
+                          </label>
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <a href="" id="link-bio-color" class="nav-link p-0">Custom bio Color</a>
+                        </div>
+                      </div>
+                      <!-- Modal For Color Picker Button-->
+                      <div class="modal fade" id="modal-color-picker-bio-color" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Choose Bio Color 
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-md-4 col-xs-4">
+                                      <div align="center">
+                                        <div id="colorpickerBioColor"></div>
+                                        <input type="text" id="bioColor" name="bioColor" value="#ffffff">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-primary btn-apply-bio" type="button" data-dismiss="modal" >Apply </button>
+                                  <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
                       <?php if ($user->membership<>'free') { ?>  
                         <div class="row">
                           <div class="col-md-2 col-3">
@@ -2894,7 +2972,7 @@
                   
                     <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
                       <div class="powered-omnilinks">
-                        <a href="#">
+                        <a href="{{url('/')}}">
                           powered by
                           <br>Omnlinkz
                           <!--<img style="width: 110px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">-->
@@ -3152,16 +3230,11 @@
     res = res.replace("animation-", "");
     //cek ada ngga di json
     $.each( templates, function( key, value ) {
-      console.log(res);
       if (res == value.theme) {
-        console.log(value);
-        $('#is_text_color').prop('checked', true);
-        $('.btnview').css("border-color",value.button_color);
-        $('.btnview').css("background-color",value.button_color);
-        $('.btnview').css("color",value.font_button_color);
-        $('.description').css("color",value.bio_font_color);
-        $('.powered-omnilinks a').css("color",value.bio_font_color+" !important");
-        button_hover_color = value.button_hover_color;
+        template = value;
+        check_template_wallpaper();
+        check_outlined();
+        check_rounded();
       }
     });
     $(this).addClass('selected');
@@ -3270,6 +3343,10 @@
       check_text_color();
       onTextColorChange($("#textColor").val());
     });
+    $('#is_bio_color').click(function() {
+      check_bio_color();
+      onBioColorChange($("#bioColor").val());
+    });
     /*$("#powered").click(function(){
       if ($(this).prop("checked")==true) {
         $("#poweredview").children().show();
@@ -3324,10 +3401,13 @@
     <?php if (!is_null($pages->wallpaper)) { ?>
       $('#wallpaperclass').val("<?php echo $pages->wallpaper; ?>");
       $("#wallpaper-tab").click();
+      $(".thumb-"+template.theme).click();
+      
     <?php } ?>
     <?php if (!is_null($pages->gif_template)) { ?>
       $('#animationclass').val("<?php echo $pages->gif_template; ?>");
       $("#animation-tab").click();
+      $(".thumb-"+template.theme).click();
     <?php } ?>
 
     //for bacground, outline color 
@@ -3360,6 +3440,16 @@
       $('.description').css("color","<?php echo $pages->text_color; ?>");
     <?php } else {?>
       $('.btnview').css("color","#fff");
+      $('.description').css("color","#fff");
+    <?php } ?>
+    
+    <?php if($pages->is_bio_color) {?>
+      //$(".mobile1").addClass("outlinedview");
+      $("#bioColor").val("<?php echo $pages->bio_color; ?>");
+      $('.powered-omnilinks a').css("color","<?php echo $pages->bio_color; ?>");
+      $('.description').css("color","<?php echo $pages->bio_color; ?>");
+    <?php } else {?>
+      $('.powered-omnilinks a').css("color","#fff");
       $('.description').css("color","#fff");
     <?php } ?>
     
@@ -3548,7 +3638,35 @@
       $('#modal-color-picker-text-color').modal('toggle');
     });
     $(document).on('click', '.btn-apply-text', function() {
+      template.font_button_color = $("#textColor").val();
       onTextColorChange($("#textColor").val());
+    });
+
+    // for all bio color purpose
+    function onBioColorChange(color) {
+      $("#bioColor").val(color);
+      if ($('#is_bio_color').val()=="1") {
+        $('.powered-omnilinks a').css("color",color);
+        $('.description').css("color",color);
+      } else {
+        $('.powered-omnilinks a').css("color","#fff");
+        $('.description').css("color","#fff");
+      }
+    }
+    $('#colorpickerBioColor').farbtastic('#bioColor');
+    pickerbtn = $.farbtastic('#colorpickerBioColor');
+    // picker.setColor("#b6b6ff");
+    $("#bioColor").on('keyup', function() {
+      pickerbtn.setColor($(this).val());
+    });
+    //pickerbtn.linkTo(onTextColorChange);
+    $("#link-bio-color").on('click', function(e) {
+      e.preventDefault();
+      $('#modal-color-picker-bio-color').modal('toggle');
+    });
+    $(document).on('click', '.btn-apply-bio', function() {
+      template.bio_font_color = $("#bioColor").val();
+      onBioColorChange($("#bioColor").val());
     });
 
     function readURL(input) {
@@ -3637,15 +3755,23 @@
           temp2 = $("#phonecolor").css("background-color");
         }
         else if ( ($('#modeBackground').val()=="wallpaper") || ($('#modeBackground').val()=="animation") ) {
-          temp2 = button_hover_color; //pake warna hover
+          temp2 = template.button_hover_color; //pake warna hover
         }
+        console.log(temp1);
         
         if ($('#is_text_color').prop("checked") == false) {
           $(this).parent().children().css("background-color",temp1);
-          $(this).parent().children().css("color",temp2);
+          if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+            $(this).parent().children().css("color",temp2);
+          }
         } else {
           $(this).parent().children().css("background-color",$('#textColor').val());
-          $(this).parent().children().css("color",$("#phonecolor").css("background-color"));
+          if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+            $(this).parent().children().css("color",$("#phonecolor").css("background-color"));
+          }
+          else {
+            $(this).parent().children().css("color",temp2);
+          }
         }
       },
       mouseleave: function () {
