@@ -1419,8 +1419,8 @@
   });
 
   function check_outlined(){
-    @if((!is_null($pages->color_picker)) || (!is_null($pages->template)))
-      <?php if($pages->is_outlined) { ?>  
+      <?php 
+      if($pages->is_outlined) { ?>  
         $(".mobile1").addClass("outlinedview");
         $('.outlined').val(1);
 
@@ -1428,13 +1428,12 @@
         <?php if(!$pages->is_text_color) { ?>  
           $('.txthov').find("button").css("border-color","<?php echo $pages->outline ?>");
           $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
-          $('.header-txt').css("color","<?php echo $pages->outline ?>");
         <?php } else { ?>  
           $('.txthov').find("button").css("border-color","<?php echo $pages->text_color ?>");
           $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
-          $('.header-txt').css("color","<?php echo $pages->text_color ?>");
         <?php } ?>  
-      <?php } else { ?>  
+      <?php } 
+      else { ?>  
         $(".mobile1").removeClass("outlinedview");
         $('.outlined').val(0);
 
@@ -1442,18 +1441,37 @@
         $('.txthov').find("button").css("border-color","transparent");
         <?php if(!$pages->is_text_color) { ?>  
           $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
-          $('.header-txt').css("color","<?php echo $pages->outline ?>");
         <?php } else { ?>  
           $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
-          $('.header-txt').css("color","<?php echo $pages->text_color ?>");
         <?php } ?>  
-      <?php } ?>  
-    @elseif((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
-      $('.txthov').find("button").css("border-color",template.button_color);
-      $('.txthov').find("button").css("background-color",template.button_color);
-      $('.txthov').find("button").css("color",template.font_button_color);
-      $('.header-txt').css("color",template.bio_font_color);
-      $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+      <?php 
+      } ?>  
+      <?php 
+      if($pages->is_bio_color) { ?>  
+        $('.header-txt').css("color","<?php echo $pages->is_bio_color; ?>");
+        $('.powered-omnilinks a').css("color","<?php echo $pages->is_bio_color; ?> !important");
+      <?php 
+      } ?>  
+    @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
+      <?php 
+      if(!$pages->is_outlined) { ?>  
+        $('.txthov').find("button").css("border-color",template.button_color);
+        $('.txthov').find("button").css("background-color",template.button_color);
+        $('.txthov').find("button").css("color",template.font_button_color);
+      <?php 
+      } ?>  
+      <?php 
+      if(!$pages->is_text_color) { ?>  
+        $('.txthov').find("button").css("color",template.font_button_color);
+      <?php 
+      } ?>  
+      <?php 
+      if(!$pages->is_bio_color) { ?>  
+        $('.header-txt').css("color",template.bio_font_color);
+        $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+      <?php 
+      } ?>  
+      
     @endif
   }
 
@@ -1496,13 +1514,13 @@
     $(".txthov").hover(
       function() {
         check_outlined();
-        temp1 = $(this).find("button").css("color");
         @if((!is_null($pages->color_picker)) || (!is_null($pages->template)))
-          temp2 = $("body").css("background-color");
+          temp1 = $(this).find("button").css("color");
         @elseif((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
-          temp2 = template.button_hover_color; //pake warna hover
+          temp1 = template.button_hover_color; //pake warna hover
         @endif
-        console.log(temp1);
+        temp2 = $("body").css("background-color");
+        
         <?php if (!$pages->is_text_color) { ?>
           $(this).find("button").css("background-color",temp1);
           $(this).find("button").css("color",temp2);

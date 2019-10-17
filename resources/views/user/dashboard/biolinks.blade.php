@@ -1630,16 +1630,10 @@
     }
   });
   function check_template_wallpaper(){
-    $('#is_text_color').prop('checked', true);
-    $('.btnview').css("border-color",template.button_color);
-    $('.btnview').css("background-color",template.button_color);
-    $('.btnview').css("color",template.font_button_color);
-    $('.description').css("color",template.bio_font_color);
-    $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
   }
 
   function check_outlined(){
-    if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+    // if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
       if ($('.outlined').prop("checked") == true) {
         //$(".mobile1").addClass("outlinedview");
         $(".screen").addClass("outlinedview");
@@ -1649,11 +1643,10 @@
         if ($('#is_text_color').prop("checked") == false) {
           $('.btnview').css("border-color",$("#colorOutlineButton").val());
           $('.btnview').css("color",$("#colorOutlineButton").val());
-          $('.description').css("color",$("#colorOutlineButton").val());
         } else {
-          $('.btnview').css("border-color",$('#textColor').val());
+          // $('.btnview').css("border-color",$('#textColor').val());
+          $('.btnview').css("border-color",$("#colorOutlineButton").val());
           $('.btnview').css("color",$('#textColor').val());
-          $('.description').css("color",$('#textColor').val());
         }
 
         /*$('.btnview').css("border-color",$("#colorButton").val());
@@ -1668,15 +1661,29 @@
         //$('.btnview').css("color","#fff");
         if ($('#is_text_color').prop("checked") == false) {
           $('.btnview').css("color",$("#colorOutlineButton").val());
-          $('.description').css("color",$("#colorOutlineButton").val());
         } else {
           $('.btnview').css("color",$("#textColor").val());
-          $('.description').css("color",$("#textColor").val());
         }
       }
-    } 
-    else if ( ($('#modeBackground').val()=="wallpaper") || ($('#modeBackground').val()=="animation") ) {
-      check_template_wallpaper();
+      if ($('#is_bio_color').prop("checked") == true) {
+        $('.description').css("color",$("#bioColor").val());
+        $('.powered-omnilinks a').css("color",$("#bioColor").val()+" !important");
+      }
+    // } 
+    // else 
+    if ( ($('#modeBackground').val()=="wallpaper") || ($('#modeBackground').val()=="animation") ) {
+      if ($('.outlined').prop("checked") == false) {
+        $('.btnview').css("border-color",template.button_color);
+        $('.btnview').css("background-color",template.button_color);
+        $('.btnview').css("color",template.font_button_color);
+      }
+      if ($('#is_text_color').prop("checked") == false) {
+        $('.btnview').css("color",template.font_button_color);
+      }
+      if ($('#is_bio_color').prop("checked") == false) {
+        $('.description').css("color",template.bio_font_color);
+        $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+      }
     }
   }
 
@@ -1729,6 +1736,7 @@
       $('#is_text_color').val(0);
     }
     check_outlined();
+    check_rounded();
   }
 
   function check_bio_color(){
@@ -1739,6 +1747,7 @@
       $('#is_bio_color').val(0);
     }
     check_outlined();
+    check_rounded();
   }
 
   function delete_photo(){
@@ -3232,7 +3241,22 @@
     $.each( templates, function( key, value ) {
       if (res == value.theme) {
         template = value;
-        check_template_wallpaper();
+
+        $('#is_text_color').prop('checked', false);
+        $('#is_bio_color').prop('checked', false);
+        $('.outlined').prop('checked', false);
+
+        /*$("#colorOutlineButton").val(template.button_color);
+        $('#textColor').val(template.font_button_color);
+        $("#bioColor").val(template.bio_font_color);*/
+
+        $('.btnview').css("border-color",template.button_color);
+        $('.btnview').css("background-color",template.button_color);
+        $('.btnview').css("color",template.font_button_color);
+        $('.description').css("color",template.bio_font_color);
+        $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+        
+        
         check_outlined();
         check_rounded();
       }
@@ -3360,23 +3384,35 @@
       // $('#backtheme').val('colorgradient1');
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen "+$('#backtheme').val());
+      check_outlined();
+      check_rounded();
     });
     $(document).on('click', '#solid', function() {
+      $('#is_text_color').prop('checked', false);
+      $('#is_bio_color').prop('checked', false);
+      $('.outlined').prop('checked', false);
+
       $('#modeBackground').val('solid');
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen");
       $("#phonecolor").css("background-color",$("#color").val());
       // $("#backtheme").val();
+      check_outlined();
+      check_rounded();
     });
     $(document).on('click', '#wallpaper-tab', function() {
       $('#modeBackground').val('wallpaper');
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen "+$('#wallpaperclass').val());
+      check_outlined();
+      check_rounded();
     });
     $(document).on('click', '#animation-tab', function() {
       $('#modeBackground').val('animation');
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen "+$('#animationclass').val());
+      check_outlined();
+      check_rounded();
     });
     $(document).on('click', '.btn-premiumid', function() {
       tambah_premiumid();
@@ -3747,17 +3783,16 @@
       mouseenter: function () {
         check_outlined();
         check_rounded();
-        temp1 = $(this).css("color");
+        if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+          temp1 = $(this).css("color");
+        }
+        else if ( ($('#modeBackground').val()=="wallpaper") || ($('#modeBackground').val()=="animation") ) {
+          temp1 = template.button_hover_color; //pake warna hover
+        }
         // temp2 = $(this).css("background-color");
         //if klo di area gradient atau solid 
         //else klo di area wallpaper or animation 
-        if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
-          temp2 = $("#phonecolor").css("background-color");
-        }
-        else if ( ($('#modeBackground').val()=="wallpaper") || ($('#modeBackground').val()=="animation") ) {
-          temp2 = template.button_hover_color; //pake warna hover
-        }
-        console.log(temp1);
+        temp2 = $("#phonecolor").css("background-color");
         
         if ($('#is_text_color').prop("checked") == false) {
           $(this).parent().children().css("background-color",temp1);

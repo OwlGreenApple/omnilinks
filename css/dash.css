@@ -586,18 +586,20 @@ hr.own {
 }
 
 .mobile{
-  width: 331px;
+  width: 298px;
   /*height: 586px;*/
-  height: 100%;
+  /*height: 100%;*/
+  height: 606px;
   background:#F0F1F1;
   border-radius: 30px;
   border:2px solid rgba(0,0,0,.3);
   box-shadow: inset 0 0 8px rgba(0,0,0,.3);
 }
 .mobile1{
-  width: 326px;
+  width: 293px;
   /*height: 580px;*/
-  height: calc(100% - 3px);
+  /*height: calc(100% - 3px);*/
+  height: 600px;
   background:#000000;
   border-radius: 30px;
   border:2px solid rgba(0,0,0,.3);
@@ -669,13 +671,13 @@ hr.own {
 
 .fixed{
   position: fixed;
-  top: 60%;
+  top: 50%;
   left: 50%;
   height: 80%;
   margin-left: 130px;
   margin-top: -290px;
   z-index: 40;
-  transform: translate(0%, -10%);  
+  transform: translate(0%, 0%);  
 }
 
 .preview-center {
@@ -689,10 +691,10 @@ hr.own {
 
 @media screen and (min-height: 625px) {
   .fixed { 
-    height: 80%;
-    top: 70%;
+    /*height: 80%;*/
+    top: 48%;
   }
-  .screen {
+  /*.screen {
     width:250px;
   }
   .mobile {
@@ -700,22 +702,31 @@ hr.own {
   }
   .mobile1 {
     width:250px;
+  }*/
+  .screen {
+    width:287px;
+  }
+  .mobile {
+    width:298px;
+  }
+  .mobile1 {
+    width:293px;
   }
 }
 @media screen and (min-height: 939px) {
   .fixed { 
     height: 80%;
     top: 50%;
-    transform: translate(0%, -10%);  
+    transform: translate(0%, 0%);  
   }
   .screen {
-    width:318px;
+    width:287px;
   }
   .mobile {
-    width:331px;
+    width:298px;
   }
   .mobile1 {
-    width:326px;
+    width:293px;
   }
 }
 
@@ -724,6 +735,15 @@ hr.own {
     height: 65%;
     top: 40%;
     transform: translate(0%, -10%);  
+  }
+  .screen {
+    width:287px;
+  }
+  .mobile {
+    width:298px;
+  }
+  .mobile1 {
+    width:293px;
   }
 }
 
@@ -749,15 +769,15 @@ hr.own {
   }
 
   .mobile.ads {
-    width: 300px;
+    width: 280px;
   }
 
   .mobile1.ads {
-    width: 295px;
+    width: 275px;
   }
 
   .screen.ads {
-    width: 290px;
+    width: 270px;
   }
 
   .project-tab .nav-link, .nav-tabs .nav-link.active, label.caption {
