@@ -1871,14 +1871,14 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="nav-link link" role="tab" data-toggle="tab">
-                  Link
+                <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
+                  Tampilan
                 </a>
               </li>
-
+              
               <li class="nav-item">
-                <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
-                  WA Link Creator
+                <a href="#link" class="nav-link link" role="tab" data-toggle="tab">
+                  Link
                 </a>
               </li>
 
@@ -1891,10 +1891,11 @@
               @endif
               
               <li class="nav-item">
-                <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
-                  Tampilan
+                <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
+                  WA Link Creator
                 </a>
               </li>
+
             </ul>
 
             <div class="tab-content">
@@ -3442,13 +3443,27 @@
     <?php if (!is_null($pages->wallpaper)) { ?>
       $('#wallpaperclass').val("<?php echo $pages->wallpaper; ?>");
       $("#wallpaper-tab").click();
-      $(".thumb-"+template.theme).click();
+      // $(".thumb-"+template.theme).click();
+        $('.btnview').css("border-color",template.button_color);
+        $('.btnview').css("background-color",template.button_color);
+        $('.btnview').css("color",template.font_button_color);
+        $('.description').css("color",template.bio_font_color);
+        $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+        check_outlined();
+        check_rounded();
       
     <?php } ?>
     <?php if (!is_null($pages->gif_template)) { ?>
       $('#animationclass').val("<?php echo $pages->gif_template; ?>");
       $("#animation-tab").click();
-      $(".thumb-"+template.theme).click();
+      // $(".thumb-"+template.theme).click();
+        $('.btnview').css("border-color",template.button_color);
+        $('.btnview').css("background-color",template.button_color);
+        $('.btnview').css("color",template.font_button_color);
+        $('.description').css("color",template.bio_font_color);
+        $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+        check_outlined();
+        check_rounded();
     <?php } ?>
 
     //for bacground, outline color 

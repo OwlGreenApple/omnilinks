@@ -1386,11 +1386,8 @@
 
       <div class="col-lg-7 col-md-8 mb-5 text-center powered-omnilinks">
         @if($pages->powered==1)
-          <a href="{{url('/')}}">
-          powered by
-          <br>Omnilinkz
-          <!--<img style="width: 150px; margin-bottom: 50px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">-->
-          </a>
+          <a href="{{url('/')}}">powered by<br>Omnilinkz
+          <!--<img style="width: 150px; margin-bottom: 50px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">--></a>
         @endif
       </div>
 
@@ -1448,8 +1445,8 @@
       } ?>  
       <?php 
       if($pages->is_bio_color) { ?>  
-        $('.header-txt').css("color","<?php echo $pages->is_bio_color; ?>");
-        $('.powered-omnilinks a').css("color","<?php echo $pages->is_bio_color; ?> !important");
+        $('.header-txt').css("color","<?php echo $pages->bio_color; ?>");
+        $('.powered-omnilinks a').css("color","<?php echo $pages->bio_color; ?>");
       <?php 
       } ?>  
     @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
@@ -1468,7 +1465,7 @@
       <?php 
       if(!$pages->is_bio_color) { ?>  
         $('.header-txt').css("color",template.bio_font_color);
-        $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
+        $('.powered-omnilinks a').css("color",template.bio_font_color);
       <?php 
       } ?>  
       
@@ -1488,7 +1485,7 @@
           $('.txthov').find("button").css("background-color",value.button_color);
           $('.txthov').find("button").css("color",value.font_button_color);
           $('.header-txt').css("color",value.bio_font_color);
-          $('.powered-omnilinks a').css("color",value.bio_font_color+" !important");
+          $('.powered-omnilinks a').css("color",value.bio_font_color);
           // check_outlined();
         }
       });
@@ -1525,7 +1522,8 @@
           $(this).find("button").css("background-color",temp1);
           $(this).find("button").css("color",temp2);
         <?php }else { ?>
-          $(this).find("button").css("background-color","<?php $pages->text_color ?>");
+          $(this).find("button").css("background-color","<?php echo $pages->text_color; ?>");
+          console.log("aws");
           @if((!is_null($pages->color_picker)) || (!is_null($pages->template)))
             $(this).find("button").css("color",temp2);
           @else
