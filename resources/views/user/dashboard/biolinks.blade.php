@@ -1684,6 +1684,7 @@
         $('.description').css("color",template.bio_font_color);
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
       }
+      
     }
   }
 
@@ -3401,6 +3402,8 @@
       check_rounded();
     });
     $(document).on('click', '#wallpaper-tab', function() {
+      $("#textColor").val("#000");
+      $("#bioColor").val("#000");
       $('#modeBackground').val('wallpaper');
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen "+$('#wallpaperclass').val());
@@ -3408,6 +3411,8 @@
       check_rounded();
     });
     $(document).on('click', '#animation-tab', function() {
+      $("#textColor").val("#000");
+      $("#bioColor").val("#000");
       $('#modeBackground').val('animation');
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen "+$('#animationclass').val());
@@ -3656,10 +3661,10 @@
       $("#textColor").val(color);
       if ($('#is_text_color').val()=="1") {
         $('.btnview').css("color",color);
-        $('.description').css("color",color);
       } else {
-        $('.btnview').css("color","#fff");
-        $('.description').css("color","#fff");
+        if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+          $('.btnview').css("color","#fff");
+        }
       }
     }
     $('#colorpickerTextColor').farbtastic('#textColor');
@@ -3685,8 +3690,10 @@
         $('.powered-omnilinks a').css("color",color);
         $('.description').css("color",color);
       } else {
-        $('.powered-omnilinks a').css("color","#fff");
-        $('.description').css("color","#fff");
+        if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
+          $('.powered-omnilinks a').css("color","#fff");
+          $('.description').css("color","#fff");
+        }
       }
     }
     $('#colorpickerBioColor').farbtastic('#bioColor');
