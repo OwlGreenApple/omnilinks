@@ -69,7 +69,8 @@
         <span>MESSENGERS</span><br>
 
         <div class="row mb-1">
-   				@if($page->wa_pixel_id!=0 and !is_null($page->wa_pixel_id))
+   				
+          @if(!is_null($page->wa_link))
           	<div class="col-lg-6 col-md-5 col-6">
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/wa/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/wa/'.$bulan.'/'.$tahun)}}">
@@ -100,7 +101,7 @@
 		        </div> 
           @endif
 
-          @if($page->telegram_pixel_id!=0 and !is_null($page->telegram_pixel_id))
+          @if(!is_null($page->telegram_link))
           	<div class="col-lg-6 col-md-5 col-6">
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/telegram/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/telegram/'.$bulan.'/'.$tahun)}}">
@@ -131,7 +132,7 @@
 		        </div> 
           @endif
 
-          @if($page->skype_pixel_id!=0 and !is_null($page->skype_pixel_id))
+          @if(!is_null($page->skype_link))
           	<div class="col-lg-6 col-md-5 col-6">
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/skype/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/skype/'.$bulan.'/'.$tahun)}}">
@@ -162,7 +163,7 @@
 		        </div> 
           @endif
 
-          @if($page->line_pixel_id!=0 and !is_null($page->line_pixel_id))
+          @if(!is_null($page->line_link))
           	<div class="col-lg-6 col-md-5 col-6">
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/line/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/line/'.$bulan.'/'.$tahun)}}">
@@ -193,7 +194,7 @@
 		        </div> 
           @endif
 
-          @if($page->messenger_pixel_id!=0 and !is_null($page->messenger_pixel_id))
+          @if(!is_null($page->messenger_link))
           	<div class="col-lg-6 col-md-5 col-6">
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/messenger/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/messenger/'.$bulan.'/'.$tahun)}}">
@@ -275,7 +276,7 @@
         <span>SOCIAL MEDIA</span><br>
 
         <div class="row" style="margin-bottom: 40px;">
-        	@if($page->fb_pixel_id!=0 && !is_null($page->fb_pixel_id))
+        	@if(!is_null($page->fb_link))
         		<div class="col-lg-6 col-md-5 col-6">
         			<span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/fb/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/fb/'.$bulan.'/'.$tahun)}}">
@@ -306,7 +307,7 @@
            	</div>
         	@endif
 
-        	@if($page->ig_pixel_id!=0 && !is_null($page->ig_pixel_id))
+        	@if(!is_null($page->ig_link))
         		<div class="col-lg-6 col-md-5 col-6">
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/ig/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/ig/'.$bulan.'/'.$tahun)}}">
@@ -337,7 +338,7 @@
            	</div>
           @endif
 
-					@if($page->twitter_pixel_id!=0 && !is_null($page->twitter_pixel_id))          
+					@if(!is_null($page->twitter_link))
 						<div class="col-lg-6 col-md-5 col-6">
 							<span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/twitter/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/twitter/'.$bulan.'/'.$tahun)}}">
@@ -368,7 +369,7 @@
            	</div>            
 					@endif
 
-					@if($page->youtube_pixel_id!=0 && !is_null($page->youtube_pixel_id))
+					@if(!is_null($page->youtube_link))
 						<div class="col-lg-6 col-md-5 col-6">
               <span class="tooltipstered" title="Click To View Details">
                 <a class="single-report" href="{{url('dash-detail/'.$page->id.'/0/youtube/'.$bulan.'/'.$tahun)}}" data-url="{{url('dash-detail/'.$page->id.'/0/youtube/'.$bulan.'/'.$tahun)}}">

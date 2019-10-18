@@ -172,9 +172,7 @@
 
           <div class="col-5 col-lg-3 col-md-4">
             <div class="pt-md-4 pb-md-4 bd-highlight">
-
               <div class="buton">
-                
                 <button type="button" deletedataid="{{$page->id}}" data-title="
                 {{$page->page_title}}" data-link="{{$names}}" data-created="
                 {{date('F d, Y', strtotime($page->created_at))}}" class="btn btn-sm btn-danger float-right btn-deletePage">
