@@ -1829,7 +1829,7 @@
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
   <div class="container body-content-mobile main-cont">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <h4 style="color: #106BC8">
           <a href="{{url('/')}}">
             <button class="btn btn-default btn-back mb-2">
@@ -1838,6 +1838,12 @@
             </button>
           </a>
         </h4>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-success mt-3 mb-3 btn-premium">
+          <i class="fas fa-star"></i> Get Premium ID
+        </button>
+
       
         <!--
         <br>
@@ -1862,10 +1868,6 @@
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
         
         <div id="pesanAlert" class="alert mb-0" style="display: none;"></div>
-
-        <button class="btn btn-success mt-3 mb-3 btn-premium">
-          <i class="fas fa-star"></i> Get Premium ID
-        </button>
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">

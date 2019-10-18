@@ -1523,7 +1523,6 @@
           $(this).find("button").css("color",temp2);
         <?php }else { ?>
           $(this).find("button").css("background-color","<?php echo $pages->text_color; ?>");
-          console.log("aws");
           @if((!is_null($pages->color_picker)) || (!is_null($pages->template)))
             $(this).find("button").css("color",temp2);
           @else
