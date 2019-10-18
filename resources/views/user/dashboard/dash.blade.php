@@ -195,7 +195,7 @@
             </a>
           </div> 
         @endif 
-        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3 menu-nomobile">
+        <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 menu-nomobile">
           <p class="text-md-right text-lg-right ">
             @if($user->membership=="free")
               <span class="txt-free header-status-account">
@@ -270,13 +270,13 @@
     <hr>
 
     <div class="col-md-12">
-      <div class="pt-md-5 pt-0" style="font-size: 25px; padding-bottom: 5px">
+      <div class="pt-md-1 pt-0" style="font-size: 25px; padding-bottom: 5px">
         <div class="text-md-left text-center">
           <p>Omnilinkz Chart</p>  
         </div>
         
 
-        <div class="row mb-4 mt-5">
+        <div class="row mb-4 mt-2">
           <div class="col-md-6">
             <div class="input-group">
               <input type="text" id="keywords" name="search" class="form-cari form-control col-md-5" placeholder="Cari Link / Judul / Kategori" aria-label="Cari Link / Judul" aria-describedby="basic-addon2">

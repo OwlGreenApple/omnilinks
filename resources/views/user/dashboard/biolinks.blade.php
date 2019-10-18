@@ -2301,13 +2301,13 @@
                   </span>
                   
                   <div class="form-group mt-3 mb-4 row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                       <label for="nomorwa" class="control-label">
                         Masukkan Nomor WA
                       </label>  
                     </div>
                     
-                    <div class="col-md-5 col-9 pr-1">
+                    <div class="col-md-6 col-9 pr-1">
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
@@ -2550,7 +2550,7 @@
                         Theme
                       </p>
                       
-                      <div class="row">
+                      <div class="row mb-2">
                         <div class="col-md-2 col-3">
                           <label class="switch">
                             <input type="checkbox" name="rounded" class="rounded" value="<?php if($pages->is_rounded) echo '1'; ?>" <?php if($pages->is_rounded) echo 'checked';?>>
@@ -2564,7 +2564,7 @@
                           </label>
                         </div>
                         <div class="col-md-5 col-5">
-                          <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Background Button Color</a>
+                          <a href="" id="link-custom-background-color" class="nav-link p-0">Custom Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -2592,7 +2592,7 @@
                         </div>
                       </div>  
 
-                      <div class="row mb-4">
+                      <div class="row mb-2">
                         <div class="col-md-2 col-3">
                           <label class="switch">
                             <input type="checkbox" name="outlined" class="outlined" value="<?php if($pages->is_outlined) echo '1'; ?>" <?php if($pages->is_outlined) echo 'checked'; ?>>
@@ -2605,7 +2605,7 @@
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
-                          <a href="" id="link-custom-outline-color" class="nav-link p-0">Custom Outline Color</a>
+                          <a href="" id="link-custom-outline-color" class="nav-link p-0">Custom Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -2633,7 +2633,7 @@
                         </div>
                       </div>  
                       
-                      <div class="row mb-4">
+                      <div class="row mb-2">
                         <div class="col-md-2 col-3">
                           <label class="switch">
                             <input type="checkbox" name="is_text_color" id="is_text_color" class="is_text_color" value="<?php if($pages->is_text_color) echo '1'; ?>" <?php if($pages->is_text_color) echo 'checked'; ?>>
@@ -2646,7 +2646,7 @@
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
-                          <a href="" id="link-text-color" class="nav-link p-0">Custom Text Color</a>
+                          <a href="" id="link-text-color" class="nav-link p-0">Custom Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -2673,7 +2673,7 @@
                             </div>
                         </div>
                       </div>
-                      <div class="row mb-4">
+                      <div class="row mb-2">
                         <div class="col-md-2 col-3">
                           <label class="switch">
                             <input type="checkbox" name="is_bio_color" id="is_bio_color" class="" value="<?php if($pages->is_bio_color) echo '1'; ?>" <?php if($pages->is_bio_color) echo 'checked'; ?>>
@@ -2686,7 +2686,7 @@
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
-                          <a href="" id="link-bio-color" class="nav-link p-0">Custom bio Color</a>
+                          <a href="" id="link-bio-color" class="nav-link p-0">Custom Color</a>
                         </div>
                       </div>
                       <!-- Modal For Color Picker Button-->
@@ -2736,10 +2736,10 @@
                       <!-- Bootstrap CSS -->
                       <ul class="nav nav-tabs sub-nav mt-4" role="tablist">
                         <li class="nav-item sub-nav">
-                          <a class="nav-link active" href="#buzz" id="gradient" role="tab" data-toggle="tab">GRADIENT</a>
+                          <a class="nav-link active" href="#buzz" id="gradient" role="tab" data-toggle="tab">Gradient</a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">SOLID</a>
+                          <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">Solid</a>
                         </li>
                         <li class="nav-item sub-nav">
                           <a class="nav-link" href="#wallpaper" id="wallpaper-tab" role="tab" data-toggle="tab">Wallpaper</a>
