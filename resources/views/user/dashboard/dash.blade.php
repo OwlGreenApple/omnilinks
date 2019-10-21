@@ -12,7 +12,7 @@
   var chart = '';
 
   function load_chart(){
-    $.ajax({                                      
+    $.ajax({
       url: "<?php echo url('/dash/load-chart'); ?>",
       type: 'get',
       data : {
@@ -573,6 +573,7 @@
 
   $('body').on('click','.link-header',function(e) {
     //e.stopPropagation();
+    <?php if ($user->membership<>'free') { ?>      
     var id = $('#linkHeader').attr('dataid');
     if ($(this).parent().find('.content-link').hasClass('hidden')) {
       $(this).parent().find('.content-link').show(id);
@@ -583,6 +584,7 @@
       $(this).parent().find('.content-link').addClass('hidden');
       return false;
     }
+    <?php } ?>
   });
 
   $( "body" ).on( "click", ".btn-copylink", function(e) 

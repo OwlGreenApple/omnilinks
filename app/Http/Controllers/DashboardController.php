@@ -75,6 +75,7 @@ class DashboardController extends Controller
                   ->with('pages',$page)
                   ->with('bulan',$request->bulan)
                   ->with('tahun',$request->tahun)
+                  ->with('user',$user)
                   ->with('search',$search);
 
     $arr['pager'] = (string) view('user.dashboard.dash_pagination')
@@ -84,6 +85,11 @@ class DashboardController extends Controller
   }
 
   public function dashboard_detail($pageid,$id,$mode,$bulan,$tahun) {
+    $user=Auth::user();
+    if ($user->membership=='free') {
+      return "Not authorize";
+    }
+    
     //halaman dashboard detail user
     $data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
 
@@ -100,6 +106,11 @@ class DashboardController extends Controller
   }
   
   public function dashboard_detail_all($pageid,$bulan,$tahun) {
+    $user=Auth::user();
+    if ($user->membership=='free') {
+      return "Not authorize";
+    }
+    
     //halaman dashboard detail user
     //$data = $this->detail_report($pageid,$id,$mode,$bulan,$tahun);
     $page = Page::find($pageid);
@@ -174,7 +185,7 @@ class DashboardController extends Controller
 
     $total_click = 0;
     while(strtotime($first_date) <= strtotime($query_date)){
-      $filename = 'clicked/'.$user->email.'/'.$first_date.'/all/total-click/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.$first_date.'/all/total-click/counter.txt';
 
       $click = $this->check_file($filename);
       $total_click = $total_click + $click;
@@ -618,7 +629,7 @@ class DashboardController extends Controller
     $arr = [];
 
     while(strtotime($first_date) <= strtotime($query_date)){
-      $filename = 'clicked/'.$user->email.'/'.$first_date.'/'.$page->id.'/total-click/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.$first_date.'/'.$page->id.'/total-click/counter.txt';
 
       $click = $this->check_file($filename);
         
@@ -630,7 +641,7 @@ class DashboardController extends Controller
     /*$click_day = 0;
     while($first_date <= $query_date){
       foreach ($banners as $banner) {
-        $filename = 'clicked/'.$user->email.'/'.$first_date.'/banner-'.$banner->title.'/counter.txt';
+        $filename = 'clicked/'.$user->username.'/'.$first_date.'/banner-'.$banner->title.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -638,7 +649,7 @@ class DashboardController extends Controller
       }
       
       foreach ($links as $link) {
-        $filename = 'clicked/'.$user->email.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
+        $filename = 'clicked/'.$user->username.'/'.$first_date.'/link-'.$link->title.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -648,7 +659,7 @@ class DashboardController extends Controller
       $key = ['wa','telegram','skype','fb','ig','twitter','youtube'];
       
       foreach ($key as $k) {
-        $filename = 'clicked/'.$user->email.'/'.$first_date.'/'.$k.'/counter.txt';
+        $filename = 'clicked/'.$user->username.'/'.$first_date.'/'.$k.'/counter.txt';
 
         $click = $this->check_file($filename);
 
@@ -673,7 +684,7 @@ class DashboardController extends Controller
     $total_click = 0;
 
     while(strtotime($first_date) <= strtotime($query_date)){
-      $filename = 'clicked/'.$user->email.'/'.$first_date.'/'.$pageid.'/'.$name.'/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.$first_date.'/'.$pageid.'/'.$name.'/counter.txt';
 
       $click = $this->check_file($filename);
       $total_click = $total_click + $click;
@@ -687,7 +698,7 @@ class DashboardController extends Controller
     $allarr['total_click'] = $total_click;
 
     /*while($first_date <= $query_date){
-      $filename = 'clicked/'.$user->email.'/'.$first_date.'/0/link-'.$link->title.'/counter.txt';
+      $filename = 'clicked/'.$user->username.'/'.$first_date.'/0/link-'.$link->title.'/counter.txt';
 
       $click = $this->check_file($filename);
       $total_click = $total_click + $click;

@@ -186,11 +186,13 @@
                 <span class="menu-nomobile" style="color:#fff">Edit</span>
               </button>
 
+              <?php if ($user->membership<>'free') { ?>  
               <button class="btn btn-sm btn-primary btn-viewall float-right" style="margin-right:5px;" data-id="{{$page->id}}/{{$bulan}}/{{$tahun}}">
                 <i class="far fa-eye"></i>
                 <span class="menu-nomobile" style="color:#fff">View</span>
               </button>
-
+              <?php } ?>
+              
               <!--<a class="menu-nomobile" href="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}" >
                 <button type="button" class="btn btn-sm btn-primary btn-pdf float-right" style="margin-right: 5px;" data-url="{{url('pdf/'.$page->id.'/biolinks/'.$bulan.'/'.$tahun)}}">
                   <i class="far fa-file-pdf"></i>

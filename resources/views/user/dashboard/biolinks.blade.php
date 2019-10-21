@@ -1271,7 +1271,7 @@
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
-          loadLinkBio();
+          // loadLinkBio();
           //new 
           // $(".delete-link").parents("li").each(function( index ) {
             // if ($(this).val() != ''){
@@ -1446,16 +1446,7 @@
       $(".bannerpixel").html(dataView);
       $(".bannerpixel").val(0);
     <?php } ?>
-    // loadPixel('{{$pages->wa_pixel_id}}','#wapixel');
-    // loadPixel('{{$pages->telegram_pixel_id}}','#telegrampixel');
-    // loadPixel('{{$pages->skype_pixel_id}}','#skypepixel');
-    // loadPixel('{{$pages->line_pixel_id}}','#linepixel');
-    // loadPixel('{{$pages->messenger_pixel_id}}','#messengerpixel');
     
-    // loadPixel('{{$pages->youtube_pixel_id}}','#youtubepixel');
-    // loadPixel('{{$pages->fb_pixel_id}}','#fbpixel');
-    // loadPixel('{{$pages->ig_pixel_id}}','#igpixel');
-    // loadPixel('{{$pages->twitter_pixel_id}}','#twitterpixel');
     <?php 
     if($links->count()) {
       foreach($links as $link) {
@@ -1470,11 +1461,12 @@
       $("#linkpixel-1").html(dataView);
       $("#linkpixel-1").val(0);
     <?php } ?>    
+    // $(".sortable-link > li:visible").each(function( index ) {
+      // console.log( index + ": " + $( this ).text() );
+      // $(this).find("select").html(dataView);
+      // $(this).find("select").val(0);
+    // });
     
-    
-    <?php if(!$banner->count()) { ?>
-      // loadPixel(0,'.bannerpixel');
-    <?php } ?>
   }
   
   function tambahwalink() {

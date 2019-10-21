@@ -26,12 +26,12 @@
           <p class="card-text">
             Silahkan melakukan Transfer Bank ke
           </p> 
-          <h2>8290981477</h2>
+          <h2>8290812845</h2>
           <p class="card-text">
-            BCA <b>Rizky Redjosoewignjo</b>
+            BCA <b>Sugiarto Lasjim</b>
           </p>
           <p class="card-text">
-            Setelah Transfer, silahkan Klik tombol konfirmasi di bawah ini <br> atau Email bukti Transfer anda ke <b>omnilinks@gmail.com</b> <br>
+            Setelah Transfer, silahkan Klik tombol konfirmasi di bawah ini <br> atau Email bukti Transfer anda ke <b>omnilinkzcom@gmail.com</b> <br>
             Admin kami akan membantu anda max 1x24 jam
           </p>
 

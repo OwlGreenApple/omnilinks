@@ -478,6 +478,33 @@ class BiolinkController extends Controller
     $id=$request->idlink;
     $deletelink=$request->deletelink;
     $sort_link = '';
+    
+    //dicheck dulu
+    $counter_new = 0; $counter_update = 0; $counter_delete = 0;
+    for ($i=0; $i <count($request->title); $i++)
+    { 
+      if($id[$i]=='new')
+      {
+        $counter_new += 1;
+      }
+      else
+      {
+        if ($deletelink[$i]=='delete') {
+          $linkku=Link::find($id[$i]);
+          if (!is_null($linkku)){
+            $counter_delete += 1;
+          }
+          continue;
+        }
+        $counter_update += 1;
+      }
+    }
+    if ($counter_new+$counter_update-$counter_delete > 5 ){
+      $arr['status'] = 'error';
+      $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
+      return $arr;
+    }
+    
     for ($i=0; $i <count($request->title); $i++)
     { 
       if($id[$i]=='new')

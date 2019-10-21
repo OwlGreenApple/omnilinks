@@ -482,7 +482,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Limit 1 link url saja
+                Limit 1 Bio Link
               </div>
             </div>
 
@@ -888,7 +888,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Bisa gunakan 3 url
+                Bisa gunakan 3 Bio Link
               </div>
             </div>
 
@@ -987,7 +987,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Tersedia 10 link tunggal 
+                Tersedia 10 Single Link
               </div>
             </div>
           </div>
@@ -1349,7 +1349,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Slot link hingga 10 url
+                Slot link hingga 10 Bio Link
               </div>
             </div>                 
 
@@ -1448,7 +1448,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Link tunggal tak terhingga
+                Single Link tak terhingga
               </div>
             </div>
           </div>
