@@ -26,6 +26,9 @@
         {{$user->valid_until}}
       @endif
     </td>
+    <td data-label="Created">
+      {{$user->created_at}}
+    </td>
     <td data-label="Action">
       <button type="button" class="btn btn-primary btn-edit" data-id="{{$user->id}}" data-name="{{$user->name}}" data-email="{{$user->email}}" data-username="{{$user->username}}" data-is_admin="{{$user->is_admin}}" data-membership="{{$user->membership}}" data-valid_until="{{$user->valid_until}}">
         Edit User
