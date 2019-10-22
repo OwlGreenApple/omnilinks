@@ -28,7 +28,7 @@
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
-        var datares = jQuery.parseJSON(result);
+        // var datares = jQuery.parseJSON(result);
         console.log(result);
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
