@@ -31,7 +31,6 @@
         
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
-              interval: 1,
               axisX:{
                 valueFormatString: "DD",
                 title: "Hari",
@@ -46,7 +45,7 @@
               },              
               data: [
               {
-                type: "area",       
+                type: "line",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
                 dataPoints: data.chart,
