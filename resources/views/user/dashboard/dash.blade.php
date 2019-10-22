@@ -39,11 +39,11 @@
               axisY:{
                 title: "Total Click",
               },
-              legend:{
-                cursor: "pointer",
-                dockInsidePlotArea: true
+              // legend:{
+                // cursor: "pointer",
+                // dockInsidePlotArea: true,
                 // itemclick: toggleDataSeries
-              },              
+              // },              
               data: [
               {
                 type: "area",       
@@ -55,15 +55,15 @@
 
           chart.render();
 
-          function toggleDataSeries(e){
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-              e.dataSeries.visible = false;
-            }
-            else{
-              e.dataSeries.visible = true;
-            }
-            chart.render();
-          }
+          // function toggleDataSeries(e){
+            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              // e.dataSeries.visible = false;
+            // }
+            // else{
+              // e.dataSeries.visible = true;
+            // }
+            // chart.render();
+          // }
 
           $('#total-click').html(datares.total_click);
 
