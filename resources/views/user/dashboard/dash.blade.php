@@ -48,7 +48,7 @@
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: datares.chart,
+                dataPoints: datares.chart.toString(),
               }]
             });
 
