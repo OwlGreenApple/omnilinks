@@ -29,6 +29,7 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
         var datares = jQuery.parseJSON(result);
+        console.log(datares.chart);
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -48,7 +49,7 @@
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: datares.chart.toString(),
+                dataPoints: datares.chart,
               }]
             });
 
