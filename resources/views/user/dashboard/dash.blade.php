@@ -40,7 +40,7 @@
               },
               legend:{
                 cursor: "pointer",
-                dockInsidePlotArea: true,
+                // dockInsidePlotArea: true,
                 itemclick: toggleDataSeries
               },              
               data: [
