@@ -40,12 +40,12 @@
               },
               legend:{
                 cursor: "pointer",
-                // dockInsidePlotArea: true,
+                dockInsidePlotArea: true,
                 itemclick: toggleDataSeries
               },              
               data: [
               {
-                type: "line",       
+                type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
                 dataPoints: data.chart,
@@ -631,4 +631,6 @@
     $('#copy-link').modal('show');
   });
 </script>
+<script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
+
 @endsection
