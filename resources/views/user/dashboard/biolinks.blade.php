@@ -1863,17 +1863,17 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#style" class="active nav-link link" role="tab" data-toggle="tab">
-                  Tampilan
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="#link" class="nav-link link" role="tab" data-toggle="tab">
+                <a href="#link" class="active nav-link link" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="#style" class="nav-link link" role="tab" data-toggle="tab">
+                  Tampilan
+                </a>
+              </li>
+              
               @if(Auth::user()->membership!='free')
                 <li class="nav-item">
                   <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
@@ -2729,10 +2729,10 @@
                       <!-- Bootstrap CSS -->
                       <ul class="nav nav-tabs sub-nav mt-4" role="tablist">
                         <li class="nav-item sub-nav">
-                          <a class="nav-link active" href="#buzz" id="gradient" role="tab" data-toggle="tab">Gradient</a>
+                          <a class="nav-link active" href="#references" id="solid" role="tab" data-toggle="tab">Solid</a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#references" id="solid" role="tab" data-toggle="tab">Solid</a>
+                          <a class="nav-link" href="#buzz" id="gradient" role="tab" data-toggle="tab">Gradient</a>
                         </li>
                         <li class="nav-item sub-nav">
                           <a class="nav-link" href="#wallpaper" id="wallpaper-tab" role="tab" data-toggle="tab">Wallpaper</a>

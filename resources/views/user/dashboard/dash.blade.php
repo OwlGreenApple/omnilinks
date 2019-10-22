@@ -29,6 +29,28 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
         
+        // chart = new CanvasJS.Chart("chartContainer", {
+              // animationEnabled: true,
+              // axisX:{
+                // valueFormatString: "DD",
+                // title: "Hari",
+              // },
+              // axisY:{
+                // title: "Total Click",
+              // },
+              // legend:{
+                // cursor: "pointer",
+                // dockInsidePlotArea: true,
+                // itemclick: toggleDataSeries
+              // },              
+              // data: [
+              // {
+                // type: "area",       
+                // xValueType: "dateTime",
+                // xValueFormatString: "DD-MM-YYYY",
+                // dataPoints: data.chart,
+              // }]
+            // });
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -45,7 +67,7 @@
               },              
               data: [
               {
-                type: "area",       
+                type: "column",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
                 dataPoints: data.chart,
