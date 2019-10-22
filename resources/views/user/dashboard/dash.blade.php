@@ -29,30 +29,9 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
         
-        // chart = new CanvasJS.Chart("chartContainer", {
-              // animationEnabled: true,
-              // axisX:{
-                // valueFormatString: "DD",
-                // title: "Hari",
-              // },
-              // axisY:{
-                // title: "Total Click",
-              // },
-              // legend:{
-                // cursor: "pointer",
-                // dockInsidePlotArea: true,
-                // itemclick: toggleDataSeries
-              // },              
-              // data: [
-              // {
-                // type: "area",       
-                // xValueType: "dateTime",
-                // xValueFormatString: "DD-MM-YYYY",
-                // dataPoints: data.chart,
-              // }]
-            // });
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
+              interval: 1,
               axisX:{
                 valueFormatString: "DD",
                 title: "Hari",
@@ -67,12 +46,35 @@
               },              
               data: [
               {
-                type: "column",       
+                type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
                 dataPoints: data.chart,
               }]
             });
+        // chart = new CanvasJS.Chart("chartContainer", {
+              // animationEnabled: true,
+              // theme: "light2",
+              // axisX:{
+                // valueFormatString: "DD",
+                // title: "Hari",
+              // },
+              // axisY:{
+                // title: "Total Click",
+              // },
+              // legend:{
+                // cursor: "pointer",
+                // dockInsidePlotArea: true,
+                // itemclick: toggleDataSeries
+              // },              
+              // data: [
+              // {
+                // type: "column",       
+                // xValueType: "dateTime",
+                // xValueFormatString: "DD-MM-YYYY",
+                // dataPoints: data.chart,
+              // }]
+            // });
 
           chart.render();
 
