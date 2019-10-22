@@ -19,7 +19,7 @@ var testChart;
         bulan : $('#bulan').val(),
         tahun : $('#tahun').val(),
       },
-      dataType: 'json',
+      dataType: 'text',
       beforeSend: function()
       {
         $('#loader').show();
