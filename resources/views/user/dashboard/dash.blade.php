@@ -10,7 +10,7 @@
 <script type="text/javascript">
   var currentPage="";
   var chart = '';
-
+var testChart;
   function load_chart(){
     $.ajax({
       url: "<?php echo url('/dash/load-chart'); ?>",
@@ -28,8 +28,8 @@
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
-        // var datares = jQuery.parseJSON(result);
-        console.log(result);
+        var datares = jQuery.parseJSON(result);
+        testChart = datares.chart;
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -49,7 +49,7 @@
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: result,
+                dataPoints: datares.chart,
               }]
             });
 

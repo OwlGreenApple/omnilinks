@@ -198,7 +198,7 @@ class DashboardController extends Controller
     $ret['chart'] = $arr;
     $ret['total_click'] = $total_click;
 
-    return $arr;
+    return $ret;
   }
 
   public function deletePage(Request $Request)
