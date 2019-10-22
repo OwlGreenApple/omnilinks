@@ -32,7 +32,7 @@
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
-                // valueFormatString: "DD",
+                valueFormatString: "DD",
                 title: "Hari",
               },
               axisY:{
@@ -41,28 +41,28 @@
               legend:{
                 cursor: "pointer",
                 dockInsidePlotArea: true,
-                itemclick: toggleDataSeries
+                // itemclick: toggleDataSeries
               },              
               data: [
               {
                 type: "area",       
                 xValueType: "dateTime",
-                // xValueFormatString: "DD-MM-YYYY",
+                xValueFormatString: "DD-MM-YYYY",
                 dataPoints: result.chart,
               }]
             });
 
           chart.render();
 
-          function toggleDataSeries(e){
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-              e.dataSeries.visible = false;
-            }
-            else{
-              e.dataSeries.visible = true;
-            }
-            chart.render();
-          }
+          // function toggleDataSeries(e){
+            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              // e.dataSeries.visible = false;
+            // }
+            // else{
+              // e.dataSeries.visible = true;
+            // }
+            // chart.render();
+          // }
 
           $('#total-click').html(result.total_click);
 
