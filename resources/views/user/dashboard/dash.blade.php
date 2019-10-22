@@ -25,10 +25,10 @@
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
-      success: function(data) {
+      success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
-        
+        console.log(result);
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -48,32 +48,9 @@
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: data.chart,
+                dataPoints: result.chart,
               }]
             });
-        // chart = new CanvasJS.Chart("chartContainer", {
-              // animationEnabled: true,
-              // theme: "light2",
-              // axisX:{
-                // valueFormatString: "DD",
-                // title: "Hari",
-              // },
-              // axisY:{
-                // title: "Total Click",
-              // },
-              // legend:{
-                // cursor: "pointer",
-                // dockInsidePlotArea: true,
-                // itemclick: toggleDataSeries
-              // },              
-              // data: [
-              // {
-                // type: "column",       
-                // xValueType: "dateTime",
-                // xValueFormatString: "DD-MM-YYYY",
-                // dataPoints: data.chart,
-              // }]
-            // });
 
           chart.render();
 
@@ -87,7 +64,7 @@
             chart.render();
           }
 
-          $('#total-click').html(data.total_click);
+          $('#total-click').html(result.total_click);
 
           <?php if(Auth::user()->membership=='free') { ?>
             $('.show-chart').hide();
@@ -631,6 +608,4 @@
     $('#copy-link').modal('show');
   });
 </script>
-<script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
-
 @endsection

@@ -195,10 +195,10 @@ class DashboardController extends Controller
       $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
     }
 
-    $arr['chart'] = $arr;
-    $arr['total_click'] = $total_click;
+    $ret['chart'] = $arr;
+    $ret['total_click'] = $total_click;
 
-    return $arr;
+    return $ret;
   }
 
   public function deletePage(Request $Request)
