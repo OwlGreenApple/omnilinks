@@ -19,7 +19,7 @@
         bulan : $('#bulan').val(),
         tahun : $('#tahun').val(),
       },
-      dataType: 'json',
+      dataType: 'text',
       beforeSend: function()
       {
         $('#loader').show();
@@ -28,7 +28,7 @@
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
-        console.log(result);
+        var datares = jQuery.parseJSON(result);
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -41,30 +41,30 @@
               legend:{
                 cursor: "pointer",
                 dockInsidePlotArea: true,
-                // itemclick: toggleDataSeries
+                itemclick: toggleDataSeries
               },              
               data: [
               {
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: result.chart,
+                dataPoints: datares.chart,
               }]
             });
 
           chart.render();
 
-          // function toggleDataSeries(e){
-            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-              // e.dataSeries.visible = false;
-            // }
-            // else{
-              // e.dataSeries.visible = true;
-            // }
-            // chart.render();
-          // }
+          function toggleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              e.dataSeries.visible = false;
+            }
+            else{
+              e.dataSeries.visible = true;
+            }
+            chart.render();
+          }
 
-          $('#total-click').html(result.total_click);
+          $('#total-click').html(datares.total_click);
 
           <?php if(Auth::user()->membership=='free') { ?>
             $('.show-chart').hide();
