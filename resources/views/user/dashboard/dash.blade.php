@@ -32,7 +32,7 @@
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
-                valueFormatString: "DD",
+                // valueFormatString: "DD",
                 title: "Hari",
               },
               axisY:{
@@ -47,7 +47,7 @@
               {
                 type: "area",       
                 xValueType: "dateTime",
-                xValueFormatString: "DD-MM-YYYY",
+                // xValueFormatString: "DD-MM-YYYY",
                 dataPoints: result.chart,
               }]
             });
