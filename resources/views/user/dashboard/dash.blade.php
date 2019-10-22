@@ -19,7 +19,7 @@
         bulan : $('#bulan').val(),
         tahun : $('#tahun').val(),
       },
-      dataType: 'text',
+      dataType: 'json',
       beforeSend: function()
       {
         $('#loader').show();
@@ -29,7 +29,7 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
         var datares = jQuery.parseJSON(result);
-        console.log(datares.chart);
+        console.log(result);
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -39,17 +39,17 @@
               axisY:{
                 title: "Total Click",
               },
-              // legend:{
-                // cursor: "pointer",
-                // dockInsidePlotArea: true,
-                // itemclick: toggleDataSeries
-              // },              
+              legend:{
+                cursor: "pointer",
+                dockInsidePlotArea: true,
+                itemclick: toggleDataSeries
+              },              
               data: [
               {
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: datares.chart,
+                dataPoints: result,
               }]
             });
 
@@ -65,7 +65,7 @@
             // chart.render();
           // }
 
-          $('#total-click').html(datares.total_click);
+          // $('#total-click').html(datares.total_click);
 
           <?php if(Auth::user()->membership=='free') { ?>
             $('.show-chart').hide();
