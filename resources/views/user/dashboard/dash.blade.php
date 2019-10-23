@@ -11,69 +11,6 @@
   var currentPage="";
   var chart = '';
 var testChart;
-  function load_chart(){
-    $.ajax({
-      url: "<?php echo url('/dash/load-chart'); ?>",
-      type: 'get',
-      data : {
-        bulan : $('#bulan').val(),
-        tahun : $('#tahun').val(),
-      },
-      dataType: 'text',
-      beforeSend: function()
-      {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
-      },
-      success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-        var datares = jQuery.parseJSON(result);
-        testChart = datares.chart;
-        chart = new CanvasJS.Chart("chartContainer", {
-              animationEnabled: true,
-              axisX:{
-                valueFormatString: "DD",
-                title: "Hari",
-              },
-              axisY:{
-                title: "Total Click",
-              },
-              legend:{
-                cursor: "pointer",
-                dockInsidePlotArea: true
-                // itemclick: toggleDataSeries
-              },              
-              data: [
-              {
-                type: "area",       
-                xValueType: "dateTime",
-                xValueFormatString: "DD-MM-YYYY",
-                dataPoints: datares.chart,
-              }]
-            });
-
-          chart.render();
-
-          // function toggleDataSeries(e){
-            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-              // e.dataSeries.visible = false;
-            // }
-            // else{
-              // e.dataSeries.visible = true;
-            // }
-            // chart.render();
-          // }
-
-          // $('#total-click').html(datares.total_click);
-
-          <?php if(Auth::user()->membership=='free') { ?>
-            $('.show-chart').hide();
-          <?php } ?>
-      }
-    });
-  }
-
   function refreshDashboard() {
     if(currentPage=="") {
       currentPage = "<?php echo url('/dash/load-dashboard'); ?>";
@@ -134,11 +71,6 @@ var testChart;
       }
     });
   }
-
-  $(document).ready(function() {
-    refreshDashboard();
-    load_chart();
-  });
 
 </script>
 
@@ -476,6 +408,74 @@ var testChart;
 </div>
 
 <script type="text/javascript">
+  function load_chart(){
+    $.ajax({
+      url: "<?php echo url('/dash/load-chart'); ?>",
+      type: 'get',
+      data : {
+        bulan : $('#bulan').val(),
+        tahun : $('#tahun').val(),
+      },
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        var datares = jQuery.parseJSON(result);
+        testChart = datares.chart;
+        chart = new CanvasJS.Chart("chartContainer", {
+              animationEnabled: true,
+              axisX:{
+                valueFormatString: "DD",
+                title: "Hari",
+              },
+              axisY:{
+                title: "Total Click",
+              },
+              legend:{
+                cursor: "pointer",
+                dockInsidePlotArea: true
+                // itemclick: toggleDataSeries
+              },              
+              data: [
+              {
+                type: "area",       
+                xValueType: "dateTime",
+                xValueFormatString: "DD-MM-YYYY",
+                dataPoints: datares.chart,
+              }]
+            });
+
+          chart.render();
+
+          // function toggleDataSeries(e){
+            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              // e.dataSeries.visible = false;
+            // }
+            // else{
+              // e.dataSeries.visible = true;
+            // }
+            // chart.render();
+          // }
+
+          // $('#total-click').html(datares.total_click);
+
+          <?php if(Auth::user()->membership=='free') { ?>
+            $('.show-chart').hide();
+          <?php } ?>
+      }
+    });
+  }
+
+  $(document).ready(function() {
+    refreshDashboard();
+    load_chart();
+  });
+
   $('#keywords').on('keypress touchend', function (e) {
     if (e.which == 13) {
       refreshDashboard();
