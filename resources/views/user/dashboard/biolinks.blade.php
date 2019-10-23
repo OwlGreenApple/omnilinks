@@ -1893,7 +1893,7 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in " id="link">
+              <div role="tabpanel" class="tab-pane fade in active show" id="link">
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
 
@@ -2284,7 +2284,7 @@
                 </form>
               </div>
       
-              <!-- TAB 2 -->
+              <!-- TAB 3 -->
               <div role="tabpanel" class="tab-pane fade " id="walink">
                 <form id="savewalink" method="post" style="margin-bottom: 40px;margin-top: 40px;">
                   {{ csrf_field() }}
@@ -2350,7 +2350,7 @@
                 </div>
               </div>
 
-              <!-- TAB 3 -->
+              <!-- TAB 4 -->
               <div class="tab-pane fade" id="pixel">
                 <form id="savepixel" method="post" style="margin-bottom: 40px;margin-top: 40px;">
                   {{ csrf_field() }}
@@ -2418,8 +2418,8 @@
                 </div>
               </div>
               
-              <!-- TAB 4 -->
-              <div role="tabpanel" class="tab-pane fade in active show" id="style">
+              <!-- TAB 2 -->
+              <div role="tabpanel" class="tab-pane fade in " id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
 
                   {{ csrf_field() }}

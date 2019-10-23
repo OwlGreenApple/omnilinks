@@ -115,7 +115,7 @@ var testChart;
         ?>
         <div class="col-lg-2 col-md-3 {{$colbio}} pl-md-3 pl-0 pr-0">
           <button class="btnbio btncreate btn-block btncreate-bio">
-            + BIO LINK  
+            Create Bio Link
           </button>
         </div>
 
@@ -123,7 +123,7 @@ var testChart;
           <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
             <a href="{{asset('/singlelink')}}" style="text-decoration: none;">
               <button class="btnsingle btncreate btn-block">
-                + SINGLE LINK  
+                Create Single Link
               </button>
             </a>
           </div> 

@@ -94,16 +94,16 @@
               @if(Auth::check())
                 <li class="nav-item dropdown pull-right">
                   <a class="nav-link navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    + Link
+                    Create Link
                     <i class="fas fa-angle-down"></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item btncreate-bio" href="">
-                      + Bio Link
+                      Create Bio Link
                     </a>
                     @if(Auth::user()->membership!='free')
                       <a class="dropdown-item <?php if(Request::is('singlelink')) echo 'active' ?>" href="{{ url('singlelink') }}">
-                        + Single Link
+                        Create Single Link
                       </a>
                     @endif 
                   </div>

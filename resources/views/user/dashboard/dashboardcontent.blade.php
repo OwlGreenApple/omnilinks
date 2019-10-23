@@ -177,19 +177,19 @@
                 {{$page->page_title}}" data-link="{{$names}}" data-created="
                 {{date('F d, Y', strtotime($page->created_at))}}" class="btn btn-sm btn-danger float-right btn-deletePage">
                   <i class="fas fa-trash-alt"></i>
-                  <span class="menu-nomobile" style="color:#fff">Delete</span>
+                  <!--<span class="menu-nomobile" style="color:#fff">Delete</span>-->
                 </button>
               </div>
 
               <button class="btn btn-sm btn-success float-right btn-editPage" data-id="{{$page->uid}}" style="margin-right:5px;">
                 <i class="fas fa-pencil-alt"></i>
-                <span class="menu-nomobile" style="color:#fff">Edit</span>
+                <!--<span class="menu-nomobile" style="color:#fff">Edit</span>-->
               </button>
 
               <?php if ($user->membership<>'free') { ?>  
               <button class="btn btn-sm btn-primary btn-viewall float-right" style="margin-right:5px;" data-id="{{$page->id}}/{{$bulan}}/{{$tahun}}">
                 <i class="far fa-eye"></i>
-                <span class="menu-nomobile" style="color:#fff">View</span>
+                <!--<span class="menu-nomobile" style="color:#fff">View</span>-->
               </button>
               <?php } ?>
               
