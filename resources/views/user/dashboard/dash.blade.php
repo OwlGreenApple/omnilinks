@@ -435,7 +435,6 @@ var testChart;
           });
           newArray.push(newObject);
         });
-        console.log(newArray);
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -461,7 +460,7 @@ var testChart;
             });
 
           chart.render();
-
+          $(".canvasjs-chart-credit").hide();
           function toggleDataSeries(e){
             if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
               e.dataSeries.visible = false;
@@ -470,6 +469,7 @@ var testChart;
               e.dataSeries.visible = true;
             }
             chart.render();
+            $(".canvasjs-chart-credit").hide();
           }
 
           $('#total-click').html(datares.total_click);
