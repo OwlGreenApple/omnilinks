@@ -427,6 +427,24 @@ var testChart;
         $('.div-loading').removeClass('background-load');
         var datares = jQuery.parseJSON(result);
         testChart = datares.chart;
+
+          // function toggleDataSeries(e){
+            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              // e.dataSeries.visible = false;
+            // }
+            // else{
+              // e.dataSeries.visible = true;
+            // }
+            // chart.render();
+          // }
+
+          // $('#total-click').html(datares.total_click);
+
+          <?php if(Auth::user()->membership=='free') { ?>
+            $('.show-chart').hide();
+          <?php } ?>
+      }
+    });
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -446,29 +464,12 @@ var testChart;
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: datares.chart,
+                dataPoints: testChart,
               }]
             });
 
           chart.render();
-
-          // function toggleDataSeries(e){
-            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-              // e.dataSeries.visible = false;
-            // }
-            // else{
-              // e.dataSeries.visible = true;
-            // }
-            // chart.render();
-          // }
-
-          // $('#total-click').html(datares.total_click);
-
-          <?php if(Auth::user()->membership=='free') { ?>
-            $('.show-chart').hide();
-          <?php } ?>
-      }
-    });
+    
   }
 
   $(document).ready(function() {
