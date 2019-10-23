@@ -427,24 +427,15 @@ var testChart;
         $('.div-loading').removeClass('background-load');
         var datares = jQuery.parseJSON(result);
         testChart = datares.chart;
-
-          // function toggleDataSeries(e){
-            // if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-              // e.dataSeries.visible = false;
-            // }
-            // else{
-              // e.dataSeries.visible = true;
-            // }
-            // chart.render();
-          // }
-
-          // $('#total-click').html(datares.total_click);
-
-          <?php if(Auth::user()->membership=='free') { ?>
-            $('.show-chart').hide();
-          <?php } ?>
-      }
-    });
+        var newArray=[];
+        $.each( datares.chart, function( key, value ) {
+          var newObject={};
+          $.each( value, function( key, value ) {
+            newObject[key]=parseInt(value);
+          });
+          newArray.push(newObject);
+        });
+        console.log(newArray);
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -456,20 +447,38 @@ var testChart;
               },
               legend:{
                 cursor: "pointer",
-                dockInsidePlotArea: true
-                // itemclick: toggleDataSeries
+                dockInsidePlotArea: true,
+                itemclick: toggleDataSeries
               },              
               data: [
               {
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: testChart,
+                yValueType: "",
+                dataPoints: newArray,
               }]
             });
 
           chart.render();
-    
+
+          function toggleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              e.dataSeries.visible = false;
+            }
+            else{
+              e.dataSeries.visible = true;
+            }
+            chart.render();
+          }
+
+          $('#total-click').html(datares.total_click);
+
+          <?php if(Auth::user()->membership=='free') { ?>
+            $('.show-chart').hide();
+          <?php } ?>
+      }
+    });
   }
 
   $(document).ready(function() {
