@@ -345,7 +345,7 @@
 }
 
 .btncreate:hover{
-  box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);
+  /*box-shadow: 1px 3px 4px 1px rgba(75, 75, 75, 0.6);*/
 }
 
 .btncreate:active,
@@ -367,13 +367,16 @@
 }
 
 .btnbio.active {
-  box-shadow: 1px 1px 3px 2px rgba(0, 0, 255, 0.2);
+  /*box-shadow: 1px 1px 3px 2px rgba(0, 0, 255, 0.2);*/
+}
+.btnbio:hover {
+  background-color:#0e4884;
 }
 .btnbio {
-  /*background-color: #106BC8;
-  color: #ffffff;*/
-  background-color: #fff;
-  color: #106BC8;  
+  background-color: #106BC8;
+  color: #ffffff;
+  /*background-color: #fff;
+  color: #106BC8;  */
   border: 1px solid #106BC8;
   border-radius: 6px;
   cursor: pointer;
@@ -394,12 +397,12 @@
 }
 
 .btnsingle{
-  /*margin-left: 10px;
-  background-color: #FBCE2D;
-  color: #505050;*/
   margin-left: 10px;
-  background-color: #fff;
-  color: #E39D31;  
+  
+  background-color: #E39D31;
+  color: #fff;
+  /*background-color: #fff;
+  color: #E39D31;  */
   border: 1px solid #E39D31;
   border-radius: 6px;
   cursor: pointer;
@@ -407,8 +410,11 @@
   font-size: 15px;
   font-weight: 700;
 }
+.btnsingle:hover{
+  background-color:#ca7e0c;
+}
 .btnsingle.active{
-  box-shadow: 1px 3px 4px 1px rgba(227, 157, 49, 0.4);
+  /*box-shadow: 1px 3px 4px 1px rgba(227, 157, 49, 0.4);*/
 }
 
 .btnsingledash {

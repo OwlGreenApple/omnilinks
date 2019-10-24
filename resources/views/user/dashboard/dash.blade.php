@@ -197,13 +197,13 @@ var testChart;
               <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
-          </p>
+      </p>
     </div>
 
     <hr>
 
     <div class="col-md-12">
-      <div class="pt-md-1 pt-0" style="font-size: 25px; padding-bottom: 5px">
+      <div class="pt-md-1 pt-0 show-chart" style="font-size: 25px; padding-bottom: 5px">
         <div class="text-md-left text-center">
           <p>Omnilinkz Chart</p>  
         </div>
@@ -260,7 +260,7 @@ var testChart;
 
       </div>
 
-      <hr style="margin-bottom: 45px">
+      <hr style="margin-bottom: 45px" class="show-chart">
 
     <div class="row show-chart">
       <div class="col-md-8 order-md-1 order-2">
@@ -474,14 +474,14 @@ var testChart;
 
           $('#total-click').html(datares.total_click);
 
-          <?php if(Auth::user()->membership=='free') { ?>
-            $('.show-chart').hide();
-          <?php } ?>
       }
     });
   }
 
   $(document).ready(function() {
+    <?php if(Auth::user()->membership=='free') { ?>
+      $('.show-chart').hide();
+    <?php } ?>
     refreshDashboard();
     load_chart();
   });

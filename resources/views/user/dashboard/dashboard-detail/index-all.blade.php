@@ -31,6 +31,16 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
 
+        testChart = data.chart;
+        var newArray=[];
+        $.each( data.chart, function( key, value ) {
+          var newObject={};
+          $.each( value, function( key, value ) {
+            newObject[key]=parseInt(value);
+          });
+          newArray.push(newObject);
+        });
+
         chart = new CanvasJS.Chart("chartContainer", {
               animationEnabled: true,
               axisX:{
@@ -50,7 +60,7 @@
                 type: "area",       
                 xValueType: "dateTime",
                 xValueFormatString: "DD-MM-YYYY",
-                dataPoints: data.chart,
+                dataPoints: newArray,
               }]
             });
 

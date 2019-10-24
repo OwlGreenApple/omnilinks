@@ -63,7 +63,7 @@
             </b>  
           </h5>
           <span class="harga harga-small free">
-            <sup>Rp</sup> 0<sub> /bln</sub>
+            <sup>Rp</sup> 0<sub> /bln<br> gratis <br>selamanya</sub>
           </span><br>
           @if(!Auth::check())
           <a class="link-free" href="{{url('register')}}">
@@ -86,7 +86,7 @@
             </b>  
           </h5>
           <span class="harga harga-small pro">
-            <sup>Rp</sup> 85.000<sub> /bln</sub>
+            <sup>Rp</sup> 85.000<sub> /bln<br>per tahun 1.020.000</sub>
           </span><br>
           <a class="link-pro" href="{{url('checkout/2')}}">
             <button class="btn btn-block btn-upgrade-big small pro">
@@ -105,7 +105,7 @@
             </b>    
           </h5>
           <span class="harga harga-small premium">
-            <sup>Rp</sup> 95.000<sub> /bln</sub>
+            <sup>Rp</sup> 95.000<sub> /bln<br>per tahun 1.140.000</sub>
           </span><br>
           <a class="link-premium" href="{{url('checkout/4')}}">
             <button class="btn btn-block btn-upgrade-big small premium">
@@ -552,7 +552,7 @@
               <sup>Rp</sup> 85.000<sub> /bln</sub>
             </span><br>
             <span class="harga-real pro">
-              Biaya Per Tahun @ Rp 1.020.000
+              Biaya Per Tahun Rp 1.020.000
             </span><br>
             <p class="hemat monthly mt-4">
               <i class="fas fa-redo-alt"></i>
@@ -915,7 +915,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Tersedia 50 variasi tema, membuat background lebih berwarna
+                Pilih lebih dari 100 template themes dan animation yang membuat Online shop Anda lebih menarik lagi, sesuai dengan paket langganan Anda.
               </div>
             </div>
 
@@ -1013,7 +1013,7 @@
               <sup>Rp</sup> 95.000<sub> /bln</sub>
             </span><br>
             <span class="harga-real premium">
-              Biaya Per Tahun @ 1.140.000
+              Biaya Per Tahun 1.140.000
             </span><br>
             <p class="hemat monthly mt-4">
               <i class="fas fa-redo-alt"></i>
@@ -1376,7 +1376,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Tersedia 50 variasi tema, membuat background lebih berwarna
+                Pilih lebih dari 100 template themes dan animation yang membuat Online shop Anda lebih menarik lagi, sesuai dengan paket langganan Anda.
               </div>
             </div>
 

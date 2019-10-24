@@ -69,6 +69,37 @@
 
                           </div>
                         </li>
+                        <li class="link-list" id="link-url-2">
+                          <div class="div-table mb-4">
+                            <div class="div-cell">
+                              <span class="handle">
+                                <i class="fas fa-bars"></i>
+                              </span>
+                            </div>
+
+                            <div class="div-cell">
+                              <div class="col-md-12 col-12 pr-0 pl-0">
+                                <div class="input-stack">
+                                  <input type="hidden" name="idlink[]" value="new">
+                                  <input type="hidden" name="deletelink[]" value="">
+                                  <input type="text" name="title[]" value="" id="title-2-view" placeholder="Title" class="form-control focuslink">
+                                  <input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">
+                                </div>
+                              </div>
+                              <div class="col-md-12 col-12 pr-0 pl-0">
+                                <select name="linkpixel[]" id="linkpixel-2" class="form-control linkpixel">
+                                </select>
+                              </div> 
+                            </div>
+                            
+                            <div class="div-cell cell-btn deletelink">
+                              <span>
+                                <i class="far fa-trash-alt"></i>
+                              </span>
+                            </div>
+
+                          </div>
+                        </li>
                       <?php } ?>
 <script>
   loadPixelPage();

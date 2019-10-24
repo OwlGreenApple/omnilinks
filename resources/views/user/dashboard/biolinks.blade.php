@@ -1460,6 +1460,8 @@
     ?>
       $("#linkpixel-1").html(dataView);
       $("#linkpixel-1").val(0);
+      $("#linkpixel-2").html(dataView);
+      $("#linkpixel-2").val(0);
     <?php } ?>    
     // $(".sortable-link > li:visible").each(function( index ) {
       // console.log( index + ": " + $( this ).text() );
@@ -1874,13 +1876,11 @@
                 </a>
               </li>
               
-              @if(Auth::user()->membership!='free')
-                <li class="nav-item">
-                  <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
-                    Pixel
-                  </a>
-                </li>
-              @endif
+              <li class="nav-item">
+                <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
+                  Pixel
+                </a>
+              </li>
               
               <li class="nav-item">
                 <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
@@ -1944,7 +1944,7 @@
                       </li>
 
                       <li id="msg-li-telegram"> <!-- telegram -->
-                        <div id="telegram" class="messengers div-table hide" style="display:none;">
+                        <div id="telegram" class="messengers div-table " >
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -2157,7 +2157,7 @@
                     </li>
 
                     <li id="sosmed-fb">
-                      <div id="fb" class="socialmedia div-table hide" data-type="fb" style="display:none;">
+                      <div id="fb" class="socialmedia div-table " data-type="fb" style="">
                         <input type="hidden" name="sortsosmed[]" value="" data-val="fb" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
@@ -2191,7 +2191,7 @@
                     </li>
 
                     <li id="sosmed-twitter">
-                      <div id="twitter" class="socialmedia div-table hide" data-type="twitter" style="display:none;">
+                      <div id="twitter" class="socialmedia div-table " data-type="twitter" style="">
                         <input type="hidden" name="sortsosmed[]" value="" data-val="twitter" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
@@ -2225,7 +2225,7 @@
                     </li>
 
                     <li id="sosmed-ig">
-                      <div id="ig" class="socialmedia div-table hide" data-type="ig" style="display:none;">
+                      <div id="ig" class="socialmedia div-table " data-type="ig" style="">
                         <input type="hidden" name="sortsosmed[]" value="" data-val="ig" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
@@ -2443,13 +2443,13 @@
                           <span id="wizardPicturePreview-delete" aria-hidden="true" style="color: red">Delete</span>
                         </div>
                         <div class="col-md-8">
-                          @if(is_null($pages->page_title))
-                          <input type="text" name="judul" id="pagetitle" value="" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
-                          @else
-                          <input type="text" name="judul" id="pagetitle" value="{{$pages->page_title}}" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
-                          @endif
+                          <input type="text" name="judul" id="pagetitle" value="<?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
                           <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize><?php if(!is_null($pages->description)) { 
                             echo $pages->description;
+                          }else {
+                            echo "This is your new text content. 
+You can modify this text 
+and add more";
                           }?></textarea>
                         </div>
                         <div class="col-md-12 mt-4">
@@ -2710,7 +2710,7 @@
                         <div class="row">
                           <div class="col-md-2 col-3">
                             <label class="switch">
-                              <input type="checkbox" name="powered" id="powered" value="<?php if($pages->powered) echo '1'; ?>" <?php if($pages->powered) echo 'checked'; ?>>
+                              <input type="checkbox" name="powered" id="powered" value="<?php if($pages->powered) { echo '1'; } ?>" <?php if($pages->powered) echo 'checked'; ?>>
                               <span class="slider round"></span>
                             </label>
                           </div>
@@ -2828,7 +2828,7 @@
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
-                        <div class="div-picture" style="width: 82px; height: 82px; margin-left: 13px;<?php if(is_null($pages->image_pages)) echo 'display: none' ?>">
+                        <div class="div-picture" style="width: 82px; height: 82px; margin-left: 13px;">
                           <?php  
                             $viewpicture = asset('/image/no-photo.jpg');
                             if(!is_null($pages->image_pages)){
@@ -2898,7 +2898,7 @@
                         </label>
                       </a>
                     </li>
-                    <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
+                    <li class="link col pl-1 pr-1 " id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
                       width: 100%;font-size:11px;height: 40px;padding: 10px;" id="telegramlinkview">
                         <i class="fab fa-telegram-plane" style="font-size:14px;"></i>
@@ -2945,28 +2945,29 @@
                         <!--
                         <button type="button" class="btn btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
                         -->
-                        <li id="link-url-1-preview" class=""><a href="#" class="btn btn-md btnview title-1-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >masukkan link</a></li>
+                        <li id="link-url-1-preview" class=""><a href="#" class="btn btn-md btnview title-1-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >Masukkan link #1</a></li>
+                        <li id="link-url-2-preview" class=""><a href="#" class="btn btn-md btnview title-2-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-2-preview" >Masukkan link #2</a></li>
                       @endif
                     </ul>
                   </div>
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
-                    <li class="col linked hide" id="youtubeviewid">
+                    <li class="col linked " id="youtubeviewid">
                       <a href="#" title="Youtube">
                         <i class="fab fa-youtube" style="color: #fff;"></i>
                       </a>
                     </li>
-                    <li class="col linked hide" id="fbviewid" >
+                    <li class="col linked " id="fbviewid" >
                       <a href="#" title="fb" >
                         <i class="fab fa-facebook-square" style="color: #fff;"></i>
                       </a>
                     </li>
-                    <li class="col linked hide" id="twitterviewid">
+                    <li class="col linked " id="twitterviewid">
                       <a href="#" title="Twitter">
                         <i class="fab fa-twitter-square" style="color: #fff;"></i>
                       </a>
                     </li>
-                    <li class="col linked hide" id="igviewid">
+                    <li class="col linked " id="igviewid">
                       <a href="#" title="ig" >
                         <i class="fab fa-instagram" style="color: #fff; "></i>
                       </a>  
