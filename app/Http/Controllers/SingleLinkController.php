@@ -126,7 +126,7 @@ class SingleLinkController extends Controller
   public function loadsinglelink(Request $request)
   {
     $link=Link::leftjoin('pixels','links.pixel_id','pixels.id')
-                ->select('pixels.title as judul','links.title','links.id as idlink','links.names as shorten','links.link as datalink','links.pixel_id as idpixel','links.premium_id','links.premium_names')
+                ->select('pixels.title as judul','links.title','links.id as idlink','links.names as shorten','links.link as datalink','links.pixel_id as idpixel','links.premium_id','links.premium_names','links.link as link')
                 ->where('links.title','Like','%'.$request->carilink.'%')
                 ->where('links.users_id',Auth::user()->id)
                 ->where('links.pages_id',0)

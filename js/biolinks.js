@@ -1,5 +1,5 @@
 var arra = 0;
-var elmhtml, counterLink = 1;
+var elmhtml, counterLink = 2;
 
 // function deleteview(id)
 // {

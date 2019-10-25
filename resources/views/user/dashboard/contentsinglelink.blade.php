@@ -20,7 +20,9 @@
           {{$link->title}}
         </div>
       </td>
-
+      
+      <td class="menu-nomobile">{{$link->link}}</td>
+      
       @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
         <td class="menu-nomobile">{{$link->judul}}</td>
       @endif
@@ -55,6 +57,7 @@
 
     <tr class="details-{{$link->idlink}} d-none">
       <td colspan="2">
+        URL : {{$link->link}}<br>
         Link : <b>{{env('SHORT_LINK')}}/{{$link->shorten}}&nbsp;</b><br>
         Pixel : {{$link->judul}} <br>
       </td>

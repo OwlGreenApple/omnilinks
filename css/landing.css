@@ -95,7 +95,7 @@ p,span {
   padding-bottom: 30px;*/
   background-color: #F2F2F2;
   min-height: 80px;
-  z-index: 30;
+  /*z-index: 30;*/
 }
 
 @media screen and (max-width: 767px) {

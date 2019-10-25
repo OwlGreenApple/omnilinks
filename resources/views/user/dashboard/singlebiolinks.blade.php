@@ -454,7 +454,7 @@
                 Recent
               </span>
               <div class="float-none float-md-right">
-                <input type="search" name="carilink" placeholder="Search Link" class="carilink form-controll form-control" arial-label="Search" style="background-color: #fff;">
+                <input type="search" name="carilink" placeholder="Search" class="carilink form-controll form-control" arial-label="Search" style="background-color: #fff;">
                 <button class="btn btn-success" id="carilink" type="button">Search</button>
               </div>
             </div> 
@@ -467,6 +467,9 @@
                   <thead align="center">
                     <th class="">
                       Title
+                    </th>
+                    <th class="menu-nomobile">
+                      URL
                     </th>
                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                       <th class="menu-nomobile">
