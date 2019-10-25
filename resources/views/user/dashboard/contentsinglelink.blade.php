@@ -1,7 +1,7 @@
 
 @if(!$links->count())
   <tr align="center">
-    <td colspan="4">No Data To show</td>
+    <td colspan="5">No Data To show</td>
   </tr>
 @else
   @foreach($links as $link)
