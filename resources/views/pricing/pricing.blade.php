@@ -155,372 +155,69 @@
           @endif
 
           <div class="upgrade-details2">
-            <!--<div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                1
-              </div>  
-              <div class="col-md-9 col-9 text-left">
-                Omnilinkz URL
-                &nbsp;
-                <span class="tooltipstered" title="Omnilinkz">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Premium ID
-                &nbsp;
-                <span class="tooltipstered" title="Premium ID">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
+                Dapatkan 1 Bio Link
               </div>
             </div>
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
+                <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Single Link
-                &nbsp;
-                <span class="tooltipstered" title="Single Link">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
-                1000
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Clicks/Bulan
-                &nbsp;
-                <span class="tooltipstered" title="Clicks/Bulan">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Profile Image
-                &nbsp;
-                <span class="tooltipstered" title="Profile Image">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Store Brand
-                &nbsp;
-                <span class="tooltipstered" title="Store Brand">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
+                Pasang FB Pixel gratis selama 1 bulan
               </div>
             </div>
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
+                <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Banner Promo
-                &nbsp;
-                <span class="tooltipstered" title="Banner Promo">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
+                Pasang Google Retargeting gratis selama 1 bulan
               </div>
             </div>
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
+                <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Omnlinkz Brand
-                &nbsp;
-                <span class="tooltipstered" title="Omnilinkz Brand">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Click to WA Creator
-                &nbsp;
-                <span class="tooltipstered" title="Click to WA Creator">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                WhatsApp
-                &nbsp;
-                <span class="tooltipstered" title="WhatsApp">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                FB Messenger
-                &nbsp;
-                <span class="tooltipstered" title="FB Messenger">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Line
-                &nbsp;
-                <span class="tooltipstered" title="Line">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Skype
-                &nbsp;
-                <span class="tooltipstered" title="Skype">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Telegram
-                &nbsp;
-                <span class="tooltipstered" title="Telegram">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                FB Pixel
-                &nbsp;
-                <span class="tooltipstered" title="FB Pixel">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Google Retargetting
-                &nbsp;
-                <span class="tooltipstered" title="Google Retargetting">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Twitter Retargetting
-                &nbsp;
-                <span class="tooltipstered" title="Twitter Retargetting">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Google Analytics
-                &nbsp;
-                <span class="tooltipstered" title="Google Analytics">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
-                Email
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Priority Support
-                &nbsp;
-                <span class="tooltipstered" title="Priority Support">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
+                Atur tampilan sesuai warna pilihanmu
               </div>
             </div>
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                5
+                <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Themes
-                &nbsp;
-                <span class="tooltipstered" title="Themes">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Jumlah Klik
-                &nbsp;
-                <span class="tooltipstered" title="Jumlah Klik">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
+                Hubungi Support kami via email 
               </div>
             </div>
             
             <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
+              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
+                <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Chart Analytic
-                &nbsp;
-                <span class="tooltipstered" title="Chart Analytic">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
+                Respon klik pada link gratis hingga 1000 klik
               </div>
-            </div>-->
-
+            </div>
+            
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Limit 1 Bio Link
+                Temukan Iklan di Display Omnilinkz
               </div>
             </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-check"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Tersedia hanya 5 variasi tema, membuat background lebih berwarna
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-check"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Kontak CS hanya via email
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-check"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Limit terbatas hanya hingga 1000 klik saja
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-check"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Penggunaan FB Pixel terbatas hanya sebulan saja
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -567,328 +264,12 @@
           </a>
 
           <div class="upgrade-details2">
-            <!--<div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                3
-              </div>  
-              <div class="col-md-9 col-9 text-left">
-                Omnilinkz URL
-                &nbsp;
-                <span class="tooltipstered" title="Omnilinkz">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                3
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Premium ID
-                &nbsp;
-                <span class="tooltipstered" title="Premium ID">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-infinity"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Single Link
-                &nbsp;
-                <span class="tooltipstered" title="Single Link">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-infinity"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Clicks/Bulan
-                &nbsp;
-                <span class="tooltipstered" title="Clicks/Bulan">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Profile Image
-                &nbsp;
-                <span class="tooltipstered" title="Profile Image">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Store Brand
-                &nbsp;
-                <span class="tooltipstered" title="Store Brand">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                1
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Banner Promo
-                &nbsp;
-                <span class="tooltipstered" title="Banner Promo">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Omnlinkz Brand
-                &nbsp;
-                <span class="tooltipstered" title="Omnilinkz Brand">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Click to WA Creator
-                &nbsp;
-                <span class="tooltipstered" title="Click to WA Creator">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                WhatsApp
-                &nbsp;
-                <span class="tooltipstered" title="WhatsApp">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                FB Messenger
-                &nbsp;
-                <span class="tooltipstered" title="FB Messenger">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Line
-                &nbsp;
-                <span class="tooltipstered" title="Line">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Skype
-                &nbsp;
-                <span class="tooltipstered" title="Skype">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Telegram
-                &nbsp;
-                <span class="tooltipstered" title="Telegram">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                FB Pixel
-                &nbsp;
-                <span class="tooltipstered" title="FB Pixel">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Google Retargetting
-                &nbsp;
-                <span class="tooltipstered" title="Google Retargetting">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Twitter Retargetting
-                &nbsp;
-                <span class="tooltipstered" title="Twitter Retargetting">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Google Analytics
-                &nbsp;
-                <span class="tooltipstered" title="Google Analytics">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
-                Chat
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Priority Support
-                &nbsp;
-                <span class="tooltipstered" title="Priority Support">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                50
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Themes
-                &nbsp;
-                <span class="tooltipstered" title="Themes">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Jumlah Klik
-                &nbsp;
-                <span class="tooltipstered" title="Jumlah Klik">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-            
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Chart Analytic
-                &nbsp;
-                <span class="tooltipstered" title="Chart Analytic">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>-->
-
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Bisa gunakan 3 Bio Link
+                Dapatkan 3 Bio Link
               </div>
             </div>
 
@@ -897,7 +278,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Tersedia 1 slide banner saja 
+                Pasang FB Pixel Gratis Selamanya
               </div>
             </div>
 
@@ -906,7 +287,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Ubah id akunmu sesuai kebutuhan
+                Pasang Google Retargeting Gratis Selamanya
               </div>
             </div>
 
@@ -915,7 +296,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Pilih lebih dari 100 template themes dan animation yang membuat Online shop Anda lebih menarik lagi, sesuai dengan paket langganan Anda.
+                Pilih lebih dari 100 Template Themes Gambar dan Animasi
               </div>
             </div>
 
@@ -924,7 +305,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Hubungi CS via email & chat 
+                Hubungi Support kami via email & live chat
               </div>
             </div>
 
@@ -933,7 +314,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Respon klik pada penggunaan link tidak terhingga
+                Unlimited Respon klik pada penggunaan link
               </div>
             </div>
 
@@ -942,7 +323,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Ketahui rekam jejak link dengan fitur analytic
+                Display Omnilinkz bebas iklan
               </div>
             </div>
 
@@ -951,7 +332,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Gunakan FB Pixel sampai kapan pun 
+                Pasang 1 Banner Promosi di Display
               </div>
             </div>
 
@@ -960,7 +341,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Gunakan Google retargetting sampai kapan pun
+                Ubah ID Biolink sesuai kebutuhan
               </div>
             </div>
 
@@ -969,7 +350,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Bisa hapus logo Omnilinkz
+                Dapatkan data analytic rekam jejak link
               </div>
             </div>
 
@@ -978,7 +359,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Display akun Omnilinkz bebas iklan
+                Dapatkan 10 Single Link
               </div>
             </div>
 
@@ -987,9 +368,10 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Tersedia 10 Single Link
+                Bisa hapus Logo Omnilinkz
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -1028,328 +410,12 @@
           </a>
 
           <div class="upgrade-details2">
-            <!--<div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                10
-              </div>  
-              <div class="col-md-9 col-9 text-left">
-                Omnilinkz URL
-                &nbsp;
-                <span class="tooltipstered" title="Omnilinkz">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                10
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Premium ID
-                &nbsp;
-                <span class="tooltipstered" title="Premium ID">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-infinity"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Single Link
-                &nbsp;
-                <span class="tooltipstered" title="Single Link">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <i class="fas fa-infinity"></i>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Clicks/Bulan
-                &nbsp;
-                <span class="tooltipstered" title="Clicks/Bulan">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Profile Image
-                &nbsp;
-                <span class="tooltipstered" title="Profile Image">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Store Brand
-                &nbsp;
-                <span class="tooltipstered" title="Store Brand">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                5
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Banner Promo
-                &nbsp;
-                <span class="tooltipstered" title="Banner Promo">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                <span class="red-color">
-                  <i class="fas fa-times-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Omnilinkz Brand
-                &nbsp;
-                <span class="tooltipstered" title="Omnilinkz Brand">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Click to WA Creator
-                &nbsp;
-                <span class="tooltipstered" title="Click to WA Creator">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                WhatsApp
-                &nbsp;
-                <span class="tooltipstered" title="WhatsApp">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                FB Messenger
-                &nbsp;
-                <span class="tooltipstered" title="FB Messenger">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Line
-                &nbsp;
-                <span class="tooltipstered" title="Line">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Skype
-                &nbsp;
-                <span class="tooltipstered" title="Skype">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Telegram
-                &nbsp;
-                <span class="tooltipstered" title="Telegram">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                FB Pixel
-                &nbsp;
-                <span class="tooltipstered" title="FB Pixel">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Google Retargetting
-                &nbsp;
-                <span class="tooltipstered" title="Google Retargetting">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Twitter Retargetting
-                &nbsp;
-                <span class="tooltipstered" title="Twitter Retargetting">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Google Analytics
-                &nbsp;
-                <span class="tooltipstered" title="Google Analytics">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color pl-0 pr-0">
-                Chat
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Priority Support
-                &nbsp;
-                <span class="tooltipstered" title="Priority Support">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
-                50
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Themes
-                &nbsp;
-                <span class="tooltipstered" title="Themes">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1  col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Jumlah Klik
-                &nbsp;
-                <span class="tooltipstered" title="Jumlah Klik">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>
-            
-            <div class="row mb-2">
-              <div class="offset-md-1 offset-1 col-md-2 col-2">
-                <span class="green-color">
-                  <i class="fas fa-check-circle"></i>
-                </span>
-              </div>
-              <div class="col-md-9 col-9 text-left">
-                Chart Analytic
-                &nbsp;
-                <span class="tooltipstered" title="Chart Analytic">
-                  <i class="fas fa-question-circle icon-reflink"></i>
-                </span>
-              </div>
-            </div>-->
-
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Slot link hingga 10 Bio Link
+                Dapatkan 10 Bio Link
               </div>
             </div>                 
 
@@ -1358,7 +424,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Tersedia 5 slide banner
+                Pasang FB Pixel Gratis Selamanya
               </div>
             </div>
 
@@ -1367,7 +433,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Ubah id akunmu sesuai kebutuhan
+                Pasang Google Retargeting Gratis Selamanya
               </div>
             </div>
 
@@ -1376,7 +442,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Pilih lebih dari 100 template themes dan animation yang membuat Online shop Anda lebih menarik lagi, sesuai dengan paket langganan Anda.
+                Pilih lebih dari 100 Template Themes Gambar dan Animasi
               </div>
             </div>
 
@@ -1385,7 +451,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Hubungi CS via email & chat
+                Hubungi Support kami via email & live chat
               </div>
             </div>
 
@@ -1394,7 +460,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Respon klik pada penggunaan link tidak terhingga
+                Unlimited Respon klik pada penggunaan link
               </div>
             </div>
 
@@ -1403,7 +469,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Ketahui rekam jejak link dengan fitur analytic
+                Display Omnilinkz bebas iklan
               </div>
             </div>
 
@@ -1412,7 +478,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Gunakan FB Pixel sampai kapan pun
+                Pasang 5 Banner Promosi di Display
               </div>
             </div>
 
@@ -1421,7 +487,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Gunakan Google retargetting sampai kapan pun
+                Ubah ID Biolink sesuai kebutuhan
               </div>
             </div>
 
@@ -1430,7 +496,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Bisa hapus logo Omnilinkz
+                Dapatkan data analytic rekam jejak link
               </div>
             </div>
 
@@ -1439,7 +505,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Display akun Omnilinkz bebas iklan
+                Dapatkan Unlimited Single Link
               </div>
             </div>
 
@@ -1448,9 +514,10 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Single Link tak terhingga
+                Bisa hapus Logo Omnilinkz
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -1518,569 +585,5 @@
   });
 </script>  
 
-<!--<section class="page-title">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>Omnilinkz</h1>
-        <hr class="orn">
-        <p class="pg-title">Pilih paket Omnilinkz </p>
-        <div class="row" align="center">
-          <div class="col-12">
-            <div class="onoffswitch">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="checked">
-              <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner" data-id="1"></span>
-                <span class="onoffswitch-switch"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<div class="comparison">
-  <table>
-    <thead>
-      <tr>
-        <th class="tl ">
-        </th>
-        <th class="qbse compare-heading ">
-          FREE TRIAL
-        </th>
-        <th class="qbse compare-heading ">
-          PRO
-        </th>
-        <th class="qbse compare-heading ">
-          PREMIUM
-        </th>
-      </tr>
-      <tr class="">
-        <th class="price-info ">
-          <div class="price-now features">
-            <span>Features</span>
-          </div>
-        </th>
-        <th class="price-info ">
-          <div class="price-now"><span>0,-</span></div>
-          <div>
-            <a href="{{url('register')}}">
-              <button type="submit" class="btn btn-default btn-primary-free">
-                SELECT
-              </button>
-            </a>
-          </div>
-        </th>
-        <th class="price-info ">
-          <div class="price-now"><span class="nprice price_pro">155,000,-</span></div>
-
-          <div class="monthly-button">
-            <a href="{{url('checkout/1')}}">
-              <button class="btn select-price btn-default btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-          <div class="yearly-button">
-            <a href="{{url('checkout/2')}}">
-              <button class="btn select-price btn-default btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-        </th>
-        <th class="price-info ">
-          <div class="price-now"><span class="nprice price_premium">195,000,-</span></div>
-
-          <div class="monthly-button">
-            <a href="{{url('checkout/3')}}">
-              <button class="btn btn-default select-price btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-          <div class="yearly-button">
-            <a href="{{url('checkout/4')}}">
-              <button class="btn btn-default select-price btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Omnilinkz
-          <span class="tooltipstered" title="Omnlinkz">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Omnilinkz
-          <span class="tooltipstered" title="Omnilinkz">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">1</span></td>
-        <td><span class="tickblue">5</span></td>
-        <td><span class="tickblue">Unlimited</span></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan="3">
-          Single Link
-          <span class="tooltipstered" title="Single Link">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Single Link
-          <span class="tooltipstered" title="Single Link">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">2</span></td>
-        <td><span class="tickblue">5</span></td>
-        <td><span class="tickblue">Unlimited</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Clicks /Hari
-          <span class="tooltipstered" title="Clicks /Hari">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Clicks /Hari
-          <span class="tooltipstered" title="Clicks /Hari">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">10</span></td>
-        <td><span class="tickblue">Unlimited</span></td>
-        <td><span class="tickblue">Unlimited</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Profile Image
-          <span class="tooltipstered" title="Profile Image">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Profile Image
-          <span class="tooltipstered" title="Profile Image">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Store Brand
-          <span class="tooltipstered" title="Store Brand">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Store Brand
-          <span class="tooltipstered" title="Store Brand">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Banner Promo
-          <span class="tooltipstered" title="Banner Promo">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Banner Promo
-          <span class="tooltipstered" title="Banner Promo">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">1</span></td>
-        <td><span class="tickblue">5</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Click to WA Creator
-          <span class="tooltipstered" title="Click to WA Creator">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Click to WA Creator
-          <span class="tooltipstered" title="Click to WA Creator">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Whatsapp
-          <span class="tooltipstered" title="Whatsapp">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          Whatsapp
-          <span class="tooltipstered" title="Whatsapp">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          FB Messenger
-          <span class="tooltipstered" title="FB Messenger">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr class="compare-row">
-        <td>
-          FB Messenger
-          <span class="tooltipstered" title="FB Messenger">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Line
-          <span class="tooltipstered" title="Line">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Line
-          <span class="tooltipstered" title="Line">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Skype
-          <span class="tooltipstered" title="Skype">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Skype
-          <span class="tooltipstered" title="Skype">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          WeChat
-          <span class="tooltipstered" title="WeChat">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          WeChat
-          <span class="tooltipstered" title="WeChat">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Telegram
-          <span class="tooltipstered" title="Telegram">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Telegram
-          <span class="tooltipstered" title="Telegram">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          FB Pixel
-          <span class="tooltipstered" title="FB Pixel">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          FB Pixel
-          <span class="tooltipstered" title="FB Pixel">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Google Retargetting
-          <span class="tooltipstered" title="Google Retargetting">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Google Retargetting
-          <span class="tooltipstered" title="Google Retargetting">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Twitter Retargetting
-          <span class="tooltipstered" title="Twitter Retargetting">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Twitter Retargetting
-          <span class="tooltipstered" title="Twitter Retargetting">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Google Analytics
-          <span class="tooltipstered" title="Google Analytics">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Google Analytics
-          <span class="tooltipstered" title="Google Analytics">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Priority Support
-          <span class="tooltipstered" title="Priority Support">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Priority Support
-          <span class="tooltipstered" title="Priority Support">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Themes
-          <span class="tooltipstered" title="Themes">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Themes
-          <span class="tooltipstered" title="Themes">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="tickblue">5</span></td>
-        <td><span class="tickblue">50</span></td>
-        <td><span class="tickblue">50</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Hide Omnilinkz Brand
-          <span class="tooltipstered" title="Hide Omnilinkz Brand">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Hide Omnilinkz Brand
-          <span class="tooltipstered" title="Hide Omnilinkz Brand">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">
-          Report Analytics
-          <span class="tooltipstered" title="Report Analytics">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Report Analytics
-          <span class="tooltipstered" title="Report Analytics">
-            <i class="fas fa-question-circle fonticon"></i>
-          </span>
-        </td>
-        <td><span class="cross">&#10060;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-        <td><span class="tickblue">&check;</span></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td colspan="3">Buy Now</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          <div>
-            <a href="{{url('register')}}">
-              <button class="btn btn-default select-price btn-primary-free" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-        </td>
-        <td>
-          <div class="monthly-button">
-            <a href="{{url('checkout/1')}}">
-              <button class="btn select-price btn-success btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-          <div class="yearly-button">
-            <a href="{{url('checkout/2')}}">
-              <button class="btn select-price btn-success btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-        </td>
-        <td>
-          <div class="monthly-button">
-            <a href="{{url('checkout/3')}}">
-              <button class="btn btn-success select-price btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-          <div class="yearly-button">
-            <a href="{{url('checkout/4')}}">
-              <button class="btn btn-success select-price btn-primary-prc" data-package="1">
-                SELECT
-              </button>
-            </a>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>-->
 @endsection

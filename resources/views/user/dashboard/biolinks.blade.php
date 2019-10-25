@@ -2977,9 +2977,9 @@ and add more";
                     <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
                       <div class="powered-omnilinks">
                         <a href="{{url('/')}}">
-                          powered by
-                          <br>Omnlinkz
-                          <!--<img style="width: 110px;" src="{{asset('image/omnilinkz-logo-wh.png')}}">-->
+                          <!--powered by
+                          <br>Omnlinkz-->
+                          <img style="width: 110px;" src="{{asset('image/powered-by.png')}}">
                         </a>
                       </div>
                     </div>
