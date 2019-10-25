@@ -2745,14 +2745,14 @@ and add more";
                       <div class="tab-content mt-4 mb-4">
 
                         <!--theme color -->
-                        <div role="tabpanel" class="tab-pane fade in active show" id="buzz">
+                        <div role="tabpanel" class="tab-pane fade in  " id="buzz">
 
                           <div class="theme mrgtp text-center">
                             @include('user.dashboard.background.theme-page')
                           </div>
                         </div>
 
-                        <div role="tabpanel" class="tab-pane fade" id="references">
+                        <div role="tabpanel" class="tab-pane fade active show" id="references">
                           <div align="center">
                             <div id="colorpicker"></div>
                             <input type="text" id="color" name="color" value="#ffffff">
@@ -3424,6 +3424,7 @@ and add more";
         $('#premium-id').modal('show');
       <?php } ?>
     });
+    // $("#solid").click();
     <?php if (!is_null($pages->color_picker)) { ?>
       color_picker = "<?php echo $pages->color_picker; ?>";
       $('#color').val(color_picker);
