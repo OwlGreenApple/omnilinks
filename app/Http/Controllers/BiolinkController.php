@@ -103,6 +103,13 @@ class BiolinkController extends Controller
     if ($user->membership<>'free') {
       $page->powered=1; 
     }
+    //default value
+  	$page->is_outlined=1;
+  	$page->outline="#000";
+  	$page->is_bio_color=1;
+  	$page->bio_color="#000";
+  	$page->color_picker="#fff";
+
   	$page->save();
 
     return redirect('/biolinks/'.$uuid);  
