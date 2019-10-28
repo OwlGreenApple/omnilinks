@@ -228,14 +228,23 @@ class BiolinkController extends Controller
 
   public function pixelpage(Request $request)
   {
+    $user=Auth::user();
     $id = 0;
 
     $pixel=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
                   ->get();
-
-    $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
+                  
+    $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+    $dt2 = Carbon::now();
+    if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
+      $arr['view']= '<option value="0" >-- FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href="'.url('pricing').'">Upgrade</a>--</option>';
+    }
+    else {
+      $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
                   ->with('data_pixel',$pixel);
+    }
+
     return $arr;
   }
 

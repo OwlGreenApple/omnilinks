@@ -1876,12 +1876,14 @@
                 </a>
               </li>
               
+              <?php if ($user->membership<>'free') { ?>
               <li class="nav-item">
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
                   Pixel
                 </a>
               </li>
-              
+              <?php } ?>
+
               <li class="nav-item">
                 <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
                   WA Link Creator

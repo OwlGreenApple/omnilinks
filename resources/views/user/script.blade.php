@@ -19,7 +19,6 @@
   </script>
   <script type="text/javascript">
     window.location.href="<?php echo $link; ?>";
-    console.log("a");
   </script>
 </head>
 
