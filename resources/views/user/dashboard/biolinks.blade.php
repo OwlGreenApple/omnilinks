@@ -1623,8 +1623,6 @@
       template = value;
     }
   });
-  function check_template_wallpaper(){
-  }
 
   function check_outlined(){
     // if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
@@ -1661,6 +1659,7 @@
       }
       if ($('#is_bio_color').prop("checked") == true) {
         $('.description').css("color",$("#bioColor").val());
+        $('#sm-preview li a').css("color",$("#bioColor").val()+" !important");
         $('.powered-omnilinks a').css("color",$("#bioColor").val()+" !important");
       }
     // } 
@@ -1676,6 +1675,7 @@
       }
       if ($('#is_bio_color').prop("checked") == false) {
         $('.description').css("color",template.bio_font_color);
+        $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
       }
       
@@ -2540,7 +2540,7 @@ and add more";
                       <input type="hidden" name="modeBackground" id="modeBackground" value="gradient">
                       <input type="hidden" name="backtheme" id="backtheme" value="colorgradient1">
                       <input type="hidden" name="wallpaperclass" id="wallpaperclass" value="wallpaper1">
-                      <input type="hidden" name="animationclass" id="animationclass" value="animation1">
+                      <input type="hidden" name="animationclass" id="animationclass" value="animation-bubble-bg-blue animation-core">
                       <p class="blue-txt">
                         Theme
                       </p>
@@ -2956,22 +2956,22 @@ and add more";
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
                     <li class="col linked " id="youtubeviewid">
                       <a href="#" title="Youtube">
-                        <i class="fab fa-youtube" style="color: #fff;"></i>
+                        <i class="fab fa-youtube"></i>
                       </a>
                     </li>
                     <li class="col linked " id="fbviewid" >
                       <a href="#" title="fb" >
-                        <i class="fab fa-facebook-square" style="color: #fff;"></i>
+                        <i class="fab fa-facebook-square" ></i>
                       </a>
                     </li>
                     <li class="col linked " id="twitterviewid">
                       <a href="#" title="Twitter">
-                        <i class="fab fa-twitter-square" style="color: #fff;"></i>
+                        <i class="fab fa-twitter-square"></i>
                       </a>
                     </li>
                     <li class="col linked " id="igviewid">
                       <a href="#" title="ig" >
-                        <i class="fab fa-instagram" style="color: #fff; "></i>
+                        <i class="fab fa-instagram" ></i>
                       </a>  
                     </li>  
                   </ul>
@@ -3251,6 +3251,7 @@ and add more";
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         
         
@@ -3426,11 +3427,18 @@ and add more";
         $('#premium-id').modal('show');
       <?php } ?>
     });
-    // $("#solid").click();
     <?php if (!is_null($pages->color_picker)) { ?>
       color_picker = "<?php echo $pages->color_picker; ?>";
       $('#color').val(color_picker);
-      $("#solid").click();
+      // $("#solid").click();
+
+      $('#modeBackground').val('solid');
+      $("#phonecolor").removeClass();
+      $("#phonecolor").addClass("screen");
+      $("#phonecolor").css("background-color",$("#color").val());
+      check_outlined();
+      check_rounded();
+
     <?php } ?>
     <?php if (!is_null($pages->template)) { ?>
       $('#backtheme').val("<?php echo $pages->template; ?>");
@@ -3444,6 +3452,7 @@ and add more";
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
         check_rounded();
@@ -3457,6 +3466,7 @@ and add more";
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
         check_rounded();
@@ -3479,10 +3489,12 @@ and add more";
       $('.btnview').css("background-color","transparent");
       $('.btnview').css("color",outline);
       $('.description').css("color",outline);
+      $('#sm-preview li a').css("color",outline+" !important");
     <?php } else {?>
       $('.btnview').css("background-color",outline);
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
+      $('#sm-preview li a').css("color","#fff !important");
     <?php } ?>
     
     <?php if($pages->is_text_color) {?>
@@ -3490,9 +3502,11 @@ and add more";
       $("#textColor").val("<?php echo $pages->text_color; ?>");
       $('.btnview').css("color","<?php echo $pages->text_color; ?>");
       $('.description').css("color","<?php echo $pages->text_color; ?>");
+      $('#sm-preview li a').css("color","<?php echo $pages->text_color; ?>");
     <?php } else {?>
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
+      $('#sm-preview li a').css("color","#fff");
     <?php } ?>
     
     <?php if($pages->is_bio_color) {?>
@@ -3500,9 +3514,11 @@ and add more";
       $("#bioColor").val("<?php echo $pages->bio_color; ?>");
       $('.powered-omnilinks a').css("color","<?php echo $pages->bio_color; ?>");
       $('.description').css("color","<?php echo $pages->bio_color; ?>");
+      $('#sm-preview li a').css("color","<?php echo $pages->bio_color; ?>");
     <?php } else {?>
       $('.powered-omnilinks a').css("color","#fff");
       $('.description').css("color","#fff");
+      $('#sm-preview li a').css("color","#fff");
     <?php } ?>
     
     loadPixelPage();
@@ -3651,6 +3667,7 @@ and add more";
       }
       $('.btnview').css("color",color);
       $('.description').css("color",color);
+      $('#sm-preview li a').css("color",color);
     }
     $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
     pickerout = $.farbtastic('#colorpickerOutlineButton');
@@ -3700,10 +3717,12 @@ and add more";
       if ($('#is_bio_color').val()=="1") {
         $('.powered-omnilinks a').css("color",color);
         $('.description').css("color",color);
+        $('#sm-preview li a').css("color",color);
       } else {
         if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
           $('.powered-omnilinks a').css("color","#fff");
           $('.description').css("color","#fff");
+          $('#sm-preview li a').css("color","#fff");
         }
       }
     }
