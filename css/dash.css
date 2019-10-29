@@ -1070,3 +1070,7 @@ ul {
 #wizardPicturePreview-delete{
   z-index:999!important;
 }
+
+.linkpixel a{
+  color:#3490dc;
+}

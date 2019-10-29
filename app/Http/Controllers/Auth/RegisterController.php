@@ -175,7 +175,7 @@ class RegisterController extends Controller
         $user->save();
       }
     } else {
-      $user->valid_until = new DateTime('+7 days');
+      $user->valid_until = new DateTime('+30 days');
       $user->save();
     }
 

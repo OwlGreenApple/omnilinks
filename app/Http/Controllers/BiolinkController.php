@@ -245,9 +245,10 @@ class BiolinkController extends Controller
     $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
     $dt2 = Carbon::now();
     if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
-      $arr['view']= '<option value="0" >-- FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href="'.url('pricing').'">Upgrade</a>--</option>';
+      $arr['free'] = 1;
     }
     else {
+      $arr['free'] = 0;
       $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
                   ->with('data_pixel',$pixel);
     }

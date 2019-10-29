@@ -1161,7 +1161,7 @@
     }
   ];
   template = templates[0];
-  var picker,dataView;
+  var picker,dataView,dataFree;
   var color_picker,rounded,outline;
   // https://www.shift8web.ca/2017/01/use-jquery-sort-reorganize-content/
   function sortMeBy(arg, sel, elem, order) {
@@ -1418,6 +1418,11 @@
         var data = jQuery.parseJSON(result);
         // $(selector).html(data.view);
         dataView = data.view;
+        dataFree = data.free;
+        //if klo free maka replace element dengan label 
+        if (dataFree == "1") {
+          $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+        }
       }
     });
   }
@@ -1468,6 +1473,9 @@
       // $(this).find("select").html(dataView);
       // $(this).find("select").val(0);
     // });
+    if (dataFree == "1") {
+      $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+    }
     
   }
   
@@ -1876,7 +1884,11 @@
                 </a>
               </li>
               
-              <?php if ($user->membership<>'free') { ?>
+              <?php 
+                $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+                $dt2 = Carbon::now();
+                if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
+              ?>
               <li class="nav-item">
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
                   Pixel
@@ -1933,7 +1945,7 @@
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
-                              <select name="wapixel" class="form-control" id="wapixel"></select>
+                              <select name="wapixel" class="form-control linkpixel" id="wapixel"></select>
                             </div>
                           </div>
 
@@ -1966,7 +1978,7 @@
                               </div>
 
                               <div class="col-md-12 col-12 pr-0 pl-0">
-                                <select name="telegrampixel" id="telegrampixel" class="form-control"></select>
+                                <select name="telegrampixel" id="telegrampixel" class="form-control linkpixel"></select>
                               </div>
                             </div>
                           </div>
@@ -2001,7 +2013,7 @@
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
-                              <select name="skypepixel" class="form-control" id="skypepixel"></select>
+                              <select name="skypepixel" class="form-control linkpixel" id="skypepixel"></select>
                             </div>
                           </div>
 
@@ -2035,7 +2047,7 @@
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
-                              <select name="linepixel" class="form-control" id="linepixel"></select>
+                              <select name="linepixel" class="form-control linkpixel" id="linepixel"></select>
                             </div>
                           </div>
 
@@ -2069,7 +2081,7 @@
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
-                              <select name="messengerpixel" class="form-control" id="messengerpixel"></select>
+                              <select name="messengerpixel" class="form-control linkpixel" id="messengerpixel"></select>
                             </div>
                           </div>
 
@@ -2145,7 +2157,7 @@
                             </div>
                           </div> 
                           <div class="col-md-12 col-12 pr-0 pl-0">
-                            <select name="youtubepixel" id="youtubepixel" class="form-control">
+                            <select name="youtubepixel" id="youtubepixel" class="form-control linkpixel">
                             </select>
                           </div> 
                         </div>
@@ -2179,7 +2191,7 @@
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
-                              <select name="fbpixel" id="fbpixel" class="form-control"></select>
+                              <select name="fbpixel" id="fbpixel" class="form-control linkpixel"></select>
                             </div>
                           </div>
                         </div>
@@ -2213,7 +2225,7 @@
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
-                            <select name="twitterpixel" id="twitterpixel" class="form-control">
+                            <select name="twitterpixel" id="twitterpixel" class="form-control linkpixel">
                             </select>
                           </div>
                         </div>
@@ -2247,7 +2259,7 @@
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
-                            <select name="igpixel" id="igpixel" class="form-control">
+                            <select name="igpixel" id="igpixel" class="form-control linkpixel">
                             </select>
                           </div>
                         </div>
@@ -2484,6 +2496,10 @@ and add more";
                                       //loadPixel('{{$ban->pixel_id}}','.bannerpixel-{{$ban->id}}');
                                       $(".bannerpixel-{{$ban->id}}").html(dataView);
                                       $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
+                                      if (dataFree == "1") {
+                                        $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+                                      }
+                                      
                                     </script>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
@@ -3872,6 +3888,9 @@ and add more";
       $el = $(".div-banner").append(elhtml);
       $(".banner-new").html(dataView);
       $(".banner-new").val(0);
+      if (dataFree == "1") {
+        $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+      }
        // loadPixel(0,'.banner-new');
       if ($('.list-banner').length==5) {
          $(this).attr('disabled', 'disabled'); 
