@@ -2752,13 +2752,13 @@ and add more";
                           <a class="nav-link active" href="#references" id="solid" role="tab" data-toggle="tab">Solid</a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#buzz" id="gradient" role="tab" data-toggle="tab">Gradient</a>
+                          <a class="nav-link" href="#buzz" id="gradient" role="tab" data-toggle="tab">Gradient <sup>pro</sup></a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#wallpaper" id="wallpaper-tab" role="tab" data-toggle="tab">Wallpaper</a>
+                          <a class="nav-link" href="#wallpaper" id="wallpaper-tab" role="tab" data-toggle="tab">Wallpaper <sup>pro</sup></a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#animation" id="animation-tab" role="tab" data-toggle="tab">Animation</a>
+                          <a class="nav-link" href="#animation" id="animation-tab" role="tab" data-toggle="tab">Animation <sup>pro</sup></a>
                         </li>
                       </ul>
                       <!-- Tab panes -->

@@ -74,8 +74,8 @@
         $("#pesan").show();
         if (data.status == "success") {
           $('#ads_id').val(data.ads.id);
-          /*$("#pesan").addClass("alert-success");
-          $("#pesan").removeClass("alert-danger");*/
+          $("#pesan").addClass("alert-success");
+          $("#pesan").removeClass("alert-danger");
           var src = "{{asset('image/success.gif')}}"+"?a="+Math.random();;
           $('#img-success').attr('src',src);
           $('#save-success').modal('show');

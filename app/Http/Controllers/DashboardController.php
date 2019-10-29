@@ -201,6 +201,7 @@ class DashboardController extends Controller
   }
 
   public function load_chart(Request $request){
+    // 
     $user=Auth::user();
     //generate chart all page
     $bulan = $request->bulan;

@@ -1077,3 +1077,9 @@ ul {
 .btn-setting-biolinks{
  border-radius:50px; 
 }
+#link-title{
+  color :#212529;
+}
+.title-dashboard-detail{
+  font-size:24px;
+}

@@ -206,23 +206,16 @@
 
 <div class="container main-cont">
   <div class="row notif">
+    @if (session('error'))
     <div class="col-md-12 mb-3">
-      <!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-          <span aria-hidden="true">×</span>
-        </button>
-        Masa trial anda akan berakhir dalam 5 hari. <span style="color:blue;">Subscribe</span>
-        untuk terus menggunakan Omnilinks
-      </div>-->
-      @if (session('error'))
       <div class="alert alert-danger">
         <button type="button" class="close" aria-label="Close" data-dismiss="alert">
           <span aria-hidden="true">×</span>
         </button>
         {{ session('error') }} <a href="{{asset('/pricing')}}">Subscribe</a>
       </div>
-      @endif
     </div>
+    @endif
 
     <div class="col-md-12 pr-0 div-btn">
       <div class="row">
@@ -237,16 +230,6 @@
             + BIO LINK  
           </button>
         </div>
-
-        @if(Auth::user()->membership!='free')
-          <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
-            <a href="{{asset('/singlelink')}}" style="text-decoration: none;">
-              <button class="btnsingle btncreate btn-block">
-                + SINGLE LINK  
-              </button>
-            </a>
-          </div> 
-        @endif 
 
         <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 mt-3 menu-nomobile">
           <p class="text-md-right text-lg-right ">
@@ -321,7 +304,7 @@
     </div>
 
     <div class="col-md-12">
-      <div class="pt-md-5 pt-0" style="padding-bottom: 5px">
+      <div class="pt-md-1 pt-0" style="padding-bottom: 5px">
         <div class="row">
           <div class="col-12 col-md-6">
             <h4 style="color: #106BC8">
@@ -339,7 +322,7 @@
           </div>
         </div>
       
-        <div class="row mb-4 mt-5">
+        <div class="row mb-4 mt-2">
           <div class="col-md-6 mb-2">
             <!--<div class="input-group">
               <?php  
@@ -351,9 +334,9 @@
               <h4>Kategori : {{ ucfirst($category) }}</h4>
             </div>-->
 
-            <h2>{{$data['pagetitle']}}</h2>
+            <?php if (is_null($data['pagetitle'])) echo "<h2 class='title-dashboard-detail' style='opacity:0.5;'>Untitled</h2>"; echo "<h2 class='title-dashboard-detail'>".$data['pagetitle']."</h2>"; ?>
             <h2>
-              <span id="link-title">
+              <span id="link-title" class="title-dashboard-detail">
                 {{$data['title']}}
               </span>  
             </h2>
@@ -389,7 +372,7 @@
 
       </div>
 
-      <hr style="margin-bottom: 45px">
+      <hr style="margin-bottom: 45px" class="show-chart">
 
       <?php 
         $pixel = Pixel::find($data['pixel_id']);

@@ -354,14 +354,14 @@
               </div>
             </div>
 
-            <div class="row mb-2">
+            <!--<div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
                 Dapatkan 10 Single Link
               </div>
-            </div>
+            </div>-->
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
@@ -500,14 +500,14 @@
               </div>
             </div>
 
-            <div class="row mb-2">
+            <!--<div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
                 Dapatkan Unlimited Single Link
               </div>
-            </div>
+            </div>-->
 
             <div class="row mb-2">
               <div class="offset-md-1 offset-1 col-md-2 col-2 green-color">
