@@ -92,6 +92,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               @if(Auth::check())
+                <!--
                 <li class="nav-item dropdown pull-right">
                   <a class="nav-link navlog" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     Create Link
@@ -107,7 +108,7 @@
                       </a>
                     @endif 
                   </div>
-                </li>
+                </li>-->
 
                 <li class="nav-item">
                   <a class="nav-link navlog" href="{{url('/')}}">

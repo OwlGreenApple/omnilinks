@@ -1421,7 +1421,7 @@
         dataFree = data.free;
         //if klo free maka replace element dengan label 
         if (dataFree == "1") {
-          $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+          $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
         }
       }
     });
@@ -1474,7 +1474,7 @@
       // $(this).find("select").val(0);
     // });
     if (dataFree == "1") {
-      $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+      $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
     }
     
   }
@@ -1888,6 +1888,8 @@
                 $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
                 $dt2 = Carbon::now();
                 if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
+                }
+                else {
               ?>
               <li class="nav-item">
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
@@ -2326,7 +2328,7 @@
                     </div>
 
                     <div class="col-md-2 col-3 pl-0 text-right">
-                      <button type="reset" class="btn btn-danger btn-reset">
+                      <button type="reset" class="btn btn-danger btn-reset ">
                         Reset
                       </button>
                     </div>
@@ -2411,10 +2413,10 @@
                     </div>
 
                     <div class="col-md-4 pl-md-0 pl-3 text-center">
-                      <button type="button" id="btnpixel" class="btn btn-primary mr-2" style="width:45%">
+                      <button type="button" id="btnpixel" class="btn btn-primary btn-setting-biolinks mr-2" style="width:45%">
                         Save
                       </button>
-                      <button type="reset" class="btn btn-danger btn-reset" style="width:45%">
+                      <button type="reset" class="btn btn-danger btn-reset btn-setting-biolinks" style="width:45%">
                         Reset
                       </button>
                     </div>
@@ -2497,7 +2499,7 @@ and add more";
                                       $(".bannerpixel-{{$ban->id}}").html(dataView);
                                       $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
                                       if (dataFree == "1") {
-                                        $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+                                        $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
                                       }
                                       
                                     </script>
@@ -3889,7 +3891,7 @@ and add more";
       $(".banner-new").html(dataView);
       $(".banner-new").val(0);
       if (dataFree == "1") {
-        $(".linkpixel").replaceWith( "<label class='linkpixel'>FB, Google Pixel Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+        $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
       }
        // loadPixel(0,'.banner-new');
       if ($('.list-banner').length==5) {

@@ -80,6 +80,33 @@ class DashboardController extends Controller
 
     $arr['pager'] = (string) view('user.dashboard.dash_pagination')
                     ->with('pages',$page);
+                    
+    //chart 
+    //generate chart all page
+    $bulan = $request->bulan;
+    $tahun = $request->tahun;
+    $query_date = date('t-'.$bulan.'-'.$tahun);
+
+    $first_date = date('01-'.$bulan.'-'.$tahun, strtotime($query_date));
+    $temp_arr = array();
+
+    $total_click = 0;
+    while(strtotime($first_date) <= strtotime($query_date)){
+      // $filename = 'clicked/'.$user->username.'/'.$first_date.'/all/total-click/counter.txt';
+      foreach($page as $temp_page){
+        $filename = 'clicked/'.$user->username.'/'.$first_date.'/'.$temp_page->id.'/total-click/counter.txt';
+        $click = $this->check_file($filename);
+        $total_click = $total_click + $click;
+          
+        $temp_arr[] = array("x"=> strtotime($first_date)*1000, "y"=>$click);
+
+        $first_date = date('d-m-Y',strtotime('+1 day', strtotime($first_date)));
+      }
+    }
+
+    $arr['chart'] = $temp_arr;
+    $arr['total_click'] = $total_click;
+
 
     return $arr;
   }

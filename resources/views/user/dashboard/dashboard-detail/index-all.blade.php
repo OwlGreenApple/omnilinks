@@ -65,7 +65,7 @@
             });
 
           chart.render();
-
+          $(".canvasjs-chart-credit").hide();
           function toggleDataSeries(e){
             if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
               e.dataSeries.visible = false;
@@ -74,6 +74,7 @@
               e.dataSeries.visible = true;
             }
             chart.render();
+            $(".canvasjs-chart-credit").hide();
           }
 
           $('#total-click').html(data.total_click);
@@ -174,7 +175,7 @@
         <div class="row mb-4 mt-5">
           <div class="col-md-6 mb-2">
         
-            <h2>{{$page->page_title}}</h2>
+            <?php if (is_null($page->page_title)) echo "<h2 style='opacity:0.5;'>Untitled</h2>"; echo "<h2>".$page->page_title."</h2>"; ?>
             
             <?php 
                 $names = '';

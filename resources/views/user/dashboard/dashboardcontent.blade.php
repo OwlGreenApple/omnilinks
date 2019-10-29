@@ -126,7 +126,7 @@
             <span>
               <span class="menu-nomobile">Title : </span>
               @if($page->page_title==null)
-                -
+                Untitled
               @else 
                 {{$page->page_title}}
               @endif

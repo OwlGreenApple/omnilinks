@@ -45,7 +45,6 @@
 }
 
 .header-premiumid {
-  border-bottom: none;
   border-top: 7px solid #106BC8;
   border-radius: 0px;
 }
@@ -1073,4 +1072,8 @@ ul {
 
 .linkpixel a{
   color:#3490dc;
+}
+
+.btn-setting-biolinks{
+ border-radius:50px; 
 }

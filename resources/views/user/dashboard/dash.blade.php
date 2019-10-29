@@ -37,6 +37,55 @@ var testChart;
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
         $('.pager').html(data.pager);
+        
+        //chart 
+        testChart = data.chart;
+        var newArray=[];
+        $.each( data.chart, function( key, value ) {
+          var newObject={};
+          $.each( value, function( key, value ) {
+            newObject[key]=parseInt(value);
+          });
+          newArray.push(newObject);
+        });
+        chart = new CanvasJS.Chart("chartContainer", {
+              animationEnabled: true,
+              axisX:{
+                valueFormatString: "DD",
+                title: "Hari",
+              },
+              axisY:{
+                title: "Total Click",
+              },
+              legend:{
+                cursor: "pointer",
+                dockInsidePlotArea: true,
+                itemclick: toggleDataSeries
+              },              
+              data: [
+              {
+                type: "area",       
+                xValueType: "dateTime",
+                xValueFormatString: "DD-MM-YYYY",
+                yValueType: "",
+                dataPoints: newArray,
+              }]
+            });
+
+          chart.render();
+          $(".canvasjs-chart-credit").hide();
+          function toggleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+              e.dataSeries.visible = false;
+            }
+            else{
+              e.dataSeries.visible = true;
+            }
+            chart.render();
+            $(".canvasjs-chart-credit").hide();
+          }
+
+          $('#total-click').html(data.total_click);
       }
     });
   }
@@ -120,6 +169,7 @@ var testChart;
         </div>
 
         @if(Auth::user()->membership!='free')
+          <!--
           <div class="col-lg-2 col-md-3 col-6 pr-md-3 pl-0 pr-0">
             <a href="{{asset('/singlelink')}}" style="text-decoration: none;">
               <button class="btnsingle btncreate btn-block">
@@ -127,6 +177,7 @@ var testChart;
               </button>
             </a>
           </div> 
+          -->
         @endif 
         <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 menu-nomobile">
           <p class="text-md-right text-lg-right ">
@@ -483,7 +534,7 @@ var testChart;
       $('.show-chart').hide();
     <?php } ?>
     refreshDashboard();
-    load_chart();
+    // load_chart();
   });
 
   $('#keywords').on('keypress touchend', function (e) {
@@ -506,13 +557,13 @@ var testChart;
   $('body').on('change','#bulan',function(e) 
   {
     refreshDashboard();
-    load_chart();
+    // load_chart();
   });
 
   $('body').on('change','#tahun',function(e) 
   {
     refreshDashboard();
-    load_chart();
+    // load_chart();
   });
 
   $('body').on('click','.btn-deletePage',function(e) 

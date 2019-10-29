@@ -28,12 +28,12 @@
               type: "area",       
               xValueType: "dateTime",
               xValueFormatString: "DD-MM-YYYY",
-              dataPoints: <?php /*echo json_encode($data['chart'], JSON_NUMERIC_CHECK)*/; ?>,
+              dataPoints: <?php echo json_encode($data['chart'], JSON_NUMERIC_CHECK); ?>,
             }]
           });
 
         chart.render();
-
+        $(".canvasjs-chart-credit").hide();
         function toggleDataSeries(e){
           if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
             e.dataSeries.visible = false;
@@ -42,6 +42,7 @@
             e.dataSeries.visible = true;
           }
           chart.render();
+          $(".canvasjs-chart-credit").hide();
         }*/
   });
 
@@ -91,7 +92,7 @@
             });
 
           chart.render();
-
+          $(".canvasjs-chart-credit").hide();
           function toggleDataSeries(e){
             if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
               e.dataSeries.visible = false;
@@ -100,6 +101,7 @@
               e.dataSeries.visible = true;
             }
             chart.render();
+            $(".canvasjs-chart-credit").hide();
           }
 
           $('#total-click').html(data.total_click);
