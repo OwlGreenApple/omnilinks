@@ -4050,13 +4050,13 @@ and add more";
       $counter = 1;
       foreach($arr as $data){
     ?>
-        $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+        $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $data; ?>");
         $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
         // $("#msg-li-"+"<?php echo $data; ?>>div").show();
         $("#msg-li-"+"<?php echo $data; ?>>div").css("display","table");
         $("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#msg-li-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
         
-        $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
+        $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $data; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
     <?php 
         $counter += 1;
@@ -4082,9 +4082,9 @@ and add more";
       $counter = 1;
       foreach($arr as $data){
     ?>
-        $("#link-url-update-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+        $("#link-url-update-"+"<?php echo $data; ?>").attr("data-category","<?php echo $data; ?>");
         
-        $("#link-preview-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
+        $("#link-preview-"+"<?php echo $data; ?>").attr("data-category","<?php echo $data; ?>");
     <?php 
         $counter += 1;
       } ?>
