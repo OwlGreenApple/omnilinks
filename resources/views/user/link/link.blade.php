@@ -1454,12 +1454,12 @@
       if(!$pages->is_outlined) { ?>  
         $('.txthov').find("button").css("border-color",template.button_color);
         $('.txthov').find("button").css("background-color",template.button_color);
-        $('.txthov').find("button").css("color",template.font_button_color);
+        $('.txthov').find("button").css("color",template.font_button_color+"!important");
       <?php 
       } ?>  
       <?php 
       if(!$pages->is_text_color) { ?>  
-        $('.txthov').find("button").css("color",template.font_button_color);
+        $('.txthov').find("button").css("color",template.font_button_color+"!important");
       <?php 
       } ?>  
       <?php 
