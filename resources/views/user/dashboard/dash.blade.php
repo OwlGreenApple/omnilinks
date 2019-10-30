@@ -157,7 +157,8 @@ var testChart;
     <div class="col-md-12 pr-0 div-btn">
       <div class="row">
         <?php  
-          $colbio = 'col-6';
+          // $colbio = 'col-6';
+          $colbio = 'col-12';
           if(Auth::user()->membership=='free'){
             $colbio = 'col-12';
           }
