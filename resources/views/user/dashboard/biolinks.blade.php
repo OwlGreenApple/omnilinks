@@ -2138,7 +2138,7 @@
 
                   <ul class="sortable-sosmed">
                     <li id="sosmed-youtube">
-                      <div id="youtube" class="socialmedia div-table mb-4 hide">
+                      <div id="youtube" class="socialmedia div-table mb-4">
                         <input type="hidden" name="sortsosmed[]" value="" data-val="youtube" class="input-hidden">
       
                         <div class="div-cell">
