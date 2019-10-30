@@ -101,6 +101,3 @@
                           </div>
                         </li>
                       <?php } ?>
-<script>
-  loadPixelPage();
-</script>

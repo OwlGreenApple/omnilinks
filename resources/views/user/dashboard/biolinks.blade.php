@@ -1204,7 +1204,7 @@
 
         var data = jQuery.parseJSON(result);
         $('.sortable-link').html(data.view);
-        
+        loadPixelPage();
       }
     });
   }
