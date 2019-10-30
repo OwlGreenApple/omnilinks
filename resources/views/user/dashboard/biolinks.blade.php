@@ -4121,9 +4121,9 @@ and add more";
     <?php }
     else {
     ?>
-        $("#sosmed-youtube>div").removeClass("hide");
+        // $("#sosmed-youtube>div").removeClass("hide");
         
-        $("#youtubeviewid").removeClass("hide");
+        // $("#youtubeviewid").removeClass("hide");
     <?php } ?>
 
     
