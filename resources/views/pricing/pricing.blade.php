@@ -7,7 +7,7 @@
   $(document).ready(function() {
     // setTimeout(function(){
       var right = $('.right-div').css('height');
-      var left = $('.left-div').css('height');
+      // var left = $('.left-div').css('height');
       $('.left-div').css('height',right);
     // }, 100);
   });
