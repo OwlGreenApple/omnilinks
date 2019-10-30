@@ -1519,8 +1519,11 @@
         temp2 = $("body").css("background-color");
         
         <?php if (!$pages->is_text_color) { ?>
+        
           $(this).find("button").css("background-color",temp1);
-          $(this).find("button").css("color",temp2);
+          @if((!is_null($pages->color_picker)) || (!is_null($pages->template)))
+            $(this).find("button").css("color",temp2);
+          @endif
         <?php }else { ?>
           $(this).find("button").css("background-color","<?php echo $pages->text_color; ?>");
           @if((!is_null($pages->color_picker)) || (!is_null($pages->template)))
