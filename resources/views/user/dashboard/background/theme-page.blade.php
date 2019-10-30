@@ -1,20 +1,19 @@
-<div class="theme-take">
-  <div class="theme1 themes selected"></div>
-</div>
-<div class="theme-take">
-  <div class="theme2 themes"></div>
-</div>
-<div class="theme-take">
-  <div class="theme3 themes"></div>
-</div>
-<div class="theme-take">
-  <div class="theme4 themes"></div>
-</div>
-<div class="theme-take">
-  <div class="theme5 themes"></div>
-</div>
-
-@if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+@if(Auth::user()->membership=='basic') 
+  <div class="theme-take">
+    <div class="theme1 themes selected"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme2 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme3 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme4 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme5 themes"></div>
+  </div>
   <div class="theme-take">
     <div class="theme6 themes"></div>
   </div>
@@ -60,6 +59,69 @@
   <div class="theme-take">
     <div class="theme20 themes"></div>
   </div>                            
+@endif
+@if(Auth::user()->membership=='elite') 
+  <div class="theme-take">
+    <div class="theme1 themes selected"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme2 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme3 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme4 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme5 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme6 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme7 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme8 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme9 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme10 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme11 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme12 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme13 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme14 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme15 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme16 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme17 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme18 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme19 themes"></div>
+  </div>
+  <div class="theme-take">
+    <div class="theme20 themes"></div>
+  </div>                            
+
   <div class="theme-take">
     <div class="theme21 themes"></div>
   </div>

@@ -3,18 +3,6 @@
 <link href="{{ asset('css/style-pricing.css') }}" rel="stylesheet">
 <script src="{{ asset('js/custom.js') }}"></script>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    // setTimeout(function(){
-      var right = $('.right-div').css('height');
-      // var left = $('.left-div').css('height');
-      $('.left-div').css('height',right);
-    // }, 100);
-  });
-
-  
-</script>
-
 <section class="page-title">
   <div class="container">
     <div class="row">
@@ -296,7 +284,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <div class="col-md-9 col-9 text-left">
-                Pilih lebih dari 100 Template Themes Gambar dan Animasi
+                Pilih lebih dari 25 Themes Gambar
               </div>
             </div>
 
@@ -583,7 +571,16 @@
     $('.link-pro').attr('href', "{{url('checkout/2')}}");
     $('.link-premium').attr('href', "{{url('checkout/4')}}");
   });
-</script>  
+  $(document).ready(function() {
+    setTimeout(function(){
+      var rightH = $('.right-div').css('height');
+      // var left = $('.left-div').css('height');
+      $('.left-div').css('height',rightH);
+    }, 100);
+  });
+
+  
+</script>
 
 
 @endsection

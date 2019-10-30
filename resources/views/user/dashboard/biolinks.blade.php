@@ -2752,13 +2752,13 @@ and add more";
                           <a class="nav-link active" href="#references" id="solid" role="tab" data-toggle="tab">Solid</a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#buzz" id="gradient" role="tab" data-toggle="tab">Gradient <sup>pro</sup></a>
+                          <a class="nav-link" href="<?php if ($user->membership<>'free') { echo "#buzz"; } else { echo "#"; } ?>" id="gradient" role="tab" <?php if ($user->membership<>'free') { echo 'data-toggle="tab"'; } ?>>Gradient <sup>pro</sup></a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#wallpaper" id="wallpaper-tab" role="tab" data-toggle="tab">Wallpaper <sup>pro</sup></a>
+                          <a class="nav-link" href="<?php if ($user->membership<>'free') { echo "#wallpaper"; } else { echo "#"; } ?>" id="wallpaper-tab" role="tab" <?php if ($user->membership<>'free') { echo 'data-toggle="tab"'; } ?>>Wallpaper <sup>pro</sup></a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="#animation" id="animation-tab" role="tab" data-toggle="tab">Animation <sup>pro</sup></a>
+                          <a class="nav-link" href="<?php if ($user->membership=='elite') { echo "#animation"; } else { echo "#"; } ?>" id="animation-tab" role="tab" <?php if ($user->membership=='elite') { echo 'data-toggle="tab"'; } ?>>Animation <sup>pro</sup></a>
                         </li>
                       </ul>
                       <!-- Tab panes -->
@@ -3396,12 +3396,14 @@ and add more";
       }
     });*/
     $(document).on('click', '#gradient', function() {
+      <?php if ($user->membership<>'free') { ?>
       $('#modeBackground').val('gradient');
       // $('#backtheme').val('colorgradient1');
       $("#phonecolor").removeClass();
       $("#phonecolor").addClass("screen "+$('#backtheme').val());
       check_outlined();
       check_rounded();
+      <?php } ?>
     });
     $(document).on('click', '#solid', function() {
       $('#is_text_color').prop('checked', false);
@@ -3417,22 +3419,26 @@ and add more";
       check_rounded();
     });
     $(document).on('click', '#wallpaper-tab', function() {
-      $("#textColor").val("#000");
-      $("#bioColor").val("#000");
-      $('#modeBackground').val('wallpaper');
-      $("#phonecolor").removeClass();
-      $("#phonecolor").addClass("screen "+$('#wallpaperclass').val());
-      check_outlined();
-      check_rounded();
+      <?php if ($user->membership<>'free') { ?>
+        $("#textColor").val("#000");
+        $("#bioColor").val("#000");
+        $('#modeBackground').val('wallpaper');
+        $("#phonecolor").removeClass();
+        $("#phonecolor").addClass("screen "+$('#wallpaperclass').val());
+        check_outlined();
+        check_rounded();
+      <?php } ?>
     });
     $(document).on('click', '#animation-tab', function() {
-      $("#textColor").val("#000");
-      $("#bioColor").val("#000");
-      $('#modeBackground').val('animation');
-      $("#phonecolor").removeClass();
-      $("#phonecolor").addClass("screen "+$('#animationclass').val());
-      check_outlined();
-      check_rounded();
+      <?php if ($user->membership=='elite') { ?>
+        $("#textColor").val("#000");
+        $("#bioColor").val("#000");
+        $('#modeBackground').val('animation');
+        $("#phonecolor").removeClass();
+        $("#phonecolor").addClass("screen "+$('#animationclass').val());
+        check_outlined();
+        check_rounded();
+      <?php } ?>
     });
     $(document).on('click', '.btn-premiumid', function() {
       tambah_premiumid();
