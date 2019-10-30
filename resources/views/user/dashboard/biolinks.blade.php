@@ -2962,9 +2962,6 @@ and add more";
                         <li id="link-preview-{{$link->id}}"><a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a></li>
                       @endforeach
                       @else
-                        <!--
-                        <button type="button" class="btn btnview title-1-view-get" id="link-url-1-preview" style="width: 100%; margin-bottom: 12px;">masukkan link</button>
-                        -->
                         <li id="link-url-1-preview" class=""><a href="#" class="btn btn-md btnview title-1-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >Masukkan link #1</a></li>
                         <li id="link-url-2-preview" class=""><a href="#" class="btn btn-md btnview title-2-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-2-preview" >Masukkan link #2</a></li>
                       @endif
@@ -3590,7 +3587,7 @@ and add more";
       update: function(event, ui) {
         var index =  ui.item.index();
         var start_pos = $(this).attr('data-previndex');
-        
+
         console.log(start_pos);
         console.log(index);
         if (start_pos<index) {
@@ -4088,6 +4085,7 @@ and add more";
       $counter = 1;
       foreach($arr as $data){
     ?>
+    console.log("<?php echo $data; ?>");
         $("#link-url-update-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         
         $("#link-preview-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
