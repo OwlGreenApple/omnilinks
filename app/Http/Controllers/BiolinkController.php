@@ -427,7 +427,8 @@ class BiolinkController extends Controller
             }
             continue;
           }
-          $banner= Banner::where('id','=',$request->idBanner[$i])->first();
+          // $banner= Banner::where('id','=',$request->idBanner[$i])->first();
+          $banner= Banner::find($request->idBanner[$i]);
         }
 
         $banner->users_id=$user->id;
@@ -574,7 +575,8 @@ class BiolinkController extends Controller
             }
             continue;
           }
-          $url=Link::where('id','=',$id[$i])->first();
+          // $url=Link::where('id','=',$id[$i])->first();
+          $url=Link::find($id[$i]);
         }
 
         // Pengecekan Link
