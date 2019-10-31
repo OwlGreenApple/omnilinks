@@ -121,6 +121,9 @@ class BiolinkController extends Controller
   	$page=Page::where('uid','=',$uuid)
               ->where('user_id',$user->id)
               ->first();
+    if (is_null($page)) {
+      return "Page not found";
+    }
   	$pageid=0;
     $links=Link::where('users_id',$user->id)
                 ->where('pages_id',$page->id)
