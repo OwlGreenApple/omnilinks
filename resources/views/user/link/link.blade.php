@@ -1357,25 +1357,25 @@
       <ul class="col-lg-7 col-md-8 mb-5 row">
         <?php foreach ($sort_sosmed as $sosmed) { ?>
           <li class="col text-center icon-sosmed">
-            @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))
+            @if( $sosmed=='fb')
               <a href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank">
                 <i class="fab fa-facebook-square"></i>
               </a>
             @endif
           
-            @if($sosmed=='ig' and (!is_null($pages->ig_link) || $pages->ig_pixel_id!=0))
+            @if($sosmed=='ig' )
               <a href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank">
                 <i class="fab fa-instagram"></i>
               </a> 
             @endif
 
-            @if($sosmed=='twitter' and (!is_null($pages->twitter_link) || $pages->twitter_pixel_id!=0))
+            @if($sosmed=='twitter' )
               <a href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank">
                 <i class="fab fa-twitter-square"></i>
               </a>
             @endif
 
-            @if($sosmed=='youtube' and (!is_null($pages->youtube_link) || $pages->youtube_pixel_id!=0))
+            @if($sosmed=='youtube' )
               <a href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank">
                 <i class="fab fa-youtube"></i>
               </a>
@@ -1383,7 +1383,16 @@
           </li>
         <?php } ?>
       </ul>
-
+      <!-- diremark supaya sesuai phone preview, ngga tau dulu kenapa ini dipake
+            @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))
+              @endif 
+            @if($sosmed=='ig' and (!is_null($pages->ig_link) || $pages->ig_pixel_id!=0))
+              @endif 
+            @if($sosmed=='twitter' and (!is_null($pages->twitter_link) || $pages->twitter_pixel_id!=0))
+              @endif 
+            @if($sosmed=='youtube' and (!is_null($pages->youtube_link) || $pages->youtube_pixel_id!=0))
+              @endif 
+      -->
       <div class="col-lg-7 col-md-8 mb-5 text-center powered-omnilinks">
         @if($pages->powered==1)
           <a href="https://omnilinkz.com"><!--powered by<br>Omnilinkz-->
