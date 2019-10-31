@@ -116,9 +116,11 @@ class BiolinkController extends Controller
   }
 
   public function viewpage($uuid)
-  {	
+  {
     $user=Auth::user();
-  	$page=Page::where('uid','=',$uuid)->first();
+  	$page=Page::where('uid','=',$uuid)
+              ->where('user_id',$user->id)
+              ->first();
   	$pageid=0;
     $links=Link::where('users_id',$user->id)
                 ->where('pages_id',$page->id)
