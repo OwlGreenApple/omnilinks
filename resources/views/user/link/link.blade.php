@@ -1354,7 +1354,7 @@
         @endif
       </ul>
 
-      <ul class="col-lg-7 col-md-8 mb-5 row">
+      <ul class="col-lg-7 col-md-8 mb-5 row" id="icon-sosmed">
         <?php foreach ($sort_sosmed as $sosmed) { ?>
           <li class="col text-center icon-sosmed">
             @if( $sosmed=='fb')
@@ -1455,7 +1455,9 @@
       <?php 
       if($pages->is_bio_color) { ?>  
         $('.header-txt').css("color","<?php echo $pages->bio_color; ?>");
+        $('#icon-sosmed li a').css("color","<?php echo $pages->bio_color; ?>");
         $('.powered-omnilinks a').css("color","<?php echo $pages->bio_color; ?>");
+        
       <?php 
       } ?>  
     @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
@@ -1474,6 +1476,7 @@
       <?php 
       if(!$pages->is_bio_color) { ?>  
         $('.header-txt').css("color",template.bio_font_color);
+        $('#icon-sosmed li a').css("color",template.bio_font_color);
         $('.powered-omnilinks a').css("color",template.bio_font_color);
       <?php 
       } ?>  
@@ -1494,6 +1497,7 @@
           $('.txthov').find("button").css("background-color",value.button_color);
           $('.txthov').find("button").css("color",value.font_button_color);
           $('.header-txt').css("color",value.bio_font_color);
+          $('#icon-sosmed li a').css("color",value.bio_font_color);
           $('.powered-omnilinks a').css("color",value.bio_font_color);
           // check_outlined();
         }
@@ -1506,7 +1510,10 @@
 
     <?php if($pages->is_outlined) {?>
       $(".btn").addClass("btn-outlined");
-    <?php } ?>
+      $('#icon-sosmed li a').css("color","<?php echo $pages->outline; ?>");
+    <?php } else { ?>
+      $('#icon-sosmed li a').css("color","#fff");
+    <?php }  ?>
 
     <?php if (!is_null($pages->rounded)) { ?>
       $('.btn').css("background-color","<?php echo $pages->rounded; ?>");
@@ -1546,8 +1553,10 @@
       }
     ); 
     moveSlide(0);
+    @if(!is_null($pages->description))
     tempStr = $("#hidden-description").val().replace(/\n/g, "<br>");
     $("#description").html(tempStr);
+    @endif
   });
 </script>
 
