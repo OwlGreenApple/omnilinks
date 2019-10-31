@@ -1381,8 +1381,6 @@
               </a>
             @endif 
           </li>
-        <?php } ?>
-      </ul>
       <!-- diremark supaya sesuai phone preview, ngga tau dulu kenapa ini dipake
             @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))
               @endif 
@@ -1393,6 +1391,8 @@
             @if($sosmed=='youtube' and (!is_null($pages->youtube_link) || $pages->youtube_pixel_id!=0))
               @endif 
       -->
+        <?php } ?>
+      </ul>
       <div class="col-lg-7 col-md-8 mb-5 text-center powered-omnilinks">
         @if($pages->powered==1)
           <a href="https://omnilinkz.com"><!--powered by<br>Omnilinkz-->
