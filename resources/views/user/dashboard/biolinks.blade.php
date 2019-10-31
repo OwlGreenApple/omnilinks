@@ -2139,7 +2139,7 @@
                   <ul class="sortable-sosmed">
                     <li id="sosmed-youtube">
                       <div id="youtube" class="socialmedia div-table mb-4">
-                        <input type="hidden" name="sortsosmed[]" value="" data-val="youtube" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="youtube" data-val="youtube" class="input-hidden">
       
                         <div class="div-cell">
                           <span class="handle">
@@ -2174,7 +2174,7 @@
 
                     <li id="sosmed-fb">
                       <div id="fb" class="socialmedia div-table " data-type="fb" style="">
-                        <input type="hidden" name="sortsosmed[]" value="" data-val="fb" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="fb" data-val="fb" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -2208,7 +2208,7 @@
 
                     <li id="sosmed-twitter">
                       <div id="twitter" class="socialmedia div-table " data-type="twitter" style="">
-                        <input type="hidden" name="sortsosmed[]" value="" data-val="twitter" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="twitter" data-val="twitter" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -2242,7 +2242,7 @@
 
                     <li id="sosmed-ig">
                       <div id="ig" class="socialmedia div-table " data-type="ig" style="">
-                        <input type="hidden" name="sortsosmed[]" value="" data-val="ig" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="ig" data-val="ig" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
