@@ -682,7 +682,7 @@ class BiolinkController extends Controller
     $page->sort_link = $sort_link;
     $page->sort_msg = $sort_msg;
     $page->sort_sosmed = $sort_sosmed;
-    $page->save();
+    // $page->save();
 
     if((is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)))
     {
