@@ -296,7 +296,14 @@ class BiolinkController extends Controller
     }
 
     $uuid=$request->uuidtemp;
-    $page=Page::where('uid','=',$uuid)->first();
+    // $page=Page::where('uid','=',$uuid)->first();
+  	$page=Page::where('uid','=',$uuid)
+              ->where('user_id',$user->id)
+              ->first();
+    if (is_null($page)) {
+      return "Page not found";
+    }
+    
     $page->page_title=$request->judul;
     $page->description=$request->description;
     // $page->link_utama=$request->link;
@@ -479,8 +486,14 @@ class BiolinkController extends Controller
     
     
   	$uuid=$request->uuid;
-  	$page=Page::where('uid','=',$uuid)->first();
   	$user=Auth::user();
+  	// $page=Page::where('uid','=',$uuid)->first();
+  	$page=Page::where('uid','=',$uuid)
+              ->where('user_id',$user->id)
+              ->first();
+    if (is_null($page)) {
+      return "Page not found";
+    }
 
     $wa = $request->wapixel;
     $twitter = $request->twitterpixel;
@@ -521,79 +534,82 @@ class BiolinkController extends Controller
     
     //dicheck dulu
     $counter_new = 0; $counter_update = 0; $counter_delete = 0;
-    for ($i=0; $i <count($request->title); $i++)
-    { 
-      if($id[$i]=='new')
-      {
-        $counter_new += 1;
-      }
-      else
-      {
-        if ($deletelink[$i]=='delete') {
-          $linkku=Link::find($id[$i]);
-          if (!is_null($linkku)){
-            $counter_delete += 1;
-          }
-          continue;
+    if (!is_null($request->title)){
+      for ($i=0; $i <count($request->title); $i++)
+      { 
+        if($id[$i]=='new')
+        {
+          $counter_new += 1;
         }
-        $counter_update += 1;
-      }
-    }
-    if ($counter_new+$counter_update-$counter_delete > 5 ){
-      $arr['status'] = 'error';
-      $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
-      return $arr;
-    }
-    
-    for ($i=0; $i <count($request->title); $i++)
-    { 
-      if($id[$i]=='new')
-      {
-        $url=new Link();
-      }
-      else
-      {
-        if ($deletelink[$i]=='delete') {
-          $linkku=Link::find($id[$i]);
-          if (!is_null($linkku)){
-            $linkku->delete();
+        else
+        {
+          if ($deletelink[$i]=='delete') {
+            $linkku=Link::find($id[$i]);
+            if (!is_null($linkku)){
+              $counter_delete += 1;
+            }
+            continue;
           }
-          continue;
+          $counter_update += 1;
         }
-        $url=Link::where('id','=',$id[$i])->first();
       }
-
-      // Pengecekan Link
-      $validator = Validator::make($request->all(), [
-        'title.'.$i => ['required', 'string', 'max:255'],
-        'url.'.$i => ['required', 'active_url', 'max:255'],
-      ]); 
-      if($validator->fails()) {
+      if ($counter_new+$counter_update-$counter_delete > 5 ){
         $arr['status'] = 'error';
-        $arr['message'] = $validator->errors()->first();
+        $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
         return $arr;
       }
+      
+      for ($i=0; $i <count($request->title); $i++)
+      { 
+        if($id[$i]=='new')
+        {
+          $url=new Link();
+        }
+        else
+        {
+          if ($deletelink[$i]=='delete') {
+            $linkku=Link::find($id[$i]);
+            if (!is_null($linkku)){
+              $linkku->delete();
+            }
+            continue;
+          }
+          $url=Link::where('id','=',$id[$i])->first();
+        }
 
-      $url->pages_id=$page->id;
-      $url->names=null;
-      $url->users_id=$user->id;
-      $url->title=$request->title[$i];
-      $url->link=$request->url[$i];
-      $url->pixel_id = $request->linkpixel[$i];
-      $url->save();
+        // Pengecekan Link
+        $validator = Validator::make($request->all(), [
+          'title.'.$i => ['required', 'string', 'max:255'],
+          'url.'.$i => ['required', 'active_url', 'max:255'],
+        ]); 
+        if($validator->fails()) {
+          $arr['status'] = 'error';
+          $arr['message'] = $validator->errors()->first();
+          return $arr;
+        }
 
-      /*if($sort_link=='')
-      {
-        $sort_link = $url->id.'-12';
-      } 
-      else {
-        $sort_link = $sort_link.';'.$url->id.'-12';
-      }*/
-      if($url->id<>''){
-        $sort_link .= $url->id.';';
+        $url->pages_id=$page->id;
+        $url->names=null;
+        $url->users_id=$user->id;
+        $url->title=$request->title[$i];
+        $url->link=$request->url[$i];
+        $url->pixel_id = $request->linkpixel[$i];
+        $url->save();
+
+        /*if($sort_link=='')
+        {
+          $sort_link = $url->id.'-12';
+        } 
+        else {
+          $sort_link = $sort_link.';'.$url->id.'-12';
+        }*/
+        if($url->id<>''){
+          $sort_link .= $url->id.';';
+        }
       }
     }
-
+    
+    
     $sort_msg = '';
     
     if($request->has('sortmsg'))
