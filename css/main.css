@@ -38,6 +38,11 @@ body {
     margin-top:105px;
   }  
 }
+@media only screen and (max-width: 767px) {
+  .main-cont {
+    margin-top:150px;
+  }  
+}
 
 /* Navbar */
 .dropdown:hover > .dropdown-menu {
