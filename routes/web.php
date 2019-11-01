@@ -39,7 +39,7 @@ if(env('DOMAIN_TYPE')=='main'){
   //auth
   Route::post('post-register', 'Auth\RegisterController@post_register');
   Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
-  Route::get('/home', 'HomeController@index')->name('home');
+  // Route::get('/home', 'HomeController@index')->name('home');
 
   //pricing
   Route::get('/pricing',function(){

@@ -1941,7 +1941,7 @@
                                     <i class="fab fa-whatsapp"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="inlineFormInputGroupUsername" onkeypress="return hanyaAngka(event)" placeholder="Masukkan nomor WhatsApp ex : 6281...">
+                                <input type="text" name="wa" class="form-control wa-input" value="{{$pages->wa_link}}" id="input-msg-wa" onkeypress="return hanyaAngka(event)" placeholder="Masukkan nomor WhatsApp ex : 6281...">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="wa" class="input-hidden">
                               </div>
                             </div>
@@ -1975,7 +1975,7 @@
                                     <i class="fab fa-telegram-plane"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="telegram" class="form-control telegram-input" id="inlineFormInputGroupUsername" value="{{$pages->telegram_link}}" placeholder="Masukkan username Telegram">
+                                <input type="text" name="telegram" class="form-control telegram-input" id="" value="{{$pages->telegram_link}}" placeholder="Masukkan username Telegram">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="telegram" class="input-hidden">
                               </div>
 
@@ -2009,7 +2009,7 @@
                                     <i class="fab fa-skype"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="skype" class="form-control skype-input" id="inlineFormInputGroupUsername" value="{{$pages->skype_link}}" placeholder="Masukkan username Skype">
+                                <input type="text" name="skype" class="form-control skype-input" id="" value="{{$pages->skype_link}}" placeholder="Masukkan username Skype">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="skype" class="input-hidden">
                               </div>
                             </div>
@@ -2043,7 +2043,7 @@
                                     <i class="fab fa-line"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="line" class="form-control line-input" value="{{$pages->line_link}}" id="inlineFormInputGroupUsername" placeholder="Masukkan username Line">
+                                <input type="text" name="line" class="form-control line-input" value="{{$pages->line_link}}" id="" placeholder="Masukkan username Line">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="line" class="input-hidden">
                               </div>
                             </div>
@@ -2077,7 +2077,7 @@
                                     <i class="fab fa-facebook-messenger"></i>
                                   </div>
                                 </div>
-                                <input type="text" name="messenger" class="form-control messenger-input" value="{{$pages->messenger_link}}" id="inlineFormInputGroupUsername" placeholder="Masukkan username Messenger">
+                                <input type="text" name="messenger" class="form-control messenger-input" value="{{$pages->messenger_link}}" id="" placeholder="Masukkan username Messenger">
                                 <input type="hidden" name="sortmsg[]" value="" data-val="messenger" class="input-hidden">
                               </div>
                             </div>
@@ -2155,7 +2155,7 @@
                                   <i class="fab fa-youtube"></i>
                                 </div>
                               </div>
-                              <input type="text" name="youtube" class="form-control youtube-input" id="inlineFormInputGroupUsername" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}">
+                              <input type="text" name="youtube" class="form-control youtube-input" id="" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}">
                             </div>
                           </div> 
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2189,7 +2189,7 @@
                                   <i class="fab fa-facebook-f"></i>
                                 </div>
                               </div>
-                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username facebook">
+                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="" placeholder="masukkan username facebook">
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2223,7 +2223,7 @@
                                   <i class="fab fa-twitter"></i>
                                 </div>
                               </div>
-                              <input type="text" name="twitter" class="form-control twitter-input" id="inlineFormInputGroupUsername" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
+                              <input type="text" name="twitter" class="form-control twitter-input" id="" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2257,7 +2257,7 @@
                                   <i class="fab fa-instagram"></i>
                                 </div>
                               </div>
-                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="inlineFormInputGroupUsername" placeholder="masukkan username instagram">
+                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="" placeholder="masukkan username instagram">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -3310,6 +3310,23 @@ and add more";
       let inputtitle=$('#pagetitle');
       let outputtitle=$('#outputtitle');
       
+      //first character cannot be 0
+      // $("#nomorwa").rules("add", { regex: "^[^0]$" });
+      $('#nomorwa,#input-msg-wa').keypress(function(e){
+        if (this.value.length == 0 && e.which == 48 ){
+          return false;
+        }
+      });
+      $('#nomorwa,#input-msg-wa').on('input propertychange paste', function (e) {
+          var reg = /^0+/gi;
+          if (this.value.match(reg)) {
+              this.value = this.value.replace(reg, '');
+          }
+      });
+
+      $(".navbar").css("z-index", "1");
+      $(".navbar").css("position", "static");
+      $(".dropdown-item").css("z-index", "41");
 
       inputtitle.keyup(function(){
         outputtitle.text(inputtitle.val());

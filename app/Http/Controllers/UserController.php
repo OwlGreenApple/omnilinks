@@ -307,7 +307,7 @@ class UserController extends Controller
       $admin = Auth::user();
       if ($admin->is_admin) {
         Auth::loginUsingId($id);
-        return redirect("home");
+        return redirect("");
       } else {
         return "NOT AUTHORIZED";
       }

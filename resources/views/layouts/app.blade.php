@@ -76,7 +76,7 @@
         <?php } else{?>
           <a class="navbar-brand" href="{{ url('/') }}">
         <?php }?>-->
-          <a class="navbar-brand" href="{{ url('/') }}">
+          <a class="navbar-brand" href="https://omnilinkz.com">
             <img src="{{asset('image/omnilinkz-logo.png')}}" width="180px;" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -153,7 +153,8 @@
                   </li>
                 @endif
               @else
-                <div class="dropdown pull-right">
+                <li class="nav-item dropdown pull-right">
+                <!--<div class="dropdown pull-right">-->
                   <a class="nav-link blue-txt" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #116BC7">
                     Halo, {{ Auth::user()->username }} &nbsp;
                     <i class="fas fa-angle-down"></i>
@@ -184,7 +185,8 @@
                       Log Out
                     </a>
                   </div>
-                </div>
+                <!--</div>-->
+                </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>
