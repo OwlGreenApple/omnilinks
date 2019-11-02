@@ -1869,7 +1869,8 @@
           <i class="fas fa-star"></i> Get Custom Link
         </button>
         
-        <a href="https://{{env('short_link')}}/<?php if (is_null($pages->premium_names)) { echo $pages->names; } else { echo $pages->premium_names; } ?>" target="_blank">https://{{env('short_link')}}/{{$pages->names}}</a>
+        <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
+        <a href="https://{{env('short_link')}}/{{$custom_link}}" target="_blank">https://{{env('short_link')}}/{{$custom_link}}</a>
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">
