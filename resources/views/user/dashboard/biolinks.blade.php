@@ -1870,7 +1870,7 @@
         </button>
         
         <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
-        <a href="https://{{env('short_link')}}/{{$custom_link}}" target="_blank">https://{{env('short_link')}}/{{$custom_link}}</a>
+        <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a>
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">
