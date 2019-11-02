@@ -1866,8 +1866,10 @@
         <div id="pesanAlert" class="alert mb-0" style="display: none;"></div>
 
         <button class="btn btn-success mt-3 mb-3 btn-premium">
-          <i class="fas fa-star"></i> Get Premium ID
+          <i class="fas fa-star"></i> Get Custom Link
         </button>
+        
+        <a href="https://{{env('short_link')}}/<?php if (is_null($pages->premium_names)) { echo $pages->names; } else { echo $pages->premium_names; } ?>" target="_blank">https://{{env('short_link')}}/{{$pages->names}}</a>
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">
@@ -3024,7 +3026,7 @@ and add more";
     <div class="modal-content content-premiumid">
       <div class="modal-header header-premiumid">
         <h5 class="modal-title font-premiumid big" id="modaltitle">
-          Custom Premium ID
+          Custom Link
         </h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
@@ -3045,7 +3047,7 @@ and add more";
 
           <div class="form-group">
             <div class="col-12 font-premiumid">
-              <b>Custom Premium ID</b>
+              <b>Custom Link</b>
             </div>
             <div class="col-auto">
               <div class="input-group mb-2">
@@ -3091,14 +3093,14 @@ and add more";
       <div class="modal-body text-center">
         <img src="{{asset('image/icon-premium-id.png')}}">
         <h5 class="font-premiumid big mt-3 mb-4">
-          Custom Premium ID
+          Custom Link Anda
         </h5>
         <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan custom premium ID</p>
 
         <div class="col-12 offset-lg-1 col-lg-10 mt-5 mb-5">
           <div class="row">
             <div class="col-lg-4 col-12 text-lg-left text-center">
-              ID Default <br>
+              Link Default <br>
               <?php echo env('SHORT_LINK').'/YtBu8L' ?>
             </div>
             <div class="col-lg-4 col-12">
@@ -3106,7 +3108,7 @@ and add more";
             </div>
             <div class="col-lg-4 col-12 text-lg-left text-center">
               <span class="font-premiumid">
-                Custom Premium ID
+                Custom Link
               </span> <br>
               <b><?php echo env('SHORT_LINK').'/YOURLINK' ?></b>
             </div>  
