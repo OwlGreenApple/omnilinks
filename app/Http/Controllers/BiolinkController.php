@@ -473,11 +473,19 @@ class BiolinkController extends Controller
 
   public function savelink(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'wa' => [ 'max:255'],
-      'telegram' => ['max:255'],
-      'skype' => ['max:255'],
-    ]); 
+    $temp_arr = array();
+    $temp_arr['wa'] = [ 'max:255'];
+    $temp_arr['telegram'] = [ 'max:255'];
+    $temp_arr['skype'] = [ 'max:255'];
+    if (!is_null($request->title)){
+      for ($i=0; $i <count($request->title); $i++)
+      { 
+        $temp_arr['title.'.$i] = ['required', 'string', 'max:255'];
+        $temp_arr['url.'.$i] = ['required', 'string', 'max:255'];
+      }
+    }
+
+    $validator = Validator::make($request->all(), $temp_arr); 
     
     if($validator->fails()) {
       $arr['status'] = 'error';
@@ -536,6 +544,7 @@ class BiolinkController extends Controller
     //dicheck dulu
     $counter_new = 0; $counter_update = 0; $counter_delete = 0;
     if (!is_null($request->title)){
+      /*
       for ($i=0; $i <count($request->title); $i++)
       { 
         if($id[$i]=='new')
@@ -558,28 +567,32 @@ class BiolinkController extends Controller
         $arr['status'] = 'error';
         $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
         return $arr;
-      }
+      }*/
       
       for ($i=0; $i <count($request->title); $i++)
       { 
         if($id[$i]=='new')
         {
           $url=new Link();
+          $counter_new += 1;
         }
         else
         {
           if ($deletelink[$i]=='delete') {
             $linkku=Link::find($id[$i]);
             if (!is_null($linkku)){
+              $counter_delete += 1;
               $linkku->delete();
             }
             continue;
           }
           // $url=Link::where('id','=',$id[$i])->first();
+          $counter_update += 1;
           $url=Link::find($id[$i]);
         }
 
         // Pengecekan Link
+        /*
         $validator = Validator::make($request->all(), [
           'title.'.$i => ['required', 'string', 'max:255'],
           'url.'.$i => ['required', 'active_url', 'max:255'],
@@ -589,6 +602,7 @@ class BiolinkController extends Controller
           $arr['message'] = $validator->errors()->first();
           return $arr;
         }
+        */
 
         $url->pages_id=$page->id;
         $url->names=null;
@@ -607,6 +621,12 @@ class BiolinkController extends Controller
         }*/
         if($url->id<>''){
           $sort_link .= $url->id.';';
+        }
+        
+        if ($counter_new+$counter_update-$counter_delete > 5 ){
+          $arr['status'] = 'error';
+          $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
+          return $arr;
         }
       }
     }
@@ -686,7 +706,7 @@ class BiolinkController extends Controller
     $page->sort_sosmed = $sort_sosmed;
     // $page->save();
 
-    if((is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)))
+    /*if((is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)))
     {
      $page->colom='links-num-1';
     }
@@ -714,7 +734,7 @@ class BiolinkController extends Controller
     elseif(!is_null($page->fb_link) && !is_null($page->ig_link) && !is_null($page->twitter_link) && !is_null($page->youtube_link))
     {
       $page->colom_sosmed='col-md-3 col-3 text-center';
-    }
+    }*/
     $page->save();
 
     $arr['status'] = 'success';
