@@ -1866,7 +1866,7 @@
         <div id="pesanAlert" class="alert mb-0" style="display: none;"></div>
 
         <button class="btn btn-success mt-3 mb-3 btn-premium">
-          <i class="fas fa-star"></i> Get Custom Link
+          <i class="fas fa-star"></i> <?php if (is_null($pages->premium_names)) { echo "Get"; } else { echo "Update"; } ?> Custom Link
         </button>
         
         <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
