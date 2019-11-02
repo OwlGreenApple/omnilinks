@@ -22,16 +22,22 @@ class BiolinkController extends Controller
   public function savewa(Request $request)
   {
   	$uuid=$request->uuidpixel;
+  	$user=Auth::user();
+  	$page=Page::where('uid','=',$uuid)
+              ->where('user_id',$user->id)
+              ->first();
+    if (is_null($page)) {
+      return "Page not found";
+    }
+    
     if(is_null($request->editidwa))
     {
       $walink= new Whatsapplink();  
     }
     else
     {
-      $walink=Whatsapplink::where('id','=',$request->editidwa)->first(); 
+      $walink=Whatsapplink::find($request->editidwa); 
     }
-  	$user=Auth::user();
-  	$page=Page::where('uid','=',$uuid)->first();
   	$walink->users_id=$user->id; 
   	$walink->pages_id=$page->id;
   	$walink->nomor=$request->nomorwa;
@@ -265,14 +271,24 @@ class BiolinkController extends Controller
   {
     $user=Auth::user();
     
-    $validator = Validator::make($request->all(), [
-      'judul' => ['required', 'string',  'max:255'],
+    $temp_arr = array();
+    $temp_arr['judul'] = ['required', 'string',  'max:255' ];
+    
+    if ($user->membership=='basic' or  $user->membership=='elite') 
+    {
+      for($i=0;$i<count($request->judulBanner);$i++) 
+      { 
+        $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:255'];
+        $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:255'];
+      }
+    }
+
+    $validator = Validator::make($request->all(), $temp_arr); 
       // 'link' => ['required', 'string', 'max:255'],
       // 'phone_no' => ['required', 'string', 'max:255'],
       // 'imagepages' => ['required', 'file'],
       // 'judulBanner.*' => ['required', 'string', 'max:255'],
       // 'linkBanner.*' => ['required', 'active_url', 'max:255'],
-    ]); 
     
     if($validator->fails()) {
       $arr['status'] = 'error';
@@ -384,6 +400,7 @@ class BiolinkController extends Controller
       for($i=0;$i<count($request->judulBanner);$i++) 
       { 
         //pengecekan banner 
+        /*
         $validator = Validator::make($request->all(), [
           'judulBanner.'.$i => ['required', 'string', 'max:255'],
           'linkBanner.'.$i => ['required', 'active_url', 'max:255'],
@@ -400,6 +417,7 @@ class BiolinkController extends Controller
             return $arr;
           }
         }
+        */
         
         if($request->hasFile('bannerImage.'.$i)) {
           $arr_size = getimagesize( $request->file('bannerImage')[$i] );
@@ -496,7 +514,6 @@ class BiolinkController extends Controller
     
   	$uuid=$request->uuid;
   	$user=Auth::user();
-  	// $page=Page::where('uid','=',$uuid)->first();
   	$page=Page::where('uid','=',$uuid)
               ->where('user_id',$user->id)
               ->first();
