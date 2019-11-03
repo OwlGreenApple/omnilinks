@@ -35,17 +35,17 @@ class PremiumIDController extends Controller
 
       if(Auth::user()->membership=='free'){
         $arr['status'] = 'error';
-        $arr['message'] = 'Silahkan upgrade akun terlebih dahulu untuk dapat menggunakan Premium ID.';
+        $arr['message'] = 'Silahkan upgrade akun terlebih dahulu untuk dapat menggunakan Custom Link.';
         return $arr;
       } else {
         $premiumid = PremiumID::where('user_id',Auth::user()->id)->get();
         if($premiumid->count()>=3 and Auth::user()->membership=='basic'){
           $arr['status'] = 'error';
-          $arr['message'] = 'Premium ID telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Premium ID.';
+          $arr['message'] = 'Custom Link telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Custom Link.';
           return $arr;
         } else if($premiumid->count()>=10 and Auth::user()->membership=='elite'){
           $arr['status'] = 'error';
-          $arr['message'] = 'Premium ID telah mencapai batas maksimal.';
+          $arr['message'] = 'Custom Link telah mencapai batas maksimal.';
           return $arr;
         }
       }
@@ -83,7 +83,8 @@ class PremiumIDController extends Controller
         $page->save();
 
         $arr['status'] = 'success';
-        $arr['message'] = 'Premium ID berhasil dibuat. Letakkan link berikut di Bio Instagram <a href="https://'.env('SHORT_LINK').'/'. $page->premium_names.'">'.env('SHORT_LINK').'/'. $page->premium_names.'</a>';
+        $arr['customLink'] = 'https://'.env('SHORT_LINK').'/'. $page->premium_names;
+        $arr['message'] = 'Custom Link berhasil dibuat. Letakkan link berikut di Bio Instagram <a href="https://'.env('SHORT_LINK').'/'. $page->premium_names.'">'.env('SHORT_LINK').'/'. $page->premium_names.'</a>';
       } else {
         $arr['status'] = 'error';
         $arr['message'] = $validator->errors()->first();
@@ -130,7 +131,7 @@ class PremiumIDController extends Controller
         $link->save();
 
         $arr['status'] = 'success';
-        $arr['message'] = 'Premium ID berhasil dibuat. Letakkan link berikut di Bio Instagram <a href="https://'.env('SHORT_LINK').'/'. $link->premium_names.'">'.env('SHORT_LINK').'/'. $link->premium_names.'</a>';
+        $arr['message'] = 'Custom Link berhasil dibuat. Letakkan link berikut di Bio Instagram <a href="https://'.env('SHORT_LINK').'/'. $link->premium_names.'">'.env('SHORT_LINK').'/'. $link->premium_names.'</a>';
       } else {
         $arr['status'] = 'error';
         $arr['message'] = $validator->errors()->first();

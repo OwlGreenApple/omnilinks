@@ -649,7 +649,7 @@
     <div class="modal-content content-premiumid">
       <div class="modal-header header-premiumid">
         <h5 class="modal-title font-premiumid big" id="modaltitle">
-          Custom Premium ID
+          Custom Link
         </h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
@@ -670,7 +670,7 @@
 
           <div class="form-group">
             <div class="col-12 font-premiumid">
-              <b>Custom Premium ID</b>
+              <b>Custom Link</b>
             </div>
             <div class="col-auto">
               <div class="input-group mb-2">
@@ -726,9 +726,9 @@
       <div class="modal-body text-center">
         <img src="{{asset('image/icon-premium-id.png')}}">
         <h5 class="font-premiumid big mt-3 mb-4">
-          Custom Premium ID
+          Custom Link
         </h5>
-        <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan custom premium ID</p>
+        <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan Custom Link</p>
 
         <div class="col-12 offset-lg-1 col-lg-10 mt-5 mb-5">
           <div class="row">
@@ -741,7 +741,7 @@
             </div>
             <div class="col-lg-4 col-12 text-lg-left text-center">
               <span class="font-premiumid">
-                Custom Premium ID
+                Custom Link
               </span> <br>
               <b><?php echo env('SHORT_LINK').'/YOURLINK' ?></b>
             </div>  

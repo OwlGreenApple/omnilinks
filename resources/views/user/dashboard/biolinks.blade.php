@@ -1818,6 +1818,7 @@
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
+          $("#custom-link-show").html(data.customLink);
         }
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
@@ -1870,7 +1871,7 @@
         </button>
         
         <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
-        <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a>
+        <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a>
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">
@@ -3096,7 +3097,7 @@ and add more";
         <h5 class="font-premiumid big mt-3 mb-4">
           Custom Link Anda
         </h5>
-        <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan custom premium ID</p>
+        <p>Buat Customer Anda lebih mudah mengingat profile online shop Anda dengan custom link anda</p>
 
         <div class="col-12 offset-lg-1 col-lg-10 mt-5 mb-5">
           <div class="row">

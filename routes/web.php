@@ -123,7 +123,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/link/deletesinglelink','SingleLinkController@deletesinglelink');
     Route::get('/singlelinks/load-link-title','SingleLinkController@load_link_title');
 
-    //premium ID
+    //Custom Link
     Route::get('/premium-id-biolinks/tambah','PremiumIDController@premiumid_biolinks');
     Route::get('/premium-id-singlelinks/tambah','PremiumIDController@premiumid_singlelinks');    
   });

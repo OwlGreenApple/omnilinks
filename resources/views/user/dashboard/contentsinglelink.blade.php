@@ -50,7 +50,7 @@
           <i class="fas fa-trash-alt"></i>
         </button>
         <button type="button" class="btn btn-sm btn-success btn-premium" data-id="{{$link->idlink}}" data-default="{{env('SHORT_LINK')}}/{{$link->shorten}}" data-premiumid="{{$link->premium_id}}" data-premiumnames="{{$link->premium_names}}">
-          Premium ID
+          Custom Link
         </button>
       </td>
     </tr>

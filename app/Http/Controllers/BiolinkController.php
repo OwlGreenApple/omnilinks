@@ -520,6 +520,10 @@ class BiolinkController extends Controller
     if (is_null($page)) {
       return "Page not found";
     }
+    $free = false;
+    if ($user->membership=='free') {
+      $free = true;
+    }
 
     $wa = $request->wapixel;
     $twitter = $request->twitterpixel;
@@ -531,15 +535,28 @@ class BiolinkController extends Controller
     $line = $request->linepixel;
     $messenger = $request->messengerpixel;
 
-    $page->wa_pixel_id=$wa;
-    $page->twitter_pixel_id=$twitter;
-    $page->ig_pixel_id=$ig;
-    $page->telegram_pixel_id=$telegram;
-    $page->youtube_pixel_id=$youtube;
-    $page->skype_pixel_id=$skype;
-    $page->fb_pixel_id=$fb;
-    $page->line_pixel_id=$line;
-    $page->messenger_pixel_id=$messenger;
+    if (!$free){
+      $page->wa_pixel_id=$wa;
+      $page->twitter_pixel_id=$twitter;
+      $page->ig_pixel_id=$ig;
+      $page->telegram_pixel_id=$telegram;
+      $page->youtube_pixel_id=$youtube;
+      $page->skype_pixel_id=$skype;
+      $page->fb_pixel_id=$fb;
+      $page->line_pixel_id=$line;
+      $page->messenger_pixel_id=$messenger;
+    }
+    else {
+      $page->wa_pixel_id=0;
+      $page->twitter_pixel_id=0;
+      $page->ig_pixel_id=0;
+      $page->telegram_pixel_id=0;
+      $page->youtube_pixel_id=0;
+      $page->skype_pixel_id=0;
+      $page->fb_pixel_id=0;
+      $page->line_pixel_id=0;
+      $page->messenger_pixel_id=0;
+    }
 
   	$page->wa_link=$request->wa;
   	$page->fb_link=$request->fb;
@@ -626,7 +643,12 @@ class BiolinkController extends Controller
         $url->users_id=$user->id;
         $url->title=$request->title[$i];
         $url->link=$request->url[$i];
-        $url->pixel_id = $request->linkpixel[$i];
+        if (!$free){
+          $url->pixel_id = $request->linkpixel[$i];
+        }
+        else {
+          $url->pixel_id = 0;
+        }
         $url->save();
 
         /*if($sort_link=='')
