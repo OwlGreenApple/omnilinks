@@ -3338,15 +3338,15 @@ and add more";
           // $(".fixed").css("top","415px");
           $( ".fixed" ).animate({
             top: 415
-          }, 5000, function() {
+          }, 500, function() {
             // Animation complete.
           });          
         }
         else {
           // $(".fixed").css("top","50%");
           $( ".fixed" ).animate({
-            top: 50%
-          }, 5000, function() {
+            top: '50%'
+          }, 500, function() {
             // Animation complete.
           });          
         }
