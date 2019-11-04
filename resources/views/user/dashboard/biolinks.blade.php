@@ -3334,7 +3334,7 @@ and add more";
              wS = $(this).scrollTop();
         // console.log(wH);
         console.log(wS);
-        if (wS<=5){
+        if (wS<=40){
           $(".fixed").css("top","415px");
         }
         else {
