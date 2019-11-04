@@ -3335,10 +3335,20 @@ and add more";
         // console.log(wH);
         console.log(wS);
         if (wS<=40){
-          $(".fixed").css("top","415px");
+          // $(".fixed").css("top","415px");
+          $( ".fixed" ).animate({
+            top: 415,
+          }, 5000, function() {
+            // Animation complete.
+          });          
         }
         else {
-          $(".fixed").css("top","50%");
+          // $(".fixed").css("top","50%");
+          $( ".fixed" ).animate({
+            top: 50%,
+          }, 5000, function() {
+            // Animation complete.
+          });          
         }
       });
       $(window).scrollTop(1);
