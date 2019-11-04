@@ -3328,6 +3328,21 @@ and add more";
           }
       });
 
+      $(window).scroll(function() {
+        var 
+             wH = $(window).height(),
+             wS = $(this).scrollTop();
+        // console.log(wH);
+        console.log(wS);
+        if (wS<=100){
+          $(".fixed").css("top","415px");
+        }
+        else {
+          $(".fixed").css("top","50%");
+        }
+      });
+      $(window).scrollTop(1);
+
       $(".navbar").css("z-index", "1");
       $(".navbar").css("position", "static");
       $(".dropdown-item").css("z-index", "41");
@@ -3609,8 +3624,8 @@ and add more";
         var index =  ui.item.index();
         var start_pos = $(this).attr('data-previndex');
 
-        console.log(start_pos);
-        console.log(index);
+        // console.log(start_pos);
+        // console.log(index);
         if (start_pos<index) {
           $("#viewLink li:eq("+start_pos+")").insertAfter($("#viewLink li:eq("+index+")"));
         }
@@ -4106,7 +4121,7 @@ and add more";
       $counter = 1;
       foreach($arr as $data){
     ?>
-    console.log("<?php echo $data; ?>");
+    // console.log("<?php echo $data; ?>");
         $("#link-url-update-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         
         $("#link-preview-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
