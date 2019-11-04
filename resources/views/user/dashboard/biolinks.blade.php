@@ -3338,7 +3338,7 @@ and add more";
           // $(".fixed").css("top","415px");
           $( ".fixed" ).animate({
             top: 415
-          }, 500, function() {
+          }, 50, function() {
             // Animation complete.
           });          
         }
@@ -3346,7 +3346,7 @@ and add more";
           // $(".fixed").css("top","50%");
           $( ".fixed" ).animate({
             top: '50%'
-          }, 500, function() {
+          }, 50, function() {
             // Animation complete.
           });          
         }
