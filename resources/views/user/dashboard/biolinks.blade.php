@@ -3335,12 +3335,12 @@ and add more";
         // console.log(wH);
         console.log(wS);
         if (wS<=40){
-          // $(".fixed").css("top","415px");
-          $( ".fixed" ).animate({
+          $(".fixed").css("top","415px");
+          /*$( ".fixed" ).animate({
             top: 415
           }, 5, function() {
             // Animation complete.
-          });          
+          });*/
         }
         else {
           // $(".fixed").css("top","50%");
