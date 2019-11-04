@@ -3338,7 +3338,7 @@ and add more";
           // $(".fixed").css("top","415px");
           $( ".fixed" ).animate({
             top: 415
-          }, 50, function() {
+          }, 5, function() {
             // Animation complete.
           });          
         }
