@@ -3333,7 +3333,7 @@ and add more";
              wH = $(window).height(),
              wS = $(this).scrollTop();
         // console.log(wH);
-        console.log(wS);
+        // console.log(wS);
         if (wS<=40){
           // $(".fixed").css("top","415px");
           $( ".fixed" ).animate({
