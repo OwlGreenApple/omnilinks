@@ -3337,7 +3337,7 @@ and add more";
         if (wS<=40){
           // $(".fixed").css("top","415px");
           $( ".fixed" ).animate({
-            top: 415,
+            top: 415
           }, 5000, function() {
             // Animation complete.
           });          
@@ -3345,7 +3345,7 @@ and add more";
         else {
           // $(".fixed").css("top","50%");
           $( ".fixed" ).animate({
-            top: 50%,
+            top: 50%
           }, 5000, function() {
             // Animation complete.
           });          
