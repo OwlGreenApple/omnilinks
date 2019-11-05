@@ -3957,7 +3957,7 @@ and add more";
       else{
         style="none"; 
       }
-      $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+      $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
       let slidesi=$('.mySlides');
       let dotselementt=$('#dot-view');
       let slidesiLength=slidesi.length-1;
