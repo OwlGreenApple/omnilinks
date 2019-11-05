@@ -747,7 +747,7 @@ hr.own {
 @media screen and (min-height: 945px) {
   .fixed { 
     height: 65%;
-    top: 55%;
+    top: 60%;
     transform: translate(0%, -10%);  
   }
   .screen {
