@@ -232,17 +232,21 @@ class DashboardController extends Controller
   public function deletePage(Request $Request)
   {
     $page=Page::find($Request->deletedataid);
+    if (!is_null($page)) {
+      $page->delete();
+    }
+    /*
     if (is_file($page->image_pages)) {
-     Storage::delete($page->image_pages);
+      Storage::delete($page->image_pages);
     }
     $link=Link::where('pages_id',$Request->deletedataid)->delete();
     $banner=Banner::where('pages_id',$Request->deletedataid)->get();
     foreach ($banner as $viewbanner)
-     {     
-          Storage::delete($viewbanner->images_banner);
-          $viewbanner->delete();
+    {     
+      Storage::delete($viewbanner->images_banner);
+      $viewbanner->delete();
     }
-    $page->delete();
+    */
     $arr['status']="success";
     return $arr;
   } 

@@ -30,7 +30,7 @@ class OrderController extends Controller
       'Top Up 5000' => 62500,
       'Top Up 10000' => 115000,
       'Top Up 20000' => 210000,
-      'Top Up 25000' => 237500,
+      'Top Up 25000' => 237000,
       'Top Up 50000' => 425000,
       'Top Up 75000' => 562000,
       'Top Up 100000' => 650000,
