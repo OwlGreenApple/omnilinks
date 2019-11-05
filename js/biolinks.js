@@ -76,8 +76,6 @@ $(document).ready(function () {
     $(document).on('click', '#tambah', function (e) {
       $('.messengers').each(function () {
         if ($(this).hasClass('hide')) {
-          // console.log('remove hidden');
-          //$(this).show();
           $(this).css("display","table");
           $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
           $(this).removeClass('hide');

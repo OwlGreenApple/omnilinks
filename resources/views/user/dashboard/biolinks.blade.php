@@ -1964,7 +1964,7 @@
                       </li>
 
                       <li id="msg-li-telegram"> <!-- telegram -->
-                        <div id="telegram" class="messengers div-table " >
+                        <div id="telegram" class="messengers div-table hide"  style="display:none;" >
                           <div class="div-cell">
                             <span class="handle">
                               <i class="fas fa-bars"></i>
@@ -2142,7 +2142,7 @@
 
                   <ul class="sortable-sosmed">
                     <li id="sosmed-youtube">
-                      <div id="youtube" class="socialmedia div-table mb-4">
+                      <div id="youtube" class="socialmedia div-table mb-4 hide">
                         <input type="hidden" name="sortsosmed[]" value="youtube" data-val="youtube" class="input-hidden">
       
                         <div class="div-cell">
@@ -2177,7 +2177,7 @@
                     </li>
 
                     <li id="sosmed-fb">
-                      <div id="fb" class="socialmedia div-table " data-type="fb" style="">
+                      <div id="fb" class="socialmedia div-table hide" data-type="fb" style="">
                         <input type="hidden" name="sortsosmed[]" value="fb" data-val="fb" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
@@ -2211,7 +2211,7 @@
                     </li>
 
                     <li id="sosmed-twitter">
-                      <div id="twitter" class="socialmedia div-table " data-type="twitter" style="">
+                      <div id="twitter" class="socialmedia div-table hide" data-type="twitter" style="">
                         <input type="hidden" name="sortsosmed[]" value="twitter" data-val="twitter" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
@@ -2245,7 +2245,7 @@
                     </li>
 
                     <li id="sosmed-ig">
-                      <div id="ig" class="socialmedia div-table " data-type="ig" style="">
+                      <div id="ig" class="socialmedia div-table hide" data-type="ig" style="">
                         <input type="hidden" name="sortsosmed[]" value="ig" data-val="ig" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
@@ -2922,7 +2922,7 @@ and add more";
                         </label>
                       </a>
                     </li>
-                    <li class="link col pl-1 pr-1 " id="telegramviewid" >
+                    <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
                       width: 100%;font-size:11px;height: 40px;padding: 10px;" id="telegramlinkview">
                         <i class="fab fa-telegram-plane" style="font-size:14px;"></i>
@@ -2973,22 +2973,22 @@ and add more";
                   </div>
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
-                    <li class="col linked " id="youtubeviewid">
+                    <li class="col linked hide" id="youtubeviewid">
                       <a href="#" title="Youtube">
                         <i class="fab fa-youtube"></i>
                       </a>
                     </li>
-                    <li class="col linked " id="fbviewid" >
+                    <li class="col linked hide" id="fbviewid" >
                       <a href="#" title="fb" >
                         <i class="fab fa-facebook-square" ></i>
                       </a>
                     </li>
-                    <li class="col linked " id="twitterviewid">
+                    <li class="col linked hide" id="twitterviewid">
                       <a href="#" title="Twitter">
                         <i class="fab fa-twitter-square"></i>
                       </a>
                     </li>
-                    <li class="col linked " id="igviewid">
+                    <li class="col linked hide" id="igviewid">
                       <a href="#" title="ig" >
                         <i class="fab fa-instagram" ></i>
                       </a>  
@@ -4120,8 +4120,11 @@ and add more";
         $("#msg-li-wa>div").removeClass("hide");
         // $("#msg-li-wa>div").show();
         $("#msg-li-wa>div").css("display","table");
-        
         $("#waviewid").removeClass("hide");
+        
+        $("#msg-li-telegram>div").removeClass("hide");
+        $("#msg-li-telegram>div").css("display","table");
+        $("#telegramviewid").removeClass("hide");
     <?php } ?>
 
 
@@ -4160,7 +4163,7 @@ and add more";
         // $("#sosmed-"+"<?php echo $data; ?>>div").show();
         $("#sosmed-"+"<?php echo $data; ?>>div").css("display","table");
         $("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").val($("#sosmed-"+"<?php echo $data; ?>>div").find(".input-hidden").attr("data-val"));
-        
+
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
         $("#"+"<?php echo $data; ?>"+"viewid").addClass("shown-sm");
@@ -4173,9 +4176,18 @@ and add more";
     <?php }
     else {
     ?>
-        // $("#sosmed-youtube>div").removeClass("hide");
-        
-        // $("#youtubeviewid").removeClass("hide");
+  
+        $("#sosmed-youtube>div").removeClass("hide");
+        $("#youtubeviewid").removeClass("hide");
+
+        $("#sosmed-ig>div").removeClass("hide");
+        $("#igviewid").removeClass("hide");
+
+        $("#sosmed-twitter>div").removeClass("hide");
+        $("#twitterviewid").removeClass("hide");
+
+        $("#sosmed-fb>div").removeClass("hide");
+        $("#fbviewid").removeClass("hide");
     <?php } ?>
 
     
