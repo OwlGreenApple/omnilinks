@@ -282,8 +282,16 @@ class BiolinkController extends Controller
         $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:255'];
       }
     }
+    
+    $messages = [
+        'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
+        /*'same'    => 'The :attribute and :other must match.',
+        'size'    => 'The :attribute must be exactly :size.',
+        'between' => 'The :attribute value :input is not between :min - :max.',
+        'in'      => 'The :attribute must be one of the following types: :values',*/
+    ];
 
-    $validator = Validator::make($request->all(), $temp_arr); 
+    $validator = Validator::make($request->all(), $temp_arr, $messages); 
       // 'link' => ['required', 'string', 'max:255'],
       // 'phone_no' => ['required', 'string', 'max:255'],
       // 'imagepages' => ['required', 'file'],
@@ -455,7 +463,12 @@ class BiolinkController extends Controller
         $banner->link=$request->linkBanner[$i];
         $banner->pixel_id=$request->bannerpixel[$i];
 
-        $banner->save(); 
+        // $banner->save(); 
+        if($idbanner[$i]==""){
+        }
+        else {
+          $banner->save(); 
+        }
         if($request->hasFile('bannerImage.'.$i)) {
           $dt = Carbon::now();
           $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
