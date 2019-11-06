@@ -3328,12 +3328,7 @@ and add more";
           }
       });
 
-      // var wH;
-      // $(window).on('resize', function(){
-        // wH = win.height();
-      // });
       $(window).scroll(function() {
-        
         wS = $(this).scrollTop();
         wH = $(window).height();
         if (wH<825){
