@@ -2143,7 +2143,7 @@
                   <ul class="sortable-sosmed">
                     <li id="sosmed-youtube">
                       <div id="youtube" class="socialmedia div-table mb-4 hide">
-                        <input type="hidden" name="sortsosmed[]" value="youtube" data-val="youtube" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="youtube" class="input-hidden">
       
                         <div class="div-cell">
                           <span class="handle">
@@ -2178,7 +2178,7 @@
 
                     <li id="sosmed-fb">
                       <div id="fb" class="socialmedia div-table hide" data-type="fb" style="">
-                        <input type="hidden" name="sortsosmed[]" value="fb" data-val="fb" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="fb" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -2212,7 +2212,7 @@
 
                     <li id="sosmed-twitter">
                       <div id="twitter" class="socialmedia div-table hide" data-type="twitter" style="">
-                        <input type="hidden" name="sortsosmed[]" value="twitter" data-val="twitter" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="twitter" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -2246,7 +2246,7 @@
 
                     <li id="sosmed-ig">
                       <div id="ig" class="socialmedia div-table hide" data-type="ig" style="">
-                        <input type="hidden" name="sortsosmed[]" value="ig" data-val="ig" class="input-hidden">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="ig" class="input-hidden">
                         <div class="div-cell">
                           <span class="handle">
                             <i class="fas fa-bars"></i>
@@ -4176,16 +4176,23 @@ and add more";
     <?php }
     else {
     ?>
-  
+        $("#sosmed-youtube>div").css("display","table");
+        $("#sosmed-youtube>div").find(".input-hidden").val($("#sosmed-youtube>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-youtube>div").removeClass("hide");
         $("#youtubeviewid").removeClass("hide");
 
+        $("#sosmed-ig>div").css("display","table");
+        $("#sosmed-ig>div").find(".input-hidden").val($("#sosmed-ig>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-ig>div").removeClass("hide");
         $("#igviewid").removeClass("hide");
 
+        $("#sosmed-twitter>div").css("display","table");
+        $("#sosmed-twitter>div").find(".input-hidden").val($("#sosmed-twitter>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-twitter>div").removeClass("hide");
         $("#twitterviewid").removeClass("hide");
 
+        $("#sosmed-fb>div").css("display","table");
+        $("#sosmed-fb>div").find(".input-hidden").val($("#sosmed-fb>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-fb>div").removeClass("hide");
         $("#fbviewid").removeClass("hide");
     <?php } ?>
