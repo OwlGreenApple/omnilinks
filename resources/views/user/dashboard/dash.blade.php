@@ -39,7 +39,7 @@ var testChart;
         $('.pager').html(data.pager);
         
         //chart 
-        testChart = data.chart;
+        /*testChart = data.chart;
         var newArray=[];
         $.each( data.chart, function( key, value ) {
           var newObject={};
@@ -85,7 +85,7 @@ var testChart;
             $(".canvasjs-chart-credit").hide();
           }
 
-          $('#total-click').html(data.total_click);
+          $('#total-click').html(data.total_click);*/
       }
     });
   }
