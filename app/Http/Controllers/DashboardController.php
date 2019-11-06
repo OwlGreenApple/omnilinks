@@ -69,7 +69,7 @@ class DashboardController extends Controller
       $page = $page->orderBy('created_at','ascend')
                 ->paginate(10);    
     }
-    
+
 
     $arr['view']=(string) view('user.dashboard.dashboardcontent')
                   ->with('pages',$page)
@@ -80,10 +80,10 @@ class DashboardController extends Controller
 
     $arr['pager'] = (string) view('user.dashboard.dash_pagination')
                     ->with('pages',$page);
-                    
+
     //chart 
     //generate chart all page
-    $bulan = $request->bulan;
+    /*$bulan = $request->bulan;
     $tahun = $request->tahun;
     $query_date = date('t-'.$bulan.'-'.$tahun);
 
@@ -105,7 +105,7 @@ class DashboardController extends Controller
     }
 
     $arr['chart'] = $temp_arr;
-    $arr['total_click'] = $total_click;
+    $arr['total_click'] = $total_click;*/
 
 
     return $arr;

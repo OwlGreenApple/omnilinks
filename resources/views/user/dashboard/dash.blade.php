@@ -535,7 +535,7 @@ var testChart;
       $('.show-chart').hide();
     <?php } ?>
     refreshDashboard();
-    // load_chart();
+    load_chart();
   });
 
   $('#keywords').on('keypress touchend', function (e) {
@@ -558,13 +558,13 @@ var testChart;
   $('body').on('change','#bulan',function(e) 
   {
     refreshDashboard();
-    // load_chart();
+    load_chart();
   });
 
   $('body').on('change','#tahun',function(e) 
   {
     refreshDashboard();
-    // load_chart();
+    load_chart();
   });
 
   $('body').on('click','.btn-deletePage',function(e) 
