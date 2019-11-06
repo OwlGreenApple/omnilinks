@@ -399,7 +399,7 @@ class BiolinkController extends Controller
     }*/
     
     $page->save();
-    if (is_null($pages->premium_names)) {
+    if (is_null($page->premium_names)) {
       $names=$page->names;
     }
     else {
@@ -589,7 +589,7 @@ class BiolinkController extends Controller
 
     $page->is_click_bait=$request->is_click_bait;
 
-    if (is_null($pages->premium_names)) {
+    if (is_null($page->premium_names)) {
       $names=$page->names;
     }
     else {
