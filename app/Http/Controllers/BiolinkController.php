@@ -399,7 +399,13 @@ class BiolinkController extends Controller
     }*/
     
     $page->save();
-    $names=$page->names;
+    if (is_null($pages->premium_names)) {
+      $names=$page->names;
+    }
+    else {
+      $names=$page->premium_names;
+    }
+    
     if ($user->membership=='basic' or  $user->membership=='elite') 
     {
       $idbanner=$request->idBanner;
@@ -583,7 +589,12 @@ class BiolinkController extends Controller
 
     $page->is_click_bait=$request->is_click_bait;
 
-  	$names=$page->names;
+    if (is_null($pages->premium_names)) {
+      $names=$page->names;
+    }
+    else {
+      $names=$page->premium_names;
+    }
     $id=$request->idlink;
     $deletelink=$request->deletelink;
     $sort_link = '';
