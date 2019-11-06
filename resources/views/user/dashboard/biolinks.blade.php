@@ -3328,12 +3328,14 @@ and add more";
           }
       });
 
+      // var wH;
+      // $(window).on('resize', function(){
+        // wH = win.height();
+      // });
       $(window).scroll(function() {
-        var 
-             wH = $(window).height(),
-             wS = $(this).scrollTop();
-        // console.log(wH);
-        // console.log(wS);
+        
+        wS = $(this).scrollTop();
+        wH = $(window).height();
         if (wH<825){
           if (wS<=40){
             // $(".fixed").css("top","415px");
@@ -3355,6 +3357,7 @@ and add more";
           }
         }
       });
+
       $(window).scrollTop(1);
 
       $(".navbar").css("z-index", "1");
