@@ -3334,23 +3334,25 @@ and add more";
              wS = $(this).scrollTop();
         // console.log(wH);
         // console.log(wS);
-        if (wS<=40){
-          // $(".fixed").css("top","415px");
-          $( ".fixed" ).animate({
-            top: 415
-          }, 5, function() {
-            // Animation complete.
-            $(".fixed").css("top","415px");
-          });
-        }
-        else {
-          // $(".fixed").css("top","50%");
-          $( ".fixed" ).animate({
-            top: '50%'
-          }, 50, function() {
-            // Animation complete.
-            $(".fixed").css("top","50%");
-          });          
+        if (wH<825){
+          if (wS<=40){
+            // $(".fixed").css("top","415px");
+            $( ".fixed" ).animate({
+              top: 415
+            }, 5, function() {
+              // Animation complete.
+              $(".fixed").css("top","415px");
+            });
+          }
+          else {
+            // $(".fixed").css("top","50%");
+            $( ".fixed" ).animate({
+              top: '50%'
+            }, 50, function() {
+              // Animation complete.
+              $(".fixed").css("top","50%");
+            });          
+          }
         }
       });
       $(window).scrollTop(1);
