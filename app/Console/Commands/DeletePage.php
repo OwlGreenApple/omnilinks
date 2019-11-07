@@ -49,7 +49,7 @@ class DeletePage extends Command
      */
     public function handle()
     {
-      $pages = Page::withTrashed()->get();
+      $pages = Page::onlyTrashed()->get();
 
       foreach ($pages as $page) {
         if (is_file($page->image_pages)) {
