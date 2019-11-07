@@ -487,7 +487,7 @@ class BiolinkController extends Controller
             Storage::disk('s3')->put($banner->images_banner, file_get_contents($request->file('bannerImage')[$i]), 'public');
           }
         } 
-        
+
       }
     }
 

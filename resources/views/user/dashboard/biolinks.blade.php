@@ -1477,6 +1477,10 @@
       $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
     }
     
+    @foreach($banner as $ban)
+    $(".bannerpixel-{{$ban->id}}").html(dataView);
+    $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
+    @endforeach
   }
   
   function tambahwalink() {
@@ -2500,11 +2504,11 @@ and add more";
                                     </select>
                                     <script type="text/javascript">
                                       //loadPixel('{{$ban->pixel_id}}','.bannerpixel-{{$ban->id}}');
-                                      $(".bannerpixel-{{$ban->id}}").html(dataView);
+                                      /*$(".bannerpixel-{{$ban->id}}").html(dataView);
                                       $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
                                       if (dataFree == "1") {
                                         $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
-                                      }
+                                      }*/
                                       
                                     </script>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
