@@ -115,8 +115,16 @@ class BiolinkController extends Controller
   	$page->is_bio_color=1;
   	$page->bio_color="#000";
   	$page->color_picker="#fff";
-
   	$page->save();
+
+    $banner= new Banner();
+    $banner->users_id=$user->id;
+    $banner->pages_id=$page->id;
+    $banner->title="Masukkan Judul Banner";
+    $banner->link="Masukkan Link";
+    $banner->pixel_id=0;
+    $banner->images_banner="0";
+    $banner->save();
 
     return redirect('/biolinks/'.$uuid);  
   }
@@ -273,13 +281,15 @@ class BiolinkController extends Controller
     
     $temp_arr = array();
     $temp_arr['judul'] = ['required', 'string',  'max:255' ];
-    
-    if ($user->membership=='basic' or  $user->membership=='elite') 
-    {
-      for($i=0;$i<count($request->judulBanner);$i++) 
-      { 
-        $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:255'];
-        $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:255'];
+
+    if (!is_null($request->judulBanner)){
+      if ($user->membership=='basic' or  $user->membership=='elite') 
+      {
+        for($i=0;$i<count($request->judulBanner);$i++) 
+        { 
+          $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:255'];
+          $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:255'];
+        }
       }
     }
     
@@ -406,88 +416,90 @@ class BiolinkController extends Controller
       $names=$page->premium_names;
     }
     
-    if ($user->membership=='basic' or  $user->membership=='elite') 
-    {
-      $idbanner=$request->idBanner;
-      $statusbanner=$request->statusBanner;
-    
-      for($i=0;$i<count($request->judulBanner);$i++) 
-      { 
-        //pengecekan banner 
-        /*
-        $validator = Validator::make($request->all(), [
-          'judulBanner.'.$i => ['required', 'string', 'max:255'],
-          'linkBanner.'.$i => ['required', 'active_url', 'max:255'],
-        ]); 
+    if (!is_null($request->judulBanner)){
+      if ($user->membership=='basic' or  $user->membership=='elite') 
+      {
+        $idbanner=$request->idBanner;
+        $statusbanner=$request->statusBanner;
+      
+        for($i=0;$i<count($request->judulBanner);$i++) 
+        { 
+          //pengecekan banner 
+          /*
+          $validator = Validator::make($request->all(), [
+            'judulBanner.'.$i => ['required', 'string', 'max:255'],
+            'linkBanner.'.$i => ['required', 'active_url', 'max:255'],
+          ]); 
 
-        if($validator->fails()) {
-          $failedRules = $validator->failed();
-        
-          if(isset($failedRules['judulBanner.'.$i]['Required']) and isset($failedRules['linkBanner.'.$i]['Required'])){
-            continue;
-          } else {
-            $arr['status'] = 'error';
-            $arr['message'] = $validator->errors()->first();
-            return $arr;
-          }
-        }
-        */
-        
-        if($request->hasFile('bannerImage.'.$i)) {
-          $arr_size = getimagesize( $request->file('bannerImage')[$i] );
-          $ratio_img = $arr_size[0] / $arr_size[1];
-          if ($ratio_img<1.2)  {
-            $arr['status'] = 'error';
-            $temp = $i+1;
-            $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih besar dari 1.2';
-            return $arr;
-          }
-        }
-
-        if($idbanner[$i]==""){
-          $banner= new Banner();
-          if(!$request->hasFile('bannerImage.'.$i)) {
-            $arr['status'] = 'error';
-            $arr['message'] = 'Banner image is required';
-            return $arr;
-          }
-        } else {
-          if ($statusbanner[$i]=="delete"){
-            $bannerde= Banner::find($request->idBanner[$i]);
-            if (!is_null($bannerde)){
-              $bannerde->delete();
+          if($validator->fails()) {
+            $failedRules = $validator->failed();
+          
+            if(isset($failedRules['judulBanner.'.$i]['Required']) and isset($failedRules['linkBanner.'.$i]['Required'])){
+              continue;
+            } else {
+              $arr['status'] = 'error';
+              $arr['message'] = $validator->errors()->first();
+              return $arr;
             }
-            continue;
           }
-          // $banner= Banner::where('id','=',$request->idBanner[$i])->first();
-          $banner= Banner::find($request->idBanner[$i]);
-        }
+          */
+          
+          if($request->hasFile('bannerImage.'.$i)) {
+            $arr_size = getimagesize( $request->file('bannerImage')[$i] );
+            $ratio_img = $arr_size[0] / $arr_size[1];
+            if ($ratio_img<1.2)  {
+              $arr['status'] = 'error';
+              $temp = $i+1;
+              $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih besar dari 1.2';
+              return $arr;
+            }
+          }
 
-        $banner->users_id=$user->id;
-        $banner->pages_id=$page->id;
-        $banner->title=$request->judulBanner[$i];
-        $banner->link=$request->linkBanner[$i];
-        $banner->pixel_id=$request->bannerpixel[$i];
-
-        // $banner->save(); 
-        if($idbanner[$i]==""){
-        }
-        else {
-          $banner->save(); 
-        }
-        if($request->hasFile('bannerImage.'.$i)) {
-          $dt = Carbon::now();
-          $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
-          $filename = $dt->format('ymdHi').'-'.$banner->id.'.jpg';
           if($idbanner[$i]==""){
-            Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('bannerImage')[$i]), 'public');
-            $banner->images_banner=$dir."/".$filename;
-            $banner->save(); 
+            $banner= new Banner();
+            if(!$request->hasFile('bannerImage.'.$i)) {
+              $arr['status'] = 'error';
+              $arr['message'] = 'Banner image is required';
+              return $arr;
+            }
           } else {
-            Storage::disk('s3')->put($banner->images_banner, file_get_contents($request->file('bannerImage')[$i]), 'public');
+            if ($statusbanner[$i]=="delete"){
+              $bannerde= Banner::find($request->idBanner[$i]);
+              if (!is_null($bannerde)){
+                $bannerde->delete();
+              }
+              continue;
+            }
+            // $banner= Banner::where('id','=',$request->idBanner[$i])->first();
+            $banner= Banner::find($request->idBanner[$i]);
           }
-        } 
 
+          $banner->users_id=$user->id;
+          $banner->pages_id=$page->id;
+          $banner->title=$request->judulBanner[$i];
+          $banner->link=$request->linkBanner[$i];
+          $banner->pixel_id=$request->bannerpixel[$i];
+
+          // $banner->save(); 
+          if($idbanner[$i]==""){
+          }
+          else {
+            $banner->save(); 
+          }
+          if($request->hasFile('bannerImage.'.$i)) {
+            $dt = Carbon::now();
+            $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+            $filename = $dt->format('ymdHi').'-'.$banner->id.'.jpg';
+            if($idbanner[$i]==""){
+              Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('bannerImage')[$i]), 'public');
+              $banner->images_banner=$dir."/".$filename;
+              $banner->save(); 
+            } else {
+              Storage::disk('s3')->put($banner->images_banner, file_get_contents($request->file('bannerImage')[$i]), 'public');
+            }
+          } 
+
+        }
       }
     }
 

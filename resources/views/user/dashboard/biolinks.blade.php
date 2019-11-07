@@ -2516,7 +2516,14 @@ and add more";
                                       <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01">
 
                                       <label class="custom-file-label" for="inputGroupFile01">
-                                        {{basename($ban->images_banner)}}
+                                        <?php 
+                                          if ($ban->images_banner=="0"){
+                                            echo asset('/image/739x218.png');
+                                          }
+                                          else {
+                                            echo basename($ban->images_banner);
+                                          }
+                                        ?>
                                       </label>
                                     </div>
                                   </div>
@@ -2529,32 +2536,6 @@ and add more";
                                 @endif  
                                 </div>
                                 @endforeach
-                              @else
-                     @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
-                                <div class="div-table list-banner mb-4" picture-id="picture-id-6">
-                                  <div class="div-cell">
-                                    <input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner">
-                                    <input type="hidden" name="idBanner[]" value="">
-                                    <input type="hidden" name="statusBanner[]" class="statusBanner" value="">
-                                    <input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">
-                                    <select name="bannerpixel[]" class="form-control bannerpixel">
-                                    </select>
-                                    <!--<input type="file" name="bannerImage[]" value="Upload">-->
-                                    <div class="custom-file">
-                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-6" aria-describedby="inputGroupFileAddon01">
-
-                                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                    </div>
-                                  </div>
-                          @endif
-                         @if(Auth::user()->membership=='elite')
-                                  <div class="div-cell cell-btn btn-deleteBanner">
-                                    <span>
-                                      <i class="far fa-trash-alt"></i>
-                                    </span>
-                                  </div>
-                                @endif    
-                                </div>
                               @endif
                             </div>
                           </div>
@@ -2897,34 +2878,26 @@ and add more";
                           ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada" altSrc="{{asset('/image/739x218.png')}}" onerror="this.src = $(this).attr('altSrc')"> 
                           -->
                           <?php
-                            $bg_image = Storage::disk('s3')->url($ban->images_banner);
+                            if ($ban->images_banner=="0"){
+                              $bg_image = asset('/image/739x218.png');
+                            }
+                            else {
+                              $bg_image = Storage::disk('s3')->url($ban->images_banner);
+                            }
                           ?>
                           <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>                          
                         </div>
                       <?php 
-                        }}
-                      } else {
-                        if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite')) {
-                      ?>
-                        <div class="mySlides mylides fit " id="picture-id-6-get">
-                          <!--
-                          <img id="picture-6" src="{{asset('image/739x218.png')}}" class="imagesize input-picture-6-get" value="ada" >
-                          -->
-                          <?php
-                            $bg_image = asset('image/739x218.png');
-                          ?>
-                          <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>
-                        </div>
-                      <?php }
-                      }?>
+                        }}?>
+                      
                       </div>
                       @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
                       @endif
+                      <?php } ?>
                     </div>
                     <br>
-
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
 
@@ -3972,7 +3945,7 @@ and add more";
       else{
         style="none"; 
       }
-      $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/banner-default.jpg');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+      $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/739x218.png');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
       let slidesi=$('.mySlides');
       let dotselementt=$('#dot-view');
       let slidesiLength=slidesi.length-1;

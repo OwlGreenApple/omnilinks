@@ -548,9 +548,9 @@ Disk folder
 {
   background-image: url('../image/svg/disk/thumbnail-disk/thumb-disk-dual-color.png');
 }
-.animation-dual-color
+.animation-disk-dual-color
 {
-  background-image: url('../image/svg/disk/bg-disk/dual-color.svg');
+  background-image: url('../image/svg/disk/bg-disk/disk-dual-color.svg');
 }
 .thumb-disk-green
 {
