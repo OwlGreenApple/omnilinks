@@ -2891,10 +2891,15 @@ and add more";
                           if (!is_null($ban->images_banner)){
                       ?>
                         <div class="mySlides mylides fit" id="picture-id-<?=$ut?>-get">
-                          <img src="<?php  
+                          <!--<img src="<?php  
                           // echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); 
                           echo Storage::disk('s3')->url($ban->images_banner); 
                           ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada" altSrc="{{asset('/image/739x218.png')}}" onerror="this.src = $(this).attr('altSrc')"> 
+                          -->
+                          <?php
+                            $bg_image = Storage::disk('s3')->url($ban->images_banner);
+                          ?>
+                          <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>                          
                         </div>
                       <?php 
                         }}
@@ -2902,7 +2907,13 @@ and add more";
                         if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite')) {
                       ?>
                         <div class="mySlides mylides fit " id="picture-id-6-get">
+                          <!--
                           <img id="picture-6" src="{{asset('image/739x218.png')}}" class="imagesize input-picture-6-get" value="ada" >
+                          -->
+                          <?php
+                            $bg_image = asset('image/739x218.png');
+                          ?>
+                          <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>
                         </div>
                       <?php }
                       }?>

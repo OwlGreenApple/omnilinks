@@ -1,3 +1,31 @@
+.galleryContainer .arrow{
+  display: inline-block;
+  border: 3px solid white;
+  width: 10px;
+  height: 10px;
+  border-left: none;
+  border-bottom: none;
+  margin: auto;
+  position: absolute;
+  left: -8px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.galleryContainer .slideShowContainer .leftArrow,.galleryContainer .slideShowContainer .rightArrow{
+  width: 30px;
+  background: #00000036;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  transition: background 0.5s;
+  height: 72px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 .banner-image
 {
   width: 100%;
@@ -57,6 +85,14 @@
 
 @media (max-width: 414px) 
 { 
+  .galleryContainer .slideShowContainer .leftArrow, .galleryContainer .slideShowContainer .rightArrow {
+    width:15px;
+    height:36px;
+  }
+  .arrow{
+    padding:10px;
+    left:-4px!important;
+  }
   .banner-image
   {
     height: 117px;
@@ -66,7 +102,7 @@
     width: 95%;
     /*height: 223px;*/
     /*height: 218px;*/
-    height: 117px;
+    height: 135px;
     max-width: 540px;
     margin: auto;
     margin-top: -21px;
@@ -125,7 +161,7 @@
   {
     width: 95%;
     /*height: 223px;*/
-    height: 117px;
+    height: 135px;
     max-width: 540px;
     margin: auto;
     user-select: none;
@@ -184,7 +220,7 @@
   .galleryContainer 
   {
     width: 98%;
-    height: 117px;
+    height: 135px;
     max-width: 540px;
     margin: auto;
     margin-top: -7px;
@@ -236,7 +272,7 @@
   .galleryContainer 
   {
     width: 88%;
-    height: 90px;
+    height: 135px;
     max-width: 540px;
     margin: auto;
     user-select: none;
@@ -279,6 +315,21 @@
   .textbutton{
     font-size: smaller;
   }
+  .galleryContainer .slideShowContainer .leftArrow, .galleryContainer .slideShowContainer .rightArrow {
+    width:15px;
+    height:36px;
+  }
+  .arrow{
+    padding:10px;
+    left:-4px!important;
+  }
+
+  .banner-image
+  {
+    width: 100%;
+    height: 152px;
+    background-size: cover;  
+  }
 
   .ultitle{
     font-size: medium; 
@@ -286,8 +337,8 @@
   }
   .galleryContainer 
   {
-    width: 88%;
-    height: 90px;
+    width: 100%;
+    height: 152px;
     max-width: 540px;
     margin: auto;
     user-select: none;
@@ -325,7 +376,7 @@
 
 }
 
-@media (min-width: 992px) and (max-width: 1199.98px) 
+@media (min-width: 992px) and (max-width: 1366.98px) 
 {
  .textbutton{
   font-size: smaller;
@@ -340,10 +391,26 @@
   height: 100px; 
   /*margin-left: 15px;*/
 }
+  .galleryContainer .slideShowContainer .leftArrow, .galleryContainer .slideShowContainer .rightArrow {
+    width:15px;
+    height:36px;
+  }
+  .arrow{
+    padding:10px;
+    left:-4px!important;
+  }
+
+  .banner-image
+  {
+    width: 100%;
+    height: 152px;
+    background-size: cover;  
+  }
+
 .galleryContainer 
 {
   width: 88%;
-  height: 90px;
+  height: 152px;
   max-width: 540px;
   margin: auto;
   user-select: none;
@@ -515,19 +582,6 @@
   display: none;
 }
 
-.galleryContainer .slideShowContainer .leftArrow,.galleryContainer .slideShowContainer .rightArrow{
-  width: 30px;
-  background: #00000036;
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  transition: background 0.5s;
-  height: 72px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
 .galleryContainer .slideShowContainer .rightArrow{
   left: auto;
   right: 0;
@@ -539,20 +593,6 @@
 .galleryContainer .slideShowContainer .leftArrow:hover,.galleryContainer .slideShowContainer .rightArrow:hover{
   background: #000000a8;
   cursor: pointer;
-}
-.galleryContainer .arrow{
-  display: inline-block;
-  border: 3px solid white;
-  width: 10px;
-  height: 10px;
-  border-left: none;
-  border-bottom: none;
-  margin: auto;
-  position: absolute;
-  left: -8px;
-  right: 0;
-  top: 0;
-  bottom: 0;
 }
 .galleryContainer .arrow.arrowLeft{
   transform: rotateZ(-135deg);

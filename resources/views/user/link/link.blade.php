@@ -13,10 +13,10 @@
   <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
   
   <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/template.css')}}">
   <link rel="stylesheet" href="{{asset('css/dash.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
   <link rel="stylesheet" href="{{asset('css/redirect.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
