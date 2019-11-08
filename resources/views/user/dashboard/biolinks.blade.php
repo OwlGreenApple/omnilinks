@@ -1582,7 +1582,7 @@
     var slides = $(".mySlides");
     if (n > slides.length) {// need to be fix
       slideIndex = 1;
-    }    
+    }
     if (n < 1) {
       slideIndex = slides.length;
     }
@@ -1599,7 +1599,7 @@
       slides[slideIndex-1].style.display = "block";
     }
     if (dots.length>0) {
-      dots[n].className +=" activated";
+      dots[slideIndex-1].className +=" activated";
     }
   }
   
@@ -1875,7 +1875,7 @@
         </button>
         
         <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
-        <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a>
+        <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a> <span class="btn-copy" data-link="https://{{env('SHORT_LINK')}}/{{$custom_link}}"><i class="fas fa-file"></i></span>
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">
@@ -2885,17 +2885,18 @@ and add more";
                               $bg_image = Storage::disk('s3')->url($ban->images_banner);
                             }
                           ?>
-                          <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>                          
+                          <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>
                         </div>
                       <?php 
                         }}?>
                       
-                      </div>
+                      
                       @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
                       @endif
                       <?php } ?>
+                      </div>
                     </div>
                     <br>
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
@@ -3981,19 +3982,19 @@ and add more";
         elhtml = $('.div-banner').html();
         $('.prev').hide();
         $('.next').hide();
-      } 
+      }
       if ($('.list-banner').length<=5) {
         $("#addBanner").removeAttr("disabled");
       }
 
       $(this).parent().remove();
-       let idthis=$(this).parent().attr("picture-id");
+      let idthis=$(this).parent().attr("picture-id");
 
       $("#"+idthis+"-get").remove();
 
-      $("."+idthis+"-dot").remove();    
-        plusSlides(-1);
-       if ($(".dot").length==1) {
+      $("."+idthis+"-dot").remove();
+      plusSlides(-1);
+      if ($(".dot").length==1) {
         $(".dot").parent().hide();
         $('.prev').hide();
         $('.next').hide();

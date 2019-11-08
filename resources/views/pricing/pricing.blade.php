@@ -560,11 +560,11 @@
     $('.btn-pricing.month').removeClass('active');
     $('.btn-pricing.year').addClass('active');
 
-    $('.harga.pro').html('<sup>Rp</sup> 85.000 <sub>/bln</sub>');
-    $('.harga-real.pro').html('Biaya Per Tahun @ Rp 1.020.000');
+    $('.harga.pro').html('<sup>Rp</sup> 85.000 <sub>/bln<br>per tahun 1.020.000</sub>');
+    // $('.harga-real.pro').html('Biaya Per Tahun @ Rp 1.020.000');
 
-    $('.harga.premium').html('<sup>Rp</sup> 95.000 <sub>/bln</sub>');
-    $('.harga-real.premium').html('Biaya Per Tahun @ Rp 1.140.000');
+    $('.harga.premium').html('<sup>Rp</sup> 95.000 <sub>/bln<br>per tahun 1.040.000</sub>');
+    // $('.harga-real.premium').html('Biaya Per Tahun @ Rp 1.140.000');
 
     $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Bulanan');
 

@@ -505,7 +505,8 @@ class BiolinkController extends Controller
 
     $arr['status'] = 'success';
     $short_link =env('SHORT_LINK');
-    $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
+    // $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
+    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
     return $arr;
   }
   
@@ -815,7 +816,8 @@ class BiolinkController extends Controller
     $arr['status'] = 'success';
 
     $short_link = env('SHORT_LINK');
-    $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
+    // $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
+    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
   	return $arr;
   }
 
