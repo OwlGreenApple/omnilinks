@@ -3827,7 +3827,7 @@ and add more";
           if (input.files && input.files[0]) {
           var reader = new FileReader();
           reader.onload = function(e) {
-            console.log(e.target.result);
+            // console.log(e.target.result);
             // $("."+inputthis+"-get").attr('src',e.target.result); //old way
             $("."+inputthis+"-get").css('background-image','url('+e.target.result+')');
             
