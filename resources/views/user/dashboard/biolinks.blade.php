@@ -2885,7 +2885,7 @@ and add more";
                               $bg_image = Storage::disk('s3')->url($ban->images_banner);
                             }
                           ?>
-                          <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>
+                          <div id="image-update-<?=$ut?>" style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image input-picture-<?=$ut?>-get"></div>
                         </div>
                       <?php 
                         }}?>
@@ -2911,7 +2911,7 @@ and add more";
                         </label>
                       </a>
                     </li>
-                    <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
+                    <li class="link col pl-1 pr-1 shown-mes hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
                       width: 100%;font-size:11px;height: 40px;padding: 10px;" id="telegramlinkview">
                         <i class="fab fa-telegram-plane" style="font-size:14px;"></i>
@@ -2954,9 +2954,6 @@ and add more";
                       @foreach($links as $link)
                         <li id="link-preview-{{$link->id}}"><a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a></li>
                       @endforeach
-                      @else
-                        <li id="link-url-1-preview" class=""><a href="#" class="btn btn-md btnview title-1-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-1-preview" >Masukkan link #1</a></li>
-                        <li id="link-url-2-preview" class=""><a href="#" class="btn btn-md btnview title-2-view-get txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-2-preview" >Masukkan link #2</a></li>
                       @endif
                     </ul>
                   </div>
@@ -3830,7 +3827,10 @@ and add more";
           if (input.files && input.files[0]) {
           var reader = new FileReader();
           reader.onload = function(e) {
-            $("."+inputthis+"-get").attr('src',e.target.result);
+            console.log(e.target.result);
+            // $("."+inputthis+"-get").attr('src',e.target.result); //old way
+            $("."+inputthis+"-get").css('background-image','url('+e.target.result+')');
+            
             // $("."+inputthis+"-get").parent().show();
             if ($(".mylides").hide()) {
               $("."+inputthis+"-get").parent().show();
@@ -3946,11 +3946,15 @@ and add more";
       else{
         style="none"; 
       }
-      $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/739x218.png');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+      // $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/739x218.png');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+      strTempBgImage1="<?php echo asset('image/739x218.png'); ?>";
+      strTempBgImage2="background-image:url('"+strTempBgImage1+"');";
+      $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><div id="picture-'+idpic+'" style="'+strTempBgImage2+'" class="banner-image input-picture-'+idpic+'-get"></div></div>');
+      
       let slidesi=$('.mySlides');
       let dotselementt=$('#dot-view');
       let slidesiLength=slidesi.length-1;
-        dotselementt.append('<span class="dot picture-id-'+idpic+'-dot input-picture-'+idpic+'-dot" id="input-picture-'+idpic+'-dot" onclick="currentSlide('+slidesiLength+')" style="display:none"></span>');
+      dotselementt.append('<span class="dot picture-id-'+idpic+'-dot input-picture-'+idpic+'-dot" id="input-picture-'+idpic+'-dot" onclick="currentSlide('+slidesiLength+')" style="display:none"></span>');
       if ($(".dot").length==1) 
       {
         $(".dot").parent().hide();
@@ -4107,12 +4111,13 @@ and add more";
     else {
     ?>
         $("#msg-li-wa>div").removeClass("hide");
-        // $("#msg-li-wa>div").show();
         $("#msg-li-wa>div").css("display","table");
+        $("#msg-li-wa>div").find(".input-hidden").val($("#msg-li-wa>div").find(".input-hidden").attr("data-val"));
         $("#waviewid").removeClass("hide");
         
         $("#msg-li-telegram>div").removeClass("hide");
         $("#msg-li-telegram>div").css("display","table");
+        $("#msg-li-telegram>div").find(".input-hidden").val($("#msg-li-telegram>div").find(".input-hidden").attr("data-val"));
         $("#telegramviewid").removeClass("hide");
     <?php } ?>
 

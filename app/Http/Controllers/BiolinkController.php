@@ -121,11 +121,29 @@ class BiolinkController extends Controller
     $banner->users_id=$user->id;
     $banner->pages_id=$page->id;
     $banner->title="Masukkan Judul Banner";
-    $banner->link="Masukkan Link";
+    $banner->link="https://example.com";
     $banner->pixel_id=0;
     $banner->images_banner="0";
     $banner->save();
 
+    $url=new Link();
+    $url->pages_id=$page->id;
+    $url->names=null;
+    $url->users_id=$user->id;
+    $url->title="Masukkan Link #1";
+    $url->link="https://example.com";
+    $url->pixel_id = 0;
+    $url->save();
+        
+    $url=new Link();
+    $url->pages_id=$page->id;
+    $url->names=null;
+    $url->users_id=$user->id;
+    $url->title="Masukkan Link #2";
+    $url->link="https://example.com";
+    $url->pixel_id = 0;
+    $url->save();
+        
     return redirect('/biolinks/'.$uuid);  
   }
 

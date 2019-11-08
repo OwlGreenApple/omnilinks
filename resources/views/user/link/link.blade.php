@@ -1173,28 +1173,34 @@
     <div class="row justify-content-center service">
       <div class="col-lg-7 col-md-8 col-12 mb-4 row">
         <div class="offset-md-1 col-md-5 col-5">
-          @if(!is_null($pages->image_pages))
             <div class="div-imagetitle">
               <img src="<?php 
               // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
-              echo Storage::disk('s3')->url($pages->image_pages);
+              $viewpicture = asset('/image/no-photo.jpg');
+              if(!is_null($pages->image_pages)){
+                // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                $viewpicture = Storage::disk('s3')->url($pages->image_pages);
+              }
+              // echo Storage::disk('s3')->url($pages->image_pages);
+              echo $viewpicture;
               ?>" class="imagetitle">
             </div>
-          @endif
         </div>
         
         <div class="col-md-5 col-7">
-          @if(!is_null($pages->page_title))
-            <span class="header-txt title">
-              {{$pages->page_title}}
-            </span>
-          @endif
-          @if(!is_null($pages->description))
-            <input type="hidden" id="hidden-description" value="{{$pages->description}}">
-            <span class="header-txt txt" style="word-break: break-all;" id="description">
-              {{$pages->description}}
-            </span>
-          @endif
+          <span class="header-txt title">
+            <?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>
+          </span>
+          <input type="hidden" id="hidden-description" value="{{$pages->description}}">
+          <span class="header-txt txt" style="word-break: break-all;" id="description">
+<?php if(!is_null($pages->description)) { 
+                            echo $pages->description;
+                          }else {
+                            echo "This is your new text content. <br>
+You can modify this text <br>
+and add more";
+                          }?>
+          </span>
         </div>
       </div>
 
@@ -1229,9 +1235,15 @@
                       -->
                       <?php 
                       $bg_image = "";
-                      if(!is_null($ban->images_banner)){
-                          $bg_image = Storage::disk('s3')->url($ban->images_banner);
-                        }
+                      // if(!is_null($ban->images_banner)){
+                          // $bg_image = Storage::disk('s3')->url($ban->images_banner);
+                        // }
+                      if ($ban->images_banner=="0"){
+                       $bg_image = asset('/image/739x218.png');
+                      }
+                      else {
+                        $bg_image = Storage::disk('s3')->url($ban->images_banner);
+                      }
                       ?>
                       <div style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image"></div>
                       <p class="captionText"></p> 
@@ -1260,16 +1272,19 @@
         
           $col = 0;
           $count_3 = 0;
-          
-          foreach ($sort_msg as $msg) { 
+          if (!is_null($pages->sort_msg)) {
+          foreach ($sort_msg as $msg) {
             if($div<=0){
+              //0
               $col = $colsisa;
             } else {
               $col = 4;
+              //1
             }
+
         ?>  
       
-          @if($msg=='wa' and !is_null($pages->wa_link))
+          @if($msg=='wa' )
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov">
                 <button class="btn btn-block">
@@ -1282,7 +1297,19 @@
             </li>
           @endif 
 
-          @if($msg=='skype' and !is_null($pages->skype_link))
+          @if($msg=='telegram')
+            <li class="col-{{$col}} pl-1 pr-1 mb-3">
+              <a href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov">
+                <button class="btn btn-block">
+                  <i class="fab fa-telegram-plane"></i>
+                  @if($div==0)
+                    <span class="textbutton" > Telegram</span>
+                  @endif
+                </button>
+              </a>
+            </li>
+          @endif  
+          @if($msg=='skype')
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="{{env('APP_URL').'/click/skype/'.$pages->id}}" title="Skype" target="_blank" class="txthov">
                 <button class="btn btn-block">
@@ -1295,20 +1322,8 @@
             </li>
           @endif  
 
-          @if($msg=='telegram' and !is_null($pages->telegram_link))
-            <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov">
-                <button class="btn btn-block">
-                  <i class="fab fa-telegram-plane"></i>
-                  @if($div==0)
-                    <span class="textbutton" > Telegram</span>
-                  @endif
-                </button>
-              </a>
-            </li>
-          @endif  
 
-          @if($msg=='line' and !is_null($pages->line_link))
+          @if($msg=='line')
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="{{env('APP_URL').'/click/line/'.$pages->id}}" title="Line" target="_blank" class="txthov">
                 <button class="btn btn-block">
@@ -1321,7 +1336,7 @@
             </li>
           @endif
 
-          @if($msg=='messenger' and !is_null($pages->messenger_link))
+          @if($msg=='messenger')
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="{{env('APP_URL').'/click/messenger/'.$pages->id}}" title="Messenger" target="_blank" class="txthov">
                 <button class="btn btn-block">
@@ -1340,7 +1355,28 @@
             $div = $div-1;
             $count_3 = 0;
           } 
-        } ?>
+        }
+        }
+        else {
+          ?>
+            <li class="col pl-1 pr-1 mb-3">
+              <a href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov">
+                <button class="btn btn-block">
+                  <i class="fab fa-whatsapp icon-msg"></i>
+                    <span class="textbutton"> WhatsApp</span>
+                </button>
+              </a>
+            </li>
+            <li class="col pl-1 pr-1 mb-3">
+              <a href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov">
+                <button class="btn btn-block">
+                  <i class="fab fa-telegram-plane"></i>
+                    <span class="textbutton" > Telegram</span>
+                </button>
+              </a>
+            </li>
+          
+        <?php } ?>
       </ul>
 
       <ul class="col-lg-7 col-md-8 mb-4">
@@ -1363,7 +1399,9 @@
       </ul>
 
       <ul class="col-lg-7 col-md-8 mb-5 row" id="icon-sosmed">
-        <?php foreach ($sort_sosmed as $sosmed) { ?>
+        <?php 
+        if (!is_null($pages->sort_sosmed)) {
+          foreach ($sort_sosmed as $sosmed) { ?>
           <li class="col text-center icon-sosmed">
             @if( $sosmed=='fb')
               <a href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank">
@@ -1399,7 +1437,31 @@
             @if($sosmed=='youtube' and (!is_null($pages->youtube_link) || $pages->youtube_pixel_id!=0))
               @endif 
       -->
-        <?php } ?>
+        <?php } }
+        else {
+        ?>
+          <li class="col text-center icon-sosmed">
+              <a href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank">
+                <i class="fab fa-facebook-square"></i>
+              </a>
+          </li>
+          <li class="col text-center icon-sosmed">
+              <a href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a> 
+          </li>
+          <li class="col text-center icon-sosmed">
+              <a href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank">
+                <i class="fab fa-twitter-square"></i>
+              </a>
+          </li>
+          <li class="col text-center icon-sosmed">
+              <a href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank">
+                <i class="fab fa-youtube"></i>
+              </a>
+          </li>
+
+        <?php }?>
       </ul>
       <div class="col-lg-7 col-md-8 mb-5 text-center powered-omnilinks">
         @if($pages->powered==1)

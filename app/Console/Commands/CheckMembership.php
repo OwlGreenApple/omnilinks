@@ -110,6 +110,22 @@ class CheckMembership extends Command
           $user->membership = 'free';
           //$user->valid_until = null;
           $user->save();
+          
+          //pages themes dibalikin jadi solid #fff
+          $pages = Page::where('user_id',$user->id)
+                      ->get();
+          if(!is_null($pages)){
+            foreach ($pages as $page) {
+              //default value
+              $page->is_outlined=1;
+              $page->outline="#000";
+              $page->is_bio_color=1;
+              $page->bio_color="#000";
+              $page->color_picker="#fff";
+              $page->save();
+            }
+          }
+          
         }
       }
     }
