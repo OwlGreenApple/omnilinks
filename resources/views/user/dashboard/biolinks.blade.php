@@ -2832,7 +2832,7 @@ and add more";
           <div class="center preview-center">
             <div class="mobile d-none d-lg-block">
               <div class="mobile1">
-                <div class="screen colorgradient1" id="phonecolor" style="border:none; overflow-y:auto; ">
+                <div class="screen " id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">

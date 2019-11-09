@@ -508,7 +508,9 @@ class BiolinkController extends Controller
             $dt = Carbon::now();
             $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
             $filename = $dt->format('ymdHi').'-'.$banner->id.'.jpg';
-            if($idbanner[$i]==""){
+            // dd($dir."/".$filename);
+            // if($idbanner[$i]==""){
+            if(($banner->images_banner=="0")||($idbanner[$i]=="")){
               Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('bannerImage')[$i]), 'public');
               $banner->images_banner=$dir."/".$filename;
               $banner->save(); 
