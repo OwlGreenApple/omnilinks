@@ -500,9 +500,9 @@ class BiolinkController extends Controller
 
           // $banner->save(); 
           if($idbanner[$i]==""){
+            $banner->save(); 
           }
           else {
-            $banner->save(); 
           }
           if($request->hasFile('bannerImage.'.$i)) {
             $dt = Carbon::now();
