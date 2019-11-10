@@ -1865,7 +1865,10 @@
           </div>
         @endif-->
       </div>
-      <div id="pesanAlert" class="col-xs-12 col-md-12 alert mb-0" style="display: none;"></div>
+      
+      <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
+      <div id="pesanAlert" class=" alert mb-0" style="display: none;"></div>
+      </div>
 
       <div class=" col-12">
         <button class="btn btn-success mt-3 mb-3 btn-premium">
