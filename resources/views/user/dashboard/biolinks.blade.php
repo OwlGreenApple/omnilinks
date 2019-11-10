@@ -1865,17 +1865,21 @@
           </div>
         @endif-->
       </div>
+      <div id="pesanAlert" class="col-xs-12 col-md-12 alert mb-0" style="display: none;"></div>
 
-      <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
-        
-        <div id="pesanAlert" class="alert mb-0" style="display: none;"></div>
-
+      <div class=" col-12">
         <button class="btn btn-success mt-3 mb-3 btn-premium">
           <i class="fas fa-star"></i> <?php if (is_null($pages->premium_names)) { echo "Get"; } else { echo "Update"; } ?> Custom Link
         </button>
-        
-        <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
+      </div>
+      
+      <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
+      <div class=" col-12">
         <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a> <span class="btn-copy" data-link="https://{{env('SHORT_LINK')}}/{{$custom_link}}"><i class="fas fa-file"></i></span>
+      </div>
+
+      <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
+        
 
         <div class="card carddash" style="margin-bottom:20px;">
           <div class="card-body">

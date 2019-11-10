@@ -547,11 +547,12 @@ class BiolinkController extends Controller
     $temp_arr['wa'] = [ 'max:255'];
     $temp_arr['telegram'] = [ 'max:255'];
     $temp_arr['skype'] = [ 'max:255'];
+    $temp_arr['youtube'] = ['required', 'active_url', 'max:255'];
     if (!is_null($request->title)){
       for ($i=0; $i <count($request->title); $i++)
       { 
         $temp_arr['title.'.$i] = ['required', 'string', 'max:255'];
-        $temp_arr['url.'.$i] = ['required', 'string', 'max:255'];
+        $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
       }
     }
 
