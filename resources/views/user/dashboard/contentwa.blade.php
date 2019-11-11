@@ -31,9 +31,7 @@ $x++; ?>
 
     <div id="collapse{{$x}}" class="collapse" aria-labelledby="heading{{$x}}" data-parent="#accordionExample">
       <div class="card-body mb-3">
-        <span id="{{$walinks->id}}">
-          {{$walinks->linkgenerator}}
-        </span>
+        <span id="{{$walinks->id}}">{{$walinks->linkgenerator}}</span>
       </div>
 
       <div class="offset-md-8 col-md-4 text-right">

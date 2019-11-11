@@ -2368,7 +2368,7 @@
                     <span class="card-header card-gray">
                       Masukkan Pesan
                     </span>
-                    <textarea class="form-control" name="pesan" id="pesan-wa" style="height:100px"> </textarea>
+                    <textarea class="form-control" name="pesan" id="pesan-wa" style="height:100px"></textarea>
                   </div>
 
                   <input type="text" name="editidwa" hidden="" id="editidwa">

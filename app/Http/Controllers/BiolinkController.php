@@ -570,7 +570,8 @@ class BiolinkController extends Controller
       for ($i=0; $i <count($request->title); $i++)
       {
         $temp_arr['title.'.$i] = ['required', 'string', 'max:255'];
-        $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
+        // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
+        $temp_arr['url.'.$i] = ['required', 'string', 'max:255'];
       }
     }
 
