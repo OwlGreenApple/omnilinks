@@ -3926,6 +3926,7 @@ and add more";
 
     $("body").on("click", ".savetemp", function() {
       tambahTemp();
+      $('.preview-mobile').addClass('preview-none');
       $('#pesanAlert').removeClass('alert-danger');
       $('#pesanAlert').children().remove();
     });
@@ -4061,6 +4062,7 @@ and add more";
       if (tambahPages()) {
         tambahTemp();
       }
+      $('.preview-mobile').addClass('preview-none');
       $('#pesanAlert').removeClass('alert-danger');
       $('#pesanAlert').children().remove();
       $(window).scrollTop(0);

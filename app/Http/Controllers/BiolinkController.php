@@ -544,19 +544,38 @@ class BiolinkController extends Controller
   public function savelink(Request $request)
   {
     $temp_arr = array();
-    $temp_arr['wa'] = [ 'max:255'];
-    $temp_arr['telegram'] = [ 'max:255'];
-    $temp_arr['skype'] = [ 'max:255'];
-    $temp_arr['youtube'] = ['required', 'active_url', 'max:255'];
+    $temp_arr['wa'] = ['required', 'max:255'];
+    $temp_arr['telegram'] = ['required', 'max:255'];
+    $temp_arr['skype'] = ['required', 'max:255'];
+    
+    if (in_array("fb", $request->sortsosmed)) {
+      $temp_arr['fb'] = ['required', 'max:255'];
+    }
+    if (in_array("twitter", $request->sortsosmed)) {
+      $temp_arr['twitter'] = ['required', 'max:255'];
+    }
+    if (in_array("ig", $request->sortsosmed)) {
+      $temp_arr['ig'] = ['required', 'max:255'];
+    }
+    if (in_array("youtube", $request->sortsosmed)) {
+      $temp_arr['youtube'] = ['required', 'active_url', 'max:255'];
+    }
     if (!is_null($request->title)){
       for ($i=0; $i <count($request->title); $i++)
-      { 
+      {
         $temp_arr['title.'.$i] = ['required', 'string', 'max:255'];
         $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
       }
     }
 
-    $validator = Validator::make($request->all(), $temp_arr); 
+    $messages = [
+        'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
+        /*'same'    => 'The :attribute and :other must match.',
+        'size'    => 'The :attribute must be exactly :size.',
+        'between' => 'The :attribute value :input is not between :min - :max.',
+        'in'      => 'The :attribute must be one of the following types: :values',*/
+    ];
+    $validator = Validator::make($request->all(), $temp_arr, $messages); 
     
     if($validator->fails()) {
       $arr['status'] = 'error';
