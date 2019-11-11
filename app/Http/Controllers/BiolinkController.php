@@ -544,9 +544,15 @@ class BiolinkController extends Controller
   public function savelink(Request $request)
   {
     $temp_arr = array();
-    $temp_arr['wa'] = ['required', 'max:255'];
-    $temp_arr['telegram'] = ['required', 'max:255'];
-    $temp_arr['skype'] = ['required', 'max:255'];
+    if (in_array("wa", $request->sortmsg)) {
+      $temp_arr['wa'] = ['required', 'max:255'];
+    }
+    if (in_array("telegram", $request->sortmsg)) {
+      $temp_arr['telegram'] = ['required', 'max:255'];
+    }
+    if (in_array("skype", $request->sortmsg)) {
+      $temp_arr['skype'] = ['required', 'max:255'];
+    }
     
     if (in_array("fb", $request->sortsosmed)) {
       $temp_arr['fb'] = ['required', 'max:255'];
