@@ -1043,7 +1043,9 @@ class BiolinkController extends Controller
       switch ($mode) {
         case "wa":
           $pages->wa_link_counter = $pages->wa_link_counter+1;
-          $link = 'https://api.whatsapp.com/send?phone='.$pages->wa_link;
+          // $link = 'https://api.whatsapp.com/send?phone='.$pages->wa_link;
+          $temp_text = " ";
+          $link = "whatsapp://send/?phone=".$pages->wa_link."&text=" . $temp_text . "";
           $idpixel = $pages->wa_pixel_id;
         break;
         case "telegram":
