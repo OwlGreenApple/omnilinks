@@ -30,6 +30,7 @@
 
 <script type="text/javascript">
   var template;
+  var changelink = 0;
   var templates = [
     {
      "id": 1,
@@ -1235,6 +1236,8 @@
         $("#pesanAlert").show();
         $(window).scrollTop(0);
         if (data.status == "success") {
+          changed = 0;
+          changelink = 0;
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
         }
@@ -1278,7 +1281,7 @@
               // $(this).remove();
             // }
           // });
-          
+          changelink = 0;
           refreshwa();
           refreshpixel();
           return true;
@@ -3239,6 +3242,25 @@ and add more";
   </div>
 </div>
 
+<!-- Modal Alert To Prevent Unsave -->
+<div class="modal fade" id="unsave" role="dialog">
+  <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        Please save your data before change into another tab
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" data-dismiss="modal">
+          OK
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
 <noscript>Jalankan Javascript di browser anda</noscript>
@@ -3246,6 +3268,31 @@ and add more";
   var elhtml;
   let idpic=6;
   let counterBanner=0;
+  var changed = 0;
+
+   //ALERT WHEN USER FORGOT TO SAVE
+   $( ":input" ).change(function() {
+      changed = $(this).closest('#saveTemplate').data('changed', true);
+      changelink = $(this).closest('#savelink').data('changed', true);
+    });
+
+   $("#addlink, #tambah, #sm, .cell-btn, #addBanner").click(function()
+   {
+        changed = 1;
+   });
+
+   $(".bannerpixel, .banner-title, .banner-link").on("change",function(){
+        changed = 1;
+   });
+
+  $("body").on("click",".link",function()
+  {
+     if(changed > 0 ||changed.length > 0 || changelink.length > 0)
+     {
+        $("#unsave").modal();
+        return false;
+     }
+  });
   
   $('body').on('click', '.btn-preview', function() {
     $('.preview-mobile').html($('.mobile1').html());
@@ -3255,6 +3302,7 @@ and add more";
   $('body').on('click', '.themes', function() {
     $('.themes').removeClass('selected');
     $(this).addClass('selected');
+    changed = 1;
   });  
 
   $('body').on('click', '.wallpapers', function() {
@@ -3286,6 +3334,7 @@ and add more";
         check_rounded();
       }
     });
+    changed = 1;
     $(this).addClass('selected');
   });  
 
@@ -3639,10 +3688,12 @@ and add more";
       start: function(e, ui) {
           // creates a temporary attribute on the element with the old index
           $(this).attr('data-previndex', ui.item.index());
+          changed = 1;
       },
       update: function(event, ui) {
         var index =  ui.item.index();
         var start_pos = $(this).attr('data-previndex');
+        changed = 1;
 
         // console.log(start_pos);
         // console.log(index);
@@ -3686,6 +3737,7 @@ and add more";
       $("#phonecolor").css("background-color",color);
       $("#backtheme").val();
       $("#color").val(color);
+       changed = 1;
     }
     $('#colorpicker').farbtastic('#color');
     pickerbg = $.farbtastic('#colorpicker');
@@ -3699,6 +3751,7 @@ and add more";
     function onColorButtonChange(color) {
       /*$("#colorButton").val(color);
       $('.btnview').css("background-color",color);*/
+       changed = 1;
       $("#colorButton").val(color);
       if ($('input[name="outlined"]').val()=="1") {
         $('.btnview').css("background-color",'transparent');
@@ -3736,7 +3789,7 @@ and add more";
         } else {
           $('.btnview').css("border-color",$('#textColor').val());
         }
-        
+        changed = 1;
       } else {
         //$('.btnview').css("background-color",color);
         //$('.btnview').css("color","#fff");
@@ -3763,6 +3816,7 @@ and add more";
     
     // for all text color purpose
     function onTextColorChange(color) {
+      changed = 1;
       $("#textColor").val(color);
       if ($('#is_text_color').val()=="1") {
         $('.btnview').css("color",color);
@@ -3790,6 +3844,7 @@ and add more";
 
     // for all bio color purpose
     function onBioColorChange(color) {
+      changed = 1;
       $("#bioColor").val(color);
       if ($('#is_bio_color').val()=="1") {
         $('.powered-omnilinks a').css("color",color);
@@ -3831,6 +3886,7 @@ and add more";
           $("#wizardPicturePreview-delete").show();
         }
         reader.readAsDataURL(input.files[0]);
+        changed = 1;
       }
     }
 
@@ -3949,7 +4005,7 @@ and add more";
     $("body").on("click", "#addBanner", function() {
       idpic+=1;
       let $el;
-      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
       $el = $(".div-banner").append(elhtml);
       $(".banner-new").html(dataView);
       $(".banner-new").val(0);
