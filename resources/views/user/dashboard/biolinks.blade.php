@@ -2323,14 +2323,29 @@
                   <span class="blue-txt">
                     WhatsApp Link Creator
                   </span>
-                  
+
+                  <div class="form-group mt-3 mb-4 row">
+                    <div class="col-md-4">
+                      <label for="nomorwa" class="control-label">
+                        WhatsApp Method
+                      </label>  
+                    </div>
+                    
+                    <div class="col-md-6 col-9 pr-1">
+                      <div class="radio">
+                        <label><input type="radio" name="optRadioWaMethod" checked value="standard" id="radio_button_wa_standard"> Standard</label>
+                        <label><input type="radio" name="optRadioWaMethod" value="deepLink" id="radio_button_wa_deep_link"> Deep Link</label>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="form-group mt-3 mb-4 row">
                     <div class="col-md-4">
                       <label for="nomorwa" class="control-label">
                         Masukkan Nomor WA
                       </label>  
                     </div>
-                    
+
                     <div class="col-md-6 col-9 pr-1">
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -4047,7 +4062,13 @@ and add more";
       var nomor = '62'+$('#nomorwa').val();
       var message = $('#pesan-wa').val();
       var convert = encodeURI(message);
-      var link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";
+      var link;
+      if($('#radio_button_wa_standard').is(':checked')) {
+        link = "https://api.whatsapp.com/send?phone=" + nomor + "&text=" + convert + "";
+      }
+      if($('#radio_button_wa_deep_link').is(':checked')) {
+        link = "whatsapp://send/?phone="+nomor+"&text=" + convert + "";
+      }
       $('#demo').html(link);
       tambahwalink();
     });

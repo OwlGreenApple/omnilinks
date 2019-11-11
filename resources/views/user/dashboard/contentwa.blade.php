@@ -9,8 +9,16 @@ $x++; ?>
         <span class="ml-2">
           <i class="fas fa-sort-down"></i>  
         </span>
-        
       </span>
+        <?php
+          $check_type = explode(':', $walinks->linkgenerator);
+          if ($check_type[0]=="whatsapp"){
+            echo " (Deep Link)";
+          }
+          if ($check_type[0]=="https"){
+            echo " (Standard)";
+          }
+        ?>
 
       <button type="button" dataidwa="{{$walinks->id}}" class="btn btn-sm btn-danger float-right btn-deletewa">
         <i class="fas fa-trash-alt"></i>
