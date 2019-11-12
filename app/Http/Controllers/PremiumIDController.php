@@ -84,7 +84,8 @@ class PremiumIDController extends Controller
 
         $arr['status'] = 'success';
         $arr['customLink'] = 'https://'.env('SHORT_LINK').'/'. $page->premium_names;
-        $arr['message'] = 'Custom Link berhasil dibuat. Letakkan link berikut di Bio Instagram <a href="https://'.env('SHORT_LINK').'/'. $page->premium_names.'">'.env('SHORT_LINK').'/'. $page->premium_names.'</a>';
+        // $arr['message'] = 'Custom Link berhasil dibuat. Letakkan link berikut di Bio Instagram <a href="https://'.env('SHORT_LINK').'/'. $page->premium_names.'">'.env('SHORT_LINK').'/'. $page->premium_names.'</a>';
+        $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
       } else {
         $arr['status'] = 'error';
         $arr['message'] = $validator->errors()->first();

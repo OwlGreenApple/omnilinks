@@ -1093,3 +1093,6 @@ ul {
   height: 117px;
   background-size: cover;  
 }
+.btnview{
+  white-space:normal;
+}
