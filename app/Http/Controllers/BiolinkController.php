@@ -307,6 +307,16 @@ class BiolinkController extends Controller
         { 
           $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:255'];
           $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:255'];
+          // Validate url
+          if (filter_var($request->linkBanner[$i], FILTER_VALIDATE_URL)) {
+              // echo("$url is a valid URL");
+          } 
+          else {
+              // echo("$url is not a valid URL");
+            $arr['status'] = 'error';
+            $arr['message'] = "Banner Link ".$i." tidak valid";
+            return $arr;
+          }
         }
       }
     }
@@ -572,6 +582,16 @@ class BiolinkController extends Controller
         $temp_arr['title.'.$i] = ['required', 'string', 'max:255'];
         // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
         $temp_arr['url.'.$i] = ['required', 'string', 'max:255'];
+        // Validate url
+        if (filter_var($request->url[$i], FILTER_VALIDATE_URL)) {
+            // echo("$url is a valid URL");
+        } 
+        else {
+            // echo("$url is not a valid URL");
+          $arr['status'] = 'error';
+          $arr['message'] = "Link Url ".$i." tidak valid";
+          return $arr;
+        }
       }
     }
 
