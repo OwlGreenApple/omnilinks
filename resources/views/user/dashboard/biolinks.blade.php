@@ -3245,11 +3245,10 @@ and add more";
 <!-- Modal Alert To Prevent Unsave -->
 <div class="modal fade" id="unsave" role="dialog">
   <div class="modal-dialog">
-    
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-body">
-        Please save your data before change into another tab
+        Please save your data before change into another tab, or <a href="#" id="reload-cancel">cancel</a>
       </div>
       <div class="modal-footer" id="foot">
         <button class="btn btn-primary" data-dismiss="modal">
@@ -3383,6 +3382,11 @@ and add more";
           if (this.value.match(reg)) {
               this.value = this.value.replace(reg, '');
           }
+      });
+
+      $('#reload-cancel').click(function(e){
+        e.preventDefault();
+        location.reload();
       });
 
       $(window).scroll(function() {
