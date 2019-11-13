@@ -2588,7 +2588,10 @@ and add more";
                         </div>
                         <div class="col-md-4 col-4">
                           <label class="caption">
-                            Rounded buttons
+                            Rounded buttons 
+                            <span class="tooltipstered" title="<div class='panel-heading'>Rounded buttons</div><div class='panel-content'>Atur warna & bentuk button sesuai keinginanmu</div>">
+                              <i class="fas fa-question-circle icon-reflink"></i>
+                            </span>
                           </label>
                         </div>
                         <div class="col-md-5 col-5">
@@ -2630,6 +2633,9 @@ and add more";
                         <div class="col-md-4 col-4">
                           <label class="caption">
                             Outlined buttons
+                            <span class="tooltipstered" title="<div class='panel-heading'>Outlined buttons</div><div class='panel-content'>Atur warna & tampilan buttonmu hanya berbentuk garis saja</div>">
+                              <i class="fas fa-question-circle icon-reflink"></i>
+                            </span>
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
@@ -2671,6 +2677,9 @@ and add more";
                         <div class="col-md-4 col-4">
                           <label class="caption">
                             Text & Hover Color
+                            <span class="tooltipstered" title="<div class='panel-heading'>Text & Hover Color</div><div class='panel-content'>Atur warna teks & hover button sesuai keinginanmu</div>">
+                              <i class="fas fa-question-circle icon-reflink"></i>
+                            </span>
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
@@ -2711,6 +2720,9 @@ and add more";
                         <div class="col-md-4 col-4">
                           <label class="caption">
                             Bio Color
+                            <span class="tooltipstered" title="<div class='panel-heading'>Bio Color</div><div class='panel-content'>Atur warna Bio & Icon Media Sosial sesuai keinginanmu</div>">
+                              <i class="fas fa-question-circle icon-reflink"></i>
+                            </span>
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
