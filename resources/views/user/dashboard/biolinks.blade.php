@@ -2669,7 +2669,7 @@ and add more";
                         </div>
                         <div class="col-md-4 col-4">
                           <label class="caption">
-                            Text Color
+                            Text & Hover Color
                           </label>
                         </div>
                         <div class="col-md-4 col-4">
@@ -2681,7 +2681,7 @@ and add more";
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    Choose Text Color 
+                                    Choose Text & Hover Color 
                                 </div>
                                 <div class="modal-body">
                                   <div class="row">
