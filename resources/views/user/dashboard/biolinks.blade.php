@@ -1235,7 +1235,7 @@
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
         $(window).scrollTop(0);
-        if (data.status == "success") {
+        if(data.status == "success") {
           changed = 0;
           changelink = 0;
           $("#pesanAlert").addClass("alert-success");
@@ -1281,6 +1281,7 @@
               // $(this).remove();
             // }
           // });
+          changed = 0;
           changelink = 0;
           refreshwa();
           refreshpixel();
