@@ -29,6 +29,30 @@ class BiolinkController extends Controller
     if (is_null($page)) {
       return "Page not found";
     }
+
+    $temp_arr = array();
+    $temp_arr['nomorwa'] = ['required', 'string',  'max:191' ];
+    $temp_arr['pesan'] = ['required', 'string',  'max:191' ];
+    $temp_arr['linkgenerator'] = ['required', 'string',  'max:191' ];
+
+    
+    $messages = [
+        'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
+        /*'same'    => 'The :attribute and :other must match.',
+        'size'    => 'The :attribute must be exactly :size.',
+        'between' => 'The :attribute value :input is not between :min - :max.',
+        'in'      => 'The :attribute must be one of the following types: :values',*/
+    ];
+
+    $validator = Validator::make($request->all(), $temp_arr, $messages); 
+    
+    if($validator->fails()) {
+      $arr['status'] = 'error';
+      $arr['message'] = $validator->errors()->first();
+      return $arr;
+    }
+
+
     
     if(is_null($request->editidwa))
     {
@@ -298,15 +322,16 @@ class BiolinkController extends Controller
     $user=Auth::user();
     
     $temp_arr = array();
-    $temp_arr['judul'] = ['required', 'string',  'max:255' ];
+    $temp_arr['judul'] = ['required', 'string',  'max:191' ];
 
     if (!is_null($request->judulBanner)){
       if ($user->membership=='basic' or  $user->membership=='elite') 
       {
         for($i=0;$i<count($request->judulBanner);$i++) 
         { 
-          $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:255'];
-          $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:255'];
+          $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:191'];
+          // $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:191'];
+          $temp_arr['linkBanner.'.$i] = ['required', 'max:191'];
           // Validate url
           if (filter_var($request->linkBanner[$i], FILTER_VALIDATE_URL)) {
               // echo("$url is a valid URL");
@@ -555,33 +580,33 @@ class BiolinkController extends Controller
   {
     $temp_arr = array();
     if (in_array("wa", $request->sortmsg)) {
-      $temp_arr['wa'] = ['required', 'max:255'];
+      $temp_arr['wa'] = ['required', 'max:191'];
     }
     if (in_array("telegram", $request->sortmsg)) {
-      $temp_arr['telegram'] = ['required', 'max:255'];
+      $temp_arr['telegram'] = ['required', 'max:191'];
     }
     if (in_array("skype", $request->sortmsg)) {
-      $temp_arr['skype'] = ['required', 'max:255'];
+      $temp_arr['skype'] = ['required', 'max:191'];
     }
     
     if (in_array("fb", $request->sortsosmed)) {
-      $temp_arr['fb'] = ['required', 'max:255'];
+      $temp_arr['fb'] = ['required', 'max:191'];
     }
     if (in_array("twitter", $request->sortsosmed)) {
-      $temp_arr['twitter'] = ['required', 'max:255'];
+      $temp_arr['twitter'] = ['required', 'max:191'];
     }
     if (in_array("ig", $request->sortsosmed)) {
-      $temp_arr['ig'] = ['required', 'max:255'];
+      $temp_arr['ig'] = ['required', 'max:191'];
     }
     if (in_array("youtube", $request->sortsosmed)) {
-      $temp_arr['youtube'] = ['required', 'active_url', 'max:255'];
+      $temp_arr['youtube'] = ['required', 'active_url', 'max:191'];
     }
     if (!is_null($request->title)){
       for ($i=0; $i <count($request->title); $i++)
       {
-        $temp_arr['title.'.$i] = ['required', 'string', 'max:255'];
+        $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
         // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
-        $temp_arr['url.'.$i] = ['required', 'string', 'max:255'];
+        $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
         // Validate url
         if (filter_var($request->url[$i], FILTER_VALIDATE_URL)) {
             // echo("$url is a valid URL");
