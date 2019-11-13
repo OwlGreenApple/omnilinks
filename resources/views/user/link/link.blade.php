@@ -1628,6 +1628,10 @@ and add more";
     $("#description").html(tempStr);
     @endif
   });
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    // some code..
+    $("a").removeAttr("target");
+  }
 </script>
 
 </body>
