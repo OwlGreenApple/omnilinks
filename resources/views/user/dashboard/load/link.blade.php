@@ -36,15 +36,3 @@
                         }
                       }
                       ?>
-<script type="text/javascript">
- //TO FORCE USER TO SAVE IF USER HAD MAKE CHANGE
- $(".focuslink-update,.linkpixel").on("change",function()
- {
-      changed = 1;
- });    
-
- $(".cell-btn").on("click",function()
- {
-      changed = 1;
- }); 
-</script>
