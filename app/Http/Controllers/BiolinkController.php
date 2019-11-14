@@ -1055,11 +1055,9 @@ class BiolinkController extends Controller
       $pixel = Pixel::find($link->pixel_id);
       $script = "";
       if (!is_null($pixel)) {
-        //jalanin pixel
-        //echo "<script>";
-        $script =  $pixel->script;
-        //echo "</script>";
-
+        if ($user->membership<>'free') {
+          $script =  $pixel->script;
+        }
       }
       // return redirect($link->link);
       if (!$is_ajax) {
@@ -1096,10 +1094,9 @@ class BiolinkController extends Controller
       $pixel = Pixel::find($banner->pixel_id);
       $script = "";
       if (!is_null($pixel)) {
-        //jalanin pixel
-        //echo "<script>";
-        $script = $pixel->script;
-        //echo "</script>";
+        if ($user->membership<>'free') {
+          $script = $pixel->script;
+        }
       }
       // return redirect($banner->link);
       if (!$is_ajax) {
@@ -1185,11 +1182,10 @@ class BiolinkController extends Controller
       $script = "";
       if (!is_null($pixel)) {
         //jalanin pixel
-        //echo "<script>";
-        $script = $pixel->script;
-        //echo "</script>";
+        if ($user->membership<>'free') {
+          $script = $pixel->script;
+        }
       }
-      // return redirect($link);
 
       if (!$is_ajax) {
         return view('user.script')->with([
