@@ -993,8 +993,11 @@ class BiolinkController extends Controller
     // }
   }
 
-  public function click($mode,$id){
-
+  public function click($mode,$id,Request $request){
+    $is_ajax = false;
+    if($request->ajax()){
+      $is_ajax = true;
+    }
     if($mode=='link'){
       $link = Link::find($id);
       //$user = User::find($link->user_id);
@@ -1019,7 +1022,18 @@ class BiolinkController extends Controller
       }
 
       if($clicks>=1000){
-        return abort(404);
+        if (!$is_ajax) {
+          return abort(404);
+        }
+        else {
+          return [
+            'user' => "",
+            'mode' => "",
+            'script' => "",
+            'link' => "",
+            'isError' => 1,
+          ];
+        }
       }
     }
 
@@ -1046,12 +1060,23 @@ class BiolinkController extends Controller
 
       }
       // return redirect($link->link);
-      return view('user.script')->with([
-        'user' => $user,
-        'mode' => $mode,
-        'script' => $script,
-        'link' => $link->link,
-      ]);
+      if (!$is_ajax) {
+        return view('user.script')->with([
+          'user' => $user,
+          'mode' => $mode,
+          'script' => $script,
+          'link' => $link->link,
+        ]);
+      }
+      else {
+        return [
+          'user' => $user,
+          'mode' => $mode,
+          'script' => $script,
+          'link' => $link->link,
+          'isError' => 0,
+        ];
+      }
 
     } 
     else if($mode=='banner'){
@@ -1075,12 +1100,23 @@ class BiolinkController extends Controller
         //echo "</script>";
       }
       // return redirect($banner->link);
-      return view('user.script')->with([
-        'user' => $user,
-        'mode' => $mode,
-        'script' => $script,
-        'link' => $banner->link,
-      ]);
+      if (!$is_ajax) {
+        return view('user.script')->with([
+          'user' => $user,
+          'mode' => $mode,
+          'script' => $script,
+          'link' => $banner->link,
+        ]);
+      }
+      else{
+        return [
+          'user' => $user,
+          'mode' => $mode,
+          'script' => $script,
+          'link' => $banner->link,
+          'isError' => 0,
+        ];
+      }
     } 
     else {
       //$pages = Page::find($id);
@@ -1153,12 +1189,23 @@ class BiolinkController extends Controller
       }
       // return redirect($link);
 
-      return view('user.script')->with([
-        'user' => $user,
-        'mode' => $mode,
-        'script' => $script,
-        'link' => $link,
-      ]);
+      if (!$is_ajax) {
+        return view('user.script')->with([
+          'user' => $user,
+          'mode' => $mode,
+          'script' => $script,
+          'link' => $link,
+        ]);
+      }
+      else {
+        return [
+          'user' => $user,
+          'mode' => $mode,
+          'script' => $script,
+          'link' => $link,
+          'isError' => 0,
+        ];
+      }
     }
   }
 
