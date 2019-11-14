@@ -20,7 +20,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-12 col-12 pr-0 pl-0">
-                                  <select name="linkpixel[]" id="linkpixel-{{$link->id}}-update" class="form-control linkpixel">
+                                  <select name="linkpixel[]" id="linkpixel-{{$link->id}}-update" class="form-control linkpixel" data-pixel-id="{{$link->pixel_id}}">
                                   </select>
                                 </div> 
                               </div>

@@ -1459,12 +1459,15 @@
     
     <?php 
     if($links->count()) {
-      foreach($links as $link) {
+      // foreach($links as $link) {
     ?>
-      $("#linkpixel-{{$link->id}}-update").html(dataView);
-      $("#linkpixel-{{$link->id}}-update").val('{{$link->pixel_id}}');
+      $(".link-list > li:visible").each(function( index ) {
+        $(this).find("select").html(dataView);
+        $(this).find("select").val($(this).find("select").attr('data-pixel-id'));
+      });
+    
     <?php 
-      }
+      // }
     }
     else {
     ?>
