@@ -1284,6 +1284,7 @@
           changed = 0;
           changelink = 0;
           refreshwa();
+          loadLinkBio();
           refreshpixel();
           return true;
         }
