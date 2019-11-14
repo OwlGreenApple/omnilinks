@@ -1461,7 +1461,7 @@
     if($links->count()) {
       // foreach($links as $link) {
     ?>
-      $(".link-list > li:visible").each(function( index ) {
+      $(".link-list").each(function( index ) {
         $(this).find("select").html(dataView);
         $(this).find("select").val($(this).find("select").attr('data-pixel-id'));
       });
