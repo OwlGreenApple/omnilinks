@@ -3324,13 +3324,11 @@ and add more";
   //TO FORCE USER TO SAVE IF USER HAD MAKE CHANGE
   $('body').on('change', '.focuslink-update,.linkpixel', function() {
   // $(".focuslink-update,.linkpixel").on("change",function()
-  {
       changed = 1;
   });    
 
   $('body').on('click', '.cell-btn', function() {
   // $(".cell-btn").on("click",function()
-  {
       changed = 1;
   }); 
  
