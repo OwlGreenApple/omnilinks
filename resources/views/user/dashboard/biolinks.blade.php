@@ -2516,7 +2516,6 @@ and add more";
                           <span class="blue-txt">
                             Banner Promo
                           </span>
-                        @endif
                           <div class="contentBanner mb-4">
                             <div class="c div-banner">
                               @if($banner->count())
@@ -2569,6 +2568,7 @@ and add more";
                               @endif
                             </div>
                           </div>
+                        @endif
                         </div>
                       </div>
                     </div>
@@ -2903,6 +2903,7 @@ and add more";
                     </div>
                   </header>
 
+                  @if(Auth::user()->membership!='free')
                   <div class="col-md-12">
                     <div class="slideshow-container">
                       <div class="ap" id="viewbanner">
@@ -2943,6 +2944,7 @@ and add more";
                     <br>
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
+                  @endif
 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 shown-mes hide" id="waviewid"> 

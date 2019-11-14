@@ -141,14 +141,16 @@ class BiolinkController extends Controller
   	$page->color_picker="#fff";
   	$page->save();
 
-    $banner= new Banner();
-    $banner->users_id=$user->id;
-    $banner->pages_id=$page->id;
-    $banner->title="Masukkan Judul Banner";
-    $banner->link="https://example.com";
-    $banner->pixel_id=0;
-    $banner->images_banner="0";
-    $banner->save();
+    if ($user->membership<>'free') {
+      $banner= new Banner();
+      $banner->users_id=$user->id;
+      $banner->pages_id=$page->id;
+      $banner->title="Masukkan Judul Banner";
+      $banner->link="https://example.com";
+      $banner->pixel_id=0;
+      $banner->images_banner="0";
+      $banner->save();
+    }
 
     $url=new Link();
     $url->pages_id=$page->id;

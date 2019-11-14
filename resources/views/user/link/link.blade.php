@@ -1203,7 +1203,8 @@ and add more";
           </span>
         </div>
       </div>
-
+      
+      @if($membership!=='free')
       <div class="col-lg-7 col-md-8 mb-5 row">
         @if($banner->count())
         <div class="galleryContainer">
@@ -1259,6 +1260,7 @@ and add more";
         </div>
         @endif
       </div>
+      @endif
 
       <ul class="col-lg-7 col-md-8 mb-0 row" style="padding-left: 24px; padding-right: 24px;">
         <?php 
