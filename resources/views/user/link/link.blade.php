@@ -1207,7 +1207,7 @@ and add more";
       @if($membership!=='free')
       <div class="col-lg-7 col-md-8 mb-5 row">
         @if($banner->count())
-        <div class="galleryContainer">
+        <div id="map" class="galleryContainer">
           <div class="slideShowContainer">
             <div onclick="plusSlides(-1)" class="nextPrevBtn leftArrow">
               <span class="arrow arrowLeft"></span>
@@ -1240,7 +1240,7 @@ and add more";
                           // $bg_image = Storage::disk('s3')->url($ban->images_banner);
                         // }
                       if ($ban->images_banner=="0"){
-                       $bg_image = asset('/image/739x218.png');
+                       $bg_image = asset('/image/424x200.jpg');
                       }
                       else {
                         $bg_image = Storage::disk('s3')->url($ban->images_banner);
@@ -1495,6 +1495,40 @@ and add more";
 
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
+
+  var w, win;
+  var h, hin = 0;
+
+  $(function()
+    {
+        resize();
+    }
+  );
+
+  $(window).resize(function()
+    {
+       resize();
+    }
+  );
+
+  function resize()
+  {
+     //image banner
+     win = $(".banner-image").width();
+     hin = win/2.17;
+     hin = Number(hin.toFixed(1));
+     $(".banner-image").height(hin);
+
+     //outside banner
+     w = $(".galleryContainer").width();
+     w = w + 18
+     h = (w/2.17) - 18;
+     h = h + 0.05;
+     h = Number(h.toFixed(1));
+     $(".galleryContainer").height(h);
+  }
+    
+
   function call_mylink(linkAjax){
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

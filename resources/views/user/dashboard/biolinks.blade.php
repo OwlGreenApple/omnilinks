@@ -2547,7 +2547,7 @@ and add more";
                                       <label class="custom-file-label" for="inputGroupFile01">
                                         <?php 
                                           if ($ban->images_banner=="0"){
-                                            echo asset('/image/739x218.png');
+                                            echo asset('/image/424x200.jpg');
                                           }
                                           else {
                                             echo basename($ban->images_banner);
@@ -2923,7 +2923,7 @@ and add more";
                           -->
                           <?php
                             if ($ban->images_banner=="0"){
-                              $bg_image = asset('/image/739x218.png');
+                              $bg_image = asset('/image/424x200.jpg');
                             }
                             else {
                               $bg_image = Storage::disk('s3')->url($ban->images_banner);
@@ -4069,8 +4069,8 @@ and add more";
       else{
         style="none"; 
       }
-      // $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<?php echo asset('image/739x218.png');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
-      strTempBgImage1="<?php echo asset('image/739x218.png'); ?>";
+      // $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<php echo asset('image/739x218.png');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
+      strTempBgImage1="<?php echo asset('image/424x200.jpg'); ?>";
       strTempBgImage2="background-image:url('"+strTempBgImage1+"');";
       $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><div id="picture-'+idpic+'" style="'+strTempBgImage2+'" class="banner-image input-picture-'+idpic+'-get"></div></div>');
       
