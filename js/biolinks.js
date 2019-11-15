@@ -169,6 +169,7 @@ $(document).ready(function () {
         //loadPixel(0,'#linkpixel-' + counterLink );
         
     });
+    
     $(document).on('click', '.deletelink', function (e) {
       //let idLink = $(this).parent().parent().attr("link-id");
       var idLink = $(this).parent().parent().attr("id");
