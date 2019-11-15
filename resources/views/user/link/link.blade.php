@@ -1495,11 +1495,34 @@ and add more";
 
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
-  $('body').on('click','.imageHolder', function(e) {
-    var url = urlbanner[slideIndex];
-    window.open(url,'_blank');
-  });
-
+  function call_mylink(linkAjax){
+    $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'GET',
+      url: linkAjax,
+      // data: { id: <?php echo $pages->id; ?>},
+      dataType: 'text',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        var data = jQuery.parseJSON(result);
+        eval(data.script);
+        window.location.href=data.link;
+        // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+          // window.location.href=data.link;
+        // }
+        // else {
+          // window.open(data.link);
+        // }
+      }
+    });
+  }
+  
   function check_outlined(){
       <?php 
       if($pages->is_outlined) { ?>  
@@ -1634,38 +1657,17 @@ and add more";
     $("#description").html(tempStr);
     @endif
     
-    $("body").on("click","a",function(e)
-    {
-      console.log("in");
+    $("body").on("click","a",function(e){
       e.preventDefault();
       linkAjax = $(this).attr('data-href');
-      $.ajax({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        type: 'GET',
-        url: linkAjax,
-        // data: { id: <?php echo $pages->id; ?>},
-        dataType: 'text',
-        beforeSend: function()
-        {
-          $('#loader').show();
-          $('.div-loading').addClass('background-load');
-        },
-        success: function(result) {
-          $('#loader').hide();
-          $('.div-loading').removeClass('background-load');
-          var data = jQuery.parseJSON(result);
-          eval(data.script);
-          window.location.href=data.link;
-          // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            // window.location.href=data.link;
-          // }
-          // else {
-            // window.open(data.link);
-          // }
-        }
-      });
+      call_mylink(linkAjax);
     });
     
+    $('body').on('click','.imageHolder', function(e) {
+      var url = urlbanner[slideIndex];
+      call_mylink(url);
+    });
+
   });
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
     // some code..

@@ -535,12 +535,7 @@ class BiolinkController extends Controller
           $banner->link=$request->linkBanner[$i];
           $banner->pixel_id=$request->bannerpixel[$i];
 
-          // $banner->save(); 
-          if($idbanner[$i]==""){
-            $banner->save(); 
-          }
-          else {
-          }
+          $banner->save(); 
           if($request->hasFile('bannerImage.'.$i)) {
             $dt = Carbon::now();
             $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
