@@ -73,26 +73,6 @@ $(document).ready(function () {
       $('#igid').addClass('shown-sm').show();
       //changeLengthMedia();
     }
-    $(document).on('click', '#tambah', function (e) {
-      $('.messengers').each(function () {
-        if ($(this).hasClass('hide')) {
-          $(this).css("display","table");
-          $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
-          $(this).removeClass('hide');
-          $(this).parent().attr("id", "msg-" + $(this).attr('id'));
-          return false;
-        }
-      });
-      $('.link').each(function () {
-        if ($(this).hasClass('hide')) {
-          $(this).show();
-          $(this).removeClass('hide');
-          $(this).addClass('shown-mes');
-          return false;
-        }
-      });
-      //changeLength();
-    });
 
     $('#deletewa').on('click', function () {
         $('#wa').hide();
@@ -101,6 +81,7 @@ $(document).ready(function () {
         $('#waviewid').hide();
         $('#waviewid').addClass('hide');
         $('#waviewid').removeClass('shown-mes');
+        renameColMessage();
         //changeLength();
         return false;
     });
@@ -112,6 +93,7 @@ $(document).ready(function () {
         $('#telegramviewid').hide();
         $('#telegramviewid').addClass('hide');
         $('#telegramviewid').removeClass('shown-mes');
+        renameColMessage();
         //changeLength();
         return false;
     });
@@ -123,6 +105,7 @@ $(document).ready(function () {
         $('#skypeviewid').hide();
         $('#skypeviewid').addClass('hide');
         $('#skypeviewid').removeClass('shown-mes');
+        renameColMessage();
         //changeLength();
         return false;
     });
@@ -134,6 +117,7 @@ $(document).ready(function () {
         $('#lineviewid').hide();
         $('#lineviewid').addClass('hide');
         $('#lineviewid').removeClass('shown-mes');
+        renameColMessage();
         //changeLength();
         return false;
     });
@@ -145,6 +129,7 @@ $(document).ready(function () {
         $('#messengerviewid').hide();
         $('#messengerviewid').addClass('hide');
         $('#messengerviewid').removeClass('shown-mes');
+        renameColMessage();
         //changeLength();
         return false;
     });

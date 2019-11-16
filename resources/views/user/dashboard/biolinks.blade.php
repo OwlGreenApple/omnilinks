@@ -1839,6 +1839,47 @@
       }
     });
   }
+    function renameColMessage(){
+      arrGetViewCount = $('#getview li:visible').length;
+      mydiv = Math.floor(arrGetViewCount/3);
+      mymod = arrGetViewCount%3;
+
+      colsisa = 0;
+      if(mymod>0){
+        colsisa = 12/mymod;
+      }
+
+      col = 0;
+      count_3 = 0;
+      counter = 1;
+      $( "#getview li:visible" ).each(function() {
+        if(mydiv<=0){
+          //0
+          col = colsisa;
+        } else {
+          col = 4;
+          //1
+        }
+        
+        //do things here, untuk membetulkan col, menghide tulisan
+        $( this ).attr("class", "link pl-1 pr-1 col-"+col );
+        $(this).find("label").show();
+        if(mydiv>0){
+          $(this).find("label").hide();
+        }
+        
+        counter += 1;
+        
+        count_3 = count_3 + 1;
+        if(count_3>=3){
+          mydiv = mydiv-1;
+          count_3 = 0;
+        } 
+        
+      });
+    }
+    
+  
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
@@ -4217,9 +4258,6 @@ and add more";
       $('#jenis_pixel').val(jenis);
     });
     
-    // buat sort msg
-    var queryArrSortMsg = [];
-    var arrHideMsg = [];
     
     <?php 
     if (!is_null($pages->sort_msg)) {
@@ -4265,9 +4303,7 @@ and add more";
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("col");
         $("#"+"<?php echo $data; ?>"+"viewid").addClass("col-<?php echo $col; ?>");
 
-        queryArrSortMsg.push("<?php echo $col; ?>");
         @if($div>0)
-          arrHideMsg.push();
           $("#"+"<?php echo $data; ?>"+"viewid").find("label").hide();
         @endif
     <?php 
@@ -4296,22 +4332,6 @@ and add more";
         $("#telegramviewid").removeClass("hide");
     <?php } ?>
 
-    function renameColMessage(){
-      ctrArrSortMessage = 0;
-      $( "#getview li" ).each(function() {
-        if (!$(this).hasClass("hide")) {
-          $( this ).attr("class", "link pl-1 pr-1 shown-mes col-"+queryArrSortMsg[ctrArrSortMessage] );
-          ctrArrSortMessage += 1;
-          $( this ).find("label").show();
-        }
-      });
-
-      $.each( arrHideMsg, function( key, value ) {
-console.log(value);
-        $(value).find("label").hide();
-      });
-    }
-    
     // buat sort link
     <?php 
     if (!is_null($pages->sort_link)) {
@@ -4442,6 +4462,27 @@ console.log(value);
     });    
     $(".animation-thumb").hide();
     $(".animation-bubble").show();
+    $(document).on('click', '#tambah', function (e) {
+      $('.messengers').each(function () {
+        if ($(this).hasClass('hide')) {
+          $(this).css("display","table");
+          $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
+          $(this).removeClass('hide');
+          $(this).parent().attr("id", "msg-" + $(this).attr('id'));
+          return false;
+        }
+      });
+      $('.link').each(function () {
+        if ($(this).hasClass('hide')) {
+          $(this).show();
+          $(this).removeClass('hide');
+          $(this).addClass('shown-mes');
+          renameColMessage();
+          return false;
+        }
+      });
+      //changeLength();
+    });
   });
 
 
