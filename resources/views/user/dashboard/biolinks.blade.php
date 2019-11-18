@@ -1692,6 +1692,8 @@
       }
       if ($('#is_text_color').prop("checked") == false) {
         $('.btnview').css("color",template.font_button_color);
+      } else {
+        $('.btnview').css("color",$("#textColor").val());
       }
       if ($('#is_bio_color').prop("checked") == false) {
         $('.description').css("color",template.bio_font_color);
