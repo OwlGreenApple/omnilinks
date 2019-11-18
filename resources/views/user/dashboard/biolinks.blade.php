@@ -4020,7 +4020,7 @@ and add more";
           reader.readAsDataURL(input.files[0]);
         }
       }
-      //showSlides();
+      showSlides(0);
       readThis(this);
     });
      
