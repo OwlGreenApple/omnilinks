@@ -1692,6 +1692,8 @@
       }
       if ($('#is_text_color').prop("checked") == false) {
         $('.btnview').css("color",template.font_button_color);
+      } else {
+        $('.btnview').css("color",$("#textColor").val());
       }
       if ($('#is_bio_color').prop("checked") == false) {
         $('.description').css("color",template.bio_font_color);
@@ -1839,6 +1841,47 @@
       }
     });
   }
+    function renameColMessage(){
+      arrGetViewCount = $('#getview li:visible').length;
+      mydiv = Math.floor(arrGetViewCount/3);
+      mymod = arrGetViewCount%3;
+
+      colsisa = 0;
+      if(mymod>0){
+        colsisa = 12/mymod;
+      }
+
+      col = 0;
+      count_3 = 0;
+      counter = 1;
+      $( "#getview li:visible" ).each(function() {
+        if(mydiv<=0){
+          //0
+          col = colsisa;
+        } else {
+          col = 4;
+          //1
+        }
+        
+        //do things here, untuk membetulkan col, menghide tulisan
+        $( this ).attr("class", "link pl-1 pr-1 col-"+col );
+        $(this).find("label").show();
+        if(mydiv>0){
+          $(this).find("label").hide();
+        }
+        
+        counter += 1;
+        
+        count_3 = count_3 + 1;
+        if(count_3>=3){
+          mydiv = mydiv-1;
+          count_3 = 0;
+        } 
+        
+      });
+    }
+    
+  
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
@@ -2542,7 +2585,7 @@ and add more";
                                     </script>
                                     <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
-                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01">
+                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01" accept="image/*">
 
                                       <label class="custom-file-label" for="inputGroupFile01">
                                         <?php 
@@ -2563,6 +2606,7 @@ and add more";
                                     </span>
                                   </div>
                                 @endif  
+                                <span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ratio Gambar 2.2:1 (width:height), Max 500KB, JPG,PNG.</span>
                                 </div>
                                 @endforeach
                               @endif
@@ -2947,7 +2991,7 @@ and add more";
                   @endif
 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
-                    <li class="link col pl-1 pr-1 shown-mes hide" id="waviewid"> 
+                    <li class="link col pl-1 pr-1 hide" id="waviewid"> 
                       <a href="#" class="btn btn-md btnview txthov" style="width: 100%;font-size:11px;height: 40px;padding: 10px;" id="walinkview">
                         <i class="fab fa-whatsapp" style="font-size:14px;"></i>
                         <label class="" style="font-size:11px;">
@@ -2955,7 +2999,7 @@ and add more";
                         </label>
                       </a>
                     </li>
-                    <li class="link col pl-1 pr-1 shown-mes hide" id="telegramviewid" >
+                    <li class="link col pl-1 pr-1 hide" id="telegramviewid" >
                       <a href="#" class="btn btn-md btnview txthov" style="
                       width: 100%;font-size:11px;height: 40px;padding: 10px;" id="telegramlinkview">
                         <i class="fab fa-telegram-plane" style="font-size:14px;"></i>
@@ -3722,11 +3766,20 @@ and add more";
         var start_pos = $(this).attr('data-previndex');
         
         if (start_pos<index) {
+          // tempNameClass1=$("#getview li:eq("+start_pos+")").attr("class");
+          // tempNameClass2=$("#getview li:eq("+index+")").attr("class");
+          // $("#getview li:eq("+start_pos+")").attr("class",tempNameClass2);
+          // $("#getview li:eq("+index+")").attr("class",tempNameClass1);
           $("#getview li:eq("+start_pos+")").insertAfter($("#getview li:eq("+index+")"));
         }
         else {
+          // tempNameClass1=$("#getview li:eq("+start_pos+")").attr("class");
+          // tempNameClass2=$("#getview li:eq("+index+")").attr("class");
+          // $("#getview li:eq("+start_pos+")").attr("class",tempNameClass2);
+          // $("#getview li:eq("+index+")").attr("class",tempNameClass1);
           $("#getview li:eq("+start_pos+")").insertBefore($("#getview li:eq("+index+")"));
         }
+        renameColMessage();
       }
     });
     $(".sortable-msg").disableSelection();
@@ -3989,7 +4042,7 @@ and add more";
           reader.readAsDataURL(input.files[0]);
         }
       }
-      //showSlides();
+      showSlides(0);
       readThis(this);
     });
      
@@ -4061,7 +4114,7 @@ and add more";
     $("body").on("click", "#addBanner", function() {
       idpic+=1;
       let $el;
-      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div></div>';
+      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01" accept="image/*"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div><span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ratio Gambar 2.2:1 (width:height), Max 500KB, JPG,PNG.</span></div>';
       $el = $(".div-banner").append(elhtml);
       $(".banner-new").html(dataView);
       $(".banner-new").val(0);
@@ -4229,12 +4282,39 @@ and add more";
       $('#jenis_pixel').val(jenis);
     });
     
-    // buat sort msg
+    
     <?php 
     if (!is_null($pages->sort_msg)) {
-      $arr = explode(";",$pages->sort_msg);
+      $arr = array_filter(explode(";",$pages->sort_msg));
+      
+      
+      //new dari link
+      $div = floor(count($arr)/3);
+      $mod = count($arr)%3;
+
+      $colsisa = 0;
+      if($mod>0){
+        $colsisa = 12/$mod;
+      }
+    
+      $col = 0;
+      $count_3 = 0;
+      
+      
+      
+      
+      
       $counter = 1;
       foreach($arr as $data){
+        
+        
+        if($div<=0){
+          //0
+          $col = $colsisa;
+        } else {
+          $col = 4;
+          //1
+        }
     ?>
         $("#msg-li-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
         $("#msg-li-"+"<?php echo $data; ?>>div").removeClass("hide");
@@ -4244,8 +4324,21 @@ and add more";
         
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
+        $("#"+"<?php echo $data; ?>"+"viewid").removeClass("col");
+        $("#"+"<?php echo $data; ?>"+"viewid").addClass("col-<?php echo $col; ?>");
+
+        @if($div>0)
+          $("#"+"<?php echo $data; ?>"+"viewid").find("label").hide();
+        @endif
     <?php 
         $counter += 1;
+        
+          $count_3 = $count_3 + 1;
+          if($count_3>=3){
+            $div = $div-1;
+            $count_3 = 0;
+          } 
+        
       } ?>
       sortMeBy("data-category", "ul.sortable-msg", "li", "asc");
       sortMeBy("data-category", "ul#getview", "li", "asc");
@@ -4256,15 +4349,13 @@ and add more";
         $("#msg-li-wa>div").css("display","table");
         $("#msg-li-wa>div").find(".input-hidden").val($("#msg-li-wa>div").find(".input-hidden").attr("data-val"));
         $("#waviewid").removeClass("hide");
-        
+
         $("#msg-li-telegram>div").removeClass("hide");
         $("#msg-li-telegram>div").css("display","table");
         $("#msg-li-telegram>div").find(".input-hidden").val($("#msg-li-telegram>div").find(".input-hidden").attr("data-val"));
         $("#telegramviewid").removeClass("hide");
     <?php } ?>
 
-
-    
     // buat sort link
     <?php 
     if (!is_null($pages->sort_link)) {
@@ -4395,6 +4486,27 @@ and add more";
     });    
     $(".animation-thumb").hide();
     $(".animation-bubble").show();
+    $(document).on('click', '#tambah', function (e) {
+      $('.messengers').each(function () {
+        if ($(this).hasClass('hide')) {
+          $(this).css("display","table");
+          $(this).find(".input-hidden").val($(this).find(".input-hidden").attr("data-val"));
+          $(this).removeClass('hide');
+          $(this).parent().attr("id", "msg-" + $(this).attr('id'));
+          return false;
+        }
+      });
+      $('.link').each(function () {
+        if ($(this).hasClass('hide')) {
+          $(this).show();
+          $(this).removeClass('hide');
+          $(this).addClass('shown-mes');
+          renameColMessage();
+          return false;
+        }
+      });
+      //changeLength();
+    });
   });
 
 

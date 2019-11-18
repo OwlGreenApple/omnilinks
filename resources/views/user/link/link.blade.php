@@ -1607,6 +1607,9 @@ and add more";
       if(!$pages->is_text_color) { ?>  
         $('.txthov').find("button").css("color",template.font_button_color);
       <?php 
+      } else {?>  
+      $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
+      <?php 
       } ?>  
       <?php 
       if(!$pages->is_bio_color) { ?>  

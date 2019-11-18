@@ -325,6 +325,7 @@ class BiolinkController extends Controller
     
     $temp_arr = array();
     $temp_arr['judul'] = ['required', 'string',  'max:191' ];
+    $temp_arr['imagepages'] = ['image', 'max:1000'];
 
     if (!is_null($request->judulBanner)){
       if ($user->membership=='basic' or  $user->membership=='elite') 
@@ -344,6 +345,7 @@ class BiolinkController extends Controller
             $arr['message'] = "Banner Link ".$i." tidak valid";
             return $arr;
           }
+          $temp_arr['bannerImage.'.$i] = ['image', 'max:1000'];
         }
       }
     }
@@ -502,10 +504,16 @@ class BiolinkController extends Controller
           if($request->hasFile('bannerImage.'.$i)) {
             $arr_size = getimagesize( $request->file('bannerImage')[$i] );
             $ratio_img = $arr_size[0] / $arr_size[1];
-            if ($ratio_img<1.2)  {
+            if ($ratio_img<2.1)  {
               $arr['status'] = 'error';
               $temp = $i+1;
-              $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih besar dari 1.2';
+              $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih besar dari 2.1';
+              return $arr;
+            }
+            if ($ratio_img>2.2)  {
+              $arr['status'] = 'error';
+              $temp = $i+1;
+              $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih kecil dari 2.2';
               return $arr;
             }
           }

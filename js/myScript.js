@@ -9,7 +9,7 @@ function initGallery()
       captionText=document.querySelector(".captionTextHolder .captionText");
       captionText.innerText=slides[slideIndex].querySelector(".captionText").innerText;
       //disable nextPrevBtn if slide count is one
-      if(slides.length<1){
+      if(slides.length<=1){
           var nextPrevBtns=document.querySelector(".leftArrow,.rightArrow");
           nextPrevBtns.style.display="none";
           document.getElementById('right').style.display="none";

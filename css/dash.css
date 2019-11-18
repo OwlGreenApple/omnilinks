@@ -1096,3 +1096,10 @@ ul {
 .btnview{
   white-space:normal;
 }
+.custom-file-label{
+  overflow:hidden;
+  white-space:normal;
+}
+.list-banner{
+  position:relative;
+}
