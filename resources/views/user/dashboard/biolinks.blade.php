@@ -3343,19 +3343,21 @@ and add more";
  
   //SCALE BANNER IMAGE
   $(window).on('load', function(){
-     var bannerwidth = $('.banner-image, .fix-image').eq(0).width();
-     resize(bannerwidth,0);
+     resize();
   });
 
-  function resize(width,pos)
+  function resize()
   {
      var cons = 2.17;
-     var h, hin = 0;
-
      /* image banner */
-     hin = width/cons;
-     hin = Number(hin.toFixed(1));
-     $(".banner-image").eq(pos).height(hin);
+     $(".banner-image").each(function(i){
+         var hin = 0;
+         var width = $(this).width();
+
+         hin = width/cons;
+         hin = Number(hin.toFixed(1));
+         $(".banner-image").height(hin);
+     });
   }
 
    //ALERT WHEN USER FORGOT TO SAVE
@@ -3387,8 +3389,7 @@ and add more";
   $('body').on('click', '.btn-preview', function() {
     $('.preview-mobile').html($('.mobile1').html());
     $('.preview-mobile').toggleClass('preview-none');
-    var banner_width = $('.banner-image').eq(1).width();
-    resize(banner_width,1);
+    resize();
   });
 
   $('body').on('click', '.themes', function() {
