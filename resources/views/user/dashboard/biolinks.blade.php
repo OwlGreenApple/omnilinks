@@ -1581,13 +1581,21 @@
   }
 
   function showSlides(n) {
-    // console.log(n);
-    // console.log($(".mySlides").length);
     var i;
     // let slides = document.getElementsByClassName("mySlides");
     // let slides = document.getElementsByClassName("mySlides");
-    var dots = $(".dot");
-    var slides = $(".mySlides");
+    if ($('.preview-mobile').hasClass('preview-none')){
+      var dots = $(".dot");
+      var slides = $(".mySlides");
+      console.log("asd1");
+    }
+    else {
+      console.log("asd2");
+      var dots = $(".preview-mobile .dot");
+      var slides = $(".preview-mobile .mySlides");
+    }
+    console.log(n);
+    console.log(slides.length);
     if (n > slides.length) {// need to be fix
       slideIndex = 1;
     }
