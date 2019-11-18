@@ -1587,15 +1587,13 @@
     if ($('.preview-mobile').hasClass('preview-none')){
       var dots = $(".dot");
       var slides = $(".mySlides");
-      console.log("asd1");
     }
     else {
-      console.log("asd2");
       var dots = $(".preview-mobile .dot");
       var slides = $(".preview-mobile .mySlides");
     }
-    console.log(n);
-    console.log(slides.length);
+    // console.log(n);
+    // console.log(slides.length);
     if (n > slides.length) {// need to be fix
       slideIndex = 1;
     }
