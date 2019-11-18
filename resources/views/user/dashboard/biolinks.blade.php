@@ -2904,7 +2904,7 @@ and add more";
                   </header>
 
                   @if(Auth::user()->membership!='free')
-                  <div class="col-md-12">
+                  <div class="col-md-12 fix-image ">
                     <div class="slideshow-container">
                       <div class="ap" id="viewbanner">
                       <?php 
@@ -2915,20 +2915,20 @@ and add more";
                           if (!is_null($ban->images_banner)){
                       ?>
                         <div class="mySlides mylides fit" id="picture-id-<?=$ut?>-get">
-                          <!--<img src="<?php  
+                          <!--<img src="<php  
                           // echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); 
                           echo Storage::disk('s3')->url($ban->images_banner); 
                           ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada" altSrc="{{asset('/image/739x218.png')}}" onerror="this.src = $(this).attr('altSrc')"> 
                           -->
                           <?php
                             if ($ban->images_banner=="0"){
-                              $bg_image = asset('/image/424x200.jpg');
+                              $bg_image = asset('/image/434x200.jpg');
                             }
                             else {
                               $bg_image = Storage::disk('s3')->url($ban->images_banner);
                             }
                           ?>
-                          <div id="image-update-<?=$ut?>" style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image input-picture-<?=$ut?>-get"></div>
+                          <div id="image-update-<?=$ut?>" style="background-image:url('<?php echo $bg_image; ?>');" class="banner-image test input-picture-<?=$ut?>-get"></div>
                         </div>
                       <?php 
                         }}?>
@@ -3288,6 +3288,24 @@ and add more";
   let counterBanner=0;
   var changed = 0;
 
+ 
+  //SCALE BANNER IMAGE
+  $(window).on('load', function(){
+     var bannerwidth = $('.banner-image, .fix-image').eq(0).width();
+     resize(bannerwidth,0);
+  });
+
+  function resize(width,pos)
+  {
+     var cons = 2.17;
+     var h, hin = 0;
+
+     /* image banner */
+     hin = width/cons;
+     hin = Number(hin.toFixed(1));
+     $(".banner-image").eq(pos).height(hin);
+  }
+
    //ALERT WHEN USER FORGOT TO SAVE
    $( ":input" ).change(function() {
       changed = $(this).closest('#saveTemplate').data('changed', true);
@@ -3311,10 +3329,14 @@ and add more";
         return false;
      }
   });
+
+  //..
   
   $('body').on('click', '.btn-preview', function() {
     $('.preview-mobile').html($('.mobile1').html());
     $('.preview-mobile').toggleClass('preview-none');
+    var banner_width = $('.banner-image').eq(1).width();
+    resize(banner_width,1);
   });
 
   $('body').on('click', '.themes', function() {
@@ -4060,7 +4082,7 @@ and add more";
         style="none"; 
       }
       // $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><img id="picture-'+idpic+'" src="<php echo asset('image/739x218.png');?>" value="tidakada" class="imagesize input-picture-'+idpic+'-get"></div>');
-      strTempBgImage1="<?php echo asset('image/424x200.jpg'); ?>";
+      strTempBgImage1="<?php echo asset('image/434x200.jpg'); ?>";
       strTempBgImage2="background-image:url('"+strTempBgImage1+"');";
       $('#viewbanner').append('<div class="mySlides mylides fit" id="picture-id-'+idpic+'-get"  style="display:'+style+'" value="hid"><div id="picture-'+idpic+'" style="'+strTempBgImage2+'" class="banner-image input-picture-'+idpic+'-get"></div></div>');
       

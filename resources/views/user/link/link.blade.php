@@ -1496,6 +1496,7 @@ and add more";
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
 
+  //SCALE BANNER IMAGE
   var w, win;
   var h, hin = 0;
 
@@ -1513,16 +1514,17 @@ and add more";
 
   function resize()
   {
+     var cons = 2.17;
      //image banner
      win = $(".banner-image").width();
-     hin = win/2.17;
+     hin = win/cons;
      hin = Number(hin.toFixed(1));
      $(".banner-image").height(hin);
 
      //outside banner
      w = $(".galleryContainer").width();
      w = w + 18
-     h = (w/2.17) - 18;
+     h = (w/cons) - 18;
      h = h + 0.05;
      h = Number(h.toFixed(1));
      $(".galleryContainer").height(h);
