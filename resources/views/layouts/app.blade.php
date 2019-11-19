@@ -260,8 +260,8 @@
                 Contact us
               </h5>
               <li class="linkfooter">
-                <a onclick="window.location.href='mailto:omnilinkzcom@gmail.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
-                  omnilinkzcom@gmail.com
+                <a onclick="window.location.href='mailto:info@omnilinkz.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
+                  info@omnilinkz.com
                 </a>
               </li>
               <li>
@@ -270,6 +270,11 @@
                 </a>
                 <a href="https://www.instagram.com/omnilinkz/" target="_blank">
                   <i class="fab fa-instagram linkfooter" style="margin-left:5px;"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://activomni.com" class="linkfooter">
+                Part of Activomni.com
                 </a>
               </li>
             </ul>
@@ -311,8 +316,13 @@
         <br>
         <b>Copyright</b><br>
         Omnilinkz.com | 2019 All Rights Reserved. | 
-        <a onclick="window.location.href='mailto:omnilinkzcom@gmail.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
-          omnilinkzcom@gmail.com
+        <a onclick="window.location.href='mailto:info@omnilinkz.com.address?subject=Hi Omnilinkz';" style="cursor:pointer;">
+          info@omnilinkz.com
+        </a>
+        <br>
+        <br>
+        <a href="https://activomni.com" class="linkfooter">
+        Part of Activomni.com
         </a>
       </div>
     </footer>
