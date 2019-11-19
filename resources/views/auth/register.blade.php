@@ -1,5 +1,26 @@
 @extends('layouts.app')
 @section('content')
+<script>
+  function hanyaAngka(evt) {
+      var charCode = (evt.which) ? evt.which :event.keyCode
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+          return false;
+      return true;
+  }
+  $(document).ready(function() {
+      $('#wa-number').keypress(function(e){
+        if (this.value.length == 0 && e.which == 48 ){
+          return false;
+        }
+      });
+      $('#wa-number').on('input propertychange paste', function (e) {
+          var reg = /^0+/gi;
+          if (this.value.match(reg)) {
+              this.value = this.value.replace(reg, '');
+          }
+      });
+  });
+</script>
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 <div class="container" style="padding-top: 120px; padding-bottom:50px;">
   <div class="row justify-content-center">
@@ -73,6 +94,17 @@
                   <label for="password-confirm" class="text">{{ __('Konfirmasi Password') }}
                   </label>
                   <input id="password-confirm" type="password" class="col-md-12 col-12 form-control form-input" name="password_confirmation" placeholder="Confirm Password" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 col-12">
+                  <label for="wa-number" class="text">{{ __('Masukkan No WA') }}</label>
+                  <input id="wa-number" type="text" class="col-md-12 col-12 form-control form-input{{ $errors->has('wa_number') ? ' is-invalid' : '' }}" name="wa_number" placeholder="No WA ex: 6281..." onkeypress="return hanyaAngka(event)" required>
+                  @if ($errors->has('wa_number'))
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('wa_number') }}</strong>
+                  </span>
+                  @endif
                 </div>
               </div>
               <div class="form-group row">

@@ -82,6 +82,7 @@ class RegisterController extends Controller
       'username'=> $data['username'],
       'password' => Hash::make($data['password']),
       'membership' => 'free',
+      'wa_number' => $data['wa_number'],
     ]);
 
     if ($data['price']<>"") {
@@ -186,8 +187,10 @@ class RegisterController extends Controller
   public function register(Request $request)
   {
     //dd($request->all());
-    $validator = $this->validator($request->all());
-
+    if(!is_numeric($request->wa_number)){
+      return redirect("register")->with("error", " No WA harus angka");
+    }
+    
     $ordercont = new OrderController;
     if($request->price<>""){
       $stat = $ordercont->cekharga($request->namapaket,$request->price);
@@ -196,6 +199,7 @@ class RegisterController extends Controller
       }
     }
 
+    $validator = $this->validator($request->all());
     if(!$validator->fails()) {
       $user = $this->create($request->all());
      
