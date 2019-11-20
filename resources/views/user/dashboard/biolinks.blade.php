@@ -1839,6 +1839,7 @@
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
           $("#custom-link-show").html(data.customLink);
+          $("#btn-copy-custom-link").attr("data-link",data.customLink);
         }
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
@@ -1935,7 +1936,7 @@
       
       <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
       <div class=" col-12">
-        <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a> <span class="btn-copy" data-link="https://{{env('SHORT_LINK')}}/{{$custom_link}}"><i class="fas fa-file"></i></span>
+        <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a> <span id="btn-copy-custom-link" class="btn-copy" data-link="https://{{env('SHORT_LINK')}}/{{$custom_link}}"><i class="fas fa-file"></i></span>
       </div>
 
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
