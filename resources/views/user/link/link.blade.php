@@ -1288,7 +1288,7 @@ and add more";
       
           @if($msg=='wa' )
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
                   <i class="fab fa-whatsapp icon-msg"></i>
                   @if($div==0)
@@ -1301,7 +1301,7 @@ and add more";
 
           @if($msg=='telegram')
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="#" data-href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
                   <i class="fab fa-telegram-plane"></i>
                   @if($div==0)
@@ -1313,7 +1313,7 @@ and add more";
           @endif  
           @if($msg=='skype')
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="#" data-href="{{env('APP_URL').'/click/skype/'.$pages->id}}" title="Skype" target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/skype/'.$pages->id}}" title="Skype" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
                   <i class="fab fa-skype icon-msg"></i>
                   @if($div==0)
@@ -1327,7 +1327,7 @@ and add more";
 
           @if($msg=='line')
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="#" data-href="{{env('APP_URL').'/click/line/'.$pages->id}}" title="Line" target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/line/'.$pages->id}}" title="Line" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
                   <i class="fab fa-line"></i>
                   @if($div==0)
@@ -1340,7 +1340,7 @@ and add more";
 
           @if($msg=='messenger')
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
-              <a href="#" data-href="{{env('APP_URL').'/click/messenger/'.$pages->id}}" title="Messenger" target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/messenger/'.$pages->id}}" title="Messenger" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
                   <i class="fab fa-facebook-messenger"></i>
                   @if($div==0)
@@ -1362,7 +1362,7 @@ and add more";
         else {
           ?>
             <li class="col pl-1 pr-1 mb-3">
-              <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
                   <i class="fab fa-whatsapp icon-msg"></i>
                     <span class="textbutton"> WhatsApp</span>
@@ -1370,7 +1370,7 @@ and add more";
               </a>
             </li>
             <li class="col pl-1 pr-1 mb-3">
-              <a href="#" data-href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/telegram/'.$pages->id}}" title="Telegram" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
                   <i class="fab fa-telegram-plane"></i>
                     <span class="textbutton" > Telegram</span>
@@ -1388,7 +1388,7 @@ and add more";
         @if($links->count())
           @foreach($links as $link)
             <li class="col-md-12 col-12 mb-3"> 
-              <a href="#" data-href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov">
+              <a href="#" data-href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
                   <span class="textbutton">
                     {{$link->title}}
@@ -1406,25 +1406,25 @@ and add more";
           foreach ($sort_sosmed as $sosmed) { ?>
           <li class="col text-center icon-sosmed">
             @if( $sosmed=='fb')
-              <a href="#" data-href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank" class="link-ajax">
                 <i class="fab fa-facebook-square"></i>
               </a>
             @endif
           
             @if($sosmed=='ig' )
-              <a href="#" data-href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank" class="link-ajax">
                 <i class="fab fa-instagram"></i>
               </a> 
             @endif
 
             @if($sosmed=='twitter' )
-              <a href="#" data-href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank" class="link-ajax">
                 <i class="fab fa-twitter-square"></i>
               </a>
             @endif
 
             @if($sosmed=='youtube' )
-              <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
               </a>
             @endif 
@@ -1443,22 +1443,22 @@ and add more";
         else {
         ?>
           <li class="col text-center icon-sosmed">
-              <a href="#" data-href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank" class="link-ajax">
                 <i class="fab fa-facebook-square"></i>
               </a>
           </li>
           <li class="col text-center icon-sosmed">
-              <a href="#" data-href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank" class="link-ajax">
                 <i class="fab fa-instagram"></i>
               </a> 
           </li>
           <li class="col text-center icon-sosmed">
-              <a href="#" data-href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank" class="link-ajax">
                 <i class="fab fa-twitter-square"></i>
               </a>
           </li>
           <li class="col text-center icon-sosmed">
-              <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank">
+              <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
               </a>
           </li>
@@ -1696,7 +1696,7 @@ and add more";
     $("#description").html(tempStr);
     @endif
     
-    $("body").on("click","a",function(e){
+    $("body").on("click",".link-ajax",function(e){
       e.preventDefault();
       linkAjax = $(this).attr('data-href');
       call_mylink(linkAjax);
