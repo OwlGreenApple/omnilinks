@@ -1227,6 +1227,11 @@
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
+      statusCode: {
+        419: function() { 
+          window.location.href = "<?php echo url('/login');?>"; //or what ever is your login URI 
+        }
+      },
       success: function(data) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
@@ -1262,6 +1267,11 @@
       {
         $('#loader').show();
         $('.div-loading').addClass('background-load');
+      },
+      statusCode: {
+        419: function() { 
+          window.location.href = "<?php echo url('/login');?>"; //or what ever is your login URI 
+        }
       },
       success: function(result) {
         $('#loader').hide();
