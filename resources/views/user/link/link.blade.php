@@ -1240,7 +1240,7 @@ and add more";
                           // $bg_image = Storage::disk('s3')->url($ban->images_banner);
                         // }
                       if ($ban->images_banner=="0"){
-                       $bg_image = asset('/image/424x200.jpg');
+                       $bg_image = asset('/image/434x200.jpg');
                       }
                       else {
                         $bg_image = Storage::disk('s3')->url($ban->images_banner);

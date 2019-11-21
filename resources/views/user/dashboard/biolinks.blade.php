@@ -2597,7 +2597,7 @@ and add more";
                                       <label class="custom-file-label" for="inputGroupFile01">
                                         <?php 
                                           if ($ban->images_banner=="0"){
-                                            echo asset('/image/424x200.jpg');
+                                            echo asset('/image/434x200.jpg');
                                           }
                                           else {
                                             echo basename($ban->images_banner);

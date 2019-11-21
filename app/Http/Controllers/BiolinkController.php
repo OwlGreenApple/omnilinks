@@ -322,6 +322,11 @@ class BiolinkController extends Controller
   public function savetemp(Request $request)
   {
     $user=Auth::user();
+    if (is_null($user)){
+      $arr['status'] = 'error';
+      $arr['message'] = "Silahkan Login ulang, <a href='".url('login')."'>klik</a>";
+      return $arr;
+    }
     
     $temp_arr = array();
     $temp_arr['judul'] = ['required', 'string',  'max:191' ];
@@ -643,6 +648,11 @@ class BiolinkController extends Controller
     
   	$uuid=$request->uuid;
   	$user=Auth::user();
+    if (is_null($user)){
+      $arr['status'] = 'error';
+      $arr['message'] = "Silahkan Login ulang, <a href='".url('login')."'>klik</a>";
+      return $arr;
+    }
   	$page=Page::where('uid','=',$uuid)
               ->where('user_id',$user->id)
               ->first();
