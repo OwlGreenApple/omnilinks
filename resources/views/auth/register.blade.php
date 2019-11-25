@@ -81,7 +81,7 @@
               <div class="form-group row">
                 <div class="col-md-12 col-12">
                   <label for="password" class="text">{{ __('Masukkan Password') }}</label>
-                  <input id="password" type="password" class="col-md-12 col-12 form-control form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password" required>
+                  <input id="password" type="password" class="col-md-12 col-12 form-control form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password min 6 character" required>
                   @if ($errors->has('password'))
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('password') }}</strong>
