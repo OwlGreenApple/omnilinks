@@ -933,15 +933,33 @@ class BiolinkController extends Controller
 
   public function savepixel(Request $request)
   {
+    $temp_arr = array();
+    $temp_arr['script'] = ['required', 'string' ];
+
+    
+    $messages = [
+        'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
+        /*'same'    => 'The :attribute and :other must match.',
+        'size'    => 'The :attribute must be exactly :size.',
+        'between' => 'The :attribute value :input is not between :min - :max.',
+        'in'      => 'The :attribute must be one of the following types: :values',*/
+    ];
+
+    $validator = Validator::make($request->all(), $temp_arr, $messages); 
+    
+    if($validator->fails()) {
+      $arr['status'] = 'error';
+      $arr['message'] = $validator->errors()->first();
+      return $arr;
+    }
+    
   	$uuid=$request->uuidpixel;
   	$page=Page::where('uid','=',$uuid)->first();
-    if (is_null($request->editidpixel)) 
-    {
+    if (is_null($request->editidpixel)) {
         $pixel=new Pixel();
     }
-    else
-    {
-     $pixel=Pixel::where('id','=',$request->editidpixel)->first(); 
+    else {
+      $pixel=Pixel::where('id','=',$request->editidpixel)->first(); 
     }
     
   	$user=Auth::user();
@@ -951,7 +969,11 @@ class BiolinkController extends Controller
     $pixel->jenis_pixel=$request->jenis_pixel;
   	$pixel->script=$request->script;
   	$pixel->save();
-  	return redirect('/biolinks/'.$uuid);
+  	// return redirect('/biolinks/'.$uuid);
+    
+    $arr['status'] = 'success';
+    $arr['message'] = "Data Berhasil disimpan";
+    return $arr;
   }
 
   public function loadpixel(Request $request)

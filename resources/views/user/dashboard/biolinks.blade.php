@@ -1332,6 +1332,21 @@
         refreshpixel();
         loadPixelPage();
         tambahBanner();
+
+        var data = jQuery.parseJSON(result);
+        
+        $("#pesanAlert").html(data.message);
+        $("#pesanAlert").show();
+        // $(window).scrollTop(0);
+        if(data.status == "success") {
+          $("#pesanAlert").addClass("alert-success");
+          $("#pesanAlert").removeClass("alert-danger");
+        }
+        if (data.status == "error") {
+          $("#pesanAlert").addClass("alert-danger");
+          $("#pesanAlert").removeClass("alert-success");
+        }
+        
       },
     });
   }
