@@ -54,8 +54,8 @@ class CheckMembership extends Command
         $now = Carbon::now();
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
         $interval = $now->diffInDays($date);
-        var_dump($user->email);
-        var_dump($interval);
+        // var_dump($user->email);
+        // var_dump($interval);
         if($interval==5){
           Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
         }
