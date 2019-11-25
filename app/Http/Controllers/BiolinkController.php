@@ -31,7 +31,7 @@ class BiolinkController extends Controller
     }
 
     $temp_arr = array();
-    $temp_arr['nomorwa'] = ['required', 'string',  'max:191' ];
+    $temp_arr['nomorwa'] = ['required', 'number',  'max:191' ];
     $temp_arr['pesan'] = ['required', 'string',  'max:191' ];
     $temp_arr['textlink'] = ['required', 'string',  'max:191' ];
 
