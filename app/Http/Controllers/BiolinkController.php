@@ -31,7 +31,7 @@ class BiolinkController extends Controller
     }
 
     $temp_arr = array();
-    $temp_arr['nomorwa'] = ['required', 'number',  'max:191' ];
+    $temp_arr['nomorwa'] = ['required', 'numeric',  'max:191' ];
     $temp_arr['pesan'] = ['required', 'string',  'max:191' ];
     $temp_arr['textlink'] = ['required', 'string',  'max:191' ];
 
@@ -68,7 +68,10 @@ class BiolinkController extends Controller
   	$walink->pesan=$request->pesan;
   	$walink->linkgenerator=$request->textlink;
   	$walink->save();	  
-  	return redirect('/biolinks/'.$uuid);
+  	// return redirect('/biolinks/'.$uuid);
+    $arr['status'] = 'success';
+    $arr['message'] = "Data Berhasil disimpan";
+    return $arr;
   }
 
   public function loadwalink(Request $request)
