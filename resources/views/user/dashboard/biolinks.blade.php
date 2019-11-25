@@ -3497,6 +3497,10 @@ and add more";
               this.value = this.value.replace(reg, '');
           }
       });
+      $('body').on('keyup', '#nomorwa,#input-msg-wa', function() {
+          newval = $(this).val().replace(/[^0-9.]/g, "");
+          $(this).val(newval);
+      });
 
       $('#reload-cancel').click(function(e){
         e.preventDefault();
