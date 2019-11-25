@@ -13,7 +13,7 @@ use App\PremiumID;
 use App\Mail\ExpiredMembershipMail;
 use App\Mail\ExpiredPremiumIDMail;
 
-use Mail,DateTime;
+use Mail,DateTime,Carbon;
 
 class CheckMembership extends Command
 {
@@ -51,17 +51,17 @@ class CheckMembership extends Command
       $users = User::All();
 
       foreach ($users as $user) {
-        $now = new DateTime();
-        $date = new DateTime($user->valid_until);
-        $interval = $date->diff($now)->format('%d');
+        $now = Carbon::now();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+        $interval = $now->diffInDays($date);
+        var_dump($user->email);
         var_dump($interval);
-        var_dump($date<$now);
-        if($date>$now and $interval==5){
+        if($interval==5){
           Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
         }
 
         //check premium id 
-        if($date<$now and $interval==5){
+        if($interval==5){
             $pages = Page::where('user_id',$user->id)
                         ->where('premium_id','!=',0)
                         ->get();
