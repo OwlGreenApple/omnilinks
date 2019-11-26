@@ -1331,7 +1331,6 @@
         $(window).scrollTop(0);
         refreshpixel();
         loadPixelPage();
-        tambahBanner();
 
         var data = jQuery.parseJSON(result);
         
