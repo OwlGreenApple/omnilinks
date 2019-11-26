@@ -133,7 +133,7 @@ class BiolinkController extends Controller
   	$page->user_id=$user->id; 
   	$page->uid=$uuid;
   	$page->names=$generated_string; 
-    if ($user->membership<>'free') {
+    if ($user->membership=='free') {
       $page->powered=1; 
     }
     //default value
