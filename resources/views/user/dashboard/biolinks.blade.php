@@ -1326,6 +1326,8 @@
 
     if(len > 0)
     {
+        location.href="#pesanAlert";
+        $("#script-code").html('');
         return false;
     }
 
@@ -1354,8 +1356,9 @@
         loadPixelPage();
 
         var data = jQuery.parseJSON(result);
-        
         $(".alertTitle").removeClass("alert-danger");
+        $(".alertTitle").html('');
+
         $("#pesanAlert").html(data.message);
         $(".alertTitle").html(data.errtitle);
         $("#pesanAlert").show();
@@ -1367,9 +1370,12 @@
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-success");
+          location.href="#pesanAlert";
         } 
-        if (data.status == "error" && data.errtitle.length > 0) {
+        if (data.statustitle == "error") {
           $(".alertTitle").addClass("alert-danger");
+          $("#pesanAlert").removeClass("alert-danger");
+          location.href="#pesanAlert";
         }
         
       },
@@ -3398,8 +3404,6 @@ and add more";
 <!-- count length to determine if script has error -->
 <div style="visibility: hidden" id="error-script"></div>
 
-
-<div style="visibility: hidden" id="script-code"><!-- script checker --></div>
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
 <noscript>Jalankan Javascript di browser anda</noscript>
@@ -4362,6 +4366,7 @@ and add more";
       $('#judul').val(title);
       $('#editidpixel').val(editidpixel);
       $('#jenis_pixel').val(jenis);
+      location.href="#script";
     });
     
     

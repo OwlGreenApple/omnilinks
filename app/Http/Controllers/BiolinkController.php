@@ -959,6 +959,7 @@ class BiolinkController extends Controller
     if($validator->fails()) {
       $arr['status'] = 'error';
       $arr['message'] = $validator->errors()->first('script');
+      $arr['statustitle'] = 'error';
       $arr['errtitle'] = $validator->errors()->first('title');
       return $arr;
     }
@@ -970,7 +971,7 @@ class BiolinkController extends Controller
     $opentag = count($patternopen[0]);
     $closetag = count($patternclose[0]);
 
-    if($opentag <> $closetag)
+    if(($opentag <> $closetag) || $opentag < 1)
     {
         $data['status'] = 'error';
         $data['message'] = 'Mohon gunakan javascript yang valid'; 
