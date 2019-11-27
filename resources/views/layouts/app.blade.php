@@ -65,6 +65,8 @@
     });
   </script>
 
+  <div id="checkscript"></div>
+
 </head>
 
 <body>

@@ -1307,7 +1307,28 @@
     });
   }
 
-  function tambahpixel() {
+  function tambahpixel() 
+  {
+    //CHECK WHETHER SCRIPT HAS ERROR OR NOT
+    var elscript = document.getElementById("error-script");
+    elscript.innerHTML = ''; //to make element error-script have default value length
+    window.onerror = function(error){
+        $("#pesanAlert").html('Javascript error silahkan cek kembali');
+        $("#pesanAlert").addClass("alert-danger");
+        $("#pesanAlert").removeClass("alert-success");
+        $("#pesanAlert").show();
+        //alert(error);
+        elscript.innerHTML = error;
+    };
+
+    $("#script-code").html($("#script").val());
+    var len = elscript.innerHTML.length;
+
+    if(len > 0)
+    {
+        return false;
+    }
+
     $.ajax({
       type: 'POST',
       headers: {
@@ -1335,20 +1356,25 @@
 
         var data = jQuery.parseJSON(result);
         
+        $(".alertTitle").removeClass("alert-danger");
         $("#pesanAlert").html(data.message);
+        $(".alertTitle").html(data.errtitle);
         $("#pesanAlert").show();
         // $(window).scrollTop(0);
         if(data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
-          $("#pesanAlert").removeClass("alert-danger");
+          $("#pesanAlert, .alertTitle").removeClass("alert-danger");
         }
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-success");
+        } 
+        if (data.status == "error" && data.errtitle.length > 0) {
+          $(".alertTitle").addClass("alert-danger");
         }
         
       },
-    });
+    }); 
   }
 
   function tambahBanner() {
@@ -1964,7 +1990,7 @@
       </div>
       
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
-      <div id="pesanAlert" class=" alert mb-0" style="display: none;"></div>
+        <div id="pesanAlert" class="alert mb-0"></div>
       </div>
 
       <div class=" col-12">
@@ -2537,6 +2563,7 @@
                     <div class="col-md-6 col-12 mb-3">
                       <input type="text" class="form-control col-md-12" name="title" placeholder="Masukkan Judul" id="judul">
                       <input type="text" name="editidpixel" hidden id="editidpixel">
+                      <div class="alertTitle alert "><!-- Error --></div>
                     </div>
 
                     <div class="col-md-4 pl-md-0 pl-3 text-center">
@@ -3369,6 +3396,11 @@ and add more";
   </div>
 </div>
 
+<!-- count length to determine if script has error -->
+<div style="visibility: hidden" id="error-script"></div>
+
+
+<div style="visibility: hidden" id="script-code"><!-- script checker --></div>
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
 <noscript>Jalankan Javascript di browser anda</noscript>
@@ -4291,8 +4323,8 @@ and add more";
 
     $(document).on("click", "#btnpixel", function(e) {
       tambahpixel();
-      $('#pesanAlert').removeClass('alert-danger');
-      $('#pesanAlert').children().remove();
+      //$('#pesanAlert').removeClass('alert-danger');
+      //$('#pesanAlert').children().remove();
     });
 
     $(document).on("click", ".btn-save-link", function(e) {

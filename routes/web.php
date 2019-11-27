@@ -109,6 +109,7 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //makepixel
     Route::post('/save-pixel','BiolinkController@savepixel');
+    Route::get('/test-pixel','BiolinkController@test');
     Route::get('/load-pixel','BiolinkController@loadpixel');
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 

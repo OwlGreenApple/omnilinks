@@ -931,14 +931,23 @@ class BiolinkController extends Controller
   	return $arr;
   }
 
+  public function test(Request $request)
+  {
+     return view('checkjs',['data'=>$request->script]);
+
+  }
+
   public function savepixel(Request $request)
   {
+
     $temp_arr = array();
     $temp_arr['script'] = ['required', 'string' ];
+    $pixelscript = $request->script;
+    $temp_arr['title'] = ['required','string','max:190'];
 
-    
     $messages = [
         'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
+        'max' => 'Maximal character untuk judul ialah :max karakter'
         /*'same'    => 'The :attribute and :other must match.',
         'size'    => 'The :attribute must be exactly :size.',
         'between' => 'The :attribute value :input is not between :min - :max.',
@@ -949,9 +958,25 @@ class BiolinkController extends Controller
     
     if($validator->fails()) {
       $arr['status'] = 'error';
-      $arr['message'] = $validator->errors()->first();
+      $arr['message'] = $validator->errors()->first('script');
+      $arr['errtitle'] = $validator->errors()->first('title');
       return $arr;
     }
+
+    #TO CHECK CORRECT SCRIPT WRITTING
+    preg_match_all('/<script>|<script.*?>/im', $pixelscript, $patternopen);
+    preg_match_all('/<\/script>/im', $pixelscript, $patternclose);
+
+    $opentag = count($patternopen[0]);
+    $closetag = count($patternclose[0]);
+
+    if($opentag <> $closetag)
+    {
+        $data['status'] = 'error';
+        $data['message'] = 'Mohon gunakan javascript yang valid'; 
+        return $data;
+    }
+    #----
     
   	$uuid=$request->uuidpixel;
   	$page=Page::where('uid','=',$uuid)->first();

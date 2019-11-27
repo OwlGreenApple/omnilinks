@@ -18,7 +18,7 @@ class thisadmin
         if (auth()->check() && ($request->user()->is_admin==1))
         {
             return $next($request);
-          }
-          return redirect('/');
+        }
+        return redirect('/');
     }
 }
