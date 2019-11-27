@@ -1492,6 +1492,8 @@ and add more";
   <div class="div-loading">
     <div id="loader" style="display: none;"></div>  
   </div> 
+  <div id="script-code">
+  </div> 
 
 <script src="{{asset('js/myScript.js')}}"></script>
 <script type="text/javascript">
@@ -1547,7 +1549,8 @@ and add more";
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
         var data = jQuery.parseJSON(result);
-        eval(data.script);
+        // eval(data.script);
+        $("#script-code").html(data.script);
         window.location.href=data.link;
         // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
           // window.location.href=data.link;
