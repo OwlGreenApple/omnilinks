@@ -1467,7 +1467,7 @@ and add more";
       </ul>
       <div class="col-lg-7 col-md-8 mb-5 text-center powered-omnilinks">
         @if($pages->powered==1 || $membership=='free')
-          <a href="#" href="https://omnilinkz.com" target="_blank"><!--powered by<br>Omnilinkz-->
+          <a href="https://omnilinkz.com" target="_blank"><!--powered by<br>Omnilinkz-->
           <img style="width: 150px; margin-bottom: 50px;" src="{{asset('image/powered-by.png')}}"></a>
         @endif
       </div>
