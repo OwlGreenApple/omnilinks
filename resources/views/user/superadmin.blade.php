@@ -53,6 +53,12 @@
                   {{$user->email}}
                 </a>
               </td>
+              <td>
+                {{$user->names}}
+              </td>
+              <td>
+                {{$user->premium_names}}
+              </td>
             </tr>
           @endforeach
         </tbody>
