@@ -297,7 +297,11 @@ class UserController extends Controller
     public function user_list(){
       $user = Auth::user();
       if ($user->is_admin) {
-          $users = User::all();
+          // $users = User::all();
+          $users = User::
+                    join("pages","users.id","=","pages.user_id")
+                    ->select("users.email","pages.names","pages.premium_names")
+                    ->get();
         return view('user.superadmin')->with('users',$users);
       } else {
         return "NOT AUTHORIZED";
