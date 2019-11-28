@@ -44,6 +44,8 @@
       <table class="table" id="myTable">
         <thead align="center">
           <th>Email</th>
+          <th>Random Name</th>
+          <th>Premium Name</th>
         </thead>
         <tbody>
           @foreach($users as $user)
