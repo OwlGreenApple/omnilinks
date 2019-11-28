@@ -1573,7 +1573,8 @@ and add more";
           $('.txthov').find("button").css("border-color","<?php echo $pages->outline ?>");
           $('.txthov').find("button").css("color","<?php echo $pages->outline ?>");
         <?php } else { ?>  
-          $('.txthov').find("button").css("border-color","<?php echo $pages->text_color ?>");
+          // $('.txthov').find("button").css("border-color","<?php echo $pages->text_color ?>");
+          $('.txthov').find("button").css("border-color","<?php echo $pages->outline ?>");
           $('.txthov').find("button").css("color","<?php echo $pages->text_color ?>");
         <?php } ?>  
       <?php } 
