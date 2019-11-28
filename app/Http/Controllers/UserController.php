@@ -300,7 +300,7 @@ class UserController extends Controller
           // $users = User::all();
           $users = User::
                     join("pages","users.id","=","pages.user_id")
-                    ->select("users.email","pages.names","pages.premium_names")
+                    ->select("users.id","users.email","pages.names","pages.premium_names")
                     ->get();
         return view('user.superadmin')->with('users',$users);
       } else {
