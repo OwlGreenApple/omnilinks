@@ -1467,7 +1467,7 @@ and add more";
       </ul>
       <div class="col-lg-7 col-md-8 mb-5 text-center powered-omnilinks">
         @if($pages->powered==1 || $membership=='free')
-          <a href="https://omnilinkz.com" target="_blank"><!--powered by<br>Omnilinkz-->
+          <a data-href="https://omnilinkz.com" class="link-ajax-no-script"><!--powered by<br>Omnilinkz-->
           <img style="width: 150px; margin-bottom: 50px;" src="{{asset('image/powered-by.png')}}"></a>
         @endif
       </div>
@@ -1475,7 +1475,7 @@ and add more";
       @if($membership=='free')
         @if(!is_null($ads))
           <div class="col-lg-7 col-md-8 text-center redirect-ads big">
-            <a href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" target="_blank">
+            <a data-href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" class="link-ajax-no-script">
               <span href="#" class="headline-1-view-get headads">
                   {{$ads->headline}}  
               </span>
@@ -1709,6 +1709,13 @@ and add more";
     $('body').on('click','.imageHolder', function(e) {
       var url = urlbanner[slideIndex];
       call_mylink(url);
+    });
+    
+    $("body").on("click",".link-ajax-no-script",function(e){
+      e.preventDefault();
+      $('#loader').show();
+      $('.div-loading').addClass('background-load');
+      window.location.href=$(this).attr('data-href');
     });
 
   });
