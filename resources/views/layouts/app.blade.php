@@ -88,6 +88,7 @@
 
             </ul>
 
+            <?php if(!Request::is('checkout')) { ?>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               @if(Auth::check())
@@ -191,6 +192,7 @@
                 </form>
               @endguest
             </ul>
+            <?php } ?>
           </div>
       </div>
     </nav>
