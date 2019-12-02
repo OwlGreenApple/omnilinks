@@ -112,7 +112,7 @@ class OrderController extends Controller
             $arr['status'] = 'success';
             $arr['message'] = '';
             $arr['total'] = number_format($total, 3, '.', '');
-            $arr['diskon'] = $diskon;
+            $arr['diskon'] = number_format($diskon, 3, '.', '');
             $arr['coupon'] = $coupon;
           }
         }
