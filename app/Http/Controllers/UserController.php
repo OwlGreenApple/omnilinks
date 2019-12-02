@@ -299,7 +299,7 @@ class UserController extends Controller
       if ($user->is_admin) {
           // $users = User::all();
           $users = User::
-                    join("pages","users.id","=","pages.user_id")
+                    leftJoin("pages","users.id","=","pages.user_id")
                     ->select("users.id","users.email","pages.names","pages.premium_names")
                     ->get();
         return view('user.superadmin')->with('users',$users);
