@@ -88,7 +88,7 @@
 
             </ul>
 
-            <?php if(!Request::is('checkout')) { ?>
+            <?php if(!Request::is('checkout/*')) { ?>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
               @if(Auth::check())
