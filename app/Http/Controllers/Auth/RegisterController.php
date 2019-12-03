@@ -87,7 +87,7 @@ class RegisterController extends Controller
 
     if ($data['price']<>"") {
       $diskon = 0;
-      $total = $data['price'];
+      // $total = $data['price'];
       $kuponid = null;
       if($data['kupon']!=''){
         $arr = $ordercont->cek_kupon($data['kupon'],$data['price'],$data['idpaket']);
@@ -95,7 +95,7 @@ class RegisterController extends Controller
         if($arr['status']=='error'){
           return redirect("checkout/1")->with("error", $arr['message']);
         } else {
-          $total = $arr['total'];
+          // $total = $data['price'];
           $diskon = $arr['diskon'];
           if($arr['coupon']!=null){
             $kuponid = $arr['coupon']->id;
@@ -115,7 +115,7 @@ class RegisterController extends Controller
       $order->coupon_id = $kuponid;
       $order->total = $data["price"];
       $order->discount = $diskon;
-      $order->grand_total = $total;
+      $order->grand_total = $data['price'] - $diskon;
       $order->status = 0;
       $order->buktibayar = "";
       $order->keterangan = "";

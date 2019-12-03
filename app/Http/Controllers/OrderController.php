@@ -252,7 +252,7 @@ class OrderController extends Controller
     $user = Auth::user();
 
     $diskon = 0;
-    $total = $request->price;
+    // $total = $request->price;
     $kuponid = null;
     if($request->kupon!=''){
       $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
@@ -260,7 +260,7 @@ class OrderController extends Controller
       if($arr['status']=='error'){
         return redirect("checkout/1")->with("error", $arr['message']);
       } else {
-        $total = $arr['total'];
+        // $total = $arr['total'];
         $diskon = $arr['diskon'];
         
         if($arr['coupon']!=null){
@@ -280,7 +280,7 @@ class OrderController extends Controller
     $order->coupon_id = $kuponid;
     $order->total = $request->price;
     $order->discount = $diskon;
-    $order->grand_total = $total;
+    $order->grand_total = $request->price - $diskon;
     $order->status = 0;
     $order->buktibayar = "";
     $order->keterangan = "";
