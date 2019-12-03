@@ -51,8 +51,8 @@
                   <strong>Success!</strong> {{session('success')}}
                 </div>
                 @endif
-                <div class="col-md-12 col-12">
-                  <label for="name" class="text">{{ __('Nama Lengkap') }}</label>
+                <label for="name" class="text">{{ __('Nama Lengkap') }}</label>
+                <div class="input-group">
                   <input id="name" type="text" class="col-md-12 col-12 form-control form-input{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Full Name" required autofocus>
                   @if ($errors->has('name'))
                   <span class="invalid-feedback" role="alert">
@@ -62,8 +62,8 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-md-12 col-12">
-                  <label for="email" class="text">{{ __('Masukkan Email') }}</label>
+                <label for="email" class="text">{{ __('Masukkan Email') }}</label>
+                <div class="input-group">
                   <input id="email" type="email" class="col-md-12 col-12 form-control form-input{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
                   @if ($errors->has('email'))
                   <span class="invalid-feedback" role="alert">
@@ -72,16 +72,27 @@
                   @endif
                 </div>
               </div>
+              <!--
               <div class="form-group row">
                 <div class="col-md-12 col-12">
                   <label for="username" class="text">{{__('Masukkan Username') }}</label>
                   <input type="text" id="username" class="col-md-12 col-12 form-control form-input" name="username" placeholder="Username" required>
                 </div>
               </div>
+              -->
               <div class="form-group row">
-                <div class="col-md-12 col-12">
-                  <label for="password" class="text">{{ __('Masukkan Password') }}</label>
-                  <input id="password" type="password" class="col-md-12 col-12 form-control form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password min 6 character" required>
+                <label for="password" class="text">{{ __('Masukkan Password') }}</label>
+                <div class="input-group" id="show_password">
+                  <input id="password" type="password" class="form-control form-input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password min 6 character" required style="width: auto !important">
+                  
+                  <div class="input-group-append" for="password">
+                    <label class="input-group-text">
+                      <span class="icon-pass">
+                        <i class="fas fa-eye-slash" aria-hidden="true"></i>
+                      </span>
+                    </label>
+                  </div>
+                  
                   @if ($errors->has('password'))
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('password') }}</strong>
@@ -89,6 +100,7 @@
                   @endif
                 </div>
               </div>
+              <!--
               <div class="form-group row">
                 <div class="col-md-12 col-12">
                   <label for="password-confirm" class="text">{{ __('Konfirmasi Password') }}
@@ -96,9 +108,10 @@
                   <input id="password-confirm" type="password" class="col-md-12 col-12 form-control form-input" name="password_confirmation" placeholder="Confirm Password" required>
                 </div>
               </div>
+              -->
               <div class="form-group row">
-                <div class="col-md-12 col-12">
-                  <label for="wa-number" class="text">{{ __('Masukkan No WA') }}</label>
+                <label for="wa-number" class="text">{{ __('Masukkan No WA') }}</label>
+                <div class="input-group">
                   <input id="wa-number" type="text" class="col-md-12 col-12 form-control form-input{{ $errors->has('wa_number') ? ' is-invalid' : '' }}" name="wa_number" placeholder="No WA ex: 6281..." onkeypress="return hanyaAngka(event)" required>
                   @if ($errors->has('wa_number'))
                   <span class="invalid-feedback" role="alert">
@@ -108,10 +121,10 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-md-12">
                   <label class="text" for="gender">
                     Gender:&nbsp;
                   </label>
+                <div class="input-group">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="1" checked>
                     <label class="form-check-label" for="inlineRadio1">Male</label>
@@ -123,7 +136,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-md-12">
+                <div class="input-group">
                   <label for="agree-term" class="label-agree-term">
                     <input type="checkbox" name="agree-term" id="agree-term" class="agree-term mr-1" required />
                     I agree with
@@ -134,11 +147,14 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-md-12 col-12">
+                <div class="input-group">
                   <button type="submit" class="btn btn-primary bsub btn-block">
                     REGISTER
                   </button>
-
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 col-12">
                   <?php if(!isset($price)) { ?>
                     <hr class="own">
                     <h3 class="have">Sudah Punya Akun?&nbsp;<a href="{{ __('login')}}">Masuk Disini</a></h3>
@@ -152,6 +168,29 @@
     </div>
   </div>
 </div>
+<script>
+ $(document).ready(function() {
+   $("#show_password .icon-pass").on('click', function(e) {
+      if($('#show_password input').attr("type") == "text"){
+        $('#show_password input').attr('type', 'password');
+        $('#show_password .icon-pass').html('<i class="fas fa-eye-slash" aria-hidden="true"></i>');
+      } else if($('#show_password input').attr("type") == "password"){
+        $('#show_password input').attr('type', 'text');
+        $('#show_password .icon-pass').html('<i class="fas fa-eye" aria-hidden="true"></i>');
+      }
+    });
+
+    $("#show_password_confirm .icon-pass-confirm").on('click', function(e) {
+      if($('#show_password_confirm input').attr("type") == "text"){
+        $('#show_password_confirm input').attr('type', 'password');
+        $('#show_password_confirm .icon-pass-confirm').html('<i class="fas fa-eye-slash" aria-hidden="true"></i>');
+      } else if($('#show_password_confirm input').attr("type") == "password"){
+        $('#show_password_confirm input').attr('type', 'text');
+        $('#show_password_confirm .icon-pass-confirm').html('<i class="fas fa-eye" aria-hidden="true"></i>');
+      }
+    });
+  });  
+</script>
 <!-- Provely Conversions App Display Code -->
 <script>(function(w,n) {
 if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
