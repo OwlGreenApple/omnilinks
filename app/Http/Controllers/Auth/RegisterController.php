@@ -225,7 +225,7 @@ class RegisterController extends Controller
       if ($request->price<>"") {
         return redirect('thankyou');
       } else {
-        return redirect('/login')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
+        return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
       }
     } else {
       return redirect("register")->with("error",$validator->errors()->first());

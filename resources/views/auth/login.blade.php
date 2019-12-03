@@ -20,10 +20,29 @@
                     <strong>Warning!</strong> {{session('error')}}
                   </div>
                   @endif
-                  @if (session('success') )
+                  @if (session('successfree') )
                   <div class="col-md-12 alert alert-success">
-                    <strong>Success!</strong> {{session('success')}}
+                    <strong>Success!</strong> {{session('successfree')}}
                   </div>
+<!-- Facebook Pixel Code page View All Pages-->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '960162064377270');
+  fbq('track', 'PageView');
+   fbq('track', 'StartTrial');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=960162064377270&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->                  
+
                   @endif
                   <label for="email" class="text">
                     Masukkan Email 

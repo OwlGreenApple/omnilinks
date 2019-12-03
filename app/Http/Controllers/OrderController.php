@@ -84,7 +84,7 @@ class OrderController extends Controller
 
       if(is_null($coupon)){
         $arr['status'] = 'error';
-        $arr['message'] = 'Kupon tidak ditemukan';
+        $arr['message'] = 'Kupon tidak terdaftar';
       } else {
         $now = new DateTime();
         $date = new DateTime($coupon->valid_until);
@@ -110,7 +110,7 @@ class OrderController extends Controller
             }
 
             $arr['status'] = 'success';
-            $arr['message'] = '';
+            $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
             $arr['total'] = number_format($total, 0, '', '.');;
             $arr['diskon'] = $diskon;
             $arr['coupon'] = $coupon;

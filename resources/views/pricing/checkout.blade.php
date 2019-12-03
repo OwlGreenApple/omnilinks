@@ -41,14 +41,19 @@
 
           var data = jQuery.parseJSON(result);
 
+          $('#pesan').html(data.message);
+          $('#pesan').show();
+          if (data.message=="") {
+            $('#pesan').hide();
+          }
           if (data.status == 'success') {
             $('.total').html('Rp. ' + data.total);
-            $('#pesan').hide();
+            // $('#pesan').hide();
+            $('#pesan').removeClass('alert-danger');
+            $('#pesan').addClass('alert-success');
           } else {
-            $('#pesan').html(data.message);
             $('#pesan').removeClass('alert-success');
             $('#pesan').addClass('alert-danger');
-            $('#pesan').show();
           }
         }
       });
@@ -60,7 +65,6 @@
       <div class="card-custom">
         <div class="card cardpad">
 
-          <div id="pesan" class="alert"></div>
 
           @if (session('error') )
             <div class="col-md-12 alert alert-danger">
@@ -76,7 +80,7 @@
               {{ csrf_field() }}
               <input type="hidden" id="price" name="price">
               <input type="hidden" id="namapaket" name="namapaket">
-              <h2 class="Daftar-Disini">Choose Your Packages</h2>
+              <h2 class="Daftar-Disini">Pilih Paket Anda</h2>
               <div class="form-group">
                 <div class="col-12 col-md-12">
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
@@ -139,6 +143,12 @@
               </div>
               <div class="form-group">
                 <div class="col-md-12 col-12">
+                  <div id="pesan" class="alert"></div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="col-md-12 col-12">
                   <label class="label-title-test" for="formGroupExampleInput">
                     Total: 
                   </label>
@@ -161,7 +171,7 @@
               </div>
               <div class="form-group">
                 <div class="col-12 col-md-12">
-                  <input type="submit" name="submit" id="submit" class="col-md-12 col-12 btn btn-primary bsub btn-block" value="Confirm Your Payment" />
+                  <input type="submit" name="submit" id="submit" class="col-md-12 col-12 btn btn-primary bsub btn-block" value="Order Sekarang" />
                 </div>
               </div>
             </form>
