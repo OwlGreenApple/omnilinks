@@ -9,6 +9,12 @@ pass  : {{$password}}
 Silahkan klik link dibawah untuk mengkonfirmasi registrasi Anda <br>
 <STRONG><a href="{{$url}}"> Link Confirmation </a></STRONG> <br>
 <br>
+<?php if ($price=="") { ?>
+  Hemat 50% dengan Kode Kupon "{{$coupon_code}}" <br>
+<br>
+  *Hanya berlaku untuk paket tahunan <br>
+<?php } ?>
+<br>
 Jika butuh bantuan jangan ragu hubungi kami di<br>
 support@omnilinkz.com<br>
 <br>

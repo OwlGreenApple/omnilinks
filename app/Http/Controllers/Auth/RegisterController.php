@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\UserLog;
 use App\Order;
+use App\Coupon;
 use App\Mail\ConfirmEmail;
 
 use App\Helpers\Helper;
@@ -60,7 +61,7 @@ class RegisterController extends Controller
     return Validator::make($data, [
       'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
       'name' => ['required', 'string', 'max:255'],
-      'password' => ['required', 'string', 'min:6'],
+      // 'password' => ['required', 'string', 'min:6'],
     ]);
   }
 
@@ -202,13 +203,49 @@ class RegisterController extends Controller
 
     $validator = $this->validator($request->all());
     if(!$validator->fails()) {
-      $user = $this->create($request->all());
-     
+      //random password
+      $pas = $request->email.$request->name;
+      $gh = substr($pas, 0,6);
+      $chrnd =substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,5);
+      $password = str_replace(' ','', $gh.$chrnd);
+      
+      $arrRequest = $request->all();
+      $arrRequest['password'] = $password;
+      $user = $this->create($arrRequest);
+
       $register_time = Carbon::now()->toDateTimeString();
       $confirmcode = Hash::make($user->email.$register_time);
       $user->confirm_code = $confirmcode;
       $user->save();
       
+      $string = '';
+      if ($request->price<>"") {
+        // return redirect('thankyou');
+      } else {
+        // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
+        //klo free user dibuatin kupon diskon 50%, berlaku selama 2x24 jam
+        do {
+          $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
+          $string = '';
+          for ($i = 0; $i < 5 ; $i++) {
+            $pos = rand(0, strlen($karakter)-1);
+            $string .= $karakter{$pos};
+          }
+          $coupon = Coupon::where("kodekupon","=",$string)->first();
+        } while (!is_null($coupon));
+        $coupon = new Coupon;
+        $coupon->kodekupon = $string;
+        $coupon->diskon_value = 0;
+        $coupon->diskon_percent = 50;
+        $coupon->valid_until = new DateTime('+2 days');
+        $coupon->valid_to = "";
+        $coupon->keterangan = "Kupon AutoGenerate Free User";
+        $coupon->package_id = 4;
+        $coupon->user_id = $user->id;
+        $coupon->save();
+      }
+      
+
       $secret_data = [
         'email' => $user->email,
       //   'register_time' => $register_time,
@@ -218,10 +255,13 @@ class RegisterController extends Controller
       $emaildata = [
         'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
         'user' => $user,
-        'password' => $request->password,
+        // 'password' => $request->password,
+        'password' => $password,
+       'price' => $request->price,
+       'coupon_code' => $string,
       ];
       
-       Mail::to($user->email)->send(new ConfirmEmail($emaildata));
+      Mail::to($user->email)->send(new ConfirmEmail($emaildata));
 
       if ($request->price<>"") {
         return redirect('thankyou');

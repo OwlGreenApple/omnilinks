@@ -79,7 +79,7 @@
                   <input type="text" id="username" class="col-md-12 col-12 form-control form-input" name="username" placeholder="Username" required>
                 </div>
               </div>
-              -->
+              
               <div class="form-group row">
                 <label for="password" class="text">{{ __('Masukkan Password') }}</label>
                 <div class="input-group" id="show_password">
@@ -100,7 +100,7 @@
                   @endif
                 </div>
               </div>
-              <!--
+              
               <div class="form-group row">
                 <div class="col-md-12 col-12">
                   <label for="password-confirm" class="text">{{ __('Konfirmasi Password') }}
