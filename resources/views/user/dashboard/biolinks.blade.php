@@ -2652,16 +2652,6 @@ and add more";
 
                                     <select name="bannerpixel[]" class="form-control bannerpixel bannerpixel-{{$ban->id}}">
                                     </select>
-                                    <script type="text/javascript">
-                                      //loadPixel('{{$ban->pixel_id}}','.bannerpixel-{{$ban->id}}');
-                                      /*$(".bannerpixel-{{$ban->id}}").html(dataView);
-                                      $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
-                                      if (dataFree == "1") {
-                                        $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 30 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
-                                      }*/
-                                      
-                                    </script>
-                                    <!--<input type="file" name="bannerImage[]" value="Upload">-->
                                     <div class="custom-file">
                                       <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01" accept="image/*">
 
@@ -3037,11 +3027,6 @@ and add more";
                           if (!is_null($ban->images_banner)){
                       ?>
                         <div class="mySlides mylides fit" id="picture-id-<?=$ut?>-get">
-                          <!--<img src="<php  
-                          // echo url(Storage::disk('local')->url('app/'.$ban->images_banner)); 
-                          echo Storage::disk('s3')->url($ban->images_banner); 
-                          ?>" class="imagesize  input-picture-<?=$ut?>-get" id="image-update-<?=$ut?>" value="ada" altSrc="{{asset('/image/739x218.png')}}" onerror="this.src = $(this).attr('altSrc')"> 
-                          -->
                           <?php
                             if ($ban->images_banner=="0"){
                               $bg_image = asset('/image/434x200.jpg');
