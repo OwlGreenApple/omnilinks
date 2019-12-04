@@ -1,9 +1,9 @@
 Hi {{$user->name}}, <br>
 <br>
 Ini adalah data login anda : <br>
-email : {{$user->email}}
+Email : {{$user->email}}
 <br>
-pass  : {{$password}}
+Pass  : {{$password}}
 <br>
 <br>
 Silahkan klik link dibawah untuk mengkonfirmasi registrasi Anda <br>
