@@ -43,8 +43,9 @@
   }
 </style>
 
-<div class="col-md-10 offset-md-1 mb-5 main-cont" style="min-height:100%;">
-  <div class="row justify-content-center">
+<section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab" style="margin-top:30px;margin-bottom: 120px;min-height:100%;">
+  <div class="container body-content-mobile main-cont">
+    <div class="row">
     <div class="col-md-12">
 
       <h2><b>Account Profile</b></h2>
@@ -177,6 +178,7 @@
     </div>
   </div>
 </div>
+</section>
 
 <script type="text/javascript">
   $( "body" ).on( "click", "#btn-edit", function() {

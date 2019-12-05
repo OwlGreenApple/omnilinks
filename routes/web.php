@@ -27,6 +27,9 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');
 
+  //API 
+  Route::post('generate-coupon', 'ApiController@generate_coupon');
+
   //information
   Route::get('/about',function(){
     return view('aboutus');

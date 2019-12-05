@@ -113,9 +113,9 @@
   }
 </script>
 
-<div class="col-md-12" style="height:100%; margin-top:30px;margin-bottom: 120px;">
-  <div class="row justify-content-center">
-    <div class="col-md-11">
+<section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab" style="margin-top:30px;margin-bottom: 120px;">
+  <div class="container body-content-mobile main-cont">
+    <div class="row">
 
       <h2><b>Orders</b></h2>  
       
@@ -231,7 +231,7 @@
       
   </div>
 </div>
-
+</section>
 
 <script type="text/javascript">
   $( "body" ).on( "click", ".btn-search", function() {
