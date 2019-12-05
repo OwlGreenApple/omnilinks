@@ -34,6 +34,11 @@ class OrderController extends Controller
       'Top Up 50000' => 425000,
       'Top Up 75000' => 562000,
       'Top Up 100000' => 650000,
+      
+      'Elite 2 Months' => 195000,
+      'Elite 3 Months' => 295000,
+      'Elite 5 Months' => 395000,
+      'Elite 7 Months' => 495000,
     );
 
     if(isset($paket[$namapaket])){

@@ -152,8 +152,10 @@
   }
 </script>
 
-<div class="col-md-12" style="height:100%; margin-top:30px;margin-bottom: 120px;">
-  <div class="row justify-content-center">
+<section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab" style="margin-top:30px;margin-bottom: 120px;">
+  <div class="container body-content-mobile main-cont">
+    <div class="row">
+
     <div class="col-md-11">
 
       <h2><b>Users</b></h2>  
@@ -403,7 +405,7 @@
     </div>
   </div>
 </div>
-
+</section>
 
 <script type="text/javascript">
   $( "body" ).on( "click", "#btn-add-user-free-trial", function() {
