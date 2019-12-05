@@ -87,11 +87,14 @@ class RegisterController extends Controller
       'wa_number' => $data['wa_number'],
     ]);
 
-    if ($data['price']<>"") {
+    #IF ORDER IS NOT FREE
+    if ($data['price']<>"") 
+    {
       $diskon = 0;
       // $total = $data['price'];
       $kuponid = null;
-      if($data['kupon']!=''){
+      if($data['kupon']!='')
+      {
         $arr = $ordercont->cek_kupon($data['kupon'],$data['price'],$data['idpaket']);
 
         if($arr['status']=='error'){
@@ -177,6 +180,7 @@ class RegisterController extends Controller
 
         $user->save();
       }
+
     } else {
       $user->valid_until = new DateTime('+30 days');
       $user->save();
@@ -189,9 +193,6 @@ class RegisterController extends Controller
   public function register(Request $request)
   {
     //dd($request->all());
-    if(!is_numeric($request->wa_number)){
-      return redirect("register")->with("error", " No WA harus angka");
-    }
     
     $ordercont = new OrderController;
     if($request->price<>""){
@@ -219,12 +220,14 @@ class RegisterController extends Controller
       $user->save();
       
       $string = '';
-      if ($request->price<>"") {
+      if ($request->price<>"") 
+      {
         // return redirect('thankyou');
       } else {
         // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
         //klo free user dibuatin kupon diskon 50%, berlaku selama 2x24 jam
-        do {
+        do 
+        {
           $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
           $string = '';
           for ($i = 0; $i < 5 ; $i++) {
@@ -266,10 +269,47 @@ class RegisterController extends Controller
       if ($request->price<>"") {
         return redirect('thankyou');
       } else {
+        $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
         return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
       }
     } else {
       return redirect("register")->with("error",$validator->errors()->first());
     }
   }
+
+  public function sendToActivWA($wa_no,$name,$email)
+    {
+      $curl = curl_init();
+
+        $data = array(
+            'list_id'=> 17,
+            'wa_no'=>$wa_no,
+            'name'=>$name,
+            'email'=>$email
+        );
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://activwa.com/dashboard/private-list",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS => json_encode($data),
+          CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          echo $response."\n";
+        }
+    }
+
+/**/  
 }

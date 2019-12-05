@@ -13,6 +13,7 @@
   APP_URL
   SHORT_LINK
 */
+
 if(env('DOMAIN_TYPE')=='main'){
   Route::get('/', 'HomeController@index');
   Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
@@ -38,6 +39,7 @@ if(env('DOMAIN_TYPE')=='main'){
   });
   //auth
   Route::post('post-register', 'Auth\RegisterController@post_register');
+  Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
   Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
   // Route::get('/home', 'HomeController@index')->name('home');
 
