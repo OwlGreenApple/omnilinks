@@ -90,6 +90,7 @@ class OrderController extends Controller
       if(is_null($coupon)){
         $arr['status'] = 'error';
         $arr['message'] = 'Kupon tidak terdaftar';
+        return $arr;
       } else {
         $now = new DateTime();
         $date = new DateTime($coupon->valid_until);
@@ -97,12 +98,17 @@ class OrderController extends Controller
         if($date<$now){
           $arr['status'] = 'error';
           $arr['message'] = 'Kupon sudah tidak berlaku';
+          return $arr;
         } else {
           if($coupon->valid_to=='new' and Auth::check()){
 
           } else if($coupon->valid_to=='extend' and !Auth::check()){
 
-          } else {
+          } 
+          else if(substr($coupon->valid_to,0,7)=='package'){
+            // selectbox ditambah dengan paket kupon 
+          }
+          else if($coupon->valid_to==''){
             $total = 0;
             $diskon = 0;
 
@@ -116,9 +122,10 @@ class OrderController extends Controller
 
             $arr['status'] = 'success';
             $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
-            $arr['total'] = number_format($total, 0, '', '.');;
+            $arr['total'] = number_format($total, 0, '', '.');
             $arr['diskon'] = $diskon;
             $arr['coupon'] = $coupon;
+            return $arr;
           }
         }
       }
