@@ -52,7 +52,12 @@ class CheckMembership extends Command
 
       foreach ($users as $user) {
         $now = Carbon::now();
-        $date = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+        if (is_null($user->valid_until)) {
+          $date = Carbon::now()->addDays(999);
+        }
+        else {
+          $date = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+        }
         $interval = $now->diffInDays($date);
         // var_dump($user->email);
         // var_dump($interval);
