@@ -55,4 +55,12 @@ class ApiController extends Controller
     $arr['is_error'] = 0;
     return json_encode($arr);
   }
+
+  public function sendmailfromactivwa(Request $request)
+  {
+      $data = json_decode($request->getContent(),true);
+      Mail::to($data['mail'])->queue(new SendMailActivWA($data['emaildata'],$data['subject']));
+  }
+
+/* end class */
 }

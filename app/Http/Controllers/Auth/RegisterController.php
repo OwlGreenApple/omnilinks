@@ -282,7 +282,7 @@ class RegisterController extends Controller
       $curl = curl_init();
 
         $data = array(
-            'list_id'=> 17,
+            'list_id'=> 17, //activwa list_id for omnilinkz
             'wa_no'=>$wa_no,
             'name'=>$name,
             'email'=>$email
