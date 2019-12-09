@@ -13,6 +13,7 @@ use App\Ads;
 use App\Coupon;
 use App\User;
 use App\AdsHistory;
+use App\Mail\SendMailActivWA;
 
 use Auth, DB, Validator, DateTime, Mail; 
 
@@ -60,6 +61,40 @@ class ApiController extends Controller
   {
       $data = json_decode($request->getContent(),true);
       Mail::to($data['mail'])->queue(new SendMailActivWA($data['emaildata'],$data['subject']));
+  }
+
+  public function testmail()
+  {
+        $curl = curl_init();
+        $data = array(
+            'mail'=>'Papercut@user.com',
+            'emaildata'=>'package-elite-6',
+            'subject'=>'package-omnilinkz',
+        );
+        $url = 'http://localhost/omnilinkz/sendmailfromactivwa';
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $url,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTREDIR => 3,
+          CURLOPT_POSTFIELDS => json_encode($data),
+          CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          echo $response;
+          //return json_decode($response,true);
+        }
   }
 
 /* end class */

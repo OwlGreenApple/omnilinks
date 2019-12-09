@@ -28,6 +28,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/click-ads/{id}','AdsController@click_ads');
 
   //API 
+  //Route::get('testmail','ApiController@testmail');
   Route::post('generate-coupon', 'ApiController@generate_coupon');
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
 
