@@ -106,7 +106,48 @@ class OrderController extends Controller
 
           } 
           else if(substr($coupon->valid_to,0,7)=='package'){
+            $total = 0;
+            $diskon = 0;
+            $paket = "";
+            $paketid = 0;
+            $dataPaket = "";
+
+            if ($coupon->valid_to == "package-elite-2") {
+              $total = 195000;
+              $paket = "Paket Elite 2 Bulan";
+              $paketid = 12;
+              $dataPaket = "Elite 2 Months";
+            }
+            if ($coupon->valid_to == "package-elite-3") {
+              $total = 295000;
+              $paket = "Paket Elite 3 Bulan";
+              $paketid = 13;
+              $dataPaket = "Elite 3 Months";
+            }
+            if ($coupon->valid_to == "package-elite-5") {
+              $total = 395000;
+              $paket = "Paket Elite 5 Bulan";
+              $paketid = 14;
+              $dataPaket = "Elite 5 Months";
+            }
+            if ($coupon->valid_to == "package-elite-7") {
+              $total = 495000;
+              $paket = "Paket Elite 7 Bulan";
+              $paketid = 15;
+              $dataPaket = "Elite 7 Months";
+            }
+            
             // selectbox ditambah dengan paket kupon 
+            $arr['status'] = 'success-paket';
+            $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
+            $arr['total'] = number_format($total, 0, '', '.');
+            $arr['diskon'] = $diskon;
+            $arr['coupon'] = $coupon;
+            $arr['paket'] = $paket;
+            $arr['paketid'] = $paketid;
+            $arr['dataPaket'] = $dataPaket;
+            $arr['dataPrice'] = $total;
+            return $arr;
           }
           else if($coupon->valid_to==''){
             $total = 0;
@@ -332,11 +373,31 @@ class OrderController extends Controller
         $user->valid_until = $valid;
         $user->membership = 'basic';
 
-      } else if(substr($order->package,0,5) === "Elite"){
+      } 
+      else if(substr($order->package,0,5) === "Elite"){
+        /*
+          'Elite 2 Months' => 195000,
+          'Elite 3 Months' => 295000,
+          'Elite 5 Months' => 395000,
+          'Elite 7 Months' => 495000,
+        */
         if($order->package=='Elite Monthly'){
-           $valid = $this->add_time($user,"+1 months");
-        } else if($order->package=='Elite Yearly'){
+          $valid = $this->add_time($user,"+1 months");
+        } 
+        else if($order->package=='Elite Yearly'){
           $valid = $this->add_time($user,"+12 months");
+        }
+        else if($order->package=='Elite 2 Months'){
+          $valid = $this->add_time($user,"+2 months");
+        }
+        else if($order->package=='Elite 3 Months'){
+          $valid = $this->add_time($user,"+3 months");
+        }
+        else if($order->package=='Elite 5 Months'){
+          $valid = $this->add_time($user,"+5 months");
+        }
+        else if($order->package=='Elite 7 Months'){
+          $valid = $this->add_time($user,"+7 months");
         }
 
         $userlog = new UserLog;

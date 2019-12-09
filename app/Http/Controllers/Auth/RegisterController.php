@@ -240,7 +240,7 @@ class RegisterController extends Controller
         $coupon->kodekupon = $string;
         $coupon->diskon_value = 0;
         $coupon->diskon_percent = 50;
-        $coupon->valid_until = new DateTime('+2 days');
+        $coupon->valid_until = new DateTime('+3 days');
         $coupon->valid_to = "";
         $coupon->keterangan = "Kupon AutoGenerate Free User";
         $coupon->package_id = 4;
