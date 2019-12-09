@@ -14,7 +14,7 @@ use App\Coupon;
 use App\User;
 use App\AdsHistory;
 
-use Auth, DB, Validator; 
+use Auth, DB, Validator, DateTime, Mail; 
 
 class ApiController extends Controller
 {
