@@ -1,1 +1,1 @@
-{{$emaildata}}
+{!! $emaildata !!}
