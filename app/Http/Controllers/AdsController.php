@@ -137,4 +137,21 @@ class AdsController extends Controller
               'id'=>$id,    
             ));
    	}
+
+    public function index(){
+      //list user admin
+      return view('admin.list-ads.index');
+    }
+
+    public function load_ads(Request $request){
+      //list user admin
+      $ads = Ads::orderBy('created_at','descend')
+                  ->get();
+
+      $arr['view'] = (string) view('admin.list-ads.content')
+                        ->with('ads',$ads);
+    
+      return $arr;
+    }
+
 }

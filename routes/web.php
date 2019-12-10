@@ -164,6 +164,10 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/list-user/edit-user','UserController@edit_user');
     Route::get('list-user/view-log','UserController@load_log');
     Route::post('/import-excel-user','UserController@import_excel_user');
+    
+    //List Ads 
+    Route::get('/list-ads','AdsController@index');
+    Route::get('/list-ads/load-ads','AdsController@load_ads');  
   });
 }
 

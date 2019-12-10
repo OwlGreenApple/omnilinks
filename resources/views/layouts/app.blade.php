@@ -170,6 +170,9 @@
                       <a class="dropdown-item <?php if(Request::is('list-coupon')) echo 'active' ?>" href="{{ url('list-coupon') }}">
                         List Kupon
                       </a>
+                      <a class="dropdown-item <?php if(Request::is('list-ads')) echo 'active' ?>" href="{{ url('list-ads') }}">
+                        List Ads
+                      </a>
                     @else 
                       <a class="dropdown-item <?php if(Request::is('orders')) echo 'active' ?>" href="{{ url('orders') }}">
                         Order
