@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\CustomerActivwa;
+use App\ReminderCustomer;
 
 class HomeController extends Controller
 {
@@ -55,6 +56,55 @@ class HomeController extends Controller
         $customer->additional = null;
         $customer->status = 1;
         $customer->save();
+        
+        $reminder_customer = new ReminderCustomer();
+        $reminder_customer->user_id = 3;
+        $reminder_customer->list_id = 17;
+        $reminder_customer->sender_id = 2;
+        $reminder_customer->customer_id = $customer->id;
+        $reminder_customer->reminder_id = 26;
+        $reminder_customer->save();
+        
+        $reminder_customer = new ReminderCustomer();
+        $reminder_customer->user_id = 3;
+        $reminder_customer->list_id = 17;
+        $reminder_customer->sender_id = 2;
+        $reminder_customer->customer_id = $customer->id;
+        $reminder_customer->reminder_id = 27;
+        $reminder_customer->save();
+        
+        $reminder_customer = new ReminderCustomer();
+        $reminder_customer->user_id = 3;
+        $reminder_customer->list_id = 17;
+        $reminder_customer->sender_id = 2;
+        $reminder_customer->customer_id = $customer->id;
+        $reminder_customer->reminder_id = 28;
+        $reminder_customer->save();
+        
+        $reminder_customer = new ReminderCustomer();
+        $reminder_customer->user_id = 3;
+        $reminder_customer->list_id = 17;
+        $reminder_customer->sender_id = 2;
+        $reminder_customer->customer_id = $customer->id;
+        $reminder_customer->reminder_id = 29;
+        $reminder_customer->save();
+        
+        $reminder_customer = new ReminderCustomer();
+        $reminder_customer->user_id = 3;
+        $reminder_customer->list_id = 17;
+        $reminder_customer->sender_id = 2;
+        $reminder_customer->customer_id = $customer->id;
+        $reminder_customer->reminder_id = 30;
+        $reminder_customer->save();
+        
+        $reminder_customer = new ReminderCustomer();
+        $reminder_customer->user_id = 3;
+        $reminder_customer->list_id = 17;
+        $reminder_customer->sender_id = 2;
+        $reminder_customer->customer_id = $customer->id;
+        $reminder_customer->reminder_id = 31;
+        $reminder_customer->save();
+        
       }
       return "success";
     }
