@@ -11,19 +11,19 @@ use App\User;
         }
       ?>
     </td>
-    <td data-label="">
+    <td data-label="Headline">
       {{$data->headline}}
     </td>
-    <td data-label="">
+    <td data-label="Link">
       {{$data->link}}
     </td>
-    <td data-label="">
+    <td data-label="Description">
       {{$data->description}}
     </td>
-    <td data-label="">
+    <td data-label="Credit">
       {{$data->credit}}
     </td>
-    <td >
+    <td data-label="Created">
       {{$data->created_at}}
     </td>
   </tr>
