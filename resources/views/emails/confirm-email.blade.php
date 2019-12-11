@@ -8,11 +8,13 @@ Pass  : {{$password}}
 <br>
 
 <?php if ($price=="") { ?>
-  Gunakan KUPON 50% OFF SPECIAL <br>
-  Hanya untuk First time user saja <br>
-  Kupon : "{{$coupon_code}}" <br>
+  <i>Selamat, </i><br>
+  <i>Anda mendapatkan </i><br>
+  <strong>KUPON 50% OFF SPECIAL</strong> <br>
+  <i>Paket Pro & Elite</i> <br>
+  <strong>Kupon 50% OFF: "{{$coupon_code}}" </strong><br>
 <br>
-  *Hanya berlaku untuk paket tahunan <br>
+  <strong>*Segera gunakan kupon ini</strong>  <br>
   (kupon akan expired sesudah 3x24 jam)<br>
   <br>
   *kupon ini hanya bisa berlaku untuk email ini saja.
@@ -26,7 +28,7 @@ Pass  : {{$password}}
 <br>
 <?php if ($price=="") { ?>
 .<br>
-*Gunakan kupon first time user ini & upgrade sekarang juga<br>
+<i><strong>*Gunakan kupon first time user ini & upgrade sekarang juga</strong></i><br>
 .<br>
 <?php } ?>
 <br>

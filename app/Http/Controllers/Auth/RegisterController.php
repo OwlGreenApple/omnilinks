@@ -243,7 +243,7 @@ class RegisterController extends Controller
         $coupon->valid_until = new DateTime('+3 days');
         $coupon->valid_to = "";
         $coupon->keterangan = "Kupon AutoGenerate Free User";
-        $coupon->package_id = 4;
+        $coupon->package_id = 0;
         $coupon->user_id = $user->id;
         $coupon->save();
       }

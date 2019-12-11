@@ -189,7 +189,7 @@ var testChart;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
+              <i>~ Limited features.</i> <a href="{{url('pricing')}}">(Upgrade now)</a>
               </span>
             @endif
             @if($user->membership=="basic")
