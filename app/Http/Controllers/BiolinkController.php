@@ -101,7 +101,7 @@ class BiolinkController extends Controller
         return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu");
       }
     }
-    else if ($user->membership=='basic') {
+    else if ($user->membership=='pro') {
       if ($pageCheck>=3) {
         return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu"); 
       }
@@ -336,7 +336,7 @@ class BiolinkController extends Controller
     $temp_arr['imagepages'] = ['image', 'max:1000'];
 
     if (!is_null($request->judulBanner)){
-      if ($user->membership=='basic' or  $user->membership=='elite') 
+      if ($user->membership=='pro' or  $user->membership=='elite') 
       {
         for($i=0;$i<count($request->judulBanner);$i++) 
         { 
@@ -482,7 +482,7 @@ class BiolinkController extends Controller
     }
     
     if (!is_null($request->judulBanner)){
-      if ($user->membership=='basic' or  $user->membership=='elite') 
+      if ($user->membership=='pro' or  $user->membership=='elite') 
       {
         $idbanner=$request->idBanner;
         $statusbanner=$request->statusBanner;

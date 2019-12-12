@@ -192,10 +192,10 @@ var testChart;
               <i>~ Limited features.</i> <a href="{{url('pricing')}}">(Upgrade now)</a>
               </span>
             @endif
-            @if($user->membership=="basic")
+            @if($user->membership=="pro")
               <span class="text-success header-status-account">
                 <i class="fas fa-trophy"></i>
-                Basic Account
+                Pro Account
               </span>
               <br>
               <span class="content-status-account">
@@ -229,10 +229,10 @@ var testChart;
               <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
-            @if($user->membership=="basic")
+            @if($user->membership=="pro")
               <span class="text-success header-status-account">
                 <i class="fas fa-trophy"></i>
-                Basic Account
+                Pro Account
               </span>
               <br>
               <span class="content-status-account">

@@ -109,14 +109,14 @@
                 <div class="col-12 col-md-12">
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
                   <select class="form-control" name="idpaket" id="select-auto-manage">
-                    <option class="" data-price="155000" data-paket="Basic Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
-                      Basic Bulanan - IDR 155.000,-/bulan
+                    <option class="" data-price="155000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
+                      Pro Bulanan - IDR 155.000,-/bulan
                     </option>
                     <option class="" data-price="195000" data-paket="Elite Monthly" value="3" <?php if ($id==3) echo "selected" ; ?>>
                       Elite Bulanan - IDR 195.000,-/bulan
                     </option>
-                    <option class="" data-price="1020000" data-paket="Basic Yearly" value="2" <?php if ($id==2) echo "selected" ; ?>>
-                      Basic Tahunan - IDR 1.020.000,-/tahun (Hemat 52%)
+                    <option class="" data-price="1020000" data-paket="Pro Yearly" value="2" <?php if ($id==2) echo "selected" ; ?>>
+                      Pro Tahunan - IDR 1.020.000,-/tahun (Hemat 52%)
                     </option>
                     <option class="" data-price="1140000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
                       Elite Tahunan - IDR 1.140.000,-/tahun (Hemat 52%)

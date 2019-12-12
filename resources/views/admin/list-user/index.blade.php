@@ -312,7 +312,7 @@
             <div class="col-md-9 col-12">
               <select class="form-control" name="membership" id="membership">
                 <option value="free">Free</option>
-                <option value="basic">Basic</option>
+                <option value="pro">Pro</option>
                 <option value="elite">Elite</option>
               </select>
             </div>

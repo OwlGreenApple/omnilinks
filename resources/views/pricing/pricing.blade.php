@@ -70,7 +70,7 @@
         <div class="card-body pricing">
           <h5 class="green-color">
             <b class="sbold small">
-              BASIC
+              PRO
             </b>  
           </h5>
           <span class="harga harga-small pro">
@@ -226,7 +226,7 @@
               </span>
               <h3 class="pt-3">
                 <b class="sbold">
-                  BASIC
+                  PRO
                 </b>  
               </h3>
             </span>

@@ -39,7 +39,7 @@ class PremiumIDController extends Controller
         return $arr;
       } else {
         $premiumid = PremiumID::where('user_id',Auth::user()->id)->get();
-        if($premiumid->count()>=3 and Auth::user()->membership=='basic'){
+        if($premiumid->count()>=3 and Auth::user()->membership=='pro'){
           $arr['status'] = 'error';
           $arr['message'] = 'Custom Link telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Custom Link.';
           return $arr;

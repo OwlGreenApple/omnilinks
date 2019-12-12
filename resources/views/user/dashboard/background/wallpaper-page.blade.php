@@ -1,4 +1,4 @@
-@if(Auth::user()->membership=='basic') 
+@if(Auth::user()->membership=='pro') 
   <div class="theme-take">
     <div class="thumb-wallpaper1 wallpapers wallpaper-core selected"></div>
   </div>

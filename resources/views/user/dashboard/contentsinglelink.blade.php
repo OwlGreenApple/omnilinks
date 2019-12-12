@@ -23,7 +23,7 @@
       
       <td class="menu-nomobile">{{$link->link}}</td>
       
-      @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+      @if((Auth::user()->membership=='pro') OR (Auth::user()->membership=='elite'))
         <td class="menu-nomobile">{{$link->judul}}</td>
       @endif
 

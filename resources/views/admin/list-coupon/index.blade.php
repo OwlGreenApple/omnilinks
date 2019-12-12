@@ -318,8 +318,8 @@
             <div class="col-md-8 col-12">
               <select class="form-control" name="package_id" id="package_id">
                 <option value="0">All</option>
-                <option value="1">Basic Montly</option>
-                <option value="2">Basic Yearly</option>
+                <option value="1">Pro Monthly</option>
+                <option value="2">Pro Yearly</option>
                 <option value="3">Elite Monthly</option>
                 <option value="4">Elite Yearly</option>
               </select>

@@ -25,10 +25,10 @@
                 echo 'All';
               break;
               case 1:
-                echo 'Basic Monthly';
+                echo 'Pro Monthly';
               break;
               case 2:
-                echo 'Basic Yearly';
+                echo 'Pro Yearly';
               break;
               case 3:
                 echo 'Elite Monthly';

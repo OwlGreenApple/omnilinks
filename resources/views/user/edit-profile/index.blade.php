@@ -59,8 +59,8 @@
               if($user->membership=="free"){
                 $html = '<i class="fas fa-flag"></i>Free Account';
                 $txt = '';
-              } else if($user->membership=="basic"){
-                $html = '<i class="fas fa-trophy"></i>Basic Account';
+              } else if($user->membership=="pro"){
+                $html = '<i class="fas fa-trophy"></i>Pro Account';
                 $txt = 'text-success';
               } else {
                 $html = '<i class="fas fa-star"></i>Elite Account';

@@ -23,9 +23,9 @@ class OrderController extends Controller
   public function cekharga($namapaket, $price){
     //cek paket dengan harga
     $paket = array(
-      'Basic Monthly' => 155000,
+      'Pro Monthly' => 155000,
       'Elite Monthly' => 195000,
-      'Basic Yearly' => 1020000,
+      'Pro Yearly' => 1020000,
       'Elite Yearly' => 1140000,
       'Top Up 5000' => 62500,
       'Top Up 10000' => 115000,
@@ -356,22 +356,22 @@ class OrderController extends Controller
       $order->status = 2;
       $order->save();
 
-      if(substr($order->package,0,5) === "Basic"){
-        if($order->package=='Basic Monthly'){
+      if(substr($order->package,0,5) === "Pro"){
+        if($order->package=='Pro Monthly'){
           $valid = $this->add_time($user,"+1 months");
-        } else if($order->package=='Basic Yearly'){
+        } else if($order->package=='Pro Yearly'){
           $valid = $this->add_time($user,"+12 months");
         }
 
         $userlog = new UserLog;
         $userlog->user_id = $user->id;
         $userlog->type = 'membership';
-        $userlog->value = 'basic';
-        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to basic('.$valid->format('Y-m-d h:i:s').')';
+        $userlog->value = 'pro';
+        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
         $userlog->save();
 
         $user->valid_until = $valid;
-        $user->membership = 'basic';
+        $user->membership = 'pro';
 
       } 
       else if(substr($order->package,0,5) === "Elite"){
@@ -476,11 +476,11 @@ class OrderController extends Controller
     $user = User::find($order->user_id);
     $valid=null;
 
-    if(substr($order->package,0,5) === "Basic"){
-      if($order->package=='Basic Monthly'){
+    if(substr($order->package,0,5) === "Pro"){
+      if($order->package=='Pro Monthly'){
         //$valid = new DateTime("+1 months");
         $valid = $this->add_time($user,"+1 months");
-      } else if($order->package=='Basic Yearly'){
+      } else if($order->package=='Pro Yearly'){
         //$valid = new DateTime("+12 months");
         $valid = $this->add_time($user,"+12 months");
       }
@@ -488,12 +488,12 @@ class OrderController extends Controller
       $userlog = new UserLog;
       $userlog->user_id = $user->id;
       $userlog->type = 'membership';
-      $userlog->value = 'basic';
-      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to basic('.$valid->format('Y-m-d h:i:s').')';
+      $userlog->value = 'pro';
+      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
       $userlog->save();
 
       $user->valid_until = $valid;
-      $user->membership = 'basic';
+      $user->membership = 'pro';
     } else if(substr($order->package,0,5) === "Elite"){
       if($order->package=='Elite Monthly'){
         //$valid = new DateTime("+1 months");

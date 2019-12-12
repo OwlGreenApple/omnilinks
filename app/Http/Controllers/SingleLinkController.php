@@ -25,7 +25,7 @@ class SingleLinkController extends Controller
       $linkCheck=Link::where('users_id',Auth::user()->id)
                       ->where('pages_id',0)
                       ->count();
-      if ((Auth::user()->membership=='basic') OR (Auth::user()->membership=='free')) {
+      if ((Auth::user()->membership=='pro') OR (Auth::user()->membership=='free')) {
          if($linkCheck>=5) {
           $arr['status'] = 'gagal';
           $arr['message'] = 'maaf anda sudah tidak bisa menambahkan link lagi';

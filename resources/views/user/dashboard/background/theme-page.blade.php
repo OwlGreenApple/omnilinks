@@ -1,4 +1,4 @@
-@if(Auth::user()->membership=='basic') 
+@if(Auth::user()->membership=='pro') 
   <div class="theme-take">
     <div class="theme1 themes selected"></div>
   </div>

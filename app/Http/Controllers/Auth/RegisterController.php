@@ -143,22 +143,22 @@ class RegisterController extends Controller
         $order->status = 2;
         $order->save();
 
-        if(substr($order->package,0,5) === "Basic"){
-          if($order->package=='Basic Monthly'){
+        if(substr($order->package,0,5) === "Pro"){
+          if($order->package=='Pro Monthly'){
             $valid = $ordercont->add_time($user,"+1 months");
-          } else if($order->package=='Basic Yearly'){
+          } else if($order->package=='Pro Yearly'){
             $valid = $ordercont->add_time($user,"+12 months");
           }
 
           $userlog = new UserLog;
           $userlog->user_id = $user->id;
           $userlog->type = 'membership';
-          $userlog->value = 'basic';
-          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to basic('.$valid->format('Y-m-d h:i:s').')';
+          $userlog->value = 'pro';
+          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
           $userlog->save();
 
           $user->valid_until = $valid;
-          $user->membership = 'basic';
+          $user->membership = 'pro';
 
         } else if(substr($order->package,0,5) === "Elite"){
           if($order->package=='Elite Monthly'){

@@ -243,10 +243,10 @@
               <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
-            @if(Auth::user()->membership=="basic")
+            @if(Auth::user()->membership=="pro")
               <span class="text-success header-status-account">
                 <i class="fas fa-trophy"></i>
-                Basic Account
+                Pro Account
               </span>
               <br>
               <span class="content-status-account">
@@ -280,10 +280,10 @@
               <i>~ Forever free.</i> <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
-            @if(Auth::user()->membership=="basic")
+            @if(Auth::user()->membership=="pro")
               <span class="text-success header-status-account">
                 <i class="fas fa-trophy"></i>
-                Basic Account
+                Pro Account
               </span>
               <br>
               <span class="content-status-account">

@@ -328,7 +328,7 @@
                 Link
               </a>
 
-              @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+              @if((Auth::user()->membership=='pro') OR (Auth::user()->membership=='elite'))
                 <a class="nav-link" href=".pixels" data-target=".pixels" role="tab" data-toggle="tab" id="pixel-tab">
                   Pixel
                 </a>
@@ -360,7 +360,7 @@
                     </div>
                   </div>
 
-                  @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                  @if((Auth::user()->membership=='pro') OR (Auth::user()->membership=='elite'))
                     <div class="form-group row">
                       <label for="password-confirm" class="col-lg-2 col-md-3 col-form-label labell gray-txt text-md-right text-left">
                         Pixel
@@ -388,7 +388,7 @@
                 </form>
               </div>
 
-              @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+              @if((Auth::user()->membership=='pro') OR (Auth::user()->membership=='elite'))
                 <!--Tab Pixel-->
                 <div role="tabpanel" class="tab-pane fade pixels" id="pixel">
                   <form method="post" id="formpixel" novalidate>
@@ -471,7 +471,7 @@
                     <th class="menu-nomobile">
                       URL
                     </th>
-                    @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+                    @if((Auth::user()->membership=='pro') OR (Auth::user()->membership=='elite'))
                       <th class="menu-nomobile">
                         Pixel
                       </th>
@@ -494,7 +494,7 @@
             </div>
           </div>
 
-          @if((Auth::user()->membership=='basic') OR (Auth::user()->membership=='elite'))
+          @if((Auth::user()->membership=='pro') OR (Auth::user()->membership=='elite'))
             <div class="pixels2">
               <div id="search-pixel" style="margin-bottom: 20px">
                 <span class="blue-txt" style="font-size: 24px">
