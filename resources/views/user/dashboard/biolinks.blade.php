@@ -2274,6 +2274,14 @@
                   <!--social media-->
                   <label class="mb-3 blue-txt">
                     Media Sosial
+                    <span class="tooltipstered" title="<div class='panel-heading'>Media Sosial</div><div class='panel-content'>
+                    Youtube : https://youtube.com/namachannel <br>
+                    Facebook : https://facebook.com/username-facebook <br>
+                    Instagram : username-instagram <br>
+                    Twitter : username-twitter <br>
+                    </div>">
+                      <i class="fas fa-question-circle icon-reflink"></i>
+                    </span>
                   </label>
                   <button type="button" class="float-right btn btn-primary btn-sm" id="sm">
                     <i class="fas fa-plus"></i>

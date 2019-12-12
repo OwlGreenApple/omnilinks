@@ -142,7 +142,7 @@ class OrderController extends Controller
             $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
             $arr['total'] = number_format($total, 0, '', '.');
             $arr['diskon'] = $diskon;
-            $arr['coupon'] = $coupon;
+            $arr['coupon'] = $coupon->kodekupon;
             $arr['paket'] = $paket;
             $arr['paketid'] = $paketid;
             $arr['dataPaket'] = $dataPaket;

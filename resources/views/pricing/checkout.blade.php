@@ -67,7 +67,11 @@
             });
 
             if (flagSelect == false) {
-              $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+data.paket+'</option>');
+              labelPaket = data.paket;
+              if (data.coupon=="SPECIAL12") {
+                labelPaket = "Paket Special Promo 1212 - IDR 295.000";
+              }
+              $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+labelPaket+'</option>');
             }
             $('#select-auto-manage').val(data.paketid);
           }
