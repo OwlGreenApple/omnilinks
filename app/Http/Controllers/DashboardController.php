@@ -20,6 +20,12 @@ class DashboardController extends Controller
     return view('user.dashboard.dash')->with('user',$user);
   }
   
+  public function viewTutorial()
+  {
+    $user=Auth::user();
+    return view('user.dashboard.tutorial')->with('user',$user);
+  }
+  
   public function loadDashboard(Request $request)
   {
     $user=Auth::user();

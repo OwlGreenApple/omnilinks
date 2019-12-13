@@ -115,6 +115,11 @@
                     {{ __('Dashboard') }}
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link navlog" href="{{url('/tutorial')}}">
+                    Tutorial
+                  </a>
+                </li>
 
                 <li class="nav-item">
                   <a class="nav-link navlog" href="{{url('ads-manager')}}">
@@ -181,9 +186,6 @@
 
                     <a class="dropdown-item <?php if(Request::is('edit-profile')) echo 'active' ?>" href="{{ url('edit-profile') }}">
                       Edit Profile
-                    </a>
-                    <a class="dropdown-item" href="https://omnilinkz.com/tutorial-teks" target="_blank">
-                      Tutorial
                     </a>
                     
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

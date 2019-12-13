@@ -83,6 +83,7 @@ if(env('DOMAIN_TYPE')=='main'){
         // return view('user.dashboard.dash');
     // });
     Route::get('/','DashboardController@viewDashboard');
+    Route::get('/tutorial','DashboardController@viewTutorial');
     Route::get('/dash/load-dashboard','DashboardController@loadDashboard');
     Route::get('/dash/load-chart','DashboardController@load_chart');
     Route::get('/dash/load-link','DashboardController@loadlink');
