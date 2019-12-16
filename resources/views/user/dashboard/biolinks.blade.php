@@ -3263,7 +3263,7 @@ and add more";
           
         </div>
         <div class="col-12 col-md-10 offset-md-1 mb-4" style="margin-top: 30px">
-          <a href="{{url('pricing')}}" target="_blank">
+          <a href="{{url('pricing')}}" target="_blank" class="free-underline">
             <button class="btn btn-success btn-block btn-beli-premium">
               BELI SEKARANG
             </button>    
@@ -3272,7 +3272,64 @@ and add more";
         </div>
         
         <div class="col-12 text-center mb-4">
-          <a href="#" data-dismiss="modal">
+          <a href="#" data-dismiss="modal" class="free-underline">
+            Lain Kali
+          </a>  
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Beli Premium ID 2, klo klik background animation-->
+<div class="modal fade" id="premium-id-beli-2" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content content-premiumid">
+      <div class="modal-header header-premiumid">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h5 class="font-premiumid big mt-3 mb-4">
+          Custom Background Anda
+        </h5>
+        <img src="{{asset('image/icon-premium-id-2.png')}}" class='img-responsive md-12'>
+        <p>Ingin tampilan Biolink anda lebih menarik seperti ini </p>
+
+        <!--<div class="col-12 offset-lg-1 col-lg-10 mt-5 mb-5">
+          <div class="row">
+            <div class="col-lg-4 col-12 text-lg-left text-center">
+              Link Default <br>
+              <?php echo env('SHORT_LINK').'/YtBu8L' ?>
+            </div>
+            <div class="col-lg-4 col-12">
+              <img class="arrow" src="{{asset('image/arrow-green.png')}}">
+            </div>
+            <div class="col-lg-4 col-12 text-lg-left text-center">
+              <span class="font-premiumid">
+                Custom Link
+              </span> <br>
+              <b><?php echo env('SHORT_LINK').'/YOURLINK' ?></b>
+            </div>  
+          </div>
+          
+        </div>
+        -->
+        <div class="col-12 col-md-10 offset-md-1 mb-4" style="margin-top: 30px">
+          <a href="{{url('pricing')}}" target="_blank" class="free-underline">
+            <button class="btn btn-success btn-block btn-beli-premium">
+              BELI SEKARANG
+            </button>    
+          </a>
+          
+        </div>
+        
+        <div class="col-12 text-center mb-4">
+          <a href="#" data-dismiss="modal" class="free-underline">
             Lain Kali
           </a>  
         </div>
@@ -3685,6 +3742,9 @@ and add more";
       check_outlined();
       check_rounded();
       <?php } ?>
+      <?php if ($user->membership=='free') { ?>
+      $("#premium-id-beli-2").modal();
+      <?php } ?>
     });
     $(document).on('click', '#solid', function() {
       $('#is_text_color').prop('checked', false);
@@ -3709,6 +3769,9 @@ and add more";
         check_outlined();
         check_rounded();
       <?php } ?>
+      <?php if ($user->membership=='free') { ?>
+      $("#premium-id-beli-2").modal();
+      <?php } ?>
     });
     $(document).on('click', '#animation-tab', function() {
       <?php if ($user->membership=='elite') { ?>
@@ -3719,6 +3782,9 @@ and add more";
         $("#phonecolor").addClass("screen "+$('#animationclass').val());
         check_outlined();
         check_rounded();
+      <?php } ?>
+      <?php if ($user->membership=='free') { ?>
+      $("#premium-id-beli-2").modal();
       <?php } ?>
     });
     $(document).on('click', '.btn-premiumid', function() {

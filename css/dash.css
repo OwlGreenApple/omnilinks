@@ -652,8 +652,8 @@ hr.own {
 }
 .redirect-ads.big{
   padding: 10px;
-  position: absolute;
-  bottom: 0px;
+  /*position: absolute;
+  bottom: 0px;*/
 }
 .headads {
   font-size: 15px;
@@ -1105,4 +1105,17 @@ ul {
 }
 .free-underline{
   text-decoration : none!important;
+}
+
+/*
+ADS
+*/
+.fixed-ads{
+  position: fixed; bottom: 0px; width: 100%; height: auto; z-index: 9995; 
+}
+.relative-ads{
+  width: 100%;height: auto;background-color: #f5f5f5;margin: 0px auto;position: relative;
+}
+.close-ads{
+  position:absolute;top:0px;right:7px;z-index: 9996;pointer:cursor;
 }

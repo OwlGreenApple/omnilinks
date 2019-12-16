@@ -1474,6 +1474,7 @@ and add more";
 
       @if($membership=='free')
         @if(!is_null($ads))
+          <!--
           <div class="col-lg-7 col-md-8 text-center redirect-ads big">
             <a data-href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" class="link-ajax-no-script">
               <span href="#" class="headline-1-view-get headads">
@@ -1484,10 +1485,38 @@ and add more";
                 {{$ads->description}}
             </span>
           </div>
+          -->
         @endif  
       @endif
     </div>
   </div>
+  
+  
+  <!--Ads-->
+  @if($membership=='free')
+    @if(!is_null($ads))
+      <div class="fixed-ads">  
+        <div class="relative-ads" style="">
+
+          <div class="col-lg-12 col-md-12 text-center redirect-ads big">
+            <a data-href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" class="link-ajax-no-script">
+              <span href="#" class="headline-1-view-get headads">
+                  {{$ads->headline}}
+              </span>
+            </a>
+            <span class="desc-1-view-get desc-ads">
+                {{$ads->description}}
+            </span>
+          </div>
+
+        </div>
+        <button type="button" class="close close-ads" id="close-ads">
+          <span >&times;</span>
+        </button>
+      </div>
+    @endif  
+  @endif
+  
   <!--Loading Bar-->
   <div class="div-loading">
     <div id="loader" style="display: none;"></div>  
@@ -1699,6 +1728,12 @@ and add more";
     tempStr = $("#hidden-description").val().replace(/\n/g, "<br>");
     $("#description").html(tempStr);
     @endif
+    
+    // $('#close-ads').click(function(e){
+    $(".fixed-ads").on('click', '#close-ads', function () {      
+      console.log("asd");
+      $(".fixed-ads").hide();
+    });
     
     $("body").on("click",".link-ajax",function(e){
       e.preventDefault();
