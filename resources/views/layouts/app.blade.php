@@ -116,7 +116,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link navlog" href="{{url('/tutorial')}}">
+                  <a class="nav-link navlog" href="https://omnilinkz.com/tutorial/" target="_blank">
                     Tutorial
                   </a>
                 </li>

@@ -4,28 +4,27 @@
 <?php use App\Helpers\Helper; ?>
 
 <link rel="stylesheet" href="{{asset('css/tutorial.css')}}">
-<script type="text/javascript" src="{{ asset('/public/node-waves/waves.js') }}"></script>
 
 <div class="container mb-5 main-cont" style="">
   <div class="row">
     <div class="col-md-12">
       <div class="tab-content">
-        <div class="embed-responsive embed-responsive-16by9 tab-pane fade in active" id="home_animation_1" role="tabpanel" >
+        <div class="embed-responsive embed-responsive-16by9 tab-pane animated fade in active" id="home_animation_1" role="tabpanel" >
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/RtpiCPeXY6g?rel=0&amp;showinfo=0"></iframe>
         </div>
-        <div class="embed-responsive embed-responsive-16by9 tab-pane  " id="profile-animation-1" role="tabpanel" >
+        <div class="embed-responsive embed-responsive-16by9 tab-pane animated " id="profile-animation-1" role="tabpanel" >
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/_jUCvWKuJ-g?rel=0&amp;showinfo=0"></iframe>
-        </div>								
-        <div class="embed-responsive embed-responsive-16by9 tab-pane  " id="tampilan_animation_1" role="tabpanel" >
+        </div>
+        <div class="embed-responsive embed-responsive-16by9 tab-pane animated " id="tampilan_animation_1" role="tabpanel" >
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/6XBwRB3dUhY?rel=0&amp;showinfo=0"></iframe>
         </div>
 
-        <div class="embed-responsive embed-responsive-16by9 tab-pane  " id="pixel_animation_1" role="tabpanel" >
+        <div class="embed-responsive embed-responsive-16by9 tab-pane animated " id="pixel_animation_1" role="tabpanel" >
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/wgruzLhPqAo?rel=0&amp;showinfo=0"></iframe>
-        </div>								
-        <div class="embed-responsive embed-responsive-16by9 tab-pane  " id="wa_animation_1" role="tabpanel" >
+        </div>
+        <div class="embed-responsive embed-responsive-16by9 tab-pane animated " id="wa_animation_1" role="tabpanel" >
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dHdgh90nGv4?rel=0&amp;showinfo=0"></iframe>
-        </div>								
+        </div>
       </div>
     </div>
   </div>
