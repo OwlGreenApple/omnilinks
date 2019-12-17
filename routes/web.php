@@ -150,6 +150,7 @@ if(env('DOMAIN_TYPE')=='main'){
     });
     Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order/confirm','OrderController@confirm_order');
+    Route::get('/list-order/calc','OrderController@calc_total_counter_on_pages');
 
     //List Coupon
     Route::get('/list-coupon','CouponController@index');
