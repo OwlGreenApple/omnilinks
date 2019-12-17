@@ -1073,8 +1073,8 @@ class BiolinkController extends Controller
       //$user = User::find($banner->user_id);
       $user = User::find($banner->users_id);
     } else {
-      $pages = Page::find($id);
-      $user = User::find($pages->user_id);
+      $page = Page::find($id);
+      $user = User::find($page->user_id);
     }
 
     $filename = 'clicked/'.$user->username.'/'.date('m-Y').'/all/total-click/counter.txt';
@@ -1108,6 +1108,9 @@ class BiolinkController extends Controller
       //$link = Link::find($id);
       $link->counter = $link->counter+1;
       $link->save();
+      $page = Page::find($link->pages_id);
+      $page->total_counter = $page->total_counter + 1;
+      $page->save();
 
       $this->make_file(date('d-m-Y'),$link->pages_id,'link-'.$link->id,$user->username);
       $this->make_file(date('d-m-Y'),$link->pages_id,'total-click',$user->username);
@@ -1147,6 +1150,9 @@ class BiolinkController extends Controller
       //$banner = Banner::find($id);
       $banner->counter = $banner->counter+1;
       $banner->save();
+      $page = Page::find($banner->pages_id);
+      $page->total_counter = $page->total_counter + 1;
+      $page->save();
 
       $this->make_file(date('d-m-Y'),$banner->pages_id,'banner-'.$banner->id,$user->username);
       $this->make_file(date('d-m-Y'),$banner->pages_id,'total-click',$user->username);
@@ -1182,64 +1188,65 @@ class BiolinkController extends Controller
       }
     } 
     else {
-      //$pages = Page::find($id);
+      //$page = Page::find($id);
 
       switch ($mode) {
         case "wa":
-          $pages->wa_link_counter = $pages->wa_link_counter+1;
-          // $link = 'https://api.whatsapp.com/send?phone='.$pages->wa_link;
+          $page->wa_link_counter = $page->wa_link_counter+1;
+          // $link = 'https://api.whatsapp.com/send?phone='.$page->wa_link;
           $temp_text = " ";
-          $link = "whatsapp://send/?phone=".$pages->wa_link."&text=" . $temp_text . "";
-          $idpixel = $pages->wa_pixel_id;
+          $link = "whatsapp://send/?phone=".$page->wa_link."&text=" . $temp_text . "";
+          $idpixel = $page->wa_pixel_id;
         break;
         case "telegram":
-          $pages->telegram_link_counter = $pages->telegram_link_counter+1;
-          $link = 'https://t.me/'.$pages->telegram_link;
-          $idpixel = $pages->telegram_pixel_id;
+          $page->telegram_link_counter = $page->telegram_link_counter+1;
+          $link = 'https://t.me/'.$page->telegram_link;
+          $idpixel = $page->telegram_pixel_id;
         break;
         case "skype":
-          $pages->skype_link_counter = $pages->skype_link_counter+1;
-          $link = 'skype:'.$pages->skype_link.'?chat';
-          $idpixel = $pages->skype_pixel_id;
+          $page->skype_link_counter = $page->skype_link_counter+1;
+          $link = 'skype:'.$page->skype_link.'?chat';
+          $idpixel = $page->skype_pixel_id;
         break;
         case "line":
-          $pages->line_link_counter = $pages->line_link_counter+1;
-          $link = 'https://line.me/ti/p/~'.$pages->line_link;
-          $idpixel = $pages->line_pixel_id;
+          $page->line_link_counter = $page->line_link_counter+1;
+          $link = 'https://line.me/ti/p/~'.$page->line_link;
+          $idpixel = $page->line_pixel_id;
         break;
         case "messenger":
-          $pages->messenger_link_counter = $pages->messenger_link_counter+1;
-          $link = 'http://m.me/'.$pages->messenger_link;
-          $idpixel = $pages->messenger_pixel_id;
+          $page->messenger_link_counter = $page->messenger_link_counter+1;
+          $link = 'http://m.me/'.$page->messenger_link;
+          $idpixel = $page->messenger_pixel_id;
         break;
         case "youtube":
-          $pages->youtube_link_counter = $pages->youtube_link_counter+1;
-          $link = $pages->youtube_link;
-          $idpixel = $pages->youtube_pixel_id;
+          $page->youtube_link_counter = $page->youtube_link_counter+1;
+          $link = $page->youtube_link;
+          $idpixel = $page->youtube_pixel_id;
         break;
         case "fb":
-          $pages->fb_link_counter = $pages->fb_link_counter+1;
-          $link = "https://facebook.com/".$pages->fb_link;
-          $idpixel = $pages->fb_pixel_id;
+          $page->fb_link_counter = $page->fb_link_counter+1;
+          $link = "https://facebook.com/".$page->fb_link;
+          $idpixel = $page->fb_pixel_id;
         break;
         case "twitter":
-          $pages->twitter_link_counter = $pages->twitter_link_counter+1;
-          $link = "https://twitter.com/".$pages->twitter_link;
-          $idpixel = $pages->twitter_pixel_id;
+          $page->twitter_link_counter = $page->twitter_link_counter+1;
+          $link = "https://twitter.com/".$page->twitter_link;
+          $idpixel = $page->twitter_pixel_id;
         break;
         case "ig":
-          $pages->ig_link_counter = $pages->ig_link_counter+1;
-          $link = "https://instagram.com/".$pages->ig_link;
-          $idpixel = $pages->ig_pixel_id;
+          $page->ig_link_counter = $page->ig_link_counter+1;
+          $link = "https://instagram.com/".$page->ig_link;
+          $idpixel = $page->ig_pixel_id;
         break;
       }
-      $pages->save();
+      $page->total_counter = $page->total_counter + 1;
+      $page->save();
 
-      $this->make_file(date('d-m-Y'),$pages->id,$mode,$user->username);
-      $this->make_file(date('d-m-Y'),$pages->id,'total-click',$user->username);
+      $this->make_file(date('d-m-Y'),$page->id,$mode,$user->username);
+      $this->make_file(date('d-m-Y'),$page->id,'total-click',$user->username);
       $this->make_file(date('d-m-Y'),'all','total-click',$user->username);
-      $this->make_file(date('m-Y'),$pages->id,$mode,$user->username);
-      $this->make_file(date('m-Y'),$pages->id,'total-click',$user->username);
+      $this->make_file(date('m-Y'),$page->id,$mode,$user->username);
+      $this->make_file(date('m-Y'),$page->id,'total-click',$user->username);
       $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
       $pixel = Pixel::find($idpixel);
