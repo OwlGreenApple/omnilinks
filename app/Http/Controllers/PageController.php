@@ -27,7 +27,7 @@ class PageController extends Controller
 
     public function load_page(Request $request){
       //halaman list kupon admin
-      $pages = Page::where("user_id",0)->get();
+      $pages = Page::all();
 
       $arr['view'] = (string) view('admin.list-page.content')
               ->with('pages',$pages);  
