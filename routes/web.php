@@ -150,7 +150,6 @@ if(env('DOMAIN_TYPE')=='main'){
     });
     Route::get('/list-order/load-order','OrderController@load_list_order');
     Route::get('/list-order/confirm','OrderController@confirm_order');
-    Route::get('/list-order/calc','OrderController@calc_total_counter_on_pages');
 
     //List Coupon
     Route::get('/list-coupon','CouponController@index');
@@ -162,6 +161,7 @@ if(env('DOMAIN_TYPE')=='main'){
     //List Page
     Route::get('/list-page','PageController@index');
     Route::get('/list-page/load-page','PageController@load_page');
+    Route::get('/list-page/calc','PageController@calc_total_counter_on_pages');
     
     //List User 
     Route::get('/list-user','UserController@index');
