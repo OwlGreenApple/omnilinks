@@ -9,8 +9,8 @@ Pass  : {{$password}}
 
 <?php if ($price=="") { ?>
   <i>Selamat, </i><br>
-  <i>Anda mendapatkan Paket Elite </i><br>
-  <strong>Hanya 295 rb saja (3 bulan paket Elite)</strong> <br>
+  <strong>Anda mendapatkan Paket Special Elite 3 bulan</strong> <br>
+  <i>Hanya dengan 295 rb saja</i> <br>
   <strong>Gunakan kupon ini: "{{$coupon_code}}" </strong><br>
   <strong>Atau klik link <a href="{{url('checkout/'.$coupon_code)}}">ini</a> </strong>  <br>
 <br>

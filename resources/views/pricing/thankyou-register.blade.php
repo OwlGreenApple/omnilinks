@@ -15,8 +15,12 @@
           <hr class="orn" style="color: #106BC8">
           <div class="form-group">
           <p class="pg-title">Selamat kesempatan anda dapat membeli <br>
-          Paket Elite 3 Bulan seharga 295Rb<br>
-          @if(!is_null($coupon_code))Kode Kupon anda <strong>#{{$coupon_code}} </strong> @endif
+          Paket Special Elite 3 Bulan seharga 295Rb<br>
+          @if(!is_null($coupon_code))
+            Kode Kupon anda <strong>#{{$coupon_code}} </strong> <br>
+            <br>
+            <i>*ps Kupon berlaku 1 x 24 jam</i>
+          @endif
           </p>
           </div>
           <div class="form-group offset-md-2 col-md-8 col-8">
