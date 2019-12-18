@@ -14,16 +14,22 @@
           <h1>Thank You<br> For Your Registration</h1>
           <hr class="orn" style="color: #106BC8">
           <div class="form-group">
-          <p class="pg-title">Selamat kesempatan anda dapat membeli <br>
-          Paket Special Elite 3 Bulan seharga 295Rb<br>
+          <p class="pg-title">Selamat, Anda mendapat kesempatan membeli <br>
+          <br>
+          <strong>PAKET SPECIAL ELITE</strong><br>
+          <strong>3 Bulan: 295Rb</strong><br>
+          <i style="color:#106AC7!important;font-size:18px;">(diskon 100Rb)</i><br>
           @if(!is_null($coupon_code))
-            Kode Kupon anda <strong>#{{$coupon_code}} </strong> <br>
             <br>
-            <i>*ps Kupon berlaku 1 x 24 jam</i>
+            <img src="{{url('image/coupons.jpg')}}" style="width:auto;height:32px;">
+            Kode Kupon anda :<br>
+          <strong><i style="color:#FF0000!important;">{{$coupon_code}} </i></strong> <br>
+            <br>
+            <i style="font-size:15px;color:#106AC7!important;">*PS: kupon expired dalam 1x24 jam</i>
           @endif
           </p>
           </div>
-          <div class="form-group offset-md-2 col-md-8 col-8">
+          <div class="form-group offset-md-2 col-md-8 col-12">
             <a href="<?php 
             if (!is_null($coupon_code)){
               echo url('checkout/'.$coupon_code);
@@ -32,7 +38,7 @@
               echo "#";
             }
             ?>" class="free-underline">
-              <input type="button" class=" btn btn-primary bsub btn-block" value="Order Sekarang" />
+              <input type="button" class=" btn btn-primary bsub btn-block" value="Gunakan Kupon Sekarang" style="margin-top:-10px; background-color:#FF0000!important;" />
             </a>
           </div>
         </div>
