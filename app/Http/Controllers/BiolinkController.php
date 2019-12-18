@@ -380,6 +380,7 @@ class BiolinkController extends Controller
       $arr['message'] = $validator->errors()->first();
       return $arr;
     }
+
     //pengecekan server side untuk paket yang dipilih 
     if ( ($request->modeBackground=="gradient") || ($request->modeBackground=="wallpaper") || ($request->modeBackground=="animation") ) {
       if ($user->membership=='free') {
