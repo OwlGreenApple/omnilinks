@@ -592,6 +592,7 @@
   overflow: hidden;
   background-color: gainsboro;
   position: relative;
+  cursor : pointer;
 }
 .galleryContainer .slideShowContainer #playPause{
   width: 32px;

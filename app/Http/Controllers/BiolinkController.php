@@ -333,7 +333,8 @@ class BiolinkController extends Controller
     
     $temp_arr = array();
     $temp_arr['judul'] = ['required', 'string',  'max:191' ];
-    $temp_arr['imagepages'] = ['image', 'max:1000'];
+    // $temp_arr['imagepages'] = ['image', 'max:1000', 'dimensions:max_width=150,min_height=150'];
+    $temp_arr['imagepages'] = ['image', 'max:1000' ];
 
     if (!is_null($request->judulBanner)){
       if ($user->membership=='pro' or  $user->membership=='elite') 
@@ -360,6 +361,7 @@ class BiolinkController extends Controller
     
     $messages = [
         'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
+        'dimensions'    => 'Ukuran maksimum 150x150px(widthxheight)  .',
         /*'same'    => 'The :attribute and :other must match.',
         'size'    => 'The :attribute must be exactly :size.',
         'between' => 'The :attribute value :input is not between :min - :max.',

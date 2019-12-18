@@ -47,6 +47,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('post-register', 'Auth\RegisterController@post_register');
   Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
   Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
+  Route::get('/thankyou-register','OrderController@thankyou_register');
   // Route::get('/home', 'HomeController@index')->name('home');
 
   //pricing
