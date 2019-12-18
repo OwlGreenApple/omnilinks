@@ -2,22 +2,6 @@
 @section('content')
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 <script type="text/javascript">
-  $(document).ready(function() {
-      $( "#select-auto-manage" ).change(function() {
-        var price = $(this).find("option:selected").attr("data-price");
-        var namapaket = $(this).find("option:selected").attr("data-paket");
-
-        $("#price").val(price);
-        $("#namapaket").val(namapaket);
-        $('#kupon').val("");
-        check_kupon();
-      });
-      $( "#select-auto-manage" ).change();
-    });
-
-    $("body").on("click", ".btn-kupon", function() {
-      check_kupon();
-    });
 
     function check_kupon(){
       $.ajax({
@@ -74,6 +58,7 @@
               $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+labelPaket+'</option>');
             }
             $('#select-auto-manage').val(data.paketid);
+            $( "#select-auto-manage" ).change();
           }
           else {
             $('#pesan').removeClass('alert-success');
@@ -82,6 +67,27 @@
         }
       });
     }
+    
+  $(document).ready(function() {
+      $( "#select-auto-manage" ).change(function() {
+        var price = $(this).find("option:selected").attr("data-price");
+        var namapaket = $(this).find("option:selected").attr("data-paket");
+
+        $("#price").val(price);
+        $("#namapaket").val(namapaket);
+        $('#kupon').val("");
+        check_kupon();
+      });
+      $( "#select-auto-manage" ).change();
+      
+      $("body").on("click", ".btn-kupon", function() {
+        check_kupon();
+      });
+
+    $("#kupon").val("<?php if(substr($id,0,7)=='special') { echo $id; } ?>");
+    $(".btn-kupon").trigger("click");
+  });
+    
 </script>
 <div class="container" style="margin-top:50px; margin-bottom:100px">
   <div class="row justify-content-center">
@@ -109,6 +115,7 @@
                 <div class="col-12 col-md-12">
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
                   <select class="form-control" name="idpaket" id="select-auto-manage">
+                    @if(substr($id,0,7)<>"special")
                     <option class="" data-price="155000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
                       Pro Bulanan - IDR 155.000,-/bulan
                     </option>
@@ -144,6 +151,7 @@
                         Top Up 100000 points
                       </option>
                     @endif
+                    @endif
                   </select>
                 </div>
               </div>
@@ -155,7 +163,7 @@
 
                   <div class="col-md-12 row">
                     <div class="col-md-11 pl-0">
-                      <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Masukkan Kode Kupon Disini" style="width:100%" />  
+                      <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Masukkan Kode Kupon Disini" style="width:100%">  
                     </div>
                     <div class="col-md-1 pl-0">
                       <button type="button" class="btn btn-primary btn-kupon">

@@ -16,7 +16,7 @@ use App\Mail\ConfirmEmail;
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
 
-use Carbon, Crypt, Mail, DateTime;
+use Carbon, Crypt, Mail, DateTime, Auth;
 
 class RegisterController extends Controller
 {
@@ -87,6 +87,7 @@ class RegisterController extends Controller
       'wa_number' => $data['wa_number'],
     ]);
 
+    $order = null;
     #IF ORDER IS NOT FREE
     if ($data['price']<>"") 
     {
@@ -186,7 +187,11 @@ class RegisterController extends Controller
       $user->save();
     }
 
-    return $user;
+    // return $user;
+    return [
+      "user"=>$user,
+      "order"=>$order,
+    ];
 
   }
 
@@ -212,12 +217,12 @@ class RegisterController extends Controller
       
       $arrRequest = $request->all();
       $arrRequest['password'] = $password;
-      $user = $this->create($arrRequest);
+      $arrRet = $this->create($arrRequest);
 
       $register_time = Carbon::now()->toDateTimeString();
-      $confirmcode = Hash::make($user->email.$register_time);
-      $user->confirm_code = $confirmcode;
-      $user->save();
+      $confirmcode = Hash::make($arrRet['user']->email.$register_time);
+      $arrRet['user']->confirm_code = $confirmcode;
+      $arrRet['user']->save();
       
       $string = '';
       if ($request->price<>"") 
@@ -229,8 +234,8 @@ class RegisterController extends Controller
         do 
         {
           $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
-          $string = '';
-          for ($i = 0; $i < 5 ; $i++) {
+          $string = 'special-';
+          for ($i = 0; $i < 7 ; $i++) {
             $pos = rand(0, strlen($karakter)-1);
             $string .= $karakter{$pos};
           }
@@ -239,41 +244,57 @@ class RegisterController extends Controller
         $coupon = new Coupon;
         $coupon->kodekupon = $string;
         $coupon->diskon_value = 0;
-        $coupon->diskon_percent = 50;
+        $coupon->diskon_percent = 0;
         $coupon->valid_until = new DateTime('+3 days');
-        $coupon->valid_to = "";
+        $coupon->valid_to = "package-elite-3";
         $coupon->keterangan = "Kupon AutoGenerate Free User";
         $coupon->package_id = 0;
-        $coupon->user_id = $user->id;
+        $coupon->user_id = $arrRet['user']->id;
         $coupon->save();
       }
       
 
       $secret_data = [
-        'email' => $user->email,
+        'email' => $arrRet['user']->email,
       //   'register_time' => $register_time,
        'confirm_code' => $confirmcode,
       ];
     
       $emaildata = [
         'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
-        'user' => $user,
+        'user' => $arrRet['user'],
         // 'password' => $request->password,
         'password' => $password,
        'price' => $request->price,
        'coupon_code' => $string,
       ];
       
-      Mail::to($user->email)->send(new ConfirmEmail($emaildata));
+      Mail::to($arrRet['user']->email)->send(new ConfirmEmail($emaildata));
 
+      Auth::loginUsingId($arrRet['user']->id);
       if ($request->price<>"") {
-        return redirect('thankyou');
+        return view('pricing.thankyou')->with(array(
+              'order'=>$arrRet['order'],    
+            ));
       } else {
-        $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
-        return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
+        $temp = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
+        // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
+        return view('pricing.thankyou-register')->with(array(
+              'order'=>$arrRet['order'],    
+              'coupon_code' => $string,
+            ));
+        
       }
     } else {
-      return redirect("register")->with("error",$validator->errors()->first());
+      // return redirect("register")->with("error",$validator->errors()->first());
+      $request->session()->flash('error', $validator->errors()->first());
+      return view('auth.register')->with(array(
+        "price"=>$request->price,
+        "namapaket"=>$request->namapaket,
+        "coupon_code"=>$request->kupon,
+        "idpaket" => $request->idpaket,
+      ));
+      
     }
   }
 
@@ -304,11 +325,11 @@ class RegisterController extends Controller
 
         curl_close($curl);
 
-        if ($err) {
-          echo "cURL Error #:" . $err;
-        } else {
-          echo $response."\n";
-        }
+        // if ($err) {
+          // echo "cURL Error #:" . $err;
+        // } else {
+          // echo $response."\n";
+        // }
     }
 
 /**/  

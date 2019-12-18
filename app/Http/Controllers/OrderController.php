@@ -72,6 +72,7 @@ class OrderController extends Controller
   }
 
   public function cek_kupon($kodekupon,$harga,$idpaket){
+    $user = Auth::user();
     //cek kodekupon
     $arr['status'] = 'success';
     $arr['message'] = '';
@@ -80,12 +81,17 @@ class OrderController extends Controller
     $arr['coupon'] = null;
 
     if($kodekupon!=''){
+      $user_id = 0;
+      if (!is_null($user)) {
+        $user_id = $user->id;
+      }
       $coupon = Coupon::where('kodekupon',$kodekupon)
-                ->where(function($query) use ($idpaket) {
-                  $query->where('package_id',$idpaket)
-                        ->orwhere('package_id',0);
-                })
-                ->first();
+              ->where(function($query) use ($idpaket) {
+                $query->where('package_id',$idpaket)
+                      ->orwhere('package_id',0);
+              })
+              ->where('user_id',$user_id)
+              ->first();
 
       if(is_null($coupon)){
         $arr['status'] = 'error';
@@ -206,7 +212,19 @@ class OrderController extends Controller
   public function thankyou()
   {
     //halaman thankyou
-    return view('pricing.thankyou');
+    return view('pricing.thankyou')->with(array(
+              'order'=>null,    
+            ));
+  }
+
+  public function thankyou_register()
+  {
+    //halaman thankyou
+    return view('pricing.thankyou-register')->with(array(
+          'order'=>null,
+          'coupon_code' => null,
+    ));
+    
   }
 
   public function checkout($id){
@@ -422,7 +440,9 @@ class OrderController extends Controller
       $order->save();
     }
 
-    return view('pricing.thankyou');
+    return view('pricing.thankyou')->with(array(
+              'order'=>$order,    
+            ));
   }
 
   public static function add_time($user,$time){

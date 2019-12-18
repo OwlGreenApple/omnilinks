@@ -9,13 +9,12 @@ Pass  : {{$password}}
 
 <?php if ($price=="") { ?>
   <i>Selamat, </i><br>
-  <i>Anda mendapatkan </i><br>
-  <strong>KUPON 50% OFF SPECIAL</strong> <br>
-  <i>Paket Pro & Elite</i> <br>
-  <strong>Kupon 50% OFF: "{{$coupon_code}}" </strong><br>
+  <i>Anda mendapatkan Paket Elite </i><br>
+  <strong>Hanya 295 rb saja (3 bulan paket Elite)</strong> <br>
+  <strong>Gunakan kupon ini: "{{$coupon_code}}" </strong><br>
+  <strong>Atau klik link <a href="{{url('checkout/'.$coupon_code)}}">ini</a> </strong>  <br>
 <br>
-  <strong>*Segera gunakan kupon ini</strong>  <br>
-  (kupon akan expired sesudah 3x24 jam)<br>
+  (kupon akan expired sesudah 1x24 jam)<br>
   <br>
   *kupon ini hanya bisa berlaku untuk email ini saja.
   <br>

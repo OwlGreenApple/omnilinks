@@ -566,10 +566,10 @@
     }
     else {
       $('.harga.pro').html('<sup>Rp</sup> 85.000 <sub>/bln');
-      $('.harga-real.pro').html('Biaya Per Tahun @ Rp 1.020.000');
+      $('.harga-real.pro').html('Biaya Per Tahun Rp 1.020.000');
 
       $('.harga.premium').html('<sup>Rp</sup> 95.000 <sub>/bln');
-      $('.harga-real.premium').html('Biaya Per Tahun @ Rp 1.140.000');
+      $('.harga-real.premium').html('Biaya Per Tahun Rp 1.140.000');
     }
 
     $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Bulanan');
