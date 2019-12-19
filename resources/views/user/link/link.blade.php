@@ -1521,7 +1521,7 @@ and add more";
   <div class="div-loading">
     <div id="loader" style="display: none;"></div>  
   </div> 
-  <div id="script-code">
+  <div id="script-code" style="display: none;">
   </div> 
 
 <script src="{{asset('js/myScript.js')}}"></script>
@@ -1723,6 +1723,10 @@ and add more";
         check_outlined();
       }
     ); 
+    $("body").on("click",".txthov",function(){
+        $(this).unbind('mouseenter mouseleave');
+    });
+    
     moveSlide(0);
     @if(!is_null($pages->description))
     tempStr = $("#hidden-description").val().replace(/\n/g, "<br>");
