@@ -8,6 +8,7 @@ use App\Banner;
 use App\Ads;
 use App\AdsHistory;
 use App\Whatsapplink;
+use App\Console\Commands\CropProfileImage;
 
 use App\Helpers\Helper;
 use App\Mail\NotifClickFreeUser; 
@@ -361,7 +362,7 @@ class BiolinkController extends Controller
     
     $messages = [
         'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
-        'dimensions'    => 'Ukuran maksimum 150x150px(widthxheight)  .',
+        //'dimensions'    => 'Ukuran maksimum 150x150px(widthxheight)  .',
         /*'same'    => 'The :attribute and :other must match.',
         'size'    => 'The :attribute must be exactly :size.',
         'between' => 'The :attribute value :input is not between :min - :max.',
@@ -380,6 +381,32 @@ class BiolinkController extends Controller
       $arr['message'] = $validator->errors()->first();
       return $arr;
     }
+
+    #RESIZE FILE IF OVER 100PX
+
+    $arr_size = getimagesize($request->file('imagepages'));
+    $imagewidth = $arr_size[0];
+    $imageheight = $arr_size[1];
+
+    if($imagewidth <> $imageheight)
+    {
+        $arr['status'] = 'error';
+        $arr['message'] = "Ukuran width dan height harus sama";
+        return $arr;
+    }
+
+    //TEMPORARY DON'T FORGET TO DELETE THIS CODE AND OPEN REMARKED CODE BELOW
+    $imageUpload =  file_get_contents($request->file('imagepages'));
+    /*
+    if($imagewidth > 100 || $imageheight > 100)
+    {
+        $imageUpload = $this->resizeImage($request->file('imagepages'),100,100);
+    }
+    else
+    {
+        $imageUpload =  file_get_contents($request->file('imagepages'));
+    }
+    */
 
     //pengecekan server side untuk paket yang dipilih 
     if ( ($request->modeBackground=="gradient") || ($request->modeBackground=="wallpaper") || ($request->modeBackground=="animation") ) {
@@ -417,7 +444,7 @@ class BiolinkController extends Controller
       $dt = Carbon::now();
       $dir = 'photo_page/'.explode(' ',trim($user->name))[0].'-'.$user->id;
       $filename = $dt->format('ymdHi').'-'.$page->id.'.jpg';
-      Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('imagepages')), 'public');
+      Storage::disk('s3')->put($dir."/".$filename, $imageUpload, 'public');
       $page->image_pages = $dir."/".$filename;
     }
 
@@ -553,6 +580,8 @@ class BiolinkController extends Controller
           $banner->title=$request->judulBanner[$i];
           $banner->link=$request->linkBanner[$i];
           $banner->pixel_id=$request->bannerpixel[$i];
+
+          /* READ AND PUT FILTER FROM BANNER */
 
           $banner->save(); 
           if($request->hasFile('bannerImage.'.$i)) {
@@ -1312,4 +1341,60 @@ class BiolinkController extends Controller
                     ->with('links',$links);
      return $arr;
   }
+
+
+  #RESIZE IMAGE
+  public function resizeImage($file, $w, $h, $crop=false){
+    list($width, $height) = getimagesize($file);
+        $r = $width / $height;
+        if ($crop) {
+            if ($width > $height) {
+                $width = ceil($width-($width*abs($r-$w/$h)));
+            } else {
+                $height = ceil($height-($height*abs($r-$w/$h)));
+            }
+            $newwidth = $w;
+            $newheight = $h;
+        } else {
+            if ($w/$h > $r) {
+                $newwidth = $h*$r;
+                $newheight = $h;
+            } else {
+                $newheight = $w/$r;
+                $newwidth = $w;
+            }
+        }
+
+        switch(exif_imagetype($file)){
+        case IMAGETYPE_PNG:
+            $src = imagecreatefrompng($file);
+            $dst = imagecreatetruecolor($newwidth, $newheight);
+            imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+            ob_start();
+            imagepng($dst);
+            $image_contents = ob_get_clean();
+        break;
+        case IMAGETYPE_GIF:
+            $src = imagecreatefromgif($file);
+            $dst = imagecreatetruecolor($newwidth, $newheight);
+            imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+            ob_start();
+            imagepng($dst);
+            $image_contents = ob_get_clean();
+        break;
+        case IMAGETYPE_JPEG:
+            $src = imagecreatefromjpeg($file);
+            $dst = imagecreatetruecolor($newwidth, $newheight);
+            imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+            ob_start();
+            imagejpeg($dst);
+            $image_contents = ob_get_clean();
+        break;
+      }
+      return $image_contents;
+  }
+
+/* end class */  
 }

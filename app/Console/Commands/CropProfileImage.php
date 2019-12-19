@@ -39,6 +39,7 @@ class CropProfileImage extends Command
      */
     public function handle()
     {
+
         $pages = Page::where('image_pages','<>',null)->select('image_pages')->get();
         foreach($pages as $page)
         {
@@ -52,13 +53,17 @@ class CropProfileImage extends Command
 
             $get_image_file = Storage::disk('s3')->get($page->image_pages);
             #BACKUP ORIGINAL IMAGE
-            Storage::disk('s3')->put('photo_page/'.$folder_name."/".$edited_filename,$get_image_file);
-            //Storage::disk('local')->put('photo_page/'.$folder_name."/".$edited_filename,$get_image_file);
-            //$image_file_local = storage_path('app/'.$page->image_pages);
+            //Storage::disk('s3')->put('photo_page/'.$folder_name."/".$edited_filename,$get_image_file);
+
+            #SAVE FILE ON LOCAL STORAGE TEMPORARY
+            Storage::disk('local')->put('test/'.$edited_filename,$get_image_file);
+            //Storage::disk('local')->put('test/'.$folder_name."/".$edited_filename,$get_image_file);
+            //Storage::disk('local')->put($files[5],$get_image_file);
+            $image_file_local = storage_path('app/'.$files[5]);
             $s3path = $page->image_pages;
 
             #CHANGE AND RESIZE THE ORIGINAL IMAGE
-            $this->runresize($image_file,$s3path,$folder_name,$files[5]);
+            //$this->runresize($image_file_local,$s3path,$folder_name,$files[5]);
         }
     }
 
@@ -104,33 +109,19 @@ class CropProfileImage extends Command
       switch(exif_imagetype($file)){
         case IMAGETYPE_PNG:
             $newfile = str_replace(".jpg",".png",$file);
-            //$news3 = str_replace(".jpg",".png",$s3path);
-            //Storage::disk('s3')->mv($s3path, $news3);
+            rename($file,$newfile);
             //return $this->convertToJPGImage($newfile,$newwidth, $newheight,$width, $height);
         break;
         case IMAGETYPE_GIF:
             $newfile = str_replace(".jpg",".gif",$file);
-            //$news3 = str_replace(".jpg",".png",$s3path);
-            //Storage::disk('s3')->mv($file, $news3);
+            rename($file,$newfile);
             //return $this->convertGIFtoJPGImage($newfile,$newwidth, $newheight,$width, $height);
         break;
         case IMAGETYPE_JPEG:
             $newfile = $file;
-
-            $src = imagecreatefromjpeg($newfile);
-            $dst = imagecreatetruecolor($newwidth, $newheight);
-            imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
-            ob_start();
-            imagejpeg($dst);
-            $image_contents = ob_get_clean();
-            $path = 'photo_page/'.$folder_name."/".$file_name;
-            Storage::disk('s3')->put($path,$image_contents,'public');
-            //return $this->convertGIFtoJPGImage($newfile,$newwidth, $newheight,$width, $height);
         break;
       }
 
-      /*
       //Get file extension
       $exploding = explode(".",$newfile);
       $ext = end($exploding);
@@ -156,32 +147,43 @@ class CropProfileImage extends Command
 
       if($ext == "png")
       {
-         $newpath = str_replace(".png",".jpg",$newfile );
+         $temp_name = str_replace(".jpg", ".png", $file_name);
          ob_start();
          imagepng($dst);
          $image_contents = ob_get_clean();
-         $path = 'photo_page/'.$folder_name."/".$file_name;
-         Storage::disk('s3')->put($path,$image_contents,'public');
+
+        //$path = 'photo_page/'.$folder_name."/".$file_name;
+         $path = 'photo_page/'.$file_name;
+         Storage::disk('local')->put($path,$image_contents);
+         Storage::delete($temp_name);
+         //Storage::disk('s3')->put($path,$image_contents,'public');
       }
       else if($ext == "gif")
       {
-         $newpath = str_replace(".gif",".jpg",$newfile );
+         $temp_name = str_replace(".jpg", ".gif", $file_name);
          ob_start();
          imagegif($dst);
          $image_contents = ob_get_clean();
-         $path = 'photo_page/'.$folder_name."/".$file_name;
-         Storage::disk('s3')->put($path,$image_contents,'public');
+
+         //$path = 'photo_page/'.$folder_name."/".$file_name;
+         $path = 'photo_page/'.$file_name;
+         Storage::disk('local')->put($path,$image_contents);
+         Storage::delete($temp_name);
+         //Storage::disk('s3')->put($path,$image_contents,'public');
       }
       else
       {
          ob_start();
          imagejpeg($dst);
          $image_contents = ob_get_clean();
-         $path = 'photo_page/'.$folder_name."/".$file_name;
-         Storage::disk('s3')->put($path,$image_contents,'public');
+
+        //$path = 'photo_page/'.$folder_name."/".$file_name;
+         $path = 'photo_page/'.$file_name;
+         Storage::disk('local')->put($path,$image_contents);
+         Storage::delete($file_name);
+         //Storage::disk('s3')->put($path,$image_contents,'public');
       }
-      */
-      //return $dst;
+      
    }
 
    #TO CONVERT PNG TO JPG
