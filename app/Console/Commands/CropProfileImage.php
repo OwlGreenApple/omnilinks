@@ -68,10 +68,7 @@ class CropProfileImage extends Command
                 $this->runresize($image_file_local,$s3path,$folder_name,$files[5]);
             }
         }
-        else
-        {
-            echo 'Nothing pic image / biolinks profile image to resize';
-        }
+       
     }
 
     public function runresize($filepath,$s3path,$folder_name,$file_name)
