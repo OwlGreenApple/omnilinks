@@ -4,23 +4,23 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Storage;
-use App\Page;
+use App\Banner;
 
-class CropProfileImage extends Command
+class ResizeBannerImage extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'crop:image';
+    protected $signature = 'resize:banner';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Backup original biolinks image profile and then resize profile image on biolinks, ';
+    protected $description = 'To backup original banner image and resize it on biolinks page';
 
     /**
      * Create a new command instance.
@@ -39,49 +39,47 @@ class CropProfileImage extends Command
      */
     public function handle()
     {
+        $banners = Banner::where('images_banner','<>','0')->select('images_banner')->get();
 
-        $pages = Page::where('image_pages','<>',null)->select('image_pages')->get();
-
-        if($pages->count() > 0)
+        if($banners->count() > 0)
         {
-            foreach($pages as $page)
+            foreach($banners as $banner)
             {
-                #GET IMAGE LINK / URL
-                $image_file = Storage::disk('s3')->url($page->image_pages);
-                $files = explode("/",$image_file);
+                $banner_image = Storage::disk('s3')->url($banner->images_banner);
+                $files = explode("/",$banner_image);
 
                 $folder_name = $files[4];
                 $filename = preg_replace('/\\.[^.\\s]{3,4}$/', '', $files[5]); #remove extesnion
-                $edited_filename = $filename.'-origin.jpg';
+                $edited_filename = $filename.'-originbanner.jpg';
 
-                $get_image_file = Storage::disk('s3')->get($page->image_pages);
+                $get_image_file = Storage::disk('s3')->get($banner->images_banner);
 
-                #BACKUP ORIGINAL IMAGE
-                Storage::disk('s3')->put('photo_page/'.$folder_name."/".$edited_filename,$get_image_file);
+                 #BACKUP ORIGINAL IMAGE
+                Storage::disk('s3')->put('banner/'.$folder_name."/".$edited_filename,$get_image_file);
 
                 #SAVE FILE ON LOCAL STORAGE TEMPORARY
                 Storage::disk('local')->put('test/'.$folder_name."/".$files[5],$get_image_file);
                 $image_file_local = storage_path('app/test/'.$folder_name."/".$files[5]);
-                $s3path = $page->image_pages;
 
                 #CHANGE AND RESIZE THE ORIGINAL IMAGE
-                $this->runresize($image_file_local,$s3path,$folder_name,$files[5]);
+                $this->runresize($image_file_local,$folder_name,$files[5]);
             }
-        }
+        }#end if
         else
         {
-            echo 'Nothing pic image / biolinks profile image to resize';
+            echo 'Nothing banner image to resize';
         }
     }
 
-    public function runresize($filepath,$s3path,$folder_name,$file_name)
+    public function runresize($filepath,$folder_name,$file_name)
     {
-      $this->resize_image($filepath, 100, 100,false,$folder_name,$file_name,$s3path);
+        $this->resize_image($filepath, 434, 200,false,$folder_name,$file_name);
     }
 
-    public function resize_image($file, $w, $h, $crop=false,$folder_name,$file_name,$s3path) {
+    public function resize_image($file, $w, $h, $crop=false,$folder_name,$file_name) {
       list($width, $height) = getimagesize($file);
       $r = $width / $height;
+
       if ($crop) {
           if ($width > $height) {
               $width = ceil($width-($width*abs($r-$w/$h)));
@@ -99,7 +97,6 @@ class CropProfileImage extends Command
               $newwidth = $w;
           }
       }
-      
 
       #Check whether the file is valid jpg or not
       switch(exif_imagetype($file)){
@@ -137,8 +134,8 @@ class CropProfileImage extends Command
               $src = imagecreatefromjpeg($newfile);
           break;
       }
-
-      $path = 'photo_page/'.$folder_name."/".$file_name;
+      
+      $path = "banner/".$folder_name."/".$file_name;
 
       if($ext == "png")
       {
@@ -147,10 +144,9 @@ class CropProfileImage extends Command
 
          $temp_name = str_replace(".jpg", ".png", $file_name);
          ob_start();
-         imagepng($dst);
+         imagepng($dst,null,5);
          $image_contents = ob_get_clean();
 
-         //Storage::disk('local')->put($path,$image_contents);
          Storage::disk('s3')->put($path,$image_contents,'public');
          Storage::disk('local')->delete('test/'.$folder_name.'/'.$temp_name);
       }
@@ -158,69 +154,27 @@ class CropProfileImage extends Command
       {
          $dst = imagecreatetruecolor($newwidth, $newheight);
          imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
          $temp_name = str_replace(".jpg", ".gif", $file_name);
          ob_start();
          imagegif($dst);
          $image_contents = ob_get_clean();
 
-         //Storage::disk('local')->put($path,$image_contents);
-         Storage::disk('s3')->put($path,$image_contents,'public');
+         Storage::disk('s3')->put($path,$image_contents,'public');         
          Storage::disk('local')->delete('test/'.$folder_name.'/'.$temp_name);
       }
       else
       {
          $dst = imagecreatetruecolor($newwidth, $newheight);
          imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
          ob_start();
          imagejpeg($dst);
          $image_contents = ob_get_clean();
 
-         //Storage::disk('local')->put($path,$image_contents);
          Storage::disk('s3')->put($path,$image_contents,'public');
          Storage::disk('local')->delete('test/'.$folder_name.'/'.$file_name);
       }
       
    }
 
-   #TO CONVERT PNG TO JPG
-    public function convertToJPGImage($filePath,$newwidth, $newheight, $width, $height)
-    {
-        $image = imagecreatefrompng($filePath);
-        $bg = imagecreatetruecolor($newwidth, $newheight);
-        imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
-        imagealphablending($bg, TRUE);
-        imagecopyresampled($bg, $image, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-        imagedestroy($image);
-        $quality = 80; // 0 = worst / smaller file, 100 = better / bigger file 
-
-        $newPath = str_replace(".png", ".jpg", $filePath);
-
-        ob_start();
-        imagejpeg($bg);
-        $image_contents = ob_get_clean();
-        $path = 'photo_page/'.$folder_name."/".$file_name;
-        Storage::disk('s3')->put($path,$image_contents,'public');
-
-        //imagejpeg($bg, $newPath, $quality);
-        imagedestroy($bg);
-    }
-
-    public function convertGIFtoJPGImage($filePath,$newwidth, $newheight, $width, $height)
-    {
-        $image = imagecreatefromgif($filePath);
-        $bg = imagecreatetruecolor($newwidth, $newheight);
-        imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
-        imagealphablending($bg, TRUE);
-        imagecopyresampled($bg, $image, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-        imagedestroy($image);
-        $quality = 80; // 0 = worst / smaller file, 100 = better / bigger file 
-
-        $newPath = str_replace(".gif", ".jpg", $filePath);
-        imagejpeg($bg, $newPath, $quality);
-        imagedestroy($bg);
-    }
-
-/* end class cropfile images */    
+/* end class file */    
 }

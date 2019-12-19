@@ -382,34 +382,6 @@ class BiolinkController extends Controller
       return $arr;
     }
 
-    #RESIZE FILE IF OVER 100PX
-
-    /*$arr_size = getimagesize($request->file('imagepages'));
-    $imagewidth = $arr_size[0];
-    $imageheight = $arr_size[1];
-
-    if($imagewidth <> $imageheight)
-    {
-        $arr['status'] = 'error';
-        $arr['message'] = "Ukuran width dan height harus sama";
-        return $arr;
-    }
-
-    $imageUpload =  file_get_contents($request->file('imagepages'));
-    /*
-    if($imagewidth > 100 || $imageheight > 100)
-    {
-        $imageUpload = $this->resizeImage($request->file('imagepages'),100,100);
-    }
-    else
-    {
-        $imageUpload =  file_get_contents($request->file('imagepages'));
-    }
-    */
-
-    //TEMPORARY DON'T FORGET TO DELETE THIS CODE AND OPEN REMARKED CODE BELOW
-    
-
     //pengecekan server side untuk paket yang dipilih 
     if ( ($request->modeBackground=="gradient") || ($request->modeBackground=="wallpaper") || ($request->modeBackground=="animation") ) {
       if ($user->membership=='free') {
@@ -443,10 +415,32 @@ class BiolinkController extends Controller
     {
       // $path = Storage::putFile('template',$request->file('imagepages')); 
       // $page->image_pages = $path;
+
+      #RESIZE FILE IF OVER 100PX
+      $arr_size = getimagesize($request->file('imagepages'));
+      $imagewidth = $arr_size[0];
+      $imageheight = $arr_size[1];
+
+      if($imagewidth <> $imageheight)
+      {
+          $arr['status'] = 'error';
+          $arr['message'] = "Ukuran width dan height pada gambar profil harus sama";
+          return $arr;
+      }
+      
+      if($imagewidth > 100 || $imageheight > 100)
+      {
+          $imageUpload = $this->resizeImage($request->file('imagepages'),100,100);
+      }
+      else
+      {
+          $imageUpload =  file_get_contents($request->file('imagepages'));
+      }
+    
       $dt = Carbon::now();
       $dir = 'photo_page/'.explode(' ',trim($user->name))[0].'-'.$user->id;
       $filename = $dt->format('ymdHi').'-'.$page->id.'.jpg';
-      Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('imagepages')), 'public');
+      Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
       $page->image_pages = $dir."/".$filename;
     }
 
@@ -583,8 +577,6 @@ class BiolinkController extends Controller
           $banner->link=$request->linkBanner[$i];
           $banner->pixel_id=$request->bannerpixel[$i];
 
-          /* READ AND PUT FILTER FROM BANNER */
-
           $banner->save(); 
           if($request->hasFile('bannerImage.'.$i)) {
             $dt = Carbon::now();
@@ -592,12 +584,28 @@ class BiolinkController extends Controller
             $filename = $dt->format('ymdHi').'-'.$banner->id.'.jpg';
             // dd($dir."/".$filename);
             // if($idbanner[$i]==""){
+
+            #FILTER TO REIZE BANNER IMAGE IF BANNER IMAGE'S HEIGHT > 200
+
+             $banner_image_size = getimagesize($request->file('bannerImage')[$i]);
+             $bannerimagewidth = $banner_image_size[0];
+             $bannerimageheight = $banner_image_size[1];
+
+             if($bannerimageheight > 200)
+             {
+                $bannerUpload = $this->resizeImage($request->file('bannerImage')[$i],434,200);
+             }
+             else
+             {
+                $bannerUpload =   file_get_contents($request->file('bannerImage')[$i]);
+             }
+
             if(($banner->images_banner=="0")||($idbanner[$i]=="")){
-              Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('bannerImage')[$i]), 'public');
+              Storage::disk('s3')->put($dir."/".$filename,$bannerUpload, 'public');
               $banner->images_banner=$dir."/".$filename;
               $banner->save(); 
             } else {
-              Storage::disk('s3')->put($banner->images_banner, file_get_contents($request->file('bannerImage')[$i]), 'public');
+              Storage::disk('s3')->put($banner->images_banner,$bannerUpload, 'public');
             }
           } 
 
@@ -1370,7 +1378,7 @@ class BiolinkController extends Controller
         switch(exif_imagetype($file)){
         case IMAGETYPE_PNG:
             $src = imagecreatefrompng($file);
-            $dst = imagecreatetruecolor($newwidth, $newheight);
+            $dst = imagecreate($newwidth, $newheight);
             imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
             ob_start();
