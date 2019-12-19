@@ -162,11 +162,11 @@
                   </label>
 
                   <div class="col-md-12 row">
-                    <div class="col-md-11 pl-0">
-                      <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Masukkan Kode Kupon Disini" style="width:100%">  
+                    <div class="col-11 pl-0">
+                      <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Kode Kupon Anda" style="width:100%">  
                     </div>
-                    <div class="col-md-1 pl-0">
-                      <button type="button" class="btn btn-primary btn-kupon">
+                    <div class="col-1 pl-0">
+                      <button type="button" class="btn btn-primary btn-kupon  form-control-lg">
                         Apply
                       </button>  
                     </div>  
