@@ -1161,12 +1161,14 @@
 
 @if(!is_null($pages->color_picker))
   <body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a "><!--height : 100vh;-->
-@elseif(!is_null($pages->template))
+@elseif(!is_null($pages->template) && ($membership!=='free') )
   <body class="{{$pages->template}}"> <!--style="height : 100vh;"--> 
-@elseif(!is_null($pages->wallpaper))
+@elseif(!is_null($pages->wallpaper) && ($membership!=='free') )
   <body class="{{$pages->wallpaper}}"> <!--style="height : 100vh;"-->
-@elseif(!is_null($pages->gif_template))
+@elseif(!is_null($pages->gif_template) && ($membership!=='free') )
   <body class="{{$pages->gif_template}}"> <!--style="height : 100vh;"-->
+@elseif($membership=='free')
+  <body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a "><!--height : 100vh;-->
 @endif
   
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
