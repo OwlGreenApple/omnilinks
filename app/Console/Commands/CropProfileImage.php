@@ -56,14 +56,12 @@ class CropProfileImage extends Command
             //Storage::disk('s3')->put('photo_page/'.$folder_name."/".$edited_filename,$get_image_file);
 
             #SAVE FILE ON LOCAL STORAGE TEMPORARY
-            Storage::disk('local')->put('test/'.$edited_filename,$get_image_file);
-            //Storage::disk('local')->put('test/'.$folder_name."/".$edited_filename,$get_image_file);
-            //Storage::disk('local')->put($files[5],$get_image_file);
-            $image_file_local = storage_path('app/'.$files[5]);
+            Storage::disk('local')->put('test/'.$folder_name."/".$files[5],$get_image_file);
+            $image_file_local = storage_path('app/test/'.$folder_name."/".$files[5]);
             $s3path = $page->image_pages;
 
             #CHANGE AND RESIZE THE ORIGINAL IMAGE
-            //$this->runresize($image_file_local,$s3path,$folder_name,$files[5]);
+            $this->runresize($image_file_local,$s3path,$folder_name,$files[5]);
         }
     }
 
@@ -155,7 +153,7 @@ class CropProfileImage extends Command
         //$path = 'photo_page/'.$folder_name."/".$file_name;
          $path = 'photo_page/'.$file_name;
          Storage::disk('local')->put($path,$image_contents);
-         Storage::delete($temp_name);
+         Storage::disk('local')->delete('test/'.$folder_name.'/'.$temp_name);
          //Storage::disk('s3')->put($path,$image_contents,'public');
       }
       else if($ext == "gif")
@@ -167,9 +165,8 @@ class CropProfileImage extends Command
 
          //$path = 'photo_page/'.$folder_name."/".$file_name;
          $path = 'photo_page/'.$file_name;
-         Storage::disk('local')->put($path,$image_contents);
-         Storage::delete($temp_name);
-         //Storage::disk('s3')->put($path,$image_contents,'public');
+         Storage::disk('s3')->put($path,$image_contents,'public');
+         Storage::disk('local')->delete('test/'.$folder_name.'/'.$temp_name);
       }
       else
       {
@@ -180,7 +177,7 @@ class CropProfileImage extends Command
         //$path = 'photo_page/'.$folder_name."/".$file_name;
          $path = 'photo_page/'.$file_name;
          Storage::disk('local')->put($path,$image_contents);
-         Storage::delete($file_name);
+         Storage::disk('local')->delete('test/'.$folder_name.'/'.$file_name);
          //Storage::disk('s3')->put($path,$image_contents,'public');
       }
       
