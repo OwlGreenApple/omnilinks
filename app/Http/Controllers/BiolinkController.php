@@ -384,7 +384,7 @@ class BiolinkController extends Controller
 
     #RESIZE FILE IF OVER 100PX
 
-    $arr_size = getimagesize($request->file('imagepages'));
+    /*$arr_size = getimagesize($request->file('imagepages'));
     $imagewidth = $arr_size[0];
     $imageheight = $arr_size[1];
 
@@ -395,7 +395,6 @@ class BiolinkController extends Controller
         return $arr;
     }
 
-    //TEMPORARY DON'T FORGET TO DELETE THIS CODE AND OPEN REMARKED CODE BELOW
     $imageUpload =  file_get_contents($request->file('imagepages'));
     /*
     if($imagewidth > 100 || $imageheight > 100)
@@ -407,6 +406,9 @@ class BiolinkController extends Controller
         $imageUpload =  file_get_contents($request->file('imagepages'));
     }
     */
+
+    //TEMPORARY DON'T FORGET TO DELETE THIS CODE AND OPEN REMARKED CODE BELOW
+    
 
     //pengecekan server side untuk paket yang dipilih 
     if ( ($request->modeBackground=="gradient") || ($request->modeBackground=="wallpaper") || ($request->modeBackground=="animation") ) {
@@ -444,7 +446,7 @@ class BiolinkController extends Controller
       $dt = Carbon::now();
       $dir = 'photo_page/'.explode(' ',trim($user->name))[0].'-'.$user->id;
       $filename = $dt->format('ymdHi').'-'.$page->id.'.jpg';
-      Storage::disk('s3')->put($dir."/".$filename, $imageUpload, 'public');
+      Storage::disk('s3')->put($dir."/".$filename, file_get_contents($request->file('imagepages')), 'public');
       $page->image_pages = $dir."/".$filename;
     }
 
