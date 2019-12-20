@@ -111,11 +111,18 @@
             <th>
               Click Total Counter
             </th>
+            <th>
+              View Counter
+            </th>
           </thead>
           <tbody id="content"></tbody>
         </table>
 
         <div id="pager"></div>    
+        <p>
+        Grand Total all click : <span id="grand-total-all-click"></span><br>
+        Grand Total all view : <span id="grand-total-all-view"></span><br>
+        </p>
       </form>
     </div>
   </div>

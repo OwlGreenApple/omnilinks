@@ -246,6 +246,8 @@ class BiolinkController extends Controller
           return $tes;
         }
       }
+      $page->total_view += 1;
+      $page->save();
 
       $user = User::find($page->user_id);
       

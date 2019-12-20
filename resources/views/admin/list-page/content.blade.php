@@ -1,6 +1,8 @@
 <?php 
 use App\Link;
 use App\Banner;
+$grandTotalClick=0;
+$grandTotalView=0;
 ?>
 @foreach($pages as $page)
   <tr>
@@ -48,7 +50,20 @@ use App\Banner;
       <?php echo number_format($page->ig_link_counter); ?>
     </td>
     <td data-label="Total counter">
-      <?php echo number_format($page->total_counter); ?>
+      <?php 
+        $grandTotalClick += $page->total_counter; 
+        echo number_format($page->total_counter); 
+      ?>
+    </td>
+    <td data-label="View counter">
+      <?php 
+        $grandTotalView += $page->total_view; 
+        echo number_format($page->total_view); 
+      ?>
     </td>
   </tr>
 @endforeach
+<script>
+  $("#grand-total-all-click").html("<?php echo $grandTotalClick; ?>");
+  $("#grand-total-all-view").html("<?php echo $grandTotalView; ?>");
+</script>

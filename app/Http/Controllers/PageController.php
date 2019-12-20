@@ -36,6 +36,7 @@ class PageController extends Controller
       return $arr;
     }
     
+    //isi total_counter dengan sum semua link yang ada dipages
     public function calc_total_counter_on_pages(){
       $pages = Page::all();
       foreach ($pages as $page){
