@@ -15,6 +15,9 @@
 */
 
 if(env('DOMAIN_TYPE')=='main'){
+  #Route::get('testresize', 'BiolinkController@testresize');
+
+
   Route::get('/', 'HomeController@index');
   Route::get('migrate-to-activwa', 'HomeController@migrate_to_activwa');
   Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

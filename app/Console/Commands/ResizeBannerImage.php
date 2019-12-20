@@ -65,10 +65,6 @@ class ResizeBannerImage extends Command
                 $this->runresize($image_file_local,$folder_name,$files[5]);
             }
         }#end if
-        else
-        {
-            echo 'Nothing banner image to resize';
-        }
     }
 
     public function runresize($filepath,$folder_name,$file_name)
