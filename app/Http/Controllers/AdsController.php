@@ -154,4 +154,13 @@ class AdsController extends Controller
       return $arr;
     }
 
+    public function view_log(Request $request){
+      $adsHistory = AdsHistory::where('user_id',$request->id)
+              ->get();
+
+      $arr['view'] = (string) view('admin.list-ads.content-log')->with('adsHistory',$adsHistory);
+
+      return $arr;
+    }
+
 }

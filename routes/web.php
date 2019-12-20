@@ -178,6 +178,7 @@ if(env('DOMAIN_TYPE')=='main'){
     //List Ads 
     Route::get('/list-ads','AdsController@index');
     Route::get('/list-ads/load-ads','AdsController@load_ads');  
+    Route::get('/list-ads/view-log','AdsController@view_log');  
   });
 }
 

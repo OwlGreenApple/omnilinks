@@ -60,7 +60,7 @@
 
     $.ajax({
       type : 'GET',
-      url : "<?php echo url('/list-user/view-log') ?>",
+      url : "<?php echo url('/list-ads/view-log') ?>",
       data : { id : $('#idlog').val() },
       dataType: 'text',
       beforeSend: function()
@@ -76,6 +76,7 @@
         $('#content-log').html(data.view);
 
         tableLog = $('#tableLog').DataTable({
+                      responsive : true,
                       destroy: true,
                       "order": [],
                   });
@@ -111,22 +112,35 @@
               Headline
             </th>
             <th>
+              Credit
+            </th>
+            <th>
+              Click
+            </th>
+            <th>
+              View
+            </th>
+            <th>
+              Created
+            </th>
+            <th>
+              Action
+            </th>
+            <th>
               Link
             </th>
             <th>
               Description
             </th>
-            <th>
-              Credit
-            </th>
-            <th>
-              Created
-            </th>
           </thead>
           <tbody id="content"></tbody>
         </table>
 
-        <div id="pager"></div>    
+        <div id="pager"></div>
+        <p>
+        Grand Total all click : <span id="grand-total-all-click"></span><br>
+        Grand Total all view : <span id="grand-total-all-view"></span><br>
+        </p>
       </form>
     </div>
   </div>
@@ -140,7 +154,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modaltitle">
-          Log
+          Ads Log 
         </h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
@@ -150,9 +164,12 @@
           <input type="hidden" name="idlog" id="idlog">
 
           <thead align="center">
-            <th>Type</th>
-            <th>Value</th>
-            <th>Keterangan</th>
+            <th>jml_credit</th>
+            <th>is_view</th>
+            <th>is_click</th>
+            <th>description</th>
+            <th>credit_before</th>
+            <th>credit_after</th>
             <th>Created_at</th>
           </thead>
           <tbody id="content-log"></tbody>
