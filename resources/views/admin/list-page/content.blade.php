@@ -64,6 +64,6 @@ $grandTotalView=0;
   </tr>
 @endforeach
 <script>
-  $("#grand-total-all-click").html("<?php echo $grandTotalClick; ?>");
-  $("#grand-total-all-view").html("<?php echo $grandTotalView; ?>");
+  $("#grand-total-all-click").html("<?php echo number_format($grandTotalClick); ?>");
+  $("#grand-total-all-view").html("<?php echo number_format($grandTotalView); ?>");
 </script>
