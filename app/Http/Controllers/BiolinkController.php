@@ -1352,6 +1352,12 @@ class BiolinkController extends Controller
      return $arr;
   }
 
+  public function testresize()
+  {
+    $image_path = storage_path('app/free.png');
+    $image_content = $this->resizeImage($image_path,434,200);
+    Storage::disk('local')->put('banner/testresize.png',$image_content);
+  }
 
   #RESIZE IMAGE
   public function resizeImage($file, $w, $h, $crop=false){
@@ -1378,20 +1384,32 @@ class BiolinkController extends Controller
         switch(exif_imagetype($file)){
         case IMAGETYPE_PNG:
             $src = imagecreatefrompng($file);
-            $dst = imagecreate($newwidth, $newheight);
+            $color_index = imagecolorat($src,0,0);
+            $color_tran = imagecolorsforindex($src, $color_index);
+            
+            if($color_tran['alpha'] > 90)
+            {
+                $dst = imagecreate($newwidth, $newheight);
+            }
+            else
+            {
+                $dst = imagecreatetruecolor($newwidth, $newheight);
+            }
             imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
             ob_start();
-            imagepng($dst);
+            imagepng($dst,null,7);
             $image_contents = ob_get_clean();
+            imagedestroy($src);
         break;
         case IMAGETYPE_GIF:
             $src = imagecreatefromgif($file);
             $dst = imagecreatetruecolor($newwidth, $newheight);
             imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
             ob_start();
-            imagepng($dst);
+            imagegif($dst);
             $image_contents = ob_get_clean();
+            imagedestroy($src);
         break;
         case IMAGETYPE_JPEG:
             $src = imagecreatefromjpeg($file);
@@ -1399,8 +1417,9 @@ class BiolinkController extends Controller
             imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
             ob_start();
-            imagejpeg($dst);
+            imagejpeg($dst,null,95);
             $image_contents = ob_get_clean();
+            imagedestroy($src);
         break;
       }
       return $image_contents;
