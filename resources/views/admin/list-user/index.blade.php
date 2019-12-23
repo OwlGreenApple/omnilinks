@@ -50,7 +50,6 @@
                   destroy: true,
                   "order": [],
                 });
-
       }
     });
   }
@@ -169,6 +168,12 @@
       <div id="pesan" class="alert"></div>
 
       <br>  
+
+      <div class="form-group">
+        <div id="user-charts" style="height: 300px; width: 100%;"></div>
+      </div>
+
+      <br>
 
       <div class="form-group">
         <button class="btn btn-primary btn-add mb-4" data-toggle="modal" data-target="#add-user">
@@ -408,6 +413,37 @@
 </section>
 
 <script type="text/javascript">
+
+  window.onload = function () {
+
+  var users = [];
+  $.each(<?php echo json_encode($users);?>, function( i, item ) {
+      users.push({'x': new Date(i), 'y': item});
+  });
+
+  var chart = new CanvasJS.Chart("user-charts", {
+    animationEnabled: true,
+    theme: "light2",
+    title:{
+      text: "Users Statistics",
+      fontFamily: "Nunito,sans-serif"
+    },
+    axisY: {
+        titleFontFamily: "Nunito,sans-serif",
+        titleFontSize : 14,
+        title : "Total registered users",
+        titleFontColor: "#b7b7b7",
+        includeZero: false
+    },
+    data: [{        
+      type: "line",       
+      dataPoints: users
+    }]
+  });
+  chart.render();
+  //{x : new Date('2019-12-04'), y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+  }
+
   $( "body" ).on( "click", "#btn-add-user-free-trial", function() {
     var uf = $('#form-add-user');
     var fd = new FormData(uf[0]);

@@ -8,7 +8,7 @@ use App\UserLog;
 
 use App\Http\Controllers\OrderController;
 
-use Excel,DateTime,Hash,Validator,Auth,Carbon,Mail;
+use Excel,DateTime,Hash,Validator,Auth,Carbon,Mail,DB;
 
 class UserController extends Controller
 { 
@@ -26,7 +26,24 @@ class UserController extends Controller
 
     public function index(){
       //list user admin
-      return view('admin.list-user.index');
+      $users = DB::table('users')->select(DB::raw('COUNT(id) AS cid, DATE_FORMAT(created_at, "%Y-%m-%d") AS ct'))
+              ->where([['created_at','<>',NULL],['is_admin','=',0]])->groupBy('ct')
+              ->orderBy('created_at', 'ASC')
+              ->get();
+
+      if($users->count() > 0)
+      {
+          foreach($users as $user)
+          {
+            $arr[$user->ct] = $user->cid;
+          }
+      }
+      else
+      {
+          $arr = array();
+      }
+      
+      return view('admin.list-user.index',['users'=>$arr]);
     }
 
     public function load_user(Request $request){
