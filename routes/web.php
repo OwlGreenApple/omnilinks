@@ -62,6 +62,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('/register-payment','OrderController@register');
   Route::post('/confirm-payment','OrderController@confirm_payment');
   Route::get('/thankyou','OrderController@thankyou');
+  Route::get('/checkout-topup/{id}','OrderController@checkout_topup');
 
   Route::group(['middleware' => ['web','auth']], function () {
     //Ads Pricing 

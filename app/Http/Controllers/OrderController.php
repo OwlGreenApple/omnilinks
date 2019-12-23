@@ -204,22 +204,19 @@ class OrderController extends Controller
     ));
   }
 
-  public function index_order()
-  {
+  public function index_order(){
     //halaman order user
     return view('order.index');
   }
 
-  public function thankyou()
-  {
+  public function thankyou(){
     //halaman thankyou
     return view('pricing.thankyou')->with(array(
               'order'=>null,    
             ));
   }
 
-  public function thankyou_register()
-  {
+  public function thankyou_register(){
     //halaman thankyou
     return view('pricing.thankyou-register')->with(array(
           'order'=>null,
@@ -235,8 +232,7 @@ class OrderController extends Controller
             ));
   }
 
-  public function load_order(Request $request)
-  {
+  public function load_order(Request $request){
     //halaman order user
     $orders = Order::where('user_id',Auth::user()->id)
                 ->orderBy('created_at','descend')
@@ -249,8 +245,7 @@ class OrderController extends Controller
     return $arr;
   }
 
-  public function load_list_order(Request $request)
-  {
+  public function load_list_order(Request $request){
     //halaman list order admin
     $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
                 ->select('orders.*','users.email')
@@ -269,8 +264,7 @@ class OrderController extends Controller
     return $arr;
   }
 
-  public function confirm_payment_order(Request $request)
-  {
+  public function confirm_payment_order(Request $request){
     $user = Auth::user();
     //konfirmasi pembayaran user
     $order = Order::find($request->id_confirm);
@@ -572,47 +566,53 @@ class OrderController extends Controller
     return $arr;
   }
 
-  private function IsPay($email,$list_id,$is_pay)
+  private function IsPay($email,$list_id,$is_pay){
+    $curl = curl_init();
+    $data = array(
+        'email'=>$email,
+        'list_id'=>$list_id,
+        'is_pay'=>$is_pay
+    );
+
+    if(env('APP_ENV') == 'local')
     {
-        $curl = curl_init();
-        $data = array(
-            'email'=>$email,
-            'list_id'=>$list_id,
-            'is_pay'=>$is_pay
-        );
-
-        if(env('APP_ENV') == 'local')
-        {
-          $url = 'http://192.168.88.177/wa-project/is_pay';
-        }
-        else
-        {
-          $url = 'https://activwa.com/dashboard/is_pay';
-        }
-        
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => $url,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTREDIR => 3,
-          CURLOPT_POSTFIELDS => json_encode($data),
-          CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-
-        if ($err) {
-          echo "cURL Error #:" . $err;
-        } else {
-          $response = json_decode($response,true);
-          return $response['response'];
-        }
+      $url = 'http://192.168.88.177/wa-project/is_pay';
     }
+    else
+    {
+      $url = 'https://activwa.com/dashboard/is_pay';
+    }
+    
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $url,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTREDIR => 3,
+      CURLOPT_POSTFIELDS => json_encode($data),
+      CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+
+    if ($err) {
+      echo "cURL Error #:" . $err;
+    } else {
+      $response = json_decode($response,true);
+      return $response['response'];
+    }
+  }
+
+  public function checkout_topup($id){
+    //halaman checkout
+    return view('pricing.checkout')->with(array(
+              'id'=>$id,    
+            ));
+  }
 
 /* end class */
 }
