@@ -186,14 +186,17 @@ class OrderController extends Controller
     //register dengan order
     $stat = $this->cekharga($request->namapaket,$request->price);
 
+    $pathUrl = str_replace(url('/'), '', url()->previous());
     if($stat==false){
-      return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      // return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      return redirect($pathUrl)->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
     $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
 
     if($arr['status']=='error'){
-      return redirect("checkout/1")->with("error", $arr['message']);
+      // return redirect("checkout/1")->with("error", $arr['message']);
+      return redirect($pathUrl)->with("error", $arr['message']);
     }
 
     return view('auth.register')->with(array(
@@ -228,7 +231,8 @@ class OrderController extends Controller
   public function checkout($id){
     //halaman checkout
     return view('pricing.checkout')->with(array(
-              'id'=>$id,    
+              'id'=>$id,
+              'type'=>'normal-package',
             ));
   }
 
@@ -304,14 +308,17 @@ class OrderController extends Controller
     //buat order user lama
     $stat = $this->cekharga($request->namapaket,$request->price);
 
+    $pathUrl = str_replace(url('/'), '', url()->previous());
     if($stat==false){
-      return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      // return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      return redirect($pathUrl)->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
     if(substr($request->namapaket,0,6) === "Top Up"){
       $ads = Ads::where('user_id',Auth::user()->id)->first();
       if(is_null($ads)){
-        return redirect("checkout/5")->with("error", "Buat Ads terlebih dahulu sebelum melakukan Top Up.");   
+        // return redirect("checkout/5")->with("error", "Buat Ads terlebih dahulu sebelum melakukan Top Up.");   
+        return redirect($pathUrl)->with("error", "Buat Ads terlebih dahulu sebelum melakukan Top Up.");   
       } 
     }
 
@@ -324,7 +331,8 @@ class OrderController extends Controller
       $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
 
       if($arr['status']=='error'){
-        return redirect("checkout/1")->with("error", $arr['message']);
+        // return redirect("checkout/1")->with("error", $arr['message']);
+        return redirect($pathUrl)->with("error", $arr['message']);
       } else {
         // $total = $arr['total'];
         $diskon = $arr['diskon'];
@@ -605,13 +613,6 @@ class OrderController extends Controller
       $response = json_decode($response,true);
       return $response['response'];
     }
-  }
-
-  public function checkout_topup($id){
-    //halaman checkout
-    return view('pricing.checkout')->with(array(
-              'id'=>$id,    
-            ));
   }
 
 /* end class */
