@@ -51,7 +51,7 @@
             </b>  
           </h5>
           <span class="harga harga-small free">
-            <sup>Rp</sup> 0<sub> /bln<br> gratis <br>selamanya</sub>
+            <sup>Rp</sup> 0<sub> /bln<br> gratis <br> </sub>
           </span><br>
           @if(!Auth::check())
           <a class="link-free" href="{{url('register')}}">
@@ -124,7 +124,7 @@
               <sup>Rp</sup> 0<sub> /bln</sub>
             </span><br>
             <span class="harga-real free">
-              selamanya
+              &nbsp
             </span><br>
             <p class="hemat monthly mt-4">
               <i class="fas fa-redo-alt"></i>

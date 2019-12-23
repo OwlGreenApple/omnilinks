@@ -64,6 +64,9 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/thankyou','OrderController@thankyou');
 
   Route::group(['middleware' => ['web','auth']], function () {
+    //coupon 
+    Route::get('/coupon-available','CouponController@coupon_available');
+    
     //Ads Pricing 
     Route::get('/ads-pricing','AdsController@ads_pricing');
     Route::get('/ads-pricing/{id}','AdsController@ads_checkout');
