@@ -127,29 +127,21 @@ var testChart;
   <div class="row">
     @if (session('error'))
     <div class="col-md-12 mb-3">
-
-      <!--@if(Auth::user()->membership=='free')
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-            <span aria-hidden="true">×</span>
-          </button>
-          <?php  
-            $time = Helper::get_trial_time();
-            echo $time;
-          ?>
-          
-          <a href="{{url('pricing')}}">
-            Subscribe
-          </a>
-          untuk terus menggunakan Omnilinkz
-        </div>
-      @endif-->
-
         <div class="alert alert-danger">
           <button type="button" class="close" aria-label="Close" data-dismiss="alert">
             <span aria-hidden="true">×</span>
           </button>
-          {{ session('error') }} <a href="{{asset('/pricing')}}">Klik disini untuk upgrade</a>
+          {!! session('error') !!} 
+        </div>
+    </div>
+    @endif
+    @if (session('success'))
+    <div class="col-md-12 mb-3">
+        <div class="alert alert-success">
+          <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+          </button>
+          {!! session('success') !!} 
         </div>
     </div>
     @endif

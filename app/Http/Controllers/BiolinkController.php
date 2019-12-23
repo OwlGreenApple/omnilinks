@@ -97,20 +97,25 @@ class BiolinkController extends Controller
     $user = Auth::user();
     $pageCheck=Page::where('user_id',$user->id)
                       ->count();
+    $link_upgrade = '<a href="'.url('/pricing').'">Klik disini untuk upgrade</a>';
     if ($user->membership=='free') {
       if ($pageCheck>=1) {
-        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu");
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu ".$link_upgrade);
       }
     }
     else if ($user->membership=='pro') {
       if ($pageCheck>=3) {
-        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu"); 
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu ".$link_upgrade); 
       }
     }
     else if ($user->membership=='elite') {
       if ($pageCheck>=10) {
-        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink"); 
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink ".$link_upgrade); 
       }
+    }
+    if (!$user->is_confirm) {
+      $link_upgrade = '<a href="'.url('/resend-confirmation-email').'">disini</a>';
+      return redirect('/')->with("error","Maaf Anda tidak bisa membuat biolink, silahkan konfirmasi email anda terlebih dahulu, atau klik ".$link_upgrade." untuk kirim ulang");
     }
 
 

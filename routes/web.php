@@ -94,6 +94,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/dash/delete-pages','DashboardController@deletePage');
     Route::get('/dash/delete-link','DashboardController@deleteLink');
     Route::get('/dash/edit-link','DashboardController@editLink');
+    Route::get('/resend-confirmation-email','DashboardController@resend_confirmation_email');
 
     Route::get('/pdf/{id}/biolinks/{bulan}/{tahun}','DashboardController@pdf_page');
     Route::get('/pdf/{pageid}/{id}/{mode}/{bulan}/{tahun}','DashboardController@pdf_single');

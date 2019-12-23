@@ -6,11 +6,12 @@ use App\User;
 use App\Pixel;
 use App\Banner;
 use App\Whatsapplink;
-use Auth,Carbon,Validator,Storage;
+use App\Mail\ResendConfirmEmail;
+
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
 
-use PDF;
+use Auth,Carbon,Validator,Storage,PDF,Crypt,Mail;
 
 class DashboardController extends Controller
 {
@@ -751,4 +752,21 @@ class DashboardController extends Controller
 
     return $allarr;
   }
+
+  public function resend_confirmation_email(Request $request){
+    $user=Auth::user();
+    $secret_data = [
+      'email' => $user->email,
+      'confirm_code' => $user->confirm_code,
+    ];
+  
+    $emaildata = [
+      'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
+      'user' => $user,
+    ];
+    Mail::to($user->email)->send(new ResendConfirmEmail($emaildata));
+    
+    return redirect('/')->with("success","Silahkan cek inbox email anda.");
+  }
+
 }
