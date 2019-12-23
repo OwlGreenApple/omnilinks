@@ -28,7 +28,7 @@ class UserController extends Controller
       //list user admin
       $users = DB::table('users')->select(DB::raw('COUNT(id) AS cid, DATE_FORMAT(created_at, "%Y-%m-%d") AS ct'))
               ->where([['created_at','<>',NULL],['is_admin','=',0]])->groupBy('ct')
-              ->orderBy('created_at', 'ASC')
+              ->orderBy('ct', 'ASC')
               ->get();
 
       if($users->count() > 0)
