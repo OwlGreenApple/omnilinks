@@ -368,6 +368,9 @@ class OrderController extends Controller
       }
     }
 
+    //unique code 
+    $unique_code = mt_rand(1, 1000);
+
     $dt = Carbon::now();
     $order = new Order;
     $str = 'OML'.$dt->format('ymdHi');
@@ -377,9 +380,9 @@ class OrderController extends Controller
     $order->package =$request->namapaket;
     $order->jmlpoin=0;
     $order->coupon_id = $kuponid;
-    $order->total = $request->price;
+    $order->total = $request->price + $unique_code;
     $order->discount = $diskon;
-    $order->grand_total = $request->price - $diskon;
+    $order->grand_total = $request->price - $diskon + $unique_code;
     $order->status = 0;
     $order->buktibayar = "";
     $order->keterangan = "";
@@ -641,5 +644,6 @@ class OrderController extends Controller
     }
   }
 
+  
 /* end class */
 }

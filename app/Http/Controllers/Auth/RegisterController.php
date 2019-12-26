@@ -109,6 +109,9 @@ class RegisterController extends Controller
         }
       }
 
+      //unique code 
+      $unique_code = mt_rand(1, 1000);
+      
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -119,9 +122,9 @@ class RegisterController extends Controller
       $order->package = $data["namapaket"];
       $order->jmlpoin = 0;
       $order->coupon_id = $kuponid;
-      $order->total = $data["price"];
+      $order->total = $data["price"] + $unique_code;
       $order->discount = $diskon;
-      $order->grand_total = $data['price'] - $diskon;
+      $order->grand_total = $data['price'] - $diskon + $unique_code;
       $order->status = 0;
       $order->buktibayar = "";
       $order->keterangan = "";
