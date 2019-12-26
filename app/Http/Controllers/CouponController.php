@@ -10,8 +10,7 @@ use Validator;
 
 class CouponController extends Controller
 {
-    protected function validator(array $data)
-    {
+    protected function validator(array $data){
       return Validator::make($data, [
         'kodekupon' => ['required','string','unique:coupons'],
         'diskon_value' => ['required','integer','min:0'],
@@ -98,5 +97,9 @@ class CouponController extends Controller
       $arr['message'] = 'Delete kupon berhasil';
 
       return $arr;
+    }
+
+    public function coupon_available(Request $request){
+      return view('user.coupon.index');
     }
 }

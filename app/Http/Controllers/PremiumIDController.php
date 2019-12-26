@@ -32,18 +32,19 @@ class PremiumIDController extends Controller
     public function check_membership(){
       $arr['status'] = 'success';
       $arr['message'] = '';
+      $user = Auth::user();
 
-      if(Auth::user()->membership=='free'){
+      if($user->membership=='free'){
         $arr['status'] = 'error';
         $arr['message'] = 'Silahkan upgrade akun terlebih dahulu untuk dapat menggunakan Custom Link.';
         return $arr;
       } else {
-        $premiumid = PremiumID::where('user_id',Auth::user()->id)->get();
-        if($premiumid->count()>=3 and Auth::user()->membership=='pro'){
+        $premiumid = PremiumID::where('user_id',$user->id)->get();
+        if($premiumid->count()>=3 and ($user->membership=='pro' or $user->membership=='popular')){
           $arr['status'] = 'error';
           $arr['message'] = 'Custom Link telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Custom Link.';
           return $arr;
-        } else if($premiumid->count()>=10 and Auth::user()->membership=='elite'){
+        } else if($premiumid->count()>=10 and ($user->membership=='elite' or $user->membership=='super')){
           $arr['status'] = 'error';
           $arr['message'] = 'Custom Link telah mencapai batas maksimal.';
           return $arr;

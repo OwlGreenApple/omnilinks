@@ -39,6 +39,12 @@ class OrderController extends Controller
       'Elite Special 3 Months' => 295000,
       'Elite Special 5 Months' => 395000,
       'Elite Special 7 Months' => 495000,
+      
+      //new 
+      'Pro' => 195000, //30hari
+      'Popular' => 395000, //90hari
+      'Elite' => 695000, //180 hari
+      'Super' => 1095000, //360 hari
     );
 
     if(isset($paket[$namapaket])){
@@ -90,7 +96,10 @@ class OrderController extends Controller
                 $query->where('package_id',$idpaket)
                       ->orwhere('package_id',0);
               })
-              ->where('user_id',$user_id)
+              ->where(function($query) use ($user_id) {
+                $query->where('user_id',$user_id)
+                      ->orwhere('user_id',0);
+              })
               ->first();
 
       if(is_null($coupon)){
@@ -98,8 +107,10 @@ class OrderController extends Controller
         $arr['message'] = 'Kupon tidak terdaftar';
         return $arr;
       } else {
-        $now = new DateTime();
-        $date = new DateTime($coupon->valid_until);
+        // $now = new DateTime();
+        // $date = new DateTime($coupon->valid_until);
+        $now = Carbon::now();
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', $coupon->valid_until);
         
         if($date<$now){
           $arr['status'] = 'error';
@@ -186,14 +197,17 @@ class OrderController extends Controller
     //register dengan order
     $stat = $this->cekharga($request->namapaket,$request->price);
 
+    $pathUrl = str_replace(url('/'), '', url()->previous());
     if($stat==false){
-      return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      // return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      return redirect($pathUrl)->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
     $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
 
     if($arr['status']=='error'){
-      return redirect("checkout/1")->with("error", $arr['message']);
+      // return redirect("checkout/1")->with("error", $arr['message']);
+      return redirect($pathUrl)->with("error", $arr['message']);
     }
 
     return view('auth.register')->with(array(
@@ -204,22 +218,19 @@ class OrderController extends Controller
     ));
   }
 
-  public function index_order()
-  {
+  public function index_order(){
     //halaman order user
     return view('order.index');
   }
 
-  public function thankyou()
-  {
+  public function thankyou(){
     //halaman thankyou
     return view('pricing.thankyou')->with(array(
               'order'=>null,    
             ));
   }
 
-  public function thankyou_register()
-  {
+  public function thankyou_register(){
     //halaman thankyou
     return view('pricing.thankyou-register')->with(array(
           'order'=>null,
@@ -228,15 +239,21 @@ class OrderController extends Controller
     
   }
 
+  public function thankyou_confirm_payment(){
+    //halaman thankyou
+    return view('pricing.thankyou-confirm-payment');
+    
+  }
+
   public function checkout($id){
     //halaman checkout
     return view('pricing.checkout')->with(array(
-              'id'=>$id,    
+              'id'=>$id,
+              'type'=>'normal-package',
             ));
   }
 
-  public function load_order(Request $request)
-  {
+  public function load_order(Request $request){
     //halaman order user
     $orders = Order::where('user_id',Auth::user()->id)
                 ->orderBy('created_at','descend')
@@ -249,8 +266,7 @@ class OrderController extends Controller
     return $arr;
   }
 
-  public function load_list_order(Request $request)
-  {
+  public function load_list_order(Request $request){
     //halaman list order admin
     $orders = Order::join(env('DB_DATABASE').'.users','orders.user_id','users.id')  
                 ->select('orders.*','users.email')
@@ -269,8 +285,8 @@ class OrderController extends Controller
     return $arr;
   }
 
-  public function confirm_payment_order(Request $request)
-  {
+  //upload bukti TT 
+  public function confirm_payment_order(Request $request){
     $user = Auth::user();
     //konfirmasi pembayaran user
     $order = Order::find($request->id_confirm);
@@ -289,35 +305,45 @@ class OrderController extends Controller
         $order->buktibayar = $dir."/".$filename;
         
       } else {
-        $arr['status'] = 'error';
-        $arr['message'] = 'Upload file buktibayar terlebih dahulu';
-        return $arr;
+        // $arr['status'] = 'error';
+        // $arr['message'] = 'Upload file buktibayar terlebih dahulu';
+        // return $arr;
+        $pathUrl = str_replace(url('/'), '', url()->previous());
+        return redirect($pathUrl)->with("error", "Upload file buktibayar terlebih dahulu");
       }  
       $order->keterangan = $request->keterangan;
       $order->save();
 
-      $arr['status'] = 'success';
-      $arr['message'] = 'Konfirmasi pembayaran berhasil';
+      // $arr['status'] = 'success';
+      // $arr['message'] = 'Konfirmasi pembayaran berhasil';
     } else {
-      $arr['status'] = 'error';
-      $arr['message'] = 'Order telah atau sedang dikonfirmasi oleh admin';
+      // $arr['status'] = 'error';
+      // $arr['message'] = 'Order telah atau sedang dikonfirmasi oleh admin';
+        $pathUrl = str_replace(url('/'), '', url()->previous());
+        return redirect($pathUrl)->with("error", "Order telah atau sedang dikonfirmasi oleh admin.");
     }
 
-    return $arr;
+    // return $arr;
+    return view('pricing.thankyou-confirm-payment');
   }
 
+
+  //checkout klo uda login
   public function confirm_payment(Request $request){
     //buat order user lama
     $stat = $this->cekharga($request->namapaket,$request->price);
 
+    $pathUrl = str_replace(url('/'), '', url()->previous());
     if($stat==false){
-      return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      // return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
+      return redirect($pathUrl)->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
     }
 
     if(substr($request->namapaket,0,6) === "Top Up"){
       $ads = Ads::where('user_id',Auth::user()->id)->first();
       if(is_null($ads)){
-        return redirect("checkout/5")->with("error", "Buat Ads terlebih dahulu sebelum melakukan Top Up.");   
+        // return redirect("checkout/5")->with("error", "Buat Ads terlebih dahulu sebelum melakukan Top Up.");   
+        return redirect($pathUrl)->with("error", "Buat Ads terlebih dahulu sebelum melakukan Top Up.");   
       } 
     }
 
@@ -330,7 +356,8 @@ class OrderController extends Controller
       $arr = $this->cek_kupon($request->kupon,$request->price,$request->idpaket);
 
       if($arr['status']=='error'){
-        return redirect("checkout/1")->with("error", $arr['message']);
+        // return redirect("checkout/1")->with("error", $arr['message']);
+        return redirect($pathUrl)->with("error", $arr['message']);
       } else {
         // $total = $arr['total'];
         $diskon = $arr['diskon'];
@@ -341,6 +368,9 @@ class OrderController extends Controller
       }
     }
 
+    //unique code 
+    $unique_code = mt_rand(1, 1000);
+
     $dt = Carbon::now();
     $order = new Order;
     $str = 'OML'.$dt->format('ymdHi');
@@ -350,9 +380,9 @@ class OrderController extends Controller
     $order->package =$request->namapaket;
     $order->jmlpoin=0;
     $order->coupon_id = $kuponid;
-    $order->total = $request->price;
+    $order->total = $request->price + $unique_code;
     $order->discount = $diskon;
-    $order->grand_total = $request->price - $diskon;
+    $order->grand_total = $request->price - $diskon + $unique_code;
     $order->status = 0;
     $order->buktibayar = "";
     $order->keterangan = "";
@@ -394,18 +424,13 @@ class OrderController extends Controller
 
       } 
       else if(substr($order->package,0,5) === "Elite"){
-        /*
-          'Elite 2 Months' => 195000,
-          'Elite 3 Months' => 295000,
-          'Elite 5 Months' => 395000,
-          'Elite 7 Months' => 495000,
-        */
         if($order->package=='Elite Monthly'){
           $valid = $this->add_time($user,"+1 months");
         } 
         else if($order->package=='Elite Yearly'){
           $valid = $this->add_time($user,"+12 months");
         }
+        /*
         else if($order->package=='Elite Special 2 Months'){
           $valid = $this->add_time($user,"+2 months");
         }
@@ -417,7 +442,7 @@ class OrderController extends Controller
         }
         else if($order->package=='Elite Special 7 Months'){
           $valid = $this->add_time($user,"+7 months");
-        }
+        }*/
 
         $userlog = new UserLog;
         $userlog->user_id = $user->id;
@@ -489,6 +514,7 @@ class OrderController extends Controller
     return $valid;
   }
 
+  //klo dilunasi lewat admin page
   public function confirm_order(Request $request){
     //konfirmasi pembayaran admin
     $order = Order::find($request->id);
@@ -496,44 +522,74 @@ class OrderController extends Controller
     
     $user = User::find($order->user_id);
     $valid=null;
-
+    $type = "";
+    
+    /*
+      'Pro' => 195000, //30hari
+      'Popular' => 395000, //90hari
+      'Elite' => 695000, //180 hari
+      'Super' => 1095000, //360 hari
+    */
     if(substr($order->package,0,5) === "Pro"){
       if($order->package=='Pro Monthly'){
-        //$valid = new DateTime("+1 months");
         $valid = $this->add_time($user,"+1 months");
-      } else if($order->package=='Pro Yearly'){
-        //$valid = new DateTime("+12 months");
+      } 
+      else if($order->package=='Pro Yearly'){
         $valid = $this->add_time($user,"+12 months");
       }
-
-      $userlog = new UserLog;
-      $userlog->user_id = $user->id;
-      $userlog->type = 'membership';
-      $userlog->value = 'pro';
-      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
-      $userlog->save();
+      else if($order->package=='Pro'){
+        $valid = $this->add_time($user,"+1 months");
+      }
+      $type = "pro";
 
       $user->valid_until = $valid;
       $user->membership = 'pro';
-    } else if(substr($order->package,0,5) === "Elite"){
+    } 
+    else if(substr($order->package,0,7) === "Popular"){
+      $valid = $this->add_time($user,"+3 months");
+      $type="popular";
+      $user->valid_until = $valid;
+      $user->membership = 'popular';
+    }
+    else if(substr($order->package,0,5) === "Elite"){
       if($order->package=='Elite Monthly'){
-        //$valid = new DateTime("+1 months");
         $valid = $this->add_time($user,"+1 months");
       } else if($order->package=='Elite Yearly'){
-        //$valid = new DateTime("+12 months");
         $valid = $this->add_time($user,"+12 months");
       }
-
-      $userlog = new UserLog;
-      $userlog->user_id = $user->id;
-      $userlog->type = 'membership';
-      $userlog->value = 'elite';
-      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
-      $userlog->save();
+      else if($order->package=='Elite Special 2 Months'){
+        $valid = $this->add_time($user,"+2 months");
+      }
+      else if($order->package=='Elite Special 3 Months'){
+        $valid = $this->add_time($user,"+3 months");
+      }
+      else if($order->package=='Elite Special 5 Months'){
+        $valid = $this->add_time($user,"+5 months");
+      }
+      else if($order->package=='Elite Special 7 Months'){
+        $valid = $this->add_time($user,"+7 months");
+      }
+      else if($order->package=='Elite'){
+        $valid = $this->add_time($user,"+6 months");
+      }
+      $type = "elite";
 
       $user->valid_until = $valid;
       $user->membership = 'elite';
     }
+    else if(substr($order->package,0,5) === "Super"){
+      $valid = $this->add_time($user,"+12 months");
+      $type="super";
+      $user->valid_until = $valid;
+      $user->membership = 'super';
+    }
+
+    $userlog = new UserLog;
+    $userlog->user_id = $user->id;
+    $userlog->type = 'membership';
+    $userlog->value = $type;
+    $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
+    $userlog->save();
 
     $user->save();
     $order->save();
@@ -572,47 +628,47 @@ class OrderController extends Controller
     return $arr;
   }
 
-  private function IsPay($email,$list_id,$is_pay)
+  private function IsPay($email,$list_id,$is_pay){
+    $curl = curl_init();
+    $data = array(
+        'email'=>$email,
+        'list_id'=>$list_id,
+        'is_pay'=>$is_pay
+    );
+
+    if(env('APP_ENV') == 'local')
     {
-        $curl = curl_init();
-        $data = array(
-            'email'=>$email,
-            'list_id'=>$list_id,
-            'is_pay'=>$is_pay
-        );
-
-        if(env('APP_ENV') == 'local')
-        {
-          $url = 'http://192.168.88.177/wa-project/is_pay';
-        }
-        else
-        {
-          $url = 'https://activwa.com/dashboard/is_pay';
-        }
-        
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => $url,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTREDIR => 3,
-          CURLOPT_POSTFIELDS => json_encode($data),
-          CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-
-        if ($err) {
-          echo "cURL Error #:" . $err;
-        } else {
-          $response = json_decode($response,true);
-          return $response['response'];
-        }
+      $url = 'http://192.168.88.177/wa-project/is_pay';
     }
+    else
+    {
+      $url = 'https://activwa.com/dashboard/is_pay';
+    }
+    
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $url,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTREDIR => 3,
+      CURLOPT_POSTFIELDS => json_encode($data),
+      CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+    ));
 
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+
+    if ($err) {
+      echo "cURL Error #:" . $err;
+    } else {
+      $response = json_decode($response,true);
+      return $response['response'];
+    }
+  }
+
+  
 /* end class */
 }

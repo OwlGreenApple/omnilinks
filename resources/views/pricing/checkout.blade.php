@@ -3,87 +3,91 @@
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 <script type="text/javascript">
 
-    function check_kupon(){
-      $.ajax({
-        type: 'POST',
-        url: "<?php echo url('/check-kupon') ?>",
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: {
-          harga : $('#price').val(),
-          kupon : $('#kupon').val(),
-          idpaket : $( "#select-auto-manage" ).val(),
-        },
-        dataType: 'text',
-        beforeSend: function() {
-          $('#loader').show();
-          $('.div-loading').addClass('background-load');
-        },
-        success: function(result) {
-          $('#loader').hide();
-          $('.div-loading').removeClass('background-load');
+  function check_kupon(){
+    $.ajax({
+      type: 'POST',
+      url: "<?php echo url('/check-kupon') ?>",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: {
+        harga : $('#price').val(),
+        kupon : $('#kupon').val(),
+        idpaket : $( "#select-auto-manage" ).val(),
+      },
+      dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
 
-          var data = jQuery.parseJSON(result);
+        var data = jQuery.parseJSON(result);
 
-          $('#pesan').html(data.message);
-          $('#pesan').show();
-          if (data.message=="") {
-            $('#pesan').hide();
-          }
-          
-          if (data.status == 'success') {
-            $('.total').html('Rp. ' + data.total);
-            $('#pesan').removeClass('alert-danger');
-            $('#pesan').addClass('alert-success');
-          } 
-          else if (data.status == 'success-paket') {
-            $('.total').html('Rp. ' + data.total);
-            $('#pesan').removeClass('alert-danger');
-            $('#pesan').addClass('alert-success');
-            
-            flagSelect = false;
-            $("#select-auto-manage option").each(function() {
-              console.log($(this).val());
-              if ($(this).val() == data.paketid) {
-                flagSelect = true;
-              }
-            });
-
-            if (flagSelect == false) {
-              labelPaket = data.paket;
-              if (data.kodekupon=="SPECIAL12") {
-                labelPaket = "Paket Special Promo 1212 - IDR 295.000";
-              }
-              $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+labelPaket+'</option>');
-            }
-            $('#select-auto-manage').val(data.paketid);
-            $( "#select-auto-manage" ).change();
-          }
-          else {
-            $('#pesan').removeClass('alert-success');
-            $('#pesan').addClass('alert-danger');
-          }
+        $('#pesan').html(data.message);
+        $('#pesan').show();
+        if (data.message=="") {
+          $('#pesan').hide();
         }
-      });
-    }
-    
+        
+        if (data.status == 'success') {
+          $('.total').html('Rp. ' + data.total);
+          $('#pesan').removeClass('alert-danger');
+          $('#pesan').addClass('alert-success');
+        } 
+        else if (data.status == 'success-paket') {
+          $('.total').html('Rp. ' + data.total);
+          $('#pesan').removeClass('alert-danger');
+          $('#pesan').addClass('alert-success');
+          
+          flagSelect = false;
+          $("#select-auto-manage option").each(function() {
+            console.log($(this).val());
+            if ($(this).val() == data.paketid) {
+              flagSelect = true;
+            }
+          });
+
+          if (flagSelect == false) {
+            labelPaket = data.paket;
+            if (data.kodekupon=="SPECIAL12") {
+              labelPaket = "Paket Special Promo 1212 - IDR 295.000";
+            }
+            $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+labelPaket+'</option>');
+          }
+          $("#price").val(data.dataPrice);
+          $("#namapaket").val(data.dataPaket);
+          
+          $('#select-auto-manage').val(data.paketid);
+          $( "#select-auto-manage" ).change();
+        }
+        else {
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-danger');
+        }
+      }
+    });
+  }
+  
   $(document).ready(function() {
-      $( "#select-auto-manage" ).change(function() {
-        var price = $(this).find("option:selected").attr("data-price");
-        var namapaket = $(this).find("option:selected").attr("data-paket");
+    <?php if(substr($id,0,7)<>"special") {?>
+    $( "#select-auto-manage" ).change(function() {
+      var price = $(this).find("option:selected").attr("data-price");
+      var namapaket = $(this).find("option:selected").attr("data-paket");
 
-        $("#price").val(price);
-        $("#namapaket").val(namapaket);
-        $('#kupon').val("");
-        check_kupon();
-      });
-      $( "#select-auto-manage" ).change();
-      
-      $("body").on("click", ".btn-kupon", function() {
-        check_kupon();
-      });
-
+      $("#price").val(price);
+      $("#namapaket").val(namapaket);
+      $('#kupon').val("");
+      check_kupon();
+    });
+    $( "#select-auto-manage" ).change();
+    <?php } ?>
+    $("body").on("click", ".btn-kupon", function() {
+      check_kupon();
+    });
+    
     $("#kupon").val("<?php if(substr($id,0,7)=='special') { echo $id; } ?>");
     $(".btn-kupon").trigger("click");
   });
@@ -116,41 +120,57 @@
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
                   <select class="form-control" name="idpaket" id="select-auto-manage">
                     @if(substr($id,0,7)<>"special")
-                    <option class="" data-price="155000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
-                      Pro Bulanan - IDR 155.000,-/bulan
-                    </option>
-                    <option class="" data-price="195000" data-paket="Elite Monthly" value="3" <?php if ($id==3) echo "selected" ; ?>>
-                      Elite Bulanan - IDR 195.000,-/bulan
-                    </option>
-                    <option class="" data-price="1020000" data-paket="Pro Yearly" value="2" <?php if ($id==2) echo "selected" ; ?>>
-                      Pro Tahunan - IDR 1.020.000,-/tahun (Hemat 52%)
-                    </option>
-                    <option class="" data-price="1140000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
-                      Elite Tahunan - IDR 1.140.000,-/tahun (Hemat 52%)
-                    </option>
-                    @if(Auth::check())
-                      <option class="" data-price="62500" data-paket="Top Up 5000" value="5" <?php if ($id==5) echo "selected" ; ?>>
-                        Top Up 5000 points
-                      </option>
-                      <option class="" data-price="115000" data-paket="Top Up 10000" value="6" <?php if ($id==6) echo "selected" ; ?>>
-                        Top Up 10000 points
-                      </option>
-                      <option class="" data-price="210000" data-paket="Top Up 20000" value="7" <?php if ($id==7) echo "selected" ; ?>>
-                        Top Up 20000 points
-                      </option>
-                      <option class="" data-price="237000" data-paket="Top Up 25000" value="8" <?php if ($id==8) echo "selected" ; ?>>
-                        Top Up 25000 points
-                      </option>
-                      <option class="" data-price="425000" data-paket="Top Up 50000" value="9" <?php if ($id==9) echo "selected" ; ?>>
-                        Top Up 50000 points
-                      </option>
-                      <option class="" data-price="562000" data-paket="Top Up 75000" value="10" <?php if ($id==10) echo "selected" ; ?>>
-                        Top Up 75000 points
-                      </option>
-                      <option class="" data-price="650000" data-paket="Top Up 100000" value="11" <?php if ($id==11) echo "selected" ; ?>>
-                        Top Up 100000 points
-                      </option>
-                    @endif
+                      @if($type=="normal-package")
+                        <!--
+                        <option class="" data-price="155000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
+                          Pro Bulanan - IDR 155.000,-/bulan
+                        </option>
+                        <option class="" data-price="195000" data-paket="Elite Monthly" value="3" <?php if ($id==3) echo "selected" ; ?>>
+                          Elite Bulanan - IDR 195.000,-/bulan
+                        </option>
+                        <option class="" data-price="1020000" data-paket="Pro Yearly" value="2" <?php if ($id==2) echo "selected" ; ?>>
+                          Pro Tahunan - IDR 1.020.000,-/tahun (Hemat 52%)
+                        </option>
+                        <option class="" data-price="1140000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
+                          Elite Tahunan - IDR 1.140.000,-/tahun (Hemat 52%)
+                        </option>
+                        -->
+                        <option class="" data-price="195000" data-paket="Pro" value="1" <?php if ($id==1) echo "selected" ; ?>>
+                          Pro - IDR 195.000,-/30 hari 
+                        </option>
+                        <option class="" data-price="395000" data-paket="Popular" value="2" <?php if ($id==2) echo "selected" ; ?>>
+                          Popular - IDR 395.000,-/90 hari 
+                        </option>
+                        <option class="" data-price="695000" data-paket="Elite" value="3" <?php if ($id==3) echo "selected" ; ?>>
+                          Elite - IDR 695.000,-/180 hari 
+                        </option>
+                        <option class="" data-price="1095000" data-paket="Super" value="4" <?php if ($id==4) echo "selected" ; ?>>
+                          Super - IDR 1.095.000,-/360 hari 
+                        </option>
+                      @endif
+                      @if(Auth::check() && $type=="ads-package")
+                        <option class="" data-price="62500" data-paket="Top Up 5000" value="5" <?php if ($id==5) echo "selected" ; ?>>
+                          Top Up 5000 points
+                        </option>
+                        <option class="" data-price="115000" data-paket="Top Up 10000" value="6" <?php if ($id==6) echo "selected" ; ?>>
+                          Top Up 10000 points
+                        </option>
+                        <option class="" data-price="210000" data-paket="Top Up 20000" value="7" <?php if ($id==7) echo "selected" ; ?>>
+                          Top Up 20000 points
+                        </option>
+                        <option class="" data-price="237000" data-paket="Top Up 25000" value="8" <?php if ($id==8) echo "selected" ; ?>>
+                          Top Up 25000 points
+                        </option>
+                        <option class="" data-price="425000" data-paket="Top Up 50000" value="9" <?php if ($id==9) echo "selected" ; ?>>
+                          Top Up 50000 points
+                        </option>
+                        <option class="" data-price="562000" data-paket="Top Up 75000" value="10" <?php if ($id==10) echo "selected" ; ?>>
+                          Top Up 75000 points
+                        </option>
+                        <option class="" data-price="650000" data-paket="Top Up 100000" value="11" <?php if ($id==11) echo "selected" ; ?>>
+                          Top Up 100000 points
+                        </option>
+                      @endif
                     @endif
                   </select>
                 </div>
@@ -203,7 +223,7 @@
               </div>
               <div class="form-group">
                 <div class="col-12 col-md-12">
-                  <input type="submit" name="submit" id="submit" class="col-md-12 col-12 btn btn-primary bsub btn-block" value="Order Sekarang" />
+                  <input type="submit" name="submit" id="submit" class="col-md-12 col-12 btn btn-primary bsub btn-block" value="Order Sekarang" @if(substr($id,0,7)=='special') style="background-color:#ff0000!important;" @endif/>
                 </div>
               </div>
             </form>

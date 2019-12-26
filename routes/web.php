@@ -51,6 +51,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
   Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
   Route::get('/thankyou-register','OrderController@thankyou_register');
+  Route::get('/thankyou-confirm-payment','OrderController@thankyou_confirm_payment');
   // Route::get('/home', 'HomeController@index')->name('home');
 
   //pricing
@@ -64,6 +65,9 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/thankyou','OrderController@thankyou');
 
   Route::group(['middleware' => ['web','auth']], function () {
+    //coupon 
+    Route::get('/coupon-available','CouponController@coupon_available');
+    
     //Ads Pricing 
     Route::get('/ads-pricing','AdsController@ads_pricing');
     Route::get('/ads-pricing/{id}','AdsController@ads_checkout');
@@ -80,7 +84,7 @@ if(env('DOMAIN_TYPE')=='main'){
     //Orders 
     Route::get('/orders','OrderController@index_order');
     Route::get('/orders/load-order','OrderController@load_order');
-    Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
+    Route::post('order-confirm-payment','OrderController@confirm_payment_order')->name('order-confirm-payment');
 
     //dashboard
     // Route::get('/',function(){
@@ -94,6 +98,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/dash/delete-pages','DashboardController@deletePage');
     Route::get('/dash/delete-link','DashboardController@deleteLink');
     Route::get('/dash/edit-link','DashboardController@editLink');
+    Route::get('/resend-confirmation-email','DashboardController@resend_confirmation_email');
 
     Route::get('/pdf/{id}/biolinks/{bulan}/{tahun}','DashboardController@pdf_page');
     Route::get('/pdf/{pageid}/{id}/{mode}/{bulan}/{tahun}','DashboardController@pdf_single');

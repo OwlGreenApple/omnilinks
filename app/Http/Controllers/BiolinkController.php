@@ -97,20 +97,25 @@ class BiolinkController extends Controller
     $user = Auth::user();
     $pageCheck=Page::where('user_id',$user->id)
                       ->count();
+    $link_upgrade = '<a href="'.url('/pricing').'">Klik disini untuk upgrade</a>';
     if ($user->membership=='free') {
       if ($pageCheck>=1) {
-        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu");
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu ".$link_upgrade);
       }
     }
-    else if ($user->membership=='pro') {
+    else if (($user->membership=='pro') || ($user->membership=='popular') ) {
       if ($pageCheck>=3) {
-        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu"); 
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu ".$link_upgrade); 
       }
     }
-    else if ($user->membership=='elite') {
+    else if (($user->membership=='elite') || ($user->membership=='super') ) {
       if ($pageCheck>=10) {
-        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink"); 
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink ".$link_upgrade); 
       }
+    }
+    if (!$user->is_confirm) {
+      $link_upgrade = '<a href="'.url('/resend-confirmation-email').'">disini</a>';
+      return redirect('/')->with("error","Maaf Anda tidak bisa membuat biolink, silahkan konfirmasi email anda terlebih dahulu, atau klik ".$link_upgrade." untuk kirim ulang");
     }
 
 
@@ -340,7 +345,7 @@ class BiolinkController extends Controller
     $temp_arr['imagepages'] = ['image', 'max:1000' ];
 
     if (!is_null($request->judulBanner)){
-      if ($user->membership=='pro' or  $user->membership=='elite') 
+      if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super') 
       {
         for($i=0;$i<count($request->judulBanner);$i++) 
         { 
@@ -392,13 +397,13 @@ class BiolinkController extends Controller
         return $arr;
       }
     }
-    if ($request->modeBackground=="animation") {
+    /*if ($request->modeBackground=="animation") {
       if ($user->membership<>'elite') {
         $arr['status'] = 'error';
         $arr['message'] = "Silahkan upgrade paket berlangganan anda.";
         return $arr;
       }
-    }
+    }*/
 
     $uuid=$request->uuidtemp;
     // $page=Page::where('uid','=',$uuid)->first();
@@ -510,13 +515,13 @@ class BiolinkController extends Controller
     }
     
     if (!is_null($request->judulBanner)){
-      if ($user->membership=='pro' or  $user->membership=='elite') 
+      if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super')
       {
         $idbanner=$request->idBanner;
         $statusbanner=$request->statusBanner;
       
-        for($i=0;$i<count($request->judulBanner);$i++) 
-        { 
+        for($i=0;$i<count($request->judulBanner);$i++)
+        {
           //pengecekan banner 
           /*
           $validator = Validator::make($request->all(), [

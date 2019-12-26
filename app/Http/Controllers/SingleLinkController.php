@@ -26,7 +26,7 @@ class SingleLinkController extends Controller
                       ->where('pages_id',0)
                       ->count();
       if ((Auth::user()->membership=='pro') OR (Auth::user()->membership=='free')) {
-         if($linkCheck>=5) {
+        if($linkCheck>=5) {
           $arr['status'] = 'gagal';
           $arr['message'] = 'maaf anda sudah tidak bisa menambahkan link lagi';
           $arr['link'] = '';
@@ -38,7 +38,7 @@ class SingleLinkController extends Controller
       $generated_string = ""; 
       $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";  
       $len = strlen($domain); 
-       for ($i=0;$i<$num;$i++) 
+      for ($i=0;$i<$num;$i++) 
       {  
         $index=rand(0,$len-1); 
         $generated_string=$generated_string.$domain[$index]; 

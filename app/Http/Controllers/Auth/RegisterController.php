@@ -109,6 +109,9 @@ class RegisterController extends Controller
         }
       }
 
+      //unique code 
+      $unique_code = mt_rand(1, 1000);
+      
       //create order 
       $dt = Carbon::now();
       $order = new Order;
@@ -119,9 +122,9 @@ class RegisterController extends Controller
       $order->package = $data["namapaket"];
       $order->jmlpoin = 0;
       $order->coupon_id = $kuponid;
-      $order->total = $data["price"];
+      $order->total = $data["price"] + $unique_code;
       $order->discount = $diskon;
-      $order->grand_total = $data['price'] - $diskon;
+      $order->grand_total = $data['price'] - $diskon + $unique_code;
       $order->status = 0;
       $order->buktibayar = "";
       $order->keterangan = "";
@@ -143,6 +146,7 @@ class RegisterController extends Controller
       } else {
         $order->status = 2;
         $order->save();
+        $type="";
 
         if(substr($order->package,0,5) === "Pro"){
           if($order->package=='Pro Monthly'){
@@ -150,34 +154,48 @@ class RegisterController extends Controller
           } else if($order->package=='Pro Yearly'){
             $valid = $ordercont->add_time($user,"+12 months");
           }
-
-          $userlog = new UserLog;
-          $userlog->user_id = $user->id;
-          $userlog->type = 'membership';
-          $userlog->value = 'pro';
-          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
-          $userlog->save();
+          else if($order->package=='Pro'){
+            $valid = $this->add_time($user,"+1 months");
+          }
+          $type="pro";
 
           $user->valid_until = $valid;
           $user->membership = 'pro';
 
-        } else if(substr($order->package,0,5) === "Elite"){
+        } 
+        else if(substr($order->package,0,7) === "Popular"){
+          $valid = $this->add_time($user,"+3 months");
+          $type="popular";
+          $user->valid_until = $valid;
+          $user->membership = 'popular';
+        }
+        else if(substr($order->package,0,5) === "Elite"){
           if($order->package=='Elite Monthly'){
             $valid = $ordercont->add_time($user,"+1 months");
           } else if($order->package=='Elite Yearly'){
             $valid = $ordercont->add_time($user,"+12 months");
           }
-
-          $userlog = new UserLog;
-          $userlog->user_id = $user->id;
-          $userlog->type = 'membership';
-          $userlog->value = 'elite';
-          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
-          $userlog->save();
+          else if($order->package=='Elite'){
+            $valid = $this->add_time($user,"+6 months");
+          }
+          $type = "elite";
 
           $user->valid_until = $valid;
           $user->membership = 'elite';
         }
+        else if(substr($order->package,0,5) === "Super"){
+          $valid = $this->add_time($user,"+12 months");
+          $type="super";
+          $user->valid_until = $valid;
+          $user->membership = 'super';
+        }
+
+        $userlog = new UserLog;
+        $userlog->user_id = $user->id;
+        $userlog->type = 'membership';
+        $userlog->value = $type;
+        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
+        $userlog->save();
 
         $user->save();
       }
@@ -299,38 +317,38 @@ class RegisterController extends Controller
   }
 
   public function sendToActivWA($wa_no,$name,$email)
-    {
-      $curl = curl_init();
+  {
+    $curl = curl_init();
 
-        $data = array(
-            'list_id'=> 17, //activwa list_id for omnilinkz
-            'wa_no'=>$wa_no,
-            'name'=>$name,
-            'email'=>$email
-        );
+      $data = array(
+          'list_id'=> 17, //activwa list_id for omnilinkz
+          'wa_no'=>$wa_no,
+          'name'=>$name,
+          'email'=>$email
+      );
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://activwa.com/dashboard/private-list",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => json_encode($data),
-          CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
-        ));
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://activwa.com/dashboard/private-list",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+      ));
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
 
-        curl_close($curl);
+      curl_close($curl);
 
-        // if ($err) {
-          // echo "cURL Error #:" . $err;
-        // } else {
-          // echo $response."\n";
-        // }
-    }
+      // if ($err) {
+        // echo "cURL Error #:" . $err;
+      // } else {
+        // echo $response."\n";
+      // }
+  }
 
 /**/  
 }

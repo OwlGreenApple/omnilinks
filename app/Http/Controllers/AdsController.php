@@ -134,7 +134,8 @@ class AdsController extends Controller
    	public function ads_checkout($id){
    		//halaman checkout
     	return view('pricing.checkout')->with(array(
-              'id'=>$id,    
+              'id'=>$id,
+              'type'=>'ads-package',
             ));
    	}
 
