@@ -1,23 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Facebook Pixel Code page View All Pages-->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '960162064377270');
-  fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=960162064377270&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
 <script type="text/javascript">
   $(document).ready(function() {
     refresh_page();
@@ -43,6 +26,7 @@
     });
   }
 
+  /* function tidak jadi dipake, karena pake thank you page reload page
   function confirm_payment()
   {
     var form = $('#formUpload')[0];
@@ -69,7 +53,6 @@
           $('#pesan').addClass('alert-success');
           $('#pesan').show();
 
-          fbq('track', 'Purchase');
           refresh_page();
         } else {
           $('#pesan').html(data.message);
@@ -79,7 +62,7 @@
         }
       }
     });  
-  }
+  }*/
 </script>
 
 <style type="text/css">
@@ -93,8 +76,8 @@
   } */ 
 </style>
 
-<div class="col-md-10 offset-md-1 mb-5 main-cont" style="height:100%;">
-  <div class="row justify-content-center">
+<div class="container mb-5 main-cont" style="">
+  <div class="row">
     <div class="col-md-12">
 
       <h2><b>Orders</b></h2>  
@@ -104,10 +87,16 @@
       </h5>
       
       <hr>
+    </div>
+      @if (session('error') )
+    <div class="col-md-12 ">
+      <div id="pesan" class="alert alert-danger">
+          {{session('error')}}
+        </div>
+    </div>
+      @endif
 
-      <div id="pesan" class="alert"></div>
-
-      <br>  
+    <div class="col-md-12">
 
       <form class="responsive">
         <table class="table responsive" id="myTable">
@@ -193,8 +182,8 @@
         </h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <div class="modal-body">
-        <form id="formUpload" enctype="multipart/form-data" >
+      <form id="formUpload" enctype="multipart/form-data" method="POST" action="{{ route('order-confirm-payment') }}">
+        <div class="modal-body">
           @csrf
           <input type="hidden" name="id_confirm" id="id_confirm">
 
@@ -259,16 +248,14 @@
               <textarea class="form-control" name="keterangan"></textarea>
             </div>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer" id="foot">
-        <button class="btn btn-primary" id="btn-confirm-ok" data-dismiss="modal">
-          Confirm
-        </button>
-        <button class="btn" data-dismiss="modal">
-          Cancel
-        </button>
-      </div>
+        </div>
+        <div class="modal-footer" id="foot">
+          <input type="submit" class="btn btn-primary" id="btn-confirm-ok" value="Confirm">
+          <button class="btn" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
       
   </div>
@@ -307,10 +294,10 @@
     $('#mod-keterangan').html(keterangan);
   });
 
-  $( "body" ).on( "click", "#btn-confirm-ok", function() 
-  {
-    confirm_payment();
-  });
+  // $( "body" ).on( "click", "#btn-confirm-ok", function() 
+  // {
+    // confirm_payment();
+  // });
 
   $( "body" ).on( "click", ".popup-newWindow", function()
   {

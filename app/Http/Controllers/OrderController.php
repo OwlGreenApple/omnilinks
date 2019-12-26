@@ -39,6 +39,12 @@ class OrderController extends Controller
       'Elite Special 3 Months' => 295000,
       'Elite Special 5 Months' => 395000,
       'Elite Special 7 Months' => 495000,
+      
+      //new 
+      'Pro' => 195000,
+      'Popular' => 395000,
+      'Elite' => 695000,
+      'Super' => 1095000,
     );
 
     if(isset($paket[$namapaket])){
@@ -228,6 +234,12 @@ class OrderController extends Controller
     
   }
 
+  public function thankyou_confirm_payment(){
+    //halaman thankyou
+    return view('pricing.thankyou-confirm-payment');
+    
+  }
+
   public function checkout($id){
     //halaman checkout
     return view('pricing.checkout')->with(array(
@@ -268,6 +280,7 @@ class OrderController extends Controller
     return $arr;
   }
 
+  //upload bukti TT 
   public function confirm_payment_order(Request $request){
     $user = Auth::user();
     //konfirmasi pembayaran user
@@ -287,23 +300,30 @@ class OrderController extends Controller
         $order->buktibayar = $dir."/".$filename;
         
       } else {
-        $arr['status'] = 'error';
-        $arr['message'] = 'Upload file buktibayar terlebih dahulu';
-        return $arr;
+        // $arr['status'] = 'error';
+        // $arr['message'] = 'Upload file buktibayar terlebih dahulu';
+        // return $arr;
+        $pathUrl = str_replace(url('/'), '', url()->previous());
+        return redirect($pathUrl)->with("error", "Upload file buktibayar terlebih dahulu");
       }  
       $order->keterangan = $request->keterangan;
       $order->save();
 
-      $arr['status'] = 'success';
-      $arr['message'] = 'Konfirmasi pembayaran berhasil';
+      // $arr['status'] = 'success';
+      // $arr['message'] = 'Konfirmasi pembayaran berhasil';
     } else {
-      $arr['status'] = 'error';
-      $arr['message'] = 'Order telah atau sedang dikonfirmasi oleh admin';
+      // $arr['status'] = 'error';
+      // $arr['message'] = 'Order telah atau sedang dikonfirmasi oleh admin';
+        $pathUrl = str_replace(url('/'), '', url()->previous());
+        return redirect($pathUrl)->with("error", "Order telah atau sedang dikonfirmasi oleh admin.");
     }
 
-    return $arr;
+    // return $arr;
+    return view('pricing.thankyou-confirm-payment');
   }
 
+
+  //checkout klo uda login
   public function confirm_payment(Request $request){
     //buat order user lama
     $stat = $this->cekharga($request->namapaket,$request->price);
@@ -491,6 +511,7 @@ class OrderController extends Controller
     return $valid;
   }
 
+  //klo dilunasi lewat admin page
   public function confirm_order(Request $request){
     //konfirmasi pembayaran admin
     $order = Order::find($request->id);

@@ -51,6 +51,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
   Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
   Route::get('/thankyou-register','OrderController@thankyou_register');
+  Route::get('/thankyou-confirm-payment','OrderController@thankyou_confirm_payment');
   // Route::get('/home', 'HomeController@index')->name('home');
 
   //pricing
@@ -83,7 +84,7 @@ if(env('DOMAIN_TYPE')=='main'){
     //Orders 
     Route::get('/orders','OrderController@index_order');
     Route::get('/orders/load-order','OrderController@load_order');
-    Route::post('/orders/confirm-payment','OrderController@confirm_payment_order');
+    Route::post('order-confirm-payment','OrderController@confirm_payment_order')->name('order-confirm-payment');
 
     //dashboard
     // Route::get('/',function(){

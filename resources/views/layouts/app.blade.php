@@ -153,8 +153,15 @@
                   <a class="nav-link navlog" href="{{ route('login') }}">{{ __('Log in') }}</a>
                 </li>
                 @if (Route::has('register'))
+                  <!--
                   <li class="nav-item">
                     <a class="btn btn-md btn-primary btn-prim-custom" href="{{ route('register') }}">{{ __('START FREE') }}</a>
+                  </li>
+                  -->
+                  <li class="nav-item">
+                    <a class="nav-link navlog" href="{{route('register')}}">
+                      {{ __('Buat Bio Link') }}
+                    </a>
                   </li>
                 @endif
               @else
