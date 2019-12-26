@@ -96,7 +96,10 @@ class OrderController extends Controller
                 $query->where('package_id',$idpaket)
                       ->orwhere('package_id',0);
               })
-              ->where('user_id',$user_id)
+              ->where(function($query) use ($user_id) {
+                $query->where('user_id',$user_id)
+                      ->orwhere('user_id',0);
+              })
               ->first();
 
       if(is_null($coupon)){
