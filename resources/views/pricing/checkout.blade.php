@@ -121,6 +121,7 @@
                   <select class="form-control" name="idpaket" id="select-auto-manage">
                     @if(substr($id,0,7)<>"special")
                       @if($type=="normal-package")
+                        <!--
                         <option class="" data-price="155000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
                           Pro Bulanan - IDR 155.000,-/bulan
                         </option>
@@ -132,6 +133,19 @@
                         </option>
                         <option class="" data-price="1140000" data-paket="Elite Yearly" value="4" <?php if ($id==4) echo "selected" ; ?>>
                           Elite Tahunan - IDR 1.140.000,-/tahun (Hemat 52%)
+                        </option>
+                        -->
+                        <option class="" data-price="195000" data-paket="Pro" value="1" <?php if ($id==1) echo "selected" ; ?>>
+                          Pro - IDR 195.000,-/30 hari 
+                        </option>
+                        <option class="" data-price="395000" data-paket="Popular" value="2" <?php if ($id==2) echo "selected" ; ?>>
+                          Popular - IDR 395.000,-/90 hari 
+                        </option>
+                        <option class="" data-price="695000" data-paket="Elite" value="3" <?php if ($id==3) echo "selected" ; ?>>
+                          Elite - IDR 695.000,-/180 hari 
+                        </option>
+                        <option class="" data-price="1095000" data-paket="Super" value="4" <?php if ($id==4) echo "selected" ; ?>>
+                          Super - IDR 1.095.000,-/360 hari 
                         </option>
                       @endif
                       @if(Auth::check() && $type=="ads-package")

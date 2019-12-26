@@ -41,10 +41,10 @@ class OrderController extends Controller
       'Elite Special 7 Months' => 495000,
       
       //new 
-      'Pro' => 195000,
-      'Popular' => 395000,
-      'Elite' => 695000,
-      'Super' => 1095000,
+      'Pro' => 195000, //30hari
+      'Popular' => 395000, //90hari
+      'Elite' => 695000, //180 hari
+      'Super' => 1095000, //360 hari
     );
 
     if(isset($paket[$namapaket])){
@@ -424,18 +424,13 @@ class OrderController extends Controller
 
       } 
       else if(substr($order->package,0,5) === "Elite"){
-        /*
-          'Elite 2 Months' => 195000,
-          'Elite 3 Months' => 295000,
-          'Elite 5 Months' => 395000,
-          'Elite 7 Months' => 495000,
-        */
         if($order->package=='Elite Monthly'){
           $valid = $this->add_time($user,"+1 months");
         } 
         else if($order->package=='Elite Yearly'){
           $valid = $this->add_time($user,"+12 months");
         }
+        /*
         else if($order->package=='Elite Special 2 Months'){
           $valid = $this->add_time($user,"+2 months");
         }
@@ -447,7 +442,7 @@ class OrderController extends Controller
         }
         else if($order->package=='Elite Special 7 Months'){
           $valid = $this->add_time($user,"+7 months");
-        }
+        }*/
 
         $userlog = new UserLog;
         $userlog->user_id = $user->id;
@@ -527,44 +522,74 @@ class OrderController extends Controller
     
     $user = User::find($order->user_id);
     $valid=null;
-
+    $type = "";
+    
+    /*
+      'Pro' => 195000, //30hari
+      'Popular' => 395000, //90hari
+      'Elite' => 695000, //180 hari
+      'Super' => 1095000, //360 hari
+    */
     if(substr($order->package,0,5) === "Pro"){
       if($order->package=='Pro Monthly'){
-        //$valid = new DateTime("+1 months");
         $valid = $this->add_time($user,"+1 months");
-      } else if($order->package=='Pro Yearly'){
-        //$valid = new DateTime("+12 months");
+      } 
+      else if($order->package=='Pro Yearly'){
         $valid = $this->add_time($user,"+12 months");
       }
-
-      $userlog = new UserLog;
-      $userlog->user_id = $user->id;
-      $userlog->type = 'membership';
-      $userlog->value = 'pro';
-      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
-      $userlog->save();
+      else if($order->package=='Pro'){
+        $valid = $this->add_time($user,"+1 months");
+      }
+      $type = "pro";
 
       $user->valid_until = $valid;
       $user->membership = 'pro';
-    } else if(substr($order->package,0,5) === "Elite"){
+    } 
+    else if(substr($order->package,0,7) === "Popular"){
+      $valid = $this->add_time($user,"+3 months");
+      $type="popular";
+      $user->valid_until = $valid;
+      $user->membership = 'popular';
+    }
+    else if(substr($order->package,0,5) === "Elite"){
       if($order->package=='Elite Monthly'){
-        //$valid = new DateTime("+1 months");
         $valid = $this->add_time($user,"+1 months");
       } else if($order->package=='Elite Yearly'){
-        //$valid = new DateTime("+12 months");
         $valid = $this->add_time($user,"+12 months");
       }
-
-      $userlog = new UserLog;
-      $userlog->user_id = $user->id;
-      $userlog->type = 'membership';
-      $userlog->value = 'elite';
-      $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
-      $userlog->save();
+      else if($order->package=='Elite Special 2 Months'){
+        $valid = $this->add_time($user,"+2 months");
+      }
+      else if($order->package=='Elite Special 3 Months'){
+        $valid = $this->add_time($user,"+3 months");
+      }
+      else if($order->package=='Elite Special 5 Months'){
+        $valid = $this->add_time($user,"+5 months");
+      }
+      else if($order->package=='Elite Special 7 Months'){
+        $valid = $this->add_time($user,"+7 months");
+      }
+      else if($order->package=='Elite'){
+        $valid = $this->add_time($user,"+6 months");
+      }
+      $type = "elite";
 
       $user->valid_until = $valid;
       $user->membership = 'elite';
     }
+    else if(substr($order->package,0,5) === "Super"){
+      $valid = $this->add_time($user,"+12 months");
+      $type="super";
+      $user->valid_until = $valid;
+      $user->membership = 'super';
+    }
+
+    $userlog = new UserLog;
+    $userlog->user_id = $user->id;
+    $userlog->type = 'membership';
+    $userlog->value = $type;
+    $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
+    $userlog->save();
 
     $user->save();
     $order->save();

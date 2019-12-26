@@ -146,6 +146,7 @@ class RegisterController extends Controller
       } else {
         $order->status = 2;
         $order->save();
+        $type="";
 
         if(substr($order->package,0,5) === "Pro"){
           if($order->package=='Pro Monthly'){
@@ -153,34 +154,48 @@ class RegisterController extends Controller
           } else if($order->package=='Pro Yearly'){
             $valid = $ordercont->add_time($user,"+12 months");
           }
-
-          $userlog = new UserLog;
-          $userlog->user_id = $user->id;
-          $userlog->type = 'membership';
-          $userlog->value = 'pro';
-          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
-          $userlog->save();
+          else if($order->package=='Pro'){
+            $valid = $this->add_time($user,"+1 months");
+          }
+          $type="pro";
 
           $user->valid_until = $valid;
           $user->membership = 'pro';
 
-        } else if(substr($order->package,0,5) === "Elite"){
+        } 
+        else if(substr($order->package,0,7) === "Popular"){
+          $valid = $this->add_time($user,"+3 months");
+          $type="popular";
+          $user->valid_until = $valid;
+          $user->membership = 'popular';
+        }
+        else if(substr($order->package,0,5) === "Elite"){
           if($order->package=='Elite Monthly'){
             $valid = $ordercont->add_time($user,"+1 months");
           } else if($order->package=='Elite Yearly'){
             $valid = $ordercont->add_time($user,"+12 months");
           }
-
-          $userlog = new UserLog;
-          $userlog->user_id = $user->id;
-          $userlog->type = 'membership';
-          $userlog->value = 'elite';
-          $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
-          $userlog->save();
+          else if($order->package=='Elite'){
+            $valid = $this->add_time($user,"+6 months");
+          }
+          $type = "elite";
 
           $user->valid_until = $valid;
           $user->membership = 'elite';
         }
+        else if(substr($order->package,0,5) === "Super"){
+          $valid = $this->add_time($user,"+12 months");
+          $type="super";
+          $user->valid_until = $valid;
+          $user->membership = 'super';
+        }
+
+        $userlog = new UserLog;
+        $userlog->user_id = $user->id;
+        $userlog->type = 'membership';
+        $userlog->value = $type;
+        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
+        $userlog->save();
 
         $user->save();
       }
