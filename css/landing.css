@@ -23,6 +23,11 @@
   src: url("../fonts/SourceSansPro-Bold.otf");
 } 
 
+ @font-face { 
+  font-family: opensanslight; 
+  src: url("../fonts/OpenSans-Light.ttf");
+} 
+
 body,
 h1,
 h2,
@@ -30,7 +35,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: OpenSans-Regular;
+  font-family: opensanslight;
   font-weight: 600;
 }
 
