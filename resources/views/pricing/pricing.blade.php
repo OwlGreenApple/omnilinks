@@ -373,7 +373,7 @@
   <h3 align="center">Frequently Asked Question</h3>
   <!-- col -->
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 faq-col">
           <div class="col-lg-12">
             <h5 class="omnhide">Apa itu Omnilinkz?</h5>
             <p class="collapse">
@@ -416,7 +416,7 @@
 
         </div>
         <!-- -->
-        <div class="col-lg-6">
+        <div class="col-lg-6 faq-col">
            <div class="col-lg-12">
             <h5 class="omnhide">Bisakah mengubah Bio Link yang sudah diedit?</h5>
             <p class="collapse">
@@ -458,7 +458,7 @@
 
    <!-- SUPPORT -->
     <div class="col-lg-12 support">
-      <h3>Butuh Bantuan <b>Tim Support</b> kami? <a onclick="window.location.href='mailto:info@omnilinkz.com.address?subject=Hi Omnilinkz';" class="btn btn-support"><b>Hubungi Kami Segera</b></a></h3>
+      <h3>Butuh Bantuan <b>Tim Support</b> kami? <a onclick="window.location.href='mailto:info@omnilinkz.com';" class="btn btn-support"><b>Hubungi Kami Segera</b></a></h3>
     </div>
 
   </div>

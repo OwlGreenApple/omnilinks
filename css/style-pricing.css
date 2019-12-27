@@ -55,7 +55,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: OpenSans-Regular, sans-serif;
+  font-family: opensanslight, sans-serif;
   /*font-family: SourceSansPro-Regular, sans-serif;*/
   font-weight: 700;
 }
@@ -372,7 +372,7 @@ span {
   position: sticky;
   top: 0;
   z-index:10;
-  background : #fff;
+  background : #f5f5f5;
 }
 
 sub {
@@ -475,6 +475,7 @@ sup {
   -o-border-radius: 10px;
   -webkit-border-radius: 10px;
   cursor: pointer;
+  background : #fff;
 }
 
 .omnhide:hover {
@@ -484,10 +485,15 @@ sup {
   border-color: #2e7cc0;
 }
 
+.faq-col > .col-lg-12 > p{
+  background : #f5f5f5;
+  padding: 8px;
+}
+
 /* Thumbnail */
 
 .bg-thumbnail {
-  padding : 15.8% 8rem;
+  padding : 4% 8rem;
   background : url('../image/bg_thumbnail.png') no-repeat;
   background-size: cover;
   color : #fff;
@@ -537,7 +543,7 @@ sup {
   color: #fff !important;
   background-color: #2e7cc0;
   border-radius: 30px;
-  padding: 0px 15px;
+  padding: 5px 15px;
   cursor: pointer;
 }
 
@@ -775,7 +781,7 @@ sup {
 
   .notes-responsive {
     display: block;
-    font-size : 32px;
+    font-size : 24px;
     text-align: left;
     padding-left : 10%;
     padding-right : 10%;
@@ -905,6 +911,10 @@ sup {
   .header-pricing {
     top : 80px;
   }
+
+  .bg-thumbnail h4 {
+    font-size : 20px;
+  }
 }
 
 @media (min-width : 300px) and (max-width: 568px) {
@@ -934,6 +944,19 @@ sup {
 
   .sbold.small {
     font-size : 12px;
+  }
+
+  .tags {
+    padding-left : 65px;
+    padding-right : 65px;
+  }
+
+  .bg-faq h3 {
+    font-size : 18px;
+  }
+
+  .bg-thumbnail h4 {
+    font-size : 16px;
   }
 
 }
