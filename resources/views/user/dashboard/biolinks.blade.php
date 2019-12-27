@@ -2636,7 +2636,7 @@ and add more";
                           }?></textarea>
                         </div>
                         <div class="col-md-12 mt-4">
-                        @if(Auth::user()->membership=='elite') 
+                        @if(Auth::user()->membership!='free') 
                           <button type="button" class="float-right mb-3 btn btn-primary btn-sm" id="addBanner">
                             <i class="fas fa-plus"></i>
                           </button>
@@ -2675,7 +2675,7 @@ and add more";
                                       </label>
                                     </div>
                                   </div>
-                                @if(Auth::user()->membership=='elite')
+                                @if(Auth::user()->membership!='free')
                                   <div class="div-cell cell-btn btn-deleteBannerUpdate">
                                     <span>
                                       <i class="far fa-trash-alt"></i>
@@ -2909,7 +2909,7 @@ and add more";
                           <a class="nav-link" href="<?php if ($user->membership<>'free') { echo "#wallpaper"; } else { echo "#"; } ?>" id="wallpaper-tab" role="tab" <?php if ($user->membership<>'free') { echo 'data-toggle="tab"'; } ?>>Wallpaper <sup>pro</sup></a>
                         </li>
                         <li class="nav-item sub-nav">
-                          <a class="nav-link" href="<?php if ($user->membership=='elite') { echo "#animation"; } else { echo "#"; } ?>" id="animation-tab" role="tab" <?php if ($user->membership=='elite') { echo 'data-toggle="tab"'; } ?>>Animation <sup>pro</sup></a>
+                          <a class="nav-link" href="<?php if ( ($user->membership=='elite') || ($user->membership=='super')) { echo "#animation"; } else { echo "#"; } ?>" id="animation-tab" role="tab" <?php if ( ($user->membership=='elite') || ($user->membership=='super') ) { echo 'data-toggle="tab"'; } ?>>Animation <sup>pro</sup></a>
                         </li>
                       </ul>
                       <!-- Tab panes -->
@@ -3049,7 +3049,7 @@ and add more";
                         }}?>
 
 
-                      @if((Auth::user()->membership=='pro') OR (Auth::user()->membership=='elite'))
+                      @if(Auth::user()->membership!='free')
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
                       @endif
@@ -3774,7 +3774,7 @@ and add more";
       <?php } ?>
     });
     $(document).on('click', '#animation-tab', function() {
-      <?php if ($user->membership=='elite') { ?>
+      <?php if ( ($user->membership=='elite') || ($user->membership=='super') ) { ?>
         $("#textColor").val("#000");
         $("#bioColor").val("#000");
         $('#modeBackground').val('animation');
