@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<link href="{{ asset('css/kupon.css') }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/kupon.css') }}" rel="stylesheet">-->
 <script src="{{ asset('js/custom.js') }}"></script>
 
 
