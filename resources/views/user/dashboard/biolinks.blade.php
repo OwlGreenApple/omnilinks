@@ -3593,6 +3593,17 @@ and add more";
   });
 
   $(document).ready(function() {
+      <?php 
+      $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+      $dt2 = Carbon::now();
+      if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
+      ?>
+      $('#modal-freetrial-expired').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+      <?php } ?>
+      
       loadLinkBio();
       dotsok();
       let inputtitle=$('#pagetitle');

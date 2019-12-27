@@ -10,7 +10,7 @@
 <script type="text/javascript">
   var currentPage="";
   var chart = '';
-var testChart;
+  var testChart;
   function refreshDashboard() {
     if(currentPage=="") {
       currentPage = "<?php echo url('/dash/load-dashboard'); ?>";
@@ -528,6 +528,17 @@ var testChart;
   }
 
   $(document).ready(function() {
+    <?php 
+    $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+    $dt2 = Carbon::now();
+    if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
+    ?>
+    $('#modal-freetrial-expired').modal({
+      backdrop: 'static',
+      keyboard: false
+    });
+    <?php } ?>
+    
     <?php if(Auth::user()->membership=='free') { ?>
       $('.show-chart').hide();
     <?php } ?>

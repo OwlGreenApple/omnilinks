@@ -12,7 +12,7 @@ use App\Helpers\Helper;
 use App\Ads;
 use App\AdsHistory;
 
-use Auth, DB, Validator; 
+use Auth, DB, Validator, Carbon; 
 
 class AdsController extends Controller
 {
@@ -34,10 +34,14 @@ class AdsController extends Controller
     }
 
    	public function ads_manager(Request $request){
-   		$ads = Ads::where('user_id',Auth::user()->id)->first();
+      $user = Auth::user();
+   		$ads = Ads::where('user_id',$user->id)->first();
 
    		return view('user.ads.ads-manager')
-   						->with('ads',$ads);	
+   						->with([
+              'ads'=>$ads,
+              'user'=>$user
+              ]);	
    	}
 
    	public function paginate($items, $perPage = 15, $page = null, $options = [])
