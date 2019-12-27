@@ -67,6 +67,28 @@
 </head>
 
 <body>
+  <!-- Modal for expired free trial user -->
+  <div class="modal fade" id="modal-freetrial-expired" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <img src="{{url('image/free-trial-expired.png')}}">
+                  <p>Waktu berlanggananmu <br>Telah <strong>habis</strong> !</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row justify-content-center">
+                <a href="{{url('pricing')}}">
+                  <button class="btn btn-primary btn-apply-btn" type="button">Berlangganan</button>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>  
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
       <div class="container">
