@@ -8,6 +8,12 @@
   src: url("../fonts/SourceSansPro-Bold.otf");
 } 
 
+@font-face { 
+  font-family: opensanslight; 
+  src: url("../fonts/OpenSans-Light.ttf");
+} 
+
+
 /*
 * {
   font-family: SourceSansPro-Regular;  
@@ -54,7 +60,7 @@ body {
   border-radius: 0px;
   border:none;
   background-color: #F2F2F2;
-  font-family: SourceSansPro-Regular; 
+  font-family: opensanslight; 
 }
 
 .dropdown-item.active, .dropdown-item:active, .dropdown-item:hover {

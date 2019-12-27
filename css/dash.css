@@ -111,6 +111,26 @@
   margin-left: -27px;
 }
 
+/* Kupon */
+.kupon-dashboard {
+  /*background : url('../image/kupon/kupon.png') no-repeat;*/
+  background: red;
+  font-size: 11px;
+  padding: 8px 29px 27px 0;
+  text-transform: capitalize;
+  color: #fff;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  left: 153px;
+  bottom: 78px;
+  color : #fff;
+}
+
+.left-kupon-dashboard {
+  background : url('../image/kupon/left-kupon.png') no-repeat;
+}
+
 @media screen and (min-width: 768px) {  
   .btn-mobile{
     margin-left: -143px;

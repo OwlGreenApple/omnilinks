@@ -64,6 +64,9 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('/confirm-payment','OrderController@confirm_payment');
   Route::get('/thankyou','OrderController@thankyou');
 
+  //Kupon
+  Route::get('kupon','CouponController@kupon')->name('kupon');
+
   Route::group(['middleware' => ['web','auth']], function () {
     //coupon 
     Route::get('/coupon-available','CouponController@coupon_available');

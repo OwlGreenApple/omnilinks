@@ -45,6 +45,7 @@
 
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
   <link rel="stylesheet" href="{{asset('selectize/selectize.css')}}">
+  <link rel="stylesheet" href="{{asset('kupon.css')}}">
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>
@@ -143,6 +144,14 @@
                 </div>
               </li>
 
+              <!--
+              <li class="nav-item">
+                <a class="nav-link navlog" href="{{route('kupon')}}" class="linkfooter">
+                  Kupon
+                </a>
+              </li>
+            -->
+
               <li class="nav-item">
                 <a class="nav-link navlog" href="{{env('APP_URL2').'/blog'}}">
                   {{ __('Blog') }}
@@ -237,7 +246,7 @@
                 <a href="{{asset('/pricing')}}" class="linkfooter">
                   Pricing
                 </a>
-              </li>
+              </li> 
               <li>
                 <!--<a href="{{asset('/faq')}}" class="linkfooter">
                   FAQ

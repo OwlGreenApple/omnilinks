@@ -204,6 +204,11 @@ var testChart;
               <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
+            <!--
+            <br/>
+            <span class="left-kupon-dashboard"></span>
+            <span class="kupon-dashboard">kamu mempunyai 4 <b>kupon baru</b></span>
+          -->
           </p>
         </div>
       </div>

@@ -100,6 +100,11 @@ h6 {
   font-family: opensansxbold;
 }
 
+.btn-bio:hover {
+  background-image: linear-gradient(rgb(51, 145, 188), rgb(51, 145, 188)) !important;
+  color : #fff !important;
+}
+
 .omnilink-logo {
   width: 274px;
   height: 43px;

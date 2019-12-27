@@ -102,4 +102,9 @@ class CouponController extends Controller
     public function coupon_available(Request $request){
       return view('user.coupon.index');
     }
+
+    public function kupon()
+    {
+      return view('user.coupon.kupon');
+    }
 }
