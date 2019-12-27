@@ -25,7 +25,7 @@
             Kode Kupon anda :<br>
           <strong><i style="color:#FF0000!important;">{{$coupon_code}} </i></strong> <br>
             <br>
-            <i style="font-size:15px;color:#106AC7!important;">*PS: kupon expired dalam 1x24 jam</i>
+            <i style="font-size:15px;color:#106AC7!important;">*PS: kupon expired dalam 2x24 jam</i>
           @endif
           </p>
           </div>

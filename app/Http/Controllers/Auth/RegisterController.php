@@ -158,15 +158,12 @@ class RegisterController extends Controller
             $valid = $this->add_time($user,"+1 months");
           }
           $type="pro";
-
-          $user->valid_until = $valid;
           $user->membership = 'pro';
 
         } 
         else if(substr($order->package,0,7) === "Popular"){
           $valid = $this->add_time($user,"+3 months");
           $type="popular";
-          $user->valid_until = $valid;
           $user->membership = 'popular';
         }
         else if(substr($order->package,0,5) === "Elite"){
@@ -179,24 +176,27 @@ class RegisterController extends Controller
             $valid = $this->add_time($user,"+6 months");
           }
           $type = "elite";
-
-          $user->valid_until = $valid;
           $user->membership = 'elite';
         }
         else if(substr($order->package,0,5) === "Super"){
           $valid = $this->add_time($user,"+12 months");
           $type="super";
-          $user->valid_until = $valid;
           $user->membership = 'super';
+        }
+
+        if($valid <> null){
+            $formattedDate = $valid->format('Y-m-d H:i:s');
         }
 
         $userlog = new UserLog;
         $userlog->user_id = $user->id;
         $userlog->type = 'membership';
         $userlog->value = $type;
-        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
+        $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
+        //$userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
         $userlog->save();
 
+        $user->valid_until = $valid;
         $user->save();
       }
 
@@ -243,7 +243,32 @@ class RegisterController extends Controller
       $arrRet['user']->save();
       
       $string = '';
-      if ($request->price<>"") 
+      if($request->price == null)
+      {
+        do 
+        {
+          $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
+          $string = 'special-';
+          for ($i = 0; $i < 7 ; $i++) {
+            $pos = rand(0, strlen($karakter)-1);
+            $string .= $karakter{$pos};
+          }
+          $coupon = Coupon::where("kodekupon","=",$string)->first();
+        } while (!is_null($coupon));
+
+        $coupon = new Coupon;
+        $coupon->kodekupon = $string;
+        $coupon->diskon_value = 0;
+        $coupon->diskon_percent = 0;
+        $coupon->valid_until = new DateTime('+2 days');
+        $coupon->valid_to = "package-elite-3";
+        $coupon->keterangan = "Kupon AutoGenerate Free User";
+        $coupon->package_id = 0;
+        $coupon->user_id = $arrRet['user']->id;
+        $coupon->save();
+      }
+
+      /*if ($request->price<>"") 
       {
         // return redirect('thankyou');
       } else {
@@ -263,14 +288,14 @@ class RegisterController extends Controller
         $coupon->kodekupon = $string;
         $coupon->diskon_value = 0;
         $coupon->diskon_percent = 0;
-        $coupon->valid_until = new DateTime('+3 days');
+        $coupon->valid_until = new DateTime('+2 days');
         $coupon->valid_to = "package-elite-3";
         $coupon->keterangan = "Kupon AutoGenerate Free User";
         $coupon->package_id = 0;
         $coupon->user_id = $arrRet['user']->id;
         $coupon->save();
       }
-      
+      */
 
       $secret_data = [
         'email' => $arrRet['user']->email,
@@ -290,7 +315,8 @@ class RegisterController extends Controller
       Mail::to($arrRet['user']->email)->send(new ConfirmEmail($emaildata));
 
       Auth::loginUsingId($arrRet['user']->id);
-      if ($request->price<>"") {
+
+      if ($request->price <> null) {
         return view('pricing.thankyou')->with(array(
               'order'=>$arrRet['order'],    
             ));
@@ -327,8 +353,17 @@ class RegisterController extends Controller
           'email'=>$email
       );
 
+      if(env('APP_ENV') == 'local')
+      {
+         $url = "http://192.168.88.177/wa-project/private-list";
+      }
+      else
+      {
+         $url = "https://activwa.com/dashboard/private-list";
+      }
+
       curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://activwa.com/dashboard/private-list",
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 30,
@@ -343,11 +378,12 @@ class RegisterController extends Controller
 
       curl_close($curl);
 
-      // if ($err) {
-        // echo "cURL Error #:" . $err;
-      // } else {
-        // echo $response."\n";
-      // }
+      /* if ($err) {
+        echo "cURL Error #:" . $err;
+       } else {
+         echo $response."\n";
+       }
+       */
   }
 
 /**/  

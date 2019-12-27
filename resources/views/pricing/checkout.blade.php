@@ -1,98 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
-<script type="text/javascript">
 
-  function check_kupon(){
-    $.ajax({
-      type: 'POST',
-      url: "<?php echo url('/check-kupon') ?>",
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      data: {
-        harga : $('#price').val(),
-        kupon : $('#kupon').val(),
-        idpaket : $( "#select-auto-manage" ).val(),
-      },
-      dataType: 'text',
-      beforeSend: function() {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
-      },
-      success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        var data = jQuery.parseJSON(result);
-
-        $('#pesan').html(data.message);
-        $('#pesan').show();
-        if (data.message=="") {
-          $('#pesan').hide();
-        }
-        
-        if (data.status == 'success') {
-          $('.total').html('Rp. ' + data.total);
-          $('#pesan').removeClass('alert-danger');
-          $('#pesan').addClass('alert-success');
-        } 
-        else if (data.status == 'success-paket') {
-          $('.total').html('Rp. ' + data.total);
-          $('#pesan').removeClass('alert-danger');
-          $('#pesan').addClass('alert-success');
-          
-          flagSelect = false;
-          $("#select-auto-manage option").each(function() {
-            console.log($(this).val());
-            if ($(this).val() == data.paketid) {
-              flagSelect = true;
-            }
-          });
-
-          if (flagSelect == false) {
-            labelPaket = data.paket;
-            if (data.kodekupon=="SPECIAL12") {
-              labelPaket = "Paket Special Promo 1212 - IDR 295.000";
-            }
-            $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+labelPaket+'</option>');
-          }
-          $("#price").val(data.dataPrice);
-          $("#namapaket").val(data.dataPaket);
-          
-          $('#select-auto-manage').val(data.paketid);
-          $( "#select-auto-manage" ).change();
-        }
-        else {
-          $('#pesan').removeClass('alert-success');
-          $('#pesan').addClass('alert-danger');
-        }
-      }
-    });
-  }
-  
-  $(document).ready(function() {
-    <?php if(substr($id,0,7)<>"special") {?>
-    $( "#select-auto-manage" ).change(function() {
-      var price = $(this).find("option:selected").attr("data-price");
-      var namapaket = $(this).find("option:selected").attr("data-paket");
-
-      $("#price").val(price);
-      $("#namapaket").val(namapaket);
-      $('#kupon').val("");
-      check_kupon();
-    });
-    $( "#select-auto-manage" ).change();
-    <?php } ?>
-    $("body").on("click", ".btn-kupon", function() {
-      check_kupon();
-    });
-    
-    $("#kupon").val("<?php if(substr($id,0,7)=='special') { echo $id; } ?>");
-    $(".btn-kupon").trigger("click");
-  });
-    
-</script>
 <div class="container" style="margin-top:50px; margin-bottom:100px">
   <div class="row justify-content-center">
     <div class="col-md-8 col-12">
@@ -232,5 +141,98 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+
+  function check_kupon(){
+    $.ajax({
+      type: 'POST',
+      url: "{{url('/check-kupon')}}",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: {
+        harga : $('#price').val(),
+        kupon : $('#kupon').val(),
+        idpaket : $( "#select-auto-manage" ).val(),
+      },
+      dataType: 'text',
+      beforeSend: function() {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        var data = jQuery.parseJSON(result);
+
+        $('#pesan').html(data.message);
+        $('#pesan').show();
+        if (data.message=="") {
+          $('#pesan').hide();
+        }
+        
+        if (data.status == 'success') {
+          $('.total').html('Rp. ' + data.total);
+          $('#pesan').removeClass('alert-danger');
+          $('#pesan').addClass('alert-success');
+        } 
+        else if (data.status == 'success-paket') {
+          $('.total').html('Rp. ' + data.total);
+          $('#pesan').removeClass('alert-danger');
+          $('#pesan').addClass('alert-success');
+          
+          flagSelect = false;
+          $("#select-auto-manage option").each(function() {
+            console.log($(this).val());
+            if ($(this).val() == data.paketid) {
+              flagSelect = true;
+            }
+          });
+
+          if (flagSelect == false) {
+            labelPaket = data.paket;
+            if (data.kodekupon=="SPECIAL12") {
+              labelPaket = "Paket Special Promo 1212 - IDR 295.000";
+            }
+            $('#select-auto-manage').append('<option value="'+data.paketid+'" data-price="'+data.dataPrice+'" data-paket="'+data.dataPaket+'" selected="selected">'+labelPaket+'</option>');
+          }
+          $("#price").val(data.dataPrice);
+          $("#namapaket").val(data.dataPaket);
+          
+          $('#select-auto-manage').val(data.paketid);
+          $( "#select-auto-manage" ).change();
+        }
+        else {
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-danger');
+        }
+      }
+    });
+  }
+  
+  $(document).ready(function() {
+    <?php if(substr($id,0,7) <> "special") {?>
+    $( "#select-auto-manage" ).change(function() {
+      var price = $(this).find("option:selected").attr("data-price");
+      var namapaket = $(this).find("option:selected").attr("data-paket");
+
+      $("#price").val(price);
+      $("#namapaket").val(namapaket);
+      $('#kupon').val("");
+      check_kupon();
+    });
+    $( "#select-auto-manage" ).change();
+    <?php } ?>
+    $("body").on("click", ".btn-kupon", function() {
+      check_kupon();
+    });
+    
+    $("#kupon").val("<?php if(substr($id,0,7)=='special') { echo $id; } ?>");
+    $(".btn-kupon").trigger("click");
+  });
+    
+</script>
 
 @endsection

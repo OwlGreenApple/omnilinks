@@ -541,14 +541,11 @@ class OrderController extends Controller
         $valid = $this->add_time($user,"+1 months");
       }
       $type = "pro";
-
-      $user->valid_until = $valid;
       $user->membership = 'pro';
     } 
     else if(substr($order->package,0,7) === "Popular"){
       $valid = $this->add_time($user,"+3 months");
       $type="popular";
-      $user->valid_until = $valid;
       $user->membership = 'popular';
     }
     else if(substr($order->package,0,5) === "Elite"){
@@ -573,24 +570,27 @@ class OrderController extends Controller
         $valid = $this->add_time($user,"+6 months");
       }
       $type = "elite";
-
-      $user->valid_until = $valid;
       $user->membership = 'elite';
     }
     else if(substr($order->package,0,5) === "Super"){
       $valid = $this->add_time($user,"+12 months");
       $type="super";
-      $user->valid_until = $valid;
       $user->membership = 'super';
+    }
+    
+    if($valid <> null){
+        $formattedDate = $valid->format('Y-m-d H:i:s');
     }
 
     $userlog = new UserLog;
     $userlog->user_id = $user->id;
     $userlog->type = 'membership';
     $userlog->value = $type;
-    $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
+    $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
+   // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
     $userlog->save();
 
+    $user->valid_until = $valid;
     $user->save();
     $order->save();
 
