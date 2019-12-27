@@ -159,8 +159,8 @@
                   </li>
                   -->
                   <li class="nav-item">
-                    <a class="nav-link navlog" href="{{route('register')}}">
-                      {{ __('Buat Bio Link') }}
+                    <a class="nav-link navlog btn btn-bio" href="{{route('register')}}">
+                      {{ __('Buat Link Anda') }}
                     </a>
                   </li>
                 @endif

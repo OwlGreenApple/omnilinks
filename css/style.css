@@ -3,6 +3,17 @@
   src: url("../fonts/OpenSans-Regular.ttf");
 } 
 
+@font-face { 
+  font-family: opensanslight; 
+  src: url("../fonts/OpenSans-Light.ttf");
+} 
+
+
+@font-face { 
+  font-family: opensansxbold; 
+  src: url("../fonts/OpenSans-ExtraBold.ttf");
+} 
+
 body,
 html {
   width: 100%;
@@ -21,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: OpenSans-Regular;
+  font-family: opensanslight;
   font-weight: 600;
 }
 
@@ -78,6 +89,15 @@ h6 {
 .bsub:hover {
   background-color: #064B91 !important;
   box-shadow: 1px 2px 2px 1px rgba(75, 75, 75, 0.3);
+}
+
+.btn-bio {
+  background-image: linear-gradient(rgb(7, 165, 10), rgb(7, 165, 10)) !important;
+  background-position: 50% 50% !important;
+  padding: 8px 40px !important;
+  border-radius: 100px;
+  color : #fff !important;
+  font-family: opensansxbold;
 }
 
 .omnilink-logo {
