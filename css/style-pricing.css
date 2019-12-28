@@ -216,7 +216,7 @@ span {
   margin-top: -47px;
 }
 
-.pricing-board{
+.pricing-board, .pricing-pro{
   letter-spacing : 2px;
   background : #2f225c;
   padding : 20px 10px;
@@ -716,9 +716,10 @@ sup {
 }
 
 #super {
-  margin-top: -300px;        /* Size of fixed header */
-  padding-bottom: 300px; 
-  display: block; 
+	position: absolute;
+    margin-top: -390px;
+    padding-bottom: 300px;
+    display: block;
 }
 
 @media (min-width: 992px) and (max-width: 1290px) {
@@ -837,7 +838,7 @@ sup {
   }
 
   .card-body.pricing {
-    padding: 10px;
+    padding: 5px;
   }
 
   .btn-upgrade-big.small {
@@ -901,6 +902,11 @@ sup {
   .pricing-fix-elite {
     margin-bottom : 12rem;
   }
+  
+  .pricing-board {
+	  padding-top : 5px;
+	  padding-bottom : 5px;
+  }
 
   .notes-wrap {
     margin-top : 3rem;
@@ -945,7 +951,7 @@ sup {
   .notes-responsive {
     padding-left: 5%;
     padding-right: 5%;
-    font-size : 18px;
+    font-size : 14px;
   }
 
   .page-title h1 {

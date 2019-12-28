@@ -92,7 +92,7 @@
       <div class="card secondary col-box">
         <div class="card-body price-box">
 
-          <div class="col-md-12 pricing-board pro-fix" align="center">
+          <div class="col-md-12 pricing-pro pro-fix" align="center">
              <h3>
               <b>
                 pro
@@ -236,10 +236,8 @@
 
     <!-- LARGE COL 4 -->
      <div class="col-lg-3 col-md-12 col-12 pl-md-0 pr-md-0 pricing-fix-col">
-      <span id="super"></span>
       <div class="card secondary col-box">
         <div class="card-body price-box">
-
           <div class="col-md-12 pricing-board pricing-board-super" align="center">
             <div class="float-left pricing-board-brand pricing-board-brand-super">
                  <h3>
@@ -252,6 +250,8 @@
             <div class="float-right pricing-fix-padding-super"><img class="pricing-fix-super" src="{{ url('/image/ribbon-super-value.png') }}" /></div>
             <div class="clearfix"></div>
           </div>
+		  
+		  <span id="super"></span>
 
           <div class="col-md-12 price-col">
             <span class="harga">

@@ -100,10 +100,13 @@
           <a class="navbar-brand" href="https://omnilinkz.com">
             <img src="{{asset('image/omnilinkz-logo.png')}}" width="180px;" alt="">
           </a>
+		  
+		   @if(!Request::is('checkout/*')) 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
           </button>
-
+		   @endif
+		   
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
