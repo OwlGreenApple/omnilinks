@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<!-- <link href="{{ asset('css/kupon.css') }}" rel="stylesheet">-->
 <script src="{{ asset('js/custom.js') }}"></script>
 
 
@@ -8,31 +7,28 @@
 <div class="col-lg-12 bg-kupon fix-col">
   <!-- banner promo -->
   <div class="col-lg-12 banner-promo fix-col">
-      banner
+      banner promo <br/> 1028 x 240
   </div>
 
   <!-- SEARCH BOX -->
   <div class="container searchbox">
     <div class="row">
       <div class="col-lg-6">
-          <div class="input-group">
-          <input type="text" class="form-control" placeholder="Cari Kupon">
+          <div class="input-group kupon-form-sel">
+          <input type="text" class="form-control search-style" placeholder="Cari Kupon">
           <div class="input-group-append">
-            <button class="btn btn-secondary" type="button">
-              <i class="fa fa-search"></i>
+            <button class="btn btn-kupon-src" type="button">
+				<img src="{{asset('image/kupon/search.png')}}" />
             </button>
           </div>
         </div>
       </div>
 
       <div class="col-lg-6">
-        <div class="form-inline float-right">
-          <label>Urutkan</label>
-          <select class="form-control" id="sel1" name="sellist1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+        <div class="form-inline kupon-form-sel">
+          <label>Urutkan :&nbsp;</label>
+          <select class="form-control kupon-select" id="sel1" name="sellist1">
+            <option>Terbaru</option>
           </select>
         </div>
       </div>
@@ -43,38 +39,238 @@
 
   <!-- COUPON -->
   <div class="container fix-col">
-    <div class="col-lg-4 col-md-12 col-12">
-      <div class="col-box">
-          <div class="col-md-12 pricing-board pro-fix" align="center">
-             <h3><b>pro</b></h3>
-          </div>
+	<div class="row fix-row">
+	
+			<!--- COUPON 1 --->
+			<div class="col-lg-4 col-md-12 col-12">
+			  <div class="col-box">
+				<div class="col-box-shadow">
+					<!-- Header / Board -->
+				  <div class="col-md-12 kupon-board pro-fix" align="center">
+					 <h3>BANNER PROMO</h3>
+				  </div>
 
-          <div class="col-md-12">
-            tingkatkan penjualan mu diawal tahun<br/>lebih hemat 50%
-          </div>
+					<!-- Desc -->
+				  <div class="col-md-12 kupon-desc">
+					tingkatkan penjualan mu diawal tahun lebih hemat 50%
+				  </div>
 
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-lg-6">image</div>
-              <div class="col-lg-6">Berlaku Hingga<br/> 1- 5 Januari 2020</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">image</div>
-              <div class="col-lg-4">Berlaku Hingga<br/> 1- 5 Januari 2020</div>
-              <div class="col-lg-4"><a type="button" class="btn btn-default">Salin Kode</a></div>
-            </div>
-          </div>
+					<!-- Valid untill -->
+				  <div class="col-md-12 mb-5">
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
+					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
+					  <div class="clearfix"></div>
+					</div>
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
+					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
+					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
+					  <div class="clearfix"></div>
+					</div>
+				  </div>
+				  
+					<!-- Button -->
+				   <div class="col-md-12 mb-4 pb-3">
+					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
+				  </div>
+			
+				</div>
+			  </div>
+			</div> 
+			
+			<!--- COUPON 2 --->
+			<div class="col-lg-4 col-md-12 col-12">
+			  <div class="col-box">
+				<div class="col-box-shadow">
+					<!-- Header / Board -->
+				  <div class="col-md-12 kupon-board pro-fix" align="center">
+					 <h3>BANNER PROMO</h3>
+				  </div>
 
-           <div class="col-md-12 mb-4 pb-3 price-col">
-            <a class="link-pro" href="{{url('checkout/1')}}">
-              <button class="btn btn-upgrade-big update">
-               Lihat Detail
-              </button>
-            </a>
-          </div>
-    
-      </div>
-    </div> 
+					<!-- Desc -->
+				  <div class="col-md-12 kupon-desc">
+					tingkatkan penjualan mu diawal tahun lebih hemat 50%
+				  </div>
+
+					<!-- Valid untill -->
+				  <div class="col-md-12 mb-5">
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
+					  <div class="kupon-exp">Berlaku Hingga<br/>
+							<div class="kupon-timer">
+								12 : 40 : 29
+							</div>
+					  </div>
+					</div>
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
+					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
+					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
+					</div>
+				  </div>
+				  
+					<!-- Button -->
+				   <div class="col-md-12 mb-4 pb-3">
+					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
+				  </div>
+			
+				</div>
+			  </div>
+			</div> 
+			
+			<!--- COUPON 3 --->
+			<div class="col-lg-4 col-md-12 col-12">
+			  <div class="col-box">
+				<div class="col-box-shadow">
+					<!-- Header / Board -->
+				  <div class="col-md-12 kupon-board pro-fix" align="center">
+					 <h3>BANNER PROMO</h3>
+				  </div>
+
+					<!-- Desc -->
+				  <div class="col-md-12 kupon-desc">
+					tingkatkan penjualan mu diawal tahun lebih hemat 50%
+				  </div>
+
+					<!-- Valid untill -->
+				  <div class="col-md-12 mb-5">
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_grey.png')}}"/></div>
+					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
+					</div>
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_grey.png')}}"/></div>
+					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
+					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
+					</div>
+				  </div>
+				  
+					<!-- Button -->
+				   <div class="col-md-12 mb-4 pb-3">
+					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
+				  </div>
+			
+				</div>
+			  </div>
+			</div> 
+			
+			<!--- COUPON 4 --->
+			<div class="col-lg-4 col-md-12 col-12">
+			  <div class="col-box">
+				<div class="col-box-shadow">
+					<!-- Header / Board -->
+				  <div class="col-md-12 kupon-board pro-fix" align="center">
+					 <h3>BANNER PROMO</h3>
+				  </div>
+
+					<!-- Desc -->
+				  <div class="col-md-12 kupon-desc">
+					tingkatkan penjualan mu diawal tahun lebih hemat 50%
+				  </div>
+
+					<!-- Valid untill -->
+				  <div class="col-md-12 mb-5">
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
+					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
+					  <div class="clearfix"></div>
+					</div>
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
+					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
+					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
+					  <div class="clearfix"></div>
+					</div>
+				  </div>
+				  
+					<!-- Button -->
+				   <div class="col-md-12 mb-4 pb-3">
+					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
+				  </div>
+			
+				</div>
+			  </div>
+			</div> 
+			
+			<!--- COUPON 5 --->
+			<div class="col-lg-4 col-md-12 col-12">
+			  <div class="col-box">
+				<div class="col-box-shadow">
+					<!-- Header / Board -->
+				  <div class="col-md-12 kupon-board pro-fix" align="center">
+					 <h3>BANNER PROMO</h3>
+				  </div>
+
+					<!-- Desc -->
+				  <div class="col-md-12 kupon-desc">
+					tingkatkan penjualan mu diawal tahun lebih hemat 50%
+				  </div>
+
+					<!-- Valid untill -->
+				  <div class="col-md-12 mb-5">
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
+					  <div class="kupon-exp">Berlaku Hingga<br/>
+							<div class="kupon-timer">
+								12 : 40 : 29
+							</div>
+					  </div>
+					</div>
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
+					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
+					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
+					</div>
+				  </div>
+				  
+					<!-- Button -->
+				   <div class="col-md-12 mb-4 pb-3">
+					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
+				  </div>
+			
+				</div>
+			  </div>
+			</div> 
+			
+			<!--- COUPON 6 --->
+			<div class="col-lg-4 col-md-12 col-12">
+			  <div class="col-box">
+				<div class="col-box-shadow">
+					<!-- Header / Board -->
+				  <div class="col-md-12 kupon-board pro-fix" align="center">
+					 <h3>BANNER PROMO</h3>
+				  </div>
+
+					<!-- Desc -->
+				  <div class="col-md-12 kupon-desc">
+					tingkatkan penjualan mu diawal tahun lebih hemat 50%
+				  </div>
+
+					<!-- Valid untill -->
+				  <div class="col-md-12 mb-5">
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_grey.png')}}"/></div>
+					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
+					</div>
+					<div class="row kupon-valid">
+					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_grey.png')}}"/></div>
+					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
+					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
+					</div>
+				  </div>
+				  
+					<!-- Button -->
+				   <div class="col-md-12 mb-4 pb-3">
+					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
+				  </div>
+			
+				</div>
+			  </div>
+			</div> 
+	
+	<!-- END ROW -->
+	</div>
   </div>
   <!-- END COUPON -->
 
@@ -82,110 +278,17 @@
 </div>
 
 <!-- FAQ -->
-<div class="col-lg-12 bg-faq">
+<div class="col-lg-12 bg-kupon-faq">
   <div class="container">
    <!-- SUPPORT -->
-    <div class="col-lg-12 support">
-      <h3>Butuh Bantuan <b>Tim Support</b> kami? <a onclick="window.location.href='mailto:info@omnilinkz.com';" class="btn btn-support"><b>Hubungi Kami Segera</b></a></h3>
+    <div class="col-lg-12 support-kupon">
+      <h3>Butuh Bantuan <b>Tim Support</b> kami? <a onclick="window.location.href='mailto:info@omnilinkz.com';" class="btn btn-support-kupon"><b>Hubungi Kami Segera</b></a></h3>
     </div>
   </div>
 </div>
 
 <!---- JAVASCRIPT ---->
-
-<script type="text/javascript">
-  // get initial position of the element
-  var elm = $('.pricing-box');
-  if (elm.length) {
-    var fixmeTop = elm.offset().top;
-  }
-
-  $(document).ready(function(){
-    $(".omnhide").eq(0).click(function(){$('.collapse').eq(1).collapse("toggle");});
-    $(".omnhide").eq(1).click(function(){$('.collapse').eq(2).collapse("toggle");});
-    $(".omnhide").eq(2).click(function(){$('.collapse').eq(3).collapse("toggle");});
-    $(".omnhide").eq(3).click(function(){$('.collapse').eq(4).collapse("toggle");});
-    $(".omnhide").eq(4).click(function(){$('.collapse').eq(5).collapse("toggle");});
-    $(".omnhide").eq(5).click(function(){$('.collapse').eq(6).collapse("toggle");});
-    $(".omnhide").eq(6).click(function(){$('.collapse').eq(7).collapse("toggle");});
-    $(".omnhide").eq(7).click(function(){$('.collapse').eq(8).collapse("toggle");});
-    $(".omnhide").eq(8).click(function(){$('.collapse').eq(9).collapse("toggle");});
-    $(".omnhide").eq(9).click(function(){$('.collapse').eq(10).collapse("toggle");});
-    $(".omnhide").eq(10).click(function(){$('.collapse').eq(11).collapse("toggle");});
-  });
- 
-
-  $(window).scroll(function() {                  
-    // get current position
-    var currentScroll = $(window).scrollTop(); 
-
-    // apply position: fixed if you
-    if (currentScroll >= fixmeTop) {           
-      $('.header-pricing').addClass('d-md-flex d-flex');
-      $('.header-pricing').removeClass('d-md-none d-none');
-    } else {
-      $('.header-pricing').addClass('d-md-none d-none');
-      $('.header-pricing').removeClass('d-md-flex d-flex');
-    }
-  });
-
-  $("body").on("click", ".btn-pricing.month,.hemat.monthly", function(e) {
-    $('.hemat').toggleClass('monthly');
-    $('.hemat').toggleClass('yearly');
-
-    $('.btn-pricing.month').addClass('active');
-    $('.btn-pricing.year').removeClass('active');
-
-    $('.harga.pro').html('<sup>Rp</sup> 155.000 <sub>/bln</sub>');
-    $('.harga-real.pro').html('<b>Dibayar Per Bulan</b>');
-
-    $('.harga.premium').html('<sup>Rp</sup> 195.000 <sub>/bln</sub>');
-    $('.harga-real.premium').html('<b>Dibayar Per Bulan</b>');
-
-    $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Tahunan');
-
-    $('.link-pro').attr('href', "{{url('checkout/1')}}");
-    $('.link-premium').attr('href', "{{url('checkout/3')}}");
-  });
-
-  $("body").on("click", ".btn-pricing.year,.hemat.yearly", function(e) {
-    $('.hemat').toggleClass('monthly');
-    $('.hemat').toggleClass('yearly');
-
-    $('.btn-pricing.month').removeClass('active');
-    $('.btn-pricing.year').addClass('active');
-
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      $('.harga.pro').html('<sup>Rp</sup> 85.000 <sub>/bln<br>per tahun 1.020.000</sub>');
-      $('.harga.premium').html('<sup>Rp</sup> 95.000 <sub>/bln<br>per tahun 1.040.000</sub>');
-    }
-    else {
-      $('.harga.pro').html('<sup>Rp</sup> 85.000 <sub>/bln');
-      $('.harga-real.pro').html('Biaya Per Tahun Rp 1.020.000');
-
-      $('.harga.premium').html('<sup>Rp</sup> 95.000 <sub>/bln');
-      $('.harga-real.premium').html('Biaya Per Tahun Rp 1.140.000');
-    }
-
-    $('.hemat').html('<i class="fas fa-redo-alt"></i>&nbsp;Harga Bulanan');
-
-    $('.link-pro').attr('href', "{{url('checkout/2')}}");
-    $('.link-premium').attr('href', "{{url('checkout/4')}}");
-  });
-
-  // Cause column height so much
-  $(document).ready(function() {
-    setTimeout(function(){
-      var rightH = $('.right-div').css('height');
-      // var left = $('.left-div').css('height');
-      $('.left-div').css('height',rightH);
-    }, 100);
-  });
-
-  
-</script>
-
-<?php if ( env('APP_ENV') !== "local" ) { ?>
+@if ( env('APP_ENV') !== "local" ) 
 <!-- Provely Conversions App Display Code -->
 <script>(function(w,n) {
 if (typeof(w[n]) == 'undefined'){ob=n+'Obj';w[ob]=[];w[n]=function(){w[ob].push(arguments);};
@@ -198,5 +301,5 @@ provelys('data', 'campaignId', '16446');
 provelys('config', 'widget', 1);
 </script>
 <!-- End Provely Conversions App Display Code -->
-<?php } ?>
+@endif
 @endsection
