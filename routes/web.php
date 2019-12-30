@@ -170,6 +170,9 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/list-coupon/edit','CouponController@edit_coupon');
     Route::get('/list-coupon/delete','CouponController@delete_coupon');
 
+    //List Catalogs
+    Route::get('/list-catalog','CatalogsController@index');
+
     //List Page
     Route::get('/list-page','PageController@index');
     Route::get('/list-page/load-page','PageController@load_page');
