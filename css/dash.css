@@ -8,6 +8,11 @@
   src: url("../fonts/SourceSansPro-Bold.otf");
 } 
 
+@font-face { 
+  font-family: opensansbold; 
+  src: url("../fonts/OpenSans-Bold.ttf");
+} 
+
 @media screen and (max-width: 768px) {  
   .arrow {
     padding: 20px;
@@ -112,23 +117,79 @@
 }
 
 /* Kupon */
-.kupon-dashboard {
-  /*background : url('../image/kupon/kupon.png') no-repeat;*/
-  background: red;
-  font-size: 11px;
-  padding: 8px 29px 27px 0;
-  text-transform: capitalize;
-  color: #fff;
-  position: absolute;
-  top: 55px;
-  right: 0;
-  left: 153px;
-  bottom: 78px;
-  color : #fff;
+
+.kupon-wrapper {
+  min-width : 1px;
+  min-height : 1px;
 }
 
-.left-kupon-dashboard {
+.kupon-dashboard {
+  margin-top : 2px;
+  background: red;
+  font-size: 11px;
+  padding: 7px 10px 5px 10px;
+  text-transform: capitalize;
+  color: #fff;
+  color : #fff;
+  float:left;
+  width: 241px;
+}
+
+.kupon-dashboard b{
+  font-family : opensansbold;
+}
+
+.left-kupon-dashboard, .left-kupon-dashboard-mobile {
   background : url('../image/kupon/left-kupon.png') no-repeat;
+  float:left;
+  min-width : 3px;
+  min-height : 35px;
+  margin-top : 2px;
+  margin-left: 121px;
+}
+
+.right-kupon-dashboard {
+  background : url('../image/kupon/right-kupon.png') no-repeat;
+  float:left;
+  min-width : 4px;
+  min-height : 35px;
+  margin-top : 2px;
+}
+
+.kupon-notif, .kupon-notif-mobile {
+  max-width : 22px;
+  margin-right : 10px;
+}
+
+.kupon-notif-pos {
+  position: absolute;
+  margin-top : -1px;
+}
+
+.kupon-notif-number, .kupon-notif-number-mobile {
+  width : 10px;
+  height : 10px;
+  background-color: #028e46;
+  border-radius : 50%;
+  padding : 0 4px;
+  color : #fff;
+  border : 1px solid transparent;
+  text-align : center;
+  margin-left: 12px;
+}
+
+/* Mobile version */
+
+.kupon-notif-mobile {
+  margin-left : 10px;
+}
+
+.kupon-notif-number-mobile {
+  margin-left : 22px;
+}
+
+.left-kupon-dashboard-mobile {
+  margin-left : 0;
 }
 
 @media screen and (min-width: 768px) {  

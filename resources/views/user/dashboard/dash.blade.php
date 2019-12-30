@@ -204,15 +204,18 @@
               <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
-            <!--
             <br/>
-            <span class="left-kupon-dashboard"></span>
-            <span class="kupon-dashboard">kamu mempunyai 4 <b>kupon baru</b></span>
-          -->
+            <span class="kupon-wrapper">
+                <span class="left-kupon-dashboard"></span>
+                <span class="kupon-dashboard"><span class="kupon-notif-pos"><span class="kupon-notif-number">4</span></span><img class="kupon-notif" src="{{asset('image/kupon/notif.png')}}"/>kamu mempunyai 4 <b>kupon baru</b></span>
+                <span class="right-kupon-dashboard"></span>
+            </span>
+            <!---->
           </p>
         </div>
       </div>
     </div>
+    <div class="clearfix"></div>
 
     <div class="col-md-12 pr-0 menu-mobile">
       <p class="text-md-right text-lg-right ">
@@ -246,8 +249,15 @@
               <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
+            <br/>
+             <span class="kupon-wrapper">
+                <span class="left-kupon-dashboard-mobile"></span>
+                <span class="kupon-dashboard">kamu mempunyai 4 <b>kupon baru</b><span class="kupon-notif-pos"><span class="kupon-notif-number-mobile">4</span></span><img class="kupon-notif-mobile" src="{{asset('image/kupon/notif.png')}}"/></span>
+                <span class="right-kupon-dashboard"></span>
+            </span>
       </p>
     </div>
+    <div class="clearfix"></div>
 
     <hr>
 

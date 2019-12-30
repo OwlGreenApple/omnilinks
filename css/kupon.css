@@ -36,7 +36,6 @@ h4,
 h5,
 h6 {
   font-family: opensanslight, sans-serif;
-  /*font-family: SourceSansPro-Regular, sans-serif;*/
   font-weight: 700;
 }
 
@@ -295,12 +294,8 @@ span {
 		margin-right: auto;
 		margin-left: auto;
 	}
-	
-   .bg-kupon {
-	    margin-top: 83px;
-   }
    
-   .bg-kupon-faq h3 {
+  .bg-kupon-faq h3 {
 	   margin-top: 1rem;
 	   margin-bottom: 2rem;
 	   font-size : 18px;
@@ -316,5 +311,11 @@ span {
   
   .support-kupon a {
 	  margin-top : 10px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .bg-kupon {
+      margin-top: 83px;
   }
 }

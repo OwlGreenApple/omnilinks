@@ -169,13 +169,11 @@
                 </div>
               </li>
 
-              <!--
               <li class="nav-item">
                 <a class="nav-link navlog" href="{{route('kupon')}}" class="linkfooter">
                   Kupon
                 </a>
               </li>
-            -->
 
               <li class="nav-item">
                 <a class="nav-link navlog" href="{{env('APP_URL2').'/blog'}}">
