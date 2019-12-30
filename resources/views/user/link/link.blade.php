@@ -1170,6 +1170,30 @@
 @elseif($membership=='free')
   <body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a "><!--height : 100vh;-->
 @endif
+
+
+  <!-- Modal for expired free trial user -->
+  <div class="modal fade" id="modal-freetrial-expired" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <img src="{{url('image/free-trial-expired.png')}}">
+                  <p>Waktu berlanggananmu <br>Telah <strong>habis</strong> !</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row justify-content-center">
+                <a href="{{url('pricing')}}">
+                  <button class="btn btn-primary btn-apply-btn" type="button">Berlangganan</button>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>  
   
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
     <div class="row justify-content-center service">
@@ -1658,6 +1682,17 @@ and add more";
   }
 
   $(document).ready(function() {
+    <?php 
+    $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $valid_until);
+    $dt2 = Carbon::now();
+    if ( ($membership=='free') && ($dt2->gt($dt1)) ) {
+    ?>
+      $('#modal-freetrial-expired').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+    <?php } ?>
+    
     initGallery();
     @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
       res = $("body").attr("class");

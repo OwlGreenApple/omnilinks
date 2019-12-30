@@ -304,6 +304,7 @@ class BiolinkController extends Controller
       return view('user.link.link')
               ->with('pages',$page)
               ->with('membership',$user->membership)
+              ->with('valid_until',$user->valid_until)
               ->with('links',$links)
               ->with('banner',$banner)
               ->with('sort_msg',$sort_msg)
