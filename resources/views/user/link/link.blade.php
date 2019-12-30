@@ -1181,14 +1181,14 @@
               <div class="row">
                 <div class="col-md-12">
                   <img src="{{url('image/free-trial-expired.png')}}">
-                  <p>Waktu berlanggananmu <br>Telah <strong>habis</strong> !</p>
+                  <p style="color: #505050;">Waktu berlanggananmu <br>Telah <strong>habis</strong> !</p>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div class="row justify-content-center">
-                <a href="{{url('pricing')}}">
-                  <button class="btn btn-primary btn-apply-btn" type="button">Berlangganan</button>
+                <a href="https://omnilinkz.com/dashboard/pricing">
+                  <button class="btn-primary btn-apply-btn" type="button">Berlangganan</button>
                 </a>
               </div>
             </div>
