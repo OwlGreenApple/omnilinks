@@ -45,7 +45,11 @@
 
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
   <link rel="stylesheet" href="{{asset('selectize/selectize.css')}}">
-  <link rel="stylesheet" href="{{ asset('css/kupon.css') }}">
+
+  @if(Request::is('pricing')) 
+  <link rel="stylesheet" href="{{ asset('css/style-pricing.css') }}"/>
+  @endif
+  <link rel="stylesheet" href="{{ asset('css/kupon.css') }}"/>
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>

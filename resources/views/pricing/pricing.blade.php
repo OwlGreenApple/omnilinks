@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<link href="{{ asset('css/style-pricing.css') }}" rel="stylesheet">
 <script src="{{ asset('js/custom.js') }}"></script>
 
 <section class="page-title">
