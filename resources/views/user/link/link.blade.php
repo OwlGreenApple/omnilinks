@@ -1188,7 +1188,7 @@
             <div class="form-group">
               <div class="row justify-content-center">
                 <a href="https://omnilinkz.com/dashboard/pricing">
-                  <button id="not-btn" class="btn btn-primary btn-apply-btn" type="button">Berlangganan</button>
+                  <button id="not-btn" class="btn btn-primary btn-apply-btn" type="button" style="background-color: #3490dc;">Berlangganan</button>
                 </a>
               </div>
             </div>
