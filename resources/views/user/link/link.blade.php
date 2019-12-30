@@ -10,6 +10,7 @@
   <script src="{{asset('js/jquery-1.12.4.js')}}"></script>
   <!--<script src="{{asset('js/myScript.js')}}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
   <script src="{{asset('js/myScript.js')}}" ></script>
+  <script src="{{asset('js/all.js')}}"></script>
   <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
   
   <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
