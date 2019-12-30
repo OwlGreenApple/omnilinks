@@ -172,6 +172,7 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //List Catalogs
     Route::get('/list-catalog','CatalogsController@index');
+    Route::post('/add-catalog','CatalogsController@AddCatalog')->name('add_catalog');
 
     //List Page
     Route::get('/list-page','PageController@index');

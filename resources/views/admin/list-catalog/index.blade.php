@@ -81,40 +81,6 @@
     });
   }
 
-  function add_kupon(){
-    $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/list-coupon/add') ?>",
-      data: $('#formKupon').serialize(),
-      dataType: 'text',
-      beforeSend: function()
-      {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
-      },
-      success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        var data = jQuery.parseJSON(result);
-        
-        if(data.status=='success'){
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-warning');
-          $('#pesan').addClass('alert-success');
-          $('#pesan').show();
-
-          refresh_page();
-        } else {
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-success');
-          $('#pesan').addClass('alert-warning');
-          $('#pesan').show();
-        }
-      }
-    });  
-  }
-
   function edit_kupon(){
     $.ajax({
       type : 'GET',
@@ -176,25 +142,16 @@
         <table class="table" id="myTable">
           <thead align="center">
             <th>
-              Kode Kupon
+              Label Catalog
             </th>
             <th>
-              Diskon (Nominal)
+              Type
             </th>
             <th>
-              Diskon (Persen)
+              Image
             </th>
             <th>
-              Valid Until
-            </th>
-            <th>
-              Valid To
-            </th>
-            <th>
-              Keterangan 
-            </th>
-            <th>
-              Paket
+              Deskripsi
             </th>
             <th>
               Action
@@ -246,23 +203,20 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="title-coupon">
+        <h5 class="modal-title">
           Tambah Catalog
         </h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form id="formKupon">
-          @csrf
-          <input type="hidden" name="id_edit" id="id_edit">
-          
+        <form id="formCatalog">          
           <div class="form-group row">
             <label class="col-md-4 col-12">
               <b>Catalog Label</b>
             </label>
 
             <div class="col-md-8 col-12">
-              <input type="text" name="kodekupon" id="kodekupon" class="form-control">
+              <input type="text" name="catalog_label" class="form-control"/>
             </div>
           </div>
 
@@ -278,9 +232,14 @@
                 <option value="other">Other</option>
                 <option value="auto-generate">Auto Generate</option>
               </select>
+
+              <div class="mt-2 coupon_users_global">
+                 <select name="coupon_id" class="form-control">
+                    <option>Special-aaaa</option>
+                  </select>
+              </div>
             </div>
           </div>
-
 
           <div class="form-group row">
             <label class="col-md-4 col-12">
@@ -298,7 +257,7 @@
             </label>
             
             <div class="col-md-12 col-12">
-              <textarea class="form-control" name="deskripsi" id="deskripsi"></textarea>
+              <textarea class="form-control" name="deskripsi"></textarea>
             </div>
           </div>
         </form>
@@ -321,13 +280,62 @@
 <script type="text/javascript">
   $(document).ready(function(){
     get_catalog_type();
+    add_catalog();
   });
 
   function get_catalog_type(){ 
+    $(".coupon_users_global").hide(); 
     $("select[name=catalog_type]").change(function(){
       var val = $(this).val();
-      console.log(val);
+      if(val == 'coupon-global')
+      {
+        $(".coupon_users_global").show(); 
+      }
+      else {
+        $(".coupon_users_global").hide(); 
+      }
     });
+  }
+
+  function add_catalog(){
+
+   // $("#formCoupon")
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+      type : 'POST',
+      url : "{{route('add_catalog')}}",
+      data: new FormData($(this)),
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        /*var data = jQuery.parseJSON(result);
+        
+        if(data.status=='success'){
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-warning');
+          $('#pesan').addClass('alert-success');
+          $('#pesan').show();
+
+          refresh_page();
+        } else {
+          $('#pesan').html(data.message);
+          $('#pesan').removeClass('alert-success');
+          $('#pesan').addClass('alert-warning');
+          $('#pesan').show();
+        }*/
+      }
+    });  
   }
 
   $( "body" ).on( "click", ".btn-edit", function() {

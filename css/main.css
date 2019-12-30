@@ -105,6 +105,22 @@ table tr:nth-child(even) td {
  background-color:#F0F0F0;
 }
 
+/* Green button on header */
+.btn-bio {
+  background-image: linear-gradient(rgb(7, 165, 10), rgb(7, 165, 10)) !important;
+  background-position: 50% 50% !important;
+  padding: 8px 40px !important;
+  border-radius: 100px;
+  color : #fff !important;
+  font-family: opensansxbold;
+  font-size: 16px;
+}
+
+.btn-bio:hover {
+  background-image: linear-gradient(rgb(51, 145, 188), rgb(51, 145, 188)) !important;
+  color : #fff !important;
+}
+
 /* loader */
 .background-load {
   background-color: #a39f9f;
