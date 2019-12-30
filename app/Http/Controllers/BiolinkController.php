@@ -252,11 +252,11 @@ class BiolinkController extends Controller
         }
       }
       $user = User::find($page->user_id);
-      $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+      /*$dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
       $dt2 = Carbon::now();
       if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
         return "Please upgrade";
-      }
+      }*/
       
       $page->total_view += 1;
       $page->save();
@@ -304,6 +304,7 @@ class BiolinkController extends Controller
       return view('user.link.link')
               ->with('pages',$page)
               ->with('membership',$user->membership)
+              ->with('valid_until',$user->valid_until)
               ->with('links',$links)
               ->with('banner',$banner)
               ->with('sort_msg',$sort_msg)

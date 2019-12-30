@@ -10,6 +10,7 @@
   <script src="{{asset('js/jquery-1.12.4.js')}}"></script>
   <!--<script src="{{asset('js/myScript.js')}}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
   <script src="{{asset('js/myScript.js')}}" ></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
   
   <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
@@ -1165,11 +1166,35 @@
   <body class="{{$pages->template}}"> <!--style="height : 100vh;"--> 
 @elseif(!is_null($pages->wallpaper) && ($membership!=='free') )
   <body class="{{$pages->wallpaper}}"> <!--style="height : 100vh;"-->
-@elseif(!is_null($pages->gif_template) && ($membership!=='free') )
+@elseif(!is_null($pages->gif_template) && ( ($membership=='elite') || ($membership=='super') ) )
   <body class="{{$pages->gif_template}}"> <!--style="height : 100vh;"-->
 @elseif($membership=='free')
   <body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a "><!--height : 100vh;-->
 @endif
+
+
+  <!-- Modal for expired free trial user -->
+  <div class="modal fade" id="modal-freetrial-expired" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <img src="{{url('image/free-trial-expired.png')}}">
+                  <p style="color: #505050;">Waktu berlanggananmu <br>Telah <strong>habis</strong> !</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row justify-content-center">
+                <a href="https://omnilinkz.com/dashboard/pricing">
+                  <button id="not-btn" class="btn btn-primary btn-apply-btn" type="button" style="background-color: #3490dc;">Berlangganan</button>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>  
   
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
     <div class="row justify-content-center service">
@@ -1658,6 +1683,17 @@ and add more";
   }
 
   $(document).ready(function() {
+    <?php 
+    $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $valid_until);
+    $dt2 = Carbon::now();
+    if ( ($membership=='free') && ($dt2->gt($dt1)) ) {
+    ?>
+      $('#modal-freetrial-expired').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+    <?php } ?>
+    
     initGallery();
     @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
       res = $("body").attr("class");
@@ -1678,22 +1714,22 @@ and add more";
     @endif
     
     <?php if($pages->is_rounded) {?>
-      $(".btn").addClass("btn-rounded");
+      $(".btn").not("#not-btn").addClass("btn-rounded");
     <?php } ?>
 
     <?php if($pages->is_outlined) {?>
-      $(".btn").addClass("btn-outlined");
+      $(".btn").not("#not-btn").addClass("btn-outlined");
       $('#icon-sosmed li a').css("color","<?php echo $pages->outline; ?>");
     <?php } else { ?>
       $('#icon-sosmed li a').css("color","#fff");
     <?php }  ?>
 
     <?php if (!is_null($pages->rounded)) { ?>
-      $('.btn').css("background-color","<?php echo $pages->rounded; ?>");
+      $('.btn').not("#not-btn").css("background-color","<?php echo $pages->rounded; ?>");
     <?php } ?>
 
     <?php if (!is_null($pages->outline)) { ?>
-      $('.btn').css("border-color","<?php echo $pages->outline; ?>");
+      $('.btn').not("#not-btn").css("border-color","<?php echo $pages->outline; ?>");
     <?php } ?>
     
     check_outlined();
