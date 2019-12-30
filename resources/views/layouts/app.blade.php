@@ -195,7 +195,7 @@
                   </li>
                   -->
                   <li class="nav-item">
-                    <a class="nav-link navlog btn btn-bio" href="{{url('pricing')}}">
+                    <a class="nav-link btn btn-bio" href="{{url('pricing')}}">
                       {{ __('Buat Link Anda') }}
                     </a>
                   </li>

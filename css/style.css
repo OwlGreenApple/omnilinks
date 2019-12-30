@@ -91,20 +91,6 @@ h6 {
   box-shadow: 1px 2px 2px 1px rgba(75, 75, 75, 0.3);
 }
 
-.btn-bio {
-  background-image: linear-gradient(rgb(7, 165, 10), rgb(7, 165, 10)) !important;
-  background-position: 50% 50% !important;
-  padding: 8px 40px !important;
-  border-radius: 100px;
-  color : #fff !important;
-  font-family: opensansxbold;
-}
-
-.btn-bio:hover {
-  background-image: linear-gradient(rgb(51, 145, 188), rgb(51, 145, 188)) !important;
-  color : #fff !important;
-}
-
 .omnilink-logo {
   width: 274px;
   height: 43px;
