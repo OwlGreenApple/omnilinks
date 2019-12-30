@@ -1188,7 +1188,7 @@
             <div class="form-group">
               <div class="row justify-content-center">
                 <a href="https://omnilinkz.com/dashboard/pricing">
-                  <button class="btn-primary btn-apply-btn" type="button">Berlangganan</button>
+                  <button id="not-btn" class="btn btn-primary btn-apply-btn" type="button">Berlangganan</button>
                 </a>
               </div>
             </div>
@@ -1714,22 +1714,22 @@ and add more";
     @endif
     
     <?php if($pages->is_rounded) {?>
-      $(".btn").addClass("btn-rounded");
+      $(".btn").not("#not-btn").addClass("btn-rounded");
     <?php } ?>
 
     <?php if($pages->is_outlined) {?>
-      $(".btn").addClass("btn-outlined");
+      $(".btn").not("#not-btn").addClass("btn-outlined");
       $('#icon-sosmed li a').css("color","<?php echo $pages->outline; ?>");
     <?php } else { ?>
       $('#icon-sosmed li a').css("color","#fff");
     <?php }  ?>
 
     <?php if (!is_null($pages->rounded)) { ?>
-      $('.btn').css("background-color","<?php echo $pages->rounded; ?>");
+      $('.btn').not("#not-btn").css("background-color","<?php echo $pages->rounded; ?>");
     <?php } ?>
 
     <?php if (!is_null($pages->outline)) { ?>
-      $('.btn').css("border-color","<?php echo $pages->outline; ?>");
+      $('.btn').not("#not-btn").css("border-color","<?php echo $pages->outline; ?>");
     <?php } ?>
     
     check_outlined();
