@@ -65,7 +65,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/thankyou','OrderController@thankyou');
 
   //Kupon
-  Route::get('kupon','CouponController@kupon')->name('kupon');
+  Route::get('catalog','CouponController@kupon')->name('kupon');
 
   Route::group(['middleware' => ['web','auth']], function () {
     //coupon 
@@ -172,7 +172,9 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //List Catalogs
     Route::get('/list-catalog','CatalogsController@index');
-    Route::post('/add-catalog','CatalogsController@AddCatalog')->name('add_catalog');
+    Route::post('/add-catalog','CatalogsController@AddCatalog')->middleware('catalogvalid')->name('add_catalog');
+    Route::get('/list-catalog-data','CatalogsController@DataCatalog')->name('datacatalog');
+    Route::post('/edit-catalog','CatalogsController@EditCatalog')->name('edit-catalog');
 
     //List Page
     Route::get('/list-page','PageController@index');

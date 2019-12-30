@@ -16,6 +16,7 @@ class CreateCatalogsTable extends Migration
         Schema::create('catalogs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('coupon_id')->nullable();
+            $table->string('label');
             $table->string('type');
             $table->string('path');
             $table->string('desc');
