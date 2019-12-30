@@ -347,9 +347,9 @@
 
   <!-- TAGS -->
     <div class="col-lg-10 tags">
-      <li><b>Coba Gratis Paket Limited</b></li>
+      <li><b>Coba 7 Hari Gratis Paket Limited</b></li>
       <li><b>1 Bio</b> Per Akun</li>
-      <li><b>30 Hari</b> Pasang FB Retargeting</li>
+      <li><b>7 Hari</b> Pasang FB Retargeting</li>
       <li>Respon <b>1000 Klik</b></li>
       <li><a href="{{ route('register') }}"><b>Daftar Sekarang</b></a></li>
     </div>
@@ -390,7 +390,7 @@
           <div class="col-lg-12">
             <h5 class="omnhide">Apakah bisa coba Omnilinkz Gratis?</h5>
             <p class="collapse">
-              Iya, Anda bisa coba Omnilinkz paket Limited GRATIS 30 hari. Anda mendapatkan 1000 klik GRATIS, cukup bagi pebisnis pemula. Anda juga bisa upgrade naik ke fitur yang lebih spesial jika anda inginkan sesuai dengan kapasitas bisnis anda.
+              Iya, Anda bisa coba Omnilinkz paket Limited GRATIS 7 hari. Anda mendapatkan 1000 klik GRATIS, cukup bagi pebisnis pemula. Anda juga bisa upgrade naik ke fitur yang lebih spesial jika anda inginkan sesuai dengan kapasitas bisnis anda.
             </p> 
           </div> 
 
@@ -401,7 +401,7 @@
               2. Setiap Link di Bio Link yang telah dibuat, bisa ditanamkan kode FB Pixel, Google Retargetting & Analytics<br/>
               3. Pasang Banner Promo untuk menarik perhatian customer<br/>
               4. Click to WA Creator, langsung dari dalam dashboard<br/>
-              5. ​​Anda bisa mencoba Omnilinkz 30 hari GRATIS<br/>
+              5. ​​Anda bisa mencoba Omnilinkz 7 hari GRATIS<br/>
               6. Dedicated Support & 100% karya anak bangsa<br/>
             </p> 
           </div> 
