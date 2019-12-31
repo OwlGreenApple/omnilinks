@@ -90,16 +90,10 @@
                     Masukkan Kode Kupon:
                   </label>
 
-                  <div class="col-md-12 row">
-                    <div class="col-11 pl-0">
-                      <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Kode Kupon Anda" style="width:100%">  
-                    </div>
-                    <div class="col-1 pl-0">
-                      <button type="button" class="btn btn-primary btn-kupon  form-control-lg">
-                        Apply
-                      </button>  
-                    </div>  
-                  </div>  
+                  <input type="text" class="form-control form-control-lg" name="kupon" id="kupon" placeholder="Kode Kupon Anda" style="width:100%">  
+                  <button type="button" class="btn btn-primary btn-kupon  form-control-lg col-md-3 col-sm-12 col-xs-12 mt-3">
+                    Apply
+                  </button>  
                 </div>
               </div>
               <div class="form-group">
