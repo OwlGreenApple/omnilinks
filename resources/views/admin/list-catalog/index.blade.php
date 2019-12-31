@@ -2,48 +2,6 @@
 
 @section('content')
 <script type="text/javascript">
-  var table;
-
-  $(document).ready(function() {
-    table = $('#myTable').DataTable({
-      destroy: true,
-      "order": [],
-    });
-    $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
-
-    refresh_page();
-
-    $('.formatted-date').datepicker({
-      dateFormat: 'yy/mm/dd',
-    });
-  });
-
-  function refresh_page(){
-    table.destroy();
-    $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/list-coupon/load-coupon') ?>",
-      dataType: 'text',
-      beforeSend: function()
-      {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
-      },
-      success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        var data = jQuery.parseJSON(result);
-        $('#content').html(data.view);
-        
-        table = $('#myTable').DataTable({
-                destroy: true,
-                "order": [],
-            });
-
-      }
-    });
-  }
 
   function delete_kupon(){
     $.ajax({
@@ -81,39 +39,7 @@
     });
   }
 
-  function edit_kupon(){
-    $.ajax({
-      type : 'GET',
-      url : "<?php echo url('/list-coupon/edit') ?>",
-      data: $('#formKupon').serialize(),
-      dataType: 'text',
-      beforeSend: function()
-      {
-        $('#loader').show();
-        $('.div-loading').addClass('background-load');
-      },
-      success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        var data = jQuery.parseJSON(result);
-        
-        if(data.status=='success'){
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-warning');
-          $('#pesan').addClass('alert-success');
-          $('#pesan').show();
-
-          refresh_page();
-        } else {
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-success');
-          $('#pesan').addClass('alert-warning');
-          $('#pesan').show();
-        }
-      }
-    });  
-  }
+  
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab" style="margin-top:30px;margin-bottom: 120px;">
@@ -134,8 +60,7 @@
       <br>  
 
       <form>
-
-        <button type="button" class="btn btn-primary btn-add mb-3" data-toggle="modal" data-target="#add-coupon">
+        <button type="button" class="btn btn-primary btn-add mb-3" data-toggle="modal" data-target="#add-catalog">
           <i class="fas fa-plus"></i> Add Catalog
         </button>
 
@@ -197,18 +122,21 @@
 </div>
 
 <!-- Modal Add Coupon -->
-<div class="modal fade" id="add-coupon" role="dialog">
+<div class="modal fade" id="add-catalog" role="dialog">
   <div class="modal-dialog">
     
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">
+        <h5 class="modal-title catalog-box">
           Tambah Catalog
         </h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
+
+        <div id="err"><!-- Display error --></div>
+
         <form id="formCatalog">          
           <div class="form-group row">
             <label class="col-md-4 col-12">
@@ -235,7 +163,8 @@
 
               <div class="mt-2 coupon_users_global">
                  <select name="coupon_id" class="form-control">
-                    <option>Special-aaaa</option>
+                    <option value="1">Special-aaaa</option>
+                    <option value="2">Special-bbbb</option>
                   </select>
               </div>
             </div>
@@ -260,11 +189,10 @@
               <textarea class="form-control" name="deskripsi"></textarea>
             </div>
           </div>
-        </form>
       </div>
 
       <div class="modal-footer" id="foot">
-        <button class="btn btn-primary" id="btn-add-ok" data-dismiss="modal">
+        <button id="btn-add-ok" class="btn btn-primary">
           Add
         </button>
         <button class="btn" data-dismiss="modal">
@@ -272,34 +200,54 @@
         </button>
       </div>
     </div>
+    </form>
       
   </div>
 </div>
 </section>
 
 <script type="text/javascript">
+  var table;
   $(document).ready(function(){
+    get_form();
     get_catalog_type();
-    add_catalog();
+    //add_catalog();
+    display_catalog();
+    //edit_catalog();
+    display_edit();
   });
+
+  function get_form()
+  {
+    $(".btn-add").click(function(){
+      $("input, textarea").val('');
+      $('select[name=catalog_type] > option[value="main"]').prop('selected','selected');
+      get_catalog_type();
+      $(".catalog-box").html('Tambah Katalog');
+    });
+  }
 
   function get_catalog_type(){ 
     $(".coupon_users_global").hide(); 
+    $("select[name='coupon_id']").prop('disabled', 'disabled'); 
+
     $("select[name=catalog_type]").change(function(){
       var val = $(this).val();
       if(val == 'coupon-global')
       {
-        $(".coupon_users_global").show(); 
+        $(".coupon_users_global").show();
+        $("select[name='coupon_id']").prop('disabled', false); 
       }
       else {
-        $(".coupon_users_global").hide(); 
+        $(".coupon_users_global").hide();
+        $("select[name='coupon_id']").prop('disabled', 'disabled'); 
       }
     });
   }
 
   function add_catalog(){
+    var formdata = new FormData($("#formCatalog")[0]);
 
-   // $("#formCoupon")
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -309,7 +257,9 @@
     $.ajax({
       type : 'POST',
       url : "{{route('add_catalog')}}",
-      data: new FormData($(this)),
+      processData: false,
+      contentType: false,
+      data: formdata,
       beforeSend: function()
       {
         $('#loader').show();
@@ -319,39 +269,134 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
 
-        /*var data = jQuery.parseJSON(result);
-        
-        if(data.status=='success'){
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-warning');
-          $('#pesan').addClass('alert-success');
-          $('#pesan').show();
+        if(result.status=='success'){
+          $('#err').html(result.message);
+          $('#err').removeClass('alert alert-warning');
+          $('#err').addClass('alert alert-success');
+          $('#err').show();
 
-          refresh_page();
+          //refresh_page();
         } else {
-          $('#pesan').html(data.message);
-          $('#pesan').removeClass('alert-success');
-          $('#pesan').addClass('alert-warning');
-          $('#pesan').show();
-        }*/
+          $('#err').html(result.message);
+          $('#err').removeClass('alert alert-success');
+          $('#err').addClass('alert alert-warning');
+          $('#err').show();
+        }
       }
     });  
   }
 
-  $( "body" ).on( "click", ".btn-edit", function() {
-    $('#title-coupon').html('Edit Kupon');
-    $('#kodekupon').val($(this).attr('data-kodekupon'));
-    $('#diskon_value').val($(this).attr('data-nominal'));
-    $('#diskon_percent').val($(this).attr('data-persen'));
-    $('#valid_until').val($(this).attr('data-validuntil'));
-    $('#valid_to').val($(this).attr('data-validto'));
-    $('#keterangan').val($(this).attr('data-keterangan'));
-    $('#package_id').val($(this).attr('data-paket'));
-    
-    $('#id_edit').val($(this).attr('data-id'));
+  function display_edit()
+  {
+     $( "body" ).on( "click", ".btn-edit", function() {
+      $(".formCatalog").attr('id','editCatalog');
+      $(".catalog-box").html('Edit Katalog');
 
-    $('#add-coupon').modal('show');
-  });
+      $('input[name=catalog_label]').val($(this).attr('data-label'));
+      $('select[name=catalog_type] > option[value='+$(this).attr('data-type')+']').prop('selected','selected');
+
+      if($(this).attr('data-type') == 'coupon-global')
+      {
+        $(".coupon_users_global").show();
+        $("select[name='coupon_id']").prop('disabled', false); 
+      }
+      else {
+        $(".coupon_users_global").hide();
+        $("select[name='coupon_id']").prop('disabled', 'disabled'); 
+      }
+
+      $('select[name=coupon_id] > option[value='+$(this).attr('data-coupon-id')+']').prop('selected','selected');
+      $('textarea[name=deskripsi]').val($(this).attr('data-desc'));
+    });
+  }
+
+  function edit_catalog(){
+        var formdata = new FormData($("#formCatalog"));
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        $.ajax({
+          type : 'POST',
+          url : "{{route('edit-catalog')}}",
+          data: formdata,
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          },
+          success: function(result) {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            
+            if(result.status=='success'){
+              $('#pesan').html(result.message);
+              $('#pesan').removeClass('alert-warning');
+              $('#pesan').addClass('alert-success');
+              $('#pesan').show();
+
+              //refresh_page();
+            } else {
+              $('#pesan').html(result.message);
+              $('#pesan').removeClass('alert-success');
+              $('#pesan').addClass('alert-warning');
+              $('#pesan').show();
+            }
+          }
+        });  
+  }
+
+  function display_catalog() {
+    table = $('#myTable').DataTable({
+      destroy: true,
+      "order": [],
+    });
+    $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
+
+    refresh_page();
+
+    $('.formatted-date').datepicker({
+      dateFormat: 'yy/mm/dd',
+    });
+  };
+
+  function refresh_page(){
+    table.destroy();
+    $.ajax({
+      type : 'GET',
+      url : "{{route('datacatalog')}}",
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        $('#content').html(result);
+        
+        table = $('#myTable').DataTable({
+                destroy: true,
+                "order": [],
+            });
+
+      }
+    });
+
+     $( "body" ).on( "click", "#btn-add-ok", function() 
+      {
+        if($('#id_edit').val()==''){
+          add_catalog();
+        } else {
+          edit_catalog();
+        }
+      });
+  }
+
+  /*
 
   $( "body" ).on( "click", ".btn-add", function() 
   {
@@ -385,7 +430,7 @@
 
   $( "body" ).on( "click", "#btn-delete-ok", function() {
     delete_kupon();
-  });
+  });*/
 
 </script>
 @endsection
