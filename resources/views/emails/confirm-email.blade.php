@@ -14,7 +14,7 @@ Pass  : {{$password}}
   <strong>Gunakan kupon ini: "{{$coupon_code}}" </strong><br>
   <strong>Atau klik link <a href="{{url('checkout/'.$coupon_code)}}">ini</a> </strong>  <br>
 <br>
-  (kupon akan expired sesudah 1x24 jam)<br>
+  (kupon akan expired sesudah 2x24 jam)<br>
   <br>
   *kupon ini hanya bisa berlaku untuk email ini saja.
   <br>
