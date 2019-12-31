@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Coupon;
-
+use App\Catalogs;
 use Validator;
+use Carbon;
 
 class CouponController extends Controller
 {
@@ -103,8 +104,32 @@ class CouponController extends Controller
       return view('user.coupon.index');
     }
 
+    #DASHBOARD
     public function kupon()
     {
-      return view('user.coupon.kupon');
+      $data = array();
+      $catalogs = Catalogs::where('catalogs.type','<>','main')
+                ->join('coupons','coupons.id','=','catalogs.coupon_id')
+                ->select('catalogs.*','coupons.valid_until','coupons.kodekupon')
+                ->get();
+      $now = Carbon::now();
+
+      if($catalogs->count() > 0)
+      {
+        foreach($catalogs as $rows)
+        {
+          $valid_until = Carbon::parse($rows->valid_until);
+          $data[] = array(
+            'path'=>$rows->path,
+            'desc'=>$rows->desc,
+            'valid_until'=>$valid_until,
+            'kodekupon'=>$rows->kodekupon
+          );
+        }
+      }
+
+      $banner = Catalogs::where('type','=','main')->first();
+      $banner = $banner->path;
+      return view('user.coupon.kupon',['catalogs'=>$catalogs, 'banner'=>$banner]);
     }
 }

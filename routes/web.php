@@ -174,7 +174,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/list-catalog','CatalogsController@index');
     Route::post('/add-catalog','CatalogsController@AddCatalog')->middleware('catalogvalid')->name('add_catalog');
     Route::get('/list-catalog-data','CatalogsController@DataCatalog')->name('datacatalog');
-    Route::post('/edit-catalog','CatalogsController@EditCatalog')->name('edit-catalog');
+    Route::get('/del-catalog','CatalogsController@DeleteCatalog');
 
     //List Page
     Route::get('/list-page','PageController@index');

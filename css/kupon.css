@@ -99,12 +99,15 @@ span {
 
 /* Banner promo */
 .banner-promo {
-  background-color: #2e7cc0;
   font-size : 36px;
-  padding : 63px;
   color : #fff;
   text-transform : uppercase;
   text-align : center;
+}
+
+.banner-promo img{
+  width : 100%;
+  max-width : 1140px;
 }
 
 /* Searchbox */
@@ -161,8 +164,7 @@ span {
 
 .kupon-board{
   letter-spacing : 2px;
-  background : #2e7cc0;
-  padding : 61px 10px;
+  /*background : #2e7cc0;*/
   text-transform : uppercase;
   color : #fff;
   border-top-left-radius : 10px;
@@ -173,6 +175,10 @@ span {
   -moz-border-top-right-radius : 10px;
   -o-border-top-right-radius : 10px;
   -webkit-border-top-right-radius : 10px;
+}
+
+.kupon-board img {
+  width : 100%;
 }
 
 .kupon-desc {

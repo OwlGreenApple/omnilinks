@@ -121,6 +121,12 @@ table tr:nth-child(even) td {
   color : #fff !important;
 }
 
+/* admin-catalog */
+.catalog-image {
+  width: 100%;
+  max-width: 100px;
+}
+
 /* loader */
 .background-load {
   background-color: #a39f9f;

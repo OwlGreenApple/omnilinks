@@ -7,7 +7,8 @@
 <div class="col-lg-12 bg-kupon fix-col">
   <!-- banner promo -->
   <div class="col-lg-12 banner-promo fix-col">
-      banner promo <br/> 1028 x 240
+      <!--banner promo <br/> 1028 x 240-->
+      <img src="{!! Storage::disk('s3')->url($banner) !!}"/>
   </div>
 
   <!-- SEARCH BOX -->
@@ -40,22 +41,76 @@
   <!-- COUPON -->
   <div class="container fix-col">
 	<div class="row fix-row">
+
+      <!--- COUPON --->
+      @if($catalogs->count() > 0)
+         @foreach($catalogs as $rows)
+            <div class="col-lg-4 col-md-12 col-12">
+              <div class="col-box">
+              <div class="col-box-shadow">
+                <!-- Header / Board -->
+                <div class="col-md-12 kupon-board pro-fix" align="center">
+                 <!--<h3>BANNER PROMO</h3>-->
+                 <img src="{!! Storage::disk('s3')->url($rows->path) !!}"/>
+                </div>
+
+                <!-- Desc -->
+                <div class="col-md-12 kupon-desc">
+                  {{$rows->desc}}
+                </div>
+
+                <!-- Valid untill -->
+                <div class="col-md-12 mb-5">
+                <div class="row kupon-valid">
+                  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
+                  <div class="kupon-exp">Berlaku Hingga<br/>
+                    <div class="kupon-timer">
+                      {{$rows->valid_until}}
+                      <!--<div id="clockdiv">
+                          <div>
+                            <span class="days"></span> :
+                            <span class="hours"></span> :
+                            <span class="minutes"></span> :
+                            <span class="seconds"></span>
+                          </div>
+                        </div>-->
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="row kupon-valid">
+                  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
+                  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">{{$rows->kodekupon}}</span></div>
+                  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
+                </div>
+                </div>
+                
+                <!-- Button -->
+                 <div class="col-md-12 mb-4 pb-3">
+                  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
+                </div>
+            
+              </div>
+              </div>
+            </div> 
+         @endforeach
+      @endif
 	
-			<!--- COUPON 1 --->
+			<!--- COUPON 1 
 			<div class="col-lg-4 col-md-12 col-12">
 			  <div class="col-box">
 				<div class="col-box-shadow">
-					<!-- Header / Board -->
+					<!-- Header / Board 
 				  <div class="col-md-12 kupon-board pro-fix" align="center">
 					 <h3>BANNER PROMO</h3>
 				  </div>
 
-					<!-- Desc -->
+					<!-- Desc 
 				  <div class="col-md-12 kupon-desc">
 					tingkatkan penjualan mu diawal tahun lebih hemat 50%
 				  </div>
 
-					<!-- Valid untill -->
+					<!-- Valid untill 
 				  <div class="col-md-12 mb-5">
 					<div class="row kupon-valid">
 					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
@@ -70,70 +125,30 @@
 					</div>
 				  </div>
 				  
-					<!-- Button -->
+					<!-- Button 
 				   <div class="col-md-12 mb-4 pb-3">
 					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
 				  </div>
 			
 				</div>
 			  </div>
-			</div> 
+			</div> -->
 			
-			<!--- COUPON 2 --->
+			<!--- COUPON 3 
 			<div class="col-lg-4 col-md-12 col-12">
 			  <div class="col-box">
 				<div class="col-box-shadow">
-					<!-- Header / Board -->
+					<!-- Header / Board
 				  <div class="col-md-12 kupon-board pro-fix" align="center">
 					 <h3>BANNER PROMO</h3>
 				  </div>
 
-					<!-- Desc -->
+					<!-- Desc 
 				  <div class="col-md-12 kupon-desc">
 					tingkatkan penjualan mu diawal tahun lebih hemat 50%
 				  </div>
 
-					<!-- Valid untill -->
-				  <div class="col-md-12 mb-5">
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
-					  <div class="kupon-exp">Berlaku Hingga<br/>
-							<div class="kupon-timer">
-								12 : 40 : 29
-							</div>
-					  </div>
-					</div>
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
-					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
-					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
-					</div>
-				  </div>
-				  
-					<!-- Button -->
-				   <div class="col-md-12 mb-4 pb-3">
-					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
-				  </div>
-			
-				</div>
-			  </div>
-			</div> 
-			
-			<!--- COUPON 3 --->
-			<div class="col-lg-4 col-md-12 col-12">
-			  <div class="col-box">
-				<div class="col-box-shadow">
-					<!-- Header / Board -->
-				  <div class="col-md-12 kupon-board pro-fix" align="center">
-					 <h3>BANNER PROMO</h3>
-				  </div>
-
-					<!-- Desc -->
-				  <div class="col-md-12 kupon-desc">
-					tingkatkan penjualan mu diawal tahun lebih hemat 50%
-				  </div>
-
-					<!-- Valid untill -->
+					<!-- Valid untill 
 				  <div class="col-md-12 mb-5">
 					<div class="row kupon-valid">
 					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_grey.png')}}"/></div>
@@ -146,128 +161,15 @@
 					</div>
 				  </div>
 				  
-					<!-- Button -->
+					<!-- Button 
 				   <div class="col-md-12 mb-4 pb-3">
 					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
 				  </div>
 			
 				</div>
 			  </div>
-			</div> 
+			</div> -->
 			
-			<!--- COUPON 4 --->
-			<div class="col-lg-4 col-md-12 col-12">
-			  <div class="col-box">
-				<div class="col-box-shadow">
-					<!-- Header / Board -->
-				  <div class="col-md-12 kupon-board pro-fix" align="center">
-					 <h3>BANNER PROMO</h3>
-				  </div>
-
-					<!-- Desc -->
-				  <div class="col-md-12 kupon-desc">
-					tingkatkan penjualan mu diawal tahun lebih hemat 50%
-				  </div>
-
-					<!-- Valid untill -->
-				  <div class="col-md-12 mb-5">
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
-					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
-					  <div class="clearfix"></div>
-					</div>
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
-					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
-					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
-					  <div class="clearfix"></div>
-					</div>
-				  </div>
-				  
-					<!-- Button -->
-				   <div class="col-md-12 mb-4 pb-3">
-					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
-				  </div>
-			
-				</div>
-			  </div>
-			</div> 
-			
-			<!--- COUPON 5 --->
-			<div class="col-lg-4 col-md-12 col-12">
-			  <div class="col-box">
-				<div class="col-box-shadow">
-					<!-- Header / Board -->
-				  <div class="col-md-12 kupon-board pro-fix" align="center">
-					 <h3>BANNER PROMO</h3>
-				  </div>
-
-					<!-- Desc -->
-				  <div class="col-md-12 kupon-desc">
-					tingkatkan penjualan mu diawal tahun lebih hemat 50%
-				  </div>
-
-					<!-- Valid untill -->
-				  <div class="col-md-12 mb-5">
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
-					  <div class="kupon-exp">Berlaku Hingga<br/>
-							<div class="kupon-timer">
-								12 : 40 : 29
-							</div>
-					  </div>
-					</div>
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
-					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
-					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
-					</div>
-				  </div>
-				  
-					<!-- Button -->
-				   <div class="col-md-12 mb-4 pb-3">
-					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
-				  </div>
-			
-				</div>
-			  </div>
-			</div> 
-			
-			<!--- COUPON 6 --->
-			<div class="col-lg-4 col-md-12 col-12">
-			  <div class="col-box">
-				<div class="col-box-shadow">
-					<!-- Header / Board -->
-				  <div class="col-md-12 kupon-board pro-fix" align="center">
-					 <h3>BANNER PROMO</h3>
-				  </div>
-
-					<!-- Desc -->
-				  <div class="col-md-12 kupon-desc">
-					tingkatkan penjualan mu diawal tahun lebih hemat 50%
-				  </div>
-
-					<!-- Valid untill -->
-				  <div class="col-md-12 mb-5">
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_grey.png')}}"/></div>
-					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
-					</div>
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_grey.png')}}"/></div>
-					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
-					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
-					</div>
-				  </div>
-				  
-					<!-- Button -->
-				   <div class="col-md-12 mb-4 pb-3">
-					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
-				  </div>
-			
-				</div>
-			  </div>
-			</div> 
 	
 	<!-- END ROW -->
 	</div>
@@ -288,6 +190,16 @@
 </div>
 
 <!---- JAVASCRIPT ---->
+<script type="text/javascript">
+  moment().format();
+  let valuestart = moment.duration("20:00:10", "HH:mm:ss");
+  let valuestop = moment.duration("23:15:05", "HH:mm:ss");
+  let difference = valuestop.subtract(valuestart);
+
+  console.log(difference.hours() + ":" + difference.minutes() + ":" + difference.seconds())
+</script>
+
+
 @if ( env('APP_ENV') !== "local" ) 
 <!-- Provely Conversions App Display Code -->
 <script>(function(w,n) {
