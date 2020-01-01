@@ -2,7 +2,6 @@
 @section('content')
 <script src="{{ asset('js/custom.js') }}"></script>
 
-
 <!-- MAIN -->
 <div class="col-lg-12 bg-kupon fix-col">
   <!-- banner promo -->
@@ -16,165 +15,37 @@
     <div class="row">
       <div class="col-lg-6">
           <div class="input-group kupon-form-sel">
-          <input type="text" class="form-control search-style" placeholder="Cari Kupon">
-          <div class="input-group-append">
-            <button class="btn btn-kupon-src" type="button">
-				<img src="{{asset('image/kupon/search.png')}}" />
-            </button>
-          </div>
+			  <input id="kupon-search" type="text" class="form-control search-style" placeholder="Cari Kupon">
+			  <div class="input-group-append">
+					<button class="btn btn-kupon-src" type="button">
+						<img src="{{asset('image/kupon/search.png')}}" />
+					</button>
+			  </div>
         </div>
       </div>
+	 <!-- END SEARCH BOX -->
 
+	  <!-- SORT BOX -->
       <div class="col-lg-6">
         <div class="form-inline kupon-form-sel">
           <label>Urutkan :&nbsp;</label>
-          <select class="form-control kupon-select" id="sel1" name="sellist1">
-            <option>Terbaru</option>
+          <select class="form-control kupon-select">
+            <option>Pilih</option>
+            <option value="1">Terbaru</option>
+            <option value="2">Terlama</option>
           </select>
         </div>
       </div>
     </div>
    <div class="clearfix"></div>
   </div>
-  <!-- END SEARCH BOX -->
+  <!-- END SORT BOX -->
 
-  <!-- COUPON -->
   <div class="container fix-col">
-	<div class="row fix-row">
-
-      <!--- COUPON --->
-      @if($catalogs->count() > 0)
-         @foreach($catalogs as $rows)
-            <div class="col-lg-4 col-md-12 col-12">
-              <div class="col-box">
-              <div class="col-box-shadow">
-                <!-- Header / Board -->
-                <div class="col-md-12 kupon-board pro-fix" align="center">
-                 <!--<h3>BANNER PROMO</h3>-->
-                 <img src="{!! Storage::disk('s3')->url($rows->path) !!}"/>
-                </div>
-
-                <!-- Desc -->
-                <div class="col-md-12 kupon-desc">
-                  {{$rows->desc}}
-                </div>
-
-                <!-- Valid untill -->
-                <div class="col-md-12 mb-5">
-                <div class="row kupon-valid">
-                  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
-                  <div class="kupon-exp">Berlaku Hingga<br/>
-                    <div class="kupon-timer">
-                      {{$rows->valid_until}}
-                      <!--<div id="clockdiv">
-                          <div>
-                            <span class="days"></span> :
-                            <span class="hours"></span> :
-                            <span class="minutes"></span> :
-                            <span class="seconds"></span>
-                          </div>
-                        </div>-->
-                      }
-                    </div>
-                  </div>
-                </div>
-                <div class="row kupon-valid">
-                  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
-                  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">{{$rows->kodekupon}}</span></div>
-                  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
-                </div>
-                </div>
-                
-                <!-- Button -->
-                 <div class="col-md-12 mb-4 pb-3">
-                  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
-                </div>
-            
-              </div>
-              </div>
-            </div> 
-         @endforeach
-      @endif
-	
-			<!--- COUPON 1 
-			<div class="col-lg-4 col-md-12 col-12">
-			  <div class="col-box">
-				<div class="col-box-shadow">
-					<!-- Header / Board 
-				  <div class="col-md-12 kupon-board pro-fix" align="center">
-					 <h3>BANNER PROMO</h3>
-				  </div>
-
-					<!-- Desc 
-				  <div class="col-md-12 kupon-desc">
-					tingkatkan penjualan mu diawal tahun lebih hemat 50%
-				  </div>
-
-					<!-- Valid untill 
-				  <div class="col-md-12 mb-5">
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_green.png')}}"/></div>
-					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
-					  <div class="clearfix"></div>
-					</div>
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_green.png')}}"/></div>
-					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
-					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
-					  <div class="clearfix"></div>
-					</div>
-				  </div>
-				  
-					<!-- Button 
-				   <div class="col-md-12 mb-4 pb-3">
-					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
-				  </div>
-			
-				</div>
-			  </div>
-			</div> -->
-			
-			<!--- COUPON 3 
-			<div class="col-lg-4 col-md-12 col-12">
-			  <div class="col-box">
-				<div class="col-box-shadow">
-					<!-- Header / Board
-				  <div class="col-md-12 kupon-board pro-fix" align="center">
-					 <h3>BANNER PROMO</h3>
-				  </div>
-
-					<!-- Desc 
-				  <div class="col-md-12 kupon-desc">
-					tingkatkan penjualan mu diawal tahun lebih hemat 50%
-				  </div>
-
-					<!-- Valid untill 
-				  <div class="col-md-12 mb-5">
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/clock_grey.png')}}"/></div>
-					  <div class="kupon-exp">Berlaku Hingga<br/><span class="opb">1- 5 Januari 2020</span></div>
-					</div>
-					<div class="row kupon-valid">
-					  <div class="kupon-image"><img src="{{asset('image/kupon/kupon_grey.png')}}"/></div>
-					  <div class="kupon-exp">Kode Promo<br/> <span class="opb kupon-kode">makinlaris20</span></div>
-					  <div class="kupon-paste"><a  class="btn btn-kupon-copy btn-sm">Salin Kode</a></div>
-					</div>
-				  </div>
-				  
-					<!-- Button 
-				   <div class="col-md-12 mb-4 pb-3">
-					  <a class="btn btn-block btn-kupon"> Lihat Detail</a>
-				  </div>
-			
-				</div>
-			  </div>
-			</div> -->
-			
-	
-	<!-- END ROW -->
+	<div id="catalog" class="row fix-row">
+		<!-- content -->
 	</div>
   </div>
-  <!-- END COUPON -->
 
   <!-- end main bg -->
 </div>
@@ -191,12 +62,53 @@
 
 <!---- JAVASCRIPT ---->
 <script type="text/javascript">
+$(document).ready(function(){
+	display_content();
+	search_kupon();
+	sort_content();
+});
+
+function search_kupon() {
+	$(".btn-kupon-src").click(function(){
+		display_content();
+	});
+}
+
+function sort_content(){
+	$(".kupon-select").change(function(){
+		var val = $(this).val();
+		alert(val);
+	});
+} 
+
+function display_content() {
+	var vals = $("#kupon-search").val();
+	$.ajax({
+      type : 'GET',
+      url : "{{url('catalog-content')}}",
+	  data : {'value' : vals},
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        $('#catalog').html(result);
+      }
+    });
+}
+
+/* momentjs
   moment().format();
   let valuestart = moment.duration("20:00:10", "HH:mm:ss");
   let valuestop = moment.duration("23:15:05", "HH:mm:ss");
   let difference = valuestop.subtract(valuestart);
 
   console.log(difference.hours() + ":" + difference.minutes() + ":" + difference.seconds())
+ */
 </script>
 
 

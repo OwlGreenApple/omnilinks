@@ -64,12 +64,13 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('/confirm-payment','OrderController@confirm_payment');
   Route::get('/thankyou','OrderController@thankyou');
 
-  //Kupon
-  Route::get('catalog','CouponController@kupon')->name('kupon');
-
   Route::group(['middleware' => ['web','auth']], function () {
     //coupon 
     Route::get('/coupon-available','CouponController@coupon_available');
+	
+	//Kupon
+	Route::get('catalog','CouponController@kupon')->name('kupon');
+	Route::get('catalog-content','CouponController@kupon_content');
     
     //Ads Pricing 
     Route::get('/ads-pricing','AdsController@ads_pricing');
