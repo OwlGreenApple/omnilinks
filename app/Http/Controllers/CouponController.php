@@ -105,15 +105,34 @@ class CouponController extends Controller
     }
 
     #DASHBOARD
-    public function kupon()
+    public function kupon() {
+		 $banner = Catalogs::where('type','=','main')->first();
+		$banner = $banner->path;
+		return view('user.coupon.kupon',['banner'=>$banner]);
+    }
+	
+	public function kupon_content(Request $request)
     {
       $data = array();
-      $catalogs = Catalogs::where('catalogs.type','<>','main')
+	  $value = $request->value;
+	  
+	  if($value == null) {
+		 $catalogs = Catalogs::where('catalogs.type','<>','main')
                 ->join('coupons','coupons.id','=','catalogs.coupon_id')
                 ->select('catalogs.*','coupons.valid_until','coupons.kodekupon')
                 ->get();
-      $now = Carbon::now();
+	  } else {
+		   $catalogs = Catalogs::where([['coupons.kodekupon','LIKE','%'.$value.'%']])
+                ->join('coupons','coupons.id','=','catalogs.coupon_id')
+                ->select('catalogs.*','coupons.valid_until','coupons.kodekupon')
+                ->get();
+	  }
+	  
+     return view('user.coupon.kupon-content',['catalogs'=>$catalogs]);
+	 
+      //$now = Carbon::now();
 
+		/*
       if($catalogs->count() > 0)
       {
         foreach($catalogs as $rows)
@@ -126,10 +145,7 @@ class CouponController extends Controller
             'kodekupon'=>$rows->kodekupon
           );
         }
-      }
-
-      $banner = Catalogs::where('type','=','main')->first();
-      $banner = $banner->path;
-      return view('user.coupon.kupon',['catalogs'=>$catalogs, 'banner'=>$banner]);
+      }*/
+      
     }
 }
