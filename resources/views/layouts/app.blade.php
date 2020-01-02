@@ -28,8 +28,8 @@
   <script src="{{ asset('js/datetime-moment.js') }}"></script>
   <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
   <script src="{{asset('js/all.js')}}"></script>
-  <script src="{{asset('js/require.js')}}"></script>
   <script src="{{asset('selectize/selectize.js')}}"></script>
+  <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
 
   <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 
@@ -51,6 +51,7 @@
   <link rel="stylesheet" href="{{ asset('css/style-pricing.css') }}"/>
   @endif
   <link rel="stylesheet" href="{{ asset('css/kupon.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('jquery-countdown/jQuery.countdownTimer.css') }}"/>
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>

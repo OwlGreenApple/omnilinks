@@ -113,39 +113,47 @@ class CouponController extends Controller
 	
 	public function kupon_content(Request $request)
     {
-      $data = array();
+    $data = array();
 	  $value = $request->value;
+    $now = Carbon::now();
 	  
 	  if($value == null) {
-		 $catalogs = Catalogs::where('catalogs.type','<>','main')
+		 $catalogs = Catalogs::where([['catalogs.type','<>','main'],['coupons.valid_until','>=',$now]])
                 ->join('coupons','coupons.id','=','catalogs.coupon_id')
                 ->select('catalogs.*','coupons.valid_until','coupons.kodekupon')
                 ->get();
 	  } else {
-		   $catalogs = Catalogs::where([['coupons.kodekupon','LIKE','%'.$value.'%']])
+		   $catalogs = Catalogs::where([['coupons.kodekupon','LIKE','%'.$value.'%'],['coupons.valid_until','>=',$now]])
                 ->join('coupons','coupons.id','=','catalogs.coupon_id')
                 ->select('catalogs.*','coupons.valid_until','coupons.kodekupon')
                 ->get();
 	  }
-	  
-     return view('user.coupon.kupon-content',['catalogs'=>$catalogs]);
-	 
-      //$now = Carbon::now();
 
-		/*
-      if($catalogs->count() > 0)
+    if($catalogs->count() > 0)
+    {
+      foreach($catalogs as $rows)
       {
-        foreach($catalogs as $rows)
-        {
-          $valid_until = Carbon::parse($rows->valid_until);
-          $data[] = array(
-            'path'=>$rows->path,
-            'desc'=>$rows->desc,
-            'valid_until'=>$valid_until,
-            'kodekupon'=>$rows->kodekupon
-          );
+        $valid_until = Carbon::parse($rows->valid_until);
+        $totalDuration = $now->diffInSeconds($valid_until,false);
+
+        if($totalDuration <= 0) {
+          $zerotime = 0;
+          $end_period = gmdate('H:i:s',$zerotime);
         }
-      }*/
+        else {
+          $end_period = gmdate('H:i:s', $totalDuration);
+        }
+
+        $data[] = array(
+          'path'=>$rows->path,
+          'desc'=>$rows->desc,
+          'valid_until'=>$end_period,
+          'kodekupon'=>$rows->kodekupon
+        );
+      }
+    }
+	  
+    return view('user.coupon.kupon-content',['catalogs'=>$data]);
       
     }
 }
