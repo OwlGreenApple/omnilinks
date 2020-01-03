@@ -48,7 +48,8 @@ class CheckMembership extends Command
      */
     public function handle()
     {
-      $users = User::All();
+      // $users = User::All();
+      $users = User::where('id',3)->get();
 
       foreach ($users as $user) {
         $now = Carbon::now();
@@ -58,11 +59,14 @@ class CheckMembership extends Command
         else {
           $date = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
         }
-        $interval = $now->diffInDays($date);
+        $interval = $now->diffInDays($date,false);
         // var_dump($user->email);
         // var_dump($interval);
-        if($interval==5){
-          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
+        if( ($interval==5) || ($interval==1) || ($interval==-1) ){
+          if(env('MAIL_HOST')=='smtp.mailtrap.io'){
+            sleep(2);
+          }
+          Mail::to($user->email)->queue(new ExpiredMembershipMail($user,$interval));
         }
 
         //check premium id 
@@ -103,13 +107,11 @@ class CheckMembership extends Command
         }
 
         if($date < $now and $user->membership!='free'){
-          Mail::to($user->email)->queue(new ExpiredMembershipMail($user->email,$user));
-
           $userlog = new UserLog;
           $userlog->user_id = $user->id;
           $userlog->type = 'membership';
           $userlog->value = $user->membership;
-          $userlog->keterangan = 'Cron check membership valid_until';
+          $userlog->keterangan = 'Cron check membership, user jadi free';
           $userlog->save();
 
           $user->membership = 'free';
