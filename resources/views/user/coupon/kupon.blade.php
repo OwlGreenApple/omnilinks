@@ -42,9 +42,9 @@
   <!-- END SORT BOX -->
 
   <div class="container fix-col">
-	<div id="catalog" class="row fix-row">
-		<!-- content -->
-	</div>
+  	<div id="catalog" class="row fix-row">
+  		<!-- content -->
+  	</div>
   </div>
 
   <!-- end main bg -->
@@ -62,6 +62,7 @@
 
 <!---- JAVASCRIPT ---->
 <script type="text/javascript">
+
 $(document).ready(function(){
 	display_content();
 	search_kupon();
@@ -100,15 +101,6 @@ function display_content() {
       }
     });
 }
-
-/* momentjs
-  moment().format();
-  let valuestart = moment.duration("20:00:10", "HH:mm:ss");
-  let valuestop = moment.duration("23:15:05", "HH:mm:ss");
-  let difference = valuestop.subtract(valuestart);
-
-  console.log(difference.hours() + ":" + difference.minutes() + ":" + difference.seconds())
- */
 </script>
 
 
