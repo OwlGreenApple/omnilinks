@@ -112,7 +112,7 @@ class OrderController extends Controller
         $now = Carbon::now();
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $coupon->valid_until);
         
-        if($date<$now){
+        if($date->lt($now)){
           $arr['status'] = 'error';
           $arr['message'] = 'Kupon sudah tidak berlaku';
           return $arr;
@@ -167,7 +167,7 @@ class OrderController extends Controller
             $arr['dataPrice'] = $total;
             return $arr;
           }
-          else if($coupon->valid_to==''){
+          else if(($coupon->valid_to=='') || ($coupon->valid_to=='expired-membership') ){
             $total = 0;
             $diskon = 0;
 
