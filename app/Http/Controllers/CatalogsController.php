@@ -32,7 +32,7 @@ class CatalogsController extends Controller
       $statement = DB::select("SHOW TABLE STATUS LIKE 'catalogs'");
       $nextId = $statement[0]->Auto_increment;
 
-      if(!is_null($check_catalog_id) && !empty($file))
+      if(!empty($file))
       {
         $files = explode('.',$file->getClientOriginalName());
         $source = file_get_contents($file);
@@ -48,6 +48,7 @@ class CatalogsController extends Controller
         {
           $path = "catalogs/real/".$filename;
         }
+
       }
 
       /*INSERT CATALOG*/
@@ -77,7 +78,7 @@ class CatalogsController extends Controller
             'desc' => $request->deskripsi,
           );
 
-          if(!is_null($check_catalog_id) && !empty($file))
+          if(!empty($file))
           {
             Storage::disk('s3')->delete($oldpath);
             $filename = $files[0].'-'.$request->id_catalog.'.'. $files[1];
