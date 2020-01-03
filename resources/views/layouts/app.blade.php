@@ -29,7 +29,10 @@
   <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
   <script src="{{asset('js/all.js')}}"></script>
   <script src="{{asset('selectize/selectize.js')}}"></script>
+  <!-- countdown timer -->
   <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
+  <!-- bootstrap datetimepicker -->
+  <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 
   <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 
@@ -52,6 +55,9 @@
   @endif
   <link rel="stylesheet" href="{{ asset('css/kupon.css') }}"/>
   <link rel="stylesheet" href="{{ asset('jquery-countdown/jQuery.countdownTimer.css') }}"/>
+
+  <!-- bootstrap datetimepicker -->
+  <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"/>
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>

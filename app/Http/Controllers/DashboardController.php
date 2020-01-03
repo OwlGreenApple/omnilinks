@@ -6,6 +6,8 @@ use App\User;
 use App\Pixel;
 use App\Banner;
 use App\Whatsapplink;
+use App\Catalogs;
+use App\Coupon;
 use App\Mail\ResendConfirmEmail;
 
 use Ramsey\Uuid\Uuid;
@@ -18,7 +20,38 @@ class DashboardController extends Controller
   public function viewDashboard()
   {
     $user=Auth::user();
-    return view('user.dashboard.dash')->with('user',$user);
+    $count = 0;
+    $now = Carbon::now();
+
+    $sel = array(
+        ['coupons.valid_until','>=',$now],
+        ['type','=','coupon-global']
+     );
+
+     #AUTO GENERATE LOGIC
+     $auto = array(
+        ['user_id','=',$user],
+        ['valid_until','>=',$now]
+     );
+
+     #OTHER
+     $other = array(
+        ['type','=','other'],
+        ['valid_until','>=',$now]
+     );
+    $catalogs = Catalogs::where($sel)
+              ->join('coupons','coupons.id','=','catalogs.coupon_id')
+              ->select('catalogs.*','coupons.valid_until','coupons.kodekupon','coupons.user_id')
+              ->get();
+    $count += $catalogs->count(); // count -- global
+
+    $gcoupons = Coupon::where($auto)->get();
+    $count += $gcoupons->count(); // count -- auto-generate
+
+    $catalog_ot = Catalogs::where($other)->get();
+    $count += $catalog_ot->count(); // count -- other
+
+    return view('user.dashboard.dash',['user'=>$user,'count'=>$count]);
   }
   
   public function viewTutorial()

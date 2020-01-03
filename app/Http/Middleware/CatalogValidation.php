@@ -37,10 +37,14 @@ class CatalogValidation
         }
 
         $catalog_id = null;
-        if($type == 'main'){
+        if($type == 'main' || $type == 'auto-generate'){
           $catalog = Catalogs::where('type','=',$type)->first();
-          $catalog_id = $catalog->id;
         } 
+
+        if(!is_null($catalog))
+        {
+          $catalog_id = $catalog->id;
+        }
 
         if($catalog_id <> $idcatalog){
           $valid_id = false;
@@ -50,7 +54,7 @@ class CatalogValidation
 
         if(!is_null($catalog) && $valid_id == false) {
           $error['status'] = false;
-          $error['message'] = 'Catalog dengan tipe <strong>main</strong> hanya boleh dibuat 1 kali saja';
+          $error['message'] = 'Catalog dengan tipe <strong>'.$type.'</strong> hanya boleh dibuat 1 kali saja';
           return response()->json($error);
         }
 

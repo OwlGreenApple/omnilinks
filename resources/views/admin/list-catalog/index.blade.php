@@ -128,9 +128,40 @@
                       @endforeach
                    @endif
                   </select>
-              </div>
+              </div> 
+
             </div>
           </div>
+
+          <div class="form-group row coupon-link">
+            <label class="col-md-4 col-12">
+              <b>Coupon URL</b> 
+            </label>
+
+            <div class="col-md-8 col-12">
+                <input type="text" name="coupon_link" class="form-control"/>
+            </div>
+          </div>   
+
+          <div class="form-group row coupon-link">
+            <label class="col-md-4 col-12">
+              <b>Valid Until</b> 
+            </label>
+
+            <div class="col-md-8 col-12">
+                <input type="text" name="valid_until" class="form-control formatted-date"/>
+            </div>
+          </div> 
+
+          <div class="form-group row coupon-link">
+            <label class="col-md-4 col-12">
+              <b>Kode Kupon</b> 
+            </label>
+
+            <div class="col-md-8 col-12">
+                <input type="text" name="coupon_code" class="form-control"/>
+            </div>
+          </div>  
 
           <div class="form-group row">
             <label class="col-md-4 col-12">
@@ -194,7 +225,10 @@
   }
 
   function get_catalog_type(){ 
+    $("input, textarea").val('');
     $(".coupon_users_global").hide(); 
+    $(".coupon-link").hide();
+    $("input[name=coupon_link], input[name=valid_until], input[name=coupon_code]").prop('disabled',true);
     $("select[name='coupon_id']").prop('disabled', 'disabled'); 
 
     $("select[name=catalog_type]").change(function(){
@@ -203,8 +237,19 @@
       {
         $(".coupon_users_global").show();
         $("select[name='coupon_id']").prop('disabled', false); 
+        $(".coupon-link").hide();
+        $("input[name=coupon_link], input[name=valid_until], input[name=coupon_code]").prop('disabled',true);
+      }
+      else if(val == 'other')
+      {
+        $(".coupon-link").show();
+        $("input[name=coupon_link], input[name=valid_until], input[name=coupon_code]").prop('disabled',false);
+        $(".coupon_users_global").hide();
+        $("select[name='coupon_id']").prop('disabled', 'disabled'); 
       }
       else {
+        $(".coupon-link").hide();
+        $("input[name=coupon_link]").prop('disabled',true);
         $(".coupon_users_global").hide();
         $("select[name='coupon_id']").prop('disabled', 'disabled'); 
       }
@@ -246,7 +291,7 @@
 
             if(result.ins == 1)
             {
-              get_form();
+              get_catalog_type();
             }
 
           } else {
@@ -273,14 +318,25 @@
       if($(this).attr('data-type') == 'coupon-global')
       {
         $(".coupon_users_global").show();
-        $("select[name='coupon_id']").prop('disabled', false); 
+        $("select[name='coupon_id']").prop('disabled', false);
+        $('select[name=coupon_id] > option[value='+$(this).attr('data-coupon-id')+']').prop('selected','selected'); 
+        $(".coupon-link").hide();
+        $("input[name=coupon_link], input[name=valid_until], input[name=coupon_code]").prop('disabled',true);
       }
-      else {
+      else if($(this).attr('data-type') == 'other'){
+        $(".coupon-link").show();
+        $("input[name=coupon_link]").val($(this).attr('data-link'));
+        $("input[name=coupon_code]").val($(this).attr('data-coupon'));
+        $("input[name=valid_until]").val($(this).attr('data-exp'));
+        $("input[name=coupon_link],input[name=valid_until], input[name=coupon_code]").prop('disabled',false);
+        $(".coupon_users_global").hide();
+        $("select[name='coupon_id']").prop('disabled', 'disabled'); 
+      } else {
+        $(".coupon-link").hide();
+        $("input[name=coupon_link]").prop('disabled',true);
         $(".coupon_users_global").hide();
         $("select[name='coupon_id']").prop('disabled', 'disabled'); 
       }
-
-      $('select[name=coupon_id] > option[value='+$(this).attr('data-coupon-id')+']').prop('selected','selected');
       $('textarea[name=deskripsi]').val($(this).attr('data-desc'));
     });
   }
@@ -291,13 +347,14 @@
       "order": [],
     });
     $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
-
     refresh_page();
-
-    $('.formatted-date').datepicker({
-      dateFormat: 'yy/mm/dd',
-    });
   };
+
+  $(function () {
+      $('.formatted-date').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+      });
+  });
 
   function refresh_page(){
     table.destroy();
