@@ -28,7 +28,7 @@
                 <div class="col-12 col-md-12">
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
                   <select class="form-control" name="idpaket" id="select-auto-manage">
-                    @if(substr($id,0,7)<>"special")
+                    @if(substr($id,0,7) <> "special") 
                       @if($type=="normal-package")
                         <!--
                         <option class="" data-price="155000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
@@ -207,23 +207,27 @@
   }
   
   $(document).ready(function() {
-    <?php if(substr($id,0,7) <> "special") {?>
-    $( "#select-auto-manage" ).change(function() {
-      var price = $(this).find("option:selected").attr("data-price");
-      var namapaket = $(this).find("option:selected").attr("data-paket");
+    <?php 
+    // if (is_numeric($id)){
+    if(substr($id,0,7) <> "special") {
+    ?>
+      $( "#select-auto-manage" ).change(function() {
+        var price = $(this).find("option:selected").attr("data-price");
+        var namapaket = $(this).find("option:selected").attr("data-paket");
 
-      $("#price").val(price);
-      $("#namapaket").val(namapaket);
-      $('#kupon').val("");
-      check_kupon();
-    });
-    $( "#select-auto-manage" ).change();
+        $("#price").val(price);
+        $("#namapaket").val(namapaket);
+        $('#kupon').val("");
+        check_kupon();
+      });
+      $( "#select-auto-manage" ).change();
     <?php } ?>
     $("body").on("click", ".btn-kupon", function() {
       check_kupon();
     });
-    
-    $("#kupon").val("<?php if(substr($id,0,7)=='special') { echo $id; } ?>");
+
+    // $("#kupon").val("<?php if(substr($id,0,7)=='special') { echo $id; } ?>");
+    $("#kupon").val("<?php if (!is_numeric($id)) { echo $id; } ?>");
     $(".btn-kupon").trigger("click");
   });
     

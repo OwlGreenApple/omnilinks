@@ -167,7 +167,7 @@ class OrderController extends Controller
             $arr['dataPrice'] = $total;
             return $arr;
           }
-          else if(($coupon->valid_to=='') || ($coupon->valid_to=='expired-membership') ){
+          else if(($coupon->valid_to=='') || ($coupon->valid_to=='expired-membership') || ($coupon->valid_to=='all') ){
             $total = 0;
             $diskon = 0;
 
