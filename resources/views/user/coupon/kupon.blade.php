@@ -7,7 +7,9 @@
   <!-- banner promo -->
   <div class="col-lg-12 banner-promo fix-col">
       <!--banner promo <br/> 1028 x 240-->
-      <img src="{!! Storage::disk('s3')->url($banner) !!}"/>
+      @if($banner <> null)
+        <img src="{!! Storage::disk('s3')->url($banner) !!}"/>
+      @endif
   </div>
 
   <!-- SEARCH BOX -->
@@ -15,7 +17,7 @@
     <div class="row">
       <div class="col-lg-6">
           <div class="input-group kupon-form-sel">
-			  <input id="kupon-search" type="text" class="form-control search-style" placeholder="Cari Kupon">
+			  <input id="kupon-search" type="text" class="form-control search-style" placeholder="Cari Kode Kupon">
 			  <div class="input-group-append">
 					<button class="btn btn-kupon-src" type="button">
 						<img src="{{asset('image/kupon/search.png')}}" />
@@ -77,8 +79,25 @@ function search_kupon() {
 
 function sort_content(){
 	$(".kupon-select").change(function(){
+    var vals = $("#kupon-search").val();
 		var val = $(this).val();
-		alert(val);
+		$.ajax({
+      type : 'GET',
+      url : "{{url('catalog-content')}}",
+      data : {'value' : vals,'sort':val},
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        $('#catalog').html(result);
+      }
+    });
+
 	});
 } 
 

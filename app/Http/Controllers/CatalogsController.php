@@ -13,7 +13,8 @@ class CatalogsController extends Controller
 {
 
     public function index(){
-      $coupon_global = Coupon::where('user_id',0)->get();
+      $now = Carbon::now();
+      $coupon_global = Coupon::where([['user_id',0],['valid_until','>=',$now]])->get();
       return view('admin.list-catalog.index',['coupons'=>$coupon_global]);
     }
 
@@ -30,19 +31,24 @@ class CatalogsController extends Controller
       
       $statement = DB::select("SHOW TABLE STATUS LIKE 'catalogs'");
       $nextId = $statement[0]->Auto_increment;
-      $files = explode('.',$file->getClientOriginalName());
-      $source = file_get_contents($file);
-    
-      #STORAGE
-      $filename = $files[0].'-'.$nextId.'.'. $files[1];
 
-      if(env('APP_ENV') == 'local')
+      if(!empty($file))
       {
-        $path = "catalogs/test/".$filename;
-      }
-      else
-      {
-        $path = "catalogs/real/".$filename;
+        $files = explode('.',$file->getClientOriginalName());
+        $source = file_get_contents($file);
+
+        #STORAGE
+        $filename = $files[0].'-'.$nextId.'.'. $files[1];
+
+        if(env('APP_ENV') == 'local')
+        {
+          $path = "catalogs/test/".$filename;
+        }
+        else
+        {
+          $path = "catalogs/real/".$filename;
+        }
+
       }
 
       /*INSERT CATALOG*/
@@ -53,6 +59,9 @@ class CatalogsController extends Controller
           $catalog->label = $request->catalog_label;
           $catalog->type = $request->catalog_type;
           $catalog->path = $path;
+          $catalog->coupon_url = $request->coupon_link;
+          $catalog->kodekupon = $request->coupon_code;
+          $catalog->valid_until = $request->valid_until;
           $catalog->desc = $request->deskripsi;
           $catalog->save();
           Storage::disk('s3')->put($path,$source,'public');
@@ -63,12 +72,14 @@ class CatalogsController extends Controller
             'coupon_id'=>$request->coupon_id,
             'label' => $request->catalog_label,
             'type' => $request->catalog_type,
+            'coupon_url'=> $request->coupon_link,
+            'kodekupon'=> $request->coupon_code,
+            'valid_until'=> $request->valid_until,
             'desc' => $request->deskripsi,
           );
 
-          if(!is_null($check_catalog_id) && !empty($file))
+          if(!empty($file))
           {
-
             Storage::disk('s3')->delete($oldpath);
             $filename = $files[0].'-'.$request->id_catalog.'.'. $files[1];
             if(env('APP_ENV') == 'local')

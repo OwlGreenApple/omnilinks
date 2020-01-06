@@ -69,7 +69,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/coupon-available','CouponController@coupon_available');
 	
 	//Kupon
-	Route::get('catalog','CouponController@kupon')->name('kupon');
+	Route::get('kupon','CouponController@kupon')->name('kupon');
 	Route::get('catalog-content','CouponController@kupon_content');
     
     //Ads Pricing 

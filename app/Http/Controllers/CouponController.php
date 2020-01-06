@@ -8,6 +8,7 @@ use App\Coupon;
 use App\Catalogs;
 use Validator;
 use Carbon;
+use Auth;
 
 class CouponController extends Controller
 {
@@ -106,34 +107,158 @@ class CouponController extends Controller
 
     #DASHBOARD
     public function kupon() {
-		 $banner = Catalogs::where('type','=','main')->first();
-		$banner = $banner->path;
-		return view('user.coupon.kupon',['banner'=>$banner]);
+  		$banner = Catalogs::where('type','=','main')->first();
+      if(!is_null($banner))
+      {
+        $banner = $banner->path;
+      }
+      else
+      {
+        $banner = null;
+      }
+  		 
+  		 return view('user.coupon.kupon',['banner'=>$banner]);
     }
 	
 	public function kupon_content(Request $request)
     {
     $data = array();
+    $coupon = array();
+    $userid = Auth::id();
 	  $value = $request->value;
+    $sort = (int)$request->sort;
     $now = Carbon::now();
 	  
-	  if($value == null) {
-		 $catalogs = Catalogs::where([['catalogs.type','<>','main'],['coupons.valid_until','>=',$now]])
-                ->join('coupons','coupons.id','=','catalogs.coupon_id')
-                ->select('catalogs.*','coupons.valid_until','coupons.kodekupon')
-                ->get();
-	  } else {
-		   $catalogs = Catalogs::where([['coupons.kodekupon','LIKE','%'.$value.'%'],['coupons.valid_until','>=',$now]])
-                ->join('coupons','coupons.id','=','catalogs.coupon_id')
-                ->select('catalogs.*','coupons.valid_until','coupons.kodekupon')
-                ->get();
-	  }
+    $pos = 'ASC';
+    if($value == null) {
+       $sel = array(
+          ['coupons.valid_until','>=',$now],
+          ['type','=','coupon-global']
+       );
 
-    if($catalogs->count() > 0)
+       #AUTO GENERATE LOGIC
+       $auto = array(
+          ['user_id','=',$userid],
+          ['valid_until','>=',$now]
+       );
+
+       #OTHER
+       $other = array(
+          ['type','=','other'],
+          ['valid_until','>=',$now]
+       );
+
+    }else if(empty($sort)) {
+       $sel = array(
+          ['coupons.valid_until','>=',$now],
+          ['type','=','coupon-global'],
+          ['coupons.kodekupon','LIKE','%'.$value.'%']
+       );
+
+      #AUTO GENERATE LOGIC
+       $auto = array(
+          ['user_id','=',$userid],
+          ['valid_until','>=',$now],
+          ['kodekupon','LIKE','%'.$value.'%']
+       );
+
+       #OTHER
+       $other = array(
+          ['type','=','other'],
+          ['valid_until','>=',$now],
+          ['kodekupon','LIKE','%'.$value.'%']
+       );
+    } else if($sort ==2) {
+      $sel = array(
+          ['coupons.valid_until','>=',$now],
+          ['type','=','coupon-global'],
+          ['coupons.kodekupon','LIKE','%'.$value.'%']
+      );
+
+      #AUTO GENERATE LOGIC
+       $auto = array(
+          ['user_id','=',$userid],
+          ['valid_until','>=',$now],
+          ['kodekupon','LIKE','%'.$value.'%']
+       );
+
+       #OTHER
+       $other = array(
+          ['type','=','other'],
+          ['valid_until','>=',$now],
+          ['kodekupon','LIKE','%'.$value.'%']
+       );
+      $pos = 'DESC'; 
+    }
+	  
+    # COUPON GLOBAL
+	   $catalogs = Catalogs::where($sel)
+              ->join('coupons','coupons.id','=','catalogs.coupon_id')
+              ->select('catalogs.*','coupons.valid_until','coupons.kodekupon','coupons.user_id')
+              ->orderBy('coupons.valid_until',$pos)
+              ->get();
+
+     if($catalogs->count() > 0)
+     {
+       foreach($catalogs as $rows)
+       {
+          $coupon[] = array(
+            'path'=>$rows->path,
+            'desc'=>$rows->desc,
+            'valid_until'=>$rows->valid_until,
+            'kodekupon'=>$rows->kodekupon,
+            'coupon_url'=>$rows->coupon_url,
+            'type'=>'coupon-global',
+          ); 
+       }
+     }
+
+     #AUTO GENERATE
+     $catalog_ag = Catalogs::where('type','=','auto-generate')->first();
+     $gcoupons = Coupon::where($auto)
+                ->orderBy('valid_until',$pos)
+                ->get();
+
+     if($gcoupons->count() > 0 && !is_null($catalog_ag))
+     {
+       foreach($gcoupons as $rows)
+       {
+          $coupon[] = array(
+            'path'=>$catalog_ag->path,
+            'desc'=>$catalog_ag->desc,
+            'coupon_url'=>$catalog_ag->coupon_url,
+            'valid_until'=>$rows->valid_until,
+            'kodekupon'=>$rows->kodekupon,
+            'type'=>'auto-generate'
+          ); 
+       }
+     }
+
+     #OTHER
+     $catalog_ot = Catalogs::where($other)
+                ->orderBy('valid_until',$pos)
+                ->get();
+
+     if($catalog_ot->count() > 0)
+     {
+        foreach($catalog_ot as $rows)
+        {
+            $coupon[] = array(
+            'path'=>$rows->path,
+            'desc'=>$rows->desc,
+            'valid_until'=>$rows->valid_until,
+            'kodekupon'=>$rows->kodekupon,
+            'coupon_url'=>$rows->coupon_url,
+            'type'=>'other'
+          ); 
+        }
+     }
+
+    if(count($coupon) > 0)
     {
-      foreach($catalogs as $rows)
+      foreach($coupon as $rows)
       {
-        $valid_until = Carbon::parse($rows->valid_until);
+        $valid_until = Carbon::parse($rows['valid_until']);
         $totalDuration = $now->diffInSeconds($valid_until,false);
 
         if($totalDuration <= 0) {
@@ -141,19 +266,27 @@ class CouponController extends Controller
           $end_period = gmdate('H:i:s',$zerotime);
         }
         else {
-          $end_period = gmdate('H:i:s', $totalDuration);
+          $convert_time = gmdate('H:i:s', $totalDuration);
+          $hour = round($totalDuration/3600);
+          $breaktime = explode(':',$convert_time);
+          $breaktime[0] = $hour;
+          $end_period = implode(":",$breaktime);
         }
 
         $data[] = array(
-          'path'=>$rows->path,
-          'desc'=>$rows->desc,
+          'path'=>$rows['path'],
+          'desc'=>$rows['desc'],
           'valid_until'=>$end_period,
-          'kodekupon'=>$rows->kodekupon
+          'kodekupon'=>$rows['kodekupon'],
+          'coupon_url'=>$rows['coupon_url'],
+          'type'=>$rows['type']
         );
       }
     }
-	  
+
     return view('user.coupon.kupon-content',['catalogs'=>$data]);
       
-    }
+}
+
+/**/    
 }
