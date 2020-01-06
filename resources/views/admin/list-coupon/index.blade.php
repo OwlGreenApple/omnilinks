@@ -306,6 +306,10 @@
                 <option value="all">All</option>
                 <option value="new">New</option>
                 <option value="extend">Extend</option>
+                <option value="package-elite-2">Package Elite 2</option>
+                <option value="package-elite-3">Package Elite 3</option>
+                <option value="package-elite-5">Package Elite 5</option>
+                <option value="package-elite-7">Package Elite 7</option>
               </select>
             </div>
           </div>
