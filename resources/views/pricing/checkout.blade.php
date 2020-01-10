@@ -1,5 +1,16 @@
 @extends('layouts.app')
 @section('content')
+<?php 
+  use App\Coupon;
+  $showPackage = false;
+  $coupon = Coupon::where('kodekupon',$id)
+            ->first();
+  if (!is_null($coupon)){
+    if(($coupon->valid_to=='') || ($coupon->valid_to=='expired-membership') || ($coupon->valid_to=='all') ){
+      $showPackage = true;
+    }
+  }
+?>
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
 <div class="container" style="margin-top:50px; margin-bottom:100px">
@@ -28,7 +39,7 @@
                 <div class="col-12 col-md-12">
                   <label class="text" for="formGroupExampleInput">Pilih Paket:</label>
                   <select class="form-control" name="idpaket" id="select-auto-manage">
-                    @if(substr($id,0,7) <> "special") 
+                    @if($showPackage) 
                       @if($type=="normal-package")
                         <!--
                         <option class="" data-price="155000" data-paket="Pro Monthly" value="1" <?php if ($id==1) echo "selected" ; ?>>
@@ -209,7 +220,8 @@
   $(document).ready(function() {
     <?php 
     // if (is_numeric($id)){
-    if(substr($id,0,7) <> "special") {
+    // if(substr($id,0,7) <> "special") {
+    if($showPackage){
     ?>
       $( "#select-auto-manage" ).change(function() {
         var price = $(this).find("option:selected").attr("data-price");
@@ -217,7 +229,7 @@
 
         $("#price").val(price);
         $("#namapaket").val(namapaket);
-        $('#kupon').val("");
+        // $('#kupon').val("");
         check_kupon();
       });
       $( "#select-auto-manage" ).change();
