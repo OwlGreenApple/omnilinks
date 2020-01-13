@@ -795,7 +795,6 @@ class DashboardController extends Controller
   
     $emaildata = [
       'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
-      'email' => $user->email,
       'user' => $user,
     ];
     Mail::to($user->email)->send(new ResendConfirmEmail($emaildata));

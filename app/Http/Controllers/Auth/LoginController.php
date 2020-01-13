@@ -47,7 +47,7 @@ class LoginController extends Controller
           $user = User::where("email","=",$data->email)->first();
           if (!is_null($user)) {
             // Check customer email and status
-            if (!$user->status){
+            // if (!$user->status){
               // Check Verification Code
               if ($user->confirm_code == $data->confirm_code){
                // $reg_date = Carbon::createFromFormat('Y-m-d H:i:s', $data->register_time);
@@ -60,10 +60,10 @@ class LoginController extends Controller
               else{
                 return redirect(404);
               }
-            }
-            else{
-              return redirect(404);
-            }
+            // }
+            // else{
+              // return redirect(404);
+            // }
           }
           else{
             return redirect(404);
