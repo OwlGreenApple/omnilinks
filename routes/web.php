@@ -49,7 +49,7 @@ if(env('DOMAIN_TYPE')=='main'){
   //auth
   Route::post('post-register', 'Auth\RegisterController@post_register');
   Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
-  Route::get('/verifyemail/{cryptedcode}','HomeController@verifyemail');
+  // Route::get('/verifyemail/{cryptedcode}','HomeController@verifyemail');
   Route::get('/thankyou-register','OrderController@thankyou_register');
   Route::get('/thankyou-confirm-payment','OrderController@thankyou_confirm_payment');
   // Route::get('/home', 'HomeController@index')->name('home');
