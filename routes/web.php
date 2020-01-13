@@ -49,7 +49,7 @@ if(env('DOMAIN_TYPE')=='main'){
   //auth
   Route::post('post-register', 'Auth\RegisterController@post_register');
   Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
-  Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
+  Route::get('/verifyemail/{cryptedcode}','HomeController@verifyemail');
   Route::get('/thankyou-register','OrderController@thankyou_register');
   Route::get('/thankyou-confirm-payment','OrderController@thankyou_confirm_payment');
   // Route::get('/home', 'HomeController@index')->name('home');
@@ -65,13 +65,13 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/thankyou','OrderController@thankyou');
 
   Route::group(['middleware' => ['web','auth']], function () {
-    Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
+    Route::get('/verifyemail/{cryptedcode}','HomeController@verifyemail');
     //coupon 
     Route::get('/coupon-available','CouponController@coupon_available');
 	
-	//Kupon
-	Route::get('kupon','CouponController@kupon')->name('kupon');
-	Route::get('catalog-content','CouponController@kupon_content');
+    //Kupon
+    Route::get('kupon','CouponController@kupon')->name('kupon');
+    Route::get('catalog-content','CouponController@kupon_content');
     
     //Ads Pricing 
     Route::get('/ads-pricing','AdsController@ads_pricing');
