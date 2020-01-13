@@ -305,6 +305,7 @@ class RegisterController extends Controller
     
       $emaildata = [
         'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
+        'email' => $arrRet['user']->email,
         'user' => $arrRet['user'],
         // 'password' => $request->password,
         'password' => $password,
