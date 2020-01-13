@@ -128,7 +128,12 @@ class HomeController extends Controller
                   $user->is_confirm = 1;
                   $user->save();
                   
-                  return redirect('/login')->with("success","Welcome to Omnilinks! Thank you for confirming your e-mail address Now you can access your profile.");  
+                  if(Auth::check()){
+                    return redirect('/dashboard')->with("success","Welcome to Omnilinks! Thank you for confirming your e-mail address Now you can access your profile.");
+                  }
+                  else {
+                    return redirect('/login')->with("success","Welcome to Omnilinks! Thank you for confirming your e-mail address Now you can access your profile.");
+                  }
               }
               else{
                 return redirect(404);
