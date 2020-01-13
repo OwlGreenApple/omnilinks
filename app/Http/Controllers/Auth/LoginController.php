@@ -44,7 +44,7 @@ class LoginController extends Controller
         try {
           $decryptedcode = Crypt::decrypt($cryptedcode);
           $data = json_decode($decryptedcode);
-          $user = User::where("email","=",$data->user)->first();
+          $user = User::where("email","=",$data->user->email)->first();
           if (!is_null($user)) {
             // Check customer email and status
             if (!$user->status){
