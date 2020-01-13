@@ -65,6 +65,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/thankyou','OrderController@thankyou');
 
   Route::group(['middleware' => ['web','auth']], function () {
+    Route::get('/verifyemail/{cryptedcode}','Auth\LoginController@verifyemail');
     //coupon 
     Route::get('/coupon-available','CouponController@coupon_available');
 	
