@@ -8,7 +8,7 @@ use App\User;
 use App\CustomerActivwa;
 use App\ReminderCustomer;
 
-use Crypt, Carbon;
+use Crypt, Carbon, Auth;
 
 class HomeController extends Controller
 {
