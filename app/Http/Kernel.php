@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'thisadmin'=>\App\Http\Middleware\thisadmin::class,
         'checkwa'=>\App\Http\Middleware\CheckWANumber::class,
         'catalogvalid'=>\App\Http\Middleware\CatalogValidation::class,
+        'wachat'=>\App\Http\Middleware\CheckWAChatSettings::class,
     ];
 
     /**

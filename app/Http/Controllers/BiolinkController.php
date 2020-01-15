@@ -52,8 +52,6 @@ class BiolinkController extends Controller
       $arr['message'] = $validator->errors()->first();
       return $arr;
     }
-
-
     
     if(is_null($request->editidwa))
     {
@@ -1437,6 +1435,41 @@ class BiolinkController extends Controller
         break;
       }
       return $image_contents;
+  }
+
+  #SAVE WA CHAT
+  public function savewaChat(Request $request)
+  {
+      $userid = Auth::id();
+      $enable_chat = $request->enable_chat;  
+      ($enable_chat == 'on')?$enable_chat = 1: $enable_chat =0;
+
+      $buzz_btn = $request->buzz_btn;  
+      ($buzz_btn == 'on')?$buzz_btn = 1: $buzz_btn =0;
+
+      $wa_btn_text = $request->wa_btn_text;  
+      $wa_header = $request->wa_header; 
+      $uuid = $request->uuid;
+
+      $data = array(
+        'enable_chat'=>$enable_chat,
+        'buzz_btn'=>$buzz_btn,
+        'wa_btn_text'=>$wa_btn_text,
+        'wa_header'=>$wa_header,
+      );
+
+      $update = Page::where([['uid','=',$uuid],['user_id','=',$userid]])->update($data);
+
+      if($update)
+      {
+        $response['status'] = 'success';
+        $response['message'] = 'WA Chat setting telah disimpan';
+      }
+      else {
+        $response['status'] = "error";
+        $response['message'] = 'WA Chat setting gagal disimpan';
+      }
+      return response()->json($response);
   }
 
 /* end class */  

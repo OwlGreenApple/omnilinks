@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="{{asset('css/redirect.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.css')}}">
 
   <title>Link</title>
 </head>
@@ -1543,6 +1545,72 @@ and add more";
       </div>
     @endif  
   @endif
+
+  <!-- Whatsapp chat popup -->
+  @if($pages->enable_chat == 1)
+  <div class="whatsapp_chat_support wcs_fixed_right" id="example">
+    <!--<div class="wcs_button_label">
+        Questions? Let's Chat
+    </div>  
+    <div class="wcs_button wcs_button_circle">
+        <span class="fa fa-whatsapp"></span>
+    </div>  -->
+     <div class="wcs_button">
+        <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+     </div>  
+ 
+    <div class="wcs_popup"> 
+        <div class="wcs_popup_header">
+            {{$pages->wa_header}}
+            <!--<strong>Need Help? Chat with us</strong>
+            <br>
+            <div class="wcs_popup_header_description">Click one of our representatives below</div>
+          -->
+        </div>  
+        <div class="wcs_popup_person_container">
+            <div 
+                class="wcs_popup_person" 
+                data-number="+528261708604"
+                data-availability='{ "monday":"08:30-18:30", "tuesday":"08:30-18:30", "wednesday":"08:30-18:30", "thursday":"08:30-18:30", "friday":"08:30-18:30" }'
+            >
+                <div class="wcs_popup_person_img"><img src="img/person_5.jpg" alt=""></div>
+                <div class="wcs_popup_person_content">
+                    <div class="wcs_popup_person_name">Mia Smith</div>
+                    <div class="wcs_popup_person_description">Sales Support</div>
+                    <div class="wcs_popup_person_status">I'm Online</div>
+                </div>  
+            </div>
+ 
+            <div 
+                class="wcs_popup_person" 
+                data-number="+528261708604"
+                data-availability='{ "monday":"08:30-18:30", "tuesday":"08:30-18:30", "wednesday":"08:30-18:30", "thursday":"08:30-18:30", "friday":"08:30-18:30" }'
+            >
+                <div class="wcs_popup_person_img"><img src="img/person_6.jpg" alt=""></div>
+                <div class="wcs_popup_person_content">
+                    <div class="wcs_popup_person_name">James Brown</div>
+                    <div class="wcs_popup_person_description">Customer Support</div>
+                    <div class="wcs_popup_person_status">I'm Online</div>
+                </div>
+            </div>
+ 
+            <div 
+                class="wcs_popup_person" 
+                data-number="+528261708604"
+                data-availability='{ "monday":"08:30-18:30", "tuesday":"08:30-18:30", "wednesday":"08:30-18:30", "thursday":"08:30-18:30", "friday":"08:30-18:30" }'
+            >
+                <div class="wcs_popup_person_img"><img src="img/person_7.jpg" alt=""></div>
+                <div class="wcs_popup_person_content">
+                    <div class="wcs_popup_person_name">Robert Miller</div>
+                    <div class="wcs_popup_person_description">Techincal Support</div>
+                    <div class="wcs_popup_person_status">I'm Online</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+@endif
+
   
   <!--Loading Bar-->
   <div class="div-loading">
@@ -1552,6 +1620,16 @@ and add more";
   </div> 
 
 <script src="{{asset('js/myScript.js')}}"></script>
+<script src="{{asset('assets/whatsapp-chat-support/components/moment/moment.min.js')}}"></script>
+<script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
+<script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
+
+@if($pages->enable_chat == 1)
+<script type="text/javascript">
+  $('#example').whatsappChatSupport();
+</script>
+@endif
+
 <script type="text/javascript">
 
   //SCALE BANNER IMAGE

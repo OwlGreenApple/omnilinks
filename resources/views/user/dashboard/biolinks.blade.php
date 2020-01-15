@@ -2045,6 +2045,12 @@
                 <a href="#walink" class="nav-link link" role="tab" data-toggle="tab">
                   WA Link Creator
                 </a>
+              </li> 
+
+              <li class="nav-item">
+                <a href="#wachat" class="nav-link link" role="tab" data-toggle="tab">
+                  WA Chat
+                </a>
               </li>
 
             </ul>
@@ -2984,6 +2990,142 @@ and add more";
                 </form>
 
               </div>
+
+              <!-- TAB 5-->
+              <div role="tabpanel" class="tab-pane fade in active show" id="wachat">
+                <form method="post" id="savewa" action="{{url('save-link')}}" novalidate>
+                  {{ csrf_field() }}
+                  <input type="hidden" name="uuid" value="{{$uuid}}">
+
+                  <p class="blue-txt">
+                    Chat Settings
+                  </p>
+                      
+                  <!-- enable button -->
+                  <div class="row mb-2">
+                    <div class="col-md-2 col-3">
+                      <label class="switch">
+                        <input type="checkbox" name="enable_chat" @if($pages->enable_chat == 1) checked @endif />
+                        <span class="slider round"></span>
+                      </label>
+                      
+                    </div>
+                    <div class="col-md-4 col-4">
+                      <label class="caption">
+                        Enable Chat
+                        <span class="tooltipstered" title="<div class='panel-heading'>Enable Chat</div><div class='panel-content'>Menampilkan WA chat link</div>">
+                          <i class="fas fa-question-circle icon-reflink"></i>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- buzz button -->
+                  <div class="row mb-2">
+                      <div class="col-md-2 col-3">
+                        <label class="switch">
+                          <input type="checkbox" name="buzz_btn" class="rounded" @if($pages->buzz_btn == 1) checked @endif>
+                          <span class="slider round"></span>
+                        </label>
+                        
+                      </div>
+                      <div class="col-md-4 col-4">
+                        <label class="caption">
+                          Buzz Button
+                          <span class="tooltipstered" title="<div class='panel-heading'>Buzz Button</div><div class='panel-content'>Memberikan efek buzz atau getaran</div>">
+                            <i class="fas fa-question-circle icon-reflink"></i>
+                          </span>
+                        </label>
+                      </div>
+                  </div>
+
+                   <!-- wa button -->
+                  <div class="row mb-2">
+                      <div class="col-md-4 col-3">
+                          <input type="text" class="form-control" name="wa_btn_text" value="{{$pages->wa_btn_text}}" />
+                      </div>
+
+                      <div class="col-md-4 col-4">
+                        <label class="caption">
+                          WA Button Text
+                          <span class="tooltipstered" title="<div class='panel-heading'>Wa Button Text</div><div class='panel-content'>Mengganti text pada tombol wa</div>">
+                            <i class="fas fa-question-circle icon-reflink"></i>
+                          </span>
+                        </label>
+                      </div>
+                  </div>
+
+                   <!-- wa header -->
+                  <div class="row mb-2">
+                      <div class="col-md-4 col-3">
+                          <textarea class="form-control" name="wa_header">{{$pages->wa_header}}</textarea>
+                      </div>
+
+                      <div class="col-md-4 col-4">
+                        <label class="caption">
+                          WA Header Text
+                          <span class="tooltipstered" title="<div class='panel-heading'>WA Header Text</div><div class='panel-content'>Mengganti text pada header WA chat</div>">
+                            <i class="fas fa-question-circle icon-reflink"></i>
+                          </span>
+                        </label>
+                      </div>
+                  </div>
+
+                  <!--Links
+                  <label class="mb-3 blue-txt">
+                    WA chat settings
+                  </label>
+                  <label class="switch" style="margin-left:33px;margin-right:15px;">
+                    <input type="checkbox" name="enable-chat" />
+                    <span class="slider round"></span>
+                  </label>
+                  <label class="caption">
+                    Enable Chat
+                  </label>
+                  <button type="button" class="float-right btn btn-primary btn-sm" id="addlink">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <br>
+
+                  <div class="row">
+                    <div class="col-md-2 col-3">
+                    </div>
+                    <div class="col-md-4 col-4">
+                    </div>
+                    <div class="col-md-4 col-4">
+                    </div>
+                  </div>
+                  
+                  <div class="mb-5">
+                    <ul class="sortable-link a">
+                      
+                    </ul>
+                  </div>-->
+
+                  <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
+                    <button type="button" id="btn-save-wa-chat" class="btn btn-primary btn-block btn-biolinks">
+                      SAVE
+                    </button>
+                  </div>
+
+                  <div class="menu-mobile">
+                    <div class="row btn-mobile">
+                      <div class="col-6 pl-0 pr-0">
+                        <button type="button" class="btn btn-default btn-block btn-preview">
+                          PREVIEW
+                        </button>
+                      </div>
+                      <div class="col-6 pl-0 pr-0">
+                        <button type="button" class="btn btn-primary btn-block btn-save-preview btn-save-link">
+                          SAVE
+                        </button>  
+                      </div>
+                    </div>  
+                  </div>
+                  
+                </form>
+              </div>
+
             </div>
           </div>
         </div>
@@ -3468,6 +3610,61 @@ and add more";
   $(window).on('load', function(){
      resize();
   });
+
+ $(document).ready(function(){
+    $('body').on('click','#btn-save-wa-chat',function(){
+      wachatSettings();
+    })
+ });
+
+ //SAVE ALL DATA FROM TAB 5
+  function wachatSettings() {
+    var data = $("#savewa").serialize();
+    $.ajax({
+      type: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'json',
+      data: data,
+      url: "{{route('savewachat')}}",
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      statusCode: {
+        419: function() { 
+          window.location.href = "<?php echo url('/login');?>"; //or what ever is your login URI 
+        }
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        $(window).scrollTop(0);
+        $("#pesanAlert").html(result.message);
+        $("#pesanAlert").show();
+        if (result.status == "success") {
+          $("#pesanAlert").addClass("alert-success");
+          $("#pesanAlert").removeClass("alert-danger");
+        
+          changed = 0;
+          changelink = 0;
+          refreshwa();
+          loadLinkBio();
+          refreshpixel();
+          return true;
+        } 
+        else 
+        {
+           $("#pesanAlert").addClass("alert-danger");
+           $("#pesanAlert").removeClass("alert-success");
+           return false;
+        }
+      }
+    });
+  }
 
   function resize()
   {
@@ -4456,10 +4653,6 @@ and add more";
     
       $col = 0;
       $count_3 = 0;
-      
-      
-      
-      
       
       $counter = 1;
       foreach($arr as $data){
