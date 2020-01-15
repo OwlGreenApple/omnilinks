@@ -3,6 +3,9 @@
 <?php 
   use App\Coupon;
   $showPackage = false;
+  if (is_numeric($id)){
+    $showPackage = true;
+  }
   $coupon = Coupon::where('kodekupon',$id)
             ->first();
   if (!is_null($coupon)){
