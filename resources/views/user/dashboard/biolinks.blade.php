@@ -2047,12 +2047,13 @@
                 </a>
               </li> 
 
+			<!--
               <li class="nav-item">
                 <a href="#wachat" class="nav-link link" role="tab" data-toggle="tab">
                   WA Chat
                 </a>
               </li>
-
+				-->
             </ul>
 
             <div class="tab-content">
