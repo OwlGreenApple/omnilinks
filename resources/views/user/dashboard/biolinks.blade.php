@@ -2993,7 +2993,7 @@ and add more";
               </div>
 
               <!-- TAB 5-->
-              <div role="tabpanel" class="tab-pane fade in active show" id="wachat">
+              <!--<div role="tabpanel" class="tab-pane fade in active show" id="wachat">
                 <form method="post" id="savewa" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
                   <input type="hidden" name="uuid" value="{{$uuid}}">
@@ -3002,7 +3002,7 @@ and add more";
                     Chat Settings
                   </p>
                       
-                  <!-- enable button -->
+                  <!-- enable button 
                   <div class="row mb-2">
                     <div class="col-md-2 col-3">
                       <label class="switch">
@@ -3021,7 +3021,7 @@ and add more";
                     </div>
                   </div>
 
-                  <!-- buzz button -->
+                  <!-- buzz button 
                   <div class="row mb-2">
                       <div class="col-md-2 col-3">
                         <label class="switch">
@@ -3040,7 +3040,7 @@ and add more";
                       </div>
                   </div>
 
-                   <!-- wa button -->
+                   <!-- wa button 
                   <div class="row mb-2">
                       <div class="col-md-4 col-3">
                           <input type="text" class="form-control" name="wa_btn_text" value="{{$pages->wa_btn_text}}" />
@@ -3056,7 +3056,7 @@ and add more";
                       </div>
                   </div>
 
-                   <!-- wa header -->
+                   <!-- wa header 
                   <div class="row mb-2">
                       <div class="col-md-4 col-3">
                           <textarea class="form-control" name="wa_header">{{$pages->wa_header}}</textarea>
@@ -3125,7 +3125,7 @@ and add more";
                   </div>
                   
                 </form>
-              </div>
+              </div>-->
 
             </div>
           </div>
