@@ -3101,13 +3101,13 @@ and add more";
                     <ul class="sortable-link a">
                       
                     </ul>
-                  </div>-->
+                  </div>
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-wa-chat" class="btn btn-primary btn-block btn-biolinks">
                       SAVE
                     </button>
-                  </div>
+                  </div>-->
 
                   <div class="menu-mobile">
                     <div class="row btn-mobile">
