@@ -48,8 +48,8 @@ class CheckMembership extends Command
      */
     public function handle()
     {
-      // $users = User::All();
-      $users = User::where('id',3)->get();
+      $users = User::All();
+      // $users = User::where('id',3)->get();
 
       foreach ($users as $user) {
         $now = Carbon::now();

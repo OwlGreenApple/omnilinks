@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CheckMembership::class,
+        Commands\NotifOrderUser::class,
         Commands\DeletePage::class,
     ];
 
@@ -25,7 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('check:membership')->dailyAt('00:00');
+        $schedule->command('check:membership')->dailyAt('07:00');
+        $schedule->command('notif:orderuser')->dailyAt('08:00');
         $schedule->command('delete:page')->dailyAt('00:00');
     }
 
