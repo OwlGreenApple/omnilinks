@@ -1,6 +1,6 @@
 Halo {{$user->name}},<br>
 <br>
-Ini adalah email pengingat bahwa [Name] memiliki pembelian Omnilinkz yang belum terbayar, silahkan cek data berikut<br>
+Ini adalah email pengingat bahwa {{$user->name}} memiliki pembelian Omnilinkz yang belum terbayar, silahkan cek data berikut<br>
 No Order        : {{$order->no_order}} <br>
 Package         : {{$order->package}} <br>
 Harga           : Rp. {{number_format($order->total)}} <br>
