@@ -51,6 +51,7 @@ class NotifOrderUser extends Command
       $orders = Order::
                 where("is_notif_1",0)
                 ->orWhere("is_notif_2",0)
+                ->where('status',"<>",2)
                 ->get();
       // $users = User::where('id',3)->get();
 
