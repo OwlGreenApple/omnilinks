@@ -42,8 +42,8 @@ class ExpiredMembershipMail extends Mailable
                   ->view('emails.expired-membership.notif-1')
                   ->with([
                     'user'=>$this->user,
-                  ])
-                  ->with($this->user->email);
+                  ]);
+                  // ->with($this->user->email);
       }
       if ($this->interval==1){
         $coupon = $this->create_coupon();
@@ -54,8 +54,8 @@ class ExpiredMembershipMail extends Mailable
                     'user'=>$this->user,
                     'coupon'=>$coupon,
                     'days_coupon'=>3,
-                  ])
-                  ->with($this->user->email);
+                  ]);
+                  // ->with($this->user->email);
       }
       if ($this->interval==-1){
         $coupon = Coupon::where('user_id',$this->user->id)
@@ -71,8 +71,8 @@ class ExpiredMembershipMail extends Mailable
                   ->with([
                     'user'=>$this->user,
                     'coupon'=>$coupon,
-                  ])
-                  ->with($this->user->email);
+                  ]);
+                  // ->with($this->user->email);
       }
     }
 
