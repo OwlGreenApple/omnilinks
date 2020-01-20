@@ -7,8 +7,11 @@
 <link rel="stylesheet" href="{{asset('css/theme.css')}}">
 <link rel="stylesheet" href="{{asset('css/animate.css')}}">
 <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
+<link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.css')}}">
+
 
 <style type="text/css">
+
   @media screen and (max-width: 768px) {
     .menu-nomobile{
       display: none;
@@ -26,11 +29,17 @@
   .themes.selected, .wallpapers.selected{
     border: 3px solid #0062CC;
   }
+
+   .wcs_fixed_right {
+        bottom: -70px !important;
+    }
+
 </style>
 
 <script type="text/javascript">
   var template;
   var changelink = 0;
+  var changechat = 0;
   var templates = [
     {
      "id": 1,
@@ -1243,6 +1252,7 @@
         if(data.status == "success") {
           changed = 0;
           changelink = 0;
+          changechat = 0;
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
         }
@@ -1293,6 +1303,7 @@
           // });
           changed = 0;
           changelink = 0;
+          changechat = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
@@ -2047,13 +2058,12 @@
                 </a>
               </li> 
 
-			<!--
               <li class="nav-item">
                 <a href="#wachat" class="nav-link link" role="tab" data-toggle="tab">
                   WA Chat
                 </a>
               </li>
-				-->
+
             </ul>
 
             <div class="tab-content">
@@ -2993,20 +3003,24 @@ and add more";
               </div>
 
               <!-- TAB 5-->
-              <!--<div role="tabpanel" class="tab-pane fade in active show" id="wachat">
+              <div role="tabpanel" class="tab-pane fade in" id="wachat">
                 <form method="post" id="savewa" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
                   <input type="hidden" name="uuid" value="{{$uuid}}">
 
-                  <p class="blue-txt">
+                  <label class="mb-3 blue-txt">
                     Chat Settings
-                  </p>
+                  </label>
+                  <button type="button" class="mt-1 float-right btn btn-primary btn-sm chat_register">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <div class="clearfix"></div>
                       
-                  <!-- enable button 
+                  <!-- enable button -->
                   <div class="row mb-2">
                     <div class="col-md-2 col-3">
                       <label class="switch">
-                        <input type="checkbox" name="enable_chat" @if($pages->enable_chat == 1) checked @endif />
+                        <input class="enable_closest" type="checkbox" name="enable_chat" @if($pages->enable_chat == 1) checked @endif />
                         <span class="slider round"></span>
                       </label>
                       
@@ -3021,11 +3035,11 @@ and add more";
                     </div>
                   </div>
 
-                  <!-- buzz button 
+                  <!-- buzz button -->
                   <div class="row mb-2">
                       <div class="col-md-2 col-3">
                         <label class="switch">
-                          <input type="checkbox" name="buzz_btn" class="rounded" @if($pages->buzz_btn == 1) checked @endif>
+                          <input type="checkbox" class="enable_closest" name="buzz_btn" class="rounded" @if($pages->buzz_btn == 1) checked @endif>
                           <span class="slider round"></span>
                         </label>
                         
@@ -3040,13 +3054,18 @@ and add more";
                       </div>
                   </div>
 
-                   <!-- wa button 
+                   <!-- wa button -->
                   <div class="row mb-2">
-                      <div class="col-md-4 col-3">
+                      <div class="col-md-8">
                           <input type="text" class="form-control" name="wa_btn_text" value="{{$pages->wa_btn_text}}" />
                       </div>
 
-                      <div class="col-md-4 col-4">
+                      <div class="col-md-4 row">
+                         <!-- IF NEED STYLING JUST OPEN THIS REMARK
+                         <a class="btn btn-success textbold">Bold</a>
+                         <a class="btn btn-success texttalic">Italic</a>
+                       -->
+
                         <label class="caption">
                           WA Button Text
                           <span class="tooltipstered" title="<div class='panel-heading'>Wa Button Text</div><div class='panel-content'>Mengganti text pada tombol wa</div>">
@@ -3056,13 +3075,13 @@ and add more";
                       </div>
                   </div>
 
-                   <!-- wa header 
+                   <!-- wa header -->
                   <div class="row mb-2">
-                      <div class="col-md-4 col-3">
+                      <div class="col-md-8">
                           <textarea class="form-control" name="wa_header">{{$pages->wa_header}}</textarea>
                       </div>
 
-                      <div class="col-md-4 col-4">
+                      <div class="col-md-4 row">
                         <label class="caption">
                           WA Header Text
                           <span class="tooltipstered" title="<div class='panel-heading'>WA Header Text</div><div class='panel-content'>Mengganti text pada header WA chat</div>">
@@ -3072,42 +3091,19 @@ and add more";
                       </div>
                   </div>
 
-                  <!--Links
-                  <label class="mb-3 blue-txt">
-                    WA chat settings
+                  <label class="mb-3 mt-3 blue-txt">
+                    Chat Members
                   </label>
-                  <label class="switch" style="margin-left:33px;margin-right:15px;">
-                    <input type="checkbox" name="enable-chat" />
-                    <span class="slider round"></span>
-                  </label>
-                  <label class="caption">
-                    Enable Chat
-                  </label>
-                  <button type="button" class="float-right btn btn-primary btn-sm" id="addlink">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                  <br>
 
-                  <div class="row">
-                    <div class="col-md-2 col-3">
-                    </div>
-                    <div class="col-md-4 col-4">
-                    </div>
-                    <div class="col-md-4 col-4">
-                    </div>
-                  </div>
-                  
-                  <div class="mb-5">
-                    <ul class="sortable-link a">
-                      
-                    </ul>
-                  </div>
+                  <!-- wa members -->
+                  <div id="wa_chat_member_data"><!-- --></div>
+                  <!-- end wa members -->
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-wa-chat" class="btn btn-primary btn-block btn-biolinks">
                       SAVE
                     </button>
-                  </div>-->
+                  </div>
 
                   <div class="menu-mobile">
                     <div class="row btn-mobile">
@@ -3131,6 +3127,7 @@ and add more";
           </div>
         </div>
       </div>
+
       <!--phone-->
       <div class="col-md-5">
         <div class="fixed">
@@ -3166,6 +3163,7 @@ and add more";
                     </div>
                   </header>
 
+                  <!-- banner -->
                   @if(Auth::user()->membership!='free')
                   <div class="col-md-12 fix-image ">
                     <div class="slideshow-container">
@@ -3293,6 +3291,36 @@ and add more";
                       </div>
                     </div>
 
+                    <!-- Whatsapp chat popup -->
+                    <div class="whatsapp_chat_support wcs_fixed_right" id="example">
+                       <div class="wcs_button">
+                          <i class="fab fa-whatsapp"></i>
+                          <span class="wcs_text">{{$pages->wa_btn_text}}</span>
+
+                          <!-- popup -->
+                          <div class="wcs_popup"> 
+                              <div class="wcs_popup_header">
+                                  <span class="wcs_text_header">{!! htmlspecialchars_decode($pages->wa_header) !!}
+                                  </span>
+                              </div>  
+                              <div class="wcs_popup_person_container">
+                                  <div 
+                                      class="wcs_popup_person" 
+                                      data-number="{{$wachat->wa_number}}"
+                                  >
+                                      <div class="wcs_popup_person_img"><img src="{{ Storage::disk('s3')->url($wachat->photo) }}" alt=""></div>
+                                      <div class="wcs_popup_person_content">
+                                          <div class="wcs_popup_person_name">{{$wachat->member_name}}</div>
+                                          <div class="wcs_popup_person_description">{{$wachat->position}}</div>
+                                          <!--<div class="wcs_popup_person_status">I'm Online</div>-->
+                                      </div>  
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end popup -->
+                       </div>  
+                    </div>
+                    <!-- --> 
                 </div>
               </div>
             </div>
@@ -3594,33 +3622,249 @@ and add more";
   </div>
 </div>
 
+<!-- Modal Alert To Prevent Add WA-Chat user more than 5 -->
+<div class="modal fade" id="wa-chat-max" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        Member chat WA maksimal hanya 5
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-primary" data-dismiss="modal">
+          OK
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
+<!-- Modal To Insert chat members -->
+<div class="modal fade" id="wa_chat_member" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="chat_error"><!-- --></div>
+        <form id="chat_member">
+              <div class="form-group">
+                <label>Admin Name:</label>
+                <input class="form-control" name="chat_member_name" placeholder="Masukan Nama" />
+              </div>
+              <div class="form-group">
+                <label>Admin Position:</label>
+                <input class="form-control" name="chat_member_position" placeholder="Masukkan Posisi / Jabatan" />
+              </div>
+              <div class="form-group">
+                <label>Admin WA Number:</label>
+                <input class="form-control" name="chat_member_number" placeholder="Masukkan No WA" />
+                <span>Eg : +628111111</span>
+              </div>
+              <div class="form-group">
+                <label>Photo:</label>
+                <input type="file" class="form-control" name="chat_member_photo" />
+              </div>
+              <input type="hidden" name="uuid" value="{{$uuid}}">
+              <input type="hidden" name="pageid" value="{{$pages->id}}">  
+              <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+      <div class="modal-footer" id="foot">
+        <button class="btn btn-default" data-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+      
+  </div>
+</div>
+
 <!-- count length to determine if script has error -->
 <div style="visibility: hidden" id="error-script"></div>
 
 <script src="{{asset('js/farbtastic.js')}}"></script>
 <script src="{{asset('js/biolinks.js')}}"></script>
 <noscript>Jalankan Javascript di browser anda</noscript>
+
+<script src="{{asset('assets/whatsapp-chat-support/components/moment/moment.min.js')}}"></script>
+<script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
+<script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
+
+@if($pages->enable_chat == 1 && !is_null($wachat))
+<script type="text/javascript">
+  /*DELAY ON KEYUP
+  function delay(callback, ms) {
+    var timer = 0;
+    return function() {
+      var context = this, args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        callback.apply(context, args);
+      }, ms || 0);
+    };
+  } */
+
+  $('#example').whatsappChatSupport();
+
+  function setRightPost(classes) {
+    var ltdefault = 38;
+    var cutwidth = 250;
+    var outerWidth = $(classes).outerWidth(cutwidth+'px');
+    $(classes).css("left", -ltdefault+'px');    
+  }
+
+  //CHANGE TEXT ON WA BUTTON
+  $(function(){
+    fix_center();
+    setRightPost(".wcs_popup");
+
+    $("input[name=wa_btn_text]").on('keypress keyup',function(e){
+      var text = $(this).val();
+      var max = 24; 
+      $(".wcs_text").html(text);
+    
+      if(text.length >= max)
+      {
+          e.preventDefault();
+          alert('Text tombol WA maksimal adalah 24 karakter');
+          text.substring(0,max);
+      }
+      else
+      {
+         fix_center();
+      }
+    });
+
+    $(window).resize(function() {
+        setRightPost(".wcs_popup");   
+    });
+
+    wa_preview_header_text();
+    getSelected();
+  });
+
+  // SET PREVIEW FOR WA HEADER
+  function wa_preview_header_text()
+  {
+    $("textarea[name=wa_header]").on('keypress keyup',function(e){
+      var text = $(this).val();
+      var max = 500; 
+      $(".wcs_text_header").html(text);
+    
+      if(text.length >= max)
+      {
+          e.preventDefault();
+          alert('Maksimal teks header WA adalah 500 karakter');
+          text.substring(0,max);
+      }
+      else
+      {
+         fix_center();
+      }
+    });
+  }
+
+  function getSelected()
+  {
+    $("textarea[name=wa_header]").select(function(e) {
+        var str;
+        var val = $(this).val();
+        var start = e.target.selectionStart;
+        var end = e.target.selectionEnd;
+        var getall = this.value.substring(0, val.length);
+        var sel = this.value.substring(start, end);
+
+        //BOLD
+        $(".textbold").click(function(){
+          str = getall.replace(sel,'<b>'+sel+'</b>');
+          $("textarea[name=wa_header]").val(str);
+        });
+        
+        //ITALIC
+        $(".textitalic").click(function(){
+          str = getall.replace(sel,'<b>'+sel+'</b>');
+          $("textarea[name=wa_header]").val(str);
+        });
+
+
+    });
+  }
+
+  //MAKE WA BUTTON ALWAYS ON CENTER
+  function fix_center(){
+    var screenwidth = $(".screen").width();
+    var containerWidth = $(".wcs_button").outerWidth();
+    var leftMargin = (screenwidth-containerWidth)/2;  
+    $("#example").css("marginLeft", leftMargin);  
+  }
+</script>
+@endif
+
 <script type="text/javascript">
   var elhtml;
   let idpic=6;
   let counterBanner=0;
   var changed = 0;
 
+  $(function(){
+    $('body').on('click','#btn-save-wa-chat',function(){
+      wachatSettings();
+    })
+    open_chat_member_registration();
+    save_chat_member();
+    load_chat_member();
+    delete_chat_member();
+    chat_preview_enable();
+    chat_buzz_enable();
+  });
  
   //SCALE BANNER IMAGE
   $(window).on('load', function(){
      resize();
   });
 
- $(document).ready(function(){
-    $('body').on('click','#btn-save-wa-chat',function(){
-      wachatSettings();
-    })
- });
+ function load_chat_member(){
+    var uid = $("input[name=uuid]").val();
+    var data = '';
+
+    $.ajax({
+       type: 'GET',
+       url : "{{route('getwachat')}}",
+       dataType: 'json',
+       data : {'uid' : uid},
+       success: function(result) {
+          for(i=0;i<result.length;i++)
+          {
+              data +=  '<div class="row mb-4 chat-list">';
+              data +=  '<div class="col-md-11 row">';
+
+              data +=  '<div class="col-md-3">Name</div>';
+              data +=  '<div class="col-md-9 mb-2"><input name="member_name['+result[i].id+']" value="'+result[i].name+'" class="form-control" /></div>';
+              data +=  '<div class="col-md-3">Position</div>';
+              data +=  '<div class="col-md-9 mb-2"><input name="position['+result[i].id+']" value="'+result[i].position+'" class="form-control" /></div>';
+              data +=  '<div class="col-md-3">WA_number</div>';
+              data +=  '<div class="col-md-9 mb-2"><input name="wa_number['+result[i].id+']" value="'+result[i].wa_number+'" class="form-control" /></div>';
+              data +=  '<div class="col-md-3">Photo</div>';
+              data +=  '<div class="col-md-9 mb-2"><input name="photo['+result[i].id+']" type="file" value="'+result[i].photo+'" class="form-control" /></div>';
+
+              data +=  '</div>'; //close col-md-10
+
+              data +=  '<div class="col-md-1"><a class="del_chat_member" id="'+result[i].id+'"><i class="far fa-trash-alt"></i></a>';
+              data +=  '</div>'; //col-md-2
+
+              data +=  '</div>'; //close row mb-4
+          }
+          $("#wa_chat_member_data").html(data);
+       }
+    });
+ }
 
  //SAVE ALL DATA FROM TAB 5
   function wachatSettings() {
-    var data = $("#savewa").serialize();
+    var getdata = document.getElementById('savewa');
+    var data = new FormData(getdata);
+
     $.ajax({
       type: 'POST',
       headers: {
@@ -3629,11 +3873,14 @@ and add more";
       dataType: 'json',
       data: data,
       url: "{{route('savewachat')}}",
+      cache:false,
+      contentType: false,
+      processData: false,
       beforeSend: function()
       {
         $('#loader').show();
         $('.div-loading').addClass('background-load');
-      },
+      }, 
       statusCode: {
         419: function() { 
           window.location.href = "<?php echo url('/login');?>"; //or what ever is your login URI 
@@ -3652,9 +3899,11 @@ and add more";
         
           changed = 0;
           changelink = 0;
+          changechat = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
+          load_chat_member();
           return true;
         } 
         else 
@@ -3665,6 +3914,182 @@ and add more";
         }
       }
     });
+  }
+
+  // TO DISPLAY CHAT PREVIEW 
+  function chat_preview_enable()
+  {
+    var check = $("input[name=enable_chat]").prop("checked");
+    if(check == true)
+    {
+        $("#example").show();
+    }
+    else
+    {
+        $("#example").hide();
+    }
+
+    $("body").on("click","input[name=enable_chat]",function(){
+        if($(this).prop("checked") == true){
+          $("#example").show();
+        }else{
+          $("#example").hide();
+        }
+    });
+  }
+
+  function chat_buzz_enable()
+  {
+    var check = $("input[name=buzz_btn]").prop("checked");
+    if(check == true)
+    {
+        $("#example").addClass('service');
+        $(".wcs_button").addClass('animate-buzz');
+    }
+    else
+    {
+        $("#example").removeClass('service');
+        $(".wcs_button").removeClass('animate-buzz');
+    }
+
+    $("body").on("click","input[name=buzz_btn]",function(){
+        if($(this).prop("checked") == true){
+          $("#example").addClass('service');
+          $(".wcs_button").addClass('animate-buzz');
+        }else{
+          $("#example").removeClass('service');
+          $(".wcs_button").removeClass('animate-buzz');
+        }
+    });
+  }
+
+  function open_chat_member_registration()
+  {
+    $("body").on("click",".chat_register",function(){
+      var len = $(".chat-list").length;
+      if(len == 5)
+      {
+        $("#wa-chat-max").modal();
+      }
+      else 
+      {
+        $("#wa_chat_member").modal();
+      }
+      
+    });
+  }
+
+  //SAVE WA MEMBER
+  function save_chat_member()
+  {
+    $("#chat_member").submit(function(e){
+      e.preventDefault();
+      var formData = new FormData(this);
+
+      $.ajax({ 
+        type: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        cache:false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        url: "{{route('savewachatmember')}}",
+        dataType: 'json',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          if (result.status == "success") {
+            $("#pesanAlert").html(result.message);
+            $("#pesanAlert").show();
+
+            $("#pesanAlert").addClass("alert-success");
+            $("#pesanAlert").removeClass("alert-danger");
+            $(window).scrollTop(0);
+
+            $("#wa_chat_member").modal('toggle');
+            $("#chat_member :input").val('');
+            
+            changed = 0;
+            changelink = 0;
+            changechat = 0;
+            refreshwa();
+            loadLinkBio();
+            refreshpixel();
+            load_chat_member();
+            return true;
+          } 
+          else 
+          {
+             $(".chat_error").addClass("alert alert-danger");
+             $(".chat_error").html(result.message);
+             return false;
+          }
+        }
+      })//ajax closing
+
+    });
+  }
+
+  function delete_chat_member()
+  {
+      $("body").on("click",".del_chat_member",function(){
+        var id = $(this).attr('id');
+        var conf = confirm('Apakah yakin mau menghapus?');
+
+        if(conf == true)
+        {
+           $.ajax({
+            type: 'GET',
+            data: {'id' : id},
+            url: "{{route('delwachatmember')}}",
+            dataType: 'json',
+            beforeSend: function()
+            {
+              $('#loader').show();
+              $('.div-loading').addClass('background-load');
+            },
+            success : function(result) {
+               $('#loader').hide();
+               $('.div-loading').removeClass('background-load');
+
+               $(window).scrollTop(0);
+               $("#pesanAlert").html(result.message);
+               $("#pesanAlert").show();
+
+               if(result.status == "success") {
+                  $("#pesanAlert").addClass("alert-success");
+                  $("#pesanAlert").removeClass("alert-danger");
+                  changed = 0;
+                  changelink = 0;
+                  changechat = 0;
+                  refreshwa();
+                  loadLinkBio();
+                  refreshpixel();
+                  load_chat_member();
+                  return true;
+                } else {
+                  $("#pesanAlert").addClass("alert-danger");
+                  $("#pesanAlert").removeClass("alert-success");
+                  return false;
+                }
+            }
+          });
+          //
+        }
+        else
+        {
+          return false;
+        }
+
+      });
   }
 
   function resize()
@@ -3685,6 +4110,7 @@ and add more";
    $( ":input" ).change(function() {
       changed = $(this).closest('#saveTemplate').data('changed', true);
       changelink = $(this).closest('#savelink').data('changed', true);
+      changechat = $(this).closest('#savewa').data('changed', true);
     });
 
    $("#addlink, #tambah, #sm, .cell-btn, #addBanner").click(function()
@@ -3698,7 +4124,7 @@ and add more";
 
   $("body").on("click",".link",function()
   {
-     if(changed > 0 ||changed.length > 0 || changelink.length > 0)
+     if(changed > 0 ||changed.length > 0 || changelink.length > 0 || changechat.length > 0)
      {
         $("#unsave").modal();
         return false;
@@ -3707,9 +4133,23 @@ and add more";
 
   //..
   
+  //.. TO DETERMINE PREVIEW AND MOVE PREVIEW ELEMENT
   $('body').on('click', '.btn-preview', function() {
-    $('.preview-mobile').html($('.mobile1').html());
-    $('.preview-mobile').toggleClass('preview-none');
+    //$('.preview-mobile').html($('.mobile1').html());
+    var checkclass = $('.preview-mobile').hasClass('preview-none');
+
+    if(checkclass == true)
+    {
+        $('.preview-mobile').prepend($('.screen'));
+        $('.preview-mobile').toggleClass('preview-none');
+    }
+    else
+    {
+        $('.preview-mobile').toggleClass('preview-none');
+        $('.mobile1').prepend($('.screen'));
+
+    }
+    fix_center();
     resize();
   });
 

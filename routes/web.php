@@ -120,6 +120,9 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/banner/load-banner','BiolinkController@addBanner');
     Route::post('/save-link','BiolinkController@savelink');
     Route::post('/savewachat','BiolinkController@savewaChat')->middleware('wachat')->name('savewachat');
+    Route::post('savewachatmember','BiolinkController@savewaChatMember')->middleware('wamember')->name('savewachatmember');
+    Route::get('getwachat','BiolinkController@loadWAChatMembers')->name('getwachat');
+    Route::get('delwachatmember','BiolinkController@delWAChatMembers')->name('delwachatmember');
     Route::get('/delete-photo','BiolinkController@delete_photo');
     Route::get('/load-pixel-page','BiolinkController@pixelpage');
     Route::get('/link-bio','BiolinkController@loadLinkBio');

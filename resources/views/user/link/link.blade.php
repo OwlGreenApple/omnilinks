@@ -1547,21 +1547,21 @@ and add more";
   @endif
 
   <!-- Whatsapp chat popup -->
-  @if($pages->enable_chat == 1)
-  <div class="whatsapp_chat_support wcs_fixed_right" id="example">
+  @if($pages->enable_chat == 1 && !is_null($wachat))
+  <div class="whatsapp_chat_support wcs_fixed_right @if($pages->buzz_btn == 1) service @endif" id="example">
     <!--<div class="wcs_button_label">
         Questions? Let's Chat
     </div>  
     <div class="wcs_button wcs_button_circle">
         <span class="fa fa-whatsapp"></span>
     </div>  -->
-     <div class="wcs_button">
+     <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
         <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
      </div>  
  
     <div class="wcs_popup"> 
         <div class="wcs_popup_header">
-            {{$pages->wa_header}}
+           {!! htmlspecialchars_decode($pages->wa_header) !!}
             <!--<strong>Need Help? Chat with us</strong>
             <br>
             <div class="wcs_popup_header_description">Click one of our representatives below</div>
@@ -1570,31 +1570,17 @@ and add more";
         <div class="wcs_popup_person_container">
             <div 
                 class="wcs_popup_person" 
-                data-number="+528261708604"
-                data-availability='{ "monday":"08:30-18:30", "tuesday":"08:30-18:30", "wednesday":"08:30-18:30", "thursday":"08:30-18:30", "friday":"08:30-18:30" }'
+                data-number="{{$wachat->wa_number}}"
             >
-                <div class="wcs_popup_person_img"><img src="img/person_5.jpg" alt=""></div>
+                <div class="wcs_popup_person_img"><img src="{{ Storage::disk('s3')->url($wachat->photo) }}" alt=""></div>
                 <div class="wcs_popup_person_content">
-                    <div class="wcs_popup_person_name">Mia Smith</div>
-                    <div class="wcs_popup_person_description">Sales Support</div>
-                    <div class="wcs_popup_person_status">I'm Online</div>
+                    <div class="wcs_popup_person_name">{{$wachat->member_name}}</div>
+                    <div class="wcs_popup_person_description">{{$wachat->position}}</div>
+                    <!--<div class="wcs_popup_person_status">I'm Online</div>-->
                 </div>  
             </div>
  
-            <div 
-                class="wcs_popup_person" 
-                data-number="+528261708604"
-                data-availability='{ "monday":"08:30-18:30", "tuesday":"08:30-18:30", "wednesday":"08:30-18:30", "thursday":"08:30-18:30", "friday":"08:30-18:30" }'
-            >
-                <div class="wcs_popup_person_img"><img src="img/person_6.jpg" alt=""></div>
-                <div class="wcs_popup_person_content">
-                    <div class="wcs_popup_person_name">James Brown</div>
-                    <div class="wcs_popup_person_description">Customer Support</div>
-                    <div class="wcs_popup_person_status">I'm Online</div>
-                </div>
-            </div>
- 
-            <div 
+            <!--<div 
                 class="wcs_popup_person" 
                 data-number="+528261708604"
                 data-availability='{ "monday":"08:30-18:30", "tuesday":"08:30-18:30", "wednesday":"08:30-18:30", "thursday":"08:30-18:30", "friday":"08:30-18:30" }'
@@ -1606,8 +1592,10 @@ and add more";
                     <div class="wcs_popup_person_status">I'm Online</div>
                 </div>
             </div>
+          -->
         </div>
     </div>
+
 </div>  
 @endif
 
@@ -1624,11 +1612,43 @@ and add more";
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
 
-@if($pages->enable_chat == 1)
+@if($pages->enable_chat == 1 && !is_null($wachat))
 <script type="text/javascript">
   $('#example').whatsappChatSupport();
 </script>
 @endif
+
+<script type="text/javascript">
+ //MAKE WA BUTTON TO ALWAYS ON CENTER
+ function setMargins(classes) {
+    width = $(window).width(); 
+    containerWidth = $(classes).width();  
+    leftMargin = (width-containerWidth)/2;    
+    $(classes).css("marginLeft", leftMargin);    
+}
+
+function setRightPost(classes) {
+  var outerWidth = $(classes).outerWidth();
+  var ltdefault = 40;
+  var gtdefault = 60;
+  console.log(outerWidth);
+  if(outerWidth < 300)
+  {
+    $(classes).css("left", -ltdefault+'px');    
+  } else {
+    $(classes).css("left", -gtdefault+'px');    
+  }
+}
+
+$(document).ready(function() {
+    setRightPost(".wcs_popup");
+    setMargins(".wcs_fixed_right");
+    $(window).resize(function() {
+        setMargins(".wcs_fixed_right"); 
+        setRightPost(".wcs_popup");   
+    });
+});
+</script>
 
 <script type="text/javascript">
 

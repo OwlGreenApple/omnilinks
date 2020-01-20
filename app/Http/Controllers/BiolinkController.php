@@ -8,6 +8,7 @@ use App\Banner;
 use App\Ads;
 use App\AdsHistory;
 use App\Whatsapplink;
+use App\WAChatMember as wachat;
 use App\Console\Commands\CropProfileImage;
 
 use App\Helpers\Helper;
@@ -15,7 +16,7 @@ use App\Mail\NotifClickFreeUser;
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
-use Auth,Carbon,Validator,Storage,Mail;
+use Auth,Carbon,Validator,Storage,Mail,DB;
 use Ramsey\Uuid\Uuid;
 
 class BiolinkController extends Controller
@@ -200,7 +201,21 @@ class BiolinkController extends Controller
   	if(!is_null($page)){
   		$pageid=$page->id;
   	}
-    
+
+    #wachat member
+    $chatdata = array();
+    $getwachat = wachat::where('pages_id','=',$page->id)->select('id')->get();
+    if($getwachat->count() > 0)
+    {
+        foreach($getwachat as $rows)
+        {
+            $chatdata[] = $rows->id;
+        }
+    }
+
+    $random_keys = array_rand($chatdata);
+    $wachat = wachat::where([['pages_id','=',$page->id],['id','=',$chatdata[$random_keys]]])->first();
+
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
       'pages'=>$page,
@@ -208,6 +223,7 @@ class BiolinkController extends Controller
       'banner'=>$banner,
       'links'=>$links,
       'user'=>$user,
+      'wachat'=>$wachat
     ]);  
   }
   
@@ -298,6 +314,19 @@ class BiolinkController extends Controller
         $ads = null;
       }
       
+      #wachat member
+      $chatdata = array();
+      $getwachat = wachat::where('pages_id','=',$page->id)->select('id')->get();
+      if($getwachat->count() > 0)
+      {
+          foreach($getwachat as $rows)
+          {
+              $chatdata[] = $rows->id;
+          }
+      }
+
+      $random_keys = array_rand($chatdata);
+      $wachat = wachat::where([['pages_id','=',$page->id],['id','=',$chatdata[$random_keys]]])->first();
 
       return view('user.link.link')
               ->with('pages',$page)
@@ -308,7 +337,9 @@ class BiolinkController extends Controller
               ->with('sort_msg',$sort_msg)
               ->with('sort_link',$sort_link)
               ->with('sort_sosmed',$sort_sosmed)
-              ->with('ads',$ads);
+              ->with('ads',$ads)
+              ->with('wachat',$wachat)
+              ;
     }
   }
 
@@ -988,7 +1019,6 @@ class BiolinkController extends Controller
   public function test(Request $request)
   {
      return view('checkjs',['data'=>$request->script]);
-
   }
 
   public function savepixel(Request $request)
@@ -1458,17 +1488,247 @@ class BiolinkController extends Controller
         'wa_header'=>$wa_header,
       );
 
-      $update = Page::where([['uid','=',$uuid],['user_id','=',$userid]])->update($data);
+      # --- WACHAT MEMBERS ---
 
-      if($update)
+      $chat['name'] = $request->member_name;
+      $chat['position'] = $request->position;
+      $chat['wa_number'] = $request->wa_number;
+      $chat['photo'] = $request->photo;
+
+      #member_name
+      if(!empty($chat['name']))
       {
+        foreach($chat['name'] as $id=>$name)
+        {
+           if(!empty($name))
+           {
+              try {
+                  wachat::where('id','=',$id)->update(['member_name'=>$name]);
+              } catch (\Illuminate\Database\QueryException $e) {
+                   $response['status'] = "error";
+                   $response['message'] = 'Perhatian! Tidak dapat mengubah nama';
+                  return response()->json($response);
+              }
+           }
+        }
+      }
+
+      #position
+      if(!empty($chat['position']))
+      {
+        foreach($chat['position'] as $id=>$position)
+        {
+           if(!empty($position))
+           {
+              try {
+                  wachat::where('id','=',$id)->update(['position'=>$position]);
+              } catch (\Illuminate\Database\QueryException $e) {
+                   $response['status'] = "error";
+                   $response['message'] = 'Perhatian! Tidak dapat mengubah posisi / jabatan';
+                  return response()->json($response);
+              }
+           }
+        }
+      }
+
+      #wa_number
+      if(!empty($chat['wa_number']))
+      {
+        foreach($chat['wa_number'] as $id=>$wa_number)
+        {
+           if(!empty($wa_number))
+           {
+              try {
+                  wachat::where('id','=',$id)->update(['wa_number'=>$wa_number]);
+              } catch (\Illuminate\Database\QueryException $e) {
+                  $response['status'] = "error";
+                  $response['message'] = 'Perhatian! Tidak dapat mengubah no WA';
+                  return response()->json($response);
+              }
+           }
+        }
+      }
+
+      #photo
+      if(env('APP_ENV') == 'local')
+      {
+        $dir = 'wa_chat_member_test';
+      }
+      else
+      {
+        $dir = 'wa_chat_member';
+      }
+
+      if(!empty($chat['photo']))
+      {
+        foreach($chat['photo'] as $id=>$photo)
+        {
+            #get photo name and path from database
+            $getphotoname = wachat::where('id','=',$id)->select('photo')->first();
+            if(!is_null($getphotoname))
+            {
+                $photopath = explode('/',$getphotoname->photo);
+                $filename = $photopath[1];
+                $path = $dir."/".$filename;
+                
+                #get uploaded photo from user
+                $arr_size = getimagesize($photo);
+                $imagewidth = $arr_size[0];
+
+                if($imagewidth > 100)
+                {
+                  $imageUpload = $this->resizeImage($photo,100,100);
+                }
+                else
+                {
+                  $imageUpload = file_get_contents($photo);
+                }
+
+                try {
+                   Storage::disk('s3')->put($path, $imageUpload, 'public');
+                } catch (Exception $e) {
+                    $response['status'] = "error";
+                    $response['message'] = 'Perhatian! Tidak dapat mengubah foto';
+                    return response()->json($response);
+                }
+                
+            }
+        }
+      }
+
+      #if all of data passed and then..
+      try {
+          Page::where([['uid','=',$uuid],['user_id','=',$userid]])->update($data);
+          $response['status'] = 'success';
+          $response['message'] = 'WA Chat setting telah disimpan';
+      } catch (\Illuminate\Database\QueryException $e) {
+          $response['status'] = "error";
+          $response['message'] = 'WA Chat setting gagal disimpan';
+      }
+
+      return response()->json($response);
+  }
+
+  #SAVE WA CHAT MEMBER
+  public function savewaChatMember(Request $request)
+  {
+    $dt = Carbon::now();
+    $member_name = $request->chat_member_name;
+    $position = $request->chat_member_position;
+    $wa_number = $request->chat_member_number;
+    $page_id = $request->pageid;
+    $uid = $request->uuid;
+    $photo = $request->file('chat_member_photo');
+    $image_extension = $photo->getClientOriginalExtension();
+
+    $arr_size = getimagesize($request->file('chat_member_photo'));
+    $imagewidth = $arr_size[0];
+    $imageheight = $arr_size[1];
+
+    if(env('APP_ENV') == 'local')
+    {
+      $dir = 'wa_chat_member_test';
+    }
+    else
+    {
+      $dir = 'wa_chat_member';
+    }
+
+    if($imagewidth > 100)
+    {
+      $imageUpload = $this->resizeImage($photo,100,100);
+    }
+    else
+    {
+      $imageUpload = file_get_contents($photo);
+    }
+
+    $chat = new wachat;
+    $chat->user_id = Auth::id();
+    $chat->uid = $uid;
+    $chat->pages_id = $page_id;
+    $chat->member_name = $member_name;
+    $chat->position = $position;
+    $chat->wa_number = $wa_number;
+
+    $statement = DB::select("SHOW TABLE STATUS LIKE 'wa_chat_members'");
+    $photo_id = $statement[0]->Auto_increment;
+
+    $filename = $dt->format('ymdHi').'-'.$photo_id.'.'.$image_extension;
+    $path = $dir."/".$filename;
+
+    $chat->photo = $path;
+    $chat->save();
+
+    if($chat->save())
+    {
+        Storage::disk('s3')->put($path, $imageUpload, 'public');
         $response['status'] = 'success';
-        $response['message'] = 'WA Chat setting telah disimpan';
+        $response['message'] = 'Data member telah disimpan';
+    }
+    else
+    {
+        $response['status'] = false;
+        $response['message'] = 'Data member gagal disimpan';
+    }
+    return response()->json($response);
+  }
+
+
+  #LOAD WA CHAT MEMBERS
+  public function loadWAChatMembers(Request $request)
+  {
+      $user_id = Auth::id();
+      $uid = $request->uid;
+      $data = array();
+
+      $member = wachat::where([['user_id','=',$user_id],['uid','=',$uid]])->get();
+
+      if($member->count() > 0)
+      {
+          foreach($member as $rows)
+          {
+              $data[] = array(
+                'id'=>$rows->id,
+                'name'=>$rows->member_name,
+                'position'=>$rows->position,
+                'wa_number'=>$rows->wa_number,
+                'photo'=>$rows->photo
+              );
+          }
       }
-      else {
+
+      return response()->json($data);
+  }
+
+  #DELETE WA CHAT MEMBER
+  public function delWAChatMembers(Request $request)
+  {
+      $userid = Auth::id();
+      $id = $request->id;
+      $getpath = wachat::where([['id','=',$id],['user_id','=',$userid]])->first();
+
+      if(is_null($getpath))
+      {
         $response['status'] = "error";
-        $response['message'] = 'WA Chat setting gagal disimpan';
+        $response['message'] = 'Member tidak terdaftar, silahkan reload browser anda';
+        return response()->json($response);
       }
+      else
+      {
+        $path = $getpath->photo;
+      }
+
+      try {
+          Storage::disk('s3')->delete($path);
+          wachat::where([['id','=',$id],['user_id','=',$userid]])->delete();
+          $response['status'] = 'success';
+          $response['message'] = 'Data member telah dihapus';
+      } catch (\Illuminate\Database\QueryException $e) {
+          $response['status'] = "error";
+          $response['message'] = 'Data member gagal dihapus';
+      }
+
       return response()->json($response);
   }
 

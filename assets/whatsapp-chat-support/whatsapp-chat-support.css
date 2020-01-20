@@ -101,7 +101,7 @@
         z-index: 999;
         position: fixed;
         bottom: 20px;
-        right: 20px;
+        /*right: 20px;*/
     }
 
     .wcs_fixed_left{
@@ -241,12 +241,13 @@
 
     .wcs_popup{
         position: absolute;
+        z-index: 999;
         width: 300px;
         bottom: 100%;
-        right: 0;
         margin-bottom: 20px;
         visibility: hidden;
         max-width: calc(100vw - 60px);
+        /*right: 0;*/
     }
 
     /* CLOSE */
@@ -892,4 +893,29 @@
     .wcs_debug strong{
         width: 125px;
         display: inline-block;
+    }
+
+/* ====================================================================== *
+        [H] FIX
+ * ====================================================================== */  
+
+
+    @font-face { 
+      font-family: opensansbold; 
+      src: url("../../fonts/OpenSans-Bold.ttf");
+    } 
+
+    .wcs_text, .wcs_text_header {
+        color : #fff !important;
+    }
+
+    b {
+        font-family : opensansbold;
+    }
+
+    @media screen and (max-width: 768px) {
+        .wcs_fixed_right
+        {
+            bottom : 50px !important;
+        }    
     }

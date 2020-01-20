@@ -156,6 +156,10 @@ table tr:nth-child(even) td {
   animation: spin 2s linear infinite;
 }
 
+.del_chat_member, .del_chat_member > i {
+  cursor : pointer;
+}
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
