@@ -194,10 +194,30 @@
               <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
+            @if($user->membership=="popular")
+              <span class="text-success header-status-account">
+                <i class="fas fa-trophy"></i>
+                Popular Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
             @if($user->membership=="elite")
               <span class="txt-elite header-status-account">
                 <i class="fas fa-star"></i>
                 Elite Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
+            @if($user->membership=="super")
+              <span class="txt-elite header-status-account">
+                <i class="fas fa-star"></i>
+                Super Account
               </span>
               <br>
               <span class="content-status-account">
@@ -240,10 +260,30 @@
               <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
+            @if($user->membership=="popular")
+              <span class="text-success header-status-account">
+                <i class="fas fa-trophy"></i>
+                Popular Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
             @if($user->membership=="elite")
               <span class="txt-elite header-status-account">
                 <i class="fas fa-star"></i>
                 Elite Account
+              </span>
+              <br>
+              <span class="content-status-account">
+              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              </span>
+            @endif
+            @if($user->membership=="super")
+              <span class="txt-elite header-status-account">
+                <i class="fas fa-star"></i>
+                Super Account
               </span>
               <br>
               <span class="content-status-account">

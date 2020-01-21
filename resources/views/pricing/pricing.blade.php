@@ -323,6 +323,8 @@
           <li>Unlimited Respon Klik</li>
           <li>Unlimited FB, Twitter,Google</li>
           <li>Retargeting</li>
+          <li>Background Animation</li>
+          <li>WA Chat</li>
           <li>Custom Bio Link</li>
           <li>Support by Live Chat & Email</li>
           <li>Bio Link Bebas Iklan</li>
@@ -335,6 +337,8 @@
           <li>Unlimited Respon Klik</li>
           <li>Unlimited FB, Twitter,Google</li>
           <li>Retargeting</li>
+          <li>Background Animation</li>
+          <li>WA Chat</li>
           <li>Custom Bio Link</li>
           <li>Support by Live Chat & Email</li>
           <li>Bio Link Bebas Iklan</li>
