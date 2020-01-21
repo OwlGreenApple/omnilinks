@@ -1170,7 +1170,8 @@
   <body class="{{$pages->wallpaper}}"> <!--style="height : 100vh;"-->
 @elseif(!is_null($pages->gif_template) && ( ($membership=='elite') || ($membership=='super') ) )
   <body class="{{$pages->gif_template}}"> <!--style="height : 100vh;"-->
-@elseif($membership=='free')
+<!--@elseif($membership=='free')-->
+@else
   <body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a "><!--height : 100vh;-->
 @endif
 
