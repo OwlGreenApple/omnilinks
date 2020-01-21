@@ -100,7 +100,7 @@
     .wcs_fixed_right{
         z-index: 999;
         position: fixed;
-        bottom: 20px;
+        bottom: 30px;
         /*right: 20px;*/
     }
 
@@ -916,6 +916,7 @@
     @media screen and (max-width: 768px) {
         .wcs_fixed_right
         {
+            position: fixed !important;
             bottom : 50px !important;
         }    
     }

@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
 <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.css')}}">
 
-
 <style type="text/css">
 
   @media screen and (max-width: 768px) {
@@ -30,10 +29,10 @@
     border: 3px solid #0062CC;
   }
 
-   .wcs_fixed_right {
-        bottom: -70px !important;
-    }
-
+  .wcs_fixed_right{
+    position: absolute;
+    bottom : 30px;
+  }
 </style>
 
 <script type="text/javascript">
@@ -3292,8 +3291,9 @@ and add more";
                     </div>
 
                     <!-- Whatsapp chat popup -->
+                    @if(!is_null($wachat) && !is_null($pages))
                     <div class="whatsapp_chat_support wcs_fixed_right" id="example">
-                       <div class="wcs_button">
+                        <div class="wcs_button">
                           <i class="fab fa-whatsapp"></i>
                           <span class="wcs_text">{{$pages->wa_btn_text}}</span>
 
@@ -3317,9 +3317,10 @@ and add more";
                                   </div>
                               </div>
                           </div>
-                          <!-- end popup -->
-                       </div>  
+                            <!-- end popup -->
+                        </div>  
                     </div>
+                    @endif
                     <!-- --> 
                 </div>
               </div>
@@ -3691,7 +3692,7 @@ and add more";
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
 
-@if($pages->enable_chat == 1 && !is_null($wachat))
+@if($pages->enable_chat == 1)
 <script type="text/javascript">
   /*DELAY ON KEYUP
   function delay(callback, ms) {
@@ -3705,29 +3706,24 @@ and add more";
     };
   } */
 
-  $('#example').whatsappChatSupport();
+  $("#example").whatsappChatSupport();
 
-  function setRightPost(classes) {
-    var ltdefault = 38;
-    var cutwidth = 250;
-    var outerWidth = $(classes).outerWidth(cutwidth+'px');
-    $(classes).css("left", -ltdefault+'px');    
-  }
-
-  //CHANGE TEXT ON WA BUTTON
   $(function(){
     fix_center();
     setRightPost(".wcs_popup");
 
+    //CHANGE TEXT ON WA BUTTON
     $("input[name=wa_btn_text]").on('keypress keyup',function(e){
       var text = $(this).val();
       var max = 24; 
       $(".wcs_text").html(text);
     
+      console.log(text);
+
       if(text.length >= max)
       {
           e.preventDefault();
-          alert('Text tombol WA maksimal adalah 24 karakter');
+          alert('Maksimal text tombol WA adalah 24 karakter');
           text.substring(0,max);
       }
       else
@@ -3742,7 +3738,26 @@ and add more";
 
     wa_preview_header_text();
     getSelected();
+    //getwachatbutton();
   });
+
+  function setRightPost(classes) {
+    var ltdefault = 38;
+    var cutwidth = 250;
+    var outerWidth = $(classes).outerWidth(cutwidth+'px');
+    $(classes).css("left", -ltdefault+'px');    
+  }
+
+   function getwachatbutton(){
+    $.ajax({
+      type : 'GET',
+      url : '{{url("getwachatbutton")}}/{{$pages->id}}',
+      dataType : 'html',
+      success : function(result){
+        $("#example").html(result);
+      }
+    });
+  };
 
   // SET PREVIEW FOR WA HEADER
   function wa_preview_header_text()
@@ -4015,16 +4030,8 @@ and add more";
             $(window).scrollTop(0);
 
             $("#wa_chat_member").modal('toggle');
-            $("#chat_member :input").val('');
-            
-            changed = 0;
-            changelink = 0;
-            changechat = 0;
-            refreshwa();
-            loadLinkBio();
-            refreshpixel();
-            load_chat_member();
-            return true;
+            //$("#chat_member :input").val('');
+            location.reload(true);
           } 
           else 
           {
@@ -4042,6 +4049,7 @@ and add more";
   {
       $("body").on("click",".del_chat_member",function(){
         var id = $(this).attr('id');
+        var len = $(".chat-list").length;
         var conf = confirm('Apakah yakin mau menghapus?');
 
         if(conf == true)
@@ -4067,14 +4075,8 @@ and add more";
                if(result.status == "success") {
                   $("#pesanAlert").addClass("alert-success");
                   $("#pesanAlert").removeClass("alert-danger");
-                  changed = 0;
-                  changelink = 0;
-                  changechat = 0;
-                  refreshwa();
-                  loadLinkBio();
-                  refreshpixel();
-                  load_chat_member();
-                  return true;
+                  location.reload(true);
+                  
                 } else {
                   $("#pesanAlert").addClass("alert-danger");
                   $("#pesanAlert").removeClass("alert-success");

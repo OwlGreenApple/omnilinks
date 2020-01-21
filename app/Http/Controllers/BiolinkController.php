@@ -202,19 +202,8 @@ class BiolinkController extends Controller
   		$pageid=$page->id;
   	}
 
-    #wachat member
-    $chatdata = array();
-    $getwachat = wachat::where('pages_id','=',$page->id)->select('id')->get();
-    if($getwachat->count() > 0)
-    {
-        foreach($getwachat as $rows)
-        {
-            $chatdata[] = $rows->id;
-        }
-    }
-
-    $random_keys = array_rand($chatdata);
-    $wachat = wachat::where([['pages_id','=',$page->id],['id','=',$chatdata[$random_keys]]])->first();
+    #wa chat button
+    $getwachat = $this->getWAchatButton($page->id);
 
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
@@ -223,8 +212,34 @@ class BiolinkController extends Controller
       'banner'=>$banner,
       'links'=>$links,
       'user'=>$user,
-      'wachat'=>$wachat
+      'wachat'=>$getwachat
     ]);  
+  }
+
+  public function getWAchatButton($pageid)
+  {
+      $chatdata = array();
+      $wachat = null;
+
+      $pages = Page::where('id','=',$pageid)->first();
+      $getwachat = wachat::where('pages_id','=',$pageid)->select('id')->get();
+
+      if($getwachat->count() > 0)
+      {
+          foreach($getwachat as $rows)
+          {
+              $chatdata[] = $rows->id;
+          }
+      }
+
+      if(count($chatdata) > 0)
+      {
+        $random_keys = array_rand($chatdata);
+        $wachat = wachat::where([['pages_id','=',$pageid],['id','=',$chatdata[$random_keys]]])->first();
+      }
+    
+      return $wachat;
+      //return view('user.wachat.wachat',['wachat'=>$wachat,'pages'=>$pages]);
   }
   
   public function link($names)
@@ -315,18 +330,7 @@ class BiolinkController extends Controller
       }
       
       #wachat member
-      $chatdata = array();
-      $getwachat = wachat::where('pages_id','=',$page->id)->select('id')->get();
-      if($getwachat->count() > 0)
-      {
-          foreach($getwachat as $rows)
-          {
-              $chatdata[] = $rows->id;
-          }
-      }
-
-      $random_keys = array_rand($chatdata);
-      $wachat = wachat::where([['pages_id','=',$page->id],['id','=',$chatdata[$random_keys]]])->first();
+      $wachat = $this->getWAchatButton($page->id);
 
       return view('user.link.link')
               ->with('pages',$page)
