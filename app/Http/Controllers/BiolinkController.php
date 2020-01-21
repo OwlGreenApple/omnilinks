@@ -204,6 +204,12 @@ class BiolinkController extends Controller
 
     #wa chat button
     $getwachat = $this->getWAchatButton($page->id);
+    $validmember = false;
+
+    if(($user->membership == 'elite') || ($user->membership == 'super'))
+    {
+        $validmember = true;
+    }
 
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
@@ -212,7 +218,8 @@ class BiolinkController extends Controller
       'banner'=>$banner,
       'links'=>$links,
       'user'=>$user,
-      'wachat'=>$getwachat
+      'wachat'=>$getwachat,
+      'valid'=>$validmember
     ]);  
   }
 
@@ -331,6 +338,12 @@ class BiolinkController extends Controller
       
       #wachat member
       $wachat = $this->getWAchatButton($page->id);
+      $validmember = false;
+
+      if(($user->membership == 'elite') || ($user->membership == 'super'))
+      {
+          $validmember = true;
+      }
 
       return view('user.link.link')
               ->with('pages',$page)
@@ -343,6 +356,7 @@ class BiolinkController extends Controller
               ->with('sort_sosmed',$sort_sosmed)
               ->with('ads',$ads)
               ->with('wachat',$wachat)
+              ->with('valid',$validmember)
               ;
     }
   }

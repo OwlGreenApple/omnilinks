@@ -1547,7 +1547,7 @@ and add more";
   @endif
 
   <!-- Whatsapp chat popup -->
-  @if($pages->enable_chat == 1 && !is_null($wachat))
+  @if($pages->enable_chat == 1 && !is_null($wachat) && $valid == true)
   <div class="whatsapp_chat_support wcs_fixed_right @if($pages->buzz_btn == 1) service @endif" id="example">
     <!--<div class="wcs_button_label">
         Questions? Let's Chat

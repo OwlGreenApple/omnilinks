@@ -2057,11 +2057,13 @@
                 </a>
               </li> 
 
+              @if($valid == true)
               <li class="nav-item">
                 <a href="#wachat" class="nav-link link" role="tab" data-toggle="tab">
                   WA Chat
                 </a>
               </li>
+              @endif
 
             </ul>
 
@@ -3291,7 +3293,7 @@ and add more";
                     </div>
 
                     <!-- Whatsapp chat popup -->
-                    @if(!is_null($wachat) && !is_null($pages))
+                    @if(!is_null($wachat) && !is_null($pages) && $valid == true)
                     <div class="whatsapp_chat_support wcs_fixed_right" id="example">
                         <div class="wcs_button">
                           <i class="fab fa-whatsapp"></i>
@@ -3692,7 +3694,6 @@ and add more";
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
 
-@if($pages->enable_chat == 1)
 <script type="text/javascript">
   /*DELAY ON KEYUP
   function delay(callback, ms) {
@@ -3814,7 +3815,6 @@ and add more";
     $("#example").css("marginLeft", leftMargin);  
   }
 </script>
-@endif
 
 <script type="text/javascript">
   var elhtml;
