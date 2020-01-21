@@ -3718,8 +3718,6 @@ and add more";
       var text = $(this).val();
       var max = 24; 
       $(".wcs_text").html(text);
-    
-      console.log(text);
 
       if(text.length >= max)
       {

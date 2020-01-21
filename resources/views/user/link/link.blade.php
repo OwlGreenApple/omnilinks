@@ -1631,7 +1631,7 @@ function setRightPost(classes) {
   var outerWidth = $(classes).outerWidth();
   var ltdefault = 40;
   var gtdefault = 60;
-  console.log(outerWidth);
+
   if(outerWidth < 300)
   {
     $(classes).css("left", -ltdefault+'px');    
