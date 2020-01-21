@@ -1793,7 +1793,7 @@ $(document).ready(function() {
     <?php } ?>
     
     initGallery();
-    @if( ((!is_null($pages->wallpaper))||(!is_null($pages->gif_template))) && ( ($membership=='elite') || ($membership=='super') ) )
+    @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
       res = $("body").attr("class");
       res = res.replace("animation-", "");
       //cek ada ngga di json
