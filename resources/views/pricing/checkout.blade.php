@@ -233,7 +233,7 @@
         $("#price").val(price);
         $("#namapaket").val(namapaket);
         // $('#kupon').val("");
-        check_kupon();
+        // check_kupon();
       });
       $( "#select-auto-manage" ).change();
     <?php } ?>
