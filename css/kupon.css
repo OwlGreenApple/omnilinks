@@ -85,6 +85,14 @@ span {
   background-size: cover;
 }
 
+.clipped {
+  color : #efcf49;
+}
+
+.nostyle {
+  list-style-type: none;
+}
+
 /* KUPON STYLING */
 
 .fix-col {

@@ -283,16 +283,22 @@
 
     <!-- NOTES COLUMN -->
     <div class="col-md-12 notes-wrap">
+          <!-- RESPONSIVE -->
          <div class="col-lg-3 notes-responsive">
           <li>Unlimited Respon Klik</li>
           <li>Unlimited FB, Twitter,Google</li>
           <li>Retargeting</li>
+          <li>Background Animation&nbsp;<i class="fa fa-star fa-lg clipped"></i></li>
+          <li>WA Chat&nbsp;<i class="fa fa-star fa-lg clipped"></i></li>
           <li>Custom Bio Link</li>
           <li>Support by Live Chat & Email</li>
           <li>Bio Link Bebas Iklan</li>
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
+          <li class="nostyle">&nbsp;</li>
+          <li class="nostyle"><i class="fa fa-star fa-lg clipped"></i>&nbsp;:&nbsp;Khusus paket elite dan super</li>
         </div> 
+
       <div class="row ml-0 mr-0">
         <!-- col -1 -->
          <div class="col-lg-3 notes-col">
