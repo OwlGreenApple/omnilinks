@@ -1797,6 +1797,15 @@ $(document).ready(function() {
     @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
       res = $("body").attr("class");
       res = res.replace("animation-", "");
+      //default value 
+      template = {
+        "id": 1,
+        "theme": "wallpaper1",
+        "bio_font_color": "#122B74",
+        "button_color": "#122B74",
+        "font_button_color": "#FFFFFF",
+        "button_hover_color": "#081F66"
+      };
       //cek ada ngga di json
       $.each( templates, function( key, value ) {
         if (res == value.theme) {
