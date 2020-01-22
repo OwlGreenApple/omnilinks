@@ -105,6 +105,10 @@ table tr:nth-child(even) td {
  background-color:#F0F0F0;
 }
 
+.wachattable.table-bordered > thead > tr > th, .wachattable.table-bordered > tbody > tr > td{
+  border:1px solid #d5dade !important;
+}
+
 /* Green button on header */
 .btn-bio {
   background-image: linear-gradient(rgb(7, 165, 10), rgb(7, 165, 10)) !important;
@@ -156,8 +160,14 @@ table tr:nth-child(even) td {
   animation: spin 2s linear infinite;
 }
 
-.del_chat_member, .del_chat_member > i {
+/* WA CHAT */
+
+.del_chat_member, .del_chat_member > i, .edit_wa_member {
   cursor : pointer;
+}
+
+.chat_photo_hide {
+  display : none;
 }
 
 @-webkit-keyframes spin {

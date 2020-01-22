@@ -1636,60 +1636,124 @@ class BiolinkController extends Controller
     $wa_number = $request->chat_member_number;
     $page_id = $request->pageid;
     $uid = $request->uuid;
+    $wa_id = (int)$request->wa_id;
     $photo = $request->file('chat_member_photo');
-    $image_extension = $photo->getClientOriginalExtension();
 
-    $arr_size = getimagesize($request->file('chat_member_photo'));
-    $imagewidth = $arr_size[0];
-    $imageheight = $arr_size[1];
-
-    if(env('APP_ENV') == 'local')
+    if(!empty($photo))
     {
-      $dir = 'wa_chat_member_test';
+      $image_extension = $photo->getClientOriginalExtension();
+      $arr_size = getimagesize($request->file('chat_member_photo'));
+      $imagewidth = $arr_size[0];
+
+      if(env('APP_ENV') == 'local')
+      {
+        $dir = 'wa_chat_member_test';
+      }
+      else
+      {
+        $dir = 'wa_chat_member';
+      }
+
+      if($imagewidth > 100)
+      {
+        $imageUpload = $this->resizeImage($photo,100,100);
+      }
+      else
+      {
+        $imageUpload = file_get_contents($photo);
+      }
+    }
+
+    if(empty($wa_id))
+    {
+      #INSERT DATA
+      $chat = new wachat;
+      $chat->user_id = Auth::id();
+      $chat->uid = $uid;
+      $chat->pages_id = $page_id;
+      $chat->member_name = $member_name;
+      $chat->position = $position;
+      $chat->wa_number = $wa_number;
+
+      $statement = DB::select("SHOW TABLE STATUS LIKE 'wa_chat_members'");
+      $photo_id = $statement[0]->Auto_increment;
+
+      $filename = $dt->format('ymdHi').'-'.$photo_id.'.'.$image_extension;
+      $path = $dir."/".$filename;
+
+      $chat->photo = $path;
+      $chat->save();
+
+      if($chat->save())
+      {
+          Storage::disk('s3')->put($path, $imageUpload, 'public');
+          $response['status'] = 'success';
+          $response['message'] = 'Data member telah disimpan';
+      }
+      else
+      {
+          $response['status'] = false;
+          $response['message'] = 'Data member gagal disimpan';
+      }
+      return response()->json($response);
     }
     else
     {
-      $dir = 'wa_chat_member';
+      #UPDATE DATA
+      $updateerror = false;
+      $updatechat = wachat::where('id','=',$wa_id)->first();
+      $updatepath = $updatechat->photo;
+
+      if(is_null($updatechat))
+      { 
+          $response['status'] = false;
+          $response['message'] = 'Mohon untuk tidak mengedit ID';
+          return response()->json($response);
+      }
+      else
+      {
+         $dataupdate = array(
+            'member_name' => $member_name,
+            'position' => $position,
+            'wa_number' => $wa_number
+         );
+
+         if(!empty($photo))
+         {
+            $dataupdate['photo'] = $updatepath;
+         }
+         
+        try
+        {
+          wachat::where('id','=',$wa_id)->update($dataupdate);
+        } catch(\Illuminate\Database\QueryException $e) {
+          $updateerror = true;
+        }
+
+        if($updateerror == false && !empty($photo))
+        {
+          Storage::disk('s3')->put($updatepath, $imageUpload, 'public');
+          $response['edit'] = 1;
+          $response['status'] = 'success';
+          $response['message'] = 'Data berhasil di edit';
+        }
+        else if($updateerror == false && empty($photo))
+        {
+          $response['edit'] = 1;
+          $response['status'] = 'success';
+          $response['message'] = 'Data berhasil di edit';
+        }
+        else {
+          $response['edit'] = 1;
+          $response['status'] = false;
+          $response['message'] = 'Data gagal di edit';
+        }
+        return response()->json($response);
+      }
+    //..
     }
 
-    if($imagewidth > 100)
-    {
-      $imageUpload = $this->resizeImage($photo,100,100);
-    }
-    else
-    {
-      $imageUpload = file_get_contents($photo);
-    }
-
-    $chat = new wachat;
-    $chat->user_id = Auth::id();
-    $chat->uid = $uid;
-    $chat->pages_id = $page_id;
-    $chat->member_name = $member_name;
-    $chat->position = $position;
-    $chat->wa_number = $wa_number;
-
-    $statement = DB::select("SHOW TABLE STATUS LIKE 'wa_chat_members'");
-    $photo_id = $statement[0]->Auto_increment;
-
-    $filename = $dt->format('ymdHi').'-'.$photo_id.'.'.$image_extension;
-    $path = $dir."/".$filename;
-
-    $chat->photo = $path;
-    $chat->save();
-
-    if($chat->save())
-    {
-        Storage::disk('s3')->put($path, $imageUpload, 'public');
-        $response['status'] = 'success';
-        $response['message'] = 'Data member telah disimpan';
-    }
-    else
-    {
-        $response['status'] = false;
-        $response['message'] = 'Data member gagal disimpan';
-    }
-    return response()->json($response);
+    
   }
 
 
