@@ -1164,9 +1164,9 @@
 
 @if(!is_null($pages->color_picker))
   <body style=" color:#fff; background-color:{{$pages->color_picker}};" class="a "><!--height : 100vh;-->
-@elseif(!is_null($pages->template) && ($membership!=='free') )
+@elseif(!is_null($pages->template)  )
   <body class="{{$pages->template}}"> <!--style="height : 100vh;"--> 
-@elseif(!is_null($pages->wallpaper) && ($membership!=='free') )
+@elseif(!is_null($pages->wallpaper)  )
   <body class="{{$pages->wallpaper}}"> <!--style="height : 100vh;"-->
 @elseif(!is_null($pages->gif_template) && ( ($membership=='elite') || ($membership=='super') ) )
   <body class="{{$pages->gif_template}}"> <!--style="height : 100vh;"-->

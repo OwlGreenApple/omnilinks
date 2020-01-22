@@ -131,6 +131,9 @@ class RegisterController extends Controller
       $order->save();
       
       if($order->grand_total!=0){
+        $user->valid_until = new DateTime('+7 days');
+        $user->save();
+
         $emaildata = [
             'order' => $order,
             'user' => $user,
@@ -143,7 +146,8 @@ class RegisterController extends Controller
           $message->to($user->email);
           $message->subject('[Omnilink] Order Nomor '.$order_number);
         });
-      } else {
+      } 
+      else {
         $order->status = 2;
         $order->save();
         $type="";
@@ -158,13 +162,13 @@ class RegisterController extends Controller
             $valid = $this->add_time($user,"+1 months");
           }
           $type="pro";
-          // $user->membership = 'pro';
+          $user->membership = 'pro';
 
         } 
         else if(substr($order->package,0,7) === "Popular"){
           $valid = $this->add_time($user,"+3 months");
           $type="popular";
-          // $user->membership = 'popular';
+          $user->membership = 'popular';
         }
         else if(substr($order->package,0,5) === "Elite"){
           if($order->package=='Elite Monthly'){
@@ -176,12 +180,12 @@ class RegisterController extends Controller
             $valid = $this->add_time($user,"+6 months");
           }
           $type = "elite";
-          // $user->membership = 'elite';
+          $user->membership = 'elite';
         }
         else if(substr($order->package,0,5) === "Super"){
           $valid = $this->add_time($user,"+12 months");
           $type="super";
-          // $user->membership = 'super';
+          $user->membership = 'super';
         }
 
         if($valid <> null){
@@ -196,18 +200,17 @@ class RegisterController extends Controller
         //$userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$valid->format('Y-m-d h:i:s').')';
         $userlog->save();
 
-        // $user->valid_until = $valid;
+        $user->valid_until = $valid;
+        $user->save();
         // $user->valid_until = new DateTime('+0 days');
-        // $user->save();
+        // $user->valid_until = Carbon::now();
       }
 
     } 
     else {
-      // $user->valid_until = new DateTime('+0 days');
-      // $user->save();
+      $user->valid_until = new DateTime('+7 days');
+      $user->save();
     }
-    $user->valid_until = Carbon::now();
-    $user->save();
 
     // return $user;
     return [
