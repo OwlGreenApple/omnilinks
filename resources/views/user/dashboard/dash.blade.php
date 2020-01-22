@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<?php use App\Helpers\Helper; ?>
+<?php 
+use App\Helpers\Helper; 
+use Carbon;
+?>
 
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/sb-admin.css')}}">
