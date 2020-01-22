@@ -451,7 +451,8 @@ class OrderController extends Controller
         $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to elite('.$valid->format('Y-m-d h:i:s').')';
         $userlog->save();
 
-        $user->valid_until = $valid;
+        // $user->valid_until = $valid;
+        $user->valid_until = new DateTime('+0 days');
         $user->membership = 'elite';
       }
 
@@ -586,7 +587,7 @@ class OrderController extends Controller
     $userlog->user_id = $user->id;
     $userlog->type = 'membership';
     $userlog->value = $type;
-    $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
+    $userlog->keterangan = 'Confirm Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
    // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
     $userlog->save();
 

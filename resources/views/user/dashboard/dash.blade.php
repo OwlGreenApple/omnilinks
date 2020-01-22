@@ -181,7 +181,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ 7 Hari Free.</i> <a href="{{url('pricing')}}">(Upgrade now)</a>
+              <!--<i>~ 7 Hari Free.</i>--> <a href="{{url('pricing')}}">(Upgrade now)</a>
               </span>
             @endif
             @if($user->membership=="pro")
@@ -247,7 +247,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ 7 Hari free.</i> <a href="{{url('pricing')}}">Upgrade</a>
+              <!--<i>~ 7 Hari free.</i>--> <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="pro")
