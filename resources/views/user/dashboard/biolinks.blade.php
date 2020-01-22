@@ -3338,6 +3338,7 @@ and add more";
                                   <div 
                                       class="wcs_popup_person" 
                                       data-number="{{$wachat->wa_number}}"
+                                      data-text = "{{$wachat->wa_text}}"
                                   >
                                       <div class="wcs_popup_person_img"><img src="{{ Storage::disk('s3')->url($wachat->photo) }}" alt=""></div>
                                       <div class="wcs_popup_person_content">
@@ -3690,8 +3691,12 @@ and add more";
               </div>
               <div class="form-group">
                 <label>Admin WA Number:</label>
-                <input class="form-control" name="chat_member_number" placeholder="Masukkan No WA" />
+                <input class="form-control" name="chat_member_number" placeholder="Masukkan No WA" value="+"/>
                 <span>Eg : +628111111</span>
+              </div>
+              <div class="form-group">
+                <label>Admin WA Text:</label>
+                <input class="form-control" name="chat_member_text" />
               </div>
               <div class="form-group">
                 <label>Photo:</label>
@@ -3768,8 +3773,27 @@ and add more";
 
     wa_preview_header_text();
     getSelected();
-    //getwachatbutton();
+    callMaintainPlus();
   });
+
+  function maintainPlus()
+  {
+    var chatnumber = $("input[name=chat_member_number]").val();
+    var check = chatnumber.substring(0,1);
+    
+    if(check !== '+')
+    {
+        var updated = chatnumber.replace(chatnumber,'+'+chatnumber);
+        $("input[name=chat_member_number]").val(updated);
+    }
+  }
+
+  function callMaintainPlus()
+  {
+      $("body").on("keyup","input[name=chat_member_number]",function(){
+          maintainPlus();
+      });
+  }
 
   function setRightPost(classes) {
     var ltdefault = 38;
@@ -3887,7 +3911,7 @@ and add more";
               data +=  '<td>'+no+'</td>';
               data +=  '<td>'+result[i].name+'</td>';
               data +=  '<td>'+result[i].position+'</td>';
-              data +=  '<td class="text-center"><a data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'"class="edit_wa_member" id="'+result[i].id+'"><i class="fas fa-pencil-alt"></i></i></a></td></td>';
+              data +=  '<td class="text-center"><a data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'" data-text="'+result[i].wa_text+'" class="edit_wa_member" id="'+result[i].id+'"><i class="fas fa-pencil-alt"></i></i></a></td></td>';
               data +=  '<td class="text-center"><a class="del_chat_member" id="'+result[i].id+'"><i class="far fa-trash-alt"></i></a></td>';
               data +=  '</tr>';
           }
@@ -4017,6 +4041,7 @@ and add more";
         $(".editrue").html('');
         $("input[name=uuid]").val(uuid);
         $("input[name=pageid]").val(pageid);
+        maintainPlus();
         $("#wa_chat_member").modal();
       }
       
@@ -4034,6 +4059,7 @@ and add more";
       $("input[name=chat_member_name]").val($(this).attr('data-nm'));
       $("input[name=chat_member_position]").val($(this).attr('data-pos'));
       $("input[name=chat_member_number]").val($(this).attr('data-num'));
+      $("input[name=chat_member_text]").val($(this).attr('data-text'));
       $("input[name=uuid]").val(uuid);
       $("input[name=pageid]").val(pageid);
 
@@ -4076,6 +4102,8 @@ and add more";
             $(window).scrollTop(0);
 
             $("#wa_chat_member").modal('toggle');
+            $(".chat_error").removeClass("alert alert-danger");
+            $(".chat_error").html('');
             //$("#chat_member :input").val('');
 
             if(result.edit == 1)
@@ -4097,6 +4125,9 @@ and add more";
           } 
           else 
           {
+             $('#loader').hide();
+             $('.div-loading').removeClass('background-load');
+
              $(".chat_error").addClass("alert alert-danger");
              $(".chat_error").html(result.message);
              return false;

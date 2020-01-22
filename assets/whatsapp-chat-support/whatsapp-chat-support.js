@@ -139,8 +139,8 @@
             var $this = $(this)
 
             if($this.attr('data-number') != undefined && !$this.hasClass('wcs_button_person_offline')){
-                go_to_whatsapp($this.attr('data-number'), settings.defaultMsg);
-            }
+                 go_to_whatsapp($this.attr('data-number'), settings.defaultMsg);
+            } 
         })
 
         /* POPUP CHAT (SINGLE PERSON) */
@@ -163,7 +163,11 @@
 
         popup_persons.on('click', '.wcs_popup_person', function(){
             var $this = $(this);
-            if(!$this.hasClass('wcs_popup_person_offline')){
+            var watext = $this.attr('data-text'); 
+
+            if(!$this.hasClass('wcs_popup_person_offline') && watext !== undefined){
+                go_to_whatsapp($this.attr('data-number'), watext);
+            } else {
                 go_to_whatsapp($this.attr('data-number'), settings.defaultMsg);
             }
         })

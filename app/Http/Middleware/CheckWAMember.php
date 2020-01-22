@@ -28,6 +28,7 @@ class CheckWAMember
         $temp_arr['chat_member_position'] = ['required','max:190' ];
         $temp_arr['uuid'] = ['required'];
         $temp_arr['pageid'] = ['required'];
+        $temp_arr['chat_member_text'] = ['max:190'];
 
          $messages = [
             'required' => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
@@ -59,10 +60,17 @@ class CheckWAMember
             return response()->json($response);
          }
 
+         if(strlen($wa_number) < 10)
+         {
+            $response['status'] = "error";
+            $response['message'] = 'Perhatian! Panjang karakter no WA tidak boleh kurang dari 10 karakter';
+            return response()->json($response);
+         } 
+
          if(strlen($wa_number) > 16)
          {
             $response['status'] = "error";
-            $response['message'] = 'Perhatian! Panjang karakter tidak boleh melebihi 16 karakter';
+            $response['message'] = 'Perhatian! Panjang karakter no WA tidak boleh melebihi 16 karakter';
             return response()->json($response);
          } 
 

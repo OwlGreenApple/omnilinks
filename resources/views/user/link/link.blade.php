@@ -1572,6 +1572,7 @@ and add more";
             <div 
                 class="wcs_popup_person" 
                 data-number="{{$wachat->wa_number}}"
+                data-text = "{{$wachat->wa_text}}"
             >
                 <div class="wcs_popup_person_img"><img src="{{ Storage::disk('s3')->url($wachat->photo) }}" alt=""></div>
                 <div class="wcs_popup_person_content">

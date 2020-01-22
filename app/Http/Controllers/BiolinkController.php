@@ -1635,6 +1635,7 @@ class BiolinkController extends Controller
     $member_name = $request->chat_member_name;
     $position = $request->chat_member_position;
     $wa_number = $request->chat_member_number;
+    $wa_text = $request->chat_member_text;
     $page_id = $request->pageid;
     $uid = $request->uuid;
     $wa_id = (int)$request->wa_id;
@@ -1675,6 +1676,7 @@ class BiolinkController extends Controller
       $chat->member_name = $member_name;
       $chat->position = $position;
       $chat->wa_number = $wa_number;
+      $chat->wa_text = $wa_text;
 
       $statement = DB::select("SHOW TABLE STATUS LIKE 'wa_chat_members'");
       $photo_id = $statement[0]->Auto_increment;
@@ -1716,7 +1718,8 @@ class BiolinkController extends Controller
          $dataupdate = array(
             'member_name' => $member_name,
             'position' => $position,
-            'wa_number' => $wa_number
+            'wa_number' => $wa_number,
+            'wa_text' => $wa_text
          );
 
          if(!empty($photo))
@@ -1752,11 +1755,8 @@ class BiolinkController extends Controller
         return response()->json($response);
       }
     //..
-    }
-
-    
+    } 
   }
-
 
   #LOAD WA CHAT MEMBERS
   public function loadWAChatMembers(Request $request)
@@ -1776,6 +1776,7 @@ class BiolinkController extends Controller
                 'name'=>$rows->member_name,
                 'position'=>$rows->position,
                 'wa_number'=>$rows->wa_number,
+                'wa_text'=>($rows->wa_text == null)?'':$rows->wa_text,
                 'photo'=>$rows->photo
               );
           }
