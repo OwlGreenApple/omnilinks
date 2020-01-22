@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<?php 
-use App\Helpers\Helper; 
-use Carbon;
-?>
+<?php use App\Helpers\Helper; ?>
 
 <link rel="stylesheet" href="{{asset('css/dash.css')}}">
 <link rel="stylesheet" href="{{asset('css/sb-admin.css')}}">
@@ -194,7 +191,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="popular")
@@ -204,7 +201,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="elite")
@@ -214,7 +211,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="super")
@@ -224,7 +221,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             <!-- kupon dashboard 
@@ -260,7 +257,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="popular")
@@ -270,7 +267,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="elite")
@@ -280,7 +277,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="super")
@@ -290,7 +287,7 @@ use Carbon;
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ Valid until <?php echo Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             <!-- kupon dashboard 
