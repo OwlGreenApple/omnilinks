@@ -181,7 +181,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ 7 Hari Free.</i> <a href="{{url('pricing')}}">(Upgrade now)</a>
+              <!--<i>~ 7 Hari Free.</i>--> <a href="{{url('pricing')}}">(Upgrade now)</a>
               </span>
             @endif
             @if($user->membership=="pro")
@@ -191,7 +191,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y'); }?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="popular")
@@ -201,7 +201,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="elite")
@@ -211,7 +211,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="super")
@@ -221,7 +221,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             <!-- kupon dashboard 
@@ -247,7 +247,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ 7 Hari free.</i> <a href="{{url('pricing')}}">Upgrade</a>
+              <!--<i>~ 7 Hari free.</i>--> <a href="{{url('pricing')}}">Upgrade</a>
               </span>
             @endif
             @if($user->membership=="pro")
@@ -257,7 +257,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="popular")
@@ -267,7 +267,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="elite")
@@ -277,7 +277,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="super")
@@ -287,7 +287,7 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ Valid until <?php echo Carbon::parse($user->valid_until)->format('d M Y');?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             <!-- kupon dashboard 
@@ -582,9 +582,15 @@
 
   $(document).ready(function() {
     <?php 
-    $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
-    $dt2 = Carbon::now();
-    if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
+    $check_valid = false;
+    if (!is_null($user->valid_until)) { 
+      $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
+      $dt2 = Carbon::now();
+      if ($dt2->gt($dt1)){
+        $check_valid = true;
+      }
+    }
+    if ( ($user->membership=='free') && $check_valid) {
     ?>
     $('#modal-freetrial-expired').modal({
       backdrop: 'static',
