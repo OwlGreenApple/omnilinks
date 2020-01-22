@@ -16,11 +16,25 @@ class CheckWANumber
     public function handle($request, Closure $next)
     {
         if(!is_numeric($request->wa_number)){
-          return redirect("register")->with("error", " No WA harus angka");
+          // return redirect("register")->with("error", " No WA harus angka");
+          // return redirect("register")->with(array(
+            // "price"=>$request->price,
+            // "namapaket"=>$request->namapaket,
+            // "coupon_code"=>$request->kupon,
+            // "idpaket" => $request->idpaket,
+            // "error" => "No WA harus angka",
+          // ));;
         }
         
         if(!preg_match("/^628+[0-9]/i",$request->wa_number)){
-          return redirect("register")->with("error", " No WA Tidak Valid");
+          // return redirect("register")->with("error", " No WA Tidak Valid");
+          // return redirect("register")->with(array(
+            // "price"=>$request->price,
+            // "namapaket"=>$request->namapaket,
+            // "coupon_code"=>$request->kupon,
+            // "idpaket" => $request->idpaket,
+            // "error" => "No WA Tidak Valid",
+          // ));
         }
         return $next($request);
     }

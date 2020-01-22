@@ -112,7 +112,7 @@
               <div class="form-group row">
                 <label for="wa-number" class="text">{{ __('Masukkan No WA') }}</label>
                 <div class="input-group">
-                  <input id="wa-number" type="text" class="col-md-12 col-12 form-control form-input{{ $errors->has('wa_number') ? ' is-invalid' : '' }}" name="wa_number" placeholder="No WA ex: 6281..." onkeypress="return hanyaAngka(event)" required>
+                  <input id="wa-number" type="text" class="col-md-12 col-12 form-control form-input{{ $errors->has('wa_number') ? ' is-invalid' : '' }}" name="wa_number" placeholder="No WA ex: 62812323...." onkeypress="return hanyaAngka(event)" required>
                   @if ($errors->has('wa_number'))
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('wa_number') }}</strong>

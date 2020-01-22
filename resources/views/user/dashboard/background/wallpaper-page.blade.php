@@ -1,33 +1,4 @@
-@if(Auth::user()->membership=='pro') 
-  <div class="theme-take">
-    <div class="thumb-wallpaper1 wallpapers wallpaper-core selected"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper2 wallpapers wallpaper-core"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper3 wallpapers wallpaper-core"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper4 wallpapers wallpaper-core"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper5 wallpapers wallpaper-core"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper6 wallpapers wallpaper-core"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper7 wallpapers wallpaper-core"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper8 wallpapers wallpaper-core"></div>
-  </div>
-  <div class="theme-take">
-    <div class="thumb-wallpaper9 wallpapers wallpaper-core"></div>
-  </div>
-@endif
-@if(Auth::user()->membership=='elite') 
+@if( (Auth::user()->membership=='elite') || (Auth::user()->membership=='super') )
   <div class="theme-take">
     <div class="thumb-wallpaper1 wallpapers wallpaper-core selected"></div>
   </div>
@@ -90,5 +61,33 @@
   </div>
   <div class="theme-take">
     <div class="thumb-wallpaper21 wallpapers wallpaper-core"></div>
+  </div>
+@else
+  <div class="theme-take">
+    <div class="thumb-wallpaper1 wallpapers wallpaper-core selected"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper2 wallpapers wallpaper-core"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper3 wallpapers wallpaper-core"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper4 wallpapers wallpaper-core"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper5 wallpapers wallpaper-core"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper6 wallpapers wallpaper-core"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper7 wallpapers wallpaper-core"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper8 wallpapers wallpaper-core"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-wallpaper9 wallpapers wallpaper-core"></div>
   </div>
 @endif

@@ -99,9 +99,9 @@ class BiolinkController extends Controller
     $link_upgrade = '<a href="'.url('/pricing').'">Klik disini untuk upgrade</a>';
     $link_order = '<a href="'.url('/orders').'">disini</a>';
     if ($user->membership=='free') {
-      // if ($pageCheck>=1) {
+      if ($pageCheck>=1) {
         return redirect('/')->with("error","Maaf Anda tidak bisa membuat biolink. Silahkan confirm order anda  ".$link_order." atau upgrade terlebih dahulu ".$link_upgrade);
-      // }
+      }
     }
     else if (($user->membership=='pro') || ($user->membership=='popular') ) {
       if ($pageCheck>=3) {
