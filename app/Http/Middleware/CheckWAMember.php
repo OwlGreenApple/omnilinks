@@ -19,12 +19,15 @@ class CheckWAMember
         $userid = Auth::id();
         $wa_number = $request->chat_member_number;
         $uuid = $request->uuid;
+        $pageid = $request->pageid;
         $photo = $request->file('chat_member_photo');
+        $is_update = (int)$request->wa_id;
 
         $temp_arr = array();
         $temp_arr['chat_member_name'] = ['required', 'max:190' ];
         $temp_arr['chat_member_position'] = ['required','max:190' ];
         $temp_arr['uuid'] = ['required'];
+        $temp_arr['pageid'] = ['required'];
 
          $messages = [
             'required' => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
@@ -71,7 +74,7 @@ class CheckWAMember
          }
 
          #photo
-         if(empty($photo))
+         if(empty($photo) && empty($is_update))
          {
             $response['status'] = "error";
             $response['message'] = 'Perhatian! Foto harus di upload';

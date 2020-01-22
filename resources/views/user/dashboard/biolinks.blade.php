@@ -3005,100 +3005,90 @@ and add more";
 
               <!-- TAB 5-->
               <div role="tabpanel" class="tab-pane fade in" id="wachat">
-                <form method="post" id="savewa" action="{{url('save-link')}}" novalidate>
-                  {{ csrf_field() }}
-                  <input type="hidden" name="uuid" value="{{$uuid}}">
-
+               
                   <label class="mb-3 blue-txt">
                     Chat Settings
                   </label>
-                  <button type="button" class="mt-1 float-right btn btn-primary btn-sm chat_register">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                  <div class="clearfix"></div>
                       
-                  <!-- enable button -->
-                  <div class="row mb-2">
-                    <div class="col-md-2 col-3">
-                      <label class="switch">
-                        <input class="enable_closest" type="checkbox" name="enable_chat" @if($pages->enable_chat == 1) checked @endif />
-                        <span class="slider round"></span>
-                      </label>
-                      
-                    </div>
-                    <div class="col-md-4 col-4">
-                      <label class="caption">
-                        Enable Chat
-                        <span class="tooltipstered" title="<div class='panel-heading'>Enable Chat</div><div class='panel-content'>Menampilkan WA chat link</div>">
-                          <i class="fas fa-question-circle icon-reflink"></i>
-                        </span>
-                      </label>
-                    </div>
-                  </div>
+                  <form method="post" id="savewa" action="{{url('save-link')}}" novalidate>
+                      {{ csrf_field() }}
+                      <input type="hidden" name="uuid" value="{{$uuid}}">
 
-                  <!-- buzz button -->
-                  <div class="row mb-2">
-                      <div class="col-md-2 col-3">
-                        <label class="switch">
-                          <input type="checkbox" class="enable_closest" name="buzz_btn" class="rounded" @if($pages->buzz_btn == 1) checked @endif>
-                          <span class="slider round"></span>
-                        </label>
-                        
-                      </div>
-                      <div class="col-md-4 col-4">
-                        <label class="caption">
-                          Buzz Button
-                          <span class="tooltipstered" title="<div class='panel-heading'>Buzz Button</div><div class='panel-content'>Memberikan efek buzz atau getaran</div>">
-                            <i class="fas fa-question-circle icon-reflink"></i>
-                          </span>
-                        </label>
-                      </div>
-                  </div>
-
-                   <!-- wa button -->
-                  <div class="row mb-2">
-                      <div class="col-md-8">
-                          <input type="text" class="form-control" name="wa_btn_text" value="{{$pages->wa_btn_text}}" />
+                      <!-- enable button -->
+                      <div class="row mb-2">
+                        <div class="col-md-2 col-3">
+                          <label class="switch">
+                            <input class="enable_closest" type="checkbox" name="enable_chat" @if($pages->enable_chat == 1) checked @endif />
+                            <span class="slider round"></span>
+                          </label>
+                          
+                        </div>
+                        <div class="col-md-4 col-4">
+                          <label class="caption">
+                            Enable Chat
+                            <span class="tooltipstered" title="<div class='panel-heading'>Enable Chat</div><div class='panel-content'>Menampilkan WA chat link</div>">
+                              <i class="fas fa-question-circle icon-reflink"></i>
+                            </span>
+                          </label>
+                        </div>
                       </div>
 
-                      <div class="col-md-4 row">
-                         <!-- IF NEED STYLING JUST OPEN THIS REMARK
-                         <a class="btn btn-success textbold">Bold</a>
-                         <a class="btn btn-success texttalic">Italic</a>
-                       -->
-
-                        <label class="caption">
-                          WA Button Text
-                          <span class="tooltipstered" title="<div class='panel-heading'>Wa Button Text</div><div class='panel-content'>Mengganti text pada tombol wa</div>">
-                            <i class="fas fa-question-circle icon-reflink"></i>
-                          </span>
-                        </label>
-                      </div>
-                  </div>
-
-                   <!-- wa header -->
-                  <div class="row mb-2">
-                      <div class="col-md-8">
-                          <textarea class="form-control" name="wa_header">{{$pages->wa_header}}</textarea>
+                      <!-- buzz button -->
+                      <div class="row mb-2">
+                          <div class="col-md-2 col-3">
+                            <label class="switch">
+                              <input type="checkbox" class="enable_closest" name="buzz_btn" class="rounded" @if($pages->buzz_btn == 1) checked @endif>
+                              <span class="slider round"></span>
+                            </label>
+                            
+                          </div>
+                          <div class="col-md-4 col-4">
+                            <label class="caption">
+                              Buzz Button
+                              <span class="tooltipstered" title="<div class='panel-heading'>Buzz Button</div><div class='panel-content'>Memberikan efek buzz atau getaran</div>">
+                                <i class="fas fa-question-circle icon-reflink"></i>
+                              </span>
+                            </label>
+                          </div>
                       </div>
 
-                      <div class="col-md-4 row">
-                        <label class="caption">
-                          WA Header Text
-                          <span class="tooltipstered" title="<div class='panel-heading'>WA Header Text</div><div class='panel-content'>Mengganti text pada header WA chat</div>">
-                            <i class="fas fa-question-circle icon-reflink"></i>
-                          </span>
-                        </label>
+                       <!-- wa button -->
+                      <div class="row mb-2">
+                          <div class="col-md-8">
+                              <input type="text" class="form-control" name="wa_btn_text" value="{{$pages->wa_btn_text}}" />
+                          </div>
+
+                          <div class="col-md-4 row">
+                             <!-- IF NEED STYLING JUST OPEN THIS REMARK
+                             <a class="btn btn-success textbold">Bold</a>
+                             <a class="btn btn-success texttalic">Italic</a>
+                           -->
+
+                            <label class="caption">
+                              WA Button Text
+                              <span class="tooltipstered" title="<div class='panel-heading'>Wa Button Text</div><div class='panel-content'>Mengganti text pada tombol wa</div>">
+                                <i class="fas fa-question-circle icon-reflink"></i>
+                              </span>
+                            </label>
+                          </div>
                       </div>
-                  </div>
 
-                  <label class="mb-3 mt-3 blue-txt">
-                    Chat Members
-                  </label>
+                       <!-- wa header -->
+                      <div class="row mb-2">
+                          <div class="col-md-8">
+                              <textarea class="form-control" name="wa_header">{{$pages->wa_header}}</textarea>
+                          </div>
 
-                  <!-- wa members -->
-                  <div id="wa_chat_member_data"><!-- --></div>
-                  <!-- end wa members -->
+                          <div class="col-md-4 row">
+                            <label class="caption">
+                              WA Header Text
+                              <span class="tooltipstered" title="<div class='panel-heading'>WA Header Text</div><div class='panel-content'>Mengganti text pada header WA chat</div>">
+                                <i class="fas fa-question-circle icon-reflink"></i>
+                              </span>
+                            </label>
+                          </div>
+                      </div>
+                  <!-- end settings -->
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-wa-chat" class="btn btn-primary btn-block btn-biolinks">
@@ -3122,6 +3112,45 @@ and add more";
                   </div>
                   
                 </form>
+
+                <!-- chat members -->
+
+                  <label class="mb-3 mt-3 blue-txt">
+                    Chat Members
+                  </label>
+
+                  <div class="row mb-4">
+                     <div class="col-md-12">
+                      <button type="button" class="mt-1 btn btn-primary btn-sm chat_register">
+                        Register WA User  
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- wa members -->
+                  @if(!is_null($wachat))
+                   <div class="row mb-4 chat-list">
+                     <div class="col-md-12 table-responsive">
+                       <table class="wachattable table table-bordered">
+                         <thead class="thead-light">
+                          <tr>
+                             <th>No</th>
+                             <th>Nama</th>
+                             <th>Jabatan</th>
+                             <th class="text-center">Edit</th>
+                             <th class="text-center">Hapus</th>
+                          </tr>
+                         </thead>
+                         <tbody id="wa_chat_member_data">
+                           <!-- display members -->
+                         </tbody>
+                       </table>
+                     </div>
+                  </div>
+                  @endif
+                  <!-- end wa members -->
+
+                  <!-- end chat members -->
               </div>
 
             </div>
@@ -3294,13 +3323,13 @@ and add more";
 
                     <!-- Whatsapp chat popup -->
                     @if(!is_null($wachat) && !is_null($pages) && $valid == true)
-                    <div class="whatsapp_chat_support wcs_fixed_right" id="example">
+                    <div class="whatsapp_chat_support wcs_fixed_right wcs-show" id="example">
                         <div class="wcs_button">
                           <i class="fab fa-whatsapp"></i>
                           <span class="wcs_text">{{$pages->wa_btn_text}}</span>
 
                           <!-- popup -->
-                          <div class="wcs_popup"> 
+                          <div class="wcs_popup" style="visibility: visible"> 
                               <div class="wcs_popup_header">
                                   <span class="wcs_text_header">{!! htmlspecialchars_decode($pages->wa_header) !!}
                                   </span>
@@ -3668,16 +3697,18 @@ and add more";
                 <label>Photo:</label>
                 <input type="file" class="form-control" name="chat_member_photo" />
               </div>
+              <span class="editrue"></span>
               <input type="hidden" name="uuid" value="{{$uuid}}">
               <input type="hidden" name="pageid" value="{{$pages->id}}">  
-              <button type="submit" class="btn btn-primary">Register</button>
-        </form>
       </div>
       <div class="modal-footer" id="foot">
+        <button type="submit" class="btn btn-primary btn-status">Register</button>
         <button class="btn btn-default" data-dismiss="modal">
           Cancel
         </button>
       </div>
+      </form>
+
     </div>
       
   </div>
@@ -3825,6 +3856,7 @@ and add more";
       wachatSettings();
     })
     open_chat_member_registration();
+    open_edit_member();
     save_chat_member();
     load_chat_member();
     delete_chat_member();
@@ -3847,26 +3879,17 @@ and add more";
        dataType: 'json',
        data : {'uid' : uid},
        success: function(result) {
+
           for(i=0;i<result.length;i++)
           {
-              data +=  '<div class="row mb-4 chat-list">';
-              data +=  '<div class="col-md-11 row">';
-
-              data +=  '<div class="col-md-3">Name</div>';
-              data +=  '<div class="col-md-9 mb-2"><input name="member_name['+result[i].id+']" value="'+result[i].name+'" class="form-control" /></div>';
-              data +=  '<div class="col-md-3">Position</div>';
-              data +=  '<div class="col-md-9 mb-2"><input name="position['+result[i].id+']" value="'+result[i].position+'" class="form-control" /></div>';
-              data +=  '<div class="col-md-3">WA_number</div>';
-              data +=  '<div class="col-md-9 mb-2"><input name="wa_number['+result[i].id+']" value="'+result[i].wa_number+'" class="form-control" /></div>';
-              data +=  '<div class="col-md-3">Photo</div>';
-              data +=  '<div class="col-md-9 mb-2"><input name="photo['+result[i].id+']" type="file" value="'+result[i].photo+'" class="form-control" /></div>';
-
-              data +=  '</div>'; //close col-md-10
-
-              data +=  '<div class="col-md-1"><a class="del_chat_member" id="'+result[i].id+'"><i class="far fa-trash-alt"></i></a>';
-              data +=  '</div>'; //col-md-2
-
-              data +=  '</div>'; //close row mb-4
+              var no = i+1;
+              data +=  '<tr>';
+              data +=  '<td>'+no+'</td>';
+              data +=  '<td>'+result[i].name+'</td>';
+              data +=  '<td>'+result[i].position+'</td>';
+              data +=  '<td class="text-center"><a data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'"class="edit_wa_member" id="'+result[i].id+'"><i class="fas fa-pencil-alt"></i></i></a></td></td>';
+              data +=  '<td class="text-center"><a class="del_chat_member" id="'+result[i].id+'"><i class="far fa-trash-alt"></i></a></td>';
+              data +=  '</tr>';
           }
           $("#wa_chat_member_data").html(data);
        }
@@ -3986,9 +4009,37 @@ and add more";
       }
       else 
       {
+        var uuid = $("input[name=uuid]").val();
+        var pageid = $("input[name=pageid]").val();
+
+        $("#chat_member :input").val('');
+        $('.btn-status').html('Register');
+        $(".editrue").html('');
+        $("input[name=uuid]").val(uuid);
+        $("input[name=pageid]").val(pageid);
         $("#wa_chat_member").modal();
       }
       
+    });
+  }
+
+  function open_edit_member()
+  {
+    $("body").on("click",".edit_wa_member",function(){
+      var wa_id = $(this).attr('id');
+      var uuid = $("input[name=uuid]").val();
+      var pageid = $("input[name=pageid]").val();
+
+      $('.btn-status').html('Edit');
+      $("input[name=chat_member_name]").val($(this).attr('data-nm'));
+      $("input[name=chat_member_position]").val($(this).attr('data-pos'));
+      $("input[name=chat_member_number]").val($(this).attr('data-num'));
+      $("input[name=uuid]").val(uuid);
+      $("input[name=pageid]").val(pageid);
+
+      $(".editrue").html('<input type="hidden" name="wa_id" readonly="readonly" value="'+wa_id+'">');
+
+      $("#wa_chat_member").modal();
     });
   }
 
@@ -4016,9 +4067,6 @@ and add more";
           $('.div-loading').addClass('background-load');
         },
         success: function(result) {
-          $('#loader').hide();
-          $('.div-loading').removeClass('background-load');
-
           if (result.status == "success") {
             $("#pesanAlert").html(result.message);
             $("#pesanAlert").show();
@@ -4029,7 +4077,23 @@ and add more";
 
             $("#wa_chat_member").modal('toggle');
             //$("#chat_member :input").val('');
-            location.reload(true);
+
+            if(result.edit == 1)
+            {
+              $('#loader').hide();
+              $('.div-loading').removeClass('background-load');
+
+              changed = 0;
+              changelink = 0;
+              changechat = 0;
+              refreshwa();
+              loadLinkBio();
+              refreshpixel();
+              load_chat_member();
+            } else {
+              location.reload(true);
+            }
+            
           } 
           else 
           {
@@ -4063,9 +4127,6 @@ and add more";
               $('.div-loading').addClass('background-load');
             },
             success : function(result) {
-               $('#loader').hide();
-               $('.div-loading').removeClass('background-load');
-
                $(window).scrollTop(0);
                $("#pesanAlert").html(result.message);
                $("#pesanAlert").show();
