@@ -229,6 +229,26 @@ class RegisterController extends Controller
       }
     }
 
+    $is_error = false;
+    $error_message = "";
+    if(!is_numeric($request->wa_number)){
+      $is_error = true;
+      $error_message = "No WA harus angka";
+    }
+    if(!preg_match("/^628+[0-9]/i",$request->wa_number)){
+      $is_error = true;
+      $error_message = "No WA Tidak Valid";
+    }
+    if ($is_error) {
+      $request->session()->flash('error', $error_message);
+      return view('auth.register')->with(array(
+        "price"=>$request->price,
+        "namapaket"=>$request->namapaket,
+        "coupon_code"=>$request->kupon,
+        "idpaket" => $request->idpaket,
+      ));
+    }
+
     $validator = $this->validator($request->all());
     if(!$validator->fails()) {
       //random password
