@@ -389,6 +389,8 @@ class OrderController extends Controller
     $order->save();
 
     if($order->grand_total!=0){
+      $user->valid_until = new DateTime('+0 days');
+      $user->save();
       //mail order to user 
       $emaildata = [
           'order' => $order,
@@ -401,7 +403,8 @@ class OrderController extends Controller
         $message->to($user->email);
         $message->subject('[Omnilinkz] Order Nomor '.$order_number);
       });
-    } else {
+    } 
+    else {
       $order->status = 2;
       $order->save();
 
@@ -419,8 +422,9 @@ class OrderController extends Controller
         $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to pro('.$valid->format('Y-m-d h:i:s').')';
         $userlog->save();
 
-        $user->valid_until = $valid;
-        $user->membership = 'pro';
+        // $user->valid_until = $valid;
+        $user->valid_until = new DateTime('+0 days');
+        // $user->membership = 'pro';
 
       } 
       else if(substr($order->package,0,5) === "Elite"){
@@ -453,7 +457,7 @@ class OrderController extends Controller
 
         // $user->valid_until = $valid;
         $user->valid_until = new DateTime('+0 days');
-        $user->membership = 'elite';
+        // $user->membership = 'elite';
       }
 
       $user->save();

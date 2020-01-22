@@ -197,14 +197,17 @@ class RegisterController extends Controller
         $userlog->save();
 
         // $user->valid_until = $valid;
-        $user->valid_until = new DateTime('+0 days');
-        $user->save();
+        // $user->valid_until = new DateTime('+0 days');
+        // $user->save();
       }
 
-    } else {
-      $user->valid_until = new DateTime('+0 days');
-      $user->save();
+    } 
+    else {
+      // $user->valid_until = new DateTime('+0 days');
+      // $user->save();
     }
+    $user->valid_until = Carbon::now();
+    $user->save();
 
     // return $user;
     return [
