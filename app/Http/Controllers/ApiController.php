@@ -25,15 +25,16 @@ class ApiController extends Controller
 
     $user = User::where("email",$data['email'])->first();
     if (!is_null($user)) {
-      $coupon = Coupon::where("valid_to",$data['package'])
-                ->where("user_id",$user->id)
+      /*$coupon = Coupon::
+                where("user_id",$user->id)
+                ->where("valid_to",$data['package'])
                 ->first();
       if (!is_null($coupon)) {
         $arr['coupon_code'] = $coupon->kodekupon;
         $arr['is_error'] = 0;
         return json_encode($arr);
       }
-      else {
+      else {*/
         do
         {
           $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
@@ -54,7 +55,7 @@ class ApiController extends Controller
         $coupon->package_id = 0;
         $coupon->user_id = $user->id;
         $coupon->save();
-      }
+      // }
     }
     else {
       $arr['coupon_code'] = "";
