@@ -185,6 +185,8 @@ class BiolinkController extends Controller
   public function viewpage($uuid)
   {
     $user=Auth::user();
+    $mod = request()->get('mod');
+
   	$page=Page::where('uid','=',$uuid)
               ->where('user_id',$user->id)
               ->first();
@@ -220,7 +222,8 @@ class BiolinkController extends Controller
       'links'=>$links,
       'user'=>$user,
       'wachat'=>$getwachat,
-      'valid'=>$validmember
+      'valid'=>$validmember,
+      'mod'=>$mod,
     ]);  
   }
 
@@ -1634,7 +1637,7 @@ class BiolinkController extends Controller
     $dt = Carbon::now();
     $member_name = $request->chat_member_name;
     $position = $request->chat_member_position;
-    $wa_number = $request->chat_member_number;
+    $wa_number = "+62".$request->chat_member_number;
     $wa_text = $request->chat_member_text;
     $page_id = $request->pageid;
     $uid = $request->uuid;
@@ -1775,7 +1778,7 @@ class BiolinkController extends Controller
                 'id'=>$rows->id,
                 'name'=>$rows->member_name,
                 'position'=>$rows->position,
-                'wa_number'=>$rows->wa_number,
+                'wa_number'=>substr($rows->wa_number,3),
                 'wa_text'=>($rows->wa_text == null)?'':$rows->wa_text,
                 'photo'=>$rows->photo
               );

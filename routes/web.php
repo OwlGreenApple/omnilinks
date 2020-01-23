@@ -114,7 +114,7 @@ if(env('DOMAIN_TYPE')=='main'){
     
     //makebio
     Route::get('/biolinks/','BiolinkController@newbio');
-    Route::get('/biolinks/{names}','BiolinkController@viewpage');
+    Route::get('/biolinks/{names}/{mod?}','BiolinkController@viewpage');
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
     Route::post('/save-template','BiolinkController@savetemp');
     Route::get('/banner/load-banner','BiolinkController@addBanner');

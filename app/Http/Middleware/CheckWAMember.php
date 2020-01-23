@@ -60,10 +60,10 @@ class CheckWAMember
             return response()->json($response);
          }
 
-         if(strlen($wa_number) < 10)
+         if(strlen($wa_number) < 8)
          {
             $response['status'] = "error";
-            $response['message'] = 'Perhatian! Panjang karakter no WA tidak boleh kurang dari 10 karakter';
+            $response['message'] = 'Perhatian! Panjang karakter no WA tidak boleh kurang dari 8 karakter';
             return response()->json($response);
          } 
 
@@ -74,10 +74,17 @@ class CheckWAMember
             return response()->json($response);
          } 
 
-         if(!preg_match('/^[+][0-9]*$/',$wa_number))
+         if(preg_match('/^[+-][0-9]*$/',$wa_number))
          {
             $response['status'] = "error";
-            $response['message'] = 'Perhatian! No Wa harus diawali tanda + dan berupa angka';
+            $response['message'] = 'Perhatian! No Wa hanya berupa angka saja';
+            return response()->json($response);
+         }
+
+        if(preg_match('/^62[0-9]*$/',$wa_number) || preg_match('/^0[0-9]*$/',$wa_number))
+         {
+            $response['status'] = "error";
+            $response['message'] = 'Perhatian! No Wa tidak diperbolehkan menggunakkan angka 62 atau 0 di awalan';
             return response()->json($response);
          }
 

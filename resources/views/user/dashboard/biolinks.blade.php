@@ -2026,7 +2026,7 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="active nav-link link" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link @if($mod <> 1) active @endif" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
@@ -2059,7 +2059,7 @@
 
               @if($valid == true)
               <li class="nav-item">
-                <a href="#wachat" class="nav-link link" role="tab" data-toggle="tab">
+                <a href="#wachat" class="nav-link link @if($mod == 1) active @endif" role="tab" data-toggle="tab">
                   WA Chat
                 </a>
               </li>
@@ -2070,7 +2070,7 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in active show" id="link">
+              <div role="tabpanel" class="tab-pane fade in @if($mod <> 1) active show @endif" id="link">
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
 
@@ -3004,7 +3004,7 @@ and add more";
               </div>
 
               <!-- TAB 5-->
-              <div role="tabpanel" class="tab-pane fade in" id="wachat">
+              <div role="tabpanel" class="tab-pane fade in @if($mod==1) active show @endif" id="wachat">
                
                   <label class="mb-3 blue-txt">
                     Chat Settings
@@ -3055,7 +3055,7 @@ and add more";
                        <!-- wa button -->
                       <div class="row mb-2">
                           <div class="col-md-8">
-                              <input type="text" class="form-control" name="wa_btn_text" value="{{$pages->wa_btn_text}}" />
+                              <input type="text" class="form-control" name="wa_btn_text" value="@if($pages->wa_btn_text == null || empty($pages->wa_btn_text)) Text Button WA @else {{$pages->wa_btn_text}} @endif" />
                           </div>
 
                           <div class="col-md-4 row">
@@ -3076,7 +3076,7 @@ and add more";
                        <!-- wa header -->
                       <div class="row mb-2">
                           <div class="col-md-8">
-                              <textarea class="form-control" name="wa_header">{{$pages->wa_header}}</textarea>
+                              <textarea class="form-control" name="wa_header">@if($pages->wa_header == null || empty($pages->wa_header)) Text Header WA @else {{$pages->wa_header}} @endif</textarea>
                           </div>
 
                           <div class="col-md-4 row">
@@ -3116,37 +3116,20 @@ and add more";
                 <!-- chat members -->
 
                   <label class="mb-3 mt-3 blue-txt">
-                    Chat Members
+                    Users
                   </label>
 
                   <div class="row mb-4">
                      <div class="col-md-12">
                       <button type="button" class="mt-1 btn btn-primary btn-sm chat_register">
-                        Register WA User  
+                        Create New User  
                       </button>
                     </div>
                   </div>
 
                   <!-- wa members -->
                   @if(!is_null($wachat))
-                   <div class="row mb-4 chat-list">
-                     <div class="col-md-12 table-responsive">
-                       <table class="wachattable table table-bordered">
-                         <thead class="thead-light">
-                          <tr>
-                             <th>No</th>
-                             <th>Nama</th>
-                             <th>Jabatan</th>
-                             <th class="text-center">Edit</th>
-                             <th class="text-center">Hapus</th>
-                          </tr>
-                         </thead>
-                         <tbody id="wa_chat_member_data">
-                           <!-- display members -->
-                         </tbody>
-                       </table>
-                     </div>
-                  </div>
+                    <div id="wa_chat_member_data"></div>
                   @endif
                   <!-- end wa members -->
 
@@ -3345,6 +3328,36 @@ and add more";
                                           <div class="wcs_popup_person_name">{{$wachat->member_name}}</div>
                                           <div class="wcs_popup_person_description">{{$wachat->position}}</div>
                                           <!--<div class="wcs_popup_person_status">I'm Online</div>-->
+                                      </div>  
+                                  </div>
+                              </div>
+                          </div>
+                            <!-- end popup -->
+                        </div>  
+                    </div>
+                    @else
+                    <!-- for preview if user hasn't registered yet -->
+                    <div class="whatsapp_chat_support wcs_fixed_right wcs-show" id="example">
+                        <div class="wcs_button">
+                          <i class="fab fa-whatsapp"></i>
+                          <span class="wcs_text"></span>
+
+                          <!-- popup -->
+                          <div class="wcs_popup" style="visibility: visible"> 
+                              <div class="wcs_popup_header">
+                                  <span class="wcs_text_header">
+                                  </span>
+                              </div>  
+                              <div class="wcs_popup_person_container">
+                                  <div 
+                                      class="wcs_popup_person" 
+                                      data-number=""
+                                      data-text = ""
+                                  >
+                                      <div class="wcs_popup_person_img"><img src="{{asset('/image/no-photo.jpg')}}" alt=""></div>
+                                      <div class="wcs_popup_person_content">
+                                          <div class="wcs_popup_person_name">Name</div>
+                                          <div class="wcs_popup_person_description">Position</div>
                                       </div>  
                                   </div>
                               </div>
@@ -3691,8 +3704,14 @@ and add more";
               </div>
               <div class="form-group">
                 <label>Admin WA Number:</label>
-                <input class="form-control" name="chat_member_number" placeholder="Masukkan No WA" value="+"/>
-                <span>Eg : +628111111</span>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      +62
+                    </div>
+                  </div>
+                  <input type="text" name="chat_member_number" class="form-control col-md-12" onkeypress="return hanyaAngka(event)" />
+                </div>
               </div>
               <div class="form-group">
                 <label>Admin WA Text:</label>
@@ -3773,9 +3792,20 @@ and add more";
 
     wa_preview_header_text();
     getSelected();
-    callMaintainPlus();
+    displayWaText();
+    //callMaintainPlus();
   });
 
+  //To display wa btn text if wa user hasn't registered yet
+  function displayWaText()
+  {
+    var btn_wa_txt = $("input[name=wa_btn_text]").val();
+    var btn_wa_header = $("textarea[name=wa_header]").val();
+    $(".wcs_text").html(btn_wa_txt);
+    $(".wcs_text_header").html(btn_wa_header);
+  }
+
+  //TO GIVE SYMBOL + IF USER DELETE IT ON PHONE NUMBER
   function maintainPlus()
   {
     var chatnumber = $("input[name=chat_member_number]").val();
@@ -3906,15 +3936,26 @@ and add more";
 
           for(i=0;i<result.length;i++)
           {
-              var no = i+1;
-              data +=  '<tr>';
-              data +=  '<td>'+no+'</td>';
-              data +=  '<td>'+result[i].name+'</td>';
-              data +=  '<td>'+result[i].position+'</td>';
-              data +=  '<td class="text-center"><a data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'" data-text="'+result[i].wa_text+'" class="edit_wa_member" id="'+result[i].id+'"><i class="fas fa-pencil-alt"></i></i></a></td></td>';
-              data +=  '<td class="text-center"><a class="del_chat_member" id="'+result[i].id+'"><i class="far fa-trash-alt"></i></a></td>';
-              data +=  '</tr>';
-          }
+              data +=  '<div class="card card-none mb-4">';
+              data +=  '<div class="card-header card-gray">';
+
+              data +=  '<span class="view-wa">'+result[i].name+'</span>';
+
+              data +=  '<button type="button" class="del_chat_member btn btn-sm btn-danger float-right" id="'+result[i].id+'">';
+
+              data +=  '<i class="fas fa-trash-alt"></i>';
+              data +=  '</button>';
+
+              data +=  '<button type="button" class="edit_wa_member btn btn-sm btn-primary float-right mr-2" data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'" data-text="'+result[i].wa_text+'" class="edit_wa_member" id="'+result[i].id+'">';
+
+              data +=  '<i class="fas fa-pencil-alt"></i>';
+              data +=  '</button>';
+
+              data +=  '<div class="clearfix"></div>';
+
+              data +=  '</div>';  //end class card-header
+              data +=  '</div>'; //end class card-none
+          } 
           $("#wa_chat_member_data").html(data);
        }
     });
@@ -3957,13 +3998,13 @@ and add more";
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
         
+          load_chat_member();
           changed = 0;
           changelink = 0;
           changechat = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
-          load_chat_member();
           return true;
         } 
         else 
@@ -3990,11 +4031,12 @@ and add more";
     }
 
     $("body").on("click","input[name=enable_chat]",function(){
-        if($(this).prop("checked") == true){
-          $("#example").show();
-        }else{
-          $("#example").hide();
-        }
+      if($(this).prop("checked") == true){
+        $("#example").show();
+        fix_center();
+      }else{
+        $("#example").hide();
+      }
     });
   }
 
@@ -4013,6 +4055,7 @@ and add more";
     }
 
     $("body").on("click","input[name=buzz_btn]",function(){
+        fix_center();
         if($(this).prop("checked") == true){
           $("#example").addClass('service');
           $(".wcs_button").addClass('animate-buzz');
@@ -4037,11 +4080,10 @@ and add more";
         var pageid = $("input[name=pageid]").val();
 
         $("#chat_member :input").val('');
-        $('.btn-status').html('Register');
+        $('.btn-status').html('Add User');
         $(".editrue").html('');
         $("input[name=uuid]").val(uuid);
         $("input[name=pageid]").val(pageid);
-        maintainPlus();
         $("#wa_chat_member").modal();
       }
       
@@ -4111,15 +4153,16 @@ and add more";
               $('#loader').hide();
               $('.div-loading').removeClass('background-load');
 
+              load_chat_member();
               changed = 0;
               changelink = 0;
               changechat = 0;
               refreshwa();
               loadLinkBio();
               refreshpixel();
-              load_chat_member();
             } else {
-              location.reload(true);
+              var url = window.location.href; 
+              location.href= url+"/?mod=1";
             }
             
           } 
@@ -4165,7 +4208,10 @@ and add more";
                if(result.status == "success") {
                   $("#pesanAlert").addClass("alert-success");
                   $("#pesanAlert").removeClass("alert-danger");
-                  location.reload(true);
+
+                  //to determine whether wa chat link tab or not
+                  var url = window.location.href; 
+                  location.href= url+"/?mod=1";
                   
                 } else {
                   $("#pesanAlert").addClass("alert-danger");

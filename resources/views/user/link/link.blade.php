@@ -1599,6 +1599,34 @@ and add more";
     </div>
 
 </div>  
+ @elseif($pages->enable_chat == 1 && is_null($wachat) && $valid == true)
+    <!-- for preview if user hasn't registered yet -->
+    <div class="whatsapp_chat_support wcs_fixed_right @if($pages->buzz_btn == 1) service @endif" id="example">
+          <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
+              <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+           </div> 
+
+          <!-- popup -->
+          <div class="wcs_popup"> 
+              <div class="wcs_popup_header">
+                  {!! htmlspecialchars_decode($pages->wa_header) !!}
+              </div>  
+              <div class="wcs_popup_person_container">
+                  <div 
+                      class="wcs_popup_person" 
+                      data-number=""
+                      data-text = ""
+                  >
+                      <div class="wcs_popup_person_img"><img src="{{asset('/image/no-photo.jpg')}}" alt=""></div>
+                      <div class="wcs_popup_person_content">
+                          <div class="wcs_popup_person_name">Name</div>
+                          <div class="wcs_popup_person_description">Position</div>
+                      </div>  
+                  </div>
+              </div>
+          </div>
+            <!-- end popup -->
+    </div>
 @endif
 
   
@@ -1614,7 +1642,7 @@ and add more";
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
 
-@if($pages->enable_chat == 1 && !is_null($wachat))
+@if($pages->enable_chat == 1)
 <script type="text/javascript">
   $('#example').whatsappChatSupport();
 </script>

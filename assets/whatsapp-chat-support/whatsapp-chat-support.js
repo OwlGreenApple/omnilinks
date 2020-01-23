@@ -146,7 +146,7 @@
         /* POPUP CHAT (SINGLE PERSON) */
 
         popup_input.on('click', '.fa', function(){
-            var $this           = $(this);
+            var $this = $(this);
 
             go_to_whatsapp(popup_input.attr('data-number'), popup_input.find('input[type="text"]').val());
         });     
