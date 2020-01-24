@@ -15,7 +15,7 @@
       });
       $('#wa-number').on('input propertychange paste', function (e) {
           //var reg = /^0+/gi;
-          var reg = /((^|, )(0|62|[+]62|[+]))/gi;
+          var reg = /((^|, )(0|62|[+]0|[+]62|[+]))/gi;
           if (this.value.match(reg)) {
               this.value = this.value.replace(reg,'');
           }
