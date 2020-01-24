@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     public function index(){
-      //list user admin
+      //list user chart
       $users = DB::table('users')->select(DB::raw('COUNT(id) AS cid, DATE_FORMAT(created_at, "%Y-%m-%d") AS ct'))
               ->where([['created_at','<>',NULL],['is_admin','=',0]])->groupBy('ct')
               ->orderBy('ct', 'ASC')
@@ -333,6 +333,22 @@ class UserController extends Controller
       } else {
         return "NOT AUTHORIZED";
       }
+    }
+
+    public function listAffiliate()
+    {
+        return view('admin.list-affiliate.index');
+    } 
+
+    public function listAffiliateContent()
+    {
+        $users = User::where('is_admin','=',2)->get();
+        return view('admin.list-affiliate.content',['users'=>$users]);
+    }
+
+    public function detailAffiliate()
+    {
+        return view('admin.list-affiliate.detail');
     }
 
     /*public function index(Request $request)

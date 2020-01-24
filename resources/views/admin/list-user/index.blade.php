@@ -304,8 +304,9 @@
             </label>
             <div class="col-md-9 col-12">
               <select class="form-control" name="is_admin" id="is_admin">
-                <option value="1">Admin</option>
                 <option value="0">User</option>
+                <option value="1">Admin</option>
+                <option value="2">Affiliate</option>
               </select>
             </div>
           </div>

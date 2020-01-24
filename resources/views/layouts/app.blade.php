@@ -224,6 +224,9 @@
                       <a class="dropdown-item <?php if(Request::is('list-user')) echo 'active' ?>" href="{{ url('list-user') }}">
                         List User
                       </a>
+                      <a class="dropdown-item <?php if(Request::is('list-affiliate')) echo 'active' ?>" href="{{ url('list-affiliate') }}">
+                        List Affiliate
+                      </a> 
                       <a class="dropdown-item <?php if(Request::is('list-page')) echo 'active' ?>" href="{{ url('list-page') }}">
                         List Page
                       </a>

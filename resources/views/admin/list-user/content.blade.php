@@ -10,10 +10,12 @@
       {{$user->username}}
     </td>
     <td data-label="Status">
-      @if($user->is_admin==1)
-        Admin
-      @else 
+      @if($user->is_admin==0)
         User
+      @elseif($user->is_admin==1)
+        Admin
+      @else
+        Affiliate
       @endif
     </td> 
     <td data-label="Membership">
