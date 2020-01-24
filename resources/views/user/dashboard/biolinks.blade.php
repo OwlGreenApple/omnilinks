@@ -1500,8 +1500,8 @@
   loadPixel();
 
   function loadPixelPage() {
-    $("#wapixel").html(dataView);
-    $("#wapixel").val('{{$pages->wa_pixel_id}}');
+    $("#wapixel, #wapixelchat").html(dataView);
+    $("#wapixel, #wapixelchat").val('{{$pages->wa_pixel_id}}');
     $("#telegrampixel").html(dataView);
     $("#telegrampixel").val('{{$pages->telegram_pixel_id}}');
     $("#skypepixel").html(dataView);
@@ -3052,6 +3052,22 @@ and add more";
                           </div>
                       </div>
 
+                       <!-- wa header -->
+                      <div class="row mb-2">
+                          <div class="col-md-8">
+                              <textarea class="form-control" name="wa_header">@if($pages->wa_header == null || empty($pages->wa_header)) Text Header WA @else {{$pages->wa_header}} @endif</textarea>
+                          </div>
+
+                          <div class="col-md-4 row">
+                            <label class="caption">
+                              WA Header Text
+                              <span class="tooltipstered" title="<div class='panel-heading'>WA Header Text</div><div class='panel-content'>Mengganti text pada header WA chat</div>">
+                                <i class="fas fa-question-circle icon-reflink"></i>
+                              </span>
+                            </label>
+                          </div>
+                      </div>
+
                        <!-- wa button -->
                       <div class="row mb-2">
                           <div class="col-md-8">
@@ -3073,21 +3089,19 @@ and add more";
                           </div>
                       </div>
 
-                       <!-- wa header -->
+                      <!-- pixel -->
                       <div class="row mb-2">
                           <div class="col-md-8">
-                              <textarea class="form-control" name="wa_header">@if($pages->wa_header == null || empty($pages->wa_header)) Text Header WA @else {{$pages->wa_header}} @endif</textarea>
+                             <select name="wapixelchat" class="form-control linkpixel" id="wapixelchat"></select>
                           </div>
 
                           <div class="col-md-4 row">
                             <label class="caption">
-                              WA Header Text
-                              <span class="tooltipstered" title="<div class='panel-heading'>WA Header Text</div><div class='panel-content'>Mengganti text pada header WA chat</div>">
-                                <i class="fas fa-question-circle icon-reflink"></i>
-                              </span>
+                              Pixel Retargetting
                             </label>
                           </div>
                       </div>
+
                   <!-- end settings -->
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
@@ -3718,7 +3732,7 @@ and add more";
                 <input class="form-control" name="chat_member_text" />
               </div>
               <div class="form-group">
-                <label>Photo:</label>
+                <label>Photo: Ukuran harus 1 : 1 dan dengan format jpg</label>
                 <input type="file" class="form-control" name="chat_member_photo" />
               </div>
               <span class="editrue"></span>

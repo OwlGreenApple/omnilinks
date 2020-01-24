@@ -111,7 +111,7 @@ class CheckWAMember
                   return response()->json($response);
               }
 
-              if($ext =='jpg' || $ext =='png' || $ext =='gif')
+              if($ext =='jpg')
               {
                   $valid_ext = true;
               }
@@ -119,7 +119,7 @@ class CheckWAMember
               if($valid_ext == false)
               {
                   $response['status'] = "error";
-                  $response['message'] = 'Perhatian! Foto hanya boleh menggunakkan extension : jpg,png dan gif';
+                  $response['message'] = 'Perhatian! Foto hanya boleh menggunakkan extension : jpg';
                   return response()->json($response);
               }
           }
