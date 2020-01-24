@@ -40,6 +40,11 @@ body {
   min-height:575px;
 }
 
+.wa-number-style {
+  background-color: #106ac7;
+  color : #fff;
+}
+
 @media only screen and (max-width: 767px) {
   .main-cont {
     margin-top:105px;

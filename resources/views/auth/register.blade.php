@@ -14,9 +14,10 @@
         }
       });
       $('#wa-number').on('input propertychange paste', function (e) {
-          var reg = /^0+/gi;
+          //var reg = /^0+/gi;
+          var reg = /((^|, )(0|62|[+]62|[+]))/gi;
           if (this.value.match(reg)) {
-              this.value = this.value.replace(reg, '');
+              this.value = this.value.replace(reg,'');
           }
       });
   });
@@ -112,14 +113,22 @@
               <div class="form-group row">
                 <label for="wa-number" class="text">{{ __('Masukkan No WA') }}</label>
                 <div class="input-group">
-                  <input id="wa-number" type="text" class="col-md-12 col-12 form-control form-input{{ $errors->has('wa_number') ? ' is-invalid' : '' }}" name="wa_number" placeholder="No WA ex: 62812323...." onkeypress="return hanyaAngka(event)" required>
+                  <div class="input-group-prepend">
+                    <div class="input-group-text wa-number-style">
+                      +62
+                    </div>
+                  </div>
+
+                  <input id="wa-number" type="text" class="col-md-12 col-12 form-control form-input{{ $errors->has('wa_number') ? ' is-invalid' : '' }}" name="wa_number" placeholder="No WA ex: 812323...." onkeypress="return hanyaAngka(event)" required>
                   @if ($errors->has('wa_number'))
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('wa_number') }}</strong>
                   </span>
                   @endif
+
                 </div>
               </div>
+
               <div class="form-group row">
                   <label class="text" for="gender">
                     Gender:&nbsp;

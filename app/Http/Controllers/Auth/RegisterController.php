@@ -84,7 +84,7 @@ class RegisterController extends Controller
       'username'=> $data['email'],
       'password' => Hash::make($data['password']),
       'membership' => 'free',
-      'wa_number' => $data['wa_number'],
+      'wa_number' => '62'.$data['wa_number'],
     ]);
 
     $order = null;
@@ -232,6 +232,7 @@ class RegisterController extends Controller
       }
     }
 
+    $request->wa_number = "62".$request->wa_number;
     $is_error = false;
     $error_message = "";
     if(!is_numeric($request->wa_number)){
