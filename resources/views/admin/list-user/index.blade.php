@@ -318,7 +318,9 @@
               <select class="form-control" name="membership" id="membership">
                 <option value="free">Free</option>
                 <option value="pro">Pro</option>
+                <option value="popular">Popular</option>
                 <option value="elite">Elite</option>
+                <option value="super">Super</option>
               </select>
             </div>
           </div>
