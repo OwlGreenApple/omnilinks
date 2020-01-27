@@ -128,7 +128,7 @@ class UserController extends Controller
 
       if(isset($request->unlimited)){
         // $user->valid_until = null;
-        $user->valid_until = new DateTime('+9999 days');
+        $user->valid_until = new DateTime('+999 days');
       } else {
         if($request->valid_until==''){
           $arr['status'] = 'error';
