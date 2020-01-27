@@ -37,7 +37,7 @@ class NotifOrderUserMail extends Mailable
     public function build()
     {
       return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
-                  ->subject('[Omnilinkz] Email Reminder Setelah Order')
+                  ->subject('[Omnilinkz] Hari Terakhir Mendapatkan Harga Spesial dari Omnilinkz. Jangan Lupa Konfirmasi yah')
                   ->view('emails.notif-order-user')
                   ->with([
                     'user'=>$this->user,
