@@ -13,6 +13,7 @@ use App\UserLog;
 use App\Notification;
 use App\Ads;
 use App\AdsHistory;
+use App\Commision;
 
 use App\Helpers\Helper;
 use Carbon, Crypt;
@@ -364,7 +365,9 @@ class OrderController extends Controller
         
         if($arr['coupon']!=null){
           $kuponid = $arr['coupon']->id;
+          $affiliate_id = $arr['coupon']->affiliate_id;
         }
+       
       }
     }
 
@@ -387,6 +390,8 @@ class OrderController extends Controller
     $order->buktibayar = "";
     $order->keterangan = "";
     $order->save();
+
+    $idorder = $order->id;
 
     if($order->grand_total!=0){
       $user->valid_until = new DateTime('+0 days');
@@ -469,6 +474,17 @@ class OrderController extends Controller
       $order->ads_id = $ads->id;
   
       $order->save();
+    }
+
+    #SAVE AFFILIATE ID
+    if($affiliate_id <> 0)
+    {
+       $commision = new Commision;
+       $commision->user_id = $affiliate_id;
+       $commision->order_id = $idorder;
+       $commision->commision = $idorder;
+       $commision->status = 0;
+       $commision->save();
     }
 
     return view('pricing.thankyou')->with(array(

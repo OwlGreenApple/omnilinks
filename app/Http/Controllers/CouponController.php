@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Coupon;
 use App\Catalogs;
+use App\User;
 use Validator;
 use Carbon;
 use Auth;
@@ -23,12 +24,13 @@ class CouponController extends Controller
 
     public function index(){
       //halaman list kupon admin
-      return view('admin.list-coupon.index');
+      $user_affiliate = User::where('is_admin','=',2)->get();
+      return view('admin.list-coupon.index',['user_affiliate'=>$user_affiliate]);
     }
 
     public function load_coupon(Request $request){
       //halaman list kupon admin
-      $coupons = Coupon::where("user_id",0)->get();
+      $coupons = Coupon::where([["coupons.user_id",0]])->leftJoin('users','coupons.affiliate_id','=','users.id')->select('coupons.*','users.email')->get();
 
       $arr['view'] = (string) view('admin.list-coupon.content')
               ->with('coupons',$coupons);  
@@ -48,6 +50,7 @@ class CouponController extends Controller
         $coupon->valid_to = $request->valid_to;
         $coupon->keterangan = $request->keterangan;
         $coupon->package_id = $request->package_id;
+        $coupon->affiliate_id = $request->affiliate_id;
         $coupon->save();
 
         $arr['status'] = 'success';
@@ -75,18 +78,40 @@ class CouponController extends Controller
         }
       }
 
+      /* ???
       $coupon = Coupon::find($request->id_edit);
       $coupon->kodekupon = $request->kodekupon;
       $coupon->diskon_value = $request->diskon_value;
       $coupon->diskon_percent = $request->diskon_percent;
-      $coupon->valid_until = $request->valid_until;
+      //$coupon->valid_until = $request->valid_until;
       $coupon->valid_to = $request->valid_to;
       $coupon->keterangan = $request->keterangan;
       $coupon->package_id = $request->package_id;
+      $coupon->affiliate_id = $request->affiliate_id;
       $coupon->save();
+      */
 
-      $arr['status'] = 'success';
-      $arr['message'] = 'Kupon berhasil diedit';
+      $data = array(
+        'kodekupon'=>$request->kodekupon,
+        'diskon_value'=>$request->diskon_value,
+        'diskon_percent'=>$request->diskon_percent,
+        'valid_until'=>$request->valid_until,
+        'valid_to'=>$request->valid_to,
+        'keterangan'=>$request->keterangan,
+        'package_id'=>$request->package_id,
+        'affiliate_id'=>$request->affiliate_id,
+      );
+
+      try{
+        Coupon::where('id','=',$request->id_edit)->update($data);
+        $arr['status'] = 'success';
+        $arr['message'] = 'Kupon berhasil diedit';
+      }catch(\Illuminate\Database\QueryException $e){
+        //$e->message
+        $arr['status'] = false;
+        $arr['message'] = 'Kupon gagal diedit';
+      }
+
       return $arr;
     }
 

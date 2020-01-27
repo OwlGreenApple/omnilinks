@@ -17,6 +17,9 @@
     </td>
     <td data-label="Keterangan">
       {{$coupon->keterangan}}
+    </td> 
+    <td data-label="Affiliate">
+      {{$coupon->email}}
     </td>
     <td data-label="Paket">
       <?php 
@@ -39,8 +42,11 @@
           }
        ?>
     </td>
-    <td data-label="Action">
-      <button type="button" class="btn btn-sm btn-primary btn-edit" data-toggle="modal" data-target="#edit-coupon" data-id="{{$coupon->id}}" data-kodekupon="{{$coupon->kodekupon}}" data-nominal="{{$coupon->diskon_value}}" data-persen="{{$coupon->diskon_percent}}" data-validuntil="{{$coupon->valid_until}}" data-validto="{{$coupon->valid_to}}" data-keterangan="{{$coupon->keterangan}}" data-paket="{{$coupon->package_id}}">
+    <td data-label="Action" style="width : 110px" >
+      <button type="button" class="btn btn-success btn-sm btn-copy" data-link="{{url('checkout')}}/{{$coupon->kodekupon}}">
+        <i class="far fa-copy"></i>
+      </button>
+      <button type="button" class="btn btn-sm btn-primary btn-edit" data-toggle="modal" data-target="#edit-coupon" data-id="{{$coupon->id}}" data-kodekupon="{{$coupon->kodekupon}}" data-nominal="{{$coupon->diskon_value}}" data-persen="{{$coupon->diskon_percent}}" data-validuntil="{{$coupon->valid_until}}" data-validto="{{$coupon->valid_to}}" data-keterangan="{{$coupon->keterangan}}" data-paket="{{$coupon->package_id}}" data-affiliate="{{$coupon->affiliate_id}}">
         <i class="fas fa-pen"></i>
       </button>  
       <button type="button" class="btn btn-sm btn-danger btn-delete" data-toggle="modal" data-target="#confirm-delete" data-id="{{$coupon->id}}">
@@ -49,3 +55,21 @@
     </td>
   </tr>
 @endforeach
+
+<script type="text/javascript">
+   $( "body" ).on( "click", ".btn-copy", function(e) 
+    {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var link = $(this).attr("data-link");
+
+      var tempInput = document.createElement("input");
+      tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+      tempInput.value = link;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+    });
+</script>

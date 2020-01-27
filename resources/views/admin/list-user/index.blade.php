@@ -311,6 +311,19 @@
             </div>
           </div>
 
+          <div class="form-group row display_commision">
+            <label class="col-md-3 col-12">
+              <b>Commision</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <select class="form-control" name="commision" id="commision">
+                  @for($x=1;$x<=100;$x++)
+                    <option value="{{$x}}">{{$x}}%</option>
+                  @endfor
+              </select>
+            </div>
+          </div>
+
           <div class="form-group row">
             <label class="col-md-3 col-12">
               <b>Membership</b> 
@@ -443,6 +456,29 @@
   });
   chart.render();
   //{x : new Date('2019-12-04'), y: 520, indexLabel: "highest",markerColor: "red", markerType: "triangle" },
+
+    changeCommision();
+  }
+
+  function changeCommision()
+  {
+    $("select[name=is_admin]").change(function(){
+      display_commision();
+    });
+  }
+
+  function display_commision()
+  {
+    var is_admin = $("select[name=is_admin]").val();
+    if(is_admin == 2)
+    {
+      $("select[name=commision] > option[value=0]").text(1+'%').val(1);
+      $(".display_commision").show();
+    }
+    else {
+      $("select[name=commision] > option[value=1]").text(0).val(0);
+      $(".display_commision").hide();
+    }
   }
 
   $( "body" ).on( "click", "#btn-add-user-free-trial", function() {
@@ -476,7 +512,7 @@
   });
   
   $( "body" ).on( "click", ".btn-edit", function() {
-    $('#modaltitle').html('Edit User');
+    $('.modal-title').text('Edit User');
 
     $('#name').val($(this).attr('data-name'));
     $('#email').val($(this).attr('data-email'));
@@ -495,6 +531,7 @@
     }
     
     $('.password-field').hide();
+     display_commision();
     
     $('#id_edit').val($(this).attr('data-id'));
 
@@ -503,7 +540,7 @@
 
   $( "body" ).on( "click", ".btn-add", function() 
   {
-    $('#modaltitle').html('Add User');
+    $('.modal-title').text('Add User');
     
     $('#name').val('');
     $('#email').val('');
@@ -517,6 +554,7 @@
     $('#password-confirm').val('');
 
     $('#id_edit').val('');
+    display_commision();
 
     $('#add-user').modal('show');
   });

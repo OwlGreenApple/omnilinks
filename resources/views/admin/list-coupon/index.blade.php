@@ -6,6 +6,7 @@
 
   $(document).ready(function() {
     table = $('#myTable').DataTable({
+      responsive : true,
       destroy: true,
       "order": [],
     });
@@ -194,6 +195,9 @@
               Keterangan 
             </th>
             <th>
+              Affiliate 
+            </th>
+            <th>
               Paket
             </th>
             <th>
@@ -296,6 +300,23 @@
             </div>
           </div>
 
+           @if($user_affiliate->count() > 0)
+          <div class="form-group row">
+            <label class="col-md-4 col-12">
+              <b>Affiliate User</b> 
+            </label>
+
+            <div class="col-md-8 col-12">
+              <select class="form-control" name="affiliate_id" id="affiliate_id">
+                <option value="0">Pilih User</option>
+                  @foreach($user_affiliate as $row)
+                     <option value="{{$row->id}}">{{$row->email}}</option>
+                  @endforeach
+              </select>
+            </div>
+          </div>  
+          @endif
+
           <div class="form-group row">
             <label class="col-md-4 col-12">
               <b>Valid To</b> 
@@ -322,10 +343,10 @@
             <div class="col-md-8 col-12">
               <select class="form-control" name="package_id" id="package_id">
                 <option value="0">All</option>
-                <option value="1">Pro Monthly</option>
-                <option value="2">Pro Yearly</option>
-                <option value="3">Elite Monthly</option>
-                <option value="4">Elite Yearly</option>
+                <option value="1">Pro</option>
+                <option value="2">Popular</option>
+                <option value="3">Elite</option>
+                <option value="4">Super</option>
               </select>
             </div>
           </div>  
@@ -357,6 +378,37 @@
 </section>
 
 <script type="text/javascript">
+  $(document).ready(function(){
+    hideAffiliateOnChange();
+  });
+
+  function hideAffiliateOnChange()
+  {
+     $("#affiliate_id").change(function(){
+        hideAffiliateOption();
+     });
+  }
+
+  function hideAffiliateOption(){
+      var val = $("#affiliate_id").val();
+      var seloption = $('select[name=valid_to] > option');
+
+      if(val == 0)
+      {
+        for(x=1;x<seloption.length;x++)
+        {
+          seloption.eq(x).show();
+        }
+      }
+      else {
+        for(x=1;x<seloption.length;x++)
+        {
+          seloption.eq(x).hide();
+        }
+        $('select[name=valid_to] > option[value=all]').prop('selected','selected');
+      }
+  }
+
   $( "body" ).on( "click", ".btn-edit", function() {
     $('#title-coupon').html('Edit Kupon');
     $('#kodekupon').val($(this).attr('data-kodekupon'));
@@ -366,8 +418,9 @@
     $('#valid_to').val($(this).attr('data-validto'));
     $('#keterangan').val($(this).attr('data-keterangan'));
     $('#package_id').val($(this).attr('data-paket'));
-    
+    $("#affiliate_id").val($(this).attr('data-affiliate'));
     $('#id_edit').val($(this).attr('data-id'));
+    hideAffiliateOption();
 
     $('#add-coupon').modal('show');
   });
@@ -385,6 +438,7 @@
     $('#package_id').val(0);
 
     $('#id_edit').val('');
+    hideAffiliateOption();
 
     $('#add-coupon').modal('show');
   });
