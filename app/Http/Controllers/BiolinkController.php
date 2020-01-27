@@ -1307,7 +1307,7 @@ class BiolinkController extends Controller
         case "wachat":
           $wachat = wachat::where('pages_id',$page->id)->first();
           $temp_text = " ";
-          $link = "https://api.whatsapp.com/send?phone=".$page->wa_link."&text=" . $temp_text . "";
+          $link = "https://api.whatsapp.com/send?phone=".$wachat->wa_number."&text=" . $wachat->wa_text . "";
           $idpixel = $page->wa_chat_pixel_id;
         break;
         case "telegram":
