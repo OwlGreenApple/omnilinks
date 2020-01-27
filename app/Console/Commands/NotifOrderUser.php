@@ -71,24 +71,24 @@ class NotifOrderUser extends Command
         $interval = $date->diffInDays($now,false);
         // var_dump($user->email);
         // var_dump($interval);
-        if( ($interval>=5) && ($user->membership=='free') ){
+        if( ($interval==5) && ($user->membership=='free') ){
           if(env('MAIL_HOST')=='smtp.mailtrap.io'){
             sleep(2);
           }
           $order->is_notif_2 = 1;
           $order->is_notif_1 = 1;
           $order->save();
-          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order));
+          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
           continue;
         }
 
-        if( ($interval>=1) && ($user->membership=='free') ){
+        if( ($interval==1) && ($user->membership=='free') ){
           if(env('MAIL_HOST')=='smtp.mailtrap.io'){
             sleep(2);
           }
           $order->is_notif_1 = 1;
           $order->save();
-          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order));
+          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
         }
 
 

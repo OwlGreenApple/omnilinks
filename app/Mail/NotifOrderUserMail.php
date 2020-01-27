@@ -22,11 +22,13 @@ class NotifOrderUserMail extends Mailable
      */
     protected $user;
     protected $order;
+    protected $interval;
 
-    public function __construct($user,$order)
+    public function __construct($user,$order,$interval)
     {
       $this->user = $user;
       $this->order = $order;
+      $this->interval = $interval;
     }
 
     /**
@@ -36,15 +38,26 @@ class NotifOrderUserMail extends Mailable
      */
     public function build()
     {
-      return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
-                  ->subject('[Omnilinkz] Hari Terakhir Mendapatkan Harga Spesial dari Omnilinkz. Jangan Lupa Konfirmasi yah')
+      if ($this->interval==5) {
+        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
+                  ->subject('[Omnilinkz] Jangan Sampai Diskonmu Gak Berlaku Lagi, Konfirmasi Sekarang')
+                  ->view('emails.notif-order-user-2')
+                  ->with([
+                    'user'=>$this->user,
+                    'order'=>$this->order,
+                  ]);
+                  // ->with($this->user->email);
+      }
+      if ($this->interval==1) {
+        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
+                  ->subject('[Omnilinkz] Kamu Lupa ya? Orderan Kamu Lagi Nunggu di Konfirmasi nih!')
                   ->view('emails.notif-order-user')
                   ->with([
                     'user'=>$this->user,
                     'order'=>$this->order,
                   ]);
                   // ->with($this->user->email);
-
+      }
     }
 
 }

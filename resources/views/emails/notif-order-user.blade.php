@@ -1,19 +1,22 @@
 Halo {{$user->name}},<br>
 <br>
-Ini adalah email pengingat bahwa {{$user->name}} memiliki pembelian Omnilinkz yang belum terbayar, silahkan cek data berikut<br>
+Gimana kabarnya?<br>
+Kami ingin mengingatkan jika kamu belum melakukan transfer & konfirmasi pembayaran.<br>
+Kemarin kamu telah membeli Omnilinkz dengan rincian :<br>
 No Order        : {{$order->no_order}} <br>
 Package         : {{$order->package}} <br>
 Harga           : Rp. {{number_format($order->total)}} <br>
 Discount        : Rp. {{number_format($order->discount)}} <br>
 Total Tagihan   : Rp. {{number_format($order->grand_total)}} <br>
 <br>
-Kami beritahukan bahwa hari ini adalah hari terakhir pembayaran sebelum sistem kami akan menghapus data pemesanan <br>
-dan anda akan kehilangan kesempatan memiliki produk tersebut di harga yang sudah anda pesan. <br>
+Silahkan transfer sekarang ke <br>
+BCA :  8290-812-845 ( Sugiarto Lasjim )  <br>
 <br>
-Anda bisa melakukan pembayaran melalui bank berikut : <br>
-BCA :  8290-812-845 ( Sugiarto Lasjim ) <br>
+Buruan transfer & konfirmasi sekarang karena pembelianmu bisa dihapus oleh sistem<br>
+dan kamu akan kehilangan kesempatan memiliki produk tersebut di harga yang sudah kamu pesan.<br>
 <br>
-Salam sukses selalu, <br>
-Team Omnilinkz <br>
-
-
+Setelah transfer, jangan lupa konfirmasi di link ini  <br>
+<br>
+Salam sukses selalu,<br>
+Team Omnilinkz<br>
+<br>
