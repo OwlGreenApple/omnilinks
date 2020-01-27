@@ -1502,12 +1502,14 @@ class BiolinkController extends Controller
       $wa_btn_text = $request->wa_btn_text;  
       $wa_header = $request->wa_header; 
       $uuid = $request->uuid;
+      $wapixelchatid = $request->wapixelchat;
 
       $data = array(
         'enable_chat'=>$enable_chat,
         'buzz_btn'=>$buzz_btn,
         'wa_btn_text'=>$wa_btn_text,
         'wa_header'=>$wa_header,
+        'wa_chat_pixel_id'=>$wapixelchatid
       );
 
       # --- WACHAT MEMBERS ---
@@ -1624,10 +1626,11 @@ class BiolinkController extends Controller
           $response['status'] = 'success';
           $response['message'] = 'WA Chat setting telah disimpan';
       } catch (\Illuminate\Database\QueryException $e) {
+          //$e->message
           $response['status'] = "error";
-          $response['message'] = 'WA Chat setting gagal disimpan';
+          $response['message'] = "Error! WA Chat setting gagal disimpan";
       }
-
+      
       return response()->json($response);
   }
 
