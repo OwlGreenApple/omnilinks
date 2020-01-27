@@ -1570,9 +1570,9 @@ and add more";
         </div>  
         <div class="wcs_popup_person_container">
             <a href="#" data-href="{{env('APP_URL').'/click/wachat/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
-              <div 
+              <!--<div 
                 class="wcs_popup_person" >
-                <!--data-number="{{$wachat->wa_number}}"
+                data-number="{{$wachat->wa_number}}"
                 data-text = "{{$wachat->wa_text}}" --> 
             
                 <div class="wcs_popup_person_img"><img src="{{ Storage::disk('s3')->url($wachat->photo) }}" alt=""></div>
@@ -1581,7 +1581,7 @@ and add more";
                     <div class="wcs_popup_person_description">{{$wachat->position}}</div>
                     <!--<div class="wcs_popup_person_status">I'm Online</div>-->
                 </div>  
-              </div>
+              <!--</div>-->
             </a>
  
             <!--<div 
