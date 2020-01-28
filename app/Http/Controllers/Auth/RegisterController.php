@@ -83,7 +83,8 @@ class RegisterController extends Controller
       // 'username'=> $data['username'],
       'username'=> $data['email'],
       'password' => Hash::make($data['password']),
-      'membership' => 'free',
+      // 'membership' => 'free',
+      'membership' => 'popular',
       'wa_number' => '62'.$data['wa_number'],
     ]);
 
@@ -351,11 +352,11 @@ class RegisterController extends Controller
       } else {
         $temp = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
         // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
-        return view('pricing.thankyou-register')->with(array(
-              'order'=>$arrRet['order'],    
-              'coupon_code' => $string,
-            ));
-        
+        return redirect('/')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
+        // return view('pricing.thankyou-register')->with(array(
+              // 'order'=>$arrRet['order'],    
+              // 'coupon_code' => $string,
+            // ));
       }
     } else {
       // return redirect("register")->with("error",$validator->errors()->first());
