@@ -306,10 +306,12 @@
                 <option value="all">All</option>
                 <option value="new">New</option>
                 <option value="extend">Extend</option>
+                <!--
                 <option value="package-elite-2">Package Elite 2</option>
                 <option value="package-elite-3">Package Elite 3</option>
                 <option value="package-elite-5">Package Elite 5</option>
                 <option value="package-elite-7">Package Elite 7</option>
+                -->
               </select>
             </div>
           </div>
@@ -322,10 +324,10 @@
             <div class="col-md-8 col-12">
               <select class="form-control" name="package_id" id="package_id">
                 <option value="0">All</option>
-                <option value="1">Pro Monthly</option>
-                <option value="2">Pro Yearly</option>
-                <option value="3">Elite Monthly</option>
-                <option value="4">Elite Yearly</option>
+                <option value="1">Pro</option>
+                <option value="2">Popular</option>
+                <option value="3">Elite</option>
+                <option value="4">Super</option>
               </select>
             </div>
           </div>  
