@@ -364,6 +364,17 @@
       <li><a href=""><b>Daftar Sekarang</b></a></li>
     </div>
   END TAGS -->
+    <div class="col-lg-10 tags">
+      <li><b>Lihat bagaimana mudahnya menggunakan Omnilinkz</b></li>
+      <li><b>Cek Tutorialnya Sekarang</b> </li>
+      <li>
+           <a class="link-pro" href="https://omnilinkz.com/tutorial/" target="_blank">
+            <button class="btn btn-upgrade-big update">
+              Tutorial
+            </button>
+          </a>
+      </li>
+    </div>
 
 </div> <!-- end header -->
 
