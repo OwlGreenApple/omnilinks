@@ -355,15 +355,15 @@
     </div> <!-- END NOTES -->
   </div><!-- end large pricing column -->
 
-  <!-- TAGS -->
+  <!-- TAGS 
     <div class="col-lg-10 tags">
       <li><b>Coba 7 Hari Gratis Paket Limited</b></li>
       <li><b>1 Bio</b> Per Akun</li>
       <li><b>7 Hari</b> Pasang FB Retargeting</li>
       <li>Respon <b>1000 Klik</b></li>
-      <li><a href="{{ route('register') }}"><b>Daftar Sekarang</b></a></li>
+      <li><a href=""><b>Daftar Sekarang</b></a></li>
     </div>
-  <!-- END TAGS -->
+  END TAGS -->
 
 </div> <!-- end header -->
 
@@ -436,7 +436,7 @@
           <div class="col-lg-12">
             <h5 class="omnhide">Bagaimana cara mendaftar?</h5>
             <p class="collapse">
-              Langsung saja Klik <a href="{{route('register')}}">► [DAFTAR DISINI]</a> , pilih paket & ikuti petunjuk nya step by step
+              Langsung saja Klik <a href="">► [DAFTAR DISINI]</a> , pilih paket & ikuti petunjuk nya step by step
             </p> 
           </div>
 

@@ -90,7 +90,7 @@
                   </a>
                   @endif
                   <hr class="own">
-                  <h3 class="have">Belum punya akun? <a href="{{ __('register')}}">Daftar Disini!</a></h3>
+                  <h3 class="have">Belum punya akun? <a href="{{ __('pricing')}}">Daftar Disini!</a></h3>
                 </div>
 
               </div>
