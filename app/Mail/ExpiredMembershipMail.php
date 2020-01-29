@@ -37,7 +37,7 @@ class ExpiredMembershipMail extends Mailable
     public function build()
     {
       if ($this->interval==5){
-        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
+        return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Membership tinggal 5 hari lagi nih, nggak berasa yah')
                   ->view('emails.expired-membership.notif-1')
                   ->with([
@@ -47,7 +47,7 @@ class ExpiredMembershipMail extends Mailable
       }
       if ($this->interval==1){
         $coupon = $this->create_coupon();
-        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
+        return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Service Omnilinkz.Com akan berakhir')
                   ->view('emails.expired-membership.notif-2')
                   ->with([
@@ -65,7 +65,7 @@ class ExpiredMembershipMail extends Mailable
         if (is_null($coupon)) {
           $coupon = $this->create_coupon();
         }
-        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
+        return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Hari ini terakhir penggunaan coupon order anda')
                   ->view('emails.expired-membership.notif-3')
                   ->with([

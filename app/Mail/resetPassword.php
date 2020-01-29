@@ -29,7 +29,7 @@ class resetPassword extends Mailable
      */
     public function build()
     {
-       return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
+       return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
         ->subject('[Omnilinkz] Reset Password')
         ->view('emails.forgot-password')
         ->with('linkReset',$this->token);

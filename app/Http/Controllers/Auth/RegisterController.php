@@ -143,7 +143,7 @@ class RegisterController extends Controller
         ];
       
         Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-          $message->from('no-reply@omnilinks.com', 'Omnilinks');
+          $message->from('no-reply@omnilinks.com', 'Michael from Activomni');
           $message->to($user->email);
           $message->subject('[Omnilink] Order Nomor '.$order_number);
         });

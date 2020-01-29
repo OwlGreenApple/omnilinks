@@ -28,7 +28,7 @@ class ResendConfirmEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('no-reply@omnilinkz.com', 'Omnilinkz')
+        return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Confirmation Email')
                   ->view('emails.resend-confirm-email')
                   ->with($this->emaildata);
