@@ -1749,13 +1749,13 @@ class BiolinkController extends Controller
         if($updateerror == false && !empty($photo))
         {
           Storage::disk('s3')->put($updatepath, $imageUpload, 'public');
-          $response['edit'] = 1;
+          $response['edit'] = 0;
           $response['status'] = 'success';
           $response['message'] = 'Data berhasil di edit';
         }
         else if($updateerror == false && empty($photo))
         {
-          $response['edit'] = 1;
+          $response['edit'] = 0;
           $response['status'] = 'success';
           $response['message'] = 'Data berhasil di edit';
         }
@@ -1789,7 +1789,7 @@ class BiolinkController extends Controller
                 'position'=>$rows->position,
                 'wa_number'=>substr($rows->wa_number,3),
                 'wa_text'=>($rows->wa_text == null)?'':$rows->wa_text,
-                'photo'=>$rows->photo
+                'photo'=>Storage::disk('s3')->url($rows->photo)
               );
           }
       }
@@ -1826,6 +1826,22 @@ class BiolinkController extends Controller
       }
 
       return response()->json($response);
+  }
+
+  public function wachatpixelpage(Request $request)
+  {
+    $iduser=Auth::id();
+    $pageid = $request->pageid;
+    $pixel=Pixel::where([['users_id',$iduser]])->get(); 
+    $pages = Page::where('id',$pageid)->first();
+
+    if(is_null($pages)){
+      $wachat_pixel_id = 0;
+    } else {
+      $wachat_pixel_id = $pages->wa_chat_pixel_id;
+    }
+  
+    return view('user.dashboard.contentpixelwachat',['data_pixel'=>$pixel,'wachat_pixel_id'=>$wachat_pixel_id]);
   }
 
 /* end class */  

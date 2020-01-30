@@ -126,6 +126,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::post('savewachatmember','BiolinkController@savewaChatMember')->middleware('wamember')->name('savewachatmember');
     Route::get('getwachat','BiolinkController@loadWAChatMembers')->name('getwachat');
     Route::get('delwachatmember','BiolinkController@delWAChatMembers')->name('delwachatmember');
+    Route::get('wachatpixel','BiolinkController@wachatpixelpage')->name('wachatpixel');
     Route::get('/delete-photo','BiolinkController@delete_photo');
     Route::get('/load-pixel-page','BiolinkController@pixelpage');
     Route::get('/link-bio','BiolinkController@loadLinkBio');
