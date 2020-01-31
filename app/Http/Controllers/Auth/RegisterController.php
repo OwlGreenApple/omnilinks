@@ -274,57 +274,7 @@ class RegisterController extends Controller
       $string = '';
       if($request->price == null)
       {
-        do 
-        {
-          $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
-          $string = 'special-';
-          for ($i = 0; $i < 7 ; $i++) {
-            $pos = rand(0, strlen($karakter)-1);
-            $string .= $karakter{$pos};
-          }
-          $coupon = Coupon::where("kodekupon","=",$string)->first();
-        } while (!is_null($coupon));
-
-        $coupon = new Coupon;
-        $coupon->kodekupon = $string;
-        $coupon->diskon_value = 0;
-        $coupon->diskon_percent = 0;
-        $coupon->valid_until = new DateTime('+2 days');
-        $coupon->valid_to = "package-elite-3";
-        $coupon->keterangan = "Kupon AutoGenerate Free User";
-        $coupon->package_id = 0;
-        $coupon->user_id = $arrRet['user']->id;
-        $coupon->save();
       }
-
-      /*if ($request->price<>"") 
-      {
-        // return redirect('thankyou');
-      } else {
-        // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
-        //klo free user dibuatin kupon diskon 50%, berlaku selama 2x24 jam
-        do 
-        {
-          $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
-          $string = 'special-';
-          for ($i = 0; $i < 7 ; $i++) {
-            $pos = rand(0, strlen($karakter)-1);
-            $string .= $karakter{$pos};
-          }
-          $coupon = Coupon::where("kodekupon","=",$string)->first();
-        } while (!is_null($coupon));
-        $coupon = new Coupon;
-        $coupon->kodekupon = $string;
-        $coupon->diskon_value = 0;
-        $coupon->diskon_percent = 0;
-        $coupon->valid_until = new DateTime('+2 days');
-        $coupon->valid_to = "package-elite-3";
-        $coupon->keterangan = "Kupon AutoGenerate Free User";
-        $coupon->package_id = 0;
-        $coupon->user_id = $arrRet['user']->id;
-        $coupon->save();
-      }
-      */
 
       $secret_data = [
         'email' => $arrRet['user']->email,

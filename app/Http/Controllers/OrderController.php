@@ -596,6 +596,7 @@ class OrderController extends Controller
     $userlog->save();
 
     $user->valid_until = $valid;
+    $user->is_member = 1;
     $user->save();
     $order->save();
 

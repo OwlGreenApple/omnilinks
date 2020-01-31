@@ -355,15 +355,15 @@
     </div> <!-- END NOTES -->
   </div><!-- end large pricing column -->
 
-  <!-- TAGS 
+  <!-- TAGS -->
     <div class="col-lg-10 tags">
-      <li><b>Coba 7 Hari Gratis Paket Limited</b></li>
-      <li><b>1 Bio</b> Per Akun</li>
-      <li><b>7 Hari</b> Pasang FB Retargeting</li>
-      <li>Respon <b>1000 Klik</b></li>
-      <li><a href=""><b>Daftar Sekarang</b></a></li>
+      <li><b>Coba 7 Hari Gratis </b></li>
+      <!--<li><b>1 Bio</b> Per Akun</li>
+      <li><b>7 Hari</b> Pasang FB Retargeting</li>-->
+      <li><b>Paket Popular</b></li>
+      <li><a href="{{url('register')}}"><b>Daftar Sekarang</b></a></li>
     </div>
-  END TAGS -->
+  <!-- END TAGS 
     <div class="col-lg-10 tags">
       <li><b>Lihat bagaimana mudahnya menggunakan Omnilinkz</b></li>
       <li><b>Cek Tutorialnya Sekarang</b> </li>
@@ -374,7 +374,7 @@
             </button>
           </a>
       </li>
-    </div>
+    </div>-->
 
 </div> <!-- end header -->
 

@@ -27,9 +27,6 @@ if(env('DOMAIN_TYPE')=='main'){
   // Route::post('/use/{id}/update','UserController@update');
   // Route::get('/use/{id}/delete','UserController@delete');
   Auth::routes();
-  Route::get('register', function(){
-    return redirect('pricing');
-  });
   
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');

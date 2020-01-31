@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\User;
+use App\Coupon;
 use App\UserLog;
 use App\Page;
 use App\Link;
@@ -12,6 +13,7 @@ use App\PremiumID;
 
 use App\Mail\ExpiredMembershipMail;
 use App\Mail\ExpiredPremiumIDMail;
+use App\Mail\ReminderFreeTrialMail;
 
 use Mail,DateTime,Carbon;
 
@@ -48,8 +50,10 @@ class CheckMembership extends Command
      */
     public function handle()
     {
-      $users = User::All();
-      // $users = User::where('id',3)->get();
+      // $users = User::
+                // where("is_confirm",1)
+                // ->get();
+      $users = User::all();
 
       foreach ($users as $user) {
         $now = Carbon::now();
@@ -62,15 +66,18 @@ class CheckMembership extends Command
         $interval = $now->diffInDays($date,false);
         // var_dump($user->email);
         // var_dump($interval);
-        if( ($interval==5) || ($interval==1) || ($interval==-1) ){
-          if(env('MAIL_HOST')=='smtp.mailtrap.io'){
-            sleep(2);
+        //klo member, maka akan diingatkan
+        if ($user->is_member){
+          if( ($interval==5) || ($interval==1) || ($interval==-1) ){
+            if(env('MAIL_HOST')=='smtp.mailtrap.io'){
+              sleep(2);
+            }
+            Mail::to($user->email)->queue(new ExpiredMembershipMail($user,$interval));
           }
-          Mail::to($user->email)->queue(new ExpiredMembershipMail($user,$interval));
-        }
-
-        //check premium id 
-        if($interval==5){
+          
+          
+          //check premium id 
+          if($interval==5){
             $pages = Page::where('user_id',$user->id)
                         ->where('premium_id','!=',0)
                         ->get();
@@ -96,14 +103,45 @@ class CheckMembership extends Command
             }
 
             $premiumid = PremiumID::where('user_id',$user->id);
-            
+
             if($premiumid->exists()){
               $premiumid->delete();
               Mail::to($user->email)->queue(new ExpiredPremiumIDMail($user->email,$user));
             }
-            
+
             //$user->valid_until = null;
             //$user->save();
+          }
+
+        }
+        //klo blm member, maka ditawari untuk beli kupon
+        else {
+          if ($interval==3) {
+            //dibuatin kupon, dikirim email kuponnya 
+            do 
+            {
+              $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
+              $string = 'special-';
+              for ($i = 0; $i < 7 ; $i++) {
+                $pos = rand(0, strlen($karakter)-1);
+                $string .= $karakter{$pos};
+              }
+              $coupon = Coupon::where("kodekupon","=",$string)->first();
+            } while (!is_null($coupon));
+
+            $coupon = new Coupon;
+            $coupon->kodekupon = $string;
+            $coupon->diskon_value = 0;
+            $coupon->diskon_percent = 0;
+            $coupon->valid_until = new DateTime('+2 days');
+            $coupon->valid_to = "package-elite-3";
+            $coupon->keterangan = "Kupon AutoGenerate Free User";
+            $coupon->package_id = 0;
+            $coupon->user_id = $user->id;
+            $coupon->save();
+
+            Mail::to($user->email)->queue(new ReminderFreeTrialMail($user,$string));
+          }
         }
 
         if($date < $now and $user->membership!='free'){
