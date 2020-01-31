@@ -1500,8 +1500,8 @@
   loadPixel();
 
   function loadPixelPage() {
-    $("#wapixel, #wapixelchat").html(dataView);
-    $("#wapixel, #wapixelchat").val('{{$pages->wa_pixel_id}}');
+    $("#wapixel").html(dataView);
+    $("#wapixel").val('{{$pages->wa_pixel_id}}');
     $("#telegrampixel").html(dataView);
     $("#telegrampixel").val('{{$pages->telegram_pixel_id}}');
     $("#skypepixel").html(dataView);
@@ -3733,6 +3733,7 @@ and add more";
               </div>
               <div class="form-group">
                 <label>Photo: Ukuran harus 1 : 1 dan dengan format jpg</label>
+                <span class="file_name"><!-- display file name --></span>
                 <input type="file" class="form-control" name="chat_member_photo" />
               </div>
               <span class="editrue"></span>
@@ -3807,6 +3808,7 @@ and add more";
     wa_preview_header_text();
     getSelected();
     displayWaText();
+    wachatloadPixel();
     //callMaintainPlus();
   });
 
@@ -3911,6 +3913,25 @@ and add more";
     var leftMargin = (screenwidth-containerWidth)/2;  
     $("#example").css("marginLeft", leftMargin);  
   }
+
+   function wachatloadPixel(){
+    $.ajax({
+      type: 'GET',
+      url: "{{route('wachatpixel')}}",
+      data: { pageid : '{{$pages->id}}' },
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        $("#wapixelchat").html(result);
+      }
+    });
+  }
 </script>
 
 <script type="text/javascript">
@@ -3960,7 +3981,7 @@ and add more";
               data +=  '<i class="fas fa-trash-alt"></i>';
               data +=  '</button>';
 
-              data +=  '<button type="button" class="edit_wa_member btn btn-sm btn-primary float-right mr-2" data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'" data-text="'+result[i].wa_text+'" class="edit_wa_member" id="'+result[i].id+'">';
+              data +=  '<button type="button" class="edit_wa_member btn btn-sm btn-primary float-right mr-2" data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'" data-text="'+result[i].wa_text+'" class="edit_wa_member" id="'+result[i].id+'" data-img="'+result[i].photo+'"">';
 
               data +=  '<i class="fas fa-pencil-alt"></i>';
               data +=  '</button>';
@@ -4098,6 +4119,7 @@ and add more";
         $(".editrue").html('');
         $("input[name=uuid]").val(uuid);
         $("input[name=pageid]").val(pageid);
+        $(".file_name").html('');
         $("#wa_chat_member").modal();
       }
       
@@ -4110,14 +4132,16 @@ and add more";
       var wa_id = $(this).attr('id');
       var uuid = $("input[name=uuid]").val();
       var pageid = $("input[name=pageid]").val();
+      var filename = $(this).attr('data-img');
 
-      $('.btn-status').html('Edit');
+      $('.btn-status').html('Save');
       $("input[name=chat_member_name]").val($(this).attr('data-nm'));
       $("input[name=chat_member_position]").val($(this).attr('data-pos'));
       $("input[name=chat_member_number]").val($(this).attr('data-num'));
       $("input[name=chat_member_text]").val($(this).attr('data-text'));
       $("input[name=uuid]").val(uuid);
       $("input[name=pageid]").val(pageid);
+      $(".file_name").html('<br/><label>File saat ini: <img src="'+filename+'"/></label>');
 
       $(".editrue").html('<input type="hidden" name="wa_id" readonly="readonly" value="'+wa_id+'">');
 
@@ -4167,13 +4191,13 @@ and add more";
               $('#loader').hide();
               $('.div-loading').removeClass('background-load');
 
-              load_chat_member();
               changed = 0;
               changelink = 0;
               changechat = 0;
               refreshwa();
               loadLinkBio();
               refreshpixel();
+              //load_chat_member();
             } else {
               var url = window.location.href; 
               location.href= url+"/?mod=1";
