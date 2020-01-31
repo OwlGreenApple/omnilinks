@@ -7,29 +7,10 @@ Pass  : {{$password}}
 <br>
 <br>
 
-<?php if ($price=="") { ?>
-  <i>Selamat, </i><br>
-  <strong>Anda mendapatkan Paket Special Elite 3 bulan</strong> <br>
-  <i>Hanya dengan 295 rb saja</i> <br>
-  <strong>Gunakan kupon ini: "{{$coupon_code}}" </strong><br>
-  <strong>Atau klik link <a href="{{url('checkout/'.$coupon_code)}}">ini</a> </strong>  <br>
-<br>
-  (kupon akan expired sesudah 2x24 jam)<br>
-  <br>
-  *kupon ini hanya bisa berlaku untuk email ini saja.
-  <br>
-<?php } ?>
-<br>
-
 
 <strong>Klik link dibawah</strong> utk  konfirmasi registrasi & upgrade sekarang. <br>
 <STRONG><a href="{{$url}}"> Link Confirmation </a></STRONG> <br>
 <br>
-<?php if ($price=="") { ?>
-.<br>
-<i><strong>*Gunakan kupon first time user ini & upgrade sekarang juga</strong></i><br>
-.<br>
-<?php } ?>
 <br>
 
 <br>
