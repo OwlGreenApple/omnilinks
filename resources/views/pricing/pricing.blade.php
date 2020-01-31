@@ -289,7 +289,7 @@
           <li>Unlimited FB, Twitter,Google</li>
           <li>Retargeting</li>
           <li>Background Animation&nbsp;<i class="fa fa-star fa-lg clipped"></i></li>
-          <li>WA Chat&nbsp;<i class="fa fa-star fa-lg clipped"></i></li>
+          <li>Whatsapp popup chat&nbsp;<i class="fa fa-star fa-lg clipped"></i></li>
           <li>Custom Bio Link</li>
           <li>Support by Live Chat & Email</li>
           <li>Bio Link Bebas Iklan</li>
@@ -330,7 +330,7 @@
           <li>Unlimited FB, Twitter,Google</li>
           <li>Retargeting</li>
           <li>Background Animation</li>
-          <li>WA Chat</li>
+          <li>Whatsapp popup chat</li>
           <li>Custom Bio Link</li>
           <li>Support by Live Chat & Email</li>
           <li>Bio Link Bebas Iklan</li>
@@ -344,7 +344,7 @@
           <li>Unlimited FB, Twitter,Google</li>
           <li>Retargeting</li>
           <li>Background Animation</li>
-          <li>WA Chat</li>
+          <li>Whatsapp popup chat</li>
           <li>Custom Bio Link</li>
           <li>Support by Live Chat & Email</li>
           <li>Bio Link Bebas Iklan</li>
