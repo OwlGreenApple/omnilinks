@@ -125,9 +125,6 @@
 
 <div class="container mb-5 main-cont" style="">
   <div class="row">
-    @if (session('reminderFree'))
-      hahahahahahah
-    @endif
     @if (session('error'))
     <div class="col-md-12 mb-3">
         <div class="alert alert-danger">
