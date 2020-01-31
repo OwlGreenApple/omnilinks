@@ -50,6 +50,7 @@ class CheckIsConfirm extends Command
     {
       $users = User::
                 where("is_confirm",0)
+                ->where("membership","free")
                 ->get();
 
       foreach ($users as $user) {
@@ -63,7 +64,6 @@ class CheckIsConfirm extends Command
           $user->membership = 'popular';
           $user->valid_until = new DateTime('+8 days');
           $user->save();
-          
           
       }
     }
