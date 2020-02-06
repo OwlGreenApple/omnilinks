@@ -19,7 +19,7 @@ Hanya perlu 1 klik saja mereka bisa akses semua link checkout dan sosial mediamu
 Oh iya, Sebagai tanda apresiasi, karena kamu telah membuat akun Omnilinkz<br>
 Kamu berhak mendapatkan Promo Omnilinkz<br>
 ➡ Gunakan Kode Promo : {{$kodekupon}} <br>
-Link Upgrade ► https://omnilinkz.com/dashboard/{{$kodekupon}}
+Link Upgrade ► https://omnilinkz.com/dashboard/checkout/{{$kodekupon}}
 <br>
 Selamat menggunakan Omnilinkz,<br>
 Semoga berguna dan membuat traffic dan omzet Olshopmu meningkat.<br>
