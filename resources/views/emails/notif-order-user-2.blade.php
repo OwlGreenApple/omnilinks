@@ -18,7 +18,7 @@ BCA :  8290-812-845 ( Sugiarto Lasjim )<br>
 <br>
 Buruan transfer & konfirmasi sekarang karena hari ini pembelianmu akan dihapus oleh sistem dan kamu akan kehilangan kesempatan<br> memiliki produk tersebut di harga yang sudah kamu pesan.<br>
 <br>
-Setelah transfer, jangan lupa konfirmasi di link ini<br>
+Setelah transfer, jangan lupa konfirmasi <strong><a href="https://omnilinkz.com/dashboard/orders">di link ini</a></strong><br>
 <br>
 Salam sukses selalu,<br>
 Team Omnilinkz<br>
