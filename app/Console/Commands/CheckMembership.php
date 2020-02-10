@@ -157,7 +157,7 @@ class CheckMembership extends Command
           $user->save();
           
           //pages themes dibalikin jadi solid #fff
-          $pages = Page::where('user_id',$user->id)
+          /* page dikasi pop up, tapi settingan tetap sama $pages = Page::where('user_id',$user->id)
                       ->get();
           if(!is_null($pages)){
             foreach ($pages as $page) {
@@ -169,7 +169,7 @@ class CheckMembership extends Command
               $page->color_picker="#fff";
               $page->save();
             }
-          }
+          }*/
           
         }
       }
