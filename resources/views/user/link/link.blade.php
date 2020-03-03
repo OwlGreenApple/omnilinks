@@ -1222,7 +1222,7 @@
             <?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>
           </span>
           <input type="hidden" id="hidden-description" value="{{$pages->description}}">
-          <span class="header-txt txt" style="word-break: break-all;" id="description">
+          <span class="header-txt txt" style="word-break: break-word;" id="description">
 <?php if(!is_null($pages->description)) { 
                             echo $pages->description;
                           }else {
