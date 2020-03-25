@@ -167,8 +167,7 @@
             <div class="bd-highlight" align="center">
               <span class="click-page">
                 {{array_sum($arr)}}
-              </span><br>
-              clicks
+              </span><br>clicks
             </div>
           </div>
 
@@ -235,7 +234,11 @@
               <div class="col-md-2 col-6 text-md-center text-right">
                 <div class=" bd-highlight">
                   <span>
-                    {{$arr[$banner->title]}} clicks
+                    {{$arr[$banner->title]}} clicks 
+                  </span>
+                  &nbsp
+                  <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/banner/'.$banner->id}}">
+                    <i class="far fa-clone"></i>  
                   </span>
                 </div>
               </div>
@@ -274,6 +277,10 @@
                 <span>
                   {{$arr['wa']}} clicks
                 </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/wa/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
+                </span>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 menu-nomobile">
@@ -300,6 +307,10 @@
                 <span>
                   {{$arr['telegram']}} clicks
                 </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/telegram/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
+                </span>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 menu-nomobile">
@@ -324,6 +335,10 @@
               <div class=" bd-highlight">
                 <span>
                   {{$arr['skype']}} clicks
+                </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/skype/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
                 </span>
               </div>
             </div>
@@ -350,6 +365,10 @@
                 <span>
                   {{$arr['line']}} clicks
                 </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/line/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
+                </span>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 menu-nomobile">
@@ -374,6 +393,10 @@
               <div class=" bd-highlight">
                 <span>
                   {{$arr['messenger']}} clicks
+                </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/messenger/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
                 </span>
               </div>
             </div>
@@ -413,6 +436,10 @@
                 <span>
                   {{$arr[$link->title]}} clicks
                 </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/link/'.$link->id}}">
+                  <i class="far fa-clone"></i>  
+                </span>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 menu-nomobile">
@@ -449,6 +476,10 @@
                 <span>
                   {{$arr['fb']}} clicks
                 </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/fb/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
+                </span>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 menu-nomobile">
@@ -474,6 +505,10 @@
                 <span>
                   {{$arr['ig']}} clicks
                 </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/ig/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
+                </span>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 menu-nomobile">
@@ -497,6 +532,10 @@
                 <span>
                   {{$arr['twitter']}} clicks
                 </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/twitter/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
+                </span>
               </div>
             </div>
             <div class="col-lg-3 col-md-4 menu-nomobile">
@@ -519,6 +558,10 @@
               <div class="bd-highlight">
                 <span>
                   {{$arr['youtube']}} clicks
+                </span>
+                &nbsp
+                <span class="btn-copylink menu-nomobile" data-id="{{$page->id}}" data-link="{{env('APP_URL3').'/click/youtube/'.$page->id}}">
+                  <i class="far fa-clone"></i>  
                 </span>
               </div>
             </div>
