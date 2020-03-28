@@ -34,8 +34,11 @@ class HomeController extends Controller
 
     public function test_shell()
     {
+      ini_set ();
       $output = exec('cat /home/omli/public_html/.env.example');
-      echo $output;
+      echo "<pre>$output</pre>";
+      dd($output);
+      ini_set ();
     }
 
     public function migrate_to_activwa()
