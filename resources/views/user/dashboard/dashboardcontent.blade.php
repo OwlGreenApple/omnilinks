@@ -79,11 +79,13 @@
   ?>
   @foreach($pages as $page)
     <?php
-    $links = $link_temp
+    $link_temp1 =$link_temp;
+    $banner_temp1 =$banner_temp;
+    $links = $link_temp1
               ->where('pages_id',$page->id)
               ->get();
 
-    $banners = $banner_temp
+    $banners = $banner_temp1
                 ->where('pages_id',$page->id)
                 ->get();
 
