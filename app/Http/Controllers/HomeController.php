@@ -32,6 +32,12 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function test_shell()
+    {
+      $output = shell_exec('cat /home/omli/public_html/.env.example');
+      echo $output;
+    }
+
     public function migrate_to_activwa()
     {
       $users = User::whereNotNull('wa_number')->get();

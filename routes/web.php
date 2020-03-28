@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +21,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/', 'HomeController@index');
   Route::get('migrate-to-activwa', 'HomeController@migrate_to_activwa');
   Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+  Route::get('test-shell-0312', 'HomeController@test_shell');
   // Route::get('/use','UserController@index');
   // Route::post('/user/create','UserController@create');
   // Route::get('/use/{id}/edit','UserController@edit');
