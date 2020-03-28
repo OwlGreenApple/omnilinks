@@ -3,6 +3,7 @@
   use App\Banner;
   use App\Pixel;
   use App\Http\Controllers\DashboardController;
+  $dashcont = new DashboardController;
 ?>
 
 <script>
@@ -62,17 +63,12 @@
     </div>
   </div>
 @else 
-  @foreach($pages as $page)
-    <?php
-    $links = Link::orderBy('users_id')
-              ->where('users_id',Auth::user()->id)
-              ->where('pages_id',$page->id)
-              ->get();
+  <?php 
+    $link_temp = Link::orderBy('users_id')
+              ->where('users_id',Auth::user()->id);
 
-    $banners = Banner::orderBy('users_id')
-                ->where('users_id',Auth::user()->id)
-                ->where('pages_id',$page->id)
-                ->get();
+    $banner_temp = Banner::orderBy('users_id')
+                ->where('users_id',Auth::user()->id);
 
     $pixels = Pixel::orderBy('jenis_pixel')
                 ->where('users_id',Auth::user()->id)
@@ -80,8 +76,16 @@
                 //->where('pages_id',$page->id)
                 ->groupBy('jenis_pixel')
                 ->get();
+  ?>
+  @foreach($pages as $page)
+    <?php
+    $links = $link_temp
+              ->where('pages_id',$page->id)
+              ->get();
 
-    $dashcont = new DashboardController;
+    $banners = $banner_temp
+                ->where('pages_id',$page->id)
+                ->get();
 
     $arr = $dashcont->counter_click_month($page,$banners,$links,$bulan,$tahun);
     ?>
