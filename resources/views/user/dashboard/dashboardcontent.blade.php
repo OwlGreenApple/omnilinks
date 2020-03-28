@@ -64,15 +64,18 @@
 @else 
   @foreach($pages as $page)
     <?php
-    $links = Link::where('users_id',Auth::user()->id)
+    $links = Link::orderBy('users_id')
+              ->where('users_id',Auth::user()->id)
               ->where('pages_id',$page->id)
               ->get();
 
-    $banners = Banner::where('users_id',Auth::user()->id)
+    $banners = Banner::orderBy('users_id')
+                ->where('users_id',Auth::user()->id)
                 ->where('pages_id',$page->id)
                 ->get();
 
-    $pixels = Pixel::where('users_id',Auth::user()->id)
+    $pixels = Pixel::orderBy('users_id')
+                ->where('users_id',Auth::user()->id)
                 ->select('jenis_pixel')
                 //->where('pages_id',$page->id)
                 ->groupBy('jenis_pixel')
