@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function test_shell()
     {
-      $output = shell_exec('cat /home/omli/public_html/.env.example');
+      $output = exec('cat /home/omli/public_html/.env.example');
       echo $output;
     }
 
