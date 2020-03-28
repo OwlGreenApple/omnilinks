@@ -65,10 +65,12 @@
 @else 
   <?php 
     $link_temp = Link::orderBy('users_id')
-              ->where('users_id',Auth::user()->id);
+              ->where('users_id',Auth::user()->id)
+              ->get();
 
     $banner_temp = Banner::orderBy('users_id')
-                ->where('users_id',Auth::user()->id);
+                ->where('users_id',Auth::user()->id)
+                ->get();
 
     $pixels = Pixel::orderBy('jenis_pixel')
                 ->where('users_id',Auth::user()->id)
@@ -79,13 +81,11 @@
   ?>
   @foreach($pages as $page)
     <?php
-    $link_temp1 =$link_temp;
-    $banner_temp1 =$banner_temp;
-    $links = $link_temp1
+    $links = $link_temp
               ->where('pages_id',$page->id)
               ->get();
 
-    $banners = $banner_temp1
+    $banners = $banner_temp
                 ->where('pages_id',$page->id)
                 ->get();
 
