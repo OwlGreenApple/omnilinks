@@ -73,7 +73,7 @@
   ?>
   @foreach($pages as $page)
     <?php
-    $links = $Link::orderBy('users_id')
+    $links = Link::orderBy('users_id')
               ->where('users_id',Auth::user()->id)
               ->where('pages_id',$page->id)
               ->get();
