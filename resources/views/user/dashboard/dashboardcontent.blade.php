@@ -74,7 +74,7 @@
                 ->where('pages_id',$page->id)
                 ->get();
 
-    $pixels = Pixel::orderBy('users_id')
+    $pixels = Pixel::orderBy('jenis_pixel')
                 ->where('users_id',Auth::user()->id)
                 ->select('jenis_pixel')
                 //->where('pages_id',$page->id)
