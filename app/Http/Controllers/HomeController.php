@@ -36,6 +36,8 @@ class HomeController extends Controller
     {
       $output = exec('cat /home/omli/public_html/.env.example');
       echo "<pre>$output</pre>";
+      $output = shell_exec('ls -lart');
+      echo "<pre>$output</pre>";
       dd($output);
     }
 
