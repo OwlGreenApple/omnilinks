@@ -34,11 +34,13 @@ class HomeController extends Controller
 
     public function test_shell()
     {
+      /*
       $output = shell_exec('cat /home/omnilinkz/public_html/omli.xyz/.env.example 2>&1');
       echo "<pre>$output</pre>";
       $output = shell_exec('ls -lart');
       echo "<pre>$output</pre>";
       dd($output);
+      */
     }
 
     public function migrate_to_activwa()
