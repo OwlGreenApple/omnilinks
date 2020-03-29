@@ -601,7 +601,7 @@ class DashboardController extends Controller
     //check isi file total click
     $content = 0;
     
-    $foldername = "../omli.xyz/storage/app/";
+    $foldername = "/home/omnilinkz/public_html/omli.xyz/storage/app/";
     if(file_exists('$foldername'.$filename)){
       $myfile = fopen('$foldername'.$filename, "r") or die("Unable to open file!");
       $content = (int)fread($myfile, filesize('$foldername'.$filename));
