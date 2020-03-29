@@ -1138,31 +1138,31 @@ class BiolinkController extends Controller
       // $root_folder = "/home2/omnilinkz/public_html/dashboard/";
     // }
     
-    /*if(file_exists($root_folder.'storage/app/'.$folder.$filename)){
+    if(file_exists($root_folder.'storage/app/'.$folder.$filename)){
       $myfile = fopen($root_folder.'storage/app/'.$folder.$filename, "r") or die("Unable to open file!");
       $content = (int)fread($myfile, filesize($root_folder.'storage/app/'.$folder.$filename));
       $counter = $content + 1;
       fclose($myfile);
     } else {
       $counter = 1;
-    }*/
+    }
     
-    if (Storage::disk('s3')->has($folder.$filename)) {
+    /*if (Storage::disk('s3')->has($folder.$filename)) {
       // $counter = file_get_contents(Storage::disk('s3')->url($filename));
       $counter = Storage::disk('s3')->get($folder.$filename);
       $counter += 1;
     } 
     else {
       $counter = 1;
-    }
+    }*/
 
-    // if ( env('APP_ENV') == "local" ) {
+    if ( env('APP_ENV') == "local" ) {
       Storage::disk('s3')->put($folder.$filename,$counter);
-    // }
-    // else if ( env('APP_ENV') !== "local" ) {
-      // mkdir($root_folder.'storage/app/'.$folder,0755,true);
-      // file_put_contents($root_folder.'storage/app/'.$folder.$filename, $counter);
-    // }
+    }
+    else if ( env('APP_ENV') !== "local" ) {
+      mkdir($root_folder.'storage/app/'.$folder,0755,true);
+      file_put_contents($root_folder.'storage/app/'.$folder.$filename, $counter);
+    }
   }
 
   public function click($mode,$id,Request $request){

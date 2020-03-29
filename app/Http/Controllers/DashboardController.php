@@ -110,7 +110,7 @@ class DashboardController extends Controller
                 ->paginate(10);    
     }
 
-
+ 
     $arr['view']=(string) view('user.dashboard.dashboardcontent')
                   ->with('pages',$page)
                   ->with('bulan',$request->bulan)
@@ -601,14 +601,15 @@ class DashboardController extends Controller
     //check isi file total click
     $content = 0;
     
-    /*if(file_exists('storage/app/'.$filename)){
-      $myfile = fopen('storage/app/'.$filename, "r") or die("Unable to open file!");
-      $content = (int)fread($myfile, filesize('storage/app/'.$filename));
+    $foldername = "../omli.xyz/storage/app/";
+    if(file_exists('$foldername'.$filename)){
+      $myfile = fopen('$foldername'.$filename, "r") or die("Unable to open file!");
+      $content = (int)fread($myfile, filesize('$foldername'.$filename));
       fclose($myfile);
-    } */
-    if (Storage::disk('s3')->has($filename)) {
+    } 
+    /*if (Storage::disk('s3')->has($filename)) {
       $content = Storage::disk('s3')->get($filename);
-    }
+    }*/
     
     return $content;
   }
