@@ -602,9 +602,9 @@ class DashboardController extends Controller
     $content = 0;
     
     $foldername = "/home/omnilinkz/public_html/omli.xyz/storage/app/";
-    if(file_exists('$foldername'.$filename)){
-      $myfile = fopen('$foldername'.$filename, "r") or die("Unable to open file!");
-      $content = (int)fread($myfile, filesize('$foldername'.$filename));
+    if(file_exists($foldername.$filename)){
+      $myfile = fopen($foldername.$filename, "r") or die("Unable to open file!");
+      $content = (int)fread($myfile, filesize($foldername.$filename));
       fclose($myfile);
     } 
     /*if (Storage::disk('s3')->has($filename)) {
