@@ -1160,7 +1160,9 @@ class BiolinkController extends Controller
       Storage::disk('s3')->put($folder.$filename,$counter);
     }
     else if ( env('APP_ENV') !== "local" ) {
-      mkdir($root_folder.'storage/app/'.$folder,0755,true);
+      if(!file_exists($root_folder.'storage/app/'.$folder) ){
+        mkdir($root_folder.'storage/app/'.$folder,0755,true);
+      }
       file_put_contents($root_folder.'storage/app/'.$folder.$filename, $counter);
     }
   }
