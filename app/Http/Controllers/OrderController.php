@@ -390,8 +390,8 @@ class OrderController extends Controller
     $order->save();
 
     if($order->grand_total!=0){
-      $user->valid_until = new DateTime('+0 days');
-      $user->save();
+      /* diremark 04 04 20, karena salah harusnya beli pertama kali ngga berubah $user->valid_until = new DateTime('+0 days');
+      $user->save();*/
       //mail order to user 
       $emaildata = [
           'order' => $order,
@@ -445,8 +445,8 @@ class OrderController extends Controller
         else if($order->package=='Elite Special 5 Months'){
           $valid = $this->add_time($user,"+5 months");
         }
-        else if($order->package=='Elite Special 7 Months'){
-          $valid = $this->add_time($user,"+7 months");
+        else if($order->package=='Elite Special 12 Months'){
+          $valid = $this->add_time($user,"+12 months");
         }*/
 
         $userlog = new UserLog;
@@ -457,7 +457,7 @@ class OrderController extends Controller
         $userlog->save();
 
         // $user->valid_until = $valid;
-        $user->valid_until = new DateTime('+0 days');
+        /* diremark 04 04 20, karena salah harusnya beli pertama kali ngga berubah $user->valid_until = new DateTime('+0 days');*/
         // $user->membership = 'elite';
       }
 
