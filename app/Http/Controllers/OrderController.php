@@ -38,7 +38,8 @@ class OrderController extends Controller
       'Elite Special 2 Months' => 195000,
       'Elite Special 3 Months' => 295000,
       'Elite Special 5 Months' => 395000,
-      'Elite Special 7 Months' => 495000,
+      // 'Elite Special 7 Months' => 495000,
+      'Elite Special 12 Months' => 495000,
       
       //new 
       'Pro' => 195000, //30hari
@@ -147,11 +148,11 @@ class OrderController extends Controller
               $paketid = 14;
               $dataPaket = "Elite Special 5 Months";
             }
-            if ($coupon->valid_to == "package-elite-7") {
+            if ($coupon->valid_to == "package-elite-12") {
               $total = 495000;
-              $paket = "Paket Special Elite 7 Bulan";
+              $paket = "Paket Special Elite 12 Bulan";
               $paketid = 15;
-              $dataPaket = "Elite Special 7 Months";
+              $dataPaket = "Elite Special 12 Months";
             }
             
             // selectbox ditambah dengan paket kupon 
@@ -568,8 +569,8 @@ class OrderController extends Controller
       else if($order->package=='Elite Special 5 Months'){
         $valid = $this->add_time($user,"+5 months");
       }
-      else if($order->package=='Elite Special 7 Months'){
-        $valid = $this->add_time($user,"+7 months");
+      else if($order->package=='Elite Special 12 Months'){
+        $valid = $this->add_time($user,"+12 months");
       }
       else if($order->package=='Elite'){
         $valid = $this->add_time($user,"+6 months");
