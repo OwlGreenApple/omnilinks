@@ -916,13 +916,13 @@ class BiolinkController extends Controller
           $sort_link .= $url->id.';';
         }
         
-        if ($counter_new+$counter_update-$counter_delete > 5 ){
+        /*if ($counter_new+$counter_update-$counter_delete > 5 ){
           if ($user->email<>"it.axiapro@gmail.com") {
             $arr['status'] = 'error';
             $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
             return $arr;
           }
-        }
+        }*/
       }
     }
     
