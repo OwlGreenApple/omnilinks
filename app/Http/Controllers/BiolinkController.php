@@ -917,9 +917,11 @@ class BiolinkController extends Controller
         }
         
         if ($counter_new+$counter_update-$counter_delete > 5 ){
-          $arr['status'] = 'error';
-          $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
-          return $arr;
+          if ($user->email<>"it.axiapro@gmail.com") {
+            $arr['status'] = 'error';
+            $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
+            return $arr;
+          }
         }
       }
     }
