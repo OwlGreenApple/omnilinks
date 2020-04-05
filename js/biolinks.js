@@ -135,26 +135,6 @@ $(document).ready(function () {
     });
 
 
-    /* biolink link */
-    $(document).on('click', '#addlink', function (e) {
-        if ($('.sortable-link > li:visible').length>5){
-          alert("Jumlah link tidak boleh lebih dari 5");
-          return "";
-        }
-        var $el;
-        counterLink += 1;
-        $('.sortable-link').append('<li class="link-list" id="link-url-' + counterLink + '"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input class="delete-link" type="hidden" name="deletelink[]" value=""><input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div><div class="col-md-12 col-12 pr-0 pl-0"><select name="linkpixel[]" id="linkpixel-' + counterLink + '" class="form-control linkpixel"></select></div> </div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
-
-        // $("#viewLink").append(' <button type="button" class="btn btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
-        $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');
-        check_outlined();
-        check_rounded();
-        $('#linkpixel-' + counterLink).html(dataView);
-        $('#linkpixel-' + counterLink ).val(0);
-        //loadPixel(0,'#linkpixel-' + counterLink );
-        
-    });
-    
     $(document).on('click', '.deletelink', function (e) {
       //let idLink = $(this).parent().parent().attr("link-id");
       var idLink = $(this).parent().parent().attr("id");
