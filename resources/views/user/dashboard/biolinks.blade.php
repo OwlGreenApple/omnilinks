@@ -1894,15 +1894,30 @@
     });  
   }
 
-  function tambah_premiumid() {
+  // fixFont
+  /*%F0%9D%97%A6
+  %F0%9D%97%BC
+  %F0%9D%97%B9
+  %F0%9D%97%B1
+  %F0%9D%97%AE
+  %F0%9D%97%B1
+  %F0%9D%98%82
+  %F0%9D%9F%B1
+  %F0%9D%9F%B2*/
+
+  function tambah_premiumid() 
+  {
+    /*var val = $('#custom_id').val();
+    $(".btn-premiumid").html(val);
+    return false;*/
     $.ajax({
       type: 'GET',
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       dataType: 'text',
-      data: $('#form-premiumID').serialize(),
-      url: "<?php echo url('/premium-id-biolinks/tambah');?>",
+      data: $('#form-premiumID').serialize().replace(/\%F0+|\%9D+/g,""),
+      url: "{{ url('/premium-id-biolinks/tambah') }}",
       beforeSend: function()
       {
         $('#loader').show();
@@ -3402,6 +3417,7 @@ and add more";
 
     <!-- Modal content-->
     <div class="modal-content content-premiumid">
+      <div id="test"></div>
       <div class="modal-header header-premiumid">
         <h5 class="modal-title font-premiumid big" id="modaltitle">
           Custom Link

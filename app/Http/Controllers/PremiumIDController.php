@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\PremiumID;
 use App\Page;
 use App\Link;
+use App\Rules\CheckFontEncode;
 
 use Auth, Validator; 
 
@@ -15,10 +16,13 @@ class PremiumIDController extends Controller
 { 
     protected function validator_pages(array $data)
     {
+      $message = [
+        'regex'=>'Custom link hanya boleh menggunakkan huruf dan angka saja.'
+      ];
       return Validator::make($data, [
-        'custom_id' => ['required', 'string','unique:premium_id,links','unique:pages,names',
+        'custom_id' => ['required', 'string','regex:/^[a-zA-Z0-9]+$/u','unique:premium_id,links','unique:pages,names',new CheckFontEncode,
         ],
-      ]);
+      ],$message);
     }
 
     protected function validator_links(array $data)
