@@ -39,7 +39,7 @@ class OrderController extends Controller
       'Elite Special 3 Months' => 295000,
       'Elite Special 5 Months' => 395000,
       // 'Elite Special 7 Months' => 495000,
-      'Elite Special 12 Months' => 495000,
+      'Elite Special 12 Months' => 595000,
       
       //new 
       'Pro' => 195000, //30hari
@@ -149,7 +149,7 @@ class OrderController extends Controller
               $dataPaket = "Elite Special 5 Months";
             }
             if ($coupon->valid_to == "package-elite-12") {
-              $total = 495000;
+              $total = 595000;
               $paket = "Paket Special Elite 12 Bulan";
               $paketid = 15;
               $dataPaket = "Elite Special 12 Months";
