@@ -26,7 +26,8 @@
             </b>  
           </h5>
           <span class="harga harga-small free">
-            Rp&nbsp;195.000 <br> <sub> /30&nbsp;Hari</sub>
+            Rp&nbsp;195.000 <br> <sub> /30&nbsp;Hari</sub><br/>
+            <sub>Rp 6500/hari</sub>
           </span><br>
           @if(!Auth::check())
           <a class="link-free" href="{{url('checkout/1')}}">
@@ -49,7 +50,8 @@
             </b>  
           </h5>
           <span class="harga harga-small pro">
-            Rp&nbsp;395.000 <br><sub> /90&nbsp;Hari</sub>
+            Rp&nbsp;395.000 <br><sub> /90&nbsp;Hari</sub><br/>
+            <sub>Rp 4388/hari</sub>
           </span><br>
           <a class="link-pro" href="{{url('checkout/2')}}">
             <button class="btn btn-block btn-upgrade-big small update">
@@ -68,7 +70,8 @@
             </b>    
           </h5>
           <span class="harga harga-small premium">
-             Rp&nbsp;695.000 <br><sub> /180&nbsp;Hari</sub>
+             Rp&nbsp;695.000 <br><sub> /180&nbsp;Hari</sub><br/>
+             <sub>Rp 3861/hari</sub>
           </span><br>
           <a class="link-premium" href="{{url('checkout/3')}}">
             <button class="btn btn-block btn-upgrade-big small update">
@@ -105,6 +108,9 @@
             </span><br>
             <span class="harga-real free">
               /30 Hari
+            </span><br>
+            <span class="harga-real free">
+              Rp 6500/hari
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
           </div>
@@ -153,6 +159,9 @@
             </span><br>
             <span class="harga-real free">
               /90 Hari
+            </span><br>
+            <span class="harga-real free">
+              Rp 4388/hari
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
           </div>
@@ -211,6 +220,9 @@
             <span class="harga-real free">
               /180 Hari
             </span><br>
+            <span class="harga-real free">
+              Rp 3861/hari
+            </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
           </div>
 
@@ -258,6 +270,9 @@
             </span><br>
             <span class="harga-real free">
               /360 Hari
+            </span><br>
+            <span class="harga-real free">
+              Rp 3041/hari
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
           </div>
