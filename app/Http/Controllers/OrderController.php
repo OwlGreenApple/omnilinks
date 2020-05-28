@@ -131,31 +131,34 @@ class OrderController extends Controller
             $paket = "";
             $paketid = 0;
             $dataPaket = "";
-            $harga_sebelum_diskon = 695000;
 
             if ($coupon->valid_to == "package-elite-2") {
               $total = 195000;
               $paket = "Paket Special Elite 2 Bulan";
               $paketid = 12;
               $dataPaket = "Elite Special 2 Months";
+              $harga_sebelum_diskon = 695000;
             }
             if ($coupon->valid_to == "package-elite-6") {
               $total = 295000;
               $paket = "Paket Special Elite 6 Bulan";
               $paketid = 13;
               $dataPaket = "Elite Special 6 Months";
+              $harga_sebelum_diskon = 695000;
             }
             if ($coupon->valid_to == "package-elite-5") {
               $total = 395000;
               $paket = "Paket Special Elite 5 Bulan";
               $paketid = 14;
               $dataPaket = "Elite Special 5 Months";
+              $harga_sebelum_diskon = 695000;
             }
             if ($coupon->valid_to == "package-elite-12") {
               $total = 595000;
               $paket = "Paket Special Elite 12 Bulan";
               $paketid = 15;
               $dataPaket = "Elite Special 12 Months";
+              $harga_sebelum_diskon = 695000;
             }
             
             // selectbox ditambah dengan paket kupon 
