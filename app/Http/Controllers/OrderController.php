@@ -87,6 +87,7 @@ class OrderController extends Controller
     $arr['total'] = number_format($harga, 0, '', '.');
     $arr['diskon'] = 0;
     $arr['coupon'] = null;
+    $arr['pricing'] = '';
 
     if($kodekupon!=''){
       $user_id = 0;
@@ -120,9 +121,9 @@ class OrderController extends Controller
           return $arr;
         } else {
           if($coupon->valid_to=='new' and Auth::check()){
-
+              //..
           } else if($coupon->valid_to=='extend' and !Auth::check()){
-
+            //..
           } 
           else if(substr($coupon->valid_to,0,7)=='package'){
             $total = 0;
@@ -159,6 +160,7 @@ class OrderController extends Controller
             // selectbox ditambah dengan paket kupon 
             $arr['status'] = 'success-paket';
             $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
+            $arr['pricing'] = '<strike>'.number_format($harga, 0, '', '.').'</strike>';
             $arr['total'] = number_format($total, 0, '', '.');
             $arr['diskon'] = $diskon;
             $arr['coupon'] = $coupon;
@@ -183,6 +185,7 @@ class OrderController extends Controller
 
             $arr['status'] = 'success';
             $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
+            $arr['pricing'] = '<strike>'.number_format($harga, 0, '', '.').'</strike>';
             $arr['total'] = number_format($total, 0, '', '.');
             $arr['diskon'] = $diskon;
             $arr['coupon'] = $coupon;

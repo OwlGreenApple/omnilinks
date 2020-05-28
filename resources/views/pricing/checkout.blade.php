@@ -182,12 +182,13 @@
         }
         
         if (data.status == 'success') {
-          $('.total').html('Rp. ' + data.total);
+          $('.total').html('Rp. ' +data.pricing+' '+ data.total);
           $('#pesan').removeClass('alert-danger');
           $('#pesan').addClass('alert-success');
         } 
-        else if (data.status == 'success-paket') {
-          $('.total').html('Rp. ' + data.total);
+        else if (data.status == 'success-paket') 
+        {
+          $('.total').html('Rp. ' +data.pricing+' '+ data.total);
           $('#pesan').removeClass('alert-danger');
           $('#pesan').addClass('alert-success');
           
