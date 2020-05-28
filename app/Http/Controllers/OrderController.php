@@ -131,6 +131,7 @@ class OrderController extends Controller
             $paket = "";
             $paketid = 0;
             $dataPaket = "";
+            $harga_sebelum_diskon = 695000;
 
             if ($coupon->valid_to == "package-elite-2") {
               $total = 195000;
@@ -160,8 +161,8 @@ class OrderController extends Controller
             // selectbox ditambah dengan paket kupon 
             $arr['status'] = 'success-paket';
             $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
-            $arr['pricing'] = '<strike>'.number_format($harga, 0, '', '.').'</strike>';
             $arr['total'] = number_format($total, 0, '', '.');
+            $arr['pricing'] = '<strike>'.number_format($harga_sebelum_diskon, 0, '', '.').'</strike>'.;
             $arr['diskon'] = $diskon;
             $arr['coupon'] = $coupon;
             $arr['kodekupon'] = $coupon->kodekupon;

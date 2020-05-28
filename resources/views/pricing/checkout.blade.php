@@ -69,7 +69,7 @@
                         </option>
                         <option class="" data-price="1095000" data-paket="Super" value="4" <?php if ($id==4) echo "selected" ; ?>>
                           Super - IDR 1.095.000,-/360 hari Hemat 53%
-                        </option>
+                        </option> 
                       @endif
                       @if(Auth::check() && $type=="ads-package")
                         <option class="" data-price="62500" data-paket="Top Up 5000" value="5" <?php if ($id==5) echo "selected" ; ?>>
