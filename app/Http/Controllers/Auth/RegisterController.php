@@ -88,6 +88,11 @@ class RegisterController extends Controller
       'wa_number' => '62'.$data['wa_number'],
     ]);
 
+		//New system, to activrespon list
+		if(env('APP_ENV') <> 'local'){
+			$temp = $this->sendToActivrespon('62'.$data['wa_number'],$data['name'],$data['email']);
+		}
+		
     $order = null;
     #IF ORDER IS NOT FREE
     if ($data['price']<>"") 
@@ -302,10 +307,6 @@ class RegisterController extends Controller
       } else {
 				//old system
         // $temp = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
-				//New system, to activrespon list
-				if(env('APP_ENV') <> 'local'){
-					$temp = $this->sendToActivrespon($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
-				}
 				
         // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
         return redirect('/')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
