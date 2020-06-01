@@ -300,7 +300,13 @@ class RegisterController extends Controller
               'order'=>$arrRet['order'],    
             ));
       } else {
-        $temp = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
+				//old system
+        // $temp = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
+				//New system, to activrespon list
+				if(env('APP_ENV') <> 'local'){
+					$temp = $this->sendToActivrespon($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
+				}
+				
         // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
         return redirect('/')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
         // return view('pricing.thankyou-register')->with(array(
@@ -319,6 +325,43 @@ class RegisterController extends Controller
       ));
       
     }
+  }
+
+  public function sendToActivrespon($wa_no,$name,$email)
+  {
+    $curl = curl_init();
+
+      $data = array(
+          'list_name'=>'o2ma0rl5',
+          'name'=>$name,
+          'email'=>$email,
+          'phone_number'=>$wa_no,
+      );
+
+		 $url = "https://activrespon.com/dashboard/entry-google-form";
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+      ));
+
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+
+      curl_close($curl);
+
+      /* if ($err) {
+        echo "cURL Error #:" . $err;
+       } else {
+         echo $response."\n";
+       }
+       */
   }
 
   public function sendToActivWA($wa_no,$name,$email)
