@@ -304,7 +304,7 @@ class RegisterController extends Controller
         // $temp = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
 				//New system, to activrespon list
 				if(env('APP_ENV') <> 'local'){
-					$temp = $this->sendToActivrespon('+'.$arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
+					$temp = $this->sendToActivrespon($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
 				}
 				
         // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
