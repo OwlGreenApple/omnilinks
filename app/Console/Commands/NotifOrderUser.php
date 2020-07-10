@@ -10,6 +10,7 @@ use App\UserLog;
 use App\Page;
 use App\Link;
 use App\PremiumID;
+use App\Helpers\Helper;
 
 use App\Mail\NotifOrderUserMail;
 
@@ -79,6 +80,34 @@ class NotifOrderUser extends Command
           $order->is_notif_1 = 1;
           $order->save();
           Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+
+          if (!is_null($user->wa_number)){
+            $message = null;
+            $message .= '*Hi '.$user->name.'*,'."\n\n";
+            $message .= "*Yakin bisa rela?* Hari ini kamu *bakal kehilangan harga spesial* yang sudah kamu dapatkan 2 hari lalu ketika order Omnilinkz lhoo. \n \n";
+            $message .= "_Ini rinciannya :_ \n \n";
+            $message .= '*No Order :* '.$order->no_order.''."\n";
+            $message .= '*Nama :* '.$user->name.''."\n";
+            $message .= '*Paket :* '.$order->package.''."\n";
+            $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->grand_total))."\n";
+
+            $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
+            $message .= 'BCA (Sugiarto Lasjim)'."\n";
+            $message .= '8290-812-845'."\n\n";
+
+            $message .= "Buruan transfer dan konfirmasi sekarang karena kalau tidak, _pembelian mu akan dihapus jam 12 malam nanti oleh sistem_. *Kamu juga akan kehilangan kesempatan memiliki Omnilinkz dengan harga spesial.* \n\n";
+
+            $message .= '*Sesudah transfer:*'."\n";
+            $message .= '- *Login* ke https://omnilinkz.com'."\n";
+            $message .= '- *Klik* Profile'."\n";
+            $message .= '- Pilih *Order & Confirm*'."\n";
+            $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
+
+            $message .= 'Terima Kasih,'."\n\n";
+            $message .= 'Team Omnilinkz'."\n";
+            $message .= '_*Omnilinkz is part of Activomni.com_';
+            Helper::send_message_queue_system($user->wa_number,$message);
+          }
           continue;
         }
 
@@ -89,6 +118,36 @@ class NotifOrderUser extends Command
           $order->is_notif_1 = 1;
           $order->save();
           Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+          
+          if (!is_null($user->wa_number)){
+            $message = null;
+            $message .= '*Hi '.$user->name.'*,'."\n\n";
+            $message .= "_Gimana kabarnya?_ \n";
+            $message .= "Kami mau mengingatkan nih kalau kamu *belum melakukan transfer dan konfirmasi pembayaran*. \n \n";
+            $message .= "_Kemarin kamu sudah membeli paket Omnilinkz, ini rinciannya :_ \n \n";
+            $message .= '*No Order :* '.$order->no_order.''."\n";
+            $message .= '*Nama :* '.$user->name.''."\n";
+            $message .= '*Paket :* '.$order->package.''."\n";
+            $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->grand_total))."\n";
+
+            $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
+            $message .= 'BCA (Sugiarto Lasjim)'."\n";
+            $message .= '8290-812-845'."\n\n";
+
+            $message .= "_Buruan transfer dan konfirmasi agar pembelianmu tidak dihapus oleh sistem._\n\n";
+
+            $message .= '*Sesudah transfer:*'."\n";
+            $message .= '- *Login* ke https://omnilinkz.com'."\n";
+            $message .= '- *Klik* Profile'."\n";
+            $message .= '- Pilih *Order & Confirm*'."\n";
+            $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
+
+            $message .= 'Terima Kasih,'."\n\n";
+            $message .= 'Team Omnilinkz'."\n";
+            $message .= '_*Omnilinkz is part of Activomni.com_';
+
+            Helper::send_message_queue_system($user->wa_number,$message);
+          }
         }
 
 

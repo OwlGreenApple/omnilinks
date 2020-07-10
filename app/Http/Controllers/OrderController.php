@@ -410,6 +410,34 @@ class OrderController extends Controller
         $message->to($user->email);
         $message->subject('[Omnilinkz] Order Nomor '.$order_number);
       });
+        if (!is_null($user->wa_number)){
+            $message = null;
+            $message .= '*Hi '.$user->name.'*,'."\n\n";
+            $message .= "Berikut info pemesanan Omnilinkz :\n";
+            $message .= '*No Order :* '.$order->no_order.''."\n";
+            $message .= '*Nama :* '.$user->name.''."\n";
+            $message .= '*Paket :* '.$order->package.''."\n";
+            // $message .= '*Tgl Pembelian :* '.$dt->format('d-M-Y').''."\n";
+            $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->grand_total))."\n";
+
+            $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
+            $message .= 'BCA (Sugiarto Lasjim)'."\n";
+            $message .= '8290-812-845'."\n\n";
+            
+            $message .= "Harus diperhatikan juga, kalau jumlah yang di transfer harus *sama persis dengan nominal diatas* supaya _*kami lebih mudah memproses pembelianmu*_.\n\n";
+
+            $message .= '*Sesudah transfer:*'."\n";
+            $message .= '- *Login* ke https://omnilinkz.com'."\n";
+            $message .= '- *Klik* Profile'."\n";
+            $message .= '- Pilih *Order & Confirm*'."\n";
+            $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
+
+            $message .= 'Terima Kasih,'."\n\n";
+            $message .= 'Team Omnilinkz'."\n";
+            $message .= '_*Omnilinkz is part of Activomni.com_';
+            
+            Helper::send_message_queue_system($user->wa_number,$message);
+        }
     } 
     else {
       $order->status = 2;
