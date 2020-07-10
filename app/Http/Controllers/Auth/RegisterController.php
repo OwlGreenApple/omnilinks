@@ -327,6 +327,25 @@ class RegisterController extends Controller
       
       Mail::to($arrRet['user']->email)->send(new ConfirmEmail($emaildata));
 
+      if (!is_null($arrRet['user']->wa_number)){
+          $message = null;
+          $message .= '*Hi '.$arrRet['user']->name."*, \n\n";
+          $message .= '*Welcome to Omnilinkz*'."\n";
+          $message .= "Terima kasih sudah memilih Omnilinkz sebagai _Tool yang bisa membantu kamu lebih dekat dengan klienmu._ Jika kamu sudah dapat WA ini berarti akunmu sudah terdaftar database kami. \n\n";
+          $message .= "Berikut info login kamu : \n";
+          $message .= "*Nama :* ".$arrRet['user']->name."\n";
+          $message .= "*Email :* ".$arrRet['user']->email."\n";
+          $message .= '*Password :* '.$password."\n\n";
+          $message .= '*Link login:* ';
+          $message .= 'https://omnilinkz.com/dashboard/login'."\n\n";
+          $message .= "Oh iya, kalau ada yang ingin ditanyakan, jangan sungkan menghubungi kami di *WA 0818-318-368*. \n\n";
+          $message .= "Salam hangat, \n";
+          $message .= 'Tim Omnilinkz';
+
+          
+          Helper::send_message_queue_system($arrRet['user']->wa_number,$message);
+      }
+
       Auth::loginUsingId($arrRet['user']->id);
 
       if ($request->price <> null) {
