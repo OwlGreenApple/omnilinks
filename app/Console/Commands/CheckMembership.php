@@ -185,73 +185,116 @@ class CheckMembership extends Command
             $coupon->valid_to = "package-elite-2";
             $coupon->keterangan = "Kupon AutoGenerate Free User";
             $coupon->package_id = 0;
-            $coupon->user_id = $user->id;
+            // $coupon->user_id = $user->id;
+            $coupon->user_id = 0;
             $coupon->save();
 
             Mail::to($user->email)->queue(new ReminderFreeTrialMail($user,$string));
-            /*if (!is_null($user->wa_number)){
+            if (!is_null($user->wa_number)){
               $message = null;
-              $message .= '*Hi '.$user->name.'*,'."\n\n";
-              $message .= "*Yakin bisa rela?* Hari ini kamu *bakal kehilangan harga spesial* yang sudah kamu dapatkan 5 hari lalu ketika order Omnilinkz lhoo. \n \n";
-              $message .= "_Ini rinciannya :_ \n \n";
-              $message .= '*No Order :* '.$order->no_order.''."\n";
-              $message .= '*Nama :* '.$user->name.''."\n";
-              $message .= '*Paket :* '.$order->package.''."\n";
-              $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->grand_total))."\n";
+              $message .= '*Hi '.$user->name.'*,'."\n";
+              $message .= "*Sudah dicoba Omnilinkz nya?* \n";
+              $message .= "fiturnya asik kan? \n \n";
 
-              $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
-              $message .= 'BCA (Sugiarto Lasjim)'."\n";
-              $message .= '8290-812-845'."\n\n";
+              $message .= '*coba deh nyalain fitur "Click to WA chat"*  \n';
+              $message .= 'dan buttonnya bisa dibuat "bergetar"  \n';
+              $message .= 'jadi _eye catching banget._ \n \n';
 
-              $message .= "Buruan transfer dan konfirmasi sekarang karena kalau tidak, _pembelian mu akan dihapus jam 12 malam nanti oleh sistem_. *Kamu juga akan kehilangan kesempatan memiliki Omnilinkz dengan harga spesial.* \n\n";
+              $message .= 'Banyak *user paling suka dengan fitur ini.* \n';
+              $message .= 'dan sudah terbukti bisa bantu \n';
+              $message .= 'mereka _nambah closingan lebih sering lagi._ \n \n';
 
-              $message .= '*Sesudah transfer:*'."\n";
-              $message .= '- *Login* ke https://omnilinkz.com'."\n";
-              $message .= '- *Klik* Profile'."\n";
-              $message .= '- Pilih *Order & Confirm*'."\n";
-              $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
+              $message .= '*Oiya, sebagai tanda apresiasi kami* \n';
+              $message .= 'karena kakak sudah nyobain omnilinkz. \n \n';
 
-              $message .= 'Terima Kasih,'."\n\n";
-              $message .= 'Team Omnilinkz'."\n";
-              $message .= '_*Omnilinkz is part of Activomni.com_';
+              $message .= '*Kami memberikan kupon spesial* \n';
+              $message .= 'diskon *50% OFF* khusus untuk \n';
+              $message .= '_pembeli pertama kali saja._ \n \n';
+
+              $message .= '*Kupon:* '.$string.' \n';
+              $message .= '*Link:* https://omnilinkz.com/dashboard/checkout/'.$string.' \n \n';
+
+              $message .= '*Klik langsung di link diatas,* \n';
+              $message .= 'kupon akan otomatis diaplikasikan. \n';
+              $message .= 'Kupon *hanya berlaku 1x24 jam saja.* \n \n';
+
+              $message .= 'Jadi *buruan klik sekarang,* \n \n';
+
+              $message .= '*Jika ada pertanyaan* \n';
+              $message .= 'bisa chat kami di sini. \n \n';
+
+              $message .= '*Salam sukses,* \n \n';
+
+              $message .= 'Endah \n';
+              $message .= 'Team Activomni \n';
+
               Helper::send_message_queue_system($user->wa_number,$message);
-            }*/
-          }
-         /* else if ($interval==2 && is_null($order)) {
-            $coupon = Coupon::
-                      where('user_id',$user->id)->first();
-            if (!is_null($coupon)){
-              Mail::to($user->email)->queue(new ReminderFreeTrialMail($user,$string));
-              
-              if (!is_null($user->wa_number)){
-                $message = null;
-                $message .= '*Hi '.$user->name.'*,'."\n\n";
-                $message .= "*Yakin bisa rela?* Hari ini kamu *bakal kehilangan harga spesial* yang sudah kamu dapatkan 5 hari lalu ketika order Omnilinkz lhoo. \n \n";
-                $message .= "_Ini rinciannya :_ \n \n";
-                $message .= '*No Order :* '.$order->no_order.''."\n";
-                $message .= '*Nama :* '.$user->name.''."\n";
-                $message .= '*Paket :* '.$order->package.''."\n";
-                $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->grand_total))."\n";
-
-                $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
-                $message .= 'BCA (Sugiarto Lasjim)'."\n";
-                $message .= '8290-812-845'."\n\n";
-
-                $message .= "Buruan transfer dan konfirmasi sekarang karena kalau tidak, _pembelian mu akan dihapus jam 12 malam nanti oleh sistem_. *Kamu juga akan kehilangan kesempatan memiliki Omnilinkz dengan harga spesial.* \n\n";
-
-                $message .= '*Sesudah transfer:*'."\n";
-                $message .= '- *Login* ke https://omnilinkz.com'."\n";
-                $message .= '- *Klik* Profile'."\n";
-                $message .= '- Pilih *Order & Confirm*'."\n";
-                $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
-
-                $message .= 'Terima Kasih,'."\n\n";
-                $message .= 'Team Omnilinkz'."\n";
-                $message .= '_*Omnilinkz is part of Activomni.com_';
-                Helper::send_message_queue_system($user->wa_number,$message);
-              }
             }
-          }*/
+          }
+          else if ($interval==5 && is_null($order)) {
+            //dibuatin kupon, dikirim email kuponnya 
+            do 
+            {
+              $karakter= 'abcdefghjklmnpqrstuvwxyz123456789';
+              $string = 'special-';
+              for ($i = 0; $i < 7 ; $i++) {
+                $pos = rand(0, strlen($karakter)-1);
+                $string .= $karakter[$pos];
+              }
+              $coupon = Coupon::where("kodekupon","=",$string)->first();
+            } while (!is_null($coupon));
+
+            $coupon = new Coupon;
+            $coupon->kodekupon = $string;
+            $coupon->diskon_value = 0;
+            $coupon->diskon_percent = 0;
+            $coupon->valid_until = new DateTime('+2 days');
+            $coupon->valid_to = "package-elite-1.5";
+            $coupon->keterangan = "Kupon AutoGenerate Free User";
+            $coupon->package_id = 0;
+            // $coupon->user_id = $user->id;
+            $coupon->user_id = 0;
+            $coupon->save();
+
+
+            Mail::to($user->email)->queue(new ReminderFreeTrialMail($user,$string));
+            
+            if (!is_null($user->wa_number)){
+              $message = null;
+              $message .= '*Hi '.$user->name.'*,'."\n";
+              $message .= "*2 hari lagi waktu trial kamu bakalan habis,* \n";
+              $message .= "sayang banget nih, _padahal followersmu_ \n";
+              $message .= "_sudah mulai tertarik dengan ig profilmu._ \n \n";
+
+              $message .= '*Kami akan kasi 1 kupon Spesial:* \n';
+              $message .= '*BONUS 15 hari tambahan* \n';
+              $message .= 'sebagai rasa apresiasi kami terhadap kamu \n';
+              $message .= 'yang sudah pakai omnilinkz \n \n';
+
+              $message .= '*Kupon:* '.$string.' \n';
+              $message .= '*Link:* https://omnilinkz.com/dashboard/checkout/'.$string.' \n \n';
+
+              $message .= '*Klik langsung di link diatas,* \n';
+              $message .= 'kupon akan otomatis diaplikasikan. \n';
+              $message .= 'Kupon *hanya berlaku 1x24 jam saja.* \n \n';
+
+              $message .= 'Jadi segera diklik sekarang, \n \n';
+              
+              $message .= '*Bayarnya sama,* \n';
+              $message .= '& dapat *Bonus 15 hari tambahan* \n';
+              $message .= 'Jadi *Total = 45 hari* \n \n';
+
+              $message .= '*Jika ada pertanyaan* \n';
+              $message .= 'bisa chat kami di sini. \n \n';
+
+              $message .= '*Salam sukses,* \n \n';
+
+              $message .= 'Endah \n';
+              $message .= 'Team Activomni \n';
+
+              Helper::send_message_queue_system($user->wa_number,$message);
+            }
+          }
         }
 
         if($date < $now and $user->membership!='free'){

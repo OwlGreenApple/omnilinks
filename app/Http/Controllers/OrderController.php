@@ -36,6 +36,7 @@ class OrderController extends Controller
       'Top Up 100000' => 650000,
       
       'Elite Special 2 Months' => 195000,
+      'Elite Special 1.5 Months' => 195000,
       // 'Elite Special 3 Months' => 295000,
       'Elite Special 6 Months' => 295000,
       'Elite Special 5 Months' => 395000,
@@ -138,6 +139,12 @@ class OrderController extends Controller
               $paket = "Paket Special Elite 2 Bulan";
               $paketid = 12;
               $dataPaket = "Elite Special 2 Months";
+            }
+            if ($coupon->valid_to == "package-elite-1.5") {
+              $total = 195000;
+              $paket = "Paket Special Elite 1.5 Bulan";
+              $paketid = 16;
+              $dataPaket = "Elite Special 1.5 Months";
             }
             if ($coupon->valid_to == "package-elite-6") {
               $total = 295000;
@@ -596,6 +603,9 @@ class OrderController extends Controller
       }
       else if($order->package=='Elite Special 2 Months'){
         $valid = $this->add_time($user,"+2 months");
+      }
+      else if($order->package=='Elite Special 1.5 Months'){
+        $valid = $this->add_time($user,"+45 days");
       }
       else if($order->package=='Elite Special 3 Months'){
         $valid = $this->add_time($user,"+3 months");
