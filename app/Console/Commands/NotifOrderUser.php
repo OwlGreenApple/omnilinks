@@ -72,7 +72,7 @@ class NotifOrderUser extends Command
         $interval = $date->diffInDays($now,false);
         // var_dump($user->email);
         // var_dump($interval);
-        if( ($interval==5) && ($user->membership=='free') ){
+        if( ($interval==5) && ($user->membership!='free') ){
           if(env('MAIL_HOST')=='smtp.mailtrap.io'){
             sleep(2);
           }
@@ -84,7 +84,7 @@ class NotifOrderUser extends Command
           if (!is_null($user->wa_number)){
             $message = null;
             $message .= '*Hi '.$user->name.'*,'."\n\n";
-            $message .= "*Yakin bisa rela?* Hari ini kamu *bakal kehilangan harga spesial* yang sudah kamu dapatkan 2 hari lalu ketika order Omnilinkz lhoo. \n \n";
+            $message .= "*Yakin bisa rela?* Hari ini kamu *bakal kehilangan harga spesial* yang sudah kamu dapatkan 5 hari lalu ketika order Omnilinkz lhoo. \n \n";
             $message .= "_Ini rinciannya :_ \n \n";
             $message .= '*No Order :* '.$order->no_order.''."\n";
             $message .= '*Nama :* '.$user->name.''."\n";
@@ -111,7 +111,7 @@ class NotifOrderUser extends Command
           continue;
         }
 
-        if( ($interval==1) && ($user->membership=='free') ){
+        if( ($interval==1) && ($user->membership!='free') ){
           if(env('MAIL_HOST')=='smtp.mailtrap.io'){
             sleep(2);
           }

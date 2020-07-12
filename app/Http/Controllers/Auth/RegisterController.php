@@ -353,9 +353,6 @@ class RegisterController extends Controller
               'order'=>$arrRet['order'],    
             ));
       } else {
-				//old system
-        // $temp = $this->sendToActivWA($arrRequest['wa_number'],$arrRequest['name'],$arrRequest['email']);
-				
         // return redirect('/login')->with("successfree", "Thank you for your registration. Please check your inbox to verify your email address.");
         return redirect('/')->with("success", "Thank you for your registration. Please check your inbox to verify your email address.");
         // return view('pricing.thankyou-register')->with(array(

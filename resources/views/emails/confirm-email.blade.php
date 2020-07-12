@@ -16,5 +16,5 @@ Pass  : {{$password}}
 <br>
 Semoga bermanfaat,<br>
 <br>
-Michael Sugiharto
+Team omnilinkz
 
