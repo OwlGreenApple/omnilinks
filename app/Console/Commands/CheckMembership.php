@@ -163,7 +163,7 @@ class CheckMembership extends Command
         //klo blm member, maka ditawari untuk beli kupon
         else {
           $order = Order::where('user_id',$user->id)->first();
-          if ($interval==1 && is_null($order)) {
+          if ($interval==6 && is_null($order)) {
             //dibuatin kupon, dikirim email kuponnya 
             do 
             {
@@ -196,42 +196,42 @@ class CheckMembership extends Command
               $message .= "*Sudah dicoba Omnilinkz nya?* \n";
               $message .= "fiturnya asik kan? \n \n";
 
-              $message .= '*coba deh nyalain fitur "Click to WA chat"*  \n';
-              $message .= 'dan buttonnya bisa dibuat "bergetar"  \n';
-              $message .= 'jadi _eye catching banget._ \n \n';
+              $message .= '*coba deh nyalain fitur "Click to WA chat"*'.  "\n";
+              $message .= 'dan buttonnya bisa dibuat "bergetar"'.  "\n";
+              $message .= "jadi _eye catching banget._ \n \n";
 
-              $message .= 'Banyak *user paling suka dengan fitur ini.* \n';
-              $message .= 'dan sudah terbukti bisa bantu \n';
-              $message .= 'mereka _nambah closingan lebih sering lagi._ \n \n';
+              $message .= "Banyak *user paling suka dengan fitur ini.* \n";
+              $message .= "dan sudah terbukti bisa bantu \n";
+              $message .= "mereka _nambah closingan lebih sering lagi._ \n \n";
 
-              $message .= '*Oiya, sebagai tanda apresiasi kami* \n';
-              $message .= 'karena kakak sudah nyobain omnilinkz. \n \n';
+              $message .= "*Oiya, sebagai tanda apresiasi kami* \n";
+              $message .= "karena kakak sudah nyobain omnilinkz. \n \n";
 
-              $message .= '*Kami memberikan kupon spesial* \n';
-              $message .= 'diskon *50% OFF* khusus untuk \n';
-              $message .= '_pembeli pertama kali saja._ \n \n';
+              $message .= "*Kami memberikan kupon spesial* \n";
+              $message .= "diskon *50% OFF* khusus untuk \n";
+              $message .= "_pembeli pertama kali saja._ \n \n";
 
-              $message .= '*Kupon:* '.$string.' \n';
-              $message .= '*Link:* https://omnilinkz.com/dashboard/checkout/'.$string.' \n \n';
+              $message .= '*Kupon:* '.$string." \n";
+              $message .= '*Link:* https://omnilinkz.com/dashboard/checkout/'.$string." \n \n";
 
-              $message .= '*Klik langsung di link diatas,* \n';
-              $message .= 'kupon akan otomatis diaplikasikan. \n';
-              $message .= 'Kupon *hanya berlaku 1x24 jam saja.* \n \n';
+              $message .= "*Klik langsung di link diatas,* \n";
+              $message .= "kupon akan otomatis diaplikasikan. \n";
+              $message .= "Kupon *hanya berlaku 1x24 jam saja.* \n \n";
 
-              $message .= 'Jadi *buruan klik sekarang,* \n \n';
+              $message .= "Jadi *buruan klik sekarang,* \n \n";
 
-              $message .= '*Jika ada pertanyaan* \n';
-              $message .= 'bisa chat kami di sini. \n \n';
+              $message .= "*Jika ada pertanyaan* \n";
+              $message .= "bisa chat kami di sini. \n \n";
 
-              $message .= '*Salam sukses,* \n \n';
+              $message .= "*Salam sukses,* \n \n";
 
-              $message .= 'Endah \n';
-              $message .= 'Team Activomni \n';
+              $message .= "Endah \n";
+              $message .= "Team Activomni \n";
 
               Helper::send_message_queue_system($user->wa_number,$message);
             }
           }
-          else if ($interval==5 && is_null($order)) {
+          else if ($interval==2 && is_null($order)) {
             //dibuatin kupon, dikirim email kuponnya 
             do 
             {
@@ -266,31 +266,31 @@ class CheckMembership extends Command
               $message .= "sayang banget nih, _padahal followersmu_ \n";
               $message .= "_sudah mulai tertarik dengan ig profilmu._ \n \n";
 
-              $message .= '*Kami akan kasi 1 kupon Spesial:* \n';
-              $message .= '*BONUS 15 hari tambahan* \n';
-              $message .= 'sebagai rasa apresiasi kami terhadap kamu \n';
-              $message .= 'yang sudah pakai omnilinkz \n \n';
+              $message .= "*Kami akan kasi 1 kupon Spesial:* \n";
+              $message .= "*BONUS 15 hari tambahan* \n";
+              $message .= "sebagai rasa apresiasi kami terhadap kamu \n";
+              $message .= "yang sudah pakai omnilinkz \n \n";
 
-              $message .= '*Kupon:* '.$string.' \n';
-              $message .= '*Link:* https://omnilinkz.com/dashboard/checkout/'.$string.' \n \n';
+              $message .= '*Kupon:* '.$string." \n";
+              $message .= '*Link:* https://omnilinkz.com/dashboard/checkout/'.$string." \n \n";
 
-              $message .= '*Klik langsung di link diatas,* \n';
-              $message .= 'kupon akan otomatis diaplikasikan. \n';
-              $message .= 'Kupon *hanya berlaku 1x24 jam saja.* \n \n';
+              $message .= "*Klik langsung di link diatas,* \n";
+              $message .= "kupon akan otomatis diaplikasikan. \n";
+              $message .= "Kupon *hanya berlaku 1x24 jam saja.* \n \n";
 
-              $message .= 'Jadi segera diklik sekarang, \n \n';
+              $message .= "Jadi segera diklik sekarang, \n \n";
               
-              $message .= '*Bayarnya sama,* \n';
-              $message .= '& dapat *Bonus 15 hari tambahan* \n';
-              $message .= 'Jadi *Total = 45 hari* \n \n';
+              $message .= "*Bayarnya sama,* \n";
+              $message .= "& dapat *Bonus 15 hari tambahan* \n";
+              $message .= "Jadi *Total = 45 hari* \n \n";
 
-              $message .= '*Jika ada pertanyaan* \n';
-              $message .= 'bisa chat kami di sini. \n \n';
+              $message .= "*Jika ada pertanyaan* \n";
+              $message .= "bisa chat kami di sini. \n \n";
 
-              $message .= '*Salam sukses,* \n \n';
+              $message .= "*Salam sukses,* \n \n";
 
-              $message .= 'Endah \n';
-              $message .= 'Team Activomni \n';
+              $message .= "Endah \n";
+              $message .= "Team Activomni \n";
 
               Helper::send_message_queue_system($user->wa_number,$message);
             }
