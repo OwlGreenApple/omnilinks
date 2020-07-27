@@ -79,7 +79,7 @@ class NotifOrderUser extends Command
           $order->is_notif_2 = 1;
           $order->is_notif_1 = 1;
           $order->save();
-          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+          Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new NotifOrderUserMail($user,$order,$interval));
 
           if (!is_null($user->wa_number)){
             $message = null;
@@ -117,7 +117,7 @@ class NotifOrderUser extends Command
           }
           $order->is_notif_1 = 1;
           $order->save();
-          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+          Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new NotifOrderUserMail($user,$order,$interval));
           
           if (!is_null($user->wa_number)){
             $message = null;

@@ -74,7 +74,7 @@ class CheckMembership extends Command
             if(env('MAIL_HOST')=='smtp.mailtrap.io'){
               sleep(2);
             }
-            Mail::to($user->email)->queue(new ExpiredMembershipMail($user,$interval));
+            Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ExpiredMembershipMail($user,$interval));
             if (!is_null($user->wa_number)){
               if ($interval == 5) {
                 $message = null;
@@ -152,7 +152,7 @@ class CheckMembership extends Command
 
             if($premiumid->exists()){
               $premiumid->delete();
-              Mail::to($user->email)->queue(new ExpiredPremiumIDMail($user->email,$user));
+              Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ExpiredPremiumIDMail($user->email,$user));
             }
 
             //$user->valid_until = null;
@@ -189,7 +189,7 @@ class CheckMembership extends Command
             $coupon->user_id = 0;
             $coupon->save();
 
-            Mail::to($user->email)->queue(new ReminderFreeTrialMail($user,$string));
+            Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ReminderFreeTrialMail($user,$string));
             if (!is_null($user->wa_number)){
               $message = null;
               $message .= '*Hi '.$user->name.'*,'."\n";
@@ -257,7 +257,7 @@ class CheckMembership extends Command
             $coupon->save();
 
 
-            Mail::to($user->email)->queue(new ReminderFreeTrialMail($user,$string));
+            Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new ReminderFreeTrialMail($user,$string));
             
             if (!is_null($user->wa_number)){
               $message = null;

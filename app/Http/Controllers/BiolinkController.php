@@ -1194,7 +1194,7 @@ class BiolinkController extends Controller
 
     if($user->membership=='free'){
       if($clicks==800){
-        Mail::to($user->email)->queue(new NotifClickFreeUser($user->email,$user,$clicks));
+        Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new NotifClickFreeUser($user->email,$user,$clicks));
       }
 
       if($clicks>=1000){

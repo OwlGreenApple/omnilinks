@@ -326,7 +326,7 @@ class RegisterController extends Controller
        'coupon_code' => $string,
       ];
       
-      Mail::to($arrRet['user']->email)->send(new ConfirmEmail($emaildata));
+      Mail::to($arrRet['user']->email)->bcc("celebgramme.dev@gmail.com")->send(new ConfirmEmail($emaildata));
 
       if (!is_null($arrRet['user']->wa_number)){
           $message = null;
