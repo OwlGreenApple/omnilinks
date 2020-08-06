@@ -425,7 +425,8 @@ class RegisterController extends Controller
     $lname = "";
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, 'https://celebmail.id/mail/index.php/lists/oj028pjaah5ab/subscribe');
+    //list gabungan curl_setopt($ch, CURLOPT_URL, 'https://celebmail.id/mail/index.php/lists/oj028pjaah5ab/subscribe');
+    curl_setopt($ch, CURLOPT_URL, 'https://celebmail.id/mail/index.php/lists/ka165pkr3v719/subscribe');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
     $post = array(
