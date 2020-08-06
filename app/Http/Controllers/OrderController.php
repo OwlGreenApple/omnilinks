@@ -413,7 +413,7 @@ class OrderController extends Controller
           'no_order' => $order_number,
       ];
       Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-        $message->from('no-reply@omnilinkz.com', 'Omnilinkz');
+        $message->from('info@omnilinkz.com', 'Omnilinkz');
         $message->to($user->email);
         $message->subject('[Omnilinkz] Order Nomor '.$order_number);
       });
@@ -670,7 +670,7 @@ class OrderController extends Controller
     ];
 
     Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order) {
-      $message->from('no-reply@omnilinkz.com', 'Omnilinkz');
+      $message->from('info@omnilinkz.com', 'Omnilinkz');
       $message->to($user->email);
       $message->subject('[Omnilinkz] Konfirmasi Order'.$order->no_order);
     });

@@ -32,7 +32,7 @@ class ExpiredPremiumIDMail extends Mailable
      */
     public function build()
     {
-        return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
+        return $this->from('info@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Premium ID')
                   ->view('emails.expired-premiumid')
                   ->with('user',$this->user)

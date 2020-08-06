@@ -36,7 +36,7 @@ class ReminderFreeTrialMail extends Mailable
      */
     public function build()
     {
-      return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
+      return $this->from('info@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Cara Sederhana Ini bisa membuat Produkmu Laku Keras ')
                   ->view('emails.reminder-free-trial')
                   ->with([

@@ -39,7 +39,7 @@ class NotifOrderUserMail extends Mailable
     public function build()
     {
       if ($this->interval==5) {
-        return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
+        return $this->from('info@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Jangan Sampai Diskonmu Gak Berlaku Lagi, Konfirmasi Sekarang')
                   ->view('emails.notif-order-user-2')
                   ->with([
@@ -49,7 +49,7 @@ class NotifOrderUserMail extends Mailable
                   // ->with($this->user->email);
       }
       if ($this->interval==1) {
-        return $this->from('no-reply@omnilinkz.com', 'Michael from Activomni')
+        return $this->from('info@omnilinkz.com', 'Michael from Activomni')
                   ->subject('[Omnilinkz] Kamu Lupa ya? Orderan Kamu Lagi Nunggu di Konfirmasi nih!')
                   ->view('emails.notif-order-user')
                   ->with([
