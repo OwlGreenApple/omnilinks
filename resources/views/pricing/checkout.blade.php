@@ -237,6 +237,12 @@
         // check_kupon();
       });
       $( "#select-auto-manage" ).change();
+      <?php 
+        if (!is_null($coupon)){
+          if ($coupon->package_id > 0 ){
+      ?>
+        $("#select-auto-manage").val(<?php echo $coupon->package_id; ?>);
+      <?php }} ?>
     <?php } ?>
     $("body").on("click", ".btn-kupon", function() {
       check_kupon();
