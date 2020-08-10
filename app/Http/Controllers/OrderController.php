@@ -168,6 +168,7 @@ class OrderController extends Controller
               $dataPaket = "Elite Special 12 Months";              
             }
             if ($coupon->valid_to == "package-pro-lifetime") {
+              $harga_sebelum_diskon = 2195000;
               $total = 595000;
               $paket = "Paket Pro Lifetime";
               $paketid = 16;
