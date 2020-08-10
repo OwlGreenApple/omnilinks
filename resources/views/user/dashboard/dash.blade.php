@@ -193,7 +193,7 @@
               <span class="content-status-account">
               <i>~ <?php 
                 if (!is_null($user->valid_until)) { 
-                  if (  Carbon::parse($user->valid_until)->diffInMonths(Carbon::now()) >500  ) { 
+                  if (  Carbon::parse($user->valid_until)->diffInMonths(Carbon::now()) >100  ) { 
                     echo "Valid until Lifetime";
                   }
                   else {
@@ -268,7 +268,7 @@
               <span class="content-status-account">
               <i>~ <?php 
                 if (!is_null($user->valid_until)) { 
-                  if (  Carbon::parse($user->valid_until)->diffInMonths(Carbon::now()) >500  ) { 
+                  if (  Carbon::parse($user->valid_until)->diffInMonths(Carbon::now()) >100  ) { 
                     echo "Valid until Lifetime";
                   }
                   else {

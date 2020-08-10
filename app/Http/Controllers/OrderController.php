@@ -597,7 +597,7 @@ class OrderController extends Controller
         $valid = $this->add_time($user,"+1 months");
       }
       else if($order->package=='Pro Lifetime'){
-        $valid = $this->add_time($user,"+999 months");
+        $valid = $this->add_time($user,"+120 months");
       }
       $type = "pro";
       $user->membership = 'pro';
