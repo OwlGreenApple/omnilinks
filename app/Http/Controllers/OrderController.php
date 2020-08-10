@@ -48,6 +48,8 @@ class OrderController extends Controller
       'Popular' => 395000, //90hari
       'Elite' => 695000, //180 hari
       'Super' => 1095000, //360 hari
+      
+      'Pro Lifetime' => 595000,
     );
 
     if(isset($paket[$namapaket])){
@@ -164,6 +166,12 @@ class OrderController extends Controller
               $paket = "Paket Special Elite 12 Bulan";
               $paketid = 15;
               $dataPaket = "Elite Special 12 Months";              
+            }
+            if ($coupon->valid_to == "pro-lifetime") {
+              $total = 595000;
+              $paket = "Paket Pro Lifetime";
+              $paketid = 16;
+              $dataPaket = "Pro Lifetime";
             }
 
             // selectbox ditambah dengan paket kupon 
@@ -586,6 +594,9 @@ class OrderController extends Controller
       }
       else if($order->package=='Pro'){
         $valid = $this->add_time($user,"+1 months");
+      }
+      else if($order->package=='Pro Lifetime'){
+        $valid = $this->add_time($user,"+999 months");
       }
       $type = "pro";
       $user->membership = 'pro';

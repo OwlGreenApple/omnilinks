@@ -191,7 +191,16 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y'); }?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php 
+                if (!is_null($user->valid_until)) { 
+                  if (  Carbon::parse($user->valid_until)->diffInMonths(Carbon::now()) >500  ) { 
+                    echo "Valid until Lifetime";
+                  }
+                  else {
+                    echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y'); 
+                  }
+                }
+                ?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="popular")
@@ -257,7 +266,16 @@
               </span>
               <br>
               <span class="content-status-account">
-              <i>~ <?php if (!is_null($user->valid_until)) { echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y');}?>.</i> <a href="{{url('pricing')}}">Extend</a>
+              <i>~ <?php 
+                if (!is_null($user->valid_until)) { 
+                  if (  Carbon::parse($user->valid_until)->diffInMonths(Carbon::now()) >500  ) { 
+                    echo "Valid until Lifetime";
+                  }
+                  else {
+                    echo "Valid until ".Carbon::parse($user->valid_until)->format('d M Y'); 
+                  }
+                }
+              ?>.</i> <a href="{{url('pricing')}}">Extend</a>
               </span>
             @endif
             @if($user->membership=="popular")
