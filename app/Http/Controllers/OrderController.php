@@ -586,7 +586,7 @@ class OrderController extends Controller
       'Elite' => 695000, //180 hari
       'Super' => 1095000, //360 hari
     */
-    if(substr($order->package,0,5) === "Pro"){
+    if(substr($order->package,0,3) === "Pro"){
       if($order->package=='Pro Monthly'){
         $valid = $this->add_time($user,"+1 months");
       } 
