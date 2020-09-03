@@ -320,6 +320,7 @@ span {
 .notes-col > li {
   list-style-type: none;
   text-align: left;
+  font-weight:normal;
 } 
 
 .notes-col > li:before {
@@ -996,4 +997,19 @@ sup {
     font-size: 17px;
   }
 
+}
+
+.red-gradient-bg{
+  background-image: url(../image/red-gradient-abstract-background.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.red-gradient-bg h1, .red-gradient-bg .harga, .red-gradient-bg .harga-real, .red-gradient-bg p{
+  color:#fff;
+}
+.red-gradient-bg .btn-upgrade-big.update{
+  color : #EF5241;
+  background-color:#fff;
 }

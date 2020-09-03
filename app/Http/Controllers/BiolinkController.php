@@ -103,15 +103,17 @@ class BiolinkController extends Controller
         return redirect('/')->with("error","Maaf Anda tidak bisa membuat biolink. Silahkan confirm order anda  ".$link_order." atau upgrade terlebih dahulu ".$link_upgrade);
       }
     }
-    else if (($user->membership=='pro') || ($user->membership=='popular') ) {
-      if ($pageCheck>=3) {
+    else if (($user->membership=='pro') && ($pageCheck>=100) ) {
         return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu ".$link_upgrade); 
-      }
     }
-    else if (($user->membership=='elite') || ($user->membership=='super') ) {
-      if ($pageCheck>=10) {
+    else if (($user->membership=='popular') && ($pageCheck>=500) ) {
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Silahkan upgrade terlebih dahulu ".$link_upgrade); 
+    }
+    else if (($user->membership=='elite') && ($pageCheck>=1000) ) {
         return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink ".$link_upgrade); 
-      }
+    }
+    else if (($user->membership=='super') && ($pageCheck>=5000) ) {
+        return redirect('/')->with("error","Maaf Anda sudah tidak bisa membuat biolink lagi. Maksimal 10 biolink ".$link_upgrade); 
     }
     if (!$user->is_confirm) {
       $link_upgrade = '<a href="'.url('/resend-confirmation-email').'">disini</a>';

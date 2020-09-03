@@ -43,11 +43,11 @@ class OrderController extends Controller
       // 'Elite Special 7 Months' => 495000,
       'Elite Special 12 Months' => 595000,
       
-      //new 
-      'Pro' => 195000, //30hari
-      'Popular' => 395000, //90hari
-      'Elite' => 695000, //180 hari
-      'Super' => 1095000, //360 hari
+      //new 1 tahun
+      'Pro' => 195000, 
+      'Popular' => 225000, 
+      'Elite' => 255000, 
+      'Super' => 295000, 
       
       'Pro Lifetime' => 595000,
     );
@@ -581,10 +581,10 @@ class OrderController extends Controller
     $type = "";
     
     /*
-      'Pro' => 195000, //30hari
-      'Popular' => 395000, //90hari
-      'Elite' => 695000, //180 hari
-      'Super' => 1095000, //360 hari
+      'Pro' => 195000, 
+      'Popular' => 225000, 
+      'Elite' => 255000, 
+      'Super' => 295000, 
     */
     if(substr($order->package,0,3) === "Pro"){
       if($order->package=='Pro Monthly'){
@@ -594,7 +594,8 @@ class OrderController extends Controller
         $valid = $this->add_time($user,"+12 months");
       }
       else if($order->package=='Pro'){
-        $valid = $this->add_time($user,"+1 months");
+        // $valid = $this->add_time($user,"+1 months");
+        $valid = $this->add_time($user,"+12 months");
       }
       else if($order->package=='Pro Lifetime'){
         $valid = $this->add_time($user,"+120 months");
@@ -603,7 +604,8 @@ class OrderController extends Controller
       $user->membership = 'pro';
     } 
     else if(substr($order->package,0,7) === "Popular"){
-      $valid = $this->add_time($user,"+3 months");
+      // $valid = $this->add_time($user,"+3 months");
+      $valid = $this->add_time($user,"+12 months");
       $type="popular";
       $user->membership = 'popular';
     }
@@ -632,7 +634,8 @@ class OrderController extends Controller
         $valid = $this->add_time($user,"+12 months");
       }
       else if($order->package=='Elite'){
-        $valid = $this->add_time($user,"+6 months");
+        // $valid = $this->add_time($user,"+6 months");
+        $valid = $this->add_time($user,"+12 months");
       }
       $type = "elite";
       $user->membership = 'elite';

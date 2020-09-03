@@ -26,8 +26,8 @@
             </b>  
           </h5>
           <span class="harga harga-small free">
-            Rp&nbsp;195.000 <br> <sub> /30&nbsp;Hari</sub><br/>
-            <sub>Rp 6500/hari</sub>
+            Rp&nbsp;195.000 <br> 
+            <sub> /1 Tahun</sub><br/>
           </span><br>
           @if(!Auth::check())
           <a class="link-free" href="{{url('checkout/1')}}">
@@ -50,8 +50,8 @@
             </b>  
           </h5>
           <span class="harga harga-small pro">
-            Rp&nbsp;395.000 <br><sub> /90&nbsp;Hari</sub><br/>
-            <sub>Rp 4388/hari</sub>
+            Rp&nbsp;225.000 <br>
+            <sub>1 Tahun</sub>
           </span><br>
           <a class="link-pro" href="{{url('checkout/2')}}">
             <button class="btn btn-block btn-upgrade-big small update">
@@ -70,8 +70,8 @@
             </b>    
           </h5>
           <span class="harga harga-small premium">
-             Rp&nbsp;695.000 <br><sub> /180&nbsp;Hari</sub><br/>
-             <sub>Rp 3861/hari</sub>
+             Rp&nbsp;255.000 <br>
+             <sub>1 Tahun</sub>
           </span><br>
           <a class="link-premium" href="{{url('checkout/3')}}">
             <button class="btn btn-block btn-upgrade-big small update">
@@ -107,19 +107,17 @@
               Rp&nbsp;195.000
             </span><br>
             <span class="harga-real free">
-              /30 Hari
-            </span><br>
-            <span class="harga-real free">
-              Rp 6500/hari
+              /1 Tahun
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
           </div>
 
           <div class="col-md-12 pb-3 price-col">
-            <p class="list" style="width : 1px; height : 35px;"></p>
-            <p class="list"><b>3 Bio Link</b></p>
+            <p class="list"><b>100 Bio Link</b></p>
             <p class="list">Lebih dari <b>25 Theme Background</b></p>
             <p class="list">Pasang <b>1 Banner Promo</b></p>
+            <p class="list">Buka Bisnis <b>Jasa Bio Link</b></p>
+            <p class="list"><b>Kartu Nama Digital</b></p>
           </div>
 
            <div class="col-md-12 mb-4 pb-3 price-col">
@@ -155,22 +153,20 @@
 
           <div class="col-md-12 price-col">
             <span class="harga">
-              Rp&nbsp;395.000
+              Rp&nbsp;225.000
             </span><br>
             <span class="harga-real free">
-              /90 Hari
-            </span><br>
-            <span class="harga-real free">
-              Rp 4388/hari
+              /1 Tahun
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
           </div>
 
           <div class="col-md-12 pb-3 price-col">
-            <p class="list"><b class="price-save">Hemat 32%</b></p>
-            <p class="list"><b>3 Bio Link</b></p>
+            <p class="list"><b>500 Bio Link</b></p>
             <p class="list">Lebih dari <b>25 Theme Background</b></p>
             <p class="list">Pasang <b>1 Banner Promo</b></p>
+            <p class="list">Buka Bisnis <b>Jasa Bio Link</b></p>
+            <p class="list"><b>Kartu Nama Digital</b></p>
           </div>
 
           <div class="col-md-12 mb-4 pb-3 price-col">
@@ -189,7 +185,7 @@
 
     <div class="col-lg-3 col-md-12 col-12 pl-md-0 pr-md-0 pricing-fix-col pricing-fix-elite">
       <div class="card primary col-box">
-        <div class="card-body price-box">
+        <div class="card-body price-box red-gradient-bg">
 
           <div class="col-md-12 pricing-board pricing-elite" align="center">
              <h1>
@@ -215,22 +211,20 @@
 
           <div class="col-md-12 price-col">
             <span class="harga">
-              Rp&nbsp;695.000
+              Rp&nbsp;255.000
             </span><br>
             <span class="harga-real free">
-              /180 Hari
+              /1 Tahun
             </span><br>
-            <span class="harga-real free">
-              Rp 3861/hari
-            </span><br>
-            <div class="col-lg-10"><hr color="#3c65af"></div>
+            <div class="col-lg-10"><hr color="#fff"></div>
           </div>
 
           <div class="col-md-12 pb-3 price-col">
-            <p class="list"><b class="price-save">Hemat 41%</b></p>
-            <p class="list"><b>10 Bio Link</b></p>
+            <p class="list"><b>1000 Bio Link</b></p>
             <p class="list">Lebih dari <b>100 Theme Background</b></p>
             <p class="list">Pasang <b>5 Banner Promo</b></p>
+            <p class="list">Buka Bisnis <b>Jasa Bio Link</b></p>
+            <p class="list"><b>Kartu Nama Digital</b></p>
           </div>
 
           <div class="col-md-12 mb-4 pb-3 price-col">
@@ -266,22 +260,20 @@
 
           <div class="col-md-12 price-col">
             <span class="harga">
-              Rp&nbsp;1.095.000
+              Rp&nbsp;295.000
             </span><br>
             <span class="harga-real free">
-              /360 Hari
-            </span><br>
-            <span class="harga-real free">
-              Rp 3041/hari
+              /1 Tahun
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
           </div>
 
           <div class="col-md-12 pb-3 price-col">
-            <p class="list"><b class="price-save">Hemat 53%</b></p>
-            <p class="list"><b>10 Bio Link</b></p>
+            <p class="list"><b>5000 Bio Link</b></p>
             <p class="list">Lebih dari <b>100 Theme Background</b></p>
             <p class="list">Pasang <b>5 Banner Promo</b></p>
+            <p class="list">Buka Bisnis <b>Jasa Bio Link</b></p>
+            <p class="list"><b>Kartu Nama Digital</b></p>
           </div>
 
           <div class="col-md-12 mb-4 pb-3 price-col">
@@ -297,6 +289,7 @@
     </div>
 
     <!-- NOTES COLUMN -->
+    <!-- NOTES COLUMN -->
     <div class="col-md-12 notes-wrap">
           <!-- RESPONSIVE -->
          <div class="col-lg-3 notes-responsive">
@@ -310,6 +303,8 @@
           <li>Bio Link Bebas Iklan</li>
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
+          <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          
           <li class="nostyle">&nbsp;</li>
           <li class="nostyle"><i class="fa fa-star fa-lg clipped"></i>&nbsp;:&nbsp;Khusus paket elite dan super</li>
         </div> 
@@ -325,6 +320,8 @@
           <li>Bio Link Bebas Iklan</li>
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
+          <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          
         </div> 
 
         <!-- col -2 -->
@@ -337,6 +334,8 @@
           <li>Bio Link Bebas Iklan</li>
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
+          <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          
         </div> 
 
         <!-- col -3 -->
@@ -351,6 +350,8 @@
           <li>Bio Link Bebas Iklan</li>
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
+          <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          
         </div>
 
         <!-- col -4 -->
@@ -365,6 +366,8 @@
           <li>Bio Link Bebas Iklan</li>
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
+          <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          
         </div>
       </div>  <!-- end row -->
     </div> <!-- END NOTES -->
@@ -433,7 +436,7 @@
           <div class="col-lg-12">
             <h5 class="omnhide">Apa keunggulan Omnilinkz?</h5>
             <p class="collapse">
-              1. Anda dapat membuat 1,3 & 10 Bio Link ( sesuai paket anda )<br/>
+              1. Anda dapat membuat 100, 500, 1000 & 5000 Bio Link (sesuai paket anda)<br/>
               2. Setiap Link di Bio Link yang telah dibuat, bisa ditanamkan kode FB Pixel, Google Retargetting & Analytics<br/>
               3. Pasang Banner Promo untuk menarik perhatian customer<br/>
               4. Click to WA Creator, langsung dari dalam dashboard<br/>
