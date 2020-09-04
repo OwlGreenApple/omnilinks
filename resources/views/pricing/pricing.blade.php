@@ -15,7 +15,7 @@
 <div class="offset-md-1 col-md-10 pricing-position" align="center">
   <!-- Header -->
 
-  <!-- SMALL COLUMN -->
+  <!-- SMALL COLUMN 
   <div class="row header-pricing d-lg-none d-md-none d-none">
     <div class="col-md-4 col-4 pr-0 pl-0">
       <div class="card">
@@ -27,7 +27,7 @@
           </h5>
           <span class="harga harga-small free">
             Rp&nbsp;195.000 <br> 
-            <sub> /1 Tahun</sub><br/>
+            <sub> /1 Tahun</sub>
           </span><br>
           @if(!Auth::check())
           <a class="link-free" href="{{url('checkout/1')}}">
@@ -83,7 +83,7 @@
       <a href="#super">Show More</a>
     </div>
 
-  </div>
+  </div>-->
 
   <!-- Large Pricing Box -->
 
