@@ -15,9 +15,9 @@
 <div class="offset-md-1 col-md-10 pricing-position" align="center">
   <!-- Header -->
 
-  <!-- SMALL COLUMN 
+  <!-- SMALL COLUMN -->
   <div class="row header-pricing d-lg-none d-md-none d-none">
-    <div class="col-md-4 col-4 pr-0 pl-0">
+    <div class="col-md-3 col-3 pr-0 pl-0">
       <div class="card">
         <div class="card-body pricing">
           <h5 class="pricing-board">
@@ -25,23 +25,26 @@
               PRO
             </b>  
           </h5>
-          <span class="harga harga-small free">
-            Rp&nbsp;195.000 <br> 
-            <sub> /1 Tahun</sub>
-          </span><br>
-          @if(!Auth::check())
-          <a class="link-free" href="{{url('checkout/1')}}">
-          @endif
-            <button class="btn btn-block btn-upgrade-big small update">
-              BELI
-            </button>
-          @if(!Auth::check())
-          </a>
-          @endif
+          <div class="col-md-12 price-col" align="center">
+            <span class="harga harga-small free">
+              Rp&nbsp;195.000 <br> 
+            </span>
+            <p>100 Biolink<br>
+            25 Themes</p>
+            @if(!Auth::check())
+            <a class="link-free" href="{{url('checkout/1')}}">
+            @endif
+              <button class="btn btn-sm btn-block btn-upgrade-big small update">
+                BELI
+              </button>
+            @if(!Auth::check())
+            </a>
+            @endif
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4 col-4 pr-0 pl-0">
+    <div class="col-md-3 col-3 pr-0 pl-0">
       <div class="card">
         <div class="card-body pricing">
           <h5 class="pricing-board">
@@ -49,41 +52,70 @@
               POPULAR
             </b>  
           </h5>
-          <span class="harga harga-small pro">
-            Rp&nbsp;225.000 <br>
-            <sub>1 Tahun</sub>
-          </span><br>
-          <a class="link-pro" href="{{url('checkout/2')}}">
-            <button class="btn btn-block btn-upgrade-big small update">
-              BELI
-            </button>
-          </a>
+          <div class="col-md-12 price-col" align="center">
+            <span class="harga harga-small pro">
+              Rp&nbsp;225.000 <br>
+            </span>
+            <p>500 Biolink<br>
+            25 Themes</p>
+            <a class="link-pro" href="{{url('checkout/2')}}">
+              <button class="btn btn-sm btn-block btn-upgrade-big small update">
+                BELI
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4 col-4 pr-0 pl-0">
+    <div class="col-md-3 col-3 pr-0 pl-0">
+      <div class="card">
+        <div class="card-body pricing">
+            <h5 class="pricing-board pricing-elite">
+              <b class="sbold small">
+                ELITE
+              </b>    
+            </h5>
+
+          <div class="col-md-12 price-col red-gradient-bg" align="center">
+            <span class="harga harga-small premium">
+               Rp&nbsp;255.000 <br>
+            </span>
+            <p>1000 Biolink<br>
+            100 Themes</p>
+            <a class="link-premium" href="{{url('checkout/3')}}">
+              <button class="btn btn-sm btn-block btn-upgrade-big small update">
+                BELI
+              </button>  
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-3 pr-0 pl-0">
       <div class="card">
         <div class="card-body pricing">
           <h5 class="pricing-board">
             <b class="sbold small">
-              ELITE
+              Super
             </b>    
           </h5>
-          <span class="harga harga-small premium">
-             Rp&nbsp;255.000 <br>
-             <sub>1 Tahun</sub>
-          </span><br>
-          <a class="link-premium" href="{{url('checkout/3')}}">
-            <button class="btn btn-block btn-upgrade-big small update">
-              BELI
-            </button>  
-          </a>
+          <div class="col-md-12 price-col" align="center">
+            <span class="harga harga-small premium">
+               Rp&nbsp;295.000 <br>
+            </span>
+            <p>5000 Biolink<br>
+            100 Themes</p>
+            <a class="link-premium" href="{{url('checkout/4')}}">
+              <button class="btn btn-sm btn-block btn-upgrade-big small update">
+                BELI
+              </button>  
+            </a>
+          </div>
         </div>
       </div>
-      <a href="#super">Show More</a>
     </div>
 
-  </div>-->
+  </div>
 
   <!-- Large Pricing Box -->
 

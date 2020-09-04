@@ -234,7 +234,6 @@ span {
 
 .pricing-elite {
    background: linear-gradient(#fede00,#ed1f24) !important;
-   color : #000 !important;
    padding : 16px 10px 5px 10px;
 }
 
@@ -636,7 +635,7 @@ sup {
 }
 
 .btn-upgrade-big.small, .btn-upgrade-big.med {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 0px;
 }
 
@@ -843,6 +842,18 @@ sup {
     padding-bottom: 40px;
   }
 
+  .pricing-elite{
+    color:#fff;
+  }
+
+  .price-col{
+    padding-top:0px;
+  }
+
+  p{
+    line-height:12px;margin-bottom:0px;font-size:10px;
+  }
+
   .card.primary.ads {
     top: 0px;
   }
@@ -855,7 +866,7 @@ sup {
     /*font-size: 18px;
     padding-left: 70px;
     padding-right: 70px;*/
-    font-size: 16px;
+    font-size: 10px;
   }
 
   .btn-upgrade-big.med {
@@ -882,7 +893,7 @@ sup {
   }
 
   .harga-small {
-    font-size: 16px;
+    font-size: 10px;
   }
 
   .harga-med {
@@ -890,7 +901,7 @@ sup {
   }
 
   sub {
-    font-size: 12px; 
+    font-size: 10px; 
   }
  
   .sbold.small {
@@ -914,8 +925,9 @@ sup {
   }
   
   .pricing-board {
-	  padding-top : 5px;
-	  padding-bottom : 5px;
+	  padding-top : 1px;
+	  padding-bottom : 0px;
+    margin-bottom:0px;
   }
 
   .notes-wrap {
