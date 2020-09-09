@@ -135,6 +135,9 @@
           </div>
 
           <div class="col-md-12 price-col">
+            <span class="harga-coret">
+              1.950.000
+            </span><br>
             <span class="harga">
               Rp&nbsp;195.000
             </span><br>
@@ -142,6 +145,9 @@
               /1 Tahun
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
+            <span class="discount-description">
+              DISC 90% OFF
+            </span>
           </div>
 
           <div class="col-md-12 pb-3 price-col">
@@ -184,6 +190,9 @@
           </div>
 
           <div class="col-md-12 price-col">
+            <span class="harga-coret">
+              2.250.000
+            </span><br>
             <span class="harga">
               Rp&nbsp;225.000
             </span><br>
@@ -191,6 +200,9 @@
               /1 Tahun
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
+            <span class="discount-description">
+              DISC 90% OFF
+            </span>
           </div>
 
           <div class="col-md-12 pb-3 price-col">
@@ -242,6 +254,9 @@
 
 
           <div class="col-md-12 price-col">
+            <span class="harga-coret">
+              5.100.000
+            </span><br>
             <span class="harga">
               Rp&nbsp;255.000
             </span><br>
@@ -249,6 +264,9 @@
               /1 Tahun
             </span><br>
             <div class="col-lg-10"><hr color="#fff"></div>
+            <span class="discount-description">
+              DISC 95% OFF
+            </span>
           </div>
 
           <div class="col-md-12 pb-3 price-col">
@@ -291,6 +309,9 @@
 		  <span id="super"></span>
 
           <div class="col-md-12 price-col">
+            <span class="harga-coret">
+              5.900.000
+            </span><br>
             <span class="harga">
               Rp&nbsp;295.000
             </span><br>
@@ -298,6 +319,9 @@
               /1 Tahun
             </span><br>
             <div class="col-lg-10"><hr color="#3c65af"></div>
+            <span class="discount-description">
+              DISC 95% OFF
+            </span>
           </div>
 
           <div class="col-md-12 pb-3 price-col">

@@ -1025,3 +1025,20 @@ sup {
   color : #EF5241;
   background-color:#fff;
 }
+.harga-coret{
+    text-decoration: line-through;
+    font-size: 16px;
+}
+.red-gradient-bg .harga-coret{
+  color:#fff;
+}
+.discount-description{
+    color: #EE423D;
+    font-size: 16px;
+    font-weight: bold;
+}
+.red-gradient-bg .discount-description{
+  color:#FCC917
+;
+}
+
