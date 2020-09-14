@@ -45,11 +45,22 @@ class PremiumIDController extends Controller
       } else {
         $premiumid = PremiumID::where('user_id',$user->id)->get();
         if ($user->email<>"it.axiapro@gmail.com"){
-          if($premiumid->count()>=3 and ($user->membership=='pro' or $user->membership=='popular')){
+          if($premiumid->count()>=100 and $user->membership=='pro'){
             $arr['status'] = 'error';
             $arr['message'] = 'Custom Link telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Custom Link.';
             return $arr;
-          } else if($premiumid->count()>=10 and ($user->membership=='elite' or $user->membership=='super')){
+          } 
+          else if($premiumid->count()>=500 and $user->membership=='popular'){
+            $arr['status'] = 'error';
+            $arr['message'] = 'Custom Link telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Custom Link.';
+            return $arr;
+          } 
+          else if($premiumid->count()>=1000 and $user->membership=='elite'){
+            $arr['status'] = 'error';
+            $arr['message'] = 'Custom Link telah mencapai batas maksimal.';
+            return $arr;
+          }
+          else if($premiumid->count()>=5000 and $user->membership=='super'){
             $arr['status'] = 'error';
             $arr['message'] = 'Custom Link telah mencapai batas maksimal.';
             return $arr;
