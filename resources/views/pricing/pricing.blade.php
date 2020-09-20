@@ -480,12 +480,12 @@
             </p> 
           </div>
 
-          <div class="col-lg-12">
+          <!--<div class="col-lg-12">
             <h5 class="omnhide">Apakah bisa coba Omnilinkz Gratis?</h5>
             <p class="collapse">
               Iya, Anda bisa coba Omnilinkz paket Limited GRATIS 7 hari. Anda mendapatkan 1000 klik GRATIS, cukup bagi pebisnis pemula. Anda juga bisa upgrade naik ke fitur yang lebih spesial jika anda inginkan sesuai dengan kapasitas bisnis anda.
             </p> 
-          </div> 
+          </div> -->
 
           <div class="col-lg-12">
             <h5 class="omnhide">Apa keunggulan Omnilinkz?</h5>
@@ -530,12 +530,12 @@
             </p> 
           </div>
 
-          <div class="col-lg-12">
+          <!--<div class="col-lg-12">
             <h5 class="omnhide">Apa saja paket Omnilinkz?</h5>
             <p class="collapse">
               Omnilinkz mempunyai 4 Paket ( Pro, Populer & Elite, Super) silahkan Klik <a href="{{url('pricing')}}">► [DAFTAR PAKET]</a> untuk detail yang lebih jelas untuk setiap paketnya
             </p> 
-          </div> 
+          </div> -->
 
           <div class="col-lg-12">
             <h5 class="omnhide">Bagaimana cara konfirmasi pembayaran?</h5>
