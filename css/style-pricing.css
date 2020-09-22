@@ -88,6 +88,15 @@ span {
   color: #3B3B3B;
 }
 
+.bg-new-banner {
+  padding-top:125px;
+  padding-bottom:125px;
+  width:100%;
+  background : url('../image/bg-new-banner.jpg') no-repeat;
+  background-position: center top;
+  background-size: cover;
+}
+
 .card {
   background-color: transparent;
   border : 0 !important;
@@ -836,6 +845,10 @@ sup {
 }*/
 
 @media screen and (max-width: 767px) {
+.bg-new-banner {
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
     /* Code from maxwidth : 769px; */
      .page-title.ads {
     padding-top: 130px;
@@ -1042,3 +1055,6 @@ sup {
 ;
 }
 
+.li-red{
+  color:#F0463D;
+}

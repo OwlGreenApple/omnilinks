@@ -360,6 +360,9 @@
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
           <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          <li class="li-red"><strong>Bonus Akses 1000+ Produk Dropship</strong><i class="fa fa-star fa-lg clipped"></i></li>
+          <li class="li-red"><strong>10 Premium Banner</strong> Produk Dropship Terlaris<i class="fa fa-star fa-lg clipped"></i></li>
+          <li class="li-red"><strong>Akses Group WA & Telegram</strong> Belajar Jualan Dropship Jutawan<i class="fa fa-star fa-lg clipped"></i></li>
           
           <li class="nostyle">&nbsp;</li>
           <li class="nostyle"><i class="fa fa-star fa-lg clipped"></i>&nbsp;:&nbsp;Khusus paket elite dan super</li>
@@ -407,6 +410,9 @@
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
           <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          <li class="li-red"><strong>Bonus Akses 1000+ Produk Dropship</strong></li>
+          <li class="li-red"><strong>10 Premium Banner</strong> Produk Dropship Terlaris</li>
+          <li class="li-red"><strong>Akses Group WA & Telegram</strong> Belajar Jualan Dropship Jutawan</li>
           
         </div>
 
@@ -423,6 +429,9 @@
           <li>Data Analytic Per Button</li>
           <li>Sembunyikan Logo Omnilinkz</li>
           <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
+          <li class="li-red"><strong>Bonus Akses 1000+ Produk Dropship</strong></li>
+          <li class="li-red"><strong>10 Premium Banner</strong> Produk Dropship Terlaris</li>
+          <li class="li-red"><strong>Akses Group WA & Telegram</strong> Belajar Jualan Dropship Jutawan</li>
           
         </div>
       </div>  <!-- end row -->
@@ -450,7 +459,7 @@
 
 </div> <!-- end header -->
 
-<!-- THUMBNAIL -->
+<!-- THUMBNAIL 
 <div class="col-lg-12 bg-thumbnail">
     <h3>Omnilinkz telah dipercaya oleh Ribuan Pebisnis Online</h3>
     <h3>Hanya dalam kurun waktu kurang dari satu bulan</h3>
@@ -458,6 +467,11 @@
     <h4><img src="{{asset('/image/stars.png')}}"/>&nbsp;4.5/5 avg. reviews</h4>
 </div>
 <!-- END -- THUMBNAIL -->
+
+<!-- NEW Banner -->
+<div class="col-lg-12 bg-new-banner">
+
+</div>
 
 <!-- FAQ -->
 <div class="col-lg-12 bg-faq">
