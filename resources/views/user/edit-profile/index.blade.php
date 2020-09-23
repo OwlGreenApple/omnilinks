@@ -59,11 +59,21 @@
               if($user->membership=="free"){
                 $html = '<i class="fas fa-flag"></i>Free Account';
                 $txt = '';
-              } else if($user->membership=="pro"){
+              } 
+              else if($user->membership=="pro"){
                 $html = '<i class="fas fa-trophy"></i>Pro Account';
                 $txt = 'text-success';
-              } else {
+              } 
+              else if($user->membership=="popular"){
+                $html = '<i class="fas fa-star"></i>Popular Account';
+                $txt = 'txt-elite';
+              }
+              else if($user->membership=="elite"){
                 $html = '<i class="fas fa-star"></i>Elite Account';
+                $txt = 'txt-elite';
+              }
+              else if($user->membership=="super"){
+                $html = '<i class="fas fa-star"></i>Super Account';
                 $txt = 'txt-elite';
               }
             ?>
