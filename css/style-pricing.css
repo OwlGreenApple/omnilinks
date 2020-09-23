@@ -1058,3 +1058,14 @@ sup {
 .li-red{
   color:#F0463D;
 }
+
+@media (min-width: 1451px) {
+  .bg-new-banner {
+    padding-top:170px;
+    padding-bottom:175px;
+    width:100%;
+    background : url('../image/bg-new-banner-2.jpg') no-repeat;
+    background-position: center top;
+    background-size: cover;
+  }
+}
