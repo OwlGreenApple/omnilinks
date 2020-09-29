@@ -362,7 +362,7 @@
           <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
           <li class="li-red"><strong>Bonus Akses 1000+ Produk Dropship</strong><i class="fa fa-star fa-lg clipped"></i></li>
           <li class="li-red"><strong>10 Premium Banner</strong> Produk Dropship Terlaris<i class="fa fa-star fa-lg clipped"></i></li>
-          <li class="li-red"><strong>Akses Group Telegram</strong> Belajar Jualan Dropship Jutawan<i class="fa fa-star fa-lg clipped"></i></li>
+          <li class="li-red"><strong>Akses Channel Telegram</strong> Belajar Jualan Dropship Jutawan<i class="fa fa-star fa-lg clipped"></i></li>
           
           <li class="nostyle">&nbsp;</li>
           <li class="nostyle"><i class="fa fa-star fa-lg clipped"></i>&nbsp;:&nbsp;Khusus paket elite dan super</li>
@@ -412,7 +412,7 @@
           <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
           <li class="li-red"><strong>Bonus Akses 1000+ Produk Dropship</strong></li>
           <li class="li-red"><strong>10 Premium Banner</strong> Produk Dropship Terlaris</li>
-          <li class="li-red"><strong>Akses Group Telegram</strong> Belajar Jualan Dropship Jutawan</li>
+          <li class="li-red"><strong>Akses Channel Telegram</strong> Belajar Jualan Dropship Jutawan</li>
           
         </div>
 
@@ -431,7 +431,7 @@
           <li>Buka Bisnis <strong>Jasa Bio Link Kartu Nama Digital</strong></li>
           <li class="li-red"><strong>Bonus Akses 1000+ Produk Dropship</strong></li>
           <li class="li-red"><strong>10 Premium Banner</strong> Produk Dropship Terlaris</li>
-          <li class="li-red"><strong>Akses Group Telegram</strong> Belajar Jualan Dropship Jutawan</li>
+          <li class="li-red"><strong>Akses Channel Telegram</strong> Belajar Jualan Dropship Jutawan</li>
           
         </div>
       </div>  <!-- end row -->
