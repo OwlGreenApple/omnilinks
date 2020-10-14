@@ -2459,6 +2459,29 @@
                     </li>
                   </ul>
 
+                  <!-- Youtube Embed -->
+                  <label class="mb-3 blue-txt">
+                    Embed Youtube
+                    <span class="tooltipstered" title="<div class='panel-heading'>Embed Youtube</div><div class='panel-content'></div>">
+                      <i class="fas fa-question-circle icon-reflink"></i>
+                    </span>
+                  </label>
+
+                    <div class="col-md-12 col-12 pr-0 pl-0 mb-3">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fa fa-youtube-square" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                        <input type="text" name="embed" class="form-control ig-input" placeholder="masukkan embed youtube link">
+                        <div class="div-cell cell-btn">
+                          <i style="margin-top:10px" class="far fa-trash-alt"></i>
+                        </div>
+                      </div>
+                    </div>
+                 
+
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks btn-save-link">
                       <!--<i class="far fa-save" style="margin-right:5px;"></i>-->
@@ -2549,8 +2572,7 @@
                       SAVE & CREATE LINK
                     </button>  
                   </div>  
-                  
-                  
+              
                 </form>
 
                 <hr>
