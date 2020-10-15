@@ -2466,7 +2466,11 @@
                   <!-- Youtube Embed -->
                   <label class="mb-3 blue-txt">
                     Embed Youtube
-                    <span class="tooltipstered" title="<div class='panel-heading'>Embed Youtube</div><div class='panel-content'></div>">
+                    <span class="tooltipstered" title="<div class='panel-heading'>Embed Youtube</div><div class='panel-content'>
+                      Taruh id youtube pada kolom dibawah, contoh id youtube:<br/>
+                      https://www.youtube.com/watch?v=<b>Gij0QNsJRxI</b><br/>
+                      cukup ambil kode yg dicetak tebal pada contoh link diatas.
+                    </div>">
                       <i class="fas fa-question-circle icon-reflink"></i>
                     </span>
                   </label>
