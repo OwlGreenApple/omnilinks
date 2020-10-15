@@ -1264,6 +1264,7 @@
   }
 
   function tambahPages() {
+    var youtube_id = $('input[name="embed"]').val();
     $.ajax({
       type: 'POST',
       headers: {
@@ -1290,6 +1291,9 @@
         var data = jQuery.parseJSON(result);
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
+
+         display_embed_youtube(youtube_id);
+
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
@@ -2471,13 +2475,14 @@
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <i class="fa fa-youtube-square" aria-hidden="true"></i>
+                            <i class="fab fa-youtube-square" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <input type="text" name="embed" class="form-control ig-input" placeholder="masukkan embed youtube link">
+                        <input type="text" name="embed" value="{{$pages->youtube_embed}}" class="form-control ig-input" placeholder="masukkan id youtube eg: Gij0QNsJRxI">
+                        <!-- 
                         <div class="div-cell cell-btn">
                           <i style="margin-top:10px" class="far fa-trash-alt"></i>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                  
@@ -3192,7 +3197,7 @@ and add more";
         </div>
       </div>
 
-      <!--phone-->
+      <!--phone preview-->
       <div class="col-md-5">
         <div class="fixed">
           <div class="center preview-center">
@@ -3261,11 +3266,14 @@ and add more";
                       <?php } ?>
                       </div>
                     </div>
-                    <br>
+                  
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
 
+                  <!--- embeded youtube --->
+                  <div id="embed_youtube"></div>
+                
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
                       <a href="#" class="btn btn-md btnview txthov" style="width: 100%;font-size:11px;height: 40px;padding: 10px;" id="walinkview">
@@ -3847,8 +3855,28 @@ and add more";
     getSelected();
     displayWaText();
     wachatloadPixel();
+    display_embed_youtube("{{ $pages->youtube_embed }}");
     //callMaintainPlus();
   });
+
+  //To display embed youtube html element
+  function display_embed_youtube(youtube_id)
+  {
+      $.ajax({
+        type : "GET",
+        url : "{{url('get-embed-youtube')}}",
+        data : {'video_id':youtube_id},
+        dataType : "html",
+        success : function(result)
+        {
+          $("#embed_youtube").html(result);
+        },
+        error : function(xhr)
+        {
+          console.log(xhr.responseText);
+        }
+      });
+  }
 
   //To display wa btn text if wa user hasn't registered yet
   function displayWaText()
@@ -5256,6 +5284,7 @@ and add more";
       if (tambahPages()) {
         tambahTemp();
       }
+
       $('.preview-mobile').addClass('preview-none');
       $('#pesanAlert').removeClass('alert-danger');
       $('#pesanAlert').children().remove();

@@ -58,9 +58,6 @@
 
   <!-- bootstrap datetimepicker -->
   <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"/>
-
-  <!-- font-awesome 4.7 -->
-  <link rel="stylesheet" href="{{asset('assets/Font-Awesome-4.7.0/css/font-awesome.css')}}">
   
   <!-- whatsapp style -->
   <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
