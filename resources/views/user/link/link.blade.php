@@ -1813,6 +1813,8 @@ $(document).ready(function() {
   }
 
   $(document).ready(function() {
+    console.log($( window ).height()+"px");
+    $('body').css("height",$( window ).height()+"px");
     <?php 
     $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $valid_until);
     $dt2 = Carbon::now();

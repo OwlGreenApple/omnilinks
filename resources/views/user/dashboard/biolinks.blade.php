@@ -5513,9 +5513,6 @@ and add more";
     
 	
   }); //end document ready
-console.log("a");
-    console.log($( window ).height()+"px");
-      $('body').css("height",$( window ).height()+"px");
       
 
  
