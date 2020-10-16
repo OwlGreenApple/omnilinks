@@ -4423,6 +4423,7 @@ and add more";
   });
 
   $(document).ready(function() {
+    console.log($( window ).height()+"px");
       $('body').css("height",$( window ).height()+"px");
       
       <?php 
