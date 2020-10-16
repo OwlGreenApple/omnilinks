@@ -1651,40 +1651,40 @@ and add more";
 @endif
 
 <script type="text/javascript">
- //MAKE WA BUTTON TO ALWAYS ON CENTER
- function setMargins(classes) {
+  $('body').css("height",$( window ).height()+"px");
+
+  //MAKE WA BUTTON TO ALWAYS ON CENTER
+  function setMargins(classes) {
     width = $(window).width(); 
     containerWidth = $(classes).width();  
     leftMargin = (width-containerWidth)/2;    
     $(classes).css("marginLeft", leftMargin);    
-}
-
-function setRightPost(classes) {
-  var outerWidth = $(classes).outerWidth();
-  var ltdefault = 40;
-  var gtdefault = 60;
-
-  if(outerWidth < 300)
-  {
-    $(classes).css("left", -ltdefault+'px');    
-  } else {
-    $(classes).css("left", -gtdefault+'px');    
   }
-}
 
-$(document).ready(function() {
-    setRightPost(".wcs_popup");
-    setMargins(".wcs_fixed_right");
-    $(window).resize(function() {
-        setMargins(".wcs_fixed_right"); 
-        setRightPost(".wcs_popup");   
-    });
-});
+  function setRightPost(classes) {
+    var outerWidth = $(classes).outerWidth();
+    var ltdefault = 40;
+    var gtdefault = 60;
+
+    if(outerWidth < 300)
+    {
+      $(classes).css("left", -ltdefault+'px');    
+    } else {
+      $(classes).css("left", -gtdefault+'px');    
+    }
+  }
+
+  $(document).ready(function() {
+      setRightPost(".wcs_popup");
+      setMargins(".wcs_fixed_right");
+      $(window).resize(function() {
+          setMargins(".wcs_fixed_right"); 
+          setRightPost(".wcs_popup");   
+      });
+  });
 </script>
 
 <script type="text/javascript">
-  $('body').css("height",$( window ).height()+"px");
-
   //SCALE BANNER IMAGE
   var w, win;
   var h, hin = 0;
