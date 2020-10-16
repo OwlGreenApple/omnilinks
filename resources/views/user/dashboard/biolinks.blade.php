@@ -4423,6 +4423,8 @@ and add more";
   });
 
   $(document).ready(function() {
+      $('body').css("height",$( window ).height()+"px");
+      
       <?php 
       $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
       $dt2 = Carbon::now();
