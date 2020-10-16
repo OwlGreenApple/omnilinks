@@ -1683,6 +1683,7 @@ $(document).ready(function() {
 </script>
 
 <script type="text/javascript">
+  $('body').css("height",$( window ).height()+"px");
 
   //SCALE BANNER IMAGE
   var w, win;
@@ -1813,8 +1814,6 @@ $(document).ready(function() {
   }
 
   $(document).ready(function() {
-    console.log($( window ).height()+"px");
-    $('body').css("height",$( window ).height()+"px");
     <?php 
     $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $valid_until);
     $dt2 = Carbon::now();
