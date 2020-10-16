@@ -5511,12 +5511,12 @@ and add more";
         
     });
     
-    console.log($( window ).height()+"px");
-      $('body').css("height",$( window ).height()+"px");
-      
 	
   }); //end document ready
 
+    console.log($( window ).height()+"px");
+      $('body').css("height",$( window ).height()+"px");
+      
 
  
     // $(document).on('click','.marker',function(){
