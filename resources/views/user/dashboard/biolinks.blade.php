@@ -4423,9 +4423,6 @@ and add more";
   });
 
   $(document).ready(function() {
-    console.log($( window ).height()+"px");
-      $('body').css("height",$( window ).height()+"px");
-      
       <?php 
       $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
       $dt2 = Carbon::now();
@@ -5514,6 +5511,9 @@ and add more";
         
     });
     
+    console.log($( window ).height()+"px");
+      $('body').css("height",$( window ).height()+"px");
+      
 	
   }); //end document ready
 
