@@ -1235,7 +1235,7 @@ and add more";
       </div>
       
       @if($membership!=='free')
-      <div class="col-lg-7 col-md-8 mb-5 row">
+      <div class="col-lg-7 col-md-8 mb-3 row">
         @if($banner->count())
         <div id="map" class="galleryContainer">
           <div class="slideShowContainer">
@@ -1249,6 +1249,8 @@ and add more";
               <p class="captionText slideTextFromTop"></p>
             </div>
             
+            <!-- banner -->
+
               @if(!is_null($banner[0]->images_banner))
                 @foreach($banner as $ban)
                   <div class="imageHolder">
@@ -1292,6 +1294,16 @@ and add more";
       </div>
       @endif
 
+      <!-- embed youtube -->
+      @if($pages->youtube_embed <> null)
+      <div class="col-lg-7 col-md-8 mb-5 row">
+        <div class="embed-responsive embed-responsive-16by9 embed-youtube">
+          <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $pages->youtube_embed }}?rel=0" allowfullscreen></iframe>
+        </div>
+      </div>
+      @endif
+
+      <!-- social media -->
       <ul class="col-lg-7 col-md-8 mb-0 row" style="padding-left: 24px; padding-right: 24px;">
         <?php 
           $div = floor(count($sort_msg)/3);

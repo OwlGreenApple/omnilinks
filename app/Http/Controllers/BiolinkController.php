@@ -367,6 +367,19 @@ class BiolinkController extends Controller
     }
   }
 
+  public function getEmbedYoutube(Request $request)
+  {
+      $youtube_id = $request->video_id;
+      if($youtube_id <> null)
+      {
+          return view('user.dashboard.embedyoutube',['youtube_id'=>$youtube_id]);
+      }
+      else
+      {
+          return null;
+      }
+  }
+
   public function pixelpage(Request $request)
   {
     $user=Auth::user();
@@ -723,7 +736,8 @@ class BiolinkController extends Controller
     if (in_array("youtube", $request->sortsosmed)) {
       $temp_arr['youtube'] = ['required', 'active_url', 'max:191'];
     }
-    if (!is_null($request->title)){
+    if (!is_null($request->title))
+    {
       for ($i=0; $i <count($request->title); $i++)
       {
         $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
@@ -742,8 +756,14 @@ class BiolinkController extends Controller
       }
     }
 
+    if($request->embed <> null)
+    {
+        $temp_arr["embed"] = ['max:15'];
+    }
+
     $messages = [
         'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
+        'max'    => 'Maximal character youtube id adalah : :max.',
         /*'same'    => 'The :attribute and :other must match.',
         'size'    => 'The :attribute must be exactly :size.',
         'between' => 'The :attribute value :input is not between :min - :max.',
@@ -815,6 +835,7 @@ class BiolinkController extends Controller
   	$page->telegram_link=$request->telegram;
   	$page->skype_link=$request->skype;
   	$page->youtube_link=$request->youtube;
+    $page->youtube_embed=$request->embed;
   	$page->ig_link=$request->ig;
     $page->line_link=$request->line;
     $page->messenger_link=$request->messenger;
