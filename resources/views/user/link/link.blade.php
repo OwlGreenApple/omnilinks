@@ -1294,15 +1294,6 @@ and add more";
       </div>
       @endif
 
-      <!-- embed youtube -->
-      @if($pages->youtube_embed <> null)
-      <div class="col-lg-7 col-md-8 mb-5 row">
-        <div class="embed-responsive embed-responsive-16by9 embed-youtube">
-          <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $pages->youtube_embed }}?rel=0" allowfullscreen></iframe>
-        </div>
-      </div>
-      @endif
-
       <!-- social media -->
       <ul class="col-lg-7 col-md-8 mb-0 row" style="padding-left: 24px; padding-right: 24px;">
         <?php 
@@ -1427,8 +1418,9 @@ and add more";
         <?php
         $ctr = 0;
         ?>
-        @if($links->count())
+        @if($links->count() > 0)
           @foreach($links as $link)
+            @if($link->options == 1)
             <li class="col-md-12 col-12 mb-3"> 
               <a href="#" data-href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
@@ -1438,6 +1430,14 @@ and add more";
                 </button>
               </a>
             </li>
+            @else
+            <!-- embed youtube -->
+            <div class="col-lg-12 col-md-8 mb-5 row">
+              <div class="embed-responsive embed-responsive-16by9 embed-youtube">
+                <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
+              </div>
+            </div>
+            @endif
           @endforeach
         @endif
       </ul>

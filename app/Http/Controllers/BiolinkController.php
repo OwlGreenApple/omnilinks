@@ -384,23 +384,30 @@ class BiolinkController extends Controller
   {
     $user=Auth::user();
     $id = 0;
+    $data_pixel = null;
 
     $pixel=Pixel::where('users_id',Auth::user()->id)
-                  ->where('pages_id','!=',0)
+                  ->where('pages_id','<>',0)
                   ->get();
-                  
+
+    if($pixel->count() > 0)
+    {
+      $data_pixel = $pixel;  
+    }
+
     $dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
     $dt2 = Carbon::now();
     if ( ($user->membership=='free') && ($dt2->gt($dt1)) ) {
       $arr['free'] = 1;
     }
+
     else {
       $arr['free'] = 0;
       $arr['view']=(string) view('user.dashboard.contentpixelsinglelink')
-                  ->with('data_pixel',$pixel);
+                  ->with('data_pixel',$data_pixel);
     }
 
-    return $arr;
+    return json_encode($arr);
   }
 
   public function savetemp(Request $request)
@@ -743,6 +750,12 @@ class BiolinkController extends Controller
         $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
         // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
         $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
+
+        if($request->options[$i] == 2)
+        {
+          $temp_arr['embed.'.$i] = ['required','max:16'];
+        }
+        
         // Validate url
         if (filter_var($request->url[$i], FILTER_VALIDATE_URL)) {
             // echo("$url is a valid URL");
@@ -754,11 +767,6 @@ class BiolinkController extends Controller
           return $arr;
         }
       }
-    }
-
-    if($request->embed <> null)
-    {
-        $temp_arr["embed"] = ['max:15'];
     }
 
     $messages = [
@@ -776,7 +784,6 @@ class BiolinkController extends Controller
       $arr['message'] = $validator->errors()->first();
       return $arr;
     }
-    
     
   	$uuid=$request->uuid;
   	$user=Auth::user();
@@ -834,9 +841,8 @@ class BiolinkController extends Controller
   	$page->twitter_link=$request->twitter;
   	$page->telegram_link=$request->telegram;
   	$page->skype_link=$request->skype;
-  	$page->youtube_link=$request->youtube;
-    $page->youtube_embed=$request->embed;
-  	$page->ig_link=$request->ig;
+  	$page->youtube_link=$request->youtube; 	
+    $page->ig_link=$request->ig;
     $page->line_link=$request->line;
     $page->messenger_link=$request->messenger;
 
@@ -918,8 +924,10 @@ class BiolinkController extends Controller
         $url->pages_id=$page->id;
         $url->names=null;
         $url->users_id=$user->id;
+        $url->options=$request->options[$i];
         $url->title=$request->title[$i];
         $url->link=$request->url[$i];
+        $url->youtube_embed = $request->embed[$i];
         if (!$free){
           $url->pixel_id = $request->linkpixel[$i];
         }

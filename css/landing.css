@@ -77,7 +77,7 @@ p,span {
   cursor: pointer;
 }
 
-.menu-mobile {
+.menu-mobile,.emb {
   display: none;
 }
 

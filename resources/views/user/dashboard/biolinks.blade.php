@@ -1292,7 +1292,7 @@
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
 
-         display_embed_youtube(youtube_id);
+         load_embed();
 
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
@@ -1438,6 +1438,7 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
+        adaptiveLink();
         //$('.pixellink').html(data.pixelink);
       }
     });
@@ -1476,11 +1477,11 @@
 
   function loadPixel(){
     $.ajax({
-      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      // headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       url: "<?php echo url('/load-pixel-page'); ?>",
-      data: { id:0 },
-      dataType: 'text',
+    /*  data: { id:0 },*/
+      dataType: 'json',
       beforeSend: function()
       {
         $('#loader').show();
@@ -1490,14 +1491,18 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
 
-        var data = jQuery.parseJSON(result);
-        // $(selector).html(data.view);
-        dataView = data.view;
-        dataFree = data.free;
-        //if klo free maka replace element dengan label 
+        dataView = result.view;
+        dataFree = result.free;
+
+         //if klo free maka replace element dengan label 
         if (dataFree == "1") {
-          $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 7 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+          $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 7 hari, Silahkan <a href='{{ url('pricing') }}' target='_blank'>Upgrade</a></label>" );
         }
+
+        /*var data = jQuery.parseJSON(result);*/
+        // $(selector).html(data.view);
+       /* dataView = data.view;
+        dataFree = data.free;*/
       }
     });
   }
@@ -1532,8 +1537,8 @@
       // foreach($links as $link) {
     ?>
       $(".link-list").each(function( index ) {
-        $(this).find("select").html(dataView);
-        $(this).find("select").val($(this).find("select").attr('data-pixel-id'));
+        $(this).find("select.linkpixel").html(dataView);
+        $(this).find("select.linkpixel").val($(this).find("select.linkpixel").attr('data-pixel-id'));
       });
     
     <?php 
@@ -2462,34 +2467,6 @@
                       </div>
                     </li>
                   </ul>
-
-                  <!-- Youtube Embed -->
-                  <label class="mb-3 blue-txt">
-                    Embed Youtube
-                    <span class="tooltipstered" title="<div class='panel-heading'>Embed Youtube</div><div class='panel-content'>
-                      Taruh id youtube pada kolom dibawah, contoh id youtube:<br/>
-                      https://www.youtube.com/watch?v=<b>Gij0QNsJRxI</b><br/>
-                      cukup ambil kode yg dicetak tebal pada contoh link diatas.
-                    </div>">
-                      <i class="fas fa-question-circle icon-reflink"></i>
-                    </span>
-                  </label>
-
-                    <div class="col-md-12 col-12 pr-0 pl-0 mb-3">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fab fa-youtube-square" aria-hidden="true"></i>
-                          </div>
-                        </div>
-                        <input type="text" name="embed" value="{{$pages->youtube_embed}}" class="form-control ig-input" placeholder="masukkan id youtube eg: Gij0QNsJRxI">
-                        <!-- 
-                        <div class="div-cell cell-btn">
-                          <i style="margin-top:10px" class="far fa-trash-alt"></i>
-                        </div> -->
-                      </div>
-                    </div>
-                 
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks btn-save-link">
@@ -3859,9 +3836,48 @@ and add more";
     getSelected();
     displayWaText();
     wachatloadPixel();
+    change_link();
     display_embed_youtube("{{ $pages->youtube_embed }}");
     //callMaintainPlus();
   });
+
+  function adaptiveLink()
+  {
+    setTimeout(function(){
+      load_embed();
+    },500);
+  }
+
+  function load_embed()
+  {
+     $(".link_option").each(function(i){
+        var id = $(this).attr('id');
+        var value = $(this).val();
+        embed_link(value,id)
+      });
+  }
+
+  function change_link()
+  {
+    $("body").on("change",".link_option",function(){
+      var value = $(this).val();
+      var id = $(this).attr('id');
+      embed_link(value,id)
+    });
+  }
+
+  function embed_link(value,id){
+     if(value == 2)
+      {
+        $(".sel_"+id).hide();
+        $(".em_"+id).show();
+      }
+      else
+      {
+        $(".sel_"+id).show();
+        $(".em_"+id).hide();
+      }
+  }
 
   //To display embed youtube html element
   function display_embed_youtube(youtube_id)
