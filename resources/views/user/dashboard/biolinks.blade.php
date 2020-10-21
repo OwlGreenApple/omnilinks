@@ -1317,6 +1317,12 @@
           $("#pesanAlert").removeClass("alert-success");
           return false;
         }
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
       }
     });
   }
@@ -1538,7 +1544,8 @@
     ?>
       $(".link-list").each(function( index ) {
         $(this).find("select.linkpixel").html(dataView);
-        $(this).find("select.linkpixel").val($(this).find("select.linkpixel").attr('data-pixel-id'));
+        $(this).find("select.linkpixel").val($(this).attr('data-pixel-id'));
+        // $(this).find("select.linkpixel").val($(this).find("select").attr('data-pixel-id'));
       });
     
     <?php 
@@ -3251,9 +3258,6 @@ and add more";
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
-
-                  <!--- embeded youtube --->
-                  <div id="embed_youtube"></div>
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
@@ -3303,10 +3307,18 @@ and add more";
                   </ul>
                   <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                     <ul class="col-md-12" id="viewLink" >
-                      @if($links->count())
-                      @foreach($links as $link)
-                        <li id="link-preview-{{$link->id}}"><a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a></li>
-                      @endforeach
+                      @if($links->count() > 0)
+                        @foreach($links as $link)
+                          <li id="link-preview-{{$link->id}}">
+                            @if($link->options == 1)
+                              <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a>
+                            @else
+                              <div class="embed-responsive embed-responsive-16by9">
+                                  <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
+                              </div>
+                            @endif
+                          </li>
+                        @endforeach
                       @endif
                     </ul>
                   </div>
@@ -3845,7 +3857,7 @@ and add more";
   {
     setTimeout(function(){
       load_embed();
-    },500);
+    },1500);
   }
 
   function load_embed()
@@ -3870,11 +3882,13 @@ and add more";
      if(value == 2)
       {
         $(".sel_"+id).hide();
+        $(".lnp_"+id).css({"visibility":"hidden"});
         $(".em_"+id).show();
       }
       else
       {
         $(".sel_"+id).show();
+        $(".lnp_"+id).css({"visibility":"visible"});
         $(".em_"+id).hide();
       }
   }
@@ -5570,7 +5584,37 @@ and add more";
      //  }
         var $el;
         counterLink += 1;
-        $('.sortable-link').append('<li class="link-list" id="link-url-' + counterLink + '"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input class="delete-link" type="hidden" name="deletelink[]" value=""><input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div><div class="col-md-12 col-12 pr-0 pl-0"><select name="linkpixel[]" id="linkpixel-' + counterLink + '" class="form-control linkpixel"></select></div> </div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
+        $('.sortable-link').append(
+          '<li class="link-list" id="link-url-' + counterLink + '">'+
+            '<div class="div-table mb-4">'+
+            '<div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div>'+
+            
+            '<div class="div-cell">'+
+              '<div class="col-md-12 col-12 pr-0 pl-0">'+
+                '<div class="input-stack">'+
+                  '<select id="new_'+counterLink+'" name="options[]" class="form-control link_option">'+
+                      '<option value="1" selected>Link</option>'+
+                      '<option value="2">Youtube Link</option>'+
+                  '</select>'+
+
+                  '<div class="sel_new_'+counterLink+'">'+
+                    '<input type="hidden" name="idlink[]" value="new">'+
+                    '<input class="delete-link" type="hidden" name="deletelink[]" value="">'+
+                    '<input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
+                    '<input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">'+
+                  '</div>'+
+                '</div>'+
+              '</div>'+
+              '<div class="col-md-12 col-12 pr-0 pl-0">'+
+                '<input type="text" name="embed[]" class="form-control em_new_'+counterLink+' emb" placeholder="masukkan youtube link">'+
+
+                '<select name="linkpixel[]" id="linkpixel-' + counterLink + '" class="form-control linkpixel lnp_new_'+counterLink+'"></select>'+
+              '</div>'+
+              '</div>'+
+              '<div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span>'+
+              '</div>'+
+            '</div>'+
+          '</li>');
 
         // $("#viewLink").append(' <button type="button" class="btn btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
         $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');

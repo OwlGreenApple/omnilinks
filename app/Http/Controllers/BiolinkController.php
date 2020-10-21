@@ -747,25 +747,24 @@ class BiolinkController extends Controller
     {
       for ($i=0; $i <count($request->title); $i++)
       {
-        $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
-        // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
-        $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
-
-        if($request->options[$i] == 2)
+        if($request->options[$i] == 1)
+        { 
+          $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
+          // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
+          $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
+        }
+        else
         {
           $temp_arr['embed.'.$i] = ['required','max:16'];
         }
         
         // Validate url
-        if (filter_var($request->url[$i], FILTER_VALIDATE_URL)) {
-            // echo("$url is a valid URL");
-        } 
-        else {
-            // echo("$url is not a valid URL");
+        if (filter_var($request->url[$i], FILTER_VALIDATE_URL) == false && $request->options[$i] == 1) {
           $arr['status'] = 'error';
           $arr['message'] = "Link Url ".$i." tidak valid";
           return $arr;
-        }
+        } 
+       
       }
     }
 
@@ -854,7 +853,7 @@ class BiolinkController extends Controller
     else {
       $names=$page->premium_names;
     }
-    $id=$request->idlink;
+ 
     $deletelink=$request->deletelink;
     $sort_link = '';
     
@@ -885,10 +884,11 @@ class BiolinkController extends Controller
         $arr['message'] = 'Jumlah link tidak boleh lebih dari 5';
         return $arr;
       }*/
-      
+
       for ($i=0; $i <count($request->title); $i++)
-      { 
-        if($id[$i]=='new')
+      {   
+
+        if($request->idlink[$i]=='new')
         {
           $url=new Link();
           $counter_new += 1;
@@ -905,7 +905,7 @@ class BiolinkController extends Controller
           }
           // $url=Link::where('id','=',$id[$i])->first();
           $counter_update += 1;
-          $url=Link::find($id[$i]);
+          $url=Link::find($request->idlink[$i]);
         }
 
         // Pengecekan Link
@@ -920,7 +920,7 @@ class BiolinkController extends Controller
           return $arr;
         }
         */
-
+        
         $url->pages_id=$page->id;
         $url->names=null;
         $url->users_id=$user->id;
@@ -928,12 +928,16 @@ class BiolinkController extends Controller
         $url->title=$request->title[$i];
         $url->link=$request->url[$i];
         $url->youtube_embed = $request->embed[$i];
-        if (!$free){
+
+        if($free == false)
+        {
           $url->pixel_id = $request->linkpixel[$i];
         }
-        else {
+        else
+        {
           $url->pixel_id = 0;
         }
+
         $url->save();
 
         /*if($sort_link=='')
