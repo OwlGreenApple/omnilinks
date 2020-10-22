@@ -883,7 +883,7 @@ class BiolinkController extends Controller
         else
         {
           if ($deletelink[$i]=='delete') {
-            $linkku=Link::find($id[$i]);
+            $linkku=Link::find($request->idlink[$i]);
             if (!is_null($linkku)){
               $counter_delete += 1;
               $linkku->delete();

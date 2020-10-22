@@ -3312,13 +3312,13 @@ and add more";
                         @foreach($links as $link)
                           <li id="link-preview-{{$link->id}}">
                               @if($link->options == 1)
-                                <span class="embed-ln-{{$link->id}}">
-                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a>
+                                <span id="link-url-update-{{$link->id}}-get" class="embed-ln-{{$link->id}}">
+                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">{{$link->title}}</a>
                                 </span>
                               @else
-                                <span class="embed-{{$link->id}}">
+                                <span id="link-url-update-{{$link->id}}-get" class="embed-{{$link->id}}">
                                   <div class="embed-responsive embed-responsive-16by9">
-                                      <iframe id="ifr-{{$link->id}}" style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
+                                      <iframe style="padding : 12px" class="embed-responsive-item ifr-{{$link->id}}" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
                                   </div>
                                 </span>
                               @endif
@@ -3889,7 +3889,7 @@ and add more";
         $(".em_"+id).val(pastedData[1]);
       },100);
       
-      $("#ifr-"+id).attr("src","https://www.youtube.com/embed/"+pastedData[1]+"?rel=0")
+      $(".ifr-"+id).attr("src","https://www.youtube.com/embed/"+pastedData[1]+"?rel=0")
     })
   }
 
@@ -3921,9 +3921,9 @@ and add more";
         var youtube_id = $(".em_"+id).val();    
 
         $(".embed-ln-"+id).html(
-          '<span class="embed-'+id+'">'+
+          '<span id="link-url-'+id+'-preview"  class="embed-'+id+'">'+
           '<div class="embed-responsive embed-responsive-16by9">'+
-          '<iframe id="ifr-'+id+'" style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/'+youtube_id+'?rel=0" allowfullscreen></iframe>'+
+          '<iframe style="padding : 12px" class="embed-responsive-item ifr-'+id+'" src="https://www.youtube.com/embed/'+youtube_id+'?rel=0" allowfullscreen></iframe>'+
           '</div></span>'
         );
       }
@@ -3940,8 +3940,8 @@ and add more";
         $(".em_"+id).hide();
          
         $(".embed-"+id).html(
-        '<span class="embed-ln-'+id+'">'+
-          '<a href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-'+id+'-get" >'+title+'</a>'+
+        '<span id="link-url-update-'+id+'-get" class="embed-ln-'+id+'">'+
+          '<a href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">'+title+'</a>'+
         '</span>'
         );
       }
@@ -5620,7 +5620,7 @@ and add more";
         var $el;
         counterLink += 1;
         $('.sortable-link').append(
-          '<li class="link-list" id="link-url-' + counterLink + '">'+
+          '<li class="link-list" id="link-url-new_' + counterLink + '">'+
             '<div class="div-table mb-4">'+
             '<div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div>'+
             
@@ -5655,8 +5655,8 @@ and add more";
 
         //back_target
         $("#viewLink").append('<li class="">'+
-          '<span class="embed-ln-new_'+counterLink+'">'+
-          '<a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li></span>');
+          '<span id="link-url-new_' + counterLink + '-preview" class="embed-ln-new_'+counterLink+'">'+
+          '<a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li></span>');
         check_outlined();
         check_rounded();
         $('#linkpixel-' + counterLink).html(dataView);
