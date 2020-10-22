@@ -3318,7 +3318,7 @@ and add more";
                               @else
                                 <span class="embed-{{$link->id}}">
                                   <div class="embed-responsive embed-responsive-16by9">
-                                      <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
+                                      <iframe id="ifr-{{$link->id}}" style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
                                   </div>
                                 </span>
                               @endif
@@ -3854,7 +3854,7 @@ and add more";
     displayWaText();
     wachatloadPixel();
     change_link();
-    // display_preview_link();
+    pastePreview();
     //callMaintainPlus();
   });
 
@@ -3863,6 +3863,34 @@ and add more";
     setTimeout(function(){
       load_embed();
     },300);
+  }
+
+  function pastePreview()
+  {
+    $("body").on("paste",".emb",function(e){
+      var cl = $(this).attr('class');
+      cl = cl.split(' ');
+      var counter = cl[1].split('_');
+      var id;
+
+      if(counter[1] == "new")
+      {
+          id = counter[1]+"_"+counter[2];
+      }
+      else
+      {
+          id = counter[1];
+      }
+
+      var pastedData = e.originalEvent.clipboardData.getData('text');
+      pastedData = pastedData.split("=");
+
+      setTimeout(function(){
+        $(".em_"+id).val(pastedData[1]);
+      },100);
+      
+      $("#ifr-"+id).attr("src","https://www.youtube.com/embed/"+pastedData[1]+"?rel=0")
+    })
   }
 
   function load_embed()
@@ -3895,14 +3923,14 @@ and add more";
         $(".embed-ln-"+id).html(
           '<span class="embed-'+id+'">'+
           '<div class="embed-responsive embed-responsive-16by9">'+
-          '<iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/'+youtube_id+'?rel=0" allowfullscreen></iframe>'+
+          '<iframe id="ifr-'+id+'" style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/'+youtube_id+'?rel=0" allowfullscreen></iframe>'+
           '</div></span>'
         );
       }
       else
       {
         var title = $("#title-"+id+"-view-update").val();
-        if(title.length == 0){
+        if(title === "" || title === undefined){
           title = "Masukkan Link"
         }
 
@@ -5645,7 +5673,11 @@ and add more";
           '</li>');
 
         // $("#viewLink").append(' <button type="button" class="btn btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
-        $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');
+
+        //back_target
+        $("#viewLink").append('<li class="">'+
+          '<span class="embed-ln-new_'+counterLink+'">'+
+          '<a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li></span>');
         check_outlined();
         check_rounded();
         $('#linkpixel-' + counterLink).html(dataView);
