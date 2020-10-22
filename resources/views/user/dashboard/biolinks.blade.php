@@ -3947,27 +3947,6 @@ and add more";
       }
   }
 
-  //To display embed youtube html element
-  function display_preview_link()
-  {
-      var request = {'page_id':'{{ $pageid }}'};
-    
-      $.ajax({
-        type : "GET",
-        url : "{{url('get-sort-links')}}",
-        data : request,
-        dataType : "html",
-        success : function(result)
-        {
-          $(".display_links").html(result);
-        },
-        error : function(xhr)
-        {
-          console.log(xhr.responseText);
-        }
-      });
-  }
-
   //To display wa btn text if wa user hasn't registered yet
   function displayWaText()
   {

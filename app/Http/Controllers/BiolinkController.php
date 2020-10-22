@@ -229,31 +229,6 @@ class BiolinkController extends Controller
     ]);  
   }
 
-  public function getPreviewLinks(Request $request)
-  {
-      $user_id = Auth::id();
-      $page_id = $request->page_id;
-      $selected = $request->selected;
-      
-      $page=Page::where('id','=',$page_id)
-              ->where('user_id',$user_id)
-              ->first();
-
-      $sort_id = $page->sort_link;
-      $sort_link = explode(";",$sort_id);
-      $last_array = count($sort_link) - 1;
-      unset($sort_link[$last_array]);
-     
-      $sorted = implode(",",$sort_link);
-    
-      $links=Link::where('users_id',$user_id)
-                ->where('pages_id',$page_id)
-                ->orderByRaw("FIELD(id,$sorted)")
-                ->get();
-
-      return view('user.dashboard.content_links',['links'=>$links,'selected'=>$selected]);
-  }
-
   public function getWAchatButton($pageid)
   {
       $chatdata = array();
