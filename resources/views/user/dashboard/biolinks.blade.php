@@ -3305,18 +3305,23 @@ and add more";
                       </a>
                     </li>
                   </ul>
-                  <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
+                  <div class="row display_links" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
+                    <!-- display preview links here .display_links -->
                     <ul class="col-md-12" id="viewLink" >
                       @if($links->count() > 0)
                         @foreach($links as $link)
                           <li id="link-preview-{{$link->id}}">
-                            @if($link->options == 1)
-                              <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a>
-                            @else
-                              <div class="embed-responsive embed-responsive-16by9">
-                                  <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
-                              </div>
-                            @endif
+                              @if($link->options == 1)
+                                <span class="embed-ln-{{$link->id}}">
+                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a>
+                                </span>
+                              @else
+                                <span class="embed-{{$link->id}}">
+                                  <div class="embed-responsive embed-responsive-16by9">
+                                      <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
+                                  </div>
+                                </span>
+                              @endif
                           </li>
                         @endforeach
                       @endif
@@ -3849,7 +3854,7 @@ and add more";
     displayWaText();
     wachatloadPixel();
     change_link();
-    display_embed_youtube("{{ $pages->youtube_embed }}");
+    // display_preview_link();
     //callMaintainPlus();
   });
 
@@ -3857,7 +3862,7 @@ and add more";
   {
     setTimeout(function(){
       load_embed();
-    },1500);
+    },300);
   }
 
   function load_embed()
@@ -3882,28 +3887,51 @@ and add more";
      if(value == 2)
       {
         $(".sel_"+id).hide();
-        $(".lnp_"+id).css({"visibility":"hidden"});
-        $(".em_"+id).show();
+        $(".lnp_"+id).hide();
+        // $(".lnp_"+id).css({"visibility":"hidden"});
+        $(".em_"+id).show();     
+        var youtube_id = $(".em_"+id).val();    
+
+        $(".embed-ln-"+id).html(
+          '<span class="embed-'+id+'">'+
+          '<div class="embed-responsive embed-responsive-16by9">'+
+          '<iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/'+youtube_id+'?rel=0" allowfullscreen></iframe>'+
+          '</div></span>'
+        );
       }
       else
       {
+        var title = $("#title-"+id+"-view-update").val();
+        if(title.length == 0){
+          title = "Masukkan Link"
+        }
+
         $(".sel_"+id).show();
-        $(".lnp_"+id).css({"visibility":"visible"});
+        $(".lnp_"+id).show();
+        // $(".lnp_"+id).css({"visibility":"visible"});
         $(".em_"+id).hide();
+         
+        $(".embed-"+id).html(
+        '<span class="embed-ln-'+id+'">'+
+          '<a href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-'+id+'-get" >'+title+'</a>'+
+        '</span>'
+        );
       }
   }
 
   //To display embed youtube html element
-  function display_embed_youtube(youtube_id)
+  function display_preview_link()
   {
+      var request = {'page_id':'{{ $pageid }}'};
+    
       $.ajax({
         type : "GET",
-        url : "{{url('get-embed-youtube')}}",
-        data : {'video_id':youtube_id},
+        url : "{{url('get-sort-links')}}",
+        data : request,
         dataType : "html",
         success : function(result)
         {
-          $("#embed_youtube").html(result);
+          $(".display_links").html(result);
         },
         error : function(xhr)
         {
