@@ -216,6 +216,14 @@ class BiolinkController extends Controller
         $validmember = true;
     }
 
+    //description
+    if(!is_null($page->description)) 
+    { 
+      $description = $page->description;
+    } else {
+      $description = "This is your new text content. You can modify this text and add more";
+    }
+
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
       'pages'=>$page,
@@ -226,6 +234,7 @@ class BiolinkController extends Controller
       'wachat'=>$getwachat,
       'valid'=>$validmember,
       'mod'=>$mod,
+      'description'=>$description
     ]);  
   }
 

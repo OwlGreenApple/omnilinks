@@ -1221,6 +1221,7 @@
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
+   
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'POST',
@@ -1259,6 +1260,11 @@
           $("#pesanAlert").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-success");
         }
+      },
+      error : function(xhr,throwable,other){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
       }
     });
   }
@@ -2677,13 +2683,13 @@
                           <input type="text" name="judul" id="pagetitle" value="<?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
 
                           <!-- editor -->
-                          <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize><?php if(!is_null($pages->description)) { 
-                            echo $pages->description;
-                          }else {
-                            echo "This is your new text content. 
-You can modify this text 
-and add more";
-                          }?></textarea>
+                          <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
+                            </textarea>
+
+                          <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
+                         
+                          <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Create Link</button>
+
                         </div>
                         <div class="col-md-12 mt-4">
                         @if(Auth::user()->membership!='free') 
@@ -3810,6 +3816,9 @@ and add more";
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
 
+<!-- to insert link if user want to change value into link on textarea -->
+<script src="{{asset('js/wraptagtextarea.js')}}"></script>
+
 <script type="text/javascript">
   /*DELAY ON KEYUP
   function delay(callback, ms) {
@@ -3857,8 +3866,17 @@ and add more";
     wachatloadPixel();
     change_link();
     pastePreview();
+    createLinkDescription();
     //callMaintainPlus();
   });
+
+  function createLinkDescription()
+  {
+     $("#make-bold").click(function(){
+        var url = $("#url").val();
+        surroundWithLink(url);
+     });
+  }
 
   function adaptiveLink()
   {
@@ -4095,6 +4113,23 @@ and add more";
      resize();
   });
 
+ /* function createLinkInDescription()
+  {
+    $('#make-bold').click(function(event){
+        event.preventDefault();
+          
+        var selection = window.getSelection();
+        var range = selection.getRangeAt(0).cloneRange();
+        
+        var tag = document.createElement('a');
+        tag.setAttribute('href', "http://google.com");
+
+        range.surroundContents(tag);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    });
+  }
+*/
  function load_chat_member(){
     var uid = $("input[name=uuid]").val();
     var data = '';
@@ -4110,21 +4145,15 @@ and add more";
           {
               data +=  '<div class="card card-none mb-4">';
               data +=  '<div class="card-header card-gray">';
-
               data +=  '<span class="view-wa">'+result[i].name+'</span>';
-
               data +=  '<button type="button" class="del_chat_member btn btn-sm btn-danger float-right" id="'+result[i].id+'">';
-
               data +=  '<i class="fas fa-trash-alt"></i>';
               data +=  '</button>';
-
               data +=  '<button type="button" class="edit_wa_member btn btn-sm btn-primary float-right mr-2" data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'" data-text="'+result[i].wa_text+'" class="edit_wa_member" id="'+result[i].id+'" data-img="'+result[i].photo+'"">';
 
               data +=  '<i class="fas fa-pencil-alt"></i>';
               data +=  '</button>';
-
               data +=  '<div class="clearfix"></div>';
-
               data +=  '</div>';  //end class card-header
               data +=  '</div>'; //end class card-none
           } 
@@ -4618,7 +4647,9 @@ and add more";
         outputtitle.text(inputtitle.val());
       });
       outputtitle.text(inputtitle.val());
-
+        
+      /*
+          temporary
       $('#description').keydown(function(e){
         newLines = $(this).val().split("\n").length;
         if(e.keyCode == 13 && newLines >= 3) {
@@ -4634,7 +4665,7 @@ and add more";
         $('#outputdescription').html(tempStr);
       });
       tempStr = $('#description').val().replace(/\n/g, "<br>");
-      $('#outputdescription').html(tempStr);
+      $('#outputdescription').html(tempStr);*/
 
       
     $(document).on('focus','.focuslink',function(){

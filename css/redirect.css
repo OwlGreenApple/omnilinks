@@ -66,3 +66,11 @@ a:hover {
   font-size: 15px;
   white-space:normal;
 }
+
+.desc-link {
+  color : #106BC8;
+}
+
+.desc-link:hover {
+  text-decoration: underline;
+}

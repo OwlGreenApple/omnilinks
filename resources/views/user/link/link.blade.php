@@ -1432,11 +1432,11 @@ and add more";
             </li>
             @else
             <!-- embed youtube -->
-            <div class="col-lg-12 col-md-8 mb-5 row">
+            <li class="col-md-12 col-12 mb-3 pad-fix"> 
               <div class="embed-responsive embed-responsive-16by9 embed-youtube">
                 <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
               </div>
-            </div>
+            </li>
             @endif
           @endforeach
         @endif
