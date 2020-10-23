@@ -1542,12 +1542,14 @@
     if($links->count()) {
       // foreach($links as $link) {
     ?>
-      $(".link-list").each(function( index ) {
-        $(this).find("select.linkpixel").html(dataView);
-        $(this).find("select.linkpixel").val($(this).attr('data-pixel-id'));
-        // $(this).find("select.linkpixel").val($(this).find("select").attr('data-pixel-id'));
-      });
-    
+      setTimeout(function(){
+        $(".link-list").each(function( index ) {
+          $(this).find("select.linkpixel").html(dataView);
+          $(this).find("select.linkpixel").val($(this).attr('data-pixel-id'));
+          // $(this).find("select.linkpixel").val($(this).find("select").attr('data-pixel-id'));
+        });
+      },500);
+     
     <?php 
       // }
     }
@@ -2649,7 +2651,7 @@
                 </div>
               </div>
               
-              <!-- TAB 2 -->
+              <!-- TAB 2 -- Tampilan -->
               <div role="tabpanel" class="tab-pane fade in " id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
 
@@ -2675,6 +2677,8 @@
                         </div>
                         <div class="col-md-8">
                           <input type="text" name="judul" id="pagetitle" value="<?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
+
+                          <!-- editor -->
                           <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize><?php if(!is_null($pages->description)) { 
                             echo $pages->description;
                           }else {

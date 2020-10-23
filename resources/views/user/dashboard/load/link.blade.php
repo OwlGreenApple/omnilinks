@@ -30,10 +30,9 @@
                                   <!-- Youtube Embed Gij0QNsJRxI -->
                                     <input type="text" name="embed[]" class="form-control em_{{$link->id}} emb" value="{{$link->youtube_embed}}" placeholder="masukkan youtube link">
 
-                                  <div class="lnp_{{$link->id}}">
-                                    <select name="linkpixel[]" id="linkpixel-{{$link->id}}-update" class="form-control linkpixel" data-pixel-id="{{$link->pixel_id}}">
+                                    <select name="linkpixel[]" id="linkpixel-{{$link->id}}-update" class="form-control linkpixel lnp_{{$link->id}}" data-pixel-id="{{$link->pixel_id}}">
                                     </select>
-                                  </div>
+                                    
                                 </div> 
                               </div>
                               
