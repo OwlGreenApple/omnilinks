@@ -1542,13 +1542,11 @@
     if($links->count()) {
       // foreach($links as $link) {
     ?>
-      setTimeout(function(){
         $(".link-list").each(function( index ) {
           $(this).find("select.linkpixel").html(dataView);
-          $(this).find("select.linkpixel").val($(this).attr('data-pixel-id'));
+          $(this).find("select.linkpixel").val($(this).find("select.linkpixel").attr('data-pixel-id'));
           // $(this).find("select.linkpixel").val($(this).find("select").attr('data-pixel-id'));
         });
-      },500);
      
     <?php 
       // }
