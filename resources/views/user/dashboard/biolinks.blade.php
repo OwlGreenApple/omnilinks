@@ -39,6 +39,9 @@
   var template;
   var changelink = 0;
   var changechat = 0;
+  var changepixel = 0;
+  var changeproof = 0;
+
   var templates = [
     {
      "id": 1,
@@ -1263,6 +1266,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
         }
@@ -1323,6 +1328,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
@@ -1343,9 +1350,10 @@
     });
   }
 
-  function tambahpixel() 
+  function tambahpixel(proof) 
   {
     //CHECK WHETHER SCRIPT HAS ERROR OR NOT
+    var data_script;
     var elscript = document.getElementById("error-script");
     elscript.innerHTML = ''; //to make element error-script have default value length
     window.onerror = function(error){
@@ -1357,7 +1365,15 @@
         elscript.innerHTML = error;
     };
 
-    $("#script-code").html($("#script").val());
+    if(proof == 'proof'){
+      data_script = $("#script_proof").val();
+    }
+    else
+    {
+      data_script = $("#script").val();
+    }
+
+    $("#script-code").html(data_script);
     var len = elscript.innerHTML.length;
 
     if(len > 0)
@@ -1367,14 +1383,33 @@
         return false;
     }
 
+    var data;
+    var proof_status = $("#btn_proof").attr('data-status');
+    //proof_status == 1 --> update
+
+    if(proof == 'proof')
+    {
+        data = $("#saveproof").serializeArray();
+        data.push({name: 'jenis_pixel', value: 'pf'});
+
+        if(proof_status !== undefined)
+        {
+          data.push({name: 'update_proof', value: proof_status});
+        }
+    }
+    else
+    {
+        data = $("#savepixel").serialize();
+    }
+
     $.ajax({
       type: 'POST',
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      url: "<?php echo url ('/save-pixel')?>",
+      url: "{{ url('save-pixel') }}",
       dataType: 'text',
-      data: $("#savepixel").serialize(),
+      data: data,
       beforeSend: function()
       {
         $('#loader').show();
@@ -1390,6 +1425,12 @@
         $(window).scrollTop(0);
         refreshpixel();
         loadPixelPage();
+
+        changed = 0;
+        changelink = 0;
+        changechat = 0;
+        changepixel = 0;
+        changeproof = 0;
 
         var data = jQuery.parseJSON(result);
         $(".alertTitle").removeClass("alert-danger");
@@ -1414,7 +1455,17 @@
           location.href="#pesanAlert";
         }
         
+        if(data.pixel_id !== 0)
+        {
+          $("#btn_proof").attr('data-status',data.pixel_id)
+        }
+        
       },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
     }); 
   }
 
@@ -1493,6 +1544,12 @@
         setTimeout(function(){
           $('#delete-success').modal('hide')
         }, 3000);
+
+        changed = 0;
+        changelink = 0;
+        changechat = 0;
+        changepixel = 0;
+        changeproof = 0;
       }
     });
   }
@@ -2095,6 +2152,12 @@
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
                   Pixel
                 </a>
+              </li> 
+
+              <li class="nav-item">
+                <a href="#proof" class="nav-link link" role="tab" data-toggle="tab">
+                  Activproof
+                </a>
               </li>
               <?php } ?>
 
@@ -2663,6 +2726,44 @@
                 <div class="accordion mt-3" id="accordionExample">
                   <div id="content"></div>
                 </div>
+              </div>
+
+               <!-- TAB 6 -->
+              <div class="tab-pane fade" id="proof">
+                <form id="saveproof" method="post" style="margin-bottom: 40px;margin-top: 40px;">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="uuidpixel" value="{{$uuid}}">
+                  <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
+                  <span class="blue-txt">
+                    ActivProof
+                  </span>
+
+                  <textarea class="form-control mt-3" name="script" id="script_proof" style="height:100px">{!! $proof_pixel !!}</textarea>
+
+                  <div class="form-group mt-3 mb-4 row">
+                    <div class="col-md-2">
+                      <label class="control-label">
+                        Title
+                      </label>  
+                    </div>
+                    
+                    <div class="col-md-6 col-12 mb-3">
+                      <input type="text" class="form-control col-md-12" name="title" placeholder="Masukkan Judul" id="title_proof" value="{{ $proof_title }}">
+                      <input type="text" name="editidpixel" hidden id="editidpixel">
+                      <div class="alertTitle alert "><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-4 pl-md-0 pl-3 text-center">
+                        <button type="button" id="btn_proof" data-status="{{ $proof_status }}" class="btn btn-primary btn-setting-biolinks mr-2" style="width:45%">
+                          Save
+                        </button>
+                      <button type="reset" class="btn btn-danger btn-reset btn-setting-biolinks" style="width:45%">
+                        Reset
+                      </button>
+                    </div>
+                  </div>
+
+                </form>
               </div>
               
               <!-- TAB 2 -- Tampilan -->
@@ -4227,6 +4328,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
@@ -4384,6 +4487,8 @@
               changed = 0;
               changelink = 0;
               changechat = 0;
+              changepixel = 0;
+              changeproof = 0;
               refreshwa();
               loadLinkBio();
               refreshpixel();
@@ -4476,6 +4581,8 @@
    $( ":input" ).change(function() {
       changed = $(this).closest('#saveTemplate').data('changed', true);
       changelink = $(this).closest('#savelink').data('changed', true);
+      changepixel = $(this).closest('#savepixel').data('changed', true);
+      changeproof = $(this).closest('#saveproof').data('changed', true);
       changechat = $(this).closest('#savewa').data('changed', true);
     });
 
@@ -4488,9 +4595,13 @@
         changed = 1;
    });
 
+   $("body").on("click",".btn-editpixel",function(){
+      changepixel = 1;
+   });
+
   $("body").on("click",".link",function()
   {
-     if(changed > 0 ||changed.length > 0 || changelink.length > 0 || changechat.length > 0)
+     if(changed > 0 ||changed.length > 0 || changelink.length > 0 || changelink > 0 ||  changepixel.length > 0 || changepixel > 0 ||changeproof.length > 0 || changeproof >0 || changechat.length > 0 || changechat > 0)
      {
         $("#unsave").modal();
         return false;
@@ -5404,6 +5515,10 @@
       tambahpixel();
       //$('#pesanAlert').removeClass('alert-danger');
       //$('#pesanAlert').children().remove();
+    });
+
+    $(document).on("click","#btn_proof",function(){
+      tambahpixel('proof');
     });
 
     $(document).on("click", ".btn-save-link", function(e) {

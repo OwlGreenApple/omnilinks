@@ -224,6 +224,20 @@ class BiolinkController extends Controller
       $description = "This is your new text content. You can modify this text and add more";
     }
 
+    //proof
+    $proof = Pixel::where([['users_id','=',Auth::id()],['pages_id','=',$page->id],['jenis_pixel','=','pf']])->first();
+
+    if(is_null($proof))
+    {
+        $proof_pixel = $proof_title = $proof_status = null;
+    }
+    else
+    {
+        $proof_title = $proof->title;
+        $proof_pixel = $proof->script;
+        $proof_status = $proof->id;
+    }
+
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
       'pages'=>$page,
@@ -234,7 +248,10 @@ class BiolinkController extends Controller
       'wachat'=>$getwachat,
       'valid'=>$validmember,
       'mod'=>$mod,
-      'description'=>$description
+      'description'=>$description,
+      'proof_title'=>$proof_title,
+      'proof_pixel'=>$proof_pixel,
+      'proof_status'=>$proof_status
     ]);  
   }
 
@@ -1080,6 +1097,7 @@ class BiolinkController extends Controller
   {
 
     $temp_arr = array();
+    $pixel_proof = null;
     $temp_arr['script'] = ['required', 'string' ];
     $pixelscript = $request->script;
     $temp_arr['title'] = ['required','string','max:190'];
@@ -1116,15 +1134,25 @@ class BiolinkController extends Controller
         $data['message'] = 'Mohon gunakan javascript yang valid'; 
         return $data;
     }
-    #----
-    
+
   	$uuid=$request->uuidpixel;
   	$page=Page::where('uid','=',$uuid)->first();
-    if (is_null($request->editidpixel)) {
+    $pixel_proof_id = $request->update_proof;
+
+    if (is_null($request->editidpixel) && $pixel_proof_id == null) 
+    {
         $pixel=new Pixel();
     }
-    else {
-      $pixel=Pixel::where('id','=',$request->editidpixel)->first(); 
+    else 
+    {
+      if($pixel_proof_id <> null)
+      {
+        $pixel=Pixel::where('id','=',$pixel_proof_id)->first(); 
+      }
+      else
+      {
+        $pixel=Pixel::where('id','=',$request->editidpixel)->first(); 
+      }
     }
     
   	$user=Auth::user();
@@ -1135,6 +1163,15 @@ class BiolinkController extends Controller
   	$pixel->script=$request->script;
   	$pixel->save();
   	// return redirect('/biolinks/'.$uuid);
+
+    if ($pixel_proof_id == null) 
+    {
+        $arr['pixel_id'] = $pixel->id;
+    }
+    else
+    {
+        $arr['pixel_id'] = 0;
+    }
     
     $arr['status'] = 'success';
     $arr['message'] = "Data Berhasil disimpan";
@@ -1145,6 +1182,7 @@ class BiolinkController extends Controller
   {
   	$pixels=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
+                  ->where('jenis_pixel','<>','pf')
   					->orderBy('created_at','ascend')->get();
   					//dd($pixels);
   	$arr['view'] =(string) view('user.dashboard.contentpixel')
