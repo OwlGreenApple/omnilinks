@@ -67,10 +67,10 @@ a:hover {
   white-space:normal;
 }
 
-.desc-link {
+.header-txt > a {
   color : #106BC8;
 }
 
-.desc-link:hover {
+.header-txt > a:hover {
   text-decoration: underline;
 }

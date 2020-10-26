@@ -1221,6 +1221,16 @@
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
+    var desc = $("#description").html();
+
+    console.log(desc.length);
+    if(desc.length > 80)
+    {
+      alert("Deskripsi melebihi 80 karakter");
+      return false;
+    }
+
+    formData.append('description',desc);
    
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -2683,10 +2693,14 @@
                           <input type="text" name="judul" id="pagetitle" value="<?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
 
                           <!-- editor -->
-                          <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
-                            </textarea>
+                          <!-- <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
+                            </textarea> -->
+
+                          <div id="description" contenteditable="true">{!! $description !!}</div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
+
+                          <div><small><b>Note</b> : menggunakkan link akan menambah karakter sebanyak karakter link dan text ditambah 14 karakter</small></div>
                          
                           <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Create Link</button>
 
@@ -3872,11 +3886,38 @@
 
   function createLinkDescription()
   {
+    $('#make-bold').click(function(event){
+        event.preventDefault();
+        var url = $("#url").val();
+
+        if(url === '')
+        {
+          alert("Kolom url tidak boleh kosong");
+        }
+        else
+        {
+          var selection = window.getSelection();
+          var range = selection.getRangeAt(0).cloneRange();
+          
+          var tag = document.createElement('a');
+          tag.setAttribute('href', url);
+
+          range.surroundContents(tag);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+        
+    });
+  }
+
+
+  /*function createLinkDescription()
+  {
      $("#make-bold").click(function(){
         var url = $("#url").val();
         surroundWithLink(url);
      });
-  }
+  }*/
 
   function adaptiveLink()
   {
@@ -4113,23 +4154,6 @@
      resize();
   });
 
- /* function createLinkInDescription()
-  {
-    $('#make-bold').click(function(event){
-        event.preventDefault();
-          
-        var selection = window.getSelection();
-        var range = selection.getRangeAt(0).cloneRange();
-        
-        var tag = document.createElement('a');
-        tag.setAttribute('href', "http://google.com");
-
-        range.surroundContents(tag);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    });
-  }
-*/
  function load_chat_member(){
     var uid = $("input[name=uuid]").val();
     var data = '';
@@ -4647,9 +4671,7 @@
         outputtitle.text(inputtitle.val());
       });
       outputtitle.text(inputtitle.val());
-        
-      /*
-          temporary
+          
       $('#description').keydown(function(e){
         newLines = $(this).val().split("\n").length;
         if(e.keyCode == 13 && newLines >= 3) {
@@ -4661,11 +4683,13 @@
         }
       });
       $('#description').keyup(function(e){
-        tempStr = $(this).val().replace(/\n/g, "<br>");;
+        // tempStr = $(this).val().replace(/\n/g, "<br>");;
+        tempStr = $(this).html().replace(/\n/g, "<br>");;
         $('#outputdescription').html(tempStr);
       });
-      tempStr = $('#description').val().replace(/\n/g, "<br>");
-      $('#outputdescription').html(tempStr);*/
+      // tempStr = $('#description').val().replace(/\n/g, "<br>");
+      tempStr = $('#description').html().replace(/\n/g, "<br>");
+      $('#outputdescription').html(tempStr);
 
       
     $(document).on('focus','.focuslink',function(){
