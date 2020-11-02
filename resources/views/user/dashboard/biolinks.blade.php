@@ -2154,11 +2154,11 @@
                 </a>
               </li> 
 
-              <li class="nav-item">
+             <!--  <li class="nav-item">
                 <a href="#proof" class="nav-link link" role="tab" data-toggle="tab">
                   Activproof
                 </a>
-              </li>
+              </li> -->
               <?php } ?>
 
               <li class="nav-item">
