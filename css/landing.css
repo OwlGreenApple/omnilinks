@@ -81,6 +81,19 @@ p,span {
   display: none;
 }
 
+.star-custom {
+  color : #ffc100;
+}
+
+.proof_text {
+  font-size: 12px;
+}
+
+.proof-wrapper {
+  background-color: #fff;
+  padding : 15px;
+}
+
 @media screen and (max-width: 767px) {
   .menu-nomobile {
     display: none;

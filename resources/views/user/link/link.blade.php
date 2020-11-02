@@ -1643,6 +1643,30 @@ and add more";
     </div>
 @endif
 
+  <!-- proof -->
+  @if($proof->count() > 0)
+    @foreach($proof as $row)
+    <div class="proof-wrapper">
+        <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+     
+        <div class="proof-desc">
+            <div class="proof_profile">
+              <div class="proof_name">{{ $row->name }}</div>
+              <div class="proof_star">
+                @for($x=1;$x<=$row->star;$x++)
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                @endfor
+              </div>
+            </div>
+
+            <div class="proof_comments">
+             xassaxsaxscds
+            </div>
+        </div>
+      <div class="clearfix"></div>
+    </div>
+    @endforeach
+  @endif
   
   <!--Loading Bar-->
   <div class="div-loading">
@@ -1692,6 +1716,7 @@ $(document).ready(function() {
         setRightPost(".wcs_popup");   
     });
 });
+
 </script>
 
 <script type="text/javascript">

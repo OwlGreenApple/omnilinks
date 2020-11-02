@@ -1365,14 +1365,7 @@
         elscript.innerHTML = error;
     };
 
-    if(proof == 'proof'){
-      data_script = $("#script_proof").val();
-    }
-    else
-    {
-      data_script = $("#script").val();
-    }
-
+    data_script = $("#script").val();
     $("#script-code").html(data_script);
     var len = elscript.innerHTML.length;
 
@@ -1383,25 +1376,6 @@
         return false;
     }
 
-    var data;
-    var proof_status = $("#btn_proof").attr('data-status');
-    //proof_status == 1 --> update
-
-    if(proof == 'proof')
-    {
-        data = $("#saveproof").serializeArray();
-        data.push({name: 'jenis_pixel', value: 'pf'});
-
-        if(proof_status !== undefined)
-        {
-          data.push({name: 'update_proof', value: proof_status});
-        }
-    }
-    else
-    {
-        data = $("#savepixel").serialize();
-    }
-
     $.ajax({
       type: 'POST',
       headers: {
@@ -1409,7 +1383,7 @@
       },
       url: "{{ url('save-pixel') }}",
       dataType: 'text',
-      data: data,
+      data:  $("#savepixel").serialize(),
       beforeSend: function()
       {
         $('#loader').show();
@@ -1453,11 +1427,6 @@
           $(".alertTitle").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-danger");
           location.href="#pesanAlert";
-        }
-        
-        if(data.pixel_id !== 0)
-        {
-          $("#btn_proof").attr('data-status',data.pixel_id)
         }
         
       },
@@ -2154,11 +2123,11 @@
                 </a>
               </li> 
 
-            <!--   <li class="nav-item">
+              <li class="nav-item">
                 <a href="#proof" class="nav-link link" role="tab" data-toggle="tab">
                   Activproof
                 </a>
-              </li> -->
+              </li>
               <?php } ?>
 
               <li class="nav-item">
@@ -2730,31 +2699,45 @@
 
                <!-- TAB 6 -->
               <div class="tab-pane fade" id="proof">
-                <form id="saveproof" method="post" style="margin-bottom: 40px;margin-top: 40px;">
-                  {{ csrf_field() }}
-                  <input type="hidden" name="uuidpixel" value="{{$uuid}}">
-                  <input type="hidden" name="idpage" id="idpage" value="{{$pageid}}">
-                  <span class="blue-txt">
-                    ActivProof
-                  </span>
+                <form id="saveproof" class="mb-4 mt-4">
 
-                  <textarea class="form-control mt-3" name="script" id="script_proof" style="height:100px">{!! $proof_pixel !!}</textarea>
-
+                  <span class="blue-txt">ActivProof</span>
+                    
                   <div class="form-group mt-3 mb-4 row">
                     <div class="col-md-2">
-                      <label class="control-label">
-                        Title
-                      </label>  
+                      <label class="control-label">Name</label>  
                     </div>
-                    
-                    <div class="col-md-6 col-12 mb-3">
-                      <input type="text" class="form-control col-md-12" name="title" placeholder="Masukkan Judul" id="title_proof" value="{{ $proof_title }}">
-                      <input type="text" name="editidpixel" hidden id="editidpixel">
-                      <div class="alertTitle alert "><!-- Error --></div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" />
+                      <div class="error_proof_name"><!-- Error --></div>
                     </div>
 
-                    <div class="col-md-4 pl-md-0 pl-3 text-center">
-                        <button type="button" id="btn_proof" data-status="{{ $proof_status }}" class="btn btn-primary btn-setting-biolinks mr-2" style="width:45%">
+                    <div class="col-md-2">
+                      <label class="control-label">Text</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <textarea class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <div class="error_proof_text"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Image</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="file" class="form-control" name="proof_image" placeholder="Masukkan Text" />
+                      <div class="error_proof_image"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Stars</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="number" value="5" min="1" max="5" class="form-control" name="proof_stars" placeholder="Jumlah bintang" />
+                      <div class="error_proof_stars"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-4 ml-auto pl-md-0 pl-3 text-center">
+                        <button type="submit" id="btn_proof" class="btn btn-primary btn-setting-biolinks mr-2" style="width:45%">
                           Save
                         </button>
                       <button type="reset" class="btn btn-danger btn-reset btn-setting-biolinks" style="width:45%">
@@ -2764,6 +2747,15 @@
                   </div>
 
                 </form>
+
+                <!-- proof list -->
+                <span class="blue-txt">
+                  List of Proofs
+                </span>
+                <div class="accordion mt-3" id="accordionExample">
+                  <div id="loaded_proof"></div>
+                </div>
+
               </div>
               
               <!-- TAB 2 -- Tampilan -->
@@ -3982,8 +3974,84 @@
     change_link();
     pastePreview();
     createLinkDescription();
+    createProof();
+    load_proof();
     //callMaintainPlus();
   });
+
+  function createProof()
+  {
+     $("#saveproof").submit(function(e){
+        e.preventDefault();
+
+        var data = new FormData(this);
+        data.append('page_id','{{ $pageid }}');
+
+        $.ajax({
+          type: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          dataType: 'json',
+          data: data,
+          url: "{{ url('save-proof') }}",
+          cache:false,
+          contentType: false,
+          processData: false,
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          }, 
+          success: function(result) {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+
+            if(result.data == 1) 
+            {
+                $("#saveproof > input").val('');
+                load_proof();
+            }
+            else
+            {
+                alert('error');
+            }
+          },
+          error : function(xhr){
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            console.log(xhr.responseText);
+          }
+        });
+        //end ajax
+     });
+  }
+
+  function load_proof()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "{{ url('load-proof') }}",
+      data: { pageid : '{{ $pageid }}' },
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        $("#loaded_proof").html(result);
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+  }
 
   function createLinkDescription()
   {
@@ -5515,10 +5583,6 @@
       tambahpixel();
       //$('#pesanAlert').removeClass('alert-danger');
       //$('#pesanAlert').children().remove();
-    });
-
-    $(document).on("click","#btn_proof",function(){
-      tambahpixel('proof');
     });
 
     $(document).on("click", ".btn-save-link", function(e) {

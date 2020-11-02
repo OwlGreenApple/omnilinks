@@ -147,6 +147,10 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/load-pixel','BiolinkController@loadpixel');
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 
+    //proof
+    Route::post('save-proof','BiolinkController@saveProof');
+    Route::get('load-proof','BiolinkController@loadProof');
+
     //makesinglelink
     Route::get('/singlelink','SingleLinkController@newsingle');
     Route::post('/save-singlelink','SingleLinkController@single');
