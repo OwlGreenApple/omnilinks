@@ -221,6 +221,7 @@ class OrderController extends Controller
     $stat = $this->cekharga($request->namapaket,$request->price);
 
     $pathUrl = str_replace(url('/'), '', url()->previous());
+
     if($stat==false){
       // return redirect("checkout/1")->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");
       return redirect($pathUrl)->with("error", "Paket dan harga tidak sesuai. Silahkan order kembali.");

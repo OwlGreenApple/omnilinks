@@ -47,9 +47,14 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/helps',function(){
     return view('term and policy');
   });
+
+   Route::get('register',function(){
+     return redirect('https://omnilinkz.com/');
+  });
+
   //auth
   Route::post('post-register', 'Auth\RegisterController@post_register');
-  Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
+  Route::post('register-save', 'Auth\RegisterController@register')->middleware('checkwa');
   // Route::get('/verifyemail/{cryptedcode}','HomeController@verifyemail');
   Route::get('/thankyou-register','OrderController@thankyou_register');
   Route::get('/thankyou-confirm-payment','OrderController@thankyou_confirm_payment');

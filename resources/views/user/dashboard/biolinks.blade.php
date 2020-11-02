@@ -1226,10 +1226,10 @@
     var formData = new FormData(form);
     var desc = $("#description").html();
 
-    console.log(desc.length);
-    if(desc.length > 80)
+    // console.log(desc.length);
+    if(desc.length > 120)
     {
-      alert("Deskripsi melebihi 80 karakter");
+      alert("Deskripsi melebihi 120 karakter");
       return false;
     }
 
@@ -2154,7 +2154,7 @@
                 </a>
               </li> 
 
-             <!--  <li class="nav-item">
+            <!--   <li class="nav-item">
                 <a href="#proof" class="nav-link link" role="tab" data-toggle="tab">
                   Activproof
                 </a>
