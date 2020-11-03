@@ -257,8 +257,6 @@ class BiolinkController extends Controller
 
   public function saveProof(Request $request)
   {
-     
-
       if($request->status == 0)
       {
          $proof = new Proof;
@@ -329,13 +327,49 @@ class BiolinkController extends Controller
   {
       $pageid = $request->pageid;
       $query = $this->getProof($pageid);
-      return view('user.dashboard.contentproof',['query'=>$query]);
+      $pages = Page::where('id','=',$pageid)->first();
+      return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$pages]);
   }
 
   private function getProof($pageid)
   {
-      $query = Proof::where('page_id',$pageid)->get();
+      $query = Proof::where('page_id',$pageid)->orderBy('id','desc')->get();
       return $query;
+  }
+
+  public function settingProof(Request $request)
+  {
+      $pageid = $request->pageid;
+      $pages = Page::where('id','=',$pageid)->first();
+
+      if(is_null($pages))
+      {
+          $data['res'] = 0;
+      }
+      else
+      {
+          $previous = $pages->proof_settings;
+          if($previous == 0)
+          {
+            $pages->proof_settings = 1;
+          }
+          else
+          {
+            $pages->proof_settings = 0; 
+          }
+      }
+
+      try
+      {
+        $pages->save();
+        $data['res'] = 1;
+      }
+      catch(QueryException $e)
+      {
+        $data['res'] = 0;
+      }
+
+      return response()->json($data);
   }
 
   public function getWAchatButton($pageid)

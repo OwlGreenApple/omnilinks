@@ -1645,7 +1645,30 @@ and add more";
 @endif
 
   <!-- proof -->
-  
+  @if($proof->count() > 0)
+    <div class="proof-box">
+    @foreach($proof as $row)
+    <div class="proof-wrapper">
+        <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+     
+        <div class="proof-desc">
+            <div class="proof_profile">
+              <div class="proof_name">{{ $row->name }}</div>
+              <div class="proof_star">
+                @for($x=1;$x<=$row->star;$x++)
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                @endfor
+              </div>
+            </div>
+
+            <div class="proof_comments">
+             {{ $row->text }}
+            </div>
+        </div>
+    </div>
+    @endforeach
+    </div>
+  @endif
   
   <!--Loading Bar-->
   <div class="div-loading">
@@ -1694,7 +1717,39 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
+    runningProof();
 });
+
+function runningProof()
+{
+  var total = $(".proof-wrapper").length;
+  var counting = 0;
+  var delay = 1000;
+
+  $('.proof-wrapper:gt(0)').hide();
+    var run = setInterval(
+      function(){
+        $('.proof-box > :first-child').fadeOut().next('.proof-wrapper').delay(delay).fadeIn().addClass('animate-buzz').end().appendTo('.proof-box');
+        counting++;
+
+        //put php logic according on setting
+        <?php 
+          if($pages->proof_settings == 0):
+        ?>
+            if(counting == total)
+            {
+              setTimeout(function(){
+                $('.proof-wrapper').hide();
+                clearInterval(run);
+              },delay);
+              
+            }
+        <?php
+          endif;
+        ?>
+      }, 
+    5000);
+}
 
 </script>
 

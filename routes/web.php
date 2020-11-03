@@ -150,6 +150,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::post('save-proof','BiolinkController@saveProof')->middleware('proof');
     Route::get('load-proof','BiolinkController@loadProof');
     Route::get('delete-proof','BiolinkController@delProof');
+    Route::get('proof_settings','BiolinkController@settingProof');
 
     //makesinglelink
     Route::get('/singlelink','SingleLinkController@newsingle');

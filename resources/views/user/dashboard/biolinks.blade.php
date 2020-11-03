@@ -25,6 +25,10 @@
     cursor: pointer;
   }
 
+  .proof-wrapper{
+    position: relative !important;
+  }
+
   .themes.selected, .wallpapers.selected{
     border: 3px solid #0062CC;
   }
@@ -2123,11 +2127,11 @@
                 </a>
               </li> 
 
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="#proof" class="nav-link link" role="tab" data-toggle="tab">
                   Activproof
                 </a>
-              </li> -->
+              </li>
               <?php } ?>
 
               <li class="nav-item">
@@ -3926,9 +3930,6 @@
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
 
-<!-- to insert link if user want to change value into link on textarea -->
-<script src="{{asset('js/wraptagtextarea.js')}}"></script>
-
 <script type="text/javascript">
   /*DELAY ON KEYUP
   function delay(callback, ms) {
@@ -3966,7 +3967,8 @@
       }
     });
 
-    $(window).resize(function() {
+    $(window).resize(function() 
+    {
         setRightPost(".wcs_popup");   
     });
 
@@ -3984,8 +3986,48 @@
     deleteProof();
     resetProof();
     load_proof();
+    change_proof_settings();
     //callMaintainPlus();
   });
+
+  function change_proof_settings()
+  {
+    $("body").on("click","input[name='proof_setting']",function(){
+      $.ajax({
+        type: 'GET',
+        url: "{{ url('proof_settings') }}",
+        data: { pageid : '{{ $pageid }}' },
+        dataType: 'json',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+          
+          if(result.res == 1)
+          {
+            $(".notice").html('<div class="alert alert-success">Proof setting telah di ubah</div>');
+          }
+          else
+          {
+            $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
+          }
+          $(window).scrollTop($("#proof").offset().top);
+          
+        },
+        error : function(xhr)
+        {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+          console.log(xhr.responseText);
+        }
+      });
+      //end ajax
+    });
+  }
 
   function createProof()
   {
