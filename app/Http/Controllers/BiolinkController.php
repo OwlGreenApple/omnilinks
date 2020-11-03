@@ -326,9 +326,18 @@ class BiolinkController extends Controller
   public function loadProof(Request $request)
   {
       $pageid = $request->pageid;
+      $preview = $request->preview;
       $query = $this->getProof($pageid);
       $pages = Page::where('id','=',$pageid)->first();
-      return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$pages]);
+
+      if($preview == 1)
+      {
+        return view('user.dashboard.previewproof',['proof'=>$query]);
+      }
+      else
+      {
+        return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$pages]);
+      }   
   }
 
   private function getProof($pageid)

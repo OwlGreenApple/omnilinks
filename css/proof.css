@@ -11,7 +11,7 @@
   width : 100%;
 }
 
-.proof-wrapper {
+.proof-wrapper, .proof-wrapper-preview {
   position: absolute;
   color : #000;
   width : 100%;
@@ -40,21 +40,33 @@
   display : flex;
 }
 
-.proof_star {
+.proof_star,.proof_star_preview {
   text-align: right;
   width : 40%;
   margin-top: -6px;
   color : #ffc100 !important;
 }
 
-.proof_name {
+.proof_name,.proof_name_preview {
   font-weight : bold;
   line-height: 12px;
   width : 60%;
 }
 
-.proof_comments {
+.proof_comments,.proof_comments_preview {
   line-height : 20px;
+}
+
+/* Preview */
+.proof-box-preview {
+  position: absolute;
+  top : 10px;
+  z-index : 90;
+  width : 100%;
+}
+
+.proof_name_preview,.proof_star_preview,.proof_comments_preview {
+  font-size:11px;
 }
 
 @media(max-width:379px) {

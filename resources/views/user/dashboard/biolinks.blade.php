@@ -3380,6 +3380,9 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
+
+                  <!-- proof-preview -->
+                  <div id="proof_preview"></div>
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
@@ -3987,8 +3990,35 @@
     resetProof();
     load_proof();
     change_proof_settings();
+    proof_preview();
     //callMaintainPlus();
   });
+
+  function proof_preview()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "{{ url('load-proof') }}",
+      data: { pageid : '{{ $pageid }}',preview : 1 },
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        $("#proof_preview").html(result);
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+  }
 
   function change_proof_settings()
   {
