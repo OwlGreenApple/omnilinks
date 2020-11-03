@@ -33,6 +33,8 @@
   <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
   <!-- bootstrap datetimepicker -->
   <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
+  <!-- create link -->
+  <script src="{{asset('js/createlink.js')}}"></script>
 
   <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 

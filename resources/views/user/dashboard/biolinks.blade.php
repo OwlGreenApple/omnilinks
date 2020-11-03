@@ -2123,11 +2123,11 @@
                 </a>
               </li> 
 
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#proof" class="nav-link link" role="tab" data-toggle="tab">
                   Activproof
                 </a>
-              </li>
+              </li> -->
               <?php } ?>
 
               <li class="nav-item">
@@ -2699,6 +2699,7 @@
 
                <!-- TAB 6 -->
               <div class="tab-pane fade" id="proof">
+                <div class="notice"><!-- display message --></div>
                 <form id="saveproof" class="mb-4 mt-4">
 
                   <span class="blue-txt">ActivProof</span>
@@ -2708,16 +2709,16 @@
                       <label class="control-label">Name</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" />
-                      <div class="error_proof_name"><!-- Error --></div>
+                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="17" />
+                      <div class="error proof_name"><!-- Error --></div>
                     </div>
 
                     <div class="col-md-2">
                       <label class="control-label">Text</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <textarea class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
-                      <div class="error_proof_text"><!-- Error --></div>
+                      <textarea maxlength="60" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <div class="error proof_text"><!-- Error --></div>
                     </div>
 
                     <div class="col-md-2">
@@ -2725,7 +2726,9 @@
                     </div>
                     <div class="col-lg-12 mb-3">
                       <input type="file" class="form-control" name="proof_image" placeholder="Masukkan Text" />
-                      <div class="error_proof_image"><!-- Error --></div>
+                      <small>Ukuran 100 x100 pixel, tipe harus : jpg, jpeg, png</small>
+                      <span class="proof_notes"></span>
+                      <div class="error proof_image"><!-- Error --></div>
                     </div>
 
                     <div class="col-md-2">
@@ -2733,14 +2736,14 @@
                     </div>
                     <div class="col-lg-12 mb-3">
                       <input type="number" value="5" min="1" max="5" class="form-control" name="proof_stars" placeholder="Jumlah bintang" />
-                      <div class="error_proof_stars"><!-- Error --></div>
+                      <div class="error proof_stars"><!-- Error --></div>
                     </div>
 
                     <div class="col-md-4 ml-auto pl-md-0 pl-3 text-center">
                         <button type="submit" id="btn_proof" class="btn btn-primary btn-setting-biolinks mr-2" style="width:45%">
                           Save
                         </button>
-                      <button type="reset" class="btn btn-danger btn-reset btn-setting-biolinks" style="width:45%">
+                      <button type="reset" class="btn btn-danger btn-reset btn-proof-reset btn-setting-biolinks" style="width:45%">
                         Reset
                       </button>
                     </div>
@@ -3967,6 +3970,8 @@
         setRightPost(".wcs_popup");   
     });
 
+    $(".alert").delay(2000).fadeOut(3000);
+
     wa_preview_header_text();
     getSelected();
     displayWaText();
@@ -3975,6 +3980,9 @@
     pastePreview();
     createLinkDescription();
     createProof();
+    editProof();
+    deleteProof();
+    resetProof();
     load_proof();
     //callMaintainPlus();
   });
@@ -3984,8 +3992,21 @@
      $("#saveproof").submit(function(e){
         e.preventDefault();
 
+        var msg;
+        var edit = $("#btn_proof").attr('status');
         var data = new FormData(this);
         data.append('page_id','{{ $pageid }}');
+
+        if(edit == undefined)
+        {
+            data.append('status',0);
+            msg = 'Data berhasil ditambahkan';
+        }
+        else
+        {
+            data.append('status',edit);
+            msg = 'Data berhasil diubah';
+        }
 
         $.ajax({
           type: 'POST',
@@ -4007,15 +4028,27 @@
             $('#loader').hide();
             $('.div-loading').removeClass('background-load');
 
+            if(result.error == 1)
+            {
+                $(".proof_name").html(result.proof_name);
+                $(".proof_text").html(result.proof_text);
+                $(".proof_stars").html(result.proof_stars);
+                $(".proof_image").html(result.proof_image);
+
+                return false;
+            }
+
             if(result.data == 1) 
             {
-                $("#saveproof > input").val('');
                 load_proof();
+                $(".btn-proof-reset").trigger('click');
+                $(".notice").html('<div class="alert alert-success">'+msg+'</div>');
             }
             else
             {
-                alert('error');
+                $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
             }
+            $(".error").html('');
           },
           error : function(xhr){
             $('#loader').hide();
@@ -4025,6 +4058,77 @@
         });
         //end ajax
      });
+  }
+
+  function editProof()
+  {
+    $("body").on("click",".btn-editproof",function()
+    {
+      $("input[name='proof_name']").val($(this).attr('data-name'));
+      $("textarea[name='proof_text']").val($(this).attr('data-text'));
+      $(".proof_notes").html('<small>Biarkan tetap kosong apabila tidak ingin merubah image</small>');
+      $("input[name='proof_stars']").val($(this).attr('data-star'));
+      $("#btn_proof").attr('status',$(this).attr('dataedit'));
+      $(window).scrollTop($("#proof").offset().top);
+    });
+  }
+
+  function deleteProof()
+  {
+    $("body").on("click",".btn-delete-proof",function()
+    {
+      var id = $(this).attr('dataid');
+      var warn = confirm('Apakah yakin mau menghapus?');
+
+      if(warn == false)
+      {
+        return false;
+      }
+      else
+      {
+        $.ajax({
+          type: 'GET',
+          url: "{{ url('delete-proof') }}",
+          data: { 'id' : id },
+          dataType: 'json',
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          },
+          success: function(result) {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            
+            if(result.res == 1)
+            {
+              $(".notice").html('<div class="alert alert-success">Data berhasil di hapus</div>');
+              load_proof();
+            }
+            else
+            {
+              $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, mohon dicoba lagi nanti</div>');
+            }
+          },
+          error : function(xhr)
+          {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            console.log(xhr.responseText);
+          }
+        });
+      //end ajax
+      }
+    });
+  }
+
+  function resetProof()
+  {
+    $(".btn-proof-reset").click(function(){
+      $("#btn_proof").removeAttr('status');
+      $(".proof_notes").html('');
+      $(".error").html('');
+    }); 
   }
 
   function load_proof()
@@ -4065,28 +4169,11 @@
         }
         else
         {
-          var selection = window.getSelection();
-          var range = selection.getRangeAt(0).cloneRange();
-          
-          var tag = document.createElement('a');
-          tag.setAttribute('href', url);
-
-          range.surroundContents(tag);
-          selection.removeAllRanges();
-          selection.addRange(range);
+          createLink();
         }
         
     });
   }
-
-
-  /*function createLinkDescription()
-  {
-     $("#make-bold").click(function(){
-        var url = $("#url").val();
-        surroundWithLink(url);
-     });
-  }*/
 
   function adaptiveLink()
   {

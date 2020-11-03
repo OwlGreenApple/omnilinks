@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="{{asset('css/dash.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
   <link rel="stylesheet" href="{{asset('css/redirect.css')}}">
+  <link rel="stylesheet" href="{{asset('css/proof.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
   <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
@@ -1644,29 +1645,7 @@ and add more";
 @endif
 
   <!-- proof -->
-  @if($proof->count() > 0)
-    @foreach($proof as $row)
-    <div class="proof-wrapper">
-        <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
-     
-        <div class="proof-desc">
-            <div class="proof_profile">
-              <div class="proof_name">{{ $row->name }}</div>
-              <div class="proof_star">
-                @for($x=1;$x<=$row->star;$x++)
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                @endfor
-              </div>
-            </div>
-
-            <div class="proof_comments">
-             xassaxsaxscds
-            </div>
-        </div>
-      <div class="clearfix"></div>
-    </div>
-    @endforeach
-  @endif
+  
   
   <!--Loading Bar-->
   <div class="div-loading">
@@ -1754,7 +1733,6 @@ $(document).ready(function() {
      h = Number(h.toFixed(1));
      $(".galleryContainer").height(h);
   }
-    
 
   function call_mylink(linkAjax){
     $.ajax({

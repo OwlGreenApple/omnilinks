@@ -257,28 +257,69 @@ class BiolinkController extends Controller
 
   public function saveProof(Request $request)
   {
-      $proof = new Proof;
+     
+
+      if($request->status == 0)
+      {
+         $proof = new Proof;
+      }
+      else
+      {
+         $proof = Proof::where([['id',$request->status],['user_id',Auth::id()]])->first();
+      }
+
       $proof->page_id = $request->page_id;
       $proof->user_id = Auth::id();
       $proof->name = $request->proof_name;
       $proof->text = $request->proof_text;
       $proof->star = $request->proof_stars;
 
-      $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
-      $dt = Carbon::now();
-      $dir = 'proof_page/'.explode(' ',trim(Auth::user()->name))[0].'-'.Auth::user()->id;
-      $filename = $dt->format('ymdHi').'-'.$request->page_id.'.jpg';
-      $proof->url_image = $dir."/".$filename;
+      if($request->file('proof_image') <> null && $request->status == 'edit')
+      {
+        $filename = $proof->url_image;
+        Storage::disk('s3')->delete($filename);
+      }
+
+      if($request->file('proof_image') <> null)
+      {
+        $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
+        $dt = Carbon::now();
+        $ext = $request->file('proof_image')->getClientOriginalExtension();
+        $dir = 'proof_page/'.explode(' ',trim(Auth::user()->name))[0].'-'.Auth::user()->id;
+        $filename = $dt->format('ymdHi').'-'.$request->page_id.'.'.$ext;
+        $proof->url_image = $dir."/".$filename;
+        Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
+      }
 
       try 
       {
-        Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
         $proof->save();
         $data['data'] = 1;
       }
       catch(QueryException $e)
       {
         $data['data'] = 0;
+      }
+
+      $data['error'] = 0;
+      return response()->json($data);
+  }
+
+  public function delProof(Request $request)
+  {
+      $id = $request->id;
+      $proof = Proof::where([['id',$id],['user_id',Auth::id()]]);
+
+      try{
+        $filename = $proof->first()->url_image;
+        Storage::disk('s3')->delete($filename);
+        $proof->delete();
+        $data['res'] = 1;
+      }
+      catch(QueryException $e)
+      {
+        //$e->getMessage();
+        $data['res'] = 0;
       }
 
       return response()->json($data);
