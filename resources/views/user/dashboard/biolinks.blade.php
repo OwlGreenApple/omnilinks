@@ -2796,6 +2796,10 @@
                           <!-- <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
                             </textarea> -->
 
+                          <div class="d-flex mb-1">
+                            <button type="button" id="create_bold" class="btn btn-primary btn-sm text-white"><b>B</b></button>
+                            <button type="button" id="create_italic" class="btn btn-primary btn-sm ml-2 text-white"><i>I</i></button>
+                          </div>
                           <div id="description" contenteditable="true">{!! $description !!}</div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
@@ -3986,6 +3990,7 @@
     change_link();
     pastePreview();
     createLinkDescription();
+    createItalic();
     createProof();
     editProof();
     deleteProof();
@@ -4233,6 +4238,17 @@
       }
     });
   }
+
+  function createItalic()
+  {
+    $('#create_italic').click(function(){
+        document.execCommand('italic', false, null);
+    });
+  }
+
+  document.getElementById('create_bold').addEventListener('click', function(e) {
+    document.execCommand('bold', false, null);
+  });
 
   function createLinkDescription()
   {
@@ -5033,6 +5049,11 @@
       // tempStr = $('#description').val().replace(/\n/g, "<br>");
       tempStr = $('#description').html().replace(/\n/g, "<br>");
       $('#outputdescription').html(tempStr);
+
+      $("#create_bold, #create_italic").click(function(){
+         tempStr = $('#description').html();
+         $('#outputdescription').html(tempStr);
+      });
 
       
     $(document).on('focus','.focuslink',function(){
