@@ -2103,7 +2103,7 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="nav-link link @if($mod <> 1) active @endif" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
@@ -2128,7 +2128,7 @@
               </li> 
 
               <li class="nav-item">
-                <a href="#proof" class="nav-link link" role="tab" data-toggle="tab">
+                <a href="#proof" class="nav-link link @if($mod == 2) active @endif" role="tab" data-toggle="tab">
                   Activproof
                 </a>
               </li>
@@ -2153,7 +2153,7 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in @if($mod <> 1) active show @endif" id="link">
+              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
 
@@ -2702,7 +2702,7 @@
               </div>
 
                <!-- TAB 6 -->
-              <div class="tab-pane fade" id="proof">
+              <div id="proof" class="tab-pane fade in @if($mod==2) active show @endif">
                 <div class="notice"><!-- display message --></div>
                 <form id="saveproof" class="mb-4 mt-4">
 
@@ -3382,7 +3382,9 @@
                   @endif
 
                   <!-- proof-preview -->
-                  <div id="proof_preview"></div>
+                  <div id="proof_preview">
+                    @include('user.dashboard.previewproof')
+                  </div>
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
@@ -3990,7 +3992,7 @@
     resetProof();
     load_proof();
     change_proof_settings();
-    proof_preview();
+    //proof_preview();
     //callMaintainPlus();
   });
 
@@ -4000,7 +4002,7 @@
       type: 'GET',
       url: "{{ url('load-proof') }}",
       data: { pageid : '{{ $pageid }}',preview : 1 },
-      dataType: 'html',
+      dataType: 'json',
       beforeSend: function()
       {
         $('#loader').show();
@@ -4009,7 +4011,7 @@
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
-        $("#proof_preview").html(result);
+        // $("#proof_preview").html(result);
       },
       error : function(xhr)
       {
@@ -4040,6 +4042,9 @@
           if(result.res == 1)
           {
             $(".notice").html('<div class="alert alert-success">Proof setting telah di ubah</div>');
+             var url = window.location.href; 
+             url = url.split("?");
+             location.href= url[0]+"/?mod=2";
           }
           else
           {

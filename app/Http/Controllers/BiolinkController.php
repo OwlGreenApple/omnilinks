@@ -226,18 +226,7 @@ class BiolinkController extends Controller
     }
 
     //proof
-    $proof = Pixel::where([['users_id','=',Auth::id()],['pages_id','=',$page->id],['jenis_pixel','=','pf']])->first();
-
-    if(is_null($proof))
-    {
-        $proof_pixel = $proof_title = $proof_status = null;
-    }
-    else
-    {
-        $proof_title = $proof->title;
-        $proof_pixel = $proof->script;
-        $proof_status = $proof->id;
-    }
+    $proof = $this->getProof($pageid);
 
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
@@ -250,8 +239,7 @@ class BiolinkController extends Controller
       'valid'=>$validmember,
       'mod'=>$mod,
       'description'=>$description,
-      'proof_title'=>$proof_title,
-      'proof_pixel'=>$proof_pixel
+      'proof'=>$proof
     ]);  
   }
 

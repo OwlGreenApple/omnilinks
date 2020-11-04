@@ -20,5 +20,40 @@
       </div>
   </div>
   @endforeach
-  </div>
 @endif
+
+<script type="text/javascript">
+
+$(function(){
+  setTimeout(function(){runningProof();},5000)
+});
+
+/* run animation display */
+  function runningProof()
+  {
+    var total = $(".proof-wrapper-preview").length;
+    var counting = 0;
+    var timer = 5000;
+
+    $('.proof-box-preview > .proof-wrapper-preview:gt(0)').hide();
+      var run = setInterval(
+        function(){
+          $('.proof-box-preview > :first-child').fadeOut().next('.proof-wrapper-preview').fadeIn().addClass('animate-buzz').end().appendTo('.proof-box-preview');
+            counting++;
+
+          //put php logic according on setting
+          <?php 
+            if($pages->proof_settings == 0):
+          ?>
+              if(counting == total)
+              {
+                  $('.proof-wrapper-preview').hide();
+                  clearInterval(run);
+              }
+          <?php
+            endif;
+          ?>
+        }, 
+      timer);
+  }
+</script>
