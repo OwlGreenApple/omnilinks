@@ -1718,6 +1718,7 @@ $(document).ready(function() {
         setRightPost(".wcs_popup");   
     });
     runningProof();
+    stylingYoutube();
 });
 
 function runningProof()
@@ -1749,6 +1750,18 @@ function runningProof()
         ?>
       }, 
     5000);
+}
+
+function stylingYoutube()
+{
+  /*$(".embed-responsive-item").on("load", function() {
+    let head = $(".embed-responsive-item").contents().find("head");
+    let css = '<xxx>.test-add{ color : red}</xxx>';
+    $(head).append(css);
+  });*/
+  var html = 'Hello from <img src="http://stackoverflow.com/favicon.ico" alt="SO">';
+  var iframe = $('.embed-responsive-item');
+  iframe.src = 'data:text/html,' + encodeURIComponent(html);
 }
 
 </script>

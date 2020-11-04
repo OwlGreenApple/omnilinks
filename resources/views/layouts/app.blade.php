@@ -66,6 +66,9 @@
 
   <!-- proof -->
   <link rel="stylesheet" href="{{asset('css/proof.css')}}">
+
+  <!-- icomoon -->
+  <link rel="stylesheet" href="{{asset('assets/icomoon/style.css')}}"/>
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>

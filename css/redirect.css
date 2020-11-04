@@ -74,3 +74,13 @@ a:hover {
 .header-txt > a:hover {
   text-decoration: underline;
 }
+
+/* youtube */
+
+.exp-responsive {
+  background: none !important;
+}
+
+.html5-video-player {
+  border-radius : 30px;
+}

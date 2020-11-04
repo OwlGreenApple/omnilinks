@@ -1577,6 +1577,8 @@
     $("#fbpixel").val('{{$pages->fb_pixel_id}}');
     $("#igpixel").html(dataView);
     $("#igpixel").val('{{$pages->ig_pixel_id}}');
+    $("#tkpixel").html(dataView);
+    $("#tkpixel").val('{{$pages->tk_pixel_id}}');
     $("#twitterpixel").html(dataView);
     $("#twitterpixel").val('{{$pages->twitter_pixel_id}}');
     <?php if(!$banner->count()) { ?>
@@ -2154,6 +2156,7 @@
 
               <!-- tab 1-->
               <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
+
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
 
@@ -2519,6 +2522,40 @@
                         </div>
                           
                         <div class="div-cell cell-btn" id="deleteig">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li id="sosmed-tiktok">
+                      <div id="tiktok" class="socialmedia div-table hide" data-type="tiktok" style="">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="tiktok" class="input-hidden">
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                 <span class="icon-tik-tok"></span>
+                                </div>
+                              </div>
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok">
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <select name="tkpixel" id="tkpixel" class="form-control linkpixel">
+                            </select>
+                          </div>
+                        </div>
+                          
+                        <div class="div-cell cell-btn" id="deletetk">
                           <span>
                             <i class="far fa-trash-alt"></i>
                           </span>
@@ -3478,6 +3515,11 @@
                     <li class="col linked hide" id="igviewid">
                       <a href="#" title="ig" >
                         <i class="fab fa-instagram" ></i>
+                      </a>  
+                    </li>  
+                    <li class="col linked hide" id="tiktokviewid">
+                      <a href="#" title="tk" >
+                        <span class="icon-tik-tok"></span>
                       </a>  
                     </li>  
                   </ul>
@@ -5936,6 +5978,11 @@
         $("#sosmed-ig>div").find(".input-hidden").val($("#sosmed-ig>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-ig>div").removeClass("hide");
         $("#igviewid").removeClass("hide");
+
+        $("#sosmed-tiktok>div").css("display","table");
+        $("#sosmed-tiktok>div").find(".input-hidden").val($("#sosmed-tiktok>div").find(".input-hidden").attr("data-val"));
+        $("#sosmed-tiktok>div").removeClass("hide");
+        $("#tiktokviewid").removeClass("hide");
 
         $("#sosmed-twitter>div").css("display","table");
         $("#sosmed-twitter>div").find(".input-hidden").val($("#sosmed-twitter>div").find(".input-hidden").attr("data-val"));

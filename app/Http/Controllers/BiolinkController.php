@@ -870,6 +870,9 @@ class BiolinkController extends Controller
     if (in_array("ig", $request->sortsosmed)) {
       $temp_arr['ig'] = ['required', 'max:191'];
     }
+    if (in_array("tiktok", $request->sortsosmed)) {
+      $temp_arr['tiktok'] = ['required', 'max:191'];
+    }
     if (in_array("youtube", $request->sortsosmed)) {
       $temp_arr['youtube'] = ['required', 'active_url', 'max:191'];
     }
@@ -937,6 +940,7 @@ class BiolinkController extends Controller
     $telegram = $request->telegrampixel;
     $youtube = $request->youtubepixel;
     $ig = $request->igpixel;
+    $tiktok = $request->tkpixel;
     $skype = $request->skypepixel;
     $fb = $request->fbpixel;
     $line = $request->linepixel;
@@ -946,6 +950,7 @@ class BiolinkController extends Controller
       $page->wa_pixel_id=$wa;
       $page->twitter_pixel_id=$twitter;
       $page->ig_pixel_id=$ig;
+      $page->tk_pixel_id=$tiktok;
       $page->telegram_pixel_id=$telegram;
       $page->youtube_pixel_id=$youtube;
       $page->skype_pixel_id=$skype;
@@ -957,6 +962,7 @@ class BiolinkController extends Controller
       $page->wa_pixel_id=0;
       $page->twitter_pixel_id=0;
       $page->ig_pixel_id=0;
+      $page->tk_pixel_id=0;
       $page->telegram_pixel_id=0;
       $page->youtube_pixel_id=0;
       $page->skype_pixel_id=0;
@@ -972,6 +978,7 @@ class BiolinkController extends Controller
   	$page->skype_link=$request->skype;
   	$page->youtube_link=$request->youtube; 	
     $page->ig_link=$request->ig;
+    $page->tk_link=$request->tiktok;
     $page->line_link=$request->line;
     $page->messenger_link=$request->messenger;
 
