@@ -25,6 +25,9 @@
   <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.css')}}">
 
+  <!-- icomoon -->
+  <link rel="stylesheet" href="{{asset('assets/icomoon/style.css')}}"/>
+
   <title>Link</title>
 </head>
 
@@ -1470,6 +1473,12 @@ and add more";
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
               </a>
+            @endif  
+
+            @if($sosmed=='tiktok' )
+              <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
+                <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
+              </a>
             @endif 
           </li>
       <!-- diremark supaya sesuai phone preview, ngga tau dulu kenapa ini dipake
@@ -1503,6 +1512,11 @@ and add more";
           <li class="col text-center icon-sosmed">
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
+              </a>
+          </li> 
+          <li class="col text-center icon-sosmed">
+              <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
+                <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
               </a>
           </li>
 
@@ -1827,6 +1841,12 @@ function stylingYoutube()
         // else {
           // window.open(data.link);
         // }
+      },
+      error:function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        alert('Ada yang salah dengan penggunaan link atau username,\nmohon diperiksa lagi.');
       }
     });
   }
@@ -2030,7 +2050,6 @@ function stylingYoutube()
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-81228145-7');
 </script>
 

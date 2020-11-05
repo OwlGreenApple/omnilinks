@@ -99,6 +99,14 @@ p,span {
   padding : 15px;
 }
 
+.description > a {
+  color : #106BC8 !important;
+}
+
+.description > a:hover {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 767px) {
   .menu-nomobile {
     display: none;

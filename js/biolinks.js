@@ -200,7 +200,7 @@ $(document).ready(function () {
         $('#tiktok').addClass('hide');
         $('#tiktok').find("input").val('');
         $('#tiktokviewid').hide();
-        $('#tiktokviewid').addClass('hide');
+        // $('#tiktokviewid').addClass('hide');
         $('#tiktokviewid').removeClass('shown-sm');
         //changeLengthMedia();
         return false;

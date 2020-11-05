@@ -2047,7 +2047,6 @@
       });
     }
     
-  
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
@@ -2833,11 +2832,21 @@
                           <!-- <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
                             </textarea> -->
 
-                          <div class="d-flex mb-1">
-                            <button type="button" id="create_bold" class="btn btn-primary btn-sm text-white"><b>B</b></button>
-                            <button type="button" id="create_italic" class="btn btn-primary btn-sm ml-2 text-white"><i>I</i></button>
+                          <fieldset>
+
+                            <button type="button" id='create_italic' class="btn btn-primary text-white" title="Italicize Highlighted Text"><i>I</i>
+                              </button>
+
+                            <!-- click on Event Attribute -->
+                            <button type="button" id="create_bold" class="btn btn-primary text-white"><b>B</b>
+                              </button>
+
+                          </fieldset>
+                         
+                          <!-- <div id="description" contenteditable="true"> -->
+                          <div id="description" contenteditable="true">
+                            {!! $description !!}
                           </div>
-                          <div id="description" contenteditable="true">{!! $description !!}</div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
@@ -3519,7 +3528,7 @@
                     </li>  
                     <li class="col linked hide" id="tiktokviewid">
                       <a href="#" title="tk" >
-                        <span class="icon-tik-tok"></span>
+                        <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
                       </a>  
                     </li>  
                   </ul>
@@ -4033,6 +4042,7 @@
     pastePreview();
     createLinkDescription();
     createItalic();
+    create_bold();
     createProof();
     editProof();
     deleteProof();
@@ -4288,9 +4298,20 @@
     });
   }
 
-  document.getElementById('create_bold').addEventListener('click', function(e) {
+  function create_bold()
+  {
+    $('#create_bold').click(function(){
+        createBold();
+    });
+  }
+
+  /*document.getElementById('create_bold').onclick = function(){
     document.execCommand('bold', false, null);
-  });
+  };*/
+
+  /*addEventListener('click', function(e) {
+    document.execCommand('bold', false, null);
+  });*/
 
   function createLinkDescription()
   {
@@ -5092,7 +5113,7 @@
       tempStr = $('#description').html().replace(/\n/g, "<br>");
       $('#outputdescription').html(tempStr);
 
-      $("#create_bold, #create_italic").click(function(){
+      $("#create_bold, #create_italic, #make-bold").click(function(){
          tempStr = $('#description').html();
          $('#outputdescription').html(tempStr);
       });

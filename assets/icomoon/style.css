@@ -28,3 +28,10 @@
 .icon-tik-tok:before {
   content: "\e900";
 }
+
+@media(max-width : 360px){
+  [class^="icon-"], [class*=" icon-"] {
+    padding-left : 10px;
+    padding-right : 10px;
+  }
+}

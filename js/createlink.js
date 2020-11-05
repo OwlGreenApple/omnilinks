@@ -35,3 +35,10 @@ function createLink() {
     restoreSelection(savedSel);
     document.execCommand("CreateLink", false, url);
 }
+
+function createBold() {
+    // There's actually no need to save and restore the selection here. This is just an example.
+    var savedSel = saveSelection();
+    restoreSelection(savedSel);
+    document.execCommand("bold", false, null);
+}
