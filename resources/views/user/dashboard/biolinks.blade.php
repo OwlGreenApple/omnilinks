@@ -4079,6 +4079,13 @@
     });
   }
 
+  function reloadPage(page)
+  {
+    var url = window.location.href; 
+    url = url.split("?");
+    location.href= url[0]+"/?mod="+page;
+  }
+
   function change_proof_settings()
   {
     $("body").on("click","input[name='proof_setting']",function(){
@@ -4093,22 +4100,20 @@
           $('.div-loading').addClass('background-load');
         },
         success: function(result) {
-          $('#loader').hide();
-          $('.div-loading').removeClass('background-load');
-          
+         
           if(result.res == 1)
           {
-            $(".notice").html('<div class="alert alert-success">Proof setting telah di ubah</div>');
-             var url = window.location.href; 
-             url = url.split("?");
-             location.href= url[0]+"/?mod=2";
+            /*$(".notice").html('<div class="alert alert-success">Proof setting telah di ubah</div>');*/
+             reloadPage(2);
           }
           else
           {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+
             $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
+            $(window).scrollTop($("#proof").offset().top);
           }
-          $(window).scrollTop($("#proof").offset().top);
-          
         },
         error : function(xhr)
         {
@@ -4159,11 +4164,12 @@
             $('.div-loading').addClass('background-load');
           }, 
           success: function(result) {
-            $('#loader').hide();
-            $('.div-loading').removeClass('background-load');
-
+          
             if(result.error == 1)
             {
+                $('#loader').hide();
+                $('.div-loading').removeClass('background-load');
+
                 $(".proof_name").html(result.proof_name);
                 $(".proof_text").html(result.proof_text);
                 $(".proof_stars").html(result.proof_stars);
@@ -4174,12 +4180,17 @@
 
             if(result.data == 1) 
             {
-                load_proof();
-                $(".btn-proof-reset").trigger('click');
-                $(".notice").html('<div class="alert alert-success">'+msg+'</div>');
+                // load_proof();
+                reloadPage(2);
+               /* $(".btn-proof-reset").trigger('click');
+                $(".notice").html('<div class="alert alert-success">'+msg+'</div>');*/
+
             }
             else
             {
+                $('#loader').hide();
+                $('.div-loading').removeClass('background-load');
+
                 $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
             }
             $(".error").html('');
@@ -4805,8 +4816,9 @@
               refreshpixel();
               //load_chat_member();
             } else {
-              var url = window.location.href; 
-              location.href= url+"/?mod=1";
+              /*var url = window.location.href; 
+              location.href= url+"/?mod=1";*/
+              reloadPage(1);
             }
             
           } 
@@ -4854,8 +4866,9 @@
                   $("#pesanAlert").removeClass("alert-danger");
 
                   //to determine whether wa chat link tab or not
-                  var url = window.location.href; 
-                  location.href= url+"/?mod=1";
+                  /*var url = window.location.href; 
+                  location.href= url+"/?mod=1";*/
+                  reloadPage(1);
                   
                 } else {
                   $("#pesanAlert").addClass("alert-danger");

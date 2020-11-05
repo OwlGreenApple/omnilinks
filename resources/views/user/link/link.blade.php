@@ -11,7 +11,7 @@
   <!--<script src="{{asset('js/myScript.js')}}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
   <script src="{{asset('js/myScript.js')}}" ></script>
   <script src="{{ asset('js/app.js') }}"></script>
-  <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
   
   <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
@@ -1327,7 +1327,7 @@ and add more";
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
-                  <i class="fab fa-whatsapp icon-msg"></i>
+                  <i class="fab fa-whatsapp" style="font-size : 20px"></i>
                   @if($div==0)
                     <span class="textbutton"> WhatsApp</span>
                   @endif
@@ -1401,7 +1401,7 @@ and add more";
             <li class="col pl-1 pr-1 mb-3">
               <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
-                  <i class="fab fa-whatsapp icon-msg"></i>
+                  <i class="fab fa-whatsapp" style="font-size : 20px"></i>
                     <span class="textbutton"> WhatsApp</span>
                 </button>
               </a>

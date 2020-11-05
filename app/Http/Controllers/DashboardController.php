@@ -51,7 +51,9 @@ class DashboardController extends Controller
     $catalog_ot = Catalogs::where($other)->get();
     $count += $catalog_ot->count(); // count -- other
 
-    return view('user.dashboard.dash',['user'=>$user,'count'=>$count]);
+    $total_link = Page::where('user_id',$user->id)->get()->count();
+
+    return view('user.dashboard.dash',['user'=>$user,'count'=>$count,'total_link'=>$total_link]);
   }
   
   public function viewTutorial()

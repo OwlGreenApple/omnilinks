@@ -395,6 +395,8 @@
       </div>
     </div>
 
+    <h5>Jumlah Link : <b>{{ $total_link }}</b></h5>
+
     <div class="pager menu-mobile"></div>
 
     <div class="" id="content"></div>
