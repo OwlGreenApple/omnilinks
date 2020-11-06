@@ -1814,9 +1814,9 @@ class BiolinkController extends Controller
           $response['status'] = 'success';
           $response['message'] = 'WA Chat setting telah disimpan';
       } catch (\Illuminate\Database\QueryException $e) {
-          //$e->message
+          // dd($e->getMessage());
           $response['status'] = "error";
-          $response['message'] = "Error! WA Chat setting gagal disimpan";
+          $response['message'] = "Server kami terlalu sibuk, mohon coba lagi nanti";
       }
       
       return response()->json($response);

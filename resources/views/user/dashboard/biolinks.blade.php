@@ -34,8 +34,7 @@
   }
 
   .wcs_fixed_right{
-    position: absolute;
-    bottom : 30px;
+    bottom : -60px;
   }
 </style>
 
@@ -4202,7 +4201,6 @@
 
   $(function(){
     fix_center();
-    setRightPost(".wcs_popup");
 
     //CHANGE TEXT ON WA BUTTON
     $("input[name=wa_btn_text]").on('keypress keyup',function(e){
@@ -4222,10 +4220,10 @@
       }
     });
 
-    $(window).resize(function() 
+    /*$(window).resize(function() 
     {
         setRightPost(".wcs_popup");   
-    });
+    });*/
 
     $(".alert").delay(2000).fadeOut(3000);
 
@@ -4244,16 +4242,17 @@
     resetProof();
     load_proof();
     change_proof_settings();
-    waButtonPos();
+    setPopupPos();
     //proof_preview();
     //callMaintainPlus();
   });
 
-  function waButtonPos()
-  {
-     $(window).on("scroll",function(){
-        
-     });
+   function setPopupPos() {
+    var default_len = 113;
+    var textlen = $(".wcs_text").text().length - 2;
+    var diff_len = textlen * 3.65;
+    var total_len = default_len - diff_len;
+    $(".wcs_popup").css({'left':'-'+total_len+'px','width':'280px'});   
   }
 
   function proof_preview()
@@ -4663,13 +4662,6 @@
       });
   }
 
-  function setRightPost(classes) {
-    var ltdefault = 38;
-    var cutwidth = 250;
-    var outerWidth = $(classes).outerWidth(cutwidth+'px');
-    $(classes).css("left", -ltdefault+'px');    
-  }
-
    function getwachatbutton(){
     $.ajax({
       type : 'GET',
@@ -4866,6 +4858,10 @@
            $("#pesanAlert").removeClass("alert-success");
            return false;
         }
+      },
+      error: function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
       }
     });
   }
