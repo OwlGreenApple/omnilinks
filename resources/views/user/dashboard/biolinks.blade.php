@@ -1230,7 +1230,7 @@
     var formData = new FormData(form);
     var desc = $("#description").html();
 
-    // console.log(desc.length);
+    // console.log(desc);
     if(desc.length > 120)
     {
       alert("Deskripsi melebihi 120 karakter");
@@ -2542,7 +2542,7 @@
                             <div class="input-group">
                               <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                 <span class="icon-tik-tok"></span>
+                                 <i class="fab fa-tiktok"></i>
                                 </div>
                               </div>
                               <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok">
@@ -3526,9 +3526,9 @@
                         <i class="fab fa-instagram" ></i>
                       </a>  
                     </li>  
-                    <li class="col linked hide" id="tiktokviewid">
+                    <li class="col linked hide" id="tiktokviewid" style="margin-top : -3px">
                       <a href="#" title="tk" >
-                        <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
+                        <i style="font-size:25px" class="fab fa-tiktok"></i>
                       </a>  
                     </li>  
                   </ul>

@@ -13,7 +13,11 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
   
-  <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
+ <!--  <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}"> -->
+
+  <!-- Font Awesome 5 -->
+  <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/template.css')}}">
   <link rel="stylesheet" href="{{asset('css/dash.css')}}">
@@ -22,7 +26,7 @@
   <link rel="stylesheet" href="{{asset('css/proof.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
+ 
   <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.css')}}">
 
   <!-- icomoon -->
@@ -1477,7 +1481,7 @@ and add more";
 
             @if($sosmed=='tiktok' )
               <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
-                <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
+                <i style="font-size:30px" class="fab fa-tiktok"></i>
               </a>
             @endif 
           </li>
