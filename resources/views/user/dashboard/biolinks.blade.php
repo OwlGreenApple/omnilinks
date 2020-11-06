@@ -3029,11 +3029,11 @@
 
                           <fieldset>
 
-                            <button type="button" id='create_italic' class="btn btn-primary text-white" title="Italicize Highlighted Text"><i>I</i>
+                            <button type="button" id='create_italic' class="btn btn-primary text-white btn-sm" title="Italicize Highlighted Text"><i>Italic</i>
                             </button>
 
                             <!-- click on Event Attribute -->
-                            <button type="button" id="create_bold" class="btn btn-primary text-white"><b>B</b>
+                            <button type="button" id="create_bold" class="btn btn-primary text-white btn-sm"><b>Bold</b>
                             </button>
 
                           </fieldset>
@@ -3043,9 +3043,9 @@
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
-                          <div><small><b>Note</b> : menggunakkan link akan menambah karakter sebanyak karakter link dan text ditambah 14 karakter</small></div>
+                          <div><small><b>Note</b> : Untuk menggunakkan link, masukkan link di kolom atas, kemudian blok tulisan / text yang akan di link dan click tombol <b>Buat Link</b> kemudian click tombol <b>Save</b>.</small> </div>
                          
-                          <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Create Link</button>
+                          <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Buat Link</button>
 
                         </div>
                         <div class="col-md-12 mt-4">
@@ -5320,6 +5320,9 @@
 
       /* RENOV */
 
+      tempStr = $('#description').html();
+      $('#outputdescription').html(tempStr);
+
       $(document).on("input", "#description", function(e) {
         $(this).find("span").contents().unwrap();
       });
@@ -5328,26 +5331,24 @@
         $(this).find("div").replaceWith("<br>");
         newLines = $(this).find("br").length;
 
-        if(e.keyCode == 13 && newLines > 2) {
-          alert('enter');
+        if(e.keyCode == 13 && newLines >= 3) {
+          // alert('enter');
           return false;
         }
         else {
+          tempStr = $('#description').html();
           $('#outputdescription').html(tempStr);
         }
       });
 
 
-      /*$('#description').keyup(function(e){
+      $('#description').keyup(function(e){
         // tempStr = $(this).val().replace(/\n/g, "<br>");;
-        tempStr = $(this).html().replace(/\n/g, "<br>");;
+        tempStr = $(this).html();
         $('#outputdescription').html(tempStr);
       });
       // tempStr = $('#description').val().replace(/\n/g, "<br>");
-      */
-
-      tempStr = $('#description').html();
-      $('#outputdescription').html(tempStr);
+      
 
       $("#create_bold, #create_italic, #make-bold").click(function(){
          tempStr = $('#description').html();
