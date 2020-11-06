@@ -1167,7 +1167,200 @@
      "button_color": "#FFFFFF",
      "font_button_color": "#C6670E",
      "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 142,
+       "theme": "abstract-black-animate",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ff6cb5",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 143,
+       "theme": "abstract-blue-wave",
+       "bio_font_color": "#ffffff",
+       "button_color": "#cdebff",
+       "font_button_color": "#00385f",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 144,
+       "theme": "abstract-fade-in",
+       "bio_font_color": "#ffffff",
+       "button_color": "#e45bb9",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 145,
+       "theme": "abstract-shadow-fall",
+       "bio_font_color": "#ffffff",
+       "button_color": "#004573",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 146,
+       "theme": "abstract-live-bg",
+       "bio_font_color": "#ffffff",
+       "button_color": "#a5d7f6",
+       "font_button_color": "#0d6ab4",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 147,
+       "theme": "abstract-motion-bg",
+       "bio_font_color": "#ffffff",
+       "button_color": "#f15a29",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 148,
+       "theme": "abstract-bubble",
+       "bio_font_color": "#ffffff",
+       "button_color": "#004162",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 149,
+       "theme": "abstract-snow",
+       "bio_font_color": "#ffffff",
+       "button_color": "#22622d",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 150,
+       "theme": "abstract-wave-red-2",
+       "bio_font_color": "#ffffff",
+       "button_color": "#cccccc",
+       "font_button_color": "#e21400",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 151,
+       "theme": "abstract-waves-acti",
+       "bio_font_color": "#ffffff",
+       "button_color": "#c21b20",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"	
+    },
+    {
+       "id": 152,
+       "theme": "abstract-interstellar",
+       "bio_font_color": "#201f1f",
+       "button_color": "#fdbdbf",
+       "font_button_color": "#c21b20",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 153,
+       "theme": "abstract-trianglify-the-little-mermaid",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ffffff",
+       "font_button_color": "#047c9a",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 154,
+       "theme": "abstract-confetti-doodles",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ff8a00",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 155,
+       "theme": "abstract-gradient-brown",
+       "bio_font_color": "#ffffff",
+       "button_color": "#4d3d30",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 156,
+       "theme": "abstract-gradient-exo",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ffffff",
+       "font_button_color": "#e78872",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 157,
+       "theme": "abstract-ripple-blue",
+       "bio_font_color": "#1d6eea",
+       "button_color": "#ffffff",
+       "font_button_color": "#1d6eea",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 158,
+       "theme": "abstract-ripple-pink",
+       "bio_font_color": "#cb3045",
+       "button_color": "#ecb47e",
+       "font_button_color": "#ecb3045",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 159,
+       "theme": "abstract-trianglify-bee",
+       "bio_font_color": "#ffffff",
+       "button_color": "#8d5410",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 160,
+       "theme": "abstract-waves-bleach",
+       "bio_font_color": "#ffffff",
+       "button_color": "#7f807a",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 161,
+       "theme": "abstract-trianglify-wedding",
+       "bio_font_color": "#161616",
+       "button_color": "#7f807a",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 162,
+       "theme": "abstract-trianglify-frozen",
+       "bio_font_color": "#ffffff",
+       "button_color": "#736187",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 163,
+       "theme": "abstract-waves-magica-adoka",
+       "bio_font_color": "#f56440",
+       "button_color": "#ffffff",
+       "font_button_color": "#f56440",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 164,
+       "theme": "abstract-waves-tableau",
+       "bio_font_color": "#ffffff",
+       "button_color": "#f56440",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 165,
+       "theme": "abstract-waves-bluex",
+       "bio_font_color": "#ffffff",
+       "button_color": "#946d8d",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
     }
+  
   ];
   template = templates[0];
   var picker,dataView,dataFree;
@@ -2767,7 +2960,7 @@
                       <input type="hidden" name="modeBackground" id="modeBackground" value="gradient">
                       <input type="hidden" name="backtheme" id="backtheme" value="colorgradient1">
                       <input type="hidden" name="wallpaperclass" id="wallpaperclass" value="wallpaper1">
-                      <input type="hidden" name="animationclass" id="animationclass" value="animation-bubble-bg-blue animation-core">
+                      <input type="hidden" name="animationclass" id="animationclass" value="animation-abstract-black-animate animation-core">
                       <p class="blue-txt">
                         Theme
                       </p>
@@ -3009,6 +3202,7 @@
 
                         <div role="tabpanel" class="tab-pane fade" id="animation">
                           <select id="select-animation">
+                            <option value="abstract">abstract *new</option>
                             <option>bubble</option>
                             <option>bubble-up</option>
                             <option>cloud</option>
@@ -5606,6 +5800,10 @@
     $('#select-animation').selectize({
       sortField: 'text',
       onChange: function(value) {
+        if (value=="abstract"){
+          $(".animation-thumb").hide();
+          $(".animation-abstract").show();
+        }
         if (value=="bubble"){
           $(".animation-thumb").hide();
           $(".animation-bubble").show();
@@ -5645,7 +5843,7 @@
       }
     });    
     $(".animation-thumb").hide();
-    $(".animation-bubble").show();
+    $(".animation-abstract").show();
     $(document).on('click', '#tambah', function (e) {
       $('.messengers').each(function () {
         if ($(this).hasClass('hide')) {

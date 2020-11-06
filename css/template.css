@@ -521,6 +521,106 @@ Waves folder
   background-image: url('../image/svg/waves/bg-waves/waves-yellow.svg');
 }
 
+/*
+abstract folder
+*/
+.animation-abstract-black-animate
+{
+  background-image: url('../image/svg/abstract/bg-abstract/black-animate.svg');
+}
+.animation-abstract-blue-wave
+{
+  background-image: url('../image/svg/abstract/bg-abstract/blue-wave.svg');
+}
+.animation-abstract-bubble
+{
+  background-image: url('../image/svg/abstract/bg-abstract/bubble.svg');
+}
+.animation-abstract-confetti-doodles
+{
+  background-image: url('../image/svg/abstract/bg-abstract/confetti-doodles.svg');
+}
+.animation-abstract-fade-in
+{
+  background-image: url('../image/svg/abstract/bg-abstract/fade-in.svg');
+}
+.animation-abstract-gradient-brown
+{
+  background-image: url('../image/svg/abstract/bg-abstract/gradient-brown.svg');
+}
+.animation-abstract-gradient-exo
+{
+  background-image: url('../image/svg/abstract/bg-abstract/gradient-exo.svg');
+}
+.animation-abstract-interstellar
+{
+  background-image: url('../image/svg/abstract/bg-abstract/interstellar.svg');
+}
+.animation-abstract-live-bg
+{
+  background-image: url('../image/svg/abstract/bg-abstract/live-bg.svg');
+}
+.animation-abstract-motion-bg
+{
+  background-image: url('../image/svg/abstract/bg-abstract/motion-bg.svg');
+}
+.animation-abstract-ripple-blue
+{
+  background-image: url('../image/svg/abstract/bg-abstract/ripple-blue.svg');
+}
+.animation-abstract-ripple-pink
+{
+  background-image: url('../image/svg/abstract/bg-abstract/ripple-pink.svg');
+}
+.animation-abstract-shadow-fall
+{
+  background-image: url('../image/svg/abstract/bg-abstract/shadow-fall.svg');
+}
+.animation-abstract-snow
+{
+  background-image: url('../image/svg/abstract/bg-abstract/snow.svg');
+}
+.animation-abstract-trianglify-bee
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-bee.svg');
+}
+.animation-abstract-trianglify-frozen
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-frozen.svg');
+}
+.animation-abstract-trianglify-the-little-mermaid
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-the-little-mermaid.svg');
+}
+.animation-abstract-trianglify-wedding
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-wedding.svg');
+}
+.animation-abstract-wave-red-2
+{
+  background-image: url('../image/svg/abstract/bg-abstract/wave-red-2.svg');
+}
+.animation-abstract-waves-acti
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-acti.svg');
+}
+.animation-abstract-waves-bleach
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-bleach.svg');
+}
+.animation-abstract-waves-bluex
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-bluex.svg');
+}
+.animation-abstract-waves-magica-adoka
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-magica-adoka.svg');
+}
+.animation-abstract-waves-tableau
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-tableau.svg');
+}
+
 .wallpaper-core{
   background-color :#21d4fd!important;
   color:#fff;

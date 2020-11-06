@@ -1002,6 +1002,203 @@ Waves folder
 }
 
 
+/*
+Abstract folder
+*/
+.thumb-abstract-black-animate
+{
+  background-image: url('../image/svg/abstract/thumbnail/black-animate.jpg');
+}
+.animation-abstract-black-animate
+{
+  background-image: url('../image/svg/abstract/bg-abstract/black-animate.svg');
+}
+.thumb-abstract-blue-wave
+{
+  background-image: url('../image/svg/abstract/thumbnail/blue-wave.jpg');
+}
+.animation-abstract-blue-wave
+{
+  background-image: url('../image/svg/abstract/bg-abstract/blue-wave.svg');
+}
+.thumb-abstract-bubble
+{
+  background-image: url('../image/svg/abstract/thumbnail/bubble.jpg');
+}
+.animation-abstract-bubble
+{
+  background-image: url('../image/svg/abstract/bg-abstract/bubble.svg');
+}
+.thumb-abstract-confetti-doodles
+{
+  background-image: url('../image/svg/abstract/thumbnail/confetti-doodles.jpg');
+}
+.animation-abstract-confetti-doodles
+{
+  background-image: url('../image/svg/abstract/bg-abstract/confetti-doodles.svg');
+}
+.thumb-abstract-fade-in
+{
+  background-image: url('../image/svg/abstract/thumbnail/fade-in.jpg');
+}
+.animation-abstract-fade-in
+{
+  background-image: url('../image/svg/abstract/bg-abstract/fade-in.svg');
+}
+.thumb-abstract-gradient-brown
+{
+  background-image: url('../image/svg/abstract/thumbnail/gradient-brown.jpg');
+}
+.animation-abstract-gradient-brown
+{
+  background-image: url('../image/svg/abstract/bg-abstract/gradient-brown.svg');
+}
+.thumb-abstract-gradient-exo
+{
+  background-image: url('../image/svg/abstract/thumbnail/gradient-exo.jpg');
+}
+.animation-abstract-gradient-exo
+{
+  background-image: url('../image/svg/abstract/bg-abstract/gradient-exo.svg');
+}
+.thumb-abstract-interstellar
+{
+  background-image: url('../image/svg/abstract/thumbnail/interstellar.jpg');
+}
+.animation-abstract-interstellar
+{
+  background-image: url('../image/svg/abstract/bg-abstract/interstellar.svg');
+}
+.thumb-abstract-live-bg
+{
+  background-image: url('../image/svg/abstract/thumbnail/live-bg.jpg');
+}
+.animation-abstract-live-bg
+{
+  background-image: url('../image/svg/abstract/bg-abstract/live-bg.svg');
+}
+.thumb-abstract-motion-bg
+{
+  background-image: url('../image/svg/abstract/thumbnail/motion-bg.jpg');
+}
+.animation-abstract-motion-bg
+{
+  background-image: url('../image/svg/abstract/bg-abstract/motion-bg.svg');
+}
+.thumb-abstract-ripple-blue
+{
+  background-image: url('../image/svg/abstract/thumbnail/ripple-blue.jpg');
+}
+.animation-abstract-ripple-blue
+{
+  background-image: url('../image/svg/abstract/bg-abstract/ripple-blue.svg');
+}
+.thumb-abstract-ripple-pink
+{
+  background-image: url('../image/svg/abstract/thumbnail/ripple-pink.jpg');
+}
+.animation-abstract-ripple-pink
+{
+  background-image: url('../image/svg/abstract/bg-abstract/ripple-pink.svg');
+}
+.thumb-abstract-shadow-fall
+{
+  background-image: url('../image/svg/abstract/thumbnail/shadow-fall.jpg');
+}
+.animation-abstract-shadow-fall
+{
+  background-image: url('../image/svg/abstract/bg-abstract/shadow-fall.svg');
+}
+.thumb-abstract-snow
+{
+  background-image: url('../image/svg/abstract/thumbnail/snow.jpg');
+}
+.animation-abstract-snow
+{
+  background-image: url('../image/svg/abstract/bg-abstract/snow.svg');
+}
+.thumb-abstract-trianglify-bee
+{
+  background-image: url('../image/svg/abstract/thumbnail/trianglify-bee.jpg');
+}
+.animation-abstract-trianglify-bee
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-bee.svg');
+}
+.thumb-abstract-trianglify-frozen
+{
+  background-image: url('../image/svg/abstract/thumbnail/trianglify-frozen.jpg');
+}
+.animation-abstract-trianglify-frozen
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-frozen.svg');
+}
+.thumb-abstract-trianglify-the-little-mermaid
+{
+  background-image: url('../image/svg/abstract/thumbnail/trianglify-the-little-mermaid.jpg');
+}
+.animation-abstract-trianglify-the-little-mermaid
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-the-little-mermaid.svg');
+}
+.thumb-abstract-trianglify-wedding
+{
+  background-image: url('../image/svg/abstract/thumbnail/trianglify-wedding.jpg');
+}
+.animation-abstract-trianglify-wedding
+{
+  background-image: url('../image/svg/abstract/bg-abstract/trianglify-wedding.svg');
+}
+.thumb-abstract-wave-red-2
+{
+  background-image: url('../image/svg/abstract/thumbnail/wave-red-2.jpg');
+}
+.animation-abstract-wave-red-2
+{
+  background-image: url('../image/svg/abstract/bg-abstract/wave-red-2.svg');
+}
+.thumb-abstract-waves-acti
+{
+  background-image: url('../image/svg/abstract/thumbnail/waves-acti.jpg');
+}
+.animation-abstract-waves-acti
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-acti.svg');
+}
+.thumb-abstract-waves-bleach
+{
+  background-image: url('../image/svg/abstract/thumbnail/waves-bleach.jpg');
+}
+.animation-abstract-waves-bleach
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-bleach.svg');
+}
+.thumb-abstract-waves-bluex
+{
+  background-image: url('../image/svg/abstract/thumbnail/waves-bluex.jpg');
+}
+.animation-abstract-waves-bluex
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-bluex.svg');
+}
+.thumb-abstract-waves-magica-adoka
+{
+  background-image: url('../image/svg/abstract/thumbnail/waves-magica-adoka.jpg');
+}
+.animation-abstract-waves-magica-adoka
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-magica-adoka.svg');
+}
+.thumb-abstract-waves-tableau
+{
+  background-image: url('../image/svg/abstract/thumbnail/waves-tableau.jpg');
+}
+.animation-abstract-waves-tableau
+{
+  background-image: url('../image/svg/abstract/bg-abstract/waves-tableau.svg');
+}
+
+
 .thumb-wallpaper1
 {
   background-image: url('../image/wallpaper/bg-thumb/thumb-bg-1.png');
@@ -1443,8 +1640,8 @@ Waves folder
 }
 
 .wallpapers {
-  width: 125px;
-  height: 125px;
+  width: 120px;
+  height: 120px;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -1456,8 +1653,8 @@ Waves folder
   }
 
   .wallpapers {
-    width: 125px;
-    height: 125px;
+    width: 120px;
+    height: 120px;
   }
 
   .theme-take {
