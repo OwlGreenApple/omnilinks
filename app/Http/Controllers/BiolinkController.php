@@ -8,6 +8,7 @@ use App\Banner;
 use App\Ads;
 use App\AdsHistory;
 use App\Whatsapplink;
+use App\Proof;
 use App\WAChatMember as wachat;
 use App\Console\Commands\CropProfileImage;
 
@@ -224,6 +225,9 @@ class BiolinkController extends Controller
       $description = "This is your new text content. You can modify this text and add more";
     }
 
+    //proof
+    $proof = $this->getProof($pageid);
+
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
       'pages'=>$page,
@@ -234,8 +238,135 @@ class BiolinkController extends Controller
       'wachat'=>$getwachat,
       'valid'=>$validmember,
       'mod'=>$mod,
-      'description'=>$description
+      'description'=>$description,
+      'proof'=>$proof
     ]);  
+  }
+
+  public function saveProof(Request $request)
+  {
+      if($request->status == 0)
+      {
+         $proof = new Proof;
+      }
+      else
+      {
+         $proof = Proof::where([['id',$request->status],['user_id',Auth::id()]])->first();
+      }
+
+      $proof->page_id = $request->page_id;
+      $proof->user_id = Auth::id();
+      $proof->name = $request->proof_name;
+      $proof->text = $request->proof_text;
+      $proof->star = $request->proof_stars;
+
+      if($request->file('proof_image') <> null && $request->status == 'edit')
+      {
+        $filename = $proof->url_image;
+        Storage::disk('s3')->delete($filename);
+      }
+
+      if($request->file('proof_image') <> null)
+      {
+        $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
+        $dt = Carbon::now();
+        $ext = $request->file('proof_image')->getClientOriginalExtension();
+        $dir = 'proof_page/'.explode(' ',trim(Auth::user()->name))[0].'-'.Auth::user()->id;
+        $filename = $dt->format('ymdHi').'-'.$request->page_id.'.'.$ext;
+        $proof->url_image = $dir."/".$filename;
+        Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
+      }
+
+      try 
+      {
+        $proof->save();
+        $data['data'] = 1;
+      }
+      catch(QueryException $e)
+      {
+        $data['data'] = 0;
+      }
+
+      $data['error'] = 0;
+      return response()->json($data);
+  }
+
+  public function delProof(Request $request)
+  {
+      $id = $request->id;
+      $proof = Proof::where([['id',$id],['user_id',Auth::id()]]);
+
+      try{
+        $filename = $proof->first()->url_image;
+        Storage::disk('s3')->delete($filename);
+        $proof->delete();
+        $data['res'] = 1;
+      }
+      catch(QueryException $e)
+      {
+        //$e->getMessage();
+        $data['res'] = 0;
+      }
+
+      return response()->json($data);
+  }
+
+  public function loadProof(Request $request)
+  {
+      $pageid = $request->pageid;
+      $preview = $request->preview;
+      $query = $this->getProof($pageid);
+      $pages = Page::where('id','=',$pageid)->first();
+
+      if($preview == 1)
+      {
+        return view('user.dashboard.previewproof',['proof'=>$query]);
+      }
+      else
+      {
+        return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$pages]);
+      }   
+  }
+
+  private function getProof($pageid)
+  {
+      $query = Proof::where('page_id',$pageid)->orderBy('id','desc')->get();
+      return $query;
+  }
+
+  public function settingProof(Request $request)
+  {
+      $pageid = $request->pageid;
+      $pages = Page::where('id','=',$pageid)->first();
+
+      if(is_null($pages))
+      {
+          $data['res'] = 0;
+      }
+      else
+      {
+          $previous = $pages->proof_settings;
+          if($previous == 0)
+          {
+            $pages->proof_settings = 1;
+          }
+          else
+          {
+            $pages->proof_settings = 0; 
+          }
+      }
+
+      try
+      {
+        $pages->save();
+        $data['res'] = 1;
+      }
+      catch(QueryException $e)
+      {
+        $data['res'] = 0;
+      }
+
+      return response()->json($data);
   }
 
   public function getWAchatButton($pageid)
@@ -360,6 +491,8 @@ class BiolinkController extends Controller
           $validmember = true;
       }
 
+      $proof = $this->getProof($page->id);
+
       return view('user.link.link')
               ->with('pages',$page)
               ->with('membership',$user->membership)
@@ -372,6 +505,7 @@ class BiolinkController extends Controller
               ->with('ads',$ads)
               ->with('wachat',$wachat)
               ->with('valid',$validmember)
+              ->with('proof',$proof)
               ;
     }
   }
@@ -736,6 +870,9 @@ class BiolinkController extends Controller
     if (in_array("ig", $request->sortsosmed)) {
       $temp_arr['ig'] = ['required', 'max:191'];
     }
+    if (in_array("tiktok", $request->sortsosmed)) {
+      $temp_arr['tiktok'] = ['required', 'max:191'];
+    }
     if (in_array("youtube", $request->sortsosmed)) {
       $temp_arr['youtube'] = ['required', 'active_url', 'max:191'];
     }
@@ -803,6 +940,7 @@ class BiolinkController extends Controller
     $telegram = $request->telegrampixel;
     $youtube = $request->youtubepixel;
     $ig = $request->igpixel;
+    $tiktok = $request->tkpixel;
     $skype = $request->skypepixel;
     $fb = $request->fbpixel;
     $line = $request->linepixel;
@@ -812,6 +950,7 @@ class BiolinkController extends Controller
       $page->wa_pixel_id=$wa;
       $page->twitter_pixel_id=$twitter;
       $page->ig_pixel_id=$ig;
+      $page->tk_pixel_id=$tiktok;
       $page->telegram_pixel_id=$telegram;
       $page->youtube_pixel_id=$youtube;
       $page->skype_pixel_id=$skype;
@@ -823,6 +962,7 @@ class BiolinkController extends Controller
       $page->wa_pixel_id=0;
       $page->twitter_pixel_id=0;
       $page->ig_pixel_id=0;
+      $page->tk_pixel_id=0;
       $page->telegram_pixel_id=0;
       $page->youtube_pixel_id=0;
       $page->skype_pixel_id=0;
@@ -838,6 +978,7 @@ class BiolinkController extends Controller
   	$page->skype_link=$request->skype;
   	$page->youtube_link=$request->youtube; 	
     $page->ig_link=$request->ig;
+    $page->tk_link=$request->tiktok;
     $page->line_link=$request->line;
     $page->messenger_link=$request->messenger;
 
@@ -1080,6 +1221,7 @@ class BiolinkController extends Controller
   {
 
     $temp_arr = array();
+    $pixel_proof = null;
     $temp_arr['script'] = ['required', 'string' ];
     $pixelscript = $request->script;
     $temp_arr['title'] = ['required','string','max:190'];
@@ -1116,15 +1258,18 @@ class BiolinkController extends Controller
         $data['message'] = 'Mohon gunakan javascript yang valid'; 
         return $data;
     }
-    #----
-    
+
   	$uuid=$request->uuidpixel;
   	$page=Page::where('uid','=',$uuid)->first();
-    if (is_null($request->editidpixel)) {
+    $pixel_proof_id = $request->update_proof;
+
+    if (is_null($request->editidpixel)) 
+    {
         $pixel=new Pixel();
     }
-    else {
-      $pixel=Pixel::where('id','=',$request->editidpixel)->first(); 
+    else 
+    {
+        $pixel=Pixel::where('id','=',$request->editidpixel)->first(); 
     }
     
   	$user=Auth::user();
@@ -1145,6 +1290,7 @@ class BiolinkController extends Controller
   {
   	$pixels=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
+                  ->where('jenis_pixel','<>','pf')
   					->orderBy('created_at','ascend')->get();
   					//dd($pixels);
   	$arr['view'] =(string) view('user.dashboard.contentpixel')

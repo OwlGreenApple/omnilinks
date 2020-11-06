@@ -25,6 +25,10 @@
     cursor: pointer;
   }
 
+  .proof-wrapper{
+    position: relative !important;
+  }
+
   .themes.selected, .wallpapers.selected{
     border: 3px solid #0062CC;
   }
@@ -39,6 +43,9 @@
   var template;
   var changelink = 0;
   var changechat = 0;
+  var changepixel = 0;
+  var changeproof = 0;
+
   var templates = [
     {
      "id": 1,
@@ -1416,10 +1423,10 @@
     var formData = new FormData(form);
     var desc = $("#description").html();
 
-    console.log(desc.length);
-    if(desc.length > 80)
+    // console.log(desc);
+    if(desc.length > 120)
     {
-      alert("Deskripsi melebihi 80 karakter");
+      alert("Deskripsi melebihi 120 karakter");
       return false;
     }
 
@@ -1456,6 +1463,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
         }
@@ -1516,6 +1525,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
@@ -1536,9 +1547,10 @@
     });
   }
 
-  function tambahpixel() 
+  function tambahpixel(proof) 
   {
     //CHECK WHETHER SCRIPT HAS ERROR OR NOT
+    var data_script;
     var elscript = document.getElementById("error-script");
     elscript.innerHTML = ''; //to make element error-script have default value length
     window.onerror = function(error){
@@ -1550,7 +1562,8 @@
         elscript.innerHTML = error;
     };
 
-    $("#script-code").html($("#script").val());
+    data_script = $("#script").val();
+    $("#script-code").html(data_script);
     var len = elscript.innerHTML.length;
 
     if(len > 0)
@@ -1565,9 +1578,9 @@
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      url: "<?php echo url ('/save-pixel')?>",
+      url: "{{ url('save-pixel') }}",
       dataType: 'text',
-      data: $("#savepixel").serialize(),
+      data:  $("#savepixel").serialize(),
       beforeSend: function()
       {
         $('#loader').show();
@@ -1583,6 +1596,12 @@
         $(window).scrollTop(0);
         refreshpixel();
         loadPixelPage();
+
+        changed = 0;
+        changelink = 0;
+        changechat = 0;
+        changepixel = 0;
+        changeproof = 0;
 
         var data = jQuery.parseJSON(result);
         $(".alertTitle").removeClass("alert-danger");
@@ -1608,6 +1627,11 @@
         }
         
       },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
     }); 
   }
 
@@ -1686,6 +1710,12 @@
         setTimeout(function(){
           $('#delete-success').modal('hide')
         }, 3000);
+
+        changed = 0;
+        changelink = 0;
+        changechat = 0;
+        changepixel = 0;
+        changeproof = 0;
       }
     });
   }
@@ -1740,6 +1770,8 @@
     $("#fbpixel").val('{{$pages->fb_pixel_id}}');
     $("#igpixel").html(dataView);
     $("#igpixel").val('{{$pages->ig_pixel_id}}');
+    $("#tkpixel").html(dataView);
+    $("#tkpixel").val('{{$pages->tk_pixel_id}}');
     $("#twitterpixel").html(dataView);
     $("#twitterpixel").val('{{$pages->twitter_pixel_id}}');
     <?php if(!$banner->count()) { ?>
@@ -2208,7 +2240,6 @@
       });
     }
     
-  
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
@@ -2266,7 +2297,7 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="nav-link link @if($mod <> 1) active @endif" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
@@ -2287,6 +2318,12 @@
               <li class="nav-item">
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
                   Pixel
+                </a>
+              </li> 
+
+              <li class="nav-item">
+                <a href="#proof" class="nav-link link @if($mod == 2) active @endif" role="tab" data-toggle="tab">
+                  Activproof
                 </a>
               </li>
               <?php } ?>
@@ -2310,7 +2347,8 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in @if($mod <> 1) active show @endif" id="link">
+              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
+
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
 
@@ -2682,6 +2720,40 @@
                         </div>
                       </div>
                     </li>
+
+                    <li id="sosmed-tiktok">
+                      <div id="tiktok" class="socialmedia div-table hide" data-type="tiktok" style="">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="tiktok" class="input-hidden">
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                 <i class="fab fa-tiktok"></i>
+                                </div>
+                              </div>
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok">
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <select name="tkpixel" id="tkpixel" class="form-control linkpixel">
+                            </select>
+                          </div>
+                        </div>
+                          
+                        <div class="div-cell cell-btn" id="deletetk">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
                   </ul>
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
@@ -2857,6 +2929,70 @@
                   <div id="content"></div>
                 </div>
               </div>
+
+               <!-- TAB 6 -->
+              <div id="proof" class="tab-pane fade in @if($mod==2) active show @endif">
+                <div class="notice"><!-- display message --></div>
+                <form id="saveproof" class="mb-4 mt-4">
+
+                  <span class="blue-txt">ActivProof</span>
+                    
+                  <div class="form-group mt-3 mb-4 row">
+                    <div class="col-md-2">
+                      <label class="control-label">Name</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="17" />
+                      <div class="error proof_name"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Text</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <textarea maxlength="60" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <div class="error proof_text"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Image</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="file" class="form-control" name="proof_image" placeholder="Masukkan Text" />
+                      <small>Ukuran 100 x100 pixel, tipe harus : jpg, jpeg, png</small>
+                      <span class="proof_notes"></span>
+                      <div class="error proof_image"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Stars</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="number" value="5" min="1" max="5" class="form-control" name="proof_stars" placeholder="Jumlah bintang" />
+                      <div class="error proof_stars"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-4 ml-auto pl-md-0 pl-3 text-center">
+                        <button type="submit" id="btn_proof" class="btn btn-primary btn-setting-biolinks mr-2" style="width:45%">
+                          Save
+                        </button>
+                      <button type="reset" class="btn btn-danger btn-reset btn-proof-reset btn-setting-biolinks" style="width:45%">
+                        Reset
+                      </button>
+                    </div>
+                  </div>
+
+                </form>
+
+                <!-- proof list -->
+                <span class="blue-txt">
+                  List of Proofs
+                </span>
+                <div class="accordion mt-3" id="accordionExample">
+                  <div id="loaded_proof"></div>
+                </div>
+
+              </div>
               
               <!-- TAB 2 -- Tampilan -->
               <div role="tabpanel" class="tab-pane fade in " id="style">
@@ -2889,7 +3025,21 @@
                           <!-- <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
                             </textarea> -->
 
-                          <div id="description" contenteditable="true">{!! $description !!}</div>
+                          <fieldset>
+
+                            <button type="button" id='create_italic' class="btn btn-primary text-white" title="Italicize Highlighted Text"><i>I</i>
+                              </button>
+
+                            <!-- click on Event Attribute -->
+                            <button type="button" id="create_bold" class="btn btn-primary text-white"><b>B</b>
+                              </button>
+
+                          </fieldset>
+                         
+                          <!-- <div id="description" contenteditable="true"> -->
+                          <div id="description" contenteditable="true">
+                            {!! $description !!}
+                          </div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
@@ -3474,6 +3624,11 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
+
+                  <!-- proof-preview -->
+                  <div id="proof_preview">
+                    @include('user.dashboard.previewproof')
+                  </div>
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
@@ -3563,6 +3718,11 @@
                     <li class="col linked hide" id="igviewid">
                       <a href="#" title="ig" >
                         <i class="fab fa-instagram" ></i>
+                      </a>  
+                    </li>  
+                    <li class="col linked hide" id="tiktokviewid" style="margin-top : -3px">
+                      <a href="#" title="tk" >
+                        <i style="font-size:25px" class="fab fa-tiktok"></i>
                       </a>  
                     </li>  
                   </ul>
@@ -4024,9 +4184,6 @@
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
 
-<!-- to insert link if user want to change value into link on textarea -->
-<script src="{{asset('js/wraptagtextarea.js')}}"></script>
-
 <script type="text/javascript">
   /*DELAY ON KEYUP
   function delay(callback, ms) {
@@ -4064,9 +4221,12 @@
       }
     });
 
-    $(window).resize(function() {
+    $(window).resize(function() 
+    {
         setRightPost(".wcs_popup");   
     });
+
+    $(".alert").delay(2000).fadeOut(3000);
 
     wa_preview_header_text();
     getSelected();
@@ -4075,8 +4235,288 @@
     change_link();
     pastePreview();
     createLinkDescription();
+    createItalic();
+    create_bold();
+    createProof();
+    editProof();
+    deleteProof();
+    resetProof();
+    load_proof();
+    change_proof_settings();
+    //proof_preview();
     //callMaintainPlus();
   });
+
+  function proof_preview()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "{{ url('load-proof') }}",
+      data: { pageid : '{{ $pageid }}',preview : 1 },
+      dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        // $("#proof_preview").html(result);
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+  }
+
+  function reloadPage(page)
+  {
+    var url = window.location.href; 
+    url = url.split("?");
+    location.href= url[0]+"/?mod="+page;
+  }
+
+  function change_proof_settings()
+  {
+    $("body").on("click","input[name='proof_setting']",function(){
+      $.ajax({
+        type: 'GET',
+        url: "{{ url('proof_settings') }}",
+        data: { pageid : '{{ $pageid }}' },
+        dataType: 'json',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+         
+          if(result.res == 1)
+          {
+            /*$(".notice").html('<div class="alert alert-success">Proof setting telah di ubah</div>');*/
+             reloadPage(2);
+          }
+          else
+          {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+
+            $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
+            $(window).scrollTop($("#proof").offset().top);
+          }
+        },
+        error : function(xhr)
+        {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+          console.log(xhr.responseText);
+        }
+      });
+      //end ajax
+    });
+  }
+
+  function createProof()
+  {
+     $("#saveproof").submit(function(e){
+        e.preventDefault();
+
+        var msg;
+        var edit = $("#btn_proof").attr('status');
+        var data = new FormData(this);
+        data.append('page_id','{{ $pageid }}');
+
+        if(edit == undefined)
+        {
+            data.append('status',0);
+            msg = 'Data berhasil ditambahkan';
+        }
+        else
+        {
+            data.append('status',edit);
+            msg = 'Data berhasil diubah';
+        }
+
+        $.ajax({
+          type: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          dataType: 'json',
+          data: data,
+          url: "{{ url('save-proof') }}",
+          cache:false,
+          contentType: false,
+          processData: false,
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          }, 
+          success: function(result) {
+          
+            if(result.error == 1)
+            {
+                $('#loader').hide();
+                $('.div-loading').removeClass('background-load');
+
+                $(".proof_name").html(result.proof_name);
+                $(".proof_text").html(result.proof_text);
+                $(".proof_stars").html(result.proof_stars);
+                $(".proof_image").html(result.proof_image);
+
+                return false;
+            }
+
+            if(result.data == 1) 
+            {
+                // load_proof();
+                reloadPage(2);
+               /* $(".btn-proof-reset").trigger('click');
+                $(".notice").html('<div class="alert alert-success">'+msg+'</div>');*/
+
+            }
+            else
+            {
+                $('#loader').hide();
+                $('.div-loading').removeClass('background-load');
+
+                $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
+            }
+            $(".error").html('');
+          },
+          error : function(xhr){
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            console.log(xhr.responseText);
+          }
+        });
+        //end ajax
+     });
+  }
+
+  function editProof()
+  {
+    $("body").on("click",".btn-editproof",function()
+    {
+      $("input[name='proof_name']").val($(this).attr('data-name'));
+      $("textarea[name='proof_text']").val($(this).attr('data-text'));
+      $(".proof_notes").html('<small>Biarkan tetap kosong apabila tidak ingin merubah image</small>');
+      $("input[name='proof_stars']").val($(this).attr('data-star'));
+      $("#btn_proof").attr('status',$(this).attr('dataedit'));
+      $(window).scrollTop($("#proof").offset().top);
+    });
+  }
+
+  function deleteProof()
+  {
+    $("body").on("click",".btn-delete-proof",function()
+    {
+      var id = $(this).attr('dataid');
+      var warn = confirm('Apakah yakin mau menghapus?');
+
+      if(warn == false)
+      {
+        return false;
+      }
+      else
+      {
+        $.ajax({
+          type: 'GET',
+          url: "{{ url('delete-proof') }}",
+          data: { 'id' : id },
+          dataType: 'json',
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          },
+          success: function(result) {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            
+            if(result.res == 1)
+            {
+              $(".notice").html('<div class="alert alert-success">Data berhasil di hapus</div>');
+              load_proof();
+            }
+            else
+            {
+              $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, mohon dicoba lagi nanti</div>');
+            }
+          },
+          error : function(xhr)
+          {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            console.log(xhr.responseText);
+          }
+        });
+      //end ajax
+      }
+    });
+  }
+
+  function resetProof()
+  {
+    $(".btn-proof-reset").click(function(){
+      $("#btn_proof").removeAttr('status');
+      $(".proof_notes").html('');
+      $(".error").html('');
+    }); 
+  }
+
+  function load_proof()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "{{ url('load-proof') }}",
+      data: { pageid : '{{ $pageid }}' },
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        $("#loaded_proof").html(result);
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+  }
+
+  function createItalic()
+  {
+    $('#create_italic').click(function(){
+        document.execCommand('italic', false, null);
+    });
+  }
+
+  function create_bold()
+  {
+    $('#create_bold').click(function(){
+        createBold();
+    });
+  }
+
+  /*document.getElementById('create_bold').onclick = function(){
+    document.execCommand('bold', false, null);
+  };*/
+
+  /*addEventListener('click', function(e) {
+    document.execCommand('bold', false, null);
+  });*/
 
   function createLinkDescription()
   {
@@ -4090,28 +4530,11 @@
         }
         else
         {
-          var selection = window.getSelection();
-          var range = selection.getRangeAt(0).cloneRange();
-          
-          var tag = document.createElement('a');
-          tag.setAttribute('href', url);
-
-          range.surroundContents(tag);
-          selection.removeAllRanges();
-          selection.addRange(range);
+          createLink();
         }
         
     });
   }
-
-
-  /*function createLinkDescription()
-  {
-     $("#make-bold").click(function(){
-        var url = $("#url").val();
-        surroundWithLink(url);
-     });
-  }*/
 
   function adaptiveLink()
   {
@@ -4421,6 +4844,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
@@ -4578,13 +5003,16 @@
               changed = 0;
               changelink = 0;
               changechat = 0;
+              changepixel = 0;
+              changeproof = 0;
               refreshwa();
               loadLinkBio();
               refreshpixel();
               //load_chat_member();
             } else {
-              var url = window.location.href; 
-              location.href= url+"/?mod=1";
+              /*var url = window.location.href; 
+              location.href= url+"/?mod=1";*/
+              reloadPage(1);
             }
             
           } 
@@ -4632,8 +5060,9 @@
                   $("#pesanAlert").removeClass("alert-danger");
 
                   //to determine whether wa chat link tab or not
-                  var url = window.location.href; 
-                  location.href= url+"/?mod=1";
+                  /*var url = window.location.href; 
+                  location.href= url+"/?mod=1";*/
+                  reloadPage(1);
                   
                 } else {
                   $("#pesanAlert").addClass("alert-danger");
@@ -4670,6 +5099,8 @@
    $( ":input" ).change(function() {
       changed = $(this).closest('#saveTemplate').data('changed', true);
       changelink = $(this).closest('#savelink').data('changed', true);
+      changepixel = $(this).closest('#savepixel').data('changed', true);
+      changeproof = $(this).closest('#saveproof').data('changed', true);
       changechat = $(this).closest('#savewa').data('changed', true);
     });
 
@@ -4682,9 +5113,13 @@
         changed = 1;
    });
 
+   $("body").on("click",".btn-editpixel",function(){
+      changepixel = 1;
+   });
+
   $("body").on("click",".link",function()
   {
-     if(changed > 0 ||changed.length > 0 || changelink.length > 0 || changechat.length > 0)
+     if(changed > 0 ||changed.length > 0 || changelink.length > 0 || changelink > 0 ||  changepixel.length > 0 || changepixel > 0 ||changeproof.length > 0 || changeproof >0 || changechat.length > 0 || changechat > 0)
      {
         $("#unsave").modal();
         return false;
@@ -4884,6 +5319,11 @@
       // tempStr = $('#description').val().replace(/\n/g, "<br>");
       tempStr = $('#description').html().replace(/\n/g, "<br>");
       $('#outputdescription').html(tempStr);
+
+      $("#create_bold, #create_italic, #make-bold").click(function(){
+         tempStr = $('#description').html();
+         $('#outputdescription').html(tempStr);
+      });
 
       
     $(document).on('focus','.focuslink',function(){
@@ -5766,6 +6206,11 @@
         $("#sosmed-ig>div").find(".input-hidden").val($("#sosmed-ig>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-ig>div").removeClass("hide");
         $("#igviewid").removeClass("hide");
+
+        $("#sosmed-tiktok>div").css("display","table");
+        $("#sosmed-tiktok>div").find(".input-hidden").val($("#sosmed-tiktok>div").find(".input-hidden").attr("data-val"));
+        $("#sosmed-tiktok>div").removeClass("hide");
+        $("#tiktokviewid").removeClass("hide");
 
         $("#sosmed-twitter>div").css("display","table");
         $("#sosmed-twitter>div").find(".input-hidden").val($("#sosmed-twitter>div").find(".input-hidden").attr("data-val"));

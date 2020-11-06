@@ -64,6 +64,11 @@ p,span {
   color: #555555;
 }
 
+.error {
+  color : #e3342f;
+  font-size: 12px;
+}
+
 .dropdown-menu {
   right: 0;
   left: auto;
@@ -79,6 +84,27 @@ p,span {
 
 .menu-mobile,.emb {
   display: none;
+}
+
+.star-custom {
+  color : #ffc100;
+}
+
+.proof_text {
+  font-size: 12px;
+}
+
+.proof-wrapper {
+  background-color: #fff;
+  padding : 15px;
+}
+
+.description > a {
+  color : #106BC8 !important;
+}
+
+.description > a:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 767px) {

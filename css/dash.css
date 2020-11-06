@@ -970,10 +970,15 @@ hr.own {
 .rows .linked {
   display: inline-block;
   font-size:xx-large;
-  padding: 0.3em 0.8em;
+  padding: 0.3em 0.33em;
   margin: 0;
   width: 21.333%;
   text-align: center; }
+
+.rows .linked > .tiktok{
+  font-size : 25px;
+  color : #000;
+}
 
   .mySlides {
     display: none

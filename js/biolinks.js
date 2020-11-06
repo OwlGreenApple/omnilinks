@@ -195,6 +195,16 @@ $(document).ready(function () {
         //changeLengthMedia();
         return false;
     });
+    $('#deletetk').on('click', function() {
+        $('#tiktok').hide();
+        $('#tiktok').addClass('hide');
+        $('#tiktok').find("input").val('');
+        $('#tiktokviewid').hide();
+        // $('#tiktokviewid').addClass('hide');
+        $('#tiktokviewid').removeClass('shown-sm');
+        //changeLengthMedia();
+        return false;
+    });
     $('#deletefb').on('click', function (e) {
         $('#fb').hide();
         $('#fb').addClass('hide');

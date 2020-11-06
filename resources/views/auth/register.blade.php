@@ -34,7 +34,8 @@
         <div class="card cardpadreg">
           <h5 class="Daftar-Disini">Daftar Disini</h5>
           <div class="card-body">
-            <form method="POST" action="{{ route('register') }}">
+            <!-- route('register') -->
+            <form method="POST" action="{{ url('register-save') }}">
               @csrf
               <input type="hidden" name="price" value="<?php if (isset ($price)) {echo $price;} ?>">
               <input type="hidden" name="namapaket" value="<?php if (isset ($namapaket)) {echo $namapaket;} ?>">

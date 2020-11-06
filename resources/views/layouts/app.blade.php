@@ -27,12 +27,17 @@
   <script src="{{ asset('js/moment.js') }}"></script>
   <script src="{{ asset('js/datetime-moment.js') }}"></script>
   <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
-  <script src="{{asset('js/all.js')}}"></script>
+  <!-- <script src="{{asset('js/all.js')}}"></script> -->
   <script src="{{asset('selectize/selectize.js')}}"></script>
   <!-- countdown timer -->
   <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
   <!-- bootstrap datetimepicker -->
   <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
+  <!-- create link -->
+  <script src="{{asset('js/createlink.js')}}"></script>
+
+  <!-- Font Awesome 5 -->
+  <script src="{{asset('assets/fontawesome-5.15.1/js/all.min.js')}}"></script>
 
   <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 
@@ -40,7 +45,11 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+  <!-- <link href="{{ asset('css/all.css') }}" rel="stylesheet"> -->
+
+  <!-- Font Awesome 5 -->
+  <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
+
   <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
   <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
@@ -58,9 +67,9 @@
 
   <!-- bootstrap datetimepicker -->
   <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"/>
-  
-  <!-- whatsapp style -->
-  <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
+
+  <!-- proof -->
+  <link rel="stylesheet" href="{{asset('css/proof.css')}}">
   
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>
@@ -68,7 +77,6 @@
    window.dataLayer = window.dataLayer || [];
    function gtag(){dataLayer.push(arguments);}
    gtag('js', new Date());
-
    gtag('config', 'UA-81228145-4');
   </script>
 

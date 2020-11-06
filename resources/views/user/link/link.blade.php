@@ -11,18 +11,26 @@
   <!--<script src="{{asset('js/myScript.js')}}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
   <script src="{{asset('js/myScript.js')}}" ></script>
   <script src="{{ asset('js/app.js') }}"></script>
-  <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
   
-  <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
+ <!--  <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}"> -->
+
+  <!-- Font Awesome 5 -->
+  <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/template.css')}}">
   <link rel="stylesheet" href="{{asset('css/dash.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
   <link rel="stylesheet" href="{{asset('css/redirect.css')}}">
+  <link rel="stylesheet" href="{{asset('css/proof.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
+ 
   <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.css')}}">
+
+  <!-- icomoon -->
+  <link rel="stylesheet" href="{{asset('assets/icomoon/style.css')}}"/>
 
   <title>Link</title>
 </head>
@@ -1516,7 +1524,7 @@ and add more";
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
-                  <i class="fab fa-whatsapp icon-msg"></i>
+                  <i class="fab fa-whatsapp" style="font-size : 20px"></i>
                   @if($div==0)
                     <span class="textbutton"> WhatsApp</span>
                   @endif
@@ -1590,7 +1598,7 @@ and add more";
             <li class="col pl-1 pr-1 mb-3">
               <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
-                  <i class="fab fa-whatsapp icon-msg"></i>
+                  <i class="fab fa-whatsapp" style="font-size : 20px"></i>
                     <span class="textbutton"> WhatsApp</span>
                 </button>
               </a>
@@ -1662,6 +1670,12 @@ and add more";
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
               </a>
+            @endif  
+
+            @if($sosmed=='tiktok' )
+              <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
+                <i style="font-size:30px" class="fab fa-tiktok"></i>
+              </a>
             @endif 
           </li>
       <!-- diremark supaya sesuai phone preview, ngga tau dulu kenapa ini dipake
@@ -1695,6 +1709,11 @@ and add more";
           <li class="col text-center icon-sosmed">
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
+              </a>
+          </li> 
+          <li class="col text-center icon-sosmed">
+              <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
+                <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
               </a>
           </li>
 
@@ -1836,6 +1855,31 @@ and add more";
     </div>
 @endif
 
+  <!-- proof -->
+  @if($proof->count() > 0)
+    <div class="proof-box">
+    @foreach($proof as $row)
+    <div class="proof-wrapper">
+        <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+     
+        <div class="proof-desc">
+            <div class="proof_profile">
+              <div class="proof_name">{{ $row->name }}</div>
+              <div class="proof_star">
+                @for($x=1;$x<=$row->star;$x++)
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                @endfor
+              </div>
+            </div>
+
+            <div class="proof_comments">
+             {{ $row->text }}
+            </div>
+        </div>
+    </div>
+    @endforeach
+    </div>
+  @endif
   
   <!--Loading Bar-->
   <div class="div-loading">
@@ -1884,7 +1928,53 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
+    runningProof();
+    stylingYoutube();
 });
+
+function runningProof()
+{
+  var total = $(".proof-wrapper").length;
+  var counting = 0;
+  var delay = 1000;
+
+  $('.proof-wrapper:gt(0)').hide();
+    var run = setInterval(
+      function(){
+        $('.proof-box > :first-child').fadeOut().next('.proof-wrapper').delay(delay).fadeIn().addClass('animate-buzz').end().appendTo('.proof-box');
+        counting++;
+
+        //put php logic according on setting
+        <?php 
+          if($pages->proof_settings == 0):
+        ?>
+            if(counting == total)
+            {
+              setTimeout(function(){
+                $('.proof-wrapper').hide();
+                clearInterval(run);
+              },delay);
+              
+            }
+        <?php
+          endif;
+        ?>
+      }, 
+    5000);
+}
+
+function stylingYoutube()
+{
+  /*$(".embed-responsive-item").on("load", function() {
+    let head = $(".embed-responsive-item").contents().find("head");
+    let css = '<xxx>.test-add{ color : red}</xxx>';
+    $(head).append(css);
+  });*/
+  var html = 'Hello from <img src="http://stackoverflow.com/favicon.ico" alt="SO">';
+  var iframe = $('.embed-responsive-item');
+  iframe.src = 'data:text/html,' + encodeURIComponent(html);
+}
+
 </script>
 
 <script type="text/javascript">
@@ -1922,7 +2012,6 @@ $(document).ready(function() {
      h = Number(h.toFixed(1));
      $(".galleryContainer").height(h);
   }
-    
 
   function call_mylink(linkAjax){
     $.ajax({
@@ -1949,6 +2038,12 @@ $(document).ready(function() {
         // else {
           // window.open(data.link);
         // }
+      },
+      error:function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        alert('Ada yang salah dengan penggunaan link atau username,\nmohon diperiksa lagi.');
       }
     });
   }
@@ -2152,7 +2247,6 @@ $(document).ready(function() {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-81228145-7');
 </script>
 
