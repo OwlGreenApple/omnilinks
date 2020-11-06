@@ -1588,7 +1588,7 @@ and add more";
         <span class="fa fa-whatsapp"></span>
     </div>  -->
      <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
-        <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+        <!-- <span class="fa fa-whatsapp"></span> --><i class="fab fa-whatsapp" style="margin-right : 5px; font-size : 15px"></i>{{$pages->wa_btn_text}}
      </div>  
  
     <div class="wcs_popup"> 
@@ -1636,7 +1636,7 @@ and add more";
     <!-- for preview if user hasn't registered yet -->
     <div class="whatsapp_chat_support wcs_fixed_right @if($pages->buzz_btn == 1) service @endif" id="example">
           <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
-              <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+              <i class="fab fa-whatsapp" style="margin-right : 5px; font-size : 15px"></i>{{$pages->wa_btn_text}}
            </div> 
 
           <!-- popup -->

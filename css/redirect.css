@@ -40,6 +40,10 @@ a:hover {
   text-decoration: none;
 }
 
+#description a:hover{
+  text-decoration: underline;
+} 
+
 .btn {
   background-color: #fff;
 }
@@ -75,12 +79,22 @@ a:hover {
   text-decoration: underline;
 }
 
-/* youtube */
+@media(min-width : 280px) and (max-width:359px){
+  .textbutton{
+    font-size : 12px;
+  }
 
-.exp-responsive {
-  background: none !important;
+  .header-txt.title {
+    font-size : 20px;
+  }
+
+  .header-txt.txt {
+    font-size : 10px;
+  }
 }
 
-.html5-video-player {
-  border-radius : 30px;
+@media(min-width : 360px) and (max-width:399px){
+  .header-txt.txt {
+    font-size : 12px;
+  }
 }

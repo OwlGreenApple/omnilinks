@@ -1229,11 +1229,14 @@
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
     var desc = $("#description").html();
+    var desc_text = $("#description").text();
 
-    // console.log(desc);
-    if(desc.length > 120)
+    /*console.log(desc);
+    return false;*/
+
+    if(desc_text.length > 80)
     {
-      alert("Deskripsi melebihi 120 karakter");
+      alert("Deskripsi melebihi 80 karakter");
       return false;
     }
 
@@ -2835,18 +2838,16 @@
                           <fieldset>
 
                             <button type="button" id='create_italic' class="btn btn-primary text-white" title="Italicize Highlighted Text"><i>I</i>
-                              </button>
+                            </button>
 
                             <!-- click on Event Attribute -->
                             <button type="button" id="create_bold" class="btn btn-primary text-white"><b>B</b>
-                              </button>
+                            </button>
 
                           </fieldset>
                          
                           <!-- <div id="description" contenteditable="true"> -->
-                          <div id="description" contenteditable="true">
-                            {!! $description !!}
-                          </div>
+                          <div id="description" contenteditable="true">{!! $description !!}</div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
@@ -3368,7 +3369,7 @@
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
-                        <div class="div-picture" style="width: 82px; height: 82px; margin-left: 13px;">
+                        <div class="div-picture">
                           <?php  
                             $viewpicture = asset('/image/no-photo.jpg');
                             if(!is_null($pages->image_pages)){
@@ -3379,13 +3380,13 @@
                           <img id="viewpicture" src="<?php echo $viewpicture ?>" style="width:100%;height:100%;border-radius: 50%;object-fit: cover;object-position: center;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
                         </div>
                       </div>
-                      <div class="col-md-10 col-8 p-2">
-                        <ul style="margin-left: 23px; font-size: 11px;">
-                          <li style="display: block; margin-bottom: -15px;  ">
-                            <p class="font-weight-bold description" style="color: #fff;" id="outputtitle"></p>
+                      <div class="col-md-10 col-9 p-2">
+                        <ul class="mobile-desc ">
+                          <li style="display: block; margin-bottom: -15px; font-size : 18px">
+                            <span class="font-weight-bold"><p class="description" style="color: #fff;" id="outputtitle"></p></span>
                           </li>
-                          <li style="display: block; margin-bottom: -15px; ">
-                            <p class="font-weight-bold description" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
+                          <li style="display: block; margin-bottom: -15px;">
+                            <p class="description" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
                           </li>
                         </ul>
                       </div>
@@ -4049,9 +4050,17 @@
     resetProof();
     load_proof();
     change_proof_settings();
+    waButtonPos();
     //proof_preview();
     //callMaintainPlus();
   });
+
+  function waButtonPos()
+  {
+     $(window).on("scroll",function(){
+        
+     });
+  }
 
   function proof_preview()
   {
@@ -5107,8 +5116,9 @@
       });
       outputtitle.text(inputtitle.val());
           
-      $('#description').keydown(function(e){
+     /* $('#description').keydown(function(e){
         newLines = $(this).val().split("\n").length;
+        console.log(e.keyCode);
         if(e.keyCode == 13 && newLines >= 3) {
           return false;
         }
@@ -5116,14 +5126,37 @@
           tempStr = $(this).val().replace(/\n/g, "<br>");;
           $('#outputdescription').html(tempStr);
         }
+      });*/
+
+      /* RENOV */
+
+      $(document).on("input", "#description", function(e) {
+        $(this).find("span").contents().unwrap();
       });
-      $('#description').keyup(function(e){
+
+      $('#description').keypress(function(e){
+        $(this).find("div").replaceWith("<br>");
+        newLines = $(this).find("br").length;
+
+        if(e.keyCode == 13 && newLines > 2) {
+          alert('enter');
+          return false;
+        }
+        else {
+          $('#outputdescription').html(tempStr);
+        }
+      });
+
+
+      /*$('#description').keyup(function(e){
         // tempStr = $(this).val().replace(/\n/g, "<br>");;
         tempStr = $(this).html().replace(/\n/g, "<br>");;
         $('#outputdescription').html(tempStr);
       });
       // tempStr = $('#description').val().replace(/\n/g, "<br>");
-      tempStr = $('#description').html().replace(/\n/g, "<br>");
+      */
+
+      tempStr = $('#description').html();
       $('#outputdescription').html(tempStr);
 
       $("#create_bold, #create_italic, #make-bold").click(function(){
