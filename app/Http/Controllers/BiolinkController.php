@@ -401,14 +401,14 @@ class BiolinkController extends Controller
     if ($names == "blog"){
       return redirect("blog");
     }
-    else {
-      $page = Page::where('names',$names) 
-                ->orwhere('premium_names',$names) 
+ 
+    $page = Page::where('names',$names) 
+                ->orWhere('premium_names',$names) 
                 ->first();
 
-      if (is_null($page)) {
+    if (is_null($page)) {
         $link = Link::where('names',$names)
-                ->orwhere('premium_names',$names)
+                ->orWhere('premium_names',$names)
                 ->first();
 
         /*if(is_null($link)){
@@ -426,14 +426,15 @@ class BiolinkController extends Controller
             'link' => $link->link,
           ]);
         }*/
+      }
 
-        if(is_null($link)){
+    /*  if(is_null($link)){
           return "Page not found";
-        } else {
+      } else {
           $tes = $this->click('link',$link->id);
           return $tes;
-        }
-      }
+      }*/
+
       $user = User::find($page->user_id);
       /*$dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
       $dt2 = Carbon::now();
@@ -508,7 +509,6 @@ class BiolinkController extends Controller
               ->with('valid',$validmember)
               ->with('proof',$proof)
               ;
-    }
   }
 
   public function pixelpage(Request $request)
