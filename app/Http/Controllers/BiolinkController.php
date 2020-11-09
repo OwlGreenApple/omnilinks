@@ -1534,10 +1534,15 @@ class BiolinkController extends Controller
           $idpixel = $page->ig_pixel_id;
         break;
         case "tiktok":
+          $page->ig_link_counter = $page->ig_link_counter+1;
+          $link = "https://instagram.com/";
+          $idpixel = $page->ig_pixel_id;
+        break;
+      /*  case "tiktok":
           $page->tk_link_counter = $page->tk_link_counter+1;
           $link = "https://tiktok.com/".$page->tk_link;
           $idpixel = $page->ig_pixel_id;
-        break;
+        break;*/
       }
       $page->total_counter = $page->total_counter + 1;
       $page->save();
