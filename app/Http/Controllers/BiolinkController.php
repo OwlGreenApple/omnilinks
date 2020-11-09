@@ -406,10 +406,11 @@ class BiolinkController extends Controller
                 ->orWhere('premium_names',$names) 
                 ->first();
 
-    if (is_null($page)) {
-        $link = Link::where('names',$names)
+    if (is_null($page)) 
+    {
+       /* $link = Link::where('names',$names)
                 ->orWhere('premium_names',$names)
-                ->first();
+                ->first();*/
 
         /*if(is_null($link)){
           return "Page not found";
@@ -426,7 +427,8 @@ class BiolinkController extends Controller
             'link' => $link->link,
           ]);
         }*/
-      }
+        return "Page not found";
+    }
 
     /*  if(is_null($link)){
           return "Page not found";
