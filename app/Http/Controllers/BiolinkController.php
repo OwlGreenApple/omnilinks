@@ -402,12 +402,33 @@ class BiolinkController extends Controller
       return redirect("blog");
     }
  
-    $page = Page::where('names',$names) 
+    /*$page = Page::where('names',$names) 
                 ->orWhere('premium_names',$names) 
-                ->first();
+                ->first();*/
+     $page_premium = null;
+     $paging =  Page::where('names',$names)->first();
+     
+     if(is_null($paging)) 
+     {
+        $page_premium = Page::where('premium_names',$names)->first();
+     }
+     else
+     {
+        $page = $paging;
+     }  
 
-    if (is_null($page)) 
-    {
+     if(is_null($page_premium))
+     {
+        return "Page not found";
+     }
+     else
+     {
+        $page = $page_premium;
+     }
+
+
+   /* if (is_null($page)) 
+    {*/
        /* $link = Link::where('names',$names)
                 ->orWhere('premium_names',$names)
                 ->first();*/
@@ -427,8 +448,7 @@ class BiolinkController extends Controller
             'link' => $link->link,
           ]);
         }*/
-        return "Page not found";
-    }
+    //}
 
     /*  if(is_null($link)){
           return "Page not found";
