@@ -1347,7 +1347,8 @@ class BiolinkController extends Controller
     }
   }
 
-  public function click($mode,$id,Request $request){
+  public function click($mode,$id,Request $request)
+  {
     $is_ajax = false;
     if($request->ajax()){
       $is_ajax = true;
@@ -1532,6 +1533,11 @@ class BiolinkController extends Controller
           $link = "https://instagram.com/".$page->ig_link;
           $idpixel = $page->ig_pixel_id;
         break;
+        case "tiktok":
+          $page->tk_link_counter = $page->tk_link_counter+1;
+          $link = "https://tiktok.com/@".$page->tk_link;
+          $idpixel = $page->tk_pixel_id;
+        break;
       }
       $page->total_counter = $page->total_counter + 1;
       $page->save();
@@ -1551,6 +1557,8 @@ class BiolinkController extends Controller
           $script = $pixel->script;
         }
       }
+
+      dd($link);
 
       if (!$is_ajax) {
         return view('user.script')->with([

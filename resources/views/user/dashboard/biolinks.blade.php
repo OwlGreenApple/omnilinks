@@ -2740,7 +2740,7 @@
                                  <i class="fab fa-tiktok"></i>
                                 </div>
                               </div>
-                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok">
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok tanpa @">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">

@@ -1713,7 +1713,7 @@ and add more";
           </li> 
           <li class="col text-center icon-sosmed">
               <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
-                <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
+                <span style="font-size:25px" class="icon-tik-tok"></span>
               </a>
           </li>
 
@@ -2028,6 +2028,7 @@ function stylingYoutube()
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+        
         var data = jQuery.parseJSON(result);
         // eval(data.script);
         $("#script-code").html(data.script);
