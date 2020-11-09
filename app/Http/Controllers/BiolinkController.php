@@ -1535,7 +1535,8 @@ class BiolinkController extends Controller
         break;
         case "tiktok":
           $page->tk_link_counter = $page->tk_link_counter+1;
-          $link = "https://tiktok.com/@".$page->tk_link;
+          // $link = "https://tiktok.com/".$page->tk_link;
+          $link = "https://google.com/";
           $idpixel = $page->tk_pixel_id;
         break;
       }

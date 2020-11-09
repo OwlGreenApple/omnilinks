@@ -1654,13 +1654,13 @@ and add more";
               </a>
             @endif
           
-            @if($sosmed=='ig' )
+            @if($sosmed=='ig')
               <a href="#" data-href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank" class="link-ajax">
                 <i class="fab fa-instagram"></i>
               </a> 
             @endif
 
-            @if($sosmed=='twitter' )
+            @if($sosmed=='twitter')
               <a href="#" data-href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank" class="link-ajax">
                 <i class="fab fa-twitter-square"></i>
               </a>
@@ -1672,7 +1672,7 @@ and add more";
               </a>
             @endif  
 
-            @if($sosmed=='tiktok' )
+            @if($sosmed=='tiktok')
               <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
                 <i style="font-size:30px" class="fab fa-tiktok"></i>
               </a>
@@ -2028,7 +2028,7 @@ function stylingYoutube()
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
-        
+
         var data = jQuery.parseJSON(result);
         // eval(data.script);
         $("#script-code").html(data.script);
