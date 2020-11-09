@@ -1554,15 +1554,15 @@ class BiolinkController extends Controller
       $this->make_file(date('m-Y'),$page->id,'total-click',$user->username);
       $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
-      $pixel = Pixel::find($idpixel);
+      // $pixel = Pixel::find($idpixel);
 
       $script = "";
-      if (!is_null($pixel)) {
+     /* if (!is_null($pixel)) {
         //jalanin pixel
         if ($user->membership<>'free') {
           $script = $pixel->script;
         }
-      }
+      }*/
 
       if (!$is_ajax) {
         return view('user.script')->with([
