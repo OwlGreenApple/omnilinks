@@ -1535,8 +1535,7 @@ class BiolinkController extends Controller
         break;
         case "tiktok":
           $page->tk_link_counter = $page->tk_link_counter+1;
-          // $link = "https://tiktok.com/".$page->tk_link;
-          $link = "https://google.com/";
+          $link = "https://tiktok.com/".$page->tk_link;
           $idpixel = $page->tk_pixel_id;
         break;
       }
@@ -1551,6 +1550,9 @@ class BiolinkController extends Controller
       $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
       $pixel = Pixel::find($idpixel);
+
+      dd($pixel);
+
       $script = "";
       if (!is_null($pixel)) {
         //jalanin pixel

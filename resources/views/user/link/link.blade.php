@@ -2013,7 +2013,8 @@ function stylingYoutube()
      $(".galleryContainer").height(h);
   }
 
-  function call_mylink(linkAjax){
+  function call_mylink(linkAjax)
+  {
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
@@ -2040,10 +2041,11 @@ function stylingYoutube()
           // window.open(data.link);
         // }
       },
-      error:function(xhr)
+      error:function(xhr,throwable,err)
       {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
         alert('Ada yang salah dengan penggunaan link atau username,\nmohon diperiksa lagi.');
       }
     });
