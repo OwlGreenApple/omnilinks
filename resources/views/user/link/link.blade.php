@@ -1666,7 +1666,7 @@ and add more";
               </a>
             @endif
 
-            @if($sosmed=='youtube' )
+            @if($sosmed=='youtube')
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
               </a>
