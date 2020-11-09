@@ -1558,8 +1558,6 @@ class BiolinkController extends Controller
         }
       }
 
-      dd($link);
-
       if (!$is_ajax) {
         return view('user.script')->with([
           'user' => $user,
