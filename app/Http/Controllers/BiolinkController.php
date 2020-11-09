@@ -223,7 +223,7 @@ class BiolinkController extends Controller
       $description = $page->description;
     } else {
       // $description = "This is your new text content. You can modify this text and add more";
-      $description = "Maksimal 80 karakter";
+      $description = "";
     }
 
     //proof

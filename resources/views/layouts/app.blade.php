@@ -62,7 +62,10 @@
   @if(Request::is('pricing')) 
   <link rel="stylesheet" href="{{ asset('css/style-pricing.css') }}"/>
   @endif
+  
+  @if(Request::is('kupon')) 
   <link rel="stylesheet" href="{{ asset('css/kupon.css') }}"/>
+  @endif
   <link rel="stylesheet" href="{{ asset('jquery-countdown/jQuery.countdownTimer.css') }}"/>
 
   <!-- bootstrap datetimepicker -->

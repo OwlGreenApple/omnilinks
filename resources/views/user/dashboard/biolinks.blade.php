@@ -1423,7 +1423,7 @@
     var desc = $("#description").html();
     var desc_text = $("#description").text();
 
-    /*console.log(desc);
+   /* console.log(desc_text.length);
     return false;*/
 
     if(desc_text.length > 80)
@@ -3039,7 +3039,7 @@
                           </fieldset>
                          
                           <!-- <div id="description" contenteditable="true"> -->
-                          <div id="description" contenteditable="true">{!! $description !!}</div>
+                          <div id="description" placeholder="Maksimal 80 Karakter" contenteditable="true">{!! $description !!}</div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
@@ -4513,6 +4513,8 @@
 
   function create_bold()
   {
+    var editable = $("[contenteditable]");
+
     $('#create_bold').click(function(){
         createBold();
     });
@@ -4765,7 +4767,18 @@
     delete_chat_member();
     chat_preview_enable();
     chat_buzz_enable();
+    descPlaceholder();
   });
+
+  function descPlaceholder()
+  {
+    $("#description").focusout(function(){
+        var element = $(this);        
+        if (!element.text().replace(" ", "").length) {
+            element.empty();
+        }
+    });
+  }
  
   //SCALE BANNER IMAGE
   $(window).on('load', function(){
@@ -5153,6 +5166,7 @@
     resize();
   });
 
+
   $('body').on('click', '.themes', function() {
     $('.themes').removeClass('selected');
     $(this).addClass('selected');
@@ -5327,12 +5341,22 @@
         $(this).find("span").contents().unwrap();
       });
 
-      $('#description').keypress(function(e){
-        $(this).find("div").replaceWith("<br>");
-        newLines = $(this).find("br").length;
+      $('#description').keypress(function(e)
+      {
+        var desctext = $("#description").text().length;
+        $(this).find("div").removeAttr('style');
+        // $(this).find("remove").replaceWith("<br>");
 
-        if(e.keyCode == 13 && newLines >= 3) {
-          // alert('enter');
+        if(desctext >= 80)
+        {
+            return false;
+        }
+
+        if(e.keyCode == 13){
+          newLines = $(this).find("div").length;
+        }
+
+        if(e.keyCode == 13 && newLines >= 2) {
           return false;
         }
         else {
@@ -5341,9 +5365,7 @@
         }
       });
 
-
       $('#description').keyup(function(e){
-        // tempStr = $(this).val().replace(/\n/g, "<br>");;
         tempStr = $(this).html();
         $('#outputdescription').html(tempStr);
       });
@@ -5354,7 +5376,6 @@
          tempStr = $('#description').html();
          $('#outputdescription').html(tempStr);
       });
-
       
     $(document).on('focus','.focuslink',function(){
       let inputlinkview=$(this);
