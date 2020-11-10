@@ -3043,7 +3043,7 @@
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
-                          <div><small><b>Note</b> : Untuk menggunakkan link, masukkan link di kolom atas, kemudian blok tulisan / text yang akan di link dan click tombol <b>Buat Link</b> kemudian click tombol <b>Save</b>.</small> </div>
+                          <div><small><b>Note</b> : Untuk menggunakan link, masukkan link di kolom atas, kemudian blok tulisan / text yang akan di link dan click tombol <b>Buat Link</b> kemudian click tombol <b>Save</b>.</small> </div>
                          
                           <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Buat Link</button>
 

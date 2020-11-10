@@ -268,13 +268,13 @@ class BiolinkController extends Controller
 
       $proof->page_id = $request->page_id;
       $proof->user_id = Auth::id();
-      $proof->name = $request->proof_name;
-      $proof->text = $request->proof_text;
+      $proof->name = strip_tags($request->proof_name);
+      $proof->text = strip_tags($request->proof_text);
       $proof->star = $request->proof_stars;
 
       if($request->file('proof_image') <> null && $request->status == 'edit')
       {
-        $filename = $proof->url_image;
+        $filename = strip_tags($proof->url_image);
         Storage::disk('s3')->delete($filename);
       }
 
