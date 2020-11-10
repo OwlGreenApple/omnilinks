@@ -1,5 +1,5 @@
 @if($query->count() > 0)
-  <label class="mb-3 blue-txt">Setting Proof</label>
+  <label class="mb-3 blue-txt">Mode</label>
     
   <label class="switch ml-2 mr-3">
     <input type="checkbox" name="proof_setting" @if($pages->proof_settings == 1) checked @endif>

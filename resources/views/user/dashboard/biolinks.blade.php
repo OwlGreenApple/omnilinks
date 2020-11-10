@@ -2287,7 +2287,6 @@
         </button>
       </div>
       
-      <?php if (is_null($pages->premium_names)) { $custom_link = $pages->names; } else { $custom_link = $pages->premium_names; } ?>
       <div class=" col-12">
         <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a> <span id="btn-copy-custom-link" class="btn-copy" data-link="https://{{env('SHORT_LINK')}}/{{$custom_link}}"><i class="fas fa-file"></i></span>
       </div>
@@ -3027,6 +3026,9 @@
                           <!-- <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
                             </textarea> -->
 
+                          <!-- <div id="description" contenteditable="true"> -->
+                          <div id="description" placeholder="Maksimal 80 Karakter" contenteditable="true">{!! $description !!}</div>
+
                           <fieldset>
 
                             <button type="button" id='create_italic' class="btn btn-primary text-white btn-sm" title="Italicize Highlighted Text"><i>Italic</i>
@@ -3038,12 +3040,10 @@
 
                           </fieldset>
                          
-                          <!-- <div id="description" contenteditable="true"> -->
-                          <div id="description" placeholder="Maksimal 80 Karakter" contenteditable="true">{!! $description !!}</div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
-                          <div><small><b>Note</b> : Untuk menggunakkan link, masukkan link di kolom atas, kemudian blok tulisan / text yang akan di link dan click tombol <b>Buat Link</b> kemudian click tombol <b>Save</b>.</small> </div>
+                          <div><small><b>Note</b> : Untuk menggunakan link, masukkan link di kolom atas, kemudian blok tulisan / text yang akan di link dan click tombol <b>Buat Link</b> kemudian click tombol <b>Save</b>.</small> </div>
                          
                           <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Buat Link</button>
 

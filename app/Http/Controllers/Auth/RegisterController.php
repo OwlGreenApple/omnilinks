@@ -77,11 +77,11 @@ class RegisterController extends Controller
 
     //create user register
     $user = User::create([
-      'email' => $data['email'],
-      'name' => $data['name'],
+      'email' => strip_tags($data['email']),
+      'name' => strip_tags($data['name']),
       'gender'=> $data['gender'],
       // 'username'=> $data['username'],
-      'username'=> $data['email'],
+      'username'=> strip_tags($data['email']),
       'password' => Hash::make($data['password']),
       // 'membership' => 'free',
       'membership' => 'popular',

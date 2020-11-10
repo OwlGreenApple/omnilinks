@@ -208,7 +208,17 @@ class BiolinkController extends Controller
   		$pageid=$page->id;
   	}
 
-    #wa chat button
+    //custom link
+    if(is_null($page->premium_names) || empty($page->premium_names)) 
+    { 
+      $custom_link = $page->names; 
+    } 
+    else 
+    { 
+      $custom_link = $page->premium_names; 
+    }
+
+    //wa chat button
     $getwachat = $this->getWAchatButton($page->id);
     $validmember = false;
 
@@ -239,6 +249,7 @@ class BiolinkController extends Controller
       'wachat'=>$getwachat,
       'valid'=>$validmember,
       'mod'=>$mod,
+      'custom_link'=>$custom_link,
       'description'=>$description,
       'proof'=>$proof
     ]);  
@@ -257,13 +268,13 @@ class BiolinkController extends Controller
 
       $proof->page_id = $request->page_id;
       $proof->user_id = Auth::id();
-      $proof->name = $request->proof_name;
-      $proof->text = $request->proof_text;
+      $proof->name = strip_tags($request->proof_name);
+      $proof->text = strip_tags($request->proof_text);
       $proof->star = $request->proof_stars;
 
       if($request->file('proof_image') <> null && $request->status == 'edit')
       {
-        $filename = $proof->url_image;
+        $filename = strip_tags($proof->url_image);
         Storage::disk('s3')->delete($filename);
       }
 
@@ -402,38 +413,17 @@ class BiolinkController extends Controller
       return redirect("blog");
     }
  
-    /*$page = Page::where('names',$names) 
+    $page = Page::where('names',$names) 
                 ->orWhere('premium_names',$names) 
-                ->first();*/
-     $page_premium = null;
-     $paging =  Page::where('names',$names)->first();
-     
-     if(is_null($paging)) 
-     {
-        $page_premium = Page::where('premium_names',$names)->first();
-     }
-     else
-     {
-        $page = $paging;
-     }  
+                ->first();
 
-     if(is_null($page_premium))
-     {
-        return "Page not found";
-     }
-     else
-     {
-        $page = $page_premium;
-     }
-
-
-   /* if (is_null($page)) 
-    {*/
-       /* $link = Link::where('names',$names)
+    if (is_null($page)) 
+    {
+        /*$link = Link::where('names',$names)
                 ->orWhere('premium_names',$names)
                 ->first();*/
 
-        /*if(is_null($link)){
+       /* if(is_null($link)){
           return "Page not found";
         } else {
           $pixel = Pixel::find($link->pixel_id);
@@ -446,9 +436,10 @@ class BiolinkController extends Controller
             'mode' => 'singlelinks',
             'script' => $script,
             'link' => $link->link,
-          ]);
-        }*/
-    //}
+          ]);*/
+        // }
+       return "Page not found";
+    }
 
     /*  if(is_null($link)){
           return "Page not found";
