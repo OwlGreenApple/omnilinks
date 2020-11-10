@@ -1875,6 +1875,8 @@ and add more";
             <div class="proof_comments">
              {{ $row->text }}
             </div>
+
+            <small><i class="fas fa-check"></i> Activproof</small>
         </div>
     </div>
     @endforeach
@@ -1928,7 +1930,7 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
-    runningProof();
+    // runningProof();
     stylingYoutube();
 });
 

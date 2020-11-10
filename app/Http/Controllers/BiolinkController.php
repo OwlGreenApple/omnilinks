@@ -208,7 +208,17 @@ class BiolinkController extends Controller
   		$pageid=$page->id;
   	}
 
-    #wa chat button
+    //custom link
+    if(is_null($page->premium_names)) 
+    { 
+      $custom_link = $page->names; 
+    } 
+    else 
+    { 
+      $custom_link = $page->premium_names; 
+    }
+
+    //wa chat button
     $getwachat = $this->getWAchatButton($page->id);
     $validmember = false;
 
@@ -239,6 +249,7 @@ class BiolinkController extends Controller
       'wachat'=>$getwachat,
       'valid'=>$validmember,
       'mod'=>$mod,
+      'custom_link'=>$custom_link,
       'description'=>$description,
       'proof'=>$proof
     ]);  
