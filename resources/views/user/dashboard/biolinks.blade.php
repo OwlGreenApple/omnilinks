@@ -1210,9 +1210,9 @@
     {
        "id": 146,
        "theme": "abstract-live-bg",
-       "bio_font_color": "#ffffff",
-       "button_color": "#a5d7f6",
-       "font_button_color": "#0d6ab4",
+       "bio_font_color": "#062841",
+       "button_color": "#062841",
+       "font_button_color": "#ffffff",
        "button_hover_color": "#F5F5F5"
     },
     {
