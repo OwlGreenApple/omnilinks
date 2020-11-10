@@ -209,7 +209,7 @@ class BiolinkController extends Controller
   	}
 
     //custom link
-    if(is_null($page->premium_names)) 
+    if(is_null($page->premium_names) || empty($page->premium_names)) 
     { 
       $custom_link = $page->names; 
     } 
