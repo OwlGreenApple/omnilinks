@@ -1930,7 +1930,7 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
-    // runningProof();
+    runningProof();
     stylingYoutube();
 });
 
