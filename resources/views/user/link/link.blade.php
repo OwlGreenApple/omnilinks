@@ -1403,6 +1403,31 @@
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
     <div class="row justify-content-center service">
       <div class="col-lg-7 col-md-8 col-12 mb-4 row">
+        <!-- proof -->
+        @if($proof->count() > 0)
+          <div class="col-lg-7 proof-box">
+          @foreach($proof as $row)
+          <div class="proof-wrapper">
+              <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+           
+              <div class="proof-desc">
+                  <div class="proof_profile">
+                    <div class="proof_name">{{ $row->name }}</div>
+                    <div class="proof_star">
+                      @for($x=1;$x<=$row->star;$x++)
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      @endfor
+                    </div>
+                  </div>
+
+                  <div class="proof_comments">"{{ $row->text }}"</div>
+                  <small><i class="fas fa-check"></i> Activproof</small>
+              </div>
+          </div>
+          @endforeach
+        </div>
+        @endif
+
         <div class="offset-md-1 col-md-5 col-5">
             <div class="div-imagetitle">
               <img src="<?php 
@@ -1855,34 +1880,6 @@ and add more";
     </div>
 @endif
 
-  <!-- proof -->
-  @if($proof->count() > 0)
-    <div class="proof-box">
-    @foreach($proof as $row)
-    <div class="proof-wrapper">
-        <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
-     
-        <div class="proof-desc">
-            <div class="proof_profile">
-              <div class="proof_name">{{ $row->name }}</div>
-              <div class="proof_star">
-                @for($x=1;$x<=$row->star;$x++)
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                @endfor
-              </div>
-            </div>
-
-            <div class="proof_comments">
-             {{ $row->text }}
-            </div>
-
-            <small><i class="fas fa-check"></i> Activproof</small>
-        </div>
-    </div>
-    @endforeach
-    </div>
-  @endif
-  
   <!--Loading Bar-->
   <div class="div-loading">
     <div id="loader" style="display: none;"></div>  
@@ -1933,6 +1930,7 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
+    $('.proof-wrapper:gt(0)').hide();
     runningProof();
     stylingYoutube();
 });
@@ -1943,10 +1941,9 @@ function runningProof()
   var counting = 0;
   var delay = 1000;
 
-  $('.proof-wrapper:gt(0)').hide();
     var run = setInterval(
       function(){
-        $('.proof-box > :first-child').fadeOut().next('.proof-wrapper').delay(delay).fadeIn().addClass('animate-buzz').end().appendTo('.proof-box');
+        $('.proof-box > :first-child').slideUp(500).next('.proof-wrapper').slideDown(1000).end().appendTo('.proof-box');
         counting++;
 
         //put php logic according on setting
@@ -1955,10 +1952,10 @@ function runningProof()
         ?>
             if(counting == total)
             {
-              setTimeout(function(){
+             /* setTimeout(function(){*/
                 $('.proof-wrapper').hide();
                 clearInterval(run);
-              },delay);
+             /* },delay);*/
               
             }
         <?php
@@ -1980,7 +1977,6 @@ function stylingYoutube()
   iframe.src = 'data:text/html,' + encodeURIComponent(html);
 }
 
->>>>>>> additonal-feature
 </script>
 
 <script type="text/javascript">

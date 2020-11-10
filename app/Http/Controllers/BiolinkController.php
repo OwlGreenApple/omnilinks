@@ -562,7 +562,18 @@ class BiolinkController extends Controller
       $arr['message'] = "Silahkan Login ulang, <a href='".url('login')."'>klik</a>";
       return $arr;
     }
-    
+
+    $desc = $request->description;
+     
+    /* FILTER FOR SECURITY REPLACEMENT STRIPTAGS */
+    preg_match_all('/&lt;script&gt;|&lt;script.*&gt;/im', $desc, $patternopen);
+    $opentag = count($patternopen[0]);
+   
+    if($opentag > 0)
+    {
+       $desc = preg_replace("/&lt;script.*&gt;|&lt;script&gt;|&lt;\/script&gt;|\(|\)/im", "", $desc);
+    }
+
     $temp_arr = array();
     $temp_arr['judul'] = ['required', 'string',  'max:191' ];
     // $temp_arr['imagepages'] = ['image', 'max:1000', 'dimensions:max_width=150,min_height=150'];
@@ -639,7 +650,7 @@ class BiolinkController extends Controller
     }
     
     $page->page_title=$request->judul;
-    $page->description=$request->description;
+    $page->description=$desc;
     // $page->link_utama=$request->link;
     
     if(!is_null($request->file('imagepages')))

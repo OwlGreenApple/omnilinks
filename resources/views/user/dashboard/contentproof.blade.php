@@ -42,9 +42,8 @@
                   </div>
                 </div>
 
-                <div class="proof_comments">
-                 {{ $proof->text }}
-                </div>
+                <div class="proof_comments">{{ $proof->text }}</div>
+                <small><i class="fas fa-check"></i> Activproof</small>
             </div>
         </div>
         <!-- -->

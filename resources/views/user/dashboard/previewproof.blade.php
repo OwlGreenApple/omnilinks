@@ -17,9 +17,12 @@
           <div class="proof_comments_preview">
            {{ $row->text }}
           </div>
+
+          <small><i class="fas fa-check"></i> Activproof</small>
       </div>
   </div>
   @endforeach
+</div>
 @endif
 
 <script type="text/javascript">
@@ -38,7 +41,7 @@ $(function(){
     $('.proof-box-preview > .proof-wrapper-preview:gt(0)').hide();
       var run = setInterval(
         function(){
-          $('.proof-box-preview > :first-child').fadeOut().next('.proof-wrapper-preview').fadeIn().addClass('animate-buzz').end().appendTo('.proof-box-preview');
+          $('.proof-box-preview > :first-child').slideUp(500).next('.proof-wrapper-preview').slideDown(1000).end().appendTo('.proof-box-preview');
             counting++;
 
           //put php logic according on setting

@@ -3560,6 +3560,12 @@
                 <div class="screen " id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
+
+                  <!-- proof-preview -->
+                  <div id="proof_preview" class="row">
+                    @include('user.dashboard.previewproof')
+                  </div>
+
                     <div class="row">
                       <div class="col-md-2 col-3">
                         <div class="div-picture">
@@ -3624,11 +3630,6 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
-
-                  <!-- proof-preview -->
-                  <div id="proof_preview">
-                    @include('user.dashboard.previewproof')
-                  </div>
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
@@ -3676,6 +3677,7 @@
                       </a>
                     </li>
                   </ul>
+
                   <div class="row display_links" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                     <!-- display preview links here .display_links -->
                     <ul class="col-md-12" id="viewLink" >
@@ -4242,15 +4244,15 @@
     resetProof();
     load_proof();
     change_proof_settings();
-    setPopupPos();
+    setWAPopupPos();
     //proof_preview();
     //callMaintainPlus();
   });
 
-   function setPopupPos() {
+   function setWAPopupPos() {
     var default_len = 113;
     var textlen = $(".wcs_text").text().length - 2;
-    var diff_len = textlen * 3.65;
+    var diff_len = textlen * 3.6;
     var total_len = default_len - diff_len;
     $(".wcs_popup").css({'left':'-'+total_len+'px','width':'280px'});   
   }
