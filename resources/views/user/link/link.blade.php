@@ -31,7 +31,7 @@
 
   <!-- icomoon -->
   <link rel="stylesheet" href="{{asset('assets/icomoon/style.css')}}"/>
-
+  
   <title>Link</title>
 </head>
 
@@ -1927,6 +1927,7 @@ and add more";
 $(document).ready(function() {
     setRightPost(".wcs_popup");
     setMargins(".wcs_fixed_right");
+
     $(window).resize(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
@@ -1977,8 +1978,6 @@ function stylingYoutube()
   var iframe = $('.embed-responsive-item');
   iframe.src = 'data:text/html,' + encodeURIComponent(html);
 }
-
->>>>>>> additonal-feature
 </script>
 
 <script type="text/javascript">
