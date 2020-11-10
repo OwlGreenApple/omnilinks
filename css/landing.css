@@ -36,7 +36,6 @@ h4,
 h5,
 h6 {
   font-family: opensanslight;
-  font-weight: 600;
 }
 
 html,body,#app {
@@ -56,12 +55,21 @@ p,span {
   color: #505050;
 }
 
+.body-content-mobile {
+  font-weight : normal;
+}
+
 .blue-txt {
   color: #116BC7;
 }
 
 .gray-txt {
   color: #555555;
+}
+
+.error {
+  color : #e3342f;
+  font-size: 12px;
 }
 
 .dropdown-menu {
@@ -77,8 +85,46 @@ p,span {
   cursor: pointer;
 }
 
-.menu-mobile {
+.menu-mobile,.emb {
   display: none;
+}
+
+.star-custom {
+  color : #ffc100;
+}
+
+.proof_text {
+  font-size: 12px;
+}
+
+.proof-wrapper {
+  background-color: #fff;
+  padding : 15px;
+}
+
+.description > a {
+  color : #106BC8 !important;
+}
+
+.description > a:hover {
+  text-decoration: underline;
+}
+
+#description {
+  padding-left : 5px;
+  background: #fff;
+  height : 80px;
+  border : 1px solid #ced4da;
+  overflow : auto;
+}
+
+#description[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555; 
+}
+
+#description[placeholder]:empty:focus:before {
+    content: "";
 }
 
 @media screen and (max-width: 767px) {

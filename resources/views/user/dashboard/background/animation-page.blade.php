@@ -1,7 +1,83 @@
+<div class="animation-thumb animation-abstract">
+  <!-- abstract -->
+  <div class="theme-take">
+    <div class="thumb-abstract-black-animate wallpapers"></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-blue-wave wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-bubble wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-confetti-doodles wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-fade-in wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-gradient-brown wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-gradient-exo wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-interstellar wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-live-bg wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-motion-bg wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-ripple-blue wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-ripple-blue wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-shadow-fall wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-snow wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-trianglify-bee wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-trianglify-frozen wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-trianglify-the-little-mermaid wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-trianglify-wedding wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-wave-red-2 wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-waves-acti wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-waves-bleach wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-waves-bluex wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-waves-magica-adoka wallpapers "></div>
+  </div>
+  <div class="theme-take">
+    <div class="thumb-abstract-waves-tableau wallpapers "></div>
+  </div>
+</div>
+
 <div class="animation-thumb animation-bubble">
   <!-- bubble -->
   <div class="theme-take">
-    <div class="thumb-bubble-bg-blue wallpapers selected"></div>
+    <div class="thumb-bubble-bg-blue wallpapers"></div>
   </div>
   <div class="theme-take">
     <div class="thumb-bubble-bg-orange wallpapers "></div>

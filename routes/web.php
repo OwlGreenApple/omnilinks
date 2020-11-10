@@ -17,7 +17,6 @@
 if(env('DOMAIN_TYPE')=='main'){
   #Route::get('testresize', 'BiolinkController@testresize');
 
-
   Route::get('/', 'HomeController@index');
   Route::get('migrate-to-activwa', 'HomeController@migrate_to_activwa');
   Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
@@ -47,9 +46,14 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('/helps',function(){
     return view('term and policy');
   });
+
+   Route::get('register',function(){
+     return redirect('https://omnilinkz.com/');
+  });
+
   //auth
   Route::post('post-register', 'Auth\RegisterController@post_register');
-  Route::post('register', 'Auth\RegisterController@register')->middleware('checkwa');
+  Route::post('register-save', 'Auth\RegisterController@register')->middleware('checkwa');
   // Route::get('/verifyemail/{cryptedcode}','HomeController@verifyemail');
   Route::get('/thankyou-register','OrderController@thankyou_register');
   Route::get('/thankyou-confirm-payment','OrderController@thankyou_confirm_payment');
@@ -119,7 +123,6 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
     Route::post('/save-template','BiolinkController@savetemp');
     Route::get('/banner/load-banner','BiolinkController@addBanner');
-    Route::get('get-embed-youtube','BiolinkController@getEmbedYoutube');
     Route::post('/save-link','BiolinkController@savelink');
     Route::post('/savewachat','BiolinkController@savewaChat')->middleware('wachat')->name('savewachat');
     Route::post('savewachatmember','BiolinkController@savewaChatMember')->middleware('wamember')->name('savewachatmember');
@@ -142,6 +145,12 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/test-pixel','BiolinkController@test');
     Route::get('/load-pixel','BiolinkController@loadpixel');
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
+
+    //proof
+    Route::post('save-proof','BiolinkController@saveProof')->middleware('proof');
+    Route::get('load-proof','BiolinkController@loadProof');
+    Route::get('delete-proof','BiolinkController@delProof');
+    Route::get('proof_settings','BiolinkController@settingProof');
 
     //makesinglelink
     Route::get('/singlelink','SingleLinkController@newsingle');

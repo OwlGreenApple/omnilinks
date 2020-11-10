@@ -25,13 +25,16 @@
     cursor: pointer;
   }
 
+  .proof-wrapper{
+    position: relative !important;
+  }
+
   .themes.selected, .wallpapers.selected{
     border: 3px solid #0062CC;
   }
 
   .wcs_fixed_right{
-    position: absolute;
-    bottom : 30px;
+    bottom : -60px;
   }
 </style>
 
@@ -39,6 +42,9 @@
   var template;
   var changelink = 0;
   var changechat = 0;
+  var changepixel = 0;
+  var changeproof = 0;
+
   var templates = [
     {
      "id": 1,
@@ -1167,7 +1173,200 @@
      "button_color": "#FFFFFF",
      "font_button_color": "#C6670E",
      "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 142,
+       "theme": "abstract-black-animate",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ff6cb5",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 143,
+       "theme": "abstract-blue-wave",
+       "bio_font_color": "#ffffff",
+       "button_color": "#cdebff",
+       "font_button_color": "#00385f",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 144,
+       "theme": "abstract-fade-in",
+       "bio_font_color": "#ffffff",
+       "button_color": "#e45bb9",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 145,
+       "theme": "abstract-shadow-fall",
+       "bio_font_color": "#ffffff",
+       "button_color": "#004573",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 146,
+       "theme": "abstract-live-bg",
+       "bio_font_color": "#062841",
+       "button_color": "#062841",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 147,
+       "theme": "abstract-motion-bg",
+       "bio_font_color": "#ffffff",
+       "button_color": "#f15a29",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 148,
+       "theme": "abstract-bubble",
+       "bio_font_color": "#ffffff",
+       "button_color": "#004162",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 149,
+       "theme": "abstract-snow",
+       "bio_font_color": "#ffffff",
+       "button_color": "#22622d",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 150,
+       "theme": "abstract-wave-red-2",
+       "bio_font_color": "#ffffff",
+       "button_color": "#cccccc",
+       "font_button_color": "#e21400",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 151,
+       "theme": "abstract-waves-acti",
+       "bio_font_color": "#ffffff",
+       "button_color": "#c21b20",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"	
+    },
+    {
+       "id": 152,
+       "theme": "abstract-interstellar",
+       "bio_font_color": "#201f1f",
+       "button_color": "#fdbdbf",
+       "font_button_color": "#c21b20",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 153,
+       "theme": "abstract-trianglify-the-little-mermaid",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ffffff",
+       "font_button_color": "#047c9a",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 154,
+       "theme": "abstract-confetti-doodles",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ff8a00",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 155,
+       "theme": "abstract-gradient-brown",
+       "bio_font_color": "#ffffff",
+       "button_color": "#4d3d30",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 156,
+       "theme": "abstract-gradient-exo",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ffffff",
+       "font_button_color": "#e78872",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 157,
+       "theme": "abstract-ripple-blue",
+       "bio_font_color": "#1d6eea",
+       "button_color": "#ffffff",
+       "font_button_color": "#1d6eea",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 158,
+       "theme": "abstract-ripple-pink",
+       "bio_font_color": "#cb3045",
+       "button_color": "#ecb47e",
+       "font_button_color": "#ecb3045",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 159,
+       "theme": "abstract-trianglify-bee",
+       "bio_font_color": "#ffffff",
+       "button_color": "#8d5410",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 160,
+       "theme": "abstract-waves-bleach",
+       "bio_font_color": "#ffffff",
+       "button_color": "#7f807a",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 161,
+       "theme": "abstract-trianglify-wedding",
+       "bio_font_color": "#161616",
+       "button_color": "#7f807a",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 162,
+       "theme": "abstract-trianglify-frozen",
+       "bio_font_color": "#ffffff",
+       "button_color": "#736187",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 163,
+       "theme": "abstract-waves-magica-adoka",
+       "bio_font_color": "#f56440",
+       "button_color": "#ffffff",
+       "font_button_color": "#f56440",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 164,
+       "theme": "abstract-waves-tableau",
+       "bio_font_color": "#ffffff",
+       "button_color": "#f56440",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 165,
+       "theme": "abstract-waves-bluex",
+       "bio_font_color": "#ffffff",
+       "button_color": "#946d8d",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
     }
+  
   ];
   template = templates[0];
   var picker,dataView,dataFree;
@@ -1221,6 +1420,20 @@
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
+    var desc = $("#description").html();
+    var desc_text = $("#description").text();
+
+   /* console.log(desc_text.length);
+    return false;*/
+
+    if(desc_text.length > 80)
+    {
+      alert("Deskripsi melebihi 80 karakter");
+      return false;
+    }
+
+    formData.append('description',desc);
+   
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'POST',
@@ -1252,6 +1465,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
         }
@@ -1259,6 +1474,11 @@
           $("#pesanAlert").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-success");
         }
+      },
+      error : function(xhr,throwable,other){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
       }
     });
   }
@@ -1292,7 +1512,7 @@
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
 
-         display_embed_youtube(youtube_id);
+         load_embed();
 
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
@@ -1307,6 +1527,8 @@
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
@@ -1317,13 +1539,20 @@
           $("#pesanAlert").removeClass("alert-success");
           return false;
         }
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
       }
     });
   }
 
-  function tambahpixel() 
+  function tambahpixel(proof) 
   {
     //CHECK WHETHER SCRIPT HAS ERROR OR NOT
+    var data_script;
     var elscript = document.getElementById("error-script");
     elscript.innerHTML = ''; //to make element error-script have default value length
     window.onerror = function(error){
@@ -1335,7 +1564,8 @@
         elscript.innerHTML = error;
     };
 
-    $("#script-code").html($("#script").val());
+    data_script = $("#script").val();
+    $("#script-code").html(data_script);
     var len = elscript.innerHTML.length;
 
     if(len > 0)
@@ -1350,9 +1580,9 @@
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      url: "<?php echo url ('/save-pixel')?>",
+      url: "{{ url('save-pixel') }}",
       dataType: 'text',
-      data: $("#savepixel").serialize(),
+      data:  $("#savepixel").serialize(),
       beforeSend: function()
       {
         $('#loader').show();
@@ -1368,6 +1598,12 @@
         $(window).scrollTop(0);
         refreshpixel();
         loadPixelPage();
+
+        changed = 0;
+        changelink = 0;
+        changechat = 0;
+        changepixel = 0;
+        changeproof = 0;
 
         var data = jQuery.parseJSON(result);
         $(".alertTitle").removeClass("alert-danger");
@@ -1393,6 +1629,11 @@
         }
         
       },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
     }); 
   }
 
@@ -1438,6 +1679,7 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
+        adaptiveLink();
         //$('.pixellink').html(data.pixelink);
       }
     });
@@ -1470,17 +1712,23 @@
         setTimeout(function(){
           $('#delete-success').modal('hide')
         }, 3000);
+
+        changed = 0;
+        changelink = 0;
+        changechat = 0;
+        changepixel = 0;
+        changeproof = 0;
       }
     });
   }
 
   function loadPixel(){
     $.ajax({
-      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      // headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       url: "<?php echo url('/load-pixel-page'); ?>",
-      data: { id:0 },
-      dataType: 'text',
+    /*  data: { id:0 },*/
+      dataType: 'json',
       beforeSend: function()
       {
         $('#loader').show();
@@ -1490,14 +1738,18 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
 
-        var data = jQuery.parseJSON(result);
-        // $(selector).html(data.view);
-        dataView = data.view;
-        dataFree = data.free;
-        //if klo free maka replace element dengan label 
+        dataView = result.view;
+        dataFree = result.free;
+
+         //if klo free maka replace element dengan label 
         if (dataFree == "1") {
-          $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 7 hari, Silahkan <a href='<?php echo url('pricing'); ?>' target='_blank'>Upgrade</a></label>" );
+          $(".linkpixel").replaceWith( "<label class='linkpixel'>FB Pixel, Google, Twitter retargetting Hanya Berlaku 7 hari, Silahkan <a href='{{ url('pricing') }}' target='_blank'>Upgrade</a></label>" );
         }
+
+        /*var data = jQuery.parseJSON(result);*/
+        // $(selector).html(data.view);
+       /* dataView = data.view;
+        dataFree = data.free;*/
       }
     });
   }
@@ -1520,6 +1772,8 @@
     $("#fbpixel").val('{{$pages->fb_pixel_id}}');
     $("#igpixel").html(dataView);
     $("#igpixel").val('{{$pages->ig_pixel_id}}');
+    $("#tkpixel").html(dataView);
+    $("#tkpixel").val('{{$pages->tk_pixel_id}}');
     $("#twitterpixel").html(dataView);
     $("#twitterpixel").val('{{$pages->twitter_pixel_id}}');
     <?php if(!$banner->count()) { ?>
@@ -1531,11 +1785,12 @@
     if($links->count()) {
       // foreach($links as $link) {
     ?>
-      $(".link-list").each(function( index ) {
-        $(this).find("select").html(dataView);
-        $(this).find("select").val($(this).find("select").attr('data-pixel-id'));
-      });
-    
+        $(".link-list").each(function( index ) {
+          $(this).find("select.linkpixel").html(dataView);
+          $(this).find("select.linkpixel").val($(this).find("select.linkpixel").attr('data-pixel-id'));
+          // $(this).find("select.linkpixel").val($(this).find("select").attr('data-pixel-id'));
+        });
+     
     <?php 
       // }
     }
@@ -1987,7 +2242,6 @@
       });
     }
     
-  
 </script>
 
 <section id="tabs" class="col-md-10 offset-md-1 col-12 pl-0 pr-0 project-tab">
@@ -2045,7 +2299,7 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="nav-link link @if($mod <> 1) active @endif" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
@@ -2066,6 +2320,12 @@
               <li class="nav-item">
                 <a href="#pixel" class="nav-link link" role="tab" data-toggle="tab">
                   Pixel
+                </a>
+              </li> 
+
+              <li class="nav-item">
+                <a href="#proof" class="nav-link link @if($mod == 2) active @endif" role="tab" data-toggle="tab">
+                  Activproof
                 </a>
               </li>
               <?php } ?>
@@ -2089,7 +2349,8 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in @if($mod <> 1) active show @endif" id="link">
+              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
+
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
 
@@ -2461,35 +2722,41 @@
                         </div>
                       </div>
                     </li>
-                  </ul>
 
-                  <!-- Youtube Embed -->
-                  <label class="mb-3 blue-txt">
-                    Embed Youtube
-                    <span class="tooltipstered" title="<div class='panel-heading'>Embed Youtube</div><div class='panel-content'>
-                      Taruh id youtube pada kolom dibawah, contoh id youtube:<br/>
-                      https://www.youtube.com/watch?v=<b>Gij0QNsJRxI</b><br/>
-                      cukup ambil kode yg dicetak tebal pada contoh link diatas.
-                    </div>">
-                      <i class="fas fa-question-circle icon-reflink"></i>
-                    </span>
-                  </label>
+                    <li id="sosmed-tiktok">
+                      <div id="tiktok" class="socialmedia div-table hide" data-type="tiktok" style="">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="tiktok" class="input-hidden">
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
 
-                    <div class="col-md-12 col-12 pr-0 pl-0 mb-3">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fab fa-youtube-square" aria-hidden="true"></i>
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                 <i class="fab fa-tiktok"></i>
+                                </div>
+                              </div>
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok tanpa @">
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <select name="tkpixel" id="tkpixel" class="form-control linkpixel">
+                            </select>
                           </div>
                         </div>
-                        <input type="text" name="embed" value="{{$pages->youtube_embed}}" class="form-control ig-input" placeholder="masukkan id youtube eg: Gij0QNsJRxI">
-                        <!-- 
-                        <div class="div-cell cell-btn">
-                          <i style="margin-top:10px" class="far fa-trash-alt"></i>
-                        </div> -->
+                          
+                        <div class="div-cell cell-btn" id="deletetk">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                 
+                    </li>
+                  </ul>
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks btn-save-link">
@@ -2664,8 +2931,72 @@
                   <div id="content"></div>
                 </div>
               </div>
+
+               <!-- TAB 6 -->
+              <div id="proof" class="tab-pane fade in @if($mod==2) active show @endif">
+                <div class="notice"><!-- display message --></div>
+                <form id="saveproof" class="mb-4 mt-4">
+
+                  <span class="blue-txt">ActivProof</span>
+                    
+                  <div class="form-group mt-3 mb-4 row">
+                    <div class="col-md-2">
+                      <label class="control-label">Name</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="17" />
+                      <div class="error proof_name"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Text</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <textarea maxlength="60" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <div class="error proof_text"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Image</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="file" class="form-control" name="proof_image" placeholder="Masukkan Text" />
+                      <small>Ukuran 100 x100 pixel, tipe harus : jpg, jpeg, png</small>
+                      <span class="proof_notes"></span>
+                      <div class="error proof_image"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <label class="control-label">Stars</label>  
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                      <input type="number" value="5" min="1" max="5" class="form-control" name="proof_stars" placeholder="Jumlah bintang" />
+                      <div class="error proof_stars"><!-- Error --></div>
+                    </div>
+
+                    <div class="col-md-4 ml-auto pl-md-0 pl-3 text-center">
+                        <button type="submit" id="btn_proof" class="btn btn-primary btn-setting-biolinks mr-2" style="width:45%">
+                          Save
+                        </button>
+                      <button type="reset" class="btn btn-danger btn-reset btn-proof-reset btn-setting-biolinks" style="width:45%">
+                        Reset
+                      </button>
+                    </div>
+                  </div>
+
+                </form>
+
+                <!-- proof list -->
+                <span class="blue-txt">
+                  List of Proofs
+                </span>
+                <div class="accordion mt-3" id="accordionExample">
+                  <div id="loaded_proof"></div>
+                </div>
+
+              </div>
               
-              <!-- TAB 2 -->
+              <!-- TAB 2 -- Tampilan -->
               <div role="tabpanel" class="tab-pane fade in " id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
 
@@ -2691,13 +3022,31 @@
                         </div>
                         <div class="col-md-8">
                           <input type="text" name="judul" id="pagetitle" value="<?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>" class="form-control" placeholder="Masukkan judul" style="margin-bottom: 5px">
-                          <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize><?php if(!is_null($pages->description)) { 
-                            echo $pages->description;
-                          }else {
-                            echo "This is your new text content. 
-You can modify this text 
-and add more";
-                          }?></textarea>
+
+                          <!-- editor -->
+                          <!-- <textarea id="description" name="description" class="form-control" style="margin-bottom: 5px;resize: none;" rows="3" cols="53" maxlength="80" wrap="hard" placeholder="Max 80 character" no-resize>{{ $description }}
+                            </textarea> -->
+
+                          <fieldset>
+
+                            <button type="button" id='create_italic' class="btn btn-primary text-white btn-sm" title="Italicize Highlighted Text"><i>Italic</i>
+                            </button>
+
+                            <!-- click on Event Attribute -->
+                            <button type="button" id="create_bold" class="btn btn-primary text-white btn-sm"><b>Bold</b>
+                            </button>
+
+                          </fieldset>
+                         
+                          <!-- <div id="description" contenteditable="true"> -->
+                          <div id="description" placeholder="Maksimal 80 Karakter" contenteditable="true">{!! $description !!}</div>
+
+                          <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
+
+                          <div><small><b>Note</b> : Untuk menggunakkan link, masukkan link di kolom atas, kemudian blok tulisan / text yang akan di link dan click tombol <b>Buat Link</b> kemudian click tombol <b>Save</b>.</small> </div>
+                         
+                          <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Buat Link</button>
+
                         </div>
                         <div class="col-md-12 mt-4">
                         @if(Auth::user()->membership!='free') 
@@ -2761,7 +3110,7 @@ and add more";
                       <input type="hidden" name="modeBackground" id="modeBackground" value="gradient">
                       <input type="hidden" name="backtheme" id="backtheme" value="colorgradient1">
                       <input type="hidden" name="wallpaperclass" id="wallpaperclass" value="wallpaper1">
-                      <input type="hidden" name="animationclass" id="animationclass" value="animation-bubble-bg-blue animation-core">
+                      <input type="hidden" name="animationclass" id="animationclass" value="animation-abstract-black-animate animation-core">
                       <p class="blue-txt">
                         Theme
                       </p>
@@ -3003,6 +3352,7 @@ and add more";
 
                         <div role="tabpanel" class="tab-pane fade" id="animation">
                           <select id="select-animation">
+                            <option value="abstract">abstract *new</option>
                             <option>bubble</option>
                             <option>bubble-up</option>
                             <option>cloud</option>
@@ -3212,7 +3562,7 @@ and add more";
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
-                        <div class="div-picture" style="width: 82px; height: 82px; margin-left: 13px;">
+                        <div class="div-picture">
                           <?php  
                             $viewpicture = asset('/image/no-photo.jpg');
                             if(!is_null($pages->image_pages)){
@@ -3223,13 +3573,13 @@ and add more";
                           <img id="viewpicture" src="<?php echo $viewpicture ?>" style="width:100%;height:100%;border-radius: 50%;object-fit: cover;object-position: center;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
                         </div>
                       </div>
-                      <div class="col-md-10 col-8 p-2">
-                        <ul style="margin-left: 23px; font-size: 11px;">
-                          <li style="display: block; margin-bottom: -15px;  ">
-                            <p class="font-weight-bold description" style="color: #fff;" id="outputtitle"></p>
+                      <div class="col-md-10 col-9 p-2">
+                        <ul class="mobile-desc ">
+                          <li style="display: block; margin-bottom: -15px; font-size : 18px">
+                            <span class="font-weight-bold"><p class="description" style="color: #fff;" id="outputtitle"></p></span>
                           </li>
-                          <li style="display: block; margin-bottom: -15px; ">
-                            <p class="font-weight-bold description" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
+                          <li style="display: block; margin-bottom: -15px;">
+                            <p class="description" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
                           </li>
                         </ul>
                       </div>
@@ -3275,8 +3625,10 @@ and add more";
                   </div>
                   @endif
 
-                  <!--- embeded youtube --->
-                  <div id="embed_youtube"></div>
+                  <!-- proof-preview -->
+                  <div id="proof_preview">
+                    @include('user.dashboard.previewproof')
+                  </div>
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
@@ -3324,12 +3676,25 @@ and add more";
                       </a>
                     </li>
                   </ul>
-                  <div class="row" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
+                  <div class="row display_links" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
+                    <!-- display preview links here .display_links -->
                     <ul class="col-md-12" id="viewLink" >
-                      @if($links->count())
-                      @foreach($links as $link)
-                        <li id="link-preview-{{$link->id}}"><a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;" id="link-url-update-{{$link->id}}-get" >{{$link->title}}</a></li>
-                      @endforeach
+                      @if($links->count() > 0)
+                        @foreach($links as $link)
+                          <li id="link-preview-{{$link->id}}">
+                              @if($link->options == 1)
+                                <span id="link-url-update-{{$link->id}}-get" class="embed-ln-{{$link->id}}">
+                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">{{$link->title}}</a>
+                                </span>
+                              @else
+                                <span id="link-url-update-{{$link->id}}-get" class="embed-{{$link->id}}">
+                                  <div class="embed-responsive embed-responsive-16by9">
+                                      <iframe style="padding : 12px" class="embed-responsive-item ifr-{{$link->id}}" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
+                                  </div>
+                                </span>
+                              @endif
+                          </li>
+                        @endforeach
                       @endif
                     </ul>
                   </div>
@@ -3353,6 +3718,11 @@ and add more";
                     <li class="col linked hide" id="igviewid">
                       <a href="#" title="ig" >
                         <i class="fab fa-instagram" ></i>
+                      </a>  
+                    </li>  
+                    <li class="col linked hide" id="tiktokviewid" style="margin-top : -3px">
+                      <a href="#" title="tk" >
+                        <i style="font-size:25px" class="fab fa-tiktok"></i>
                       </a>  
                     </li>  
                   </ul>
@@ -3831,7 +4201,6 @@ and add more";
 
   $(function(){
     fix_center();
-    setRightPost(".wcs_popup");
 
     //CHANGE TEXT ON WA BUTTON
     $("input[name=wa_btn_text]").on('keypress keyup',function(e){
@@ -3851,35 +4220,419 @@ and add more";
       }
     });
 
-    $(window).resize(function() {
+    /*$(window).resize(function() 
+    {
         setRightPost(".wcs_popup");   
-    });
+    });*/
+
+    $(".alert").delay(2000).fadeOut(3000);
 
     wa_preview_header_text();
     getSelected();
     displayWaText();
     wachatloadPixel();
-    display_embed_youtube("{{ $pages->youtube_embed }}");
+    change_link();
+    pastePreview();
+    createLinkDescription();
+    createItalic();
+    create_bold();
+    createProof();
+    editProof();
+    deleteProof();
+    resetProof();
+    load_proof();
+    change_proof_settings();
+    setPopupPos();
+    //proof_preview();
     //callMaintainPlus();
   });
 
-  //To display embed youtube html element
-  function display_embed_youtube(youtube_id)
+   function setPopupPos() {
+    var default_len = 113;
+    var textlen = $(".wcs_text").text().length - 2;
+    var diff_len = textlen * 3.65;
+    var total_len = default_len - diff_len;
+    $(".wcs_popup").css({'left':'-'+total_len+'px','width':'280px'});   
+  }
+
+  function proof_preview()
   {
+    $.ajax({
+      type: 'GET',
+      url: "{{ url('load-proof') }}",
+      data: { pageid : '{{ $pageid }}',preview : 1 },
+      dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        // $("#proof_preview").html(result);
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+  }
+
+  function reloadPage(page)
+  {
+    var url = window.location.href; 
+    url = url.split("?");
+    location.href= url[0]+"/?mod="+page;
+  }
+
+  function change_proof_settings()
+  {
+    $("body").on("click","input[name='proof_setting']",function(){
       $.ajax({
-        type : "GET",
-        url : "{{url('get-embed-youtube')}}",
-        data : {'video_id':youtube_id},
-        dataType : "html",
-        success : function(result)
+        type: 'GET',
+        url: "{{ url('proof_settings') }}",
+        data: { pageid : '{{ $pageid }}' },
+        dataType: 'json',
+        beforeSend: function()
         {
-          $("#embed_youtube").html(result);
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        },
+        success: function(result) {
+         
+          if(result.res == 1)
+          {
+            /*$(".notice").html('<div class="alert alert-success">Proof setting telah di ubah</div>');*/
+             reloadPage(2);
+          }
+          else
+          {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+
+            $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
+            $(window).scrollTop($("#proof").offset().top);
+          }
         },
         error : function(xhr)
         {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
           console.log(xhr.responseText);
         }
       });
+      //end ajax
+    });
+  }
+
+  function createProof()
+  {
+     $("#saveproof").submit(function(e){
+        e.preventDefault();
+
+        var msg;
+        var edit = $("#btn_proof").attr('status');
+        var data = new FormData(this);
+        data.append('page_id','{{ $pageid }}');
+
+        if(edit == undefined)
+        {
+            data.append('status',0);
+            msg = 'Data berhasil ditambahkan';
+        }
+        else
+        {
+            data.append('status',edit);
+            msg = 'Data berhasil diubah';
+        }
+
+        $.ajax({
+          type: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          dataType: 'json',
+          data: data,
+          url: "{{ url('save-proof') }}",
+          cache:false,
+          contentType: false,
+          processData: false,
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          }, 
+          success: function(result) {
+          
+            if(result.error == 1)
+            {
+                $('#loader').hide();
+                $('.div-loading').removeClass('background-load');
+
+                $(".proof_name").html(result.proof_name);
+                $(".proof_text").html(result.proof_text);
+                $(".proof_stars").html(result.proof_stars);
+                $(".proof_image").html(result.proof_image);
+
+                return false;
+            }
+
+            if(result.data == 1) 
+            {
+                // load_proof();
+                reloadPage(2);
+               /* $(".btn-proof-reset").trigger('click');
+                $(".notice").html('<div class="alert alert-success">'+msg+'</div>');*/
+
+            }
+            else
+            {
+                $('#loader').hide();
+                $('.div-loading').removeClass('background-load');
+
+                $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, silahkan coba lagi nanti.</div>');
+            }
+            $(".error").html('');
+          },
+          error : function(xhr){
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            console.log(xhr.responseText);
+          }
+        });
+        //end ajax
+     });
+  }
+
+  function editProof()
+  {
+    $("body").on("click",".btn-editproof",function()
+    {
+      $("input[name='proof_name']").val($(this).attr('data-name'));
+      $("textarea[name='proof_text']").val($(this).attr('data-text'));
+      $(".proof_notes").html('<small>Biarkan tetap kosong apabila tidak ingin merubah image</small>');
+      $("input[name='proof_stars']").val($(this).attr('data-star'));
+      $("#btn_proof").attr('status',$(this).attr('dataedit'));
+      $(window).scrollTop($("#proof").offset().top);
+    });
+  }
+
+  function deleteProof()
+  {
+    $("body").on("click",".btn-delete-proof",function()
+    {
+      var id = $(this).attr('dataid');
+      var warn = confirm('Apakah yakin mau menghapus?');
+
+      if(warn == false)
+      {
+        return false;
+      }
+      else
+      {
+        $.ajax({
+          type: 'GET',
+          url: "{{ url('delete-proof') }}",
+          data: { 'id' : id },
+          dataType: 'json',
+          beforeSend: function()
+          {
+            $('#loader').show();
+            $('.div-loading').addClass('background-load');
+          },
+          success: function(result) {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            
+            if(result.res == 1)
+            {
+              $(".notice").html('<div class="alert alert-success">Data berhasil di hapus</div>');
+              load_proof();
+            }
+            else
+            {
+              $(".notice").html('<div class="alert alert-danger">Server terlalu sibuk, mohon dicoba lagi nanti</div>');
+            }
+          },
+          error : function(xhr)
+          {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+            console.log(xhr.responseText);
+          }
+        });
+      //end ajax
+      }
+    });
+  }
+
+  function resetProof()
+  {
+    $(".btn-proof-reset").click(function(){
+      $("#btn_proof").removeAttr('status');
+      $(".proof_notes").html('');
+      $(".error").html('');
+    }); 
+  }
+
+  function load_proof()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "{{ url('load-proof') }}",
+      data: { pageid : '{{ $pageid }}' },
+      dataType: 'html',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      },
+      success: function(result) {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        $("#loaded_proof").html(result);
+      },
+      error : function(xhr)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+  }
+
+  function createItalic()
+  {
+    $('#create_italic').click(function(){
+        document.execCommand('italic', false, null);
+    });
+  }
+
+  function create_bold()
+  {
+    var editable = $("[contenteditable]");
+
+    $('#create_bold').click(function(){
+        createBold();
+    });
+  }
+
+  /*document.getElementById('create_bold').onclick = function(){
+    document.execCommand('bold', false, null);
+  };*/
+
+  /*addEventListener('click', function(e) {
+    document.execCommand('bold', false, null);
+  });*/
+
+  function createLinkDescription()
+  {
+    $('#make-bold').click(function(event){
+        event.preventDefault();
+        var url = $("#url").val();
+
+        if(url === '')
+        {
+          alert("Kolom url tidak boleh kosong");
+        }
+        else
+        {
+          createLink();
+        }
+        
+    });
+  }
+
+  function adaptiveLink()
+  {
+    setTimeout(function(){
+      load_embed();
+    },300);
+  }
+
+  function pastePreview()
+  {
+    $("body").on("paste",".emb",function(e){
+      var cl = $(this).attr('class');
+      cl = cl.split(' ');
+      var counter = cl[1].split('_');
+      var id;
+
+      if(counter[1] == "new")
+      {
+          id = counter[1]+"_"+counter[2];
+      }
+      else
+      {
+          id = counter[1];
+      }
+
+      var pastedData = e.originalEvent.clipboardData.getData('text');
+      pastedData = pastedData.split("=");
+
+      setTimeout(function(){
+        $(".em_"+id).val(pastedData[1]);
+      },100);
+      
+      $(".ifr-"+id).attr("src","https://www.youtube.com/embed/"+pastedData[1]+"?rel=0")
+    })
+  }
+
+  function load_embed()
+  {
+     $(".link_option").each(function(i){
+        var id = $(this).attr('id');
+        var value = $(this).val();
+        embed_link(value,id)
+      });
+  }
+
+  function change_link()
+  {
+    $("body").on("change",".link_option",function(){
+      var value = $(this).val();
+      var id = $(this).attr('id');
+      embed_link(value,id)
+    });
+  }
+
+  function embed_link(value,id){
+     if(value == 2)
+      {
+        $(".sel_"+id).hide();
+        $(".lnp_"+id).hide();
+        // $(".lnp_"+id).css({"visibility":"hidden"});
+        $(".em_"+id).show();     
+        var youtube_id = $(".em_"+id).val();    
+
+        $(".embed-ln-"+id).html(
+          '<span id="link-url-'+id+'-preview"  class="embed-'+id+'">'+
+          '<div class="embed-responsive embed-responsive-16by9">'+
+          '<iframe style="padding : 12px" class="embed-responsive-item ifr-'+id+'" src="https://www.youtube.com/embed/'+youtube_id+'?rel=0" allowfullscreen></iframe>'+
+          '</div></span>'
+        );
+      }
+      else
+      {
+        var title = $("#title-"+id+"-view-update").val();
+        if(title === "" || title === undefined){
+          title = "Masukkan Link"
+        }
+
+        $(".sel_"+id).show();
+        $(".lnp_"+id).show();
+        // $(".lnp_"+id).css({"visibility":"visible"});
+        $(".em_"+id).hide();
+         
+        $(".embed-"+id).html(
+        '<span id="link-url-update-'+id+'-get" class="embed-ln-'+id+'">'+
+          '<a href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">'+title+'</a>'+
+        '</span>'
+        );
+      }
   }
 
   //To display wa btn text if wa user hasn't registered yet
@@ -3909,13 +4662,6 @@ and add more";
       $("body").on("keyup","input[name=chat_member_number]",function(){
           maintainPlus();
       });
-  }
-
-  function setRightPost(classes) {
-    var ltdefault = 38;
-    var cutwidth = 250;
-    var outerWidth = $(classes).outerWidth(cutwidth+'px');
-    $(classes).css("left", -ltdefault+'px');    
   }
 
    function getwachatbutton(){
@@ -4021,7 +4767,18 @@ and add more";
     delete_chat_member();
     chat_preview_enable();
     chat_buzz_enable();
+    descPlaceholder();
   });
+
+  function descPlaceholder()
+  {
+    $("#description").focusout(function(){
+        var element = $(this);        
+        if (!element.text().replace(" ", "").length) {
+            element.empty();
+        }
+    });
+  }
  
   //SCALE BANNER IMAGE
   $(window).on('load', function(){
@@ -4043,21 +4800,15 @@ and add more";
           {
               data +=  '<div class="card card-none mb-4">';
               data +=  '<div class="card-header card-gray">';
-
               data +=  '<span class="view-wa">'+result[i].name+'</span>';
-
               data +=  '<button type="button" class="del_chat_member btn btn-sm btn-danger float-right" id="'+result[i].id+'">';
-
               data +=  '<i class="fas fa-trash-alt"></i>';
               data +=  '</button>';
-
               data +=  '<button type="button" class="edit_wa_member btn btn-sm btn-primary float-right mr-2" data-edit="true" data-nm = "'+result[i].name+'" data-pos="'+result[i].position+'" data-num="'+result[i].wa_number+'" data-text="'+result[i].wa_text+'" class="edit_wa_member" id="'+result[i].id+'" data-img="'+result[i].photo+'"">';
 
               data +=  '<i class="fas fa-pencil-alt"></i>';
               data +=  '</button>';
-
               data +=  '<div class="clearfix"></div>';
-
               data +=  '</div>';  //end class card-header
               data +=  '</div>'; //end class card-none
           } 
@@ -4107,6 +4858,8 @@ and add more";
           changed = 0;
           changelink = 0;
           changechat = 0;
+          changepixel = 0;
+          changeproof = 0;
           refreshwa();
           loadLinkBio();
           refreshpixel();
@@ -4118,6 +4871,10 @@ and add more";
            $("#pesanAlert").removeClass("alert-success");
            return false;
         }
+      },
+      error: function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
       }
     });
   }
@@ -4264,13 +5021,16 @@ and add more";
               changed = 0;
               changelink = 0;
               changechat = 0;
+              changepixel = 0;
+              changeproof = 0;
               refreshwa();
               loadLinkBio();
               refreshpixel();
               //load_chat_member();
             } else {
-              var url = window.location.href; 
-              location.href= url+"/?mod=1";
+              /*var url = window.location.href; 
+              location.href= url+"/?mod=1";*/
+              reloadPage(1);
             }
             
           } 
@@ -4318,8 +5078,9 @@ and add more";
                   $("#pesanAlert").removeClass("alert-danger");
 
                   //to determine whether wa chat link tab or not
-                  var url = window.location.href; 
-                  location.href= url+"/?mod=1";
+                  /*var url = window.location.href; 
+                  location.href= url+"/?mod=1";*/
+                  reloadPage(1);
                   
                 } else {
                   $("#pesanAlert").addClass("alert-danger");
@@ -4356,6 +5117,8 @@ and add more";
    $( ":input" ).change(function() {
       changed = $(this).closest('#saveTemplate').data('changed', true);
       changelink = $(this).closest('#savelink').data('changed', true);
+      changepixel = $(this).closest('#savepixel').data('changed', true);
+      changeproof = $(this).closest('#saveproof').data('changed', true);
       changechat = $(this).closest('#savewa').data('changed', true);
     });
 
@@ -4368,9 +5131,13 @@ and add more";
         changed = 1;
    });
 
+   $("body").on("click",".btn-editpixel",function(){
+      changepixel = 1;
+   });
+
   $("body").on("click",".link",function()
   {
-     if(changed > 0 ||changed.length > 0 || changelink.length > 0 || changechat.length > 0)
+     if(changed > 0 ||changed.length > 0 || changelink.length > 0 || changelink > 0 ||  changepixel.length > 0 || changepixel > 0 ||changeproof.length > 0 || changeproof >0 || changechat.length > 0 || changechat > 0)
      {
         $("#unsave").modal();
         return false;
@@ -4398,6 +5165,7 @@ and add more";
     fix_center();
     resize();
   });
+
 
   $('body').on('click', '.themes', function() {
     $('.themes').removeClass('selected');
@@ -4551,9 +5319,10 @@ and add more";
         outputtitle.text(inputtitle.val());
       });
       outputtitle.text(inputtitle.val());
-
-      $('#description').keydown(function(e){
+          
+     /* $('#description').keydown(function(e){
         newLines = $(this).val().split("\n").length;
+        console.log(e.keyCode);
         if(e.keyCode == 13 && newLines >= 3) {
           return false;
         }
@@ -4561,14 +5330,52 @@ and add more";
           tempStr = $(this).val().replace(/\n/g, "<br>");;
           $('#outputdescription').html(tempStr);
         }
-      });
-      $('#description').keyup(function(e){
-        tempStr = $(this).val().replace(/\n/g, "<br>");;
-        $('#outputdescription').html(tempStr);
-      });
-      tempStr = $('#description').val().replace(/\n/g, "<br>");
+      });*/
+
+      /* RENOV */
+
+      tempStr = $('#description').html();
       $('#outputdescription').html(tempStr);
 
+      $(document).on("input", "#description", function(e) {
+        $(this).find("span").contents().unwrap();
+      });
+
+      $('#description').keypress(function(e)
+      {
+        var desctext = $("#description").text().length;
+        $(this).find("div").removeAttr('style');
+        // $(this).find("remove").replaceWith("<br>");
+
+        if(desctext >= 80)
+        {
+            return false;
+        }
+
+        if(e.keyCode == 13){
+          newLines = $(this).find("div").length;
+        }
+
+        if(e.keyCode == 13 && newLines >= 2) {
+          return false;
+        }
+        else {
+          tempStr = $('#description').html();
+          $('#outputdescription').html(tempStr);
+        }
+      });
+
+      $('#description').keyup(function(e){
+        tempStr = $(this).html();
+        $('#outputdescription').html(tempStr);
+      });
+      // tempStr = $('#description').val().replace(/\n/g, "<br>");
+      
+
+      $("#create_bold, #create_italic, #make-bold").click(function(){
+         tempStr = $('#description').html();
+         $('#outputdescription').html(tempStr);
+      });
       
     $(document).on('focus','.focuslink',function(){
       let inputlinkview=$(this);
@@ -5451,6 +6258,11 @@ and add more";
         $("#sosmed-ig>div").removeClass("hide");
         $("#igviewid").removeClass("hide");
 
+        $("#sosmed-tiktok>div").css("display","table");
+        $("#sosmed-tiktok>div").find(".input-hidden").val($("#sosmed-tiktok>div").find(".input-hidden").attr("data-val"));
+        $("#sosmed-tiktok>div").removeClass("hide");
+        $("#tiktokviewid").removeClass("hide");
+
         $("#sosmed-twitter>div").css("display","table");
         $("#sosmed-twitter>div").find(".input-hidden").val($("#sosmed-twitter>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-twitter>div").removeClass("hide");
@@ -5484,6 +6296,10 @@ and add more";
     $('#select-animation').selectize({
       sortField: 'text',
       onChange: function(value) {
+        if (value=="abstract"){
+          $(".animation-thumb").hide();
+          $(".animation-abstract").show();
+        }
         if (value=="bubble"){
           $(".animation-thumb").hide();
           $(".animation-bubble").show();
@@ -5523,7 +6339,7 @@ and add more";
       }
     });    
     $(".animation-thumb").hide();
-    $(".animation-bubble").show();
+    $(".animation-abstract").show();
     $(document).on('click', '#tambah', function (e) {
       $('.messengers').each(function () {
         if ($(this).hasClass('hide')) {
@@ -5554,10 +6370,44 @@ and add more";
      //  }
         var $el;
         counterLink += 1;
-        $('.sortable-link').append('<li class="link-list" id="link-url-' + counterLink + '"><div class="div-table mb-4"><div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div><div class="div-cell"><div class="col-md-12 col-12 pr-0 pl-0"><div class="input-stack"><input type="hidden" name="idlink[]" value="new"><input class="delete-link" type="hidden" name="deletelink[]" value=""><input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink"><input type="text" name="url[]" value="" placeholder="http://url..." class="form-control"></div></div><div class="col-md-12 col-12 pr-0 pl-0"><select name="linkpixel[]" id="linkpixel-' + counterLink + '" class="form-control linkpixel"></select></div> </div><div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span></div></div></li>');
+        $('.sortable-link').append(
+          '<li class="link-list" id="link-url-new_' + counterLink + '">'+
+            '<div class="div-table mb-4">'+
+            '<div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div>'+
+            
+            '<div class="div-cell">'+
+              '<div class="col-md-12 col-12 pr-0 pl-0">'+
+                '<div class="input-stack">'+
+                  '<select id="new_'+counterLink+'" name="options[]" class="form-control link_option">'+
+                      '<option value="1" selected>Link</option>'+
+                      '<option value="2">Youtube Link</option>'+
+                  '</select>'+
+
+                  '<div class="sel_new_'+counterLink+'">'+
+                    '<input type="hidden" name="idlink[]" value="new">'+
+                    '<input class="delete-link" type="hidden" name="deletelink[]" value="">'+
+                    '<input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
+                    '<input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">'+
+                  '</div>'+
+                '</div>'+
+              '</div>'+
+              '<div class="col-md-12 col-12 pr-0 pl-0">'+
+                '<input type="text" name="embed[]" class="form-control em_new_'+counterLink+' emb" placeholder="masukkan youtube link">'+
+
+                '<select name="linkpixel[]" id="linkpixel-' + counterLink + '" class="form-control linkpixel lnp_new_'+counterLink+'"></select>'+
+              '</div>'+
+              '</div>'+
+              '<div class="div-cell cell-btn deletelink"><span><i class="far fa-trash-alt"></i></span>'+
+              '</div>'+
+            '</div>'+
+          '</li>');
 
         // $("#viewLink").append(' <button type="button" class="btn btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
-        $("#viewLink").append('<li class=""><a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li>');
+
+        //back_target
+        $("#viewLink").append('<li class="">'+
+          '<span id="link-url-new_' + counterLink + '-preview" class="embed-ln-new_'+counterLink+'">'+
+          '<a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li></span>');
         check_outlined();
         check_rounded();
         $('#linkpixel-' + counterLink).html(dataView);

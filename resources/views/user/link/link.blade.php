@@ -11,18 +11,26 @@
   <!--<script src="{{asset('js/myScript.js')}}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
   <script src="{{asset('js/myScript.js')}}" ></script>
   <script src="{{ asset('js/app.js') }}"></script>
-  <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
   
-  <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
+ <!--  <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}"> -->
+
+  <!-- Font Awesome 5 -->
+  <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/template.css')}}">
   <link rel="stylesheet" href="{{asset('css/dash.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
   <link rel="stylesheet" href="{{asset('css/redirect.css')}}">
+  <link rel="stylesheet" href="{{asset('css/proof.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate.css')}}">
   <link rel="stylesheet" href="{{asset('css/animate-2.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/components/Font_Awesome/css/font-awesome.min.css')}}">
+ 
   <link rel="stylesheet" href="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.css')}}">
+
+  <!-- icomoon -->
+  <link rel="stylesheet" href="{{asset('assets/icomoon/style.css')}}"/>
 
   <title>Link</title>
 </head>
@@ -1157,7 +1165,200 @@
      "button_color": "#FFFFFF",
      "font_button_color": "#C6670E",
      "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 142,
+       "theme": "abstract-black-animate",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ff6cb5",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 143,
+       "theme": "abstract-blue-wave",
+       "bio_font_color": "#ffffff",
+       "button_color": "#cdebff",
+       "font_button_color": "#00385f",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 144,
+       "theme": "abstract-fade-in",
+       "bio_font_color": "#ffffff",
+       "button_color": "#e45bb9",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 145,
+       "theme": "abstract-shadow-fall",
+       "bio_font_color": "#ffffff",
+       "button_color": "#004573",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 146,
+       "theme": "abstract-live-bg",
+       "bio_font_color": "#062841",
+       "button_color": "#062841",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 147,
+       "theme": "abstract-motion-bg",
+       "bio_font_color": "#ffffff",
+       "button_color": "#f15a29",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 148,
+       "theme": "abstract-bubble",
+       "bio_font_color": "#ffffff",
+       "button_color": "#004162",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 149,
+       "theme": "abstract-snow",
+       "bio_font_color": "#ffffff",
+       "button_color": "#22622d",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 150,
+       "theme": "abstract-wave-red-2",
+       "bio_font_color": "#ffffff",
+       "button_color": "#cccccc",
+       "font_button_color": "#e21400",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 151,
+       "theme": "abstract-waves-acti",
+       "bio_font_color": "#ffffff",
+       "button_color": "#c21b20",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"	
+    },
+    {
+       "id": 152,
+       "theme": "abstract-interstellar",
+       "bio_font_color": "#201f1f",
+       "button_color": "#fdbdbf",
+       "font_button_color": "#c21b20",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 153,
+       "theme": "abstract-trianglify-the-little-mermaid",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ffffff",
+       "font_button_color": "#047c9a",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 154,
+       "theme": "abstract-confetti-doodles",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ff8a00",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 155,
+       "theme": "abstract-gradient-brown",
+       "bio_font_color": "#ffffff",
+       "button_color": "#4d3d30",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 156,
+       "theme": "abstract-gradient-exo",
+       "bio_font_color": "#ffffff",
+       "button_color": "#ffffff",
+       "font_button_color": "#e78872",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 157,
+       "theme": "abstract-ripple-blue",
+       "bio_font_color": "#1d6eea",
+       "button_color": "#ffffff",
+       "font_button_color": "#1d6eea",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 158,
+       "theme": "abstract-ripple-pink",
+       "bio_font_color": "#cb3045",
+       "button_color": "#ecb47e",
+       "font_button_color": "#ecb3045",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 159,
+       "theme": "abstract-trianglify-bee",
+       "bio_font_color": "#ffffff",
+       "button_color": "#8d5410",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 160,
+       "theme": "abstract-waves-bleach",
+       "bio_font_color": "#ffffff",
+       "button_color": "#7f807a",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 161,
+       "theme": "abstract-trianglify-wedding",
+       "bio_font_color": "#161616",
+       "button_color": "#7f807a",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 162,
+       "theme": "abstract-trianglify-frozen",
+       "bio_font_color": "#ffffff",
+       "button_color": "#736187",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 163,
+       "theme": "abstract-waves-magica-adoka",
+       "bio_font_color": "#f56440",
+       "button_color": "#ffffff",
+       "font_button_color": "#f56440",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 164,
+       "theme": "abstract-waves-tableau",
+       "bio_font_color": "#ffffff",
+       "button_color": "#f56440",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
+    },
+    {
+       "id": 165,
+       "theme": "abstract-waves-bluex",
+       "bio_font_color": "#ffffff",
+       "button_color": "#946d8d",
+       "font_button_color": "#ffffff",
+       "button_hover_color": "#F5F5F5"
     }
+    
   ];
   
 </script>
@@ -1294,15 +1495,6 @@ and add more";
       </div>
       @endif
 
-      <!-- embed youtube -->
-      @if($pages->youtube_embed <> null)
-      <div class="col-lg-7 col-md-8 mb-5 row">
-        <div class="embed-responsive embed-responsive-16by9 embed-youtube">
-          <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $pages->youtube_embed }}?rel=0" allowfullscreen></iframe>
-        </div>
-      </div>
-      @endif
-
       <!-- social media -->
       <ul class="col-lg-7 col-md-8 mb-0 row" style="padding-left: 24px; padding-right: 24px;">
         <?php 
@@ -1332,7 +1524,7 @@ and add more";
             <li class="col-{{$col}} pl-1 pr-1 mb-3">
               <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
-                  <i class="fab fa-whatsapp icon-msg"></i>
+                  <i class="fab fa-whatsapp" style="font-size : 20px"></i>
                   @if($div==0)
                     <span class="textbutton"> WhatsApp</span>
                   @endif
@@ -1406,7 +1598,7 @@ and add more";
             <li class="col pl-1 pr-1 mb-3">
               <a href="#" data-href="{{env('APP_URL').'/click/wa/'.$pages->id}}" title="wa" target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block">
-                  <i class="fab fa-whatsapp icon-msg"></i>
+                  <i class="fab fa-whatsapp" style="font-size : 20px"></i>
                     <span class="textbutton"> WhatsApp</span>
                 </button>
               </a>
@@ -1427,8 +1619,9 @@ and add more";
         <?php
         $ctr = 0;
         ?>
-        @if($links->count())
+        @if($links->count() > 0)
           @foreach($links as $link)
+            @if($link->options == 1)
             <li class="col-md-12 col-12 mb-3"> 
               <a href="#" data-href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov link-ajax">
                 <button class="btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
@@ -1438,6 +1631,14 @@ and add more";
                 </button>
               </a>
             </li>
+            @else
+            <!-- embed youtube -->
+            <li class="col-md-12 col-12 mb-3 pad-fix"> 
+              <div class="embed-responsive embed-responsive-16by9 embed-youtube">
+                <iframe style="padding : 12px" class="embed-responsive-item" src="https://www.youtube.com/embed/{{ $link->youtube_embed }}?rel=0" allowfullscreen></iframe>
+              </div>
+            </li>
+            @endif
           @endforeach
         @endif
       </ul>
@@ -1453,21 +1654,27 @@ and add more";
               </a>
             @endif
           
-            @if($sosmed=='ig' )
+            @if($sosmed=='ig')
               <a href="#" data-href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank" class="link-ajax">
                 <i class="fab fa-instagram"></i>
               </a> 
             @endif
 
-            @if($sosmed=='twitter' )
+            @if($sosmed=='twitter')
               <a href="#" data-href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank" class="link-ajax">
                 <i class="fab fa-twitter-square"></i>
               </a>
             @endif
 
-            @if($sosmed=='youtube' )
+            @if($sosmed=='youtube')
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
+              </a>
+            @endif  
+
+            @if($sosmed=='tiktok')
+              <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
+                <i style="font-size:30px" class="fab fa-tiktok"></i>
               </a>
             @endif 
           </li>
@@ -1502,6 +1709,11 @@ and add more";
           <li class="col text-center icon-sosmed">
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
+              </a>
+          </li> 
+          <li class="col text-center icon-sosmed">
+              <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
+                <span style="font-size:25px" class="icon-tik-tok"></span>
               </a>
           </li>
 
@@ -1569,7 +1781,7 @@ and add more";
         <span class="fa fa-whatsapp"></span>
     </div>  -->
      <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
-        <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+        <!-- <span class="fa fa-whatsapp"></span> --><i class="fab fa-whatsapp" style="margin-right : 5px; font-size : 15px"></i>{{$pages->wa_btn_text}}
      </div>  
  
     <div class="wcs_popup"> 
@@ -1617,7 +1829,7 @@ and add more";
     <!-- for preview if user hasn't registered yet -->
     <div class="whatsapp_chat_support wcs_fixed_right @if($pages->buzz_btn == 1) service @endif" id="example">
           <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
-              <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+              <i class="fab fa-whatsapp" style="margin-right : 5px; font-size : 15px"></i>{{$pages->wa_btn_text}}
            </div> 
 
           <!-- popup -->
@@ -1643,6 +1855,31 @@ and add more";
     </div>
 @endif
 
+  <!-- proof -->
+  @if($proof->count() > 0)
+    <div class="proof-box">
+    @foreach($proof as $row)
+    <div class="proof-wrapper">
+        <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+     
+        <div class="proof-desc">
+            <div class="proof_profile">
+              <div class="proof_name">{{ $row->name }}</div>
+              <div class="proof_star">
+                @for($x=1;$x<=$row->star;$x++)
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                @endfor
+              </div>
+            </div>
+
+            <div class="proof_comments">
+             {{ $row->text }}
+            </div>
+        </div>
+    </div>
+    @endforeach
+    </div>
+  @endif
   
   <!--Loading Bar-->
   <div class="div-loading">
@@ -1686,14 +1923,62 @@ and add more";
     }
   }
 
-  $(document).ready(function() {
-      setRightPost(".wcs_popup");
-      setMargins(".wcs_fixed_right");
-      $(window).resize(function() {
-          setMargins(".wcs_fixed_right"); 
-          setRightPost(".wcs_popup");   
-      });
-  });
+
+$(document).ready(function() {
+    setRightPost(".wcs_popup");
+    setMargins(".wcs_fixed_right");
+    $(window).resize(function() {
+        setMargins(".wcs_fixed_right"); 
+        setRightPost(".wcs_popup");   
+    });
+    runningProof();
+    stylingYoutube();
+});
+
+function runningProof()
+{
+  var total = $(".proof-wrapper").length;
+  var counting = 0;
+  var delay = 1000;
+
+  $('.proof-wrapper:gt(0)').hide();
+    var run = setInterval(
+      function(){
+        $('.proof-box > :first-child').fadeOut().next('.proof-wrapper').delay(delay).fadeIn().addClass('animate-buzz').end().appendTo('.proof-box');
+        counting++;
+
+        //put php logic according on setting
+        <?php 
+          if($pages->proof_settings == 0):
+        ?>
+            if(counting == total)
+            {
+              setTimeout(function(){
+                $('.proof-wrapper').hide();
+                clearInterval(run);
+              },delay);
+              
+            }
+        <?php
+          endif;
+        ?>
+      }, 
+    5000);
+}
+
+function stylingYoutube()
+{
+  /*$(".embed-responsive-item").on("load", function() {
+    let head = $(".embed-responsive-item").contents().find("head");
+    let css = '<xxx>.test-add{ color : red}</xxx>';
+    $(head).append(css);
+  });*/
+  var html = 'Hello from <img src="http://stackoverflow.com/favicon.ico" alt="SO">';
+  var iframe = $('.embed-responsive-item');
+  iframe.src = 'data:text/html,' + encodeURIComponent(html);
+}
+
+>>>>>>> additonal-feature
 </script>
 
 <script type="text/javascript">
@@ -1730,9 +2015,9 @@ and add more";
      h = Number(h.toFixed(1));
      $(".galleryContainer").height(h);
   }
-    
 
-  function call_mylink(linkAjax){
+  function call_mylink(linkAjax)
+  {
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
@@ -1747,6 +2032,7 @@ and add more";
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         // eval(data.script);
         $("#script-code").html(data.script);
@@ -1757,6 +2043,13 @@ and add more";
         // else {
           // window.open(data.link);
         // }
+      },
+      error:function(xhr,throwable,err)
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+        alert('Ada yang salah dengan penggunaan link atau username,\nmohon diperiksa lagi.');
       }
     });
   }
@@ -1960,7 +2253,6 @@ and add more";
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-81228145-7');
 </script>
 

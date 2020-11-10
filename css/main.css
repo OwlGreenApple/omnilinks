@@ -27,17 +27,15 @@ html {
   height: 100%;
 }
 
-body {
-  min-height: 100%;
-}
-
  .alert {
   display: none;
 }*/
 
+
 .main-cont {
   margin-top:45px;
   min-height:575px;
+  font-weight : 600;
 }
 
 .wa-number-style {
