@@ -222,7 +222,8 @@ class BiolinkController extends Controller
     { 
       $description = $page->description;
     } else {
-      $description = "This is your new text content. You can modify this text and add more";
+      // $description = "This is your new text content. You can modify this text and add more";
+      $description = "";
     }
 
     //proof
@@ -400,15 +401,37 @@ class BiolinkController extends Controller
     if ($names == "blog"){
       return redirect("blog");
     }
-    else {
-      $page = Page::where('names',$names) 
-                ->orwhere('premium_names',$names) 
-                ->first();
+ 
+    /*$page = Page::where('names',$names) 
+                ->orWhere('premium_names',$names) 
+                ->first();*/
+     $page_premium = null;
+     $paging =  Page::where('names',$names)->first();
+     
+     if(is_null($paging)) 
+     {
+        $page_premium = Page::where('premium_names',$names)->first();
+     }
+     else
+     {
+        $page = $paging;
+     }  
 
-      if (is_null($page)) {
-        $link = Link::where('names',$names)
-                ->orwhere('premium_names',$names)
-                ->first();
+     if(is_null($page_premium))
+     {
+        return "Page not found";
+     }
+     else
+     {
+        $page = $page_premium;
+     }
+
+
+   /* if (is_null($page)) 
+    {*/
+       /* $link = Link::where('names',$names)
+                ->orWhere('premium_names',$names)
+                ->first();*/
 
         /*if(is_null($link)){
           return "Page not found";
@@ -425,14 +448,15 @@ class BiolinkController extends Controller
             'link' => $link->link,
           ]);
         }*/
+    //}
 
-        if(is_null($link)){
+    /*  if(is_null($link)){
           return "Page not found";
-        } else {
+      } else {
           $tes = $this->click('link',$link->id);
           return $tes;
-        }
-      }
+      }*/
+
       $user = User::find($page->user_id);
       /*$dt1 = Carbon::createFromFormat('Y-m-d H:i:s', $user->valid_until);
       $dt2 = Carbon::now();
@@ -507,7 +531,6 @@ class BiolinkController extends Controller
               ->with('valid',$validmember)
               ->with('proof',$proof)
               ;
-    }
   }
 
   public function pixelpage(Request $request)
@@ -1346,7 +1369,8 @@ class BiolinkController extends Controller
     }
   }
 
-  public function click($mode,$id,Request $request){
+  public function click($mode,$id,Request $request)
+  {
     $is_ajax = false;
     if($request->ajax()){
       $is_ajax = true;
@@ -1531,6 +1555,11 @@ class BiolinkController extends Controller
           $link = "https://instagram.com/".$page->ig_link;
           $idpixel = $page->ig_pixel_id;
         break;
+        case "tiktok":
+          $page->tk_link_counter = $page->tk_link_counter+1;
+          $link = "https://www.tiktok.com/@".$page->tk_link;
+          $idpixel = $page->tk_pixel_id;
+        break;
       }
       $page->total_counter = $page->total_counter + 1;
       $page->save();
@@ -1543,6 +1572,7 @@ class BiolinkController extends Controller
       $this->make_file(date('m-Y'),'all','total-click',$user->username);
 
       $pixel = Pixel::find($idpixel);
+
       $script = "";
       if (!is_null($pixel)) {
         //jalanin pixel
@@ -1813,9 +1843,9 @@ class BiolinkController extends Controller
           $response['status'] = 'success';
           $response['message'] = 'WA Chat setting telah disimpan';
       } catch (\Illuminate\Database\QueryException $e) {
-          //$e->message
+          // dd($e->getMessage());
           $response['status'] = "error";
-          $response['message'] = "Error! WA Chat setting gagal disimpan";
+          $response['message'] = "Server kami terlalu sibuk, mohon coba lagi nanti";
       }
       
       return response()->json($response);

@@ -34,8 +34,7 @@
   }
 
   .wcs_fixed_right{
-    position: absolute;
-    bottom : 30px;
+    bottom : -60px;
   }
 </style>
 
@@ -1422,11 +1421,14 @@
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
     var desc = $("#description").html();
+    var desc_text = $("#description").text();
 
-    // console.log(desc);
-    if(desc.length > 120)
+   /* console.log(desc_text.length);
+    return false;*/
+
+    if(desc_text.length > 80)
     {
-      alert("Deskripsi melebihi 120 karakter");
+      alert("Deskripsi melebihi 80 karakter");
       return false;
     }
 
@@ -2738,7 +2740,7 @@
                                  <i class="fab fa-tiktok"></i>
                                 </div>
                               </div>
-                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok">
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok tanpa @">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -3027,25 +3029,23 @@
 
                           <fieldset>
 
-                            <button type="button" id='create_italic' class="btn btn-primary text-white" title="Italicize Highlighted Text"><i>I</i>
-                              </button>
+                            <button type="button" id='create_italic' class="btn btn-primary text-white btn-sm" title="Italicize Highlighted Text"><i>Italic</i>
+                            </button>
 
                             <!-- click on Event Attribute -->
-                            <button type="button" id="create_bold" class="btn btn-primary text-white"><b>B</b>
-                              </button>
+                            <button type="button" id="create_bold" class="btn btn-primary text-white btn-sm"><b>Bold</b>
+                            </button>
 
                           </fieldset>
                          
                           <!-- <div id="description" contenteditable="true"> -->
-                          <div id="description" contenteditable="true">
-                            {!! $description !!}
-                          </div>
+                          <div id="description" placeholder="Maksimal 80 Karakter" contenteditable="true">{!! $description !!}</div>
 
                           <input placeholder="eg : https://omnilinkz.com" id="url" class="form-control" type="text" />  
 
-                          <div><small><b>Note</b> : menggunakkan link akan menambah karakter sebanyak karakter link dan text ditambah 14 karakter</small></div>
+                          <div><small><b>Note</b> : Untuk menggunakkan link, masukkan link di kolom atas, kemudian blok tulisan / text yang akan di link dan click tombol <b>Buat Link</b> kemudian click tombol <b>Save</b>.</small> </div>
                          
-                          <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Create Link</button>
+                          <button type="button" class="btn btn-primary btn-sm mt-1" id="make-bold">Buat Link</button>
 
                         </div>
                         <div class="col-md-12 mt-4">
@@ -3562,7 +3562,7 @@
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
                     <div class="row">
                       <div class="col-md-2 col-3">
-                        <div class="div-picture" style="width: 82px; height: 82px; margin-left: 13px;">
+                        <div class="div-picture">
                           <?php  
                             $viewpicture = asset('/image/no-photo.jpg');
                             if(!is_null($pages->image_pages)){
@@ -3573,13 +3573,13 @@
                           <img id="viewpicture" src="<?php echo $viewpicture ?>" style="width:100%;height:100%;border-radius: 50%;object-fit: cover;object-position: center;" altSrc="{{asset('/image/no-photo.jpg')}}" onerror="this.src = $(this).attr('altSrc')">
                         </div>
                       </div>
-                      <div class="col-md-10 col-8 p-2">
-                        <ul style="margin-left: 23px; font-size: 11px;">
-                          <li style="display: block; margin-bottom: -15px;  ">
-                            <p class="font-weight-bold description" style="color: #fff;" id="outputtitle"></p>
+                      <div class="col-md-10 col-9 p-2">
+                        <ul class="mobile-desc ">
+                          <li style="display: block; margin-bottom: -15px; font-size : 18px">
+                            <span class="font-weight-bold"><p class="description" style="color: #fff;" id="outputtitle"></p></span>
                           </li>
-                          <li style="display: block; margin-bottom: -15px; ">
-                            <p class="font-weight-bold description" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
+                          <li style="display: block; margin-bottom: -15px;">
+                            <p class="description" style="color: #fff; word-break: break-all;" id="outputdescription"></p>
                           </li>
                         </ul>
                       </div>
@@ -4201,7 +4201,6 @@
 
   $(function(){
     fix_center();
-    setRightPost(".wcs_popup");
 
     //CHANGE TEXT ON WA BUTTON
     $("input[name=wa_btn_text]").on('keypress keyup',function(e){
@@ -4221,10 +4220,10 @@
       }
     });
 
-    $(window).resize(function() 
+    /*$(window).resize(function() 
     {
         setRightPost(".wcs_popup");   
-    });
+    });*/
 
     $(".alert").delay(2000).fadeOut(3000);
 
@@ -4243,9 +4242,18 @@
     resetProof();
     load_proof();
     change_proof_settings();
+    setPopupPos();
     //proof_preview();
     //callMaintainPlus();
   });
+
+   function setPopupPos() {
+    var default_len = 113;
+    var textlen = $(".wcs_text").text().length - 2;
+    var diff_len = textlen * 3.65;
+    var total_len = default_len - diff_len;
+    $(".wcs_popup").css({'left':'-'+total_len+'px','width':'280px'});   
+  }
 
   function proof_preview()
   {
@@ -4505,6 +4513,8 @@
 
   function create_bold()
   {
+    var editable = $("[contenteditable]");
+
     $('#create_bold').click(function(){
         createBold();
     });
@@ -4654,13 +4664,6 @@
       });
   }
 
-  function setRightPost(classes) {
-    var ltdefault = 38;
-    var cutwidth = 250;
-    var outerWidth = $(classes).outerWidth(cutwidth+'px');
-    $(classes).css("left", -ltdefault+'px');    
-  }
-
    function getwachatbutton(){
     $.ajax({
       type : 'GET',
@@ -4764,7 +4767,18 @@
     delete_chat_member();
     chat_preview_enable();
     chat_buzz_enable();
+    descPlaceholder();
   });
+
+  function descPlaceholder()
+  {
+    $("#description").focusout(function(){
+        var element = $(this);        
+        if (!element.text().replace(" ", "").length) {
+            element.empty();
+        }
+    });
+  }
  
   //SCALE BANNER IMAGE
   $(window).on('load', function(){
@@ -4857,6 +4871,10 @@
            $("#pesanAlert").removeClass("alert-success");
            return false;
         }
+      },
+      error: function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
       }
     });
   }
@@ -5148,6 +5166,7 @@
     resize();
   });
 
+
   $('body').on('click', '.themes', function() {
     $('.themes').removeClass('selected');
     $(this).addClass('selected');
@@ -5301,8 +5320,9 @@
       });
       outputtitle.text(inputtitle.val());
           
-      $('#description').keydown(function(e){
+     /* $('#description').keydown(function(e){
         newLines = $(this).val().split("\n").length;
+        console.log(e.keyCode);
         if(e.keyCode == 13 && newLines >= 3) {
           return false;
         }
@@ -5310,21 +5330,52 @@
           tempStr = $(this).val().replace(/\n/g, "<br>");;
           $('#outputdescription').html(tempStr);
         }
+      });*/
+
+      /* RENOV */
+
+      tempStr = $('#description').html();
+      $('#outputdescription').html(tempStr);
+
+      $(document).on("input", "#description", function(e) {
+        $(this).find("span").contents().unwrap();
       });
+
+      $('#description').keypress(function(e)
+      {
+        var desctext = $("#description").text().length;
+        $(this).find("div").removeAttr('style');
+        // $(this).find("remove").replaceWith("<br>");
+
+        if(desctext >= 80)
+        {
+            return false;
+        }
+
+        if(e.keyCode == 13){
+          newLines = $(this).find("div").length;
+        }
+
+        if(e.keyCode == 13 && newLines >= 2) {
+          return false;
+        }
+        else {
+          tempStr = $('#description').html();
+          $('#outputdescription').html(tempStr);
+        }
+      });
+
       $('#description').keyup(function(e){
-        // tempStr = $(this).val().replace(/\n/g, "<br>");;
-        tempStr = $(this).html().replace(/\n/g, "<br>");;
+        tempStr = $(this).html();
         $('#outputdescription').html(tempStr);
       });
       // tempStr = $('#description').val().replace(/\n/g, "<br>");
-      tempStr = $('#description').html().replace(/\n/g, "<br>");
-      $('#outputdescription').html(tempStr);
+      
 
       $("#create_bold, #create_italic, #make-bold").click(function(){
          tempStr = $('#description').html();
          $('#outputdescription').html(tempStr);
       });
-
       
     $(document).on('focus','.focuslink',function(){
       let inputlinkview=$(this);

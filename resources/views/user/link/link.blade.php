@@ -1654,25 +1654,25 @@ and add more";
               </a>
             @endif
           
-            @if($sosmed=='ig' )
+            @if($sosmed=='ig')
               <a href="#" data-href="{{env('APP_URL').'/click/ig/'.$pages->id}}" title="ig" target="_blank" class="link-ajax">
                 <i class="fab fa-instagram"></i>
               </a> 
             @endif
 
-            @if($sosmed=='twitter' )
+            @if($sosmed=='twitter')
               <a href="#" data-href="{{env('APP_URL').'/click/twitter/'.$pages->id}}" title="Twitter" target="_blank" class="link-ajax">
                 <i class="fab fa-twitter-square"></i>
               </a>
             @endif
 
-            @if($sosmed=='youtube' )
+            @if($sosmed=='youtube')
               <a href="#" data-href="{{env('APP_URL').'/click/youtube/'.$pages->id}}" title="Youtube" target="_blank" class="link-ajax">
                 <i class="fab fa-youtube"></i>
               </a>
             @endif  
 
-            @if($sosmed=='tiktok' )
+            @if($sosmed=='tiktok')
               <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
                 <i style="font-size:30px" class="fab fa-tiktok"></i>
               </a>
@@ -1713,7 +1713,7 @@ and add more";
           </li> 
           <li class="col text-center icon-sosmed">
               <a href="#" data-href="{{env('APP_URL').'/click/tiktok/'.$pages->id}}" title="Tiktok" target="_blank" class="link-ajax">
-                <span style="color : #000;font-size:25px" class="icon-tik-tok"></span>
+                <span style="font-size:25px" class="icon-tik-tok"></span>
               </a>
           </li>
 
@@ -1781,7 +1781,7 @@ and add more";
         <span class="fa fa-whatsapp"></span>
     </div>  -->
      <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
-        <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+        <!-- <span class="fa fa-whatsapp"></span> --><i class="fab fa-whatsapp" style="margin-right : 5px; font-size : 15px"></i>{{$pages->wa_btn_text}}
      </div>  
  
     <div class="wcs_popup"> 
@@ -1829,7 +1829,7 @@ and add more";
     <!-- for preview if user hasn't registered yet -->
     <div class="whatsapp_chat_support wcs_fixed_right @if($pages->buzz_btn == 1) service @endif" id="example">
           <div class="wcs_button @if($pages->buzz_btn == 1) animate-buzz @endif">
-              <span class="fa fa-whatsapp"></span>{{$pages->wa_btn_text}}
+              <i class="fab fa-whatsapp" style="margin-right : 5px; font-size : 15px"></i>{{$pages->wa_btn_text}}
            </div> 
 
           <!-- popup -->
@@ -2013,7 +2013,8 @@ function stylingYoutube()
      $(".galleryContainer").height(h);
   }
 
-  function call_mylink(linkAjax){
+  function call_mylink(linkAjax)
+  {
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
@@ -2028,6 +2029,7 @@ function stylingYoutube()
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+
         var data = jQuery.parseJSON(result);
         // eval(data.script);
         $("#script-code").html(data.script);
@@ -2039,10 +2041,11 @@ function stylingYoutube()
           // window.open(data.link);
         // }
       },
-      error:function(xhr)
+      error:function(xhr,throwable,err)
       {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
         alert('Ada yang salah dengan penggunaan link atau username,\nmohon diperiksa lagi.');
       }
     });
