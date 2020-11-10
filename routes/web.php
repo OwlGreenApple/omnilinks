@@ -47,7 +47,7 @@ if(env('DOMAIN_TYPE')=='main'){
     return view('term and policy');
   });
 
-   Route::get('register',function(){
+  Route::get('register',function(){
      return redirect('https://omnilinkz.com/');
   });
 
