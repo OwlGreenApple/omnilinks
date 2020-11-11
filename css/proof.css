@@ -3,11 +3,7 @@
   created : tue 03-Nov-2020;
 */
 
-small i {
-  color : #26C281;
-}
-
-.proof-box {
+.proof-box,.proof-box-preview {
  margin-left : auto;
  margin-right : auto;
  margin-bottom : 10px;
@@ -21,8 +17,12 @@ small i {
   background-color: #fff;
   border : 2px solid #f7f7f7;
   border-radius : 10px;
-  padding : 15px;
+  padding : 10px;
   display : inline-flex;
+}
+
+.proof-desc small i, .proof-wrapper-preview small svg {
+  color : #26C281 !important;
 }
 
 .proof_image img {
@@ -68,8 +68,22 @@ small i {
   position: relative;
 }
 
-.proof_name_preview,.proof_star_preview,.proof_comments_preview {
-  font-size:11px;
+.proof_name_preview {
+  font-size:9px;
+}
+
+.proof_star_preview {
+  margin-top: -1px;
+  font-size:8px;
+}
+ 
+.proof_comments_preview {
+  font-size:8px;
+  line-height : 14px;
+}
+
+.proof-wrapper-preview .proof_image img {
+  max-width : 90px;
 }
 
 @media(max-width:414px){

@@ -1433,6 +1433,7 @@
     }
 
     formData.append('description',desc);
+    formData.append('proof_text_color',$("#proof_preview").attr('proof-text'));
    
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -2024,6 +2025,7 @@
       }
       if ($('#is_bio_color').prop("checked") == true) {
         $('.description').css("color",$("#bioColor").val());
+        $('.proof-wrapper-preview').css("background-color",$("#bioColor").val());
         $('#sm-preview li a').css("color",$("#bioColor").val()+" !important");
         $('.powered-omnilinks a').css("color",$("#bioColor").val()+" !important");
       }
@@ -2042,6 +2044,7 @@
       }
       if ($('#is_bio_color').prop("checked") == false) {
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
       }
@@ -3562,7 +3565,7 @@
                   <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
 
                   <!-- proof-preview -->
-                  <div id="proof_preview" class="row">
+                  <div id="proof_preview" proof-text="black" >
                     @include('user.dashboard.previewproof')
                   </div>
 
@@ -5207,6 +5210,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         
@@ -5527,6 +5531,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
@@ -5541,6 +5546,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
@@ -5564,11 +5570,13 @@
       $('.btnview').css("background-color","transparent");
       $('.btnview').css("color",outline);
       $('.description').css("color",outline);
+      $('.proof-wrapper-preview').css("background-color",outline);
       $('#sm-preview li a').css("color",outline+" !important");
     <?php } else {?>
       $('.btnview').css("background-color",outline);
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
+      $('.proof-wrapper-preview').css("background-color","#fff");
       $('#sm-preview li a').css("color","#fff !important");
     <?php } ?>
     
@@ -5577,10 +5585,12 @@
       $("#textColor").val("<?php echo $pages->text_color; ?>");
       $('.btnview').css("color","<?php echo $pages->text_color; ?>");
       $('.description').css("color","<?php echo $pages->text_color; ?>");
+      $('.proof-wrapper-preview').css("background-color","<?php echo $pages->text_color; ?>");
       $('#sm-preview li a').css("color","<?php echo $pages->text_color; ?>");
     <?php } else {?>
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
+      $('.proof-wrapper-preview').css("background-color","#fff");
       $('#sm-preview li a').css("color","#fff");
     <?php } ?>
     
@@ -5589,10 +5599,12 @@
       $("#bioColor").val("<?php echo $pages->bio_color; ?>");
       $('.powered-omnilinks a').css("color","<?php echo $pages->bio_color; ?>");
       $('.description').css("color","<?php echo $pages->bio_color; ?>");
+      $('.proof-wrapper-preview').css({"background-color":"<?php echo $pages->bio_color; ?>",color: '{{$proof_text_color}}' });
       $('#sm-preview li a').css("color","<?php echo $pages->bio_color; ?>");
     <?php } else {?>
       $('.powered-omnilinks a').css("color","#fff");
       $('.description').css("color","#fff");
+      $('.proof-wrapper-preview').css({"background-color":"#fff",color:'{{$proof_text_color}}'});
       $('#sm-preview li a').css("color","#fff");
     <?php } ?>
     
@@ -5755,6 +5767,7 @@
       }
       $('.btnview').css("color",color);
       $('.description').css("color",color);
+      $('.proof-wrapper-preview').css("background-color",color);
       $('#sm-preview li a').css("color",color);
     }
     $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
@@ -5807,15 +5820,44 @@
       if ($('#is_bio_color').val()=="1") {
         $('.powered-omnilinks a').css("color",color);
         $('.description').css("color",color);
+        $('.proof-wrapper-preview').css("background-color",color);
+        $('.proof-wrapper-preview').css("color",hexToRgb(color));
+        $("#proof_preview").attr('proof-text',hexToRgb(color));
         $('#sm-preview li a').css("color",color);
       } else {
         if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
           $('.powered-omnilinks a').css("color","#fff");
           $('.description').css("color","#fff");
+          $('.proof-wrapper-preview').css("background-color","#fff");
+          $('.proof-wrapper-preview').css("color","#000");
+          $("#proof_preview").attr('proof-text','black');
           $('#sm-preview li a').css("color","#fff");
         }
       }
     }
+
+    //TO MEASURE COLOR DEPTH TO DETERMINE TEXT WHITE OR BLACK
+    function hexToRgb(hex) {
+      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+      });
+
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+      var r = parseInt(result[1], 16);
+      var g = parseInt(result[2], 16);
+      var b = parseInt(result[3], 16);
+      var yiq = ((r*299)+(g*587)+(b*114))/1000;
+     /* return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;*/
+      return (yiq >= 128) ? 'black' : 'white';
+    }
+
     $('#colorpickerBioColor').farbtastic('#bioColor');
     pickerbtn = $.farbtastic('#colorpickerBioColor');
     // picker.setColor("#b6b6ff");
@@ -5825,6 +5867,7 @@
     //pickerbtn.linkTo(onTextColorChange);
     $("#link-bio-color").on('click', function(e) {
       e.preventDefault();
+      $(".proof-wrapper-preview").eq(0).show();
       $('#modal-color-picker-bio-color').modal('toggle');
     });
     $(document).on('click', '.btn-apply-bio', function() {
