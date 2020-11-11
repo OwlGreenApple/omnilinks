@@ -1470,6 +1470,8 @@
           changeproof = 0;
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
+
+          reloadPage(3);
         }
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
@@ -2301,13 +2303,13 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2 || $mod == 3) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="#style" class="nav-link link" role="tab" data-toggle="tab">
+                <a href="#style" class="nav-link link @if($mod == 3) active @endif" role="tab" data-toggle="tab">
                   Tampilan
                 </a>
               </li>
@@ -2351,7 +2353,7 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
+              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2 || $mod == 3) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
 
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
@@ -3042,7 +3044,7 @@
               </div>
               
               <!-- TAB 2 -- Tampilan -->
-              <div role="tabpanel" class="tab-pane fade in " id="style">
+              <div role="tabpanel" class="tab-pane fade in @if($mod==3) active show @endif" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
 
                   {{ csrf_field() }}
