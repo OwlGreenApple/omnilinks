@@ -497,7 +497,7 @@ class BiolinkController extends Controller
         $ads = null;
       }
       
-      #wachat member
+      //wachat member
       $wachat = $this->getWAchatButton($page->id);
       $validmember = false;
 
@@ -658,7 +658,7 @@ class BiolinkController extends Controller
       // $path = Storage::putFile('template',$request->file('imagepages')); 
       // $page->image_pages = $path;
 
-      #RESIZE FILE IF OVER 100PX
+      //RESIZE FILE IF OVER 100PX
       $arr_size = getimagesize($request->file('imagepages'));
       $imagewidth = $arr_size[0];
       $imageheight = $arr_size[1];
@@ -827,7 +827,7 @@ class BiolinkController extends Controller
             // dd($dir."/".$filename);
             // if($idbanner[$i]==""){
 
-            #FILTER TO REIZE BANNER IMAGE IF BANNER IMAGE'S HEIGHT > 200
+            //FILTER TO REIZE BANNER IMAGE IF BANNER IMAGE'S HEIGHT > 200
 
              $banner_image_size = getimagesize($request->file('bannerImage')[$i]);
              $bannerimagewidth = $banner_image_size[0];
@@ -1269,7 +1269,7 @@ class BiolinkController extends Controller
       return $arr;
     }
 
-    #TO CHECK CORRECT SCRIPT WRITTING
+    //TO CHECK CORRECT SCRIPT WRITTING
     preg_match_all('/<script>|<script.*?>/im', $pixelscript, $patternopen);
     preg_match_all('/<\/script>/im', $pixelscript, $patternclose);
 
@@ -1301,7 +1301,7 @@ class BiolinkController extends Controller
   	$pixel->users_id=$user->id;
   	$pixel->title=strip_tags($request->title);
     $pixel->jenis_pixel=strip_tags($request->jenis_pixel);
-  	$pixel->script=$request->script; //?? mesti dipikirkan strip_tags nya gmn 
+  	$pixel->script=$request->script; 
   	$pixel->save();
   	// return redirect('/biolinks/'.$uuid);
     
@@ -1641,7 +1641,7 @@ class BiolinkController extends Controller
     Storage::disk('local')->put('banner/testresize.png',$image_content);
   }
 
-  #RESIZE IMAGE
+  //RESIZE IMAGE
   public function resizeImage($file, $w, $h, $crop=false){
     list($width, $height) = getimagesize($file);
         $r = $width / $height;
@@ -1707,7 +1707,7 @@ class BiolinkController extends Controller
       return $image_contents;
   }
 
-  #SAVE WA CHAT
+  //SAVE WA CHAT
   public function savewaChat(Request $request)
   {
       $userid = Auth::id();
@@ -1730,14 +1730,14 @@ class BiolinkController extends Controller
         'wa_chat_pixel_id'=>$wapixelchatid
       );
 
-      # --- WACHAT MEMBERS ---
+      // --- WACHAT MEMBERS ---
 
       $chat['name'] = $request->member_name;
       $chat['position'] = $request->position;
       $chat['wa_number'] = $request->wa_number;
       $chat['photo'] = $request->photo;
 
-      #member_name
+      //member_name
       if(!empty($chat['name']))
       {
         foreach($chat['name'] as $id=>$name)
@@ -1755,7 +1755,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #position
+      //position
       if(!empty($chat['position']))
       {
         foreach($chat['position'] as $id=>$position)
@@ -1773,7 +1773,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #wa_number
+      //wa_number
       if(!empty($chat['wa_number']))
       {
         foreach($chat['wa_number'] as $id=>$wa_number)
@@ -1791,7 +1791,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #photo
+      //photo
       if(env('APP_ENV') == 'local')
       {
         $dir = 'wa_chat_member_test';
@@ -1805,7 +1805,7 @@ class BiolinkController extends Controller
       {
         foreach($chat['photo'] as $id=>$photo)
         {
-            #get photo name and path from database
+            //get photo name and path from database
             $getphotoname = wachat::where('id','=',$id)->select('photo')->first();
             if(!is_null($getphotoname))
             {
@@ -1813,7 +1813,7 @@ class BiolinkController extends Controller
                 $filename = $photopath[1];
                 $path = $dir."/".$filename;
                 
-                #get uploaded photo from user
+                //get uploaded photo from user
                 $arr_size = getimagesize($photo);
                 $imagewidth = $arr_size[0];
 
@@ -1838,7 +1838,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #if all of data passed and then..
+      //if all of data passed and then..
       try {
           Page::where([['uid','=',$uuid],['user_id','=',$userid]])->update($data);
           $response['status'] = 'success';
@@ -1852,7 +1852,7 @@ class BiolinkController extends Controller
       return response()->json($response);
   }
 
-  #SAVE WA CHAT MEMBER
+  //SAVE WA CHAT MEMBER
   public function savewaChatMember(Request $request)
   {
     $dt = Carbon::now();
@@ -1892,7 +1892,7 @@ class BiolinkController extends Controller
 
     if(empty($wa_id))
     {
-      #INSERT DATA
+      //INSERT DATA
       $chat = new wachat;
       $chat->user_id = Auth::id();
       $chat->uid = $uid;
@@ -1926,7 +1926,7 @@ class BiolinkController extends Controller
     }
     else
     {
-      #UPDATE DATA
+      //UPDATE DATA
       $updateerror = false;
       $updatechat = wachat::where('id','=',$wa_id)->first();
       $updatepath = $updatechat->photo;
@@ -1982,7 +1982,7 @@ class BiolinkController extends Controller
     } 
   }
 
-  #LOAD WA CHAT MEMBERS
+  //LOAD WA CHAT MEMBERS
   public function loadWAChatMembers(Request $request)
   {
       $user_id = Auth::id();
@@ -2009,7 +2009,7 @@ class BiolinkController extends Controller
       return response()->json($data);
   }
 
-  #DELETE WA CHAT MEMBER
+  //DELETE WA CHAT MEMBER
   public function delWAChatMembers(Request $request)
   {
       $userid = Auth::id();
