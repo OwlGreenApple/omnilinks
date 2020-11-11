@@ -95,6 +95,8 @@ class BiolinkController extends Controller
 
   public function newbio(Request $request)
   {
+    dd($request->all());
+
     $user = Auth::user();
     $pageCheck=Page::where('user_id',$user->id)
                       ->count();

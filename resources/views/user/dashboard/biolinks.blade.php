@@ -6366,8 +6366,6 @@
         $("#sosmed-fb>div").find(".input-hidden").val($("#sosmed-fb>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-fb>div").removeClass("hide");
         $("#fbviewid").removeClass("hide");
-
-        $("#check_"+'{{ $data }}').prop('checked',false);
     <?php } ?>
 
     
