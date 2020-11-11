@@ -1470,6 +1470,8 @@
           changeproof = 0;
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
+
+          reloadPage(3);
         }
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
@@ -2301,13 +2303,13 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2 || $mod == 3) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="#style" class="nav-link link" role="tab" data-toggle="tab">
+                <a href="#style" class="nav-link link @if($mod == 3) active @endif" role="tab" data-toggle="tab">
                   Tampilan
                 </a>
               </li>
@@ -2351,7 +2353,7 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
+              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2 || $mod == 3) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
 
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
@@ -2579,6 +2581,7 @@
                     Facebook : https://facebook.com/username-facebook <br>
                     Instagram : username-instagram <br>
                     Twitter : username-twitter <br>
+                    Tiktok : username-tiktok <br>
                     </div>">
                       <i class="fas fa-question-circle icon-reflink"></i>
                     </span>
@@ -2759,6 +2762,48 @@
                       </div>
                     </li>
                   </ul>
+
+                  <!-- -modal option for social media -->
+                  <div class="modal fade" id="modal-social-media" tabindex="-1" role="dialog"aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Choose Social Media
+                                </div>
+                                <div class="modal-body">
+                                  <!-- Youtube -->
+                                  <div class="form-check">
+                                      <input id="check_youtube" type="checkbox" class="form-check-input check_social" data-check="youtube">
+                                      <label class="form-check-label"><i class="fab fa-youtube"></i> Youtube</label>
+                                  </div>
+                                  <!-- Facebook -->
+                                  <div class="form-check">
+                                      <input id="check_fb" type="checkbox" class="form-check-input check_social" data-check="fb">
+                                      <label class="form-check-label"><i class="fab fa-facebook-f"></i> Facebook</label>
+                                  </div>
+                                  <!-- Twitter -->
+                                  <div class="form-check">
+                                      <input id="check_twitter" type="checkbox" class="form-check-input check_social" data-check="twitter">
+                                      <label class="form-check-label"><i class="fab fa-twitter"></i> Twitter</label>
+                                  </div>
+                                  <!--  Instagram -->
+                                  <div class="form-check">
+                                      <input id="check_ig" type="checkbox" class="form-check-input check_social" data-check="ig">
+                                      <label class="form-check-label"><i class="fab fa-instagram"></i> Instagram</label>
+                                  </div>
+                                  <!--  Tiktok -->
+                                  <div class="form-check">
+                                      <input id="check_tiktok" type="checkbox" class="form-check-input check_social" data-check="tiktok">
+                                      <label class="form-check-label"><i class="fab fa-tiktok"></i> Tiktok</label>
+                                  </div>
+                                  <!-- end -->
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                                </div>
+                            </div>
+                        </div>
+                      </div> 
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks btn-save-link">
@@ -2999,7 +3044,7 @@
               </div>
               
               <!-- TAB 2 -- Tampilan -->
-              <div role="tabpanel" class="tab-pane fade in " id="style">
+              <div role="tabpanel" class="tab-pane fade in @if($mod==3) active show @endif" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
 
                   {{ csrf_field() }}
@@ -6284,6 +6329,8 @@
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
         $("#"+"<?php echo $data; ?>"+"viewid").addClass("shown-sm");
+
+        $("#check_"+'{{ $data }}').prop('checked',true);
         // changeLengthMedia();
     <?php 
         $counter += 1;
@@ -6317,6 +6364,8 @@
         $("#sosmed-fb>div").find(".input-hidden").val($("#sosmed-fb>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-fb>div").removeClass("hide");
         $("#fbviewid").removeClass("hide");
+
+        $("#check_"+'{{ $data }}').prop('checked',false);
     <?php } ?>
 
     
