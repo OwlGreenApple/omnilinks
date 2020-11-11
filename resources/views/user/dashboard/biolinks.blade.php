@@ -6240,6 +6240,7 @@
       $count_3 = 0;
       
       $counter = 1;
+      if (count($arr)>0) {
       foreach($arr as $data){
         
         
@@ -6274,7 +6275,7 @@
             $count_3 = 0;
           } 
         
-      } ?>
+      }} ?>
       sortMeBy("data-category", "ul.sortable-msg", "li", "asc");
       sortMeBy("data-category", "ul#getview", "li", "asc");
     <?php }
@@ -6318,6 +6319,7 @@
     if (!is_null($pages->sort_sosmed)) {
       $arr = explode(";",$pages->sort_sosmed);
       $counter = 1;
+      if (count($arr)>0) {
       foreach($arr as $data){
     ?>
         $("#sosmed-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
@@ -6334,7 +6336,7 @@
         // changeLengthMedia();
     <?php 
         $counter += 1;
-      } ?>
+      }} ?>
       sortMeBy("data-category", "ul.sortable-sosmed", "li", "asc");
       sortMeBy("data-category", "ul#sm-preview", "li", "asc");
     <?php }
