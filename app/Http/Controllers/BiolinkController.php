@@ -238,6 +238,7 @@ class BiolinkController extends Controller
 
     //proof
     $proof = $this->getProof($pageid);
+    $proof_text_color = $page->proof_text_color;
 
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
@@ -251,7 +252,8 @@ class BiolinkController extends Controller
       'mod'=>$mod,
       'custom_link'=>$custom_link,
       'description'=>$description,
-      'proof'=>$proof
+      'proof'=>$proof,
+      'proof_text_color'=>$proof_text_color
     ]);  
   }
 
@@ -328,15 +330,16 @@ class BiolinkController extends Controller
       $pageid = $request->pageid;
       $preview = $request->preview;
       $query = $this->getProof($pageid);
-      $pages = Page::where('id','=',$pageid)->first();
+      $page = Page::where('id','=',$pageid)->first();
+      $proof_text_color = $page->proof_text_color;
 
       if($preview == 1)
       {
-        return view('user.dashboard.previewproof',['proof'=>$query]);
+        return view('user.dashboard.previewproof',['proof'=>$query,'proof_text_color'=>$proof_text_color]);
       }
       else
       {
-        return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$pages]);
+        return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$page]);
       }   
   }
 
@@ -734,6 +737,7 @@ class BiolinkController extends Controller
     $page->is_text_color=$request->is_text_color;
     $page->bio_color=$request->bioColor;
     $page->is_bio_color=$request->is_bio_color;
+    $page->proof_text_color=$request->proof_text_color;
 
     /*if(Auth::user()->membership=='elite'){
       $page->powered=0;

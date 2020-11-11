@@ -1,3 +1,5 @@
+<!--- activproof phone-preview -->
+
 @if($proof->count() > 0)
   <div class="proof-box-preview">
   @foreach($proof as $row)
@@ -14,10 +16,7 @@
             </div>
           </div>
 
-          <div class="proof_comments_preview">
-           {{ $row->text }}
-          </div>
-
+          <div class="proof_comments_preview">{{ $row->text }}</div>
           <small><i class="fas fa-check"></i> Activproof</small>
       </div>
   </div>
@@ -28,7 +27,9 @@
 <script type="text/javascript">
 
 $(function(){
-  setTimeout(function(){runningProof();},5000)
+  $('.proof-box-preview > .proof-wrapper-preview:gt(1)').css({position:'absolute','top':0,'left':0});
+  $('.proof-box-preview > .proof-wrapper-preview:gt(0)').hide();
+  setTimeout(function(){runningProof();},5000);
 });
 
 /* run animation display */
@@ -38,10 +39,9 @@ $(function(){
     var counting = 0;
     var timer = 5000;
 
-    $('.proof-box-preview > .proof-wrapper-preview:gt(0)').hide();
       var run = setInterval(
         function(){
-          $('.proof-box-preview > :first-child').slideUp(500).next('.proof-wrapper-preview').slideDown(1000).end().appendTo('.proof-box-preview');
+          $('.proof-box-preview > :first-child').fadeOut(1000).css({position:'absolute','top':0,'left':0}).next('.proof-wrapper-preview').css({position:'relative'}).fadeIn(1000).end().appendTo('.proof-box-preview');
             counting++;
 
           //put php logic according on setting

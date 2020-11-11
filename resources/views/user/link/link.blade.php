@@ -1930,7 +1930,9 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
-    $('.proof-wrapper:gt(0)').hide();
+    $(".proof-wrapper").css({'background-color':'{{ $pages->bio_color }}','color':'{{ $pages->proof_text_color }}'})
+    $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
+    $('.proof-box > .proof-wrapper:gt(0)').hide();
     runningProof();
     stylingYoutube();
 });
@@ -1940,10 +1942,11 @@ function runningProof()
   var total = $(".proof-wrapper").length;
   var counting = 0;
   var delay = 1000;
+  var timing = 5000;
 
     var run = setInterval(
       function(){
-        $('.proof-box > :first-child').slideUp(500).next('.proof-wrapper').slideDown(1000).end().appendTo('.proof-box');
+        $('.proof-box > :first-child').fadeOut(1000).css({position:'absolute','top':0,'left':0}).next('.proof-wrapper').css({position:'relative'}).fadeIn(1000).end().appendTo('.proof-box');
         counting++;
 
         //put php logic according on setting
@@ -1962,7 +1965,7 @@ function runningProof()
           endif;
         ?>
       }, 
-    5000);
+    timing);
 }
 
 function stylingYoutube()
