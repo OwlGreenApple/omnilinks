@@ -26,6 +26,11 @@
     fbq('track', 'Purchase');
   </script>
   <!-- End Facebook Pixel Code -->
+  
+  <!-- Event snippet for Website sale conversion page --> 
+  <script> 
+    gtag('event', 'conversion', { 'send_to': 'AW-482312235/fOOYCJzK2ugBEKuA_uUB', 'transaction_id': '' }); 
+  </script>  
 <?php } ?>
 <div class="container konten konten-register">
   <div class="offset-sm-2 col-sm-8">

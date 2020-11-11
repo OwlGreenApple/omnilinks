@@ -74,6 +74,7 @@
   <!-- proof -->
   <link rel="stylesheet" href="{{asset('css/proof.css')}}">
   
+  <?php if ( env('APP_ENV') !== "local" ) { ?>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>
   <script>
@@ -83,6 +84,14 @@
    gtag('config', 'UA-81228145-4');
   </script>
 
+  <!-- Global site tag (gtag.js) - Google Ads: 482312235 --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-482312235"></script> 
+  <script> 
+    window.dataLayer = window.dataLayer || []; 
+    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-482312235'); 
+  </script>
+  <?php } ?>
+  
   <script>
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
