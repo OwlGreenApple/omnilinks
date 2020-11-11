@@ -805,7 +805,8 @@ class BiolinkController extends Controller
               $arr['message'] = 'Banner image is required';
               return $arr;
             }
-          } else {
+          } 
+          else {
             if ($statusbanner[$i]=="delete"){
               $bannerde= Banner::find($request->idBanner[$i]);
               if (!is_null($bannerde)){
