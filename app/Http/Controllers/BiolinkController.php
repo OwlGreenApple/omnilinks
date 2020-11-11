@@ -976,16 +976,16 @@ class BiolinkController extends Controller
     $messenger = $request->messengerpixel;
 
     if (!$free){
-      $page->wa_pixel_id=$wa;
-      $page->twitter_pixel_id=$twitter;
-      $page->ig_pixel_id=$ig;
-      $page->tk_pixel_id=$tiktok;
-      $page->telegram_pixel_id=$telegram;
-      $page->youtube_pixel_id=$youtube;
-      $page->skype_pixel_id=$skype;
-      $page->fb_pixel_id=$fb;
-      $page->line_pixel_id=$line;
-      $page->messenger_pixel_id=$messenger;
+      $page->wa_pixel_id=strip_tags($wa);
+      $page->twitter_pixel_id=strip_tags($twitter);
+      $page->ig_pixel_id=strip_tags($ig);
+      $page->tk_pixel_id=strip_tags($tiktok);
+      $page->telegram_pixel_id=strip_tags($telegram);
+      $page->youtube_pixel_id=strip_tags($youtube);
+      $page->skype_pixel_id=strip_tags($skype);
+      $page->fb_pixel_id=strip_tags($fb);
+      $page->line_pixel_id=strip_tags($line);
+      $page->messenger_pixel_id=strip_tags($messenger);
     }
     else {
       $page->wa_pixel_id=0;
@@ -1000,18 +1000,18 @@ class BiolinkController extends Controller
       $page->messenger_pixel_id=0;
     }
 
-  	$page->wa_link=$request->wa;
-  	$page->fb_link=$request->fb;
-  	$page->twitter_link=$request->twitter;
-  	$page->telegram_link=$request->telegram;
-  	$page->skype_link=$request->skype;
-  	$page->youtube_link=$request->youtube; 	
-    $page->ig_link=$request->ig;
-    $page->tk_link=$request->tiktok;
-    $page->line_link=$request->line;
-    $page->messenger_link=$request->messenger;
+  	$page->wa_link=strip_tags($request->wa);
+  	$page->fb_link=strip_tags($request->fb);
+  	$page->twitter_link=strip_tags($request->twitter);
+  	$page->telegram_link=strip_tags($request->telegram);
+  	$page->skype_link=strip_tags($request->skype);
+  	$page->youtube_link=strip_tags($request->youtube);
+    $page->ig_link=strip_tags($request->ig);
+    $page->tk_link=strip_tags($request->tiktok);
+    $page->line_link=strip_tags($request->line);
+    $page->messenger_link=strip_tags($request->messenger);
 
-    $page->is_click_bait=$request->is_click_bait;
+    $page->is_click_bait=strip_tags($request->is_click_bait);
 
     if (is_null($page->premium_names)) {
       $names=$page->names;
@@ -1090,14 +1090,14 @@ class BiolinkController extends Controller
         $url->pages_id=$page->id;
         $url->names=null;
         $url->users_id=$user->id;
-        $url->options=$request->options[$i];
-        $url->title=$request->title[$i];
-        $url->link=$request->url[$i];
-        $url->youtube_embed = $request->embed[$i];
+        $url->options=strip_tags($request->options[$i]);
+        $url->title=strip_tags($request->title[$i]);
+        $url->link=strip_tags($request->url[$i]);
+        $url->youtube_embed = strip_tags($request->embed[$i]);
 
         if($free == false)
         {
-          $url->pixel_id = $request->linkpixel[$i];
+          $url->pixel_id = strip_tags($request->linkpixel[$i]);
         }
         else
         {
@@ -1197,9 +1197,9 @@ class BiolinkController extends Controller
       // }
     }
 
-    $page->sort_link = $sort_link;
-    $page->sort_msg = $sort_msg;
-    $page->sort_sosmed = $sort_sosmed;
+    $page->sort_link = strip_tags($sort_link);
+    $page->sort_msg = strip_tags($sort_msg);
+    $page->sort_sosmed = strip_tags($sort_sosmed);
     // $page->save();
 
     /*if((is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)))
@@ -1248,7 +1248,6 @@ class BiolinkController extends Controller
 
   public function savepixel(Request $request)
   {
-
     $temp_arr = array();
     $pixel_proof = null;
     $temp_arr['script'] = ['required', 'string' ];
@@ -1304,9 +1303,9 @@ class BiolinkController extends Controller
   	$user=Auth::user();
   	$pixel->pages_id=$page->id;
   	$pixel->users_id=$user->id;
-  	$pixel->title=$request->title;
-    $pixel->jenis_pixel=$request->jenis_pixel;
-  	$pixel->script=$request->script;
+  	$pixel->title=strip_tags($request->title);
+    $pixel->jenis_pixel=strip_tags($request->jenis_pixel);
+  	$pixel->script=$request->script; //?? mesti dipikirkan strip_tags nya gmn 
   	$pixel->save();
   	// return redirect('/biolinks/'.$uuid);
     
