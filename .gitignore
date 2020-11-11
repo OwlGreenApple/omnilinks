@@ -1,3 +1,5 @@
 .env
 .htaccess
 storage/test
+
+/.htaccess
