@@ -17,6 +17,7 @@ use App\Mail\NotifClickFreeUser;
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Auth,Carbon,Validator,Storage,Mail,DB;
 use Ramsey\Uuid\Uuid;
 
@@ -976,16 +977,16 @@ class BiolinkController extends Controller
     $messenger = $request->messengerpixel;
 
     if (!$free){
-      $page->wa_pixel_id=strip_tags($wa);
-      $page->twitter_pixel_id=strip_tags($twitter);
-      $page->ig_pixel_id=strip_tags($ig);
-      $page->tk_pixel_id=strip_tags($tiktok);
-      $page->telegram_pixel_id=strip_tags($telegram);
-      $page->youtube_pixel_id=strip_tags($youtube);
-      $page->skype_pixel_id=strip_tags($skype);
-      $page->fb_pixel_id=strip_tags($fb);
-      $page->line_pixel_id=strip_tags($line);
-      $page->messenger_pixel_id=strip_tags($messenger);
+      $page->wa_pixel_id=$wa;
+      $page->twitter_pixel_id=$twitter;
+      $page->ig_pixel_id=$ig;
+      $page->tk_pixel_id=$tiktok;
+      $page->telegram_pixel_id=$telegram;
+      $page->youtube_pixel_id=$youtube;
+      $page->skype_pixel_id=$skype;
+      $page->fb_pixel_id=$fb;
+      $page->line_pixel_id=$line;
+      $page->messenger_pixel_id=$messenger;
     }
     else {
       $page->wa_pixel_id=0;
@@ -1011,7 +1012,7 @@ class BiolinkController extends Controller
     $page->line_link=strip_tags($request->line);
     $page->messenger_link=strip_tags($request->messenger);
 
-    $page->is_click_bait=strip_tags($request->is_click_bait);
+    $page->is_click_bait=$request->is_click_bait;
 
     if (is_null($page->premium_names)) {
       $names=$page->names;
@@ -1127,7 +1128,6 @@ class BiolinkController extends Controller
       }
     }
     
-    
     $sort_msg = '';
     
     if($request->has('sortmsg'))
@@ -1231,13 +1231,22 @@ class BiolinkController extends Controller
     {
       $page->colom_sosmed='col-md-3 col-3 text-center';
     }*/
-    $page->save();
-
-    $arr['status'] = 'success';
+    try
+    {
+      $page->save();
+      $arr['status'] = 'success';
+      $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+    }
+    catch(QueryException $e)
+    {
+      // dd($e->getMessage());
+      $arr['status'] = 'error';
+      $arr['message'] = 'Server kami terlalu sibuk, silahkan dicoba lagi nanti.';
+    }
 
     $short_link = env('SHORT_LINK');
     // $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
-    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+   
   	return $arr;
   }
 

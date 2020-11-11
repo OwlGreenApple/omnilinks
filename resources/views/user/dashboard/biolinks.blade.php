@@ -2579,6 +2579,7 @@
                     Facebook : https://facebook.com/username-facebook <br>
                     Instagram : username-instagram <br>
                     Twitter : username-twitter <br>
+                    Tiktok : username-tiktok <br>
                     </div>">
                       <i class="fas fa-question-circle icon-reflink"></i>
                     </span>
@@ -2759,6 +2760,48 @@
                       </div>
                     </li>
                   </ul>
+
+                  <!-- -modal option for social media -->
+                  <div class="modal fade" id="modal-social-media" tabindex="-1" role="dialog"aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Choose Social Media
+                                </div>
+                                <div class="modal-body">
+                                  <!-- Youtube -->
+                                  <div class="form-check">
+                                      <input id="check_youtube" type="checkbox" class="form-check-input check_social" data-check="youtube">
+                                      <label class="form-check-label"><i class="fab fa-youtube"></i> Youtube</label>
+                                  </div>
+                                  <!-- Facebook -->
+                                  <div class="form-check">
+                                      <input id="check_fb" type="checkbox" class="form-check-input check_social" data-check="fb">
+                                      <label class="form-check-label"><i class="fab fa-facebook-f"></i> Facebook</label>
+                                  </div>
+                                  <!-- Twitter -->
+                                  <div class="form-check">
+                                      <input id="check_twitter" type="checkbox" class="form-check-input check_social" data-check="twitter">
+                                      <label class="form-check-label"><i class="fab fa-twitter"></i> Twitter</label>
+                                  </div>
+                                  <!--  Instagram -->
+                                  <div class="form-check">
+                                      <input id="check_ig" type="checkbox" class="form-check-input check_social" data-check="ig">
+                                      <label class="form-check-label"><i class="fab fa-instagram"></i> Instagram</label>
+                                  </div>
+                                  <!--  Tiktok -->
+                                  <div class="form-check">
+                                      <input id="check_tiktok" type="checkbox" class="form-check-input check_social" data-check="tiktok">
+                                      <label class="form-check-label"><i class="fab fa-tiktok"></i> Tiktok</label>
+                                  </div>
+                                  <!-- end -->
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                                </div>
+                            </div>
+                        </div>
+                      </div> 
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks btn-save-link">
@@ -6284,6 +6327,8 @@
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
         $("#"+"<?php echo $data; ?>"+"viewid").addClass("shown-sm");
+
+        $("#check_"+'{{ $data }}').prop('checked',true);
         // changeLengthMedia();
     <?php 
         $counter += 1;
@@ -6317,6 +6362,8 @@
         $("#sosmed-fb>div").find(".input-hidden").val($("#sosmed-fb>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-fb>div").removeClass("hide");
         $("#fbviewid").removeClass("hide");
+
+        $("#check_"+'{{ $data }}').prop('checked',false);
     <?php } ?>
 
     

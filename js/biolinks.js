@@ -153,7 +153,38 @@ $(document).ready(function () {
     });
 
     /* biolink social-media */
-    $(document).on('click', '#sm', function (e) {
+    $(document).on('click', '#sm', function() 
+    {
+        $("#modal-social-media").modal();
+    });
+
+    $(".check_social").click(function()
+    {
+        var checked = $(this).prop('checked');
+        var data_id = $(this).attr('data-check');
+        var cl = $("#"+data_id+"viewid");
+
+        if(checked == true)
+        {
+            $("#"+data_id).css("display","table");
+            $("#"+data_id).find(".input-hidden").val($("#"+data_id).find(".input-hidden").attr("data-val"));
+            $("#"+data_id).removeClass('hide');
+            cl.show();
+            cl.removeClass('hide');
+            cl.addClass('shown-sm');
+        }
+        else
+        {
+            $('#'+data_id).hide();
+            $('#'+data_id).addClass('hide');
+            $('#'+data_id).find(".input-hidden").val('');
+            cl.hide();
+            cl.addClass('hide');
+            cl.removeClass('shown-sm');
+        }
+    });
+
+    /*$(document).on('click', '#sm', function (e) {
       $('.socialmedia').each(function () {
         if ($(this).hasClass('hide')) {
           //$(this).show();
@@ -173,7 +204,7 @@ $(document).ready(function () {
         }
       });
       //changeLengthMedia();
-    });
+    });*/
 
     $('#deleteyoutube').on('click', function () {
         $('#youtube').hide();
@@ -182,6 +213,7 @@ $(document).ready(function () {
         $('#youtubeviewid').hide();
         $('#youtubeviewid').addClass('hide');
         $('#youtubeviewid').removeClass('shown-sm');
+        $('#check_youtube').prop('checked',false);
         //changeLengthMedia();
         return false;
     });
@@ -192,6 +224,7 @@ $(document).ready(function () {
         $('#igviewid').hide();
         $('#igviewid').addClass('hide');
         $('#igviewid').removeClass('shown-sm');
+        $('#check_ig').prop('checked',false);
         //changeLengthMedia();
         return false;
     });
@@ -200,8 +233,9 @@ $(document).ready(function () {
         $('#tiktok').addClass('hide');
         $('#tiktok').find("input").val('');
         $('#tiktokviewid').hide();
-        // $('#tiktokviewid').addClass('hide');
+        $('#tiktokviewid').addClass('hide');
         $('#tiktokviewid').removeClass('shown-sm');
+        $('#check_tiktok').prop('checked',false);
         //changeLengthMedia();
         return false;
     });
@@ -212,6 +246,7 @@ $(document).ready(function () {
         $('#fbviewid').hide();
         $('#fbviewid').addClass('hide');
         $('#fbviewid').removeClass('shown-sm');
+        $('#check_fb').prop('checked',false);
         //changeLengthMedia();
         return false;
     });
@@ -222,6 +257,7 @@ $(document).ready(function () {
         $('#twitterviewid').hide();
         $('#twitterviewid').addClass('hide');
         $('#twitterviewid').removeClass('shown-sm');
+        $('#check_twitter').prop('checked',false);
         //changeLengthMedia();
         return false;
     });
