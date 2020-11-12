@@ -1,0 +1,19 @@
+/*
+	activproof.css
+	created : Nov 12 2020
+*/
+
+#apf .shop {
+	padding : 20px;
+	font-size : 28px;
+	border : 1px solid #ced4da;
+	text-align: center;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+#apf .shop .btn {
+	font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+}

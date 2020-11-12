@@ -165,7 +165,13 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //Custom Link
     Route::get('/premium-id-biolinks/tambah','PremiumIDController@premiumid_biolinks');
-    Route::get('/premium-id-singlelinks/tambah','PremiumIDController@premiumid_singlelinks');    
+    Route::get('/premium-id-singlelinks/tambah','PremiumIDController@premiumid_singlelinks');
+
+    //Proof-Shop
+    Route::get('activproof','ProofController@index');
+    Route::post('page_point','ProofController@count_page_point');    
+    Route::get('display_links','ProofController@display_links');    
+    Route::post('counting_point','ProofController@counting_point');    
   });
 
 

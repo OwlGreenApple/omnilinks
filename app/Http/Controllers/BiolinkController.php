@@ -525,6 +525,8 @@ class BiolinkController extends Controller
               ->with('wachat',$wachat)
               ->with('valid',$validmember)
               ->with('proof',$proof)
+              ->with('page_name',$names)
+              ->with('user_id',$page->user_id)
               ;
   }
 

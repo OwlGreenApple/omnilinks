@@ -1403,29 +1403,31 @@
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
     <div class="row justify-content-center service">
       <div class="col-lg-7 col-md-8 col-12 mb-4 row">
-        <!-- proof -->
-        @if($proof->count() > 0)
-          <div class="col-lg-7 proof-box">
-          @foreach($proof as $row)
-          <div class="proof-wrapper">
-              <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
-           
-              <div class="proof-desc">
-                  <div class="proof_profile">
-                    <div class="proof_name">{{ $row->name }}</div>
-                    <div class="proof_star">
-                      @for($x=1;$x<=$row->star;$x++)
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                      @endfor
-                    </div>
-                  </div>
+        @if($pages->point > 0)
+            <!-- proof -->
+            @if($proof->count() > 0)
+              <div class="col-lg-7 proof-box">
+              @foreach($proof as $row)
+              <div class="proof-wrapper">
+                  <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+               
+                  <div class="proof-desc">
+                      <div class="proof_profile">
+                        <div class="proof_name">{{ $row->name }}</div>
+                        <div class="proof_star">
+                          @for($x=1;$x<=$row->star;$x++)
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                          @endfor
+                        </div>
+                      </div>
 
-                  <div class="proof_comments">"{{ $row->text }}"</div>
-                  <small><i class="fas fa-check"></i> Activproof</small>
+                      <div class="proof_comments">"{{ $row->text }}"</div>
+                      <small><i class="fas fa-check"></i> Activproof</small>
+                  </div>
               </div>
-          </div>
-          @endforeach
-        </div>
+              @endforeach
+            </div>
+            @endif 
         @endif
 
         <div class="offset-md-1 col-md-5 col-5">
@@ -1934,8 +1936,34 @@ $(document).ready(function() {
     $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
     $('.proof-box > .proof-wrapper:gt(0)').hide();
     runningProof();
-    stylingYoutube();
+    getClientIP();
 });
+
+function getClientIP()
+{
+  $.getJSON("https://api.ipify.org/?format=json", function(e) {
+    pointCount(e.ip);
+  });
+}
+
+function pointCount(ip)
+{
+  $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      type: 'POST',
+      url: '{{ url("page_point") }}',
+      data: {page : '{{$page_name}}',user_id:'{{$user_id}}', ip : ip},
+      dataType:'json',
+     /* success: function(result) 
+      {
+        alert(result.msg);
+      },*/
+      error:function(xhr,throwable,err)
+      {
+        // console.log(xhr.responseText);
+      }
+    });
+}
 
 function runningProof()
 {
@@ -1966,18 +1994,6 @@ function runningProof()
         ?>
       }, 
     timing);
-}
-
-function stylingYoutube()
-{
-  /*$(".embed-responsive-item").on("load", function() {
-    let head = $(".embed-responsive-item").contents().find("head");
-    let css = '<xxx>.test-add{ color : red}</xxx>';
-    $(head).append(css);
-  });*/
-  var html = 'Hello from <img src="http://stackoverflow.com/favicon.ico" alt="SO">';
-  var iframe = $('.embed-responsive-item');
-  iframe.src = 'data:text/html,' + encodeURIComponent(html);
 }
 
 </script>
