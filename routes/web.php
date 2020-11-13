@@ -172,7 +172,8 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::post('page_point','ProofController@count_page_point');    
     Route::get('display_links','ProofController@display_links');    
     Route::post('counting_point','ProofController@counting_point')->middleware('allocate');    
-    Route::get('proof_history/{mod?}','ProofController@proof_history');    
+    Route::get('proof_history/{mod?}','ProofController@proof_history'); 
+    Route::get('checkout_proof/{id}','ProofController@checkout_proof');   
   });
 
 

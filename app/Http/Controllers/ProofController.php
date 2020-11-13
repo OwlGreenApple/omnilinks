@@ -202,5 +202,10 @@ class ProofController extends Controller
     return view('user.proof.history',['pf'=>$pf]);
   }
 
+  public function checkout_proof($id)
+  {
+    return view('pricing.checkoutproof')->with(array('id'=>$id));
+  }
+
 /* END CONTROLLER */
 }

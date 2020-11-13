@@ -33,10 +33,14 @@
 
   function table()
   {
-    var paging = parseInt('{{$paging}}')-1;
+    var paging = parseInt('{{$paging}}');
+    if(paging > 0)
+    {
+      paging = paging - 1;
+    }
+
     var table = $("#alocation").DataTable({
       "destroy": true,
-      "pageLength": 3
     });
     table.page(paging).draw( 'page' );
   }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use App\Account;
 use App\HistorySearch;
 use App\User;
@@ -351,6 +352,115 @@ class OrderController extends Controller
     return view('pricing.thankyou-confirm-payment');
   }
 
+  private function cek_proof_price($package,$price)
+  {
+    $paket = array(
+      getActivProofPackage()[1]['package'] => getActivProofPackage()[1]['price'],
+      getActivProofPackage()[2]['package'] => getActivProofPackage()[2]['price'],
+      getActivProofPackage()[3]['package'] => getActivProofPackage()[3]['price'],
+      getActivProofPackage()[4]['package'] => getActivProofPackage()[4]['price'],
+    );
+
+    if(isset($paket[$package]))
+    {
+      if($price!=$paket[$package]){
+        return false; 
+      } else {
+        return true;
+      }
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public function proof_payment(Request $request)
+  {
+    $user = Auth::user();
+    $diskon = 0;
+    //unique code 
+    $unique_code = mt_rand(1, 1000);
+
+    $dt = Carbon::now();
+    $order = new Order;
+    $str = 'OML'.$dt->format('ymdHi');
+    $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
+    $order->no_order = $order_number;
+    $order->user_id = $user->id;
+    $order->package =$request->package;
+    $order->jmlpoin=0;
+    $order->coupon_id = '-';
+    $order->total = $request->price + $unique_code;
+    $order->discount = $diskon;
+    $order->grand_total = $request->price - $diskon + $unique_code;
+    $order->status = 0;
+    $order->buktibayar = "";
+    $order->keterangan = "";
+
+    try
+    {
+      $order->save();
+      $order_status = true;
+    }
+    catch(QueryException $e)
+    {
+      // $e->getMessage();
+      $order_status = false;
+    }
+
+    if($order_status == true)
+    {
+      $emaildata = [
+        'order' => $order,
+        'user' => $user,
+        'nama_paket' => $request->package,
+        'no_order' => $order_number,
+      ];
+    
+      Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+        $message->from('info@omnilinkz.com', 'Omnilinkz');
+        $message->to($user->email);
+        $message->subject('[Omnilinkz] Order Nomor '.$order_number);
+      });
+    }
+    else
+    {
+        $res['msg'] = 0;
+        return response()->json($res); 
+    }
+
+    if(!is_null($user->wa_number)){
+      $message = null;
+      $message .= '*Hi '.$user->name.'*,'."\n\n";
+      $message .= "Berikut info pemesanan Omnilinkz :\n";
+      $message .= '*No Order :* '.$order->no_order.''."\n";
+      $message .= '*Nama :* '.$user->name.''."\n";
+      $message .= '*Paket :* '.$order->package.''."\n";
+      // $message .= '*Tgl Pembelian :* '.$dt->format('d-M-Y').''."\n";
+      $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->grand_total))."\n";
+
+      $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
+      $message .= 'BCA (Sugiarto Lasjim)'."\n";
+      $message .= '8290-812-845'."\n\n";
+      
+      $message .= "Harus diperhatikan juga, kalau jumlah yang di transfer harus *sama persis dengan nominal diatas* supaya _*kami lebih mudah memproses pembelianmu*_.\n\n";
+
+      $message .= '*Sesudah transfer:*'."\n";
+      $message .= '- *Login* ke https://omnilinkz.com'."\n";
+      $message .= '- *Klik* Profile'."\n";
+      $message .= '- Pilih *Order & Confirm*'."\n";
+      $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
+
+      $message .= 'Terima Kasih,'."\n\n";
+      $message .= 'Team Omnilinkz'."\n";
+      $message .= '_*Omnilinkz is part of Activomni.com_';
+      
+      Helper::send_message_queue_system($user->wa_number,$message);
+     }
+     $res['msg'] = 1;
+     return response()->json($res); 
+  }
 
   //checkout klo uda login
   public function confirm_payment(Request $request){

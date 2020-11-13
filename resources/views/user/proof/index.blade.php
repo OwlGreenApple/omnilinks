@@ -17,29 +17,42 @@
     </div>
 
     <div class="col-md-12 pr-0 div-btn mx-auto mt-3 mb-3">
+        <div class="text-md-left text-center mb-5"><p><b><h3>Top Up Activproof Credit</h3></b></p></div>
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="shop">
-              <div>1</div>
-              <button type="button" class="btn btn-success">Beli</button>
+              @php $x = 1 @endphp
+              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
+              <div class="notes">Rp {!! str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+              <div class="notes">{!! str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+              <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="shop">
-              <div>2</div>
-              <button type="button" class="btn btn-success">Beli</button>
+               @php $x = 2 @endphp
+              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
+              <div class="notes">Rp {!! str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+              <div class="notes">{!! str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+              <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="shop">
-              <div>3</div>
-              <button type="button" class="btn btn-success">Beli</button>
+              @php $x = 3 @endphp
+              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
+              <div class="notes">Rp {!! str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+              <div class="notes">{!! str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+              <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3 col-3">
             <div class="shop">
-              <div>3</div>
-              <button type="button" class="btn btn-success">Beli</button>
+              @php $x = 4 @endphp
+              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
+              <div class="notes">Rp {!! str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+              <div class="notes">{!! str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+              <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
           <!-- --> 
@@ -47,6 +60,7 @@
     </div>
 
     <div class="col-md-12 pr-0 div-btn mx-auto mt-5">
+      <div class="text-md-left text-center mb-5"><p><b><h3>Alokasi Activproof Credit</h3></b></p></div>
       <span id="notifier"><!-- display message --></span>
       <div class="table-responsive" id="content"><!-- display table --></div>
     </div>

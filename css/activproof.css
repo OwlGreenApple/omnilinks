@@ -17,3 +17,8 @@
     font-size: 18px;
     width: 100%;
 }
+
+#apf .notes {
+	font-size : 20px;
+	font-weight: 500;
+}
