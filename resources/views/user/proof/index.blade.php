@@ -7,11 +7,11 @@
     <div class="col-md-9 pr-0 div-btn mx-auto mb-5">
         <div class="row">
           <div class="col-lg-4 col-md-3 pl-md-3 pl-0 pr-0">
-            <h4>Total Credits : <b>{{ $total_proof_credit }}</b></h4>
+            <h4>Total Credits : <b class="current_point">{{ $total_proof_credit }}</b></h4>
           </div>
 
           <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 text-right">
-            <a href="#" class="btn btn-primary btn-lg">History</a>
+            <a href="{{ url('proof_history') }}" class="btn btn-primary btn-lg">History</a>
           </div>
         </div>
     </div>
@@ -47,6 +47,7 @@
     </div>
 
     <div class="col-md-12 pr-0 div-btn mx-auto mt-5">
+      <span id="notifier"><!-- display message --></span>
       <div class="table-responsive" id="content"><!-- display table --></div>
     </div>
 <!-- -->   
@@ -57,13 +58,23 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><h5>Silahkan isi jumlah credit untuk <b>menambahkan</b></h5>
+        <h5 class="modal-title">Silahkan isi jumlah credit untuk <b>menambahkan</b>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
       <div class="modal-body">
-        <input min="0" type="number" class="form-control" name="nominal" />
+        <div>Page: <b class="pg_name"></b></div>
+        <div>Jumlah Credit: <b class="pg_credit"></b></div>
+      </div>
+
+      <div class="modal-body">
+        <span class="notif"><!-- notif --></span>
+        <input min="0" type="number" class="form-control" name="nominal" value="0" />
+        <span class="error alo-id"><!-- error id --></span>
+        <span class="error alo-nominal"><!-- error id --></span>
+        <span class="error alo-page"><!-- error id --></span>
       </div>
       <div class="modal-footer">
         <button id="save_credit_add" type="button" class="btn btn-success">Tambah</button>
@@ -77,13 +88,23 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><h5>Silahkan isi jumlah credit untuk <b>mengurangi</b></h5>
+        <h5 class="modal-title">Silahkan isi jumlah credit untuk <b>mengurangi</b>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
       <div class="modal-body">
-        <input min="0" type="number" class="form-control" name="nominal_subs" />
+        <div>Page: <b class="pg_name"></b></div>
+        <div>Jumlah Credit: <b class="pg_credit"></b></div>
+      </div>
+
+      <div class="modal-body">
+        <span class="notif"><!-- display error --></span>
+        <input min="0" type="number" class="form-control" name="nominal_subs" value="0" />
+        <span class="error alo-id"><!-- error id --></span>
+        <span class="error alo-nominal"><!-- error id --></span>
+        <span class="error alo-page"><!-- error id --></span>
       </div>
       <div class="modal-footer">
         <button id="save_credit_subs" type="button" class="btn btn-danger">Kurangi</button>
@@ -107,7 +128,8 @@
     $("#save_credit_add").click(function(){
       var nominal = $("input[name='nominal']").val();
       var id = $(this).attr('data-id');
-      counting_point(id,nominal,1);
+      var page = $(this).attr('data-page');
+      counting_point(id,nominal,page,1);
     });
   }
 
@@ -116,17 +138,18 @@
     $("#save_credit_subs").click(function(){
       var nominal = $("input[name='nominal_subs']").val();
       var id = $(this).attr('data-id');
-      counting_point(id,nominal,0);
+      var page = $(this).attr('data-page');
+      counting_point(id,nominal,page,0);
     });
   }
 
-  function counting_point(id,nominal,purpose)
+  function counting_point(id,nominal,page,purpose)
   {
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'POST',
       url: '{{ url("counting_point") }}',
-      data: {id : id,nominal : nominal, purpose : purpose},
+      data: {id : id,nominal : nominal, purpose : purpose, page : page},
       dataType:'json',
       beforeSend: function()
       {
@@ -138,19 +161,37 @@
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
         
-        if(result.error == 1)
+        if(result.err == 0)
         {
-            $("#notif").html('<div class="alert alert-danger">Server kami terlalu sibuk. mohon di coba lagi nanti.</div>');
-        }
-        else if(result.error == 2)
-        {
-            $("#notif").html('<div class="alert alert-danger">Jumlah invalid.</div>');
-        }
-        else
-        {
-            $("#notif").html('<div class="alert alert-success">Data nominal anda telah di alokasikan.</div>');
+            $("#notifier").html('<div class="alert alert-success">Data nominal anda telah di alokasikan.</div>');
+            $("#modal_credit , #modal_credit_subs").modal('hide');
+            $(".current_point").html(result.point);
             get_links();
         }
+        
+        if(result.err == 1)
+        {
+            $(".notif").html('<div class="alert alert-danger">Server kami terlalu sibuk. mohon di coba lagi nanti.</div>');
+        }
+
+        if(result.err == 2)
+        {
+            $(".notif").html('<div class="alert alert-danger">Jumlah invalid.</div>');
+        }
+
+        if(result.err == 3)
+        {
+            $(".notif").html('<div class="alert alert-danger">Credit and tidak cukup, silahkan top up lagi</div>');
+        }
+
+        if(result.err == 4)
+        {
+            $(".alo-id").html('<div>'+result.id+'</div>');
+            $(".alo-nominal").html('<div>'+result.nominal+'</div>');
+            $(".alo-page").html('<div>'+result.page+'</div>');
+        }
+       
+        $(".alert, .error").delay(5000).fadeOut(2000);
       },
       error:function(xhr,throwable,err)
       {
@@ -168,6 +209,11 @@
       var id = $(this).attr('id');
       id = id.split("_");
       $("#save_credit_add").attr('data-id',id[1]);
+      var page = $("#pg_"+id[1]).text();
+      var credit = $("#cd_"+id[1]).text();
+      $("#save_credit_add").attr('data-page',page);
+      $(".pg_name").html(page); 
+      $(".pg_credit").html(credit);
       $("#modal_credit").modal();
     });
 
@@ -176,6 +222,11 @@
       var id = $(this).attr('id');
       id = id.split("_");
       $("#save_credit_subs").attr('data-id',id[1]);
+      var page = $("#pg_"+id[1]).text();
+      var credit = $("#cd_"+id[1]).text();
+      $("#save_credit_subs").attr('data-page',page);
+      $(".pg_name").html(page); 
+      $(".pg_credit").html(credit);
       $("#modal_credit_subs").modal();
     });
   }

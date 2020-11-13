@@ -113,23 +113,41 @@ class ProofController extends Controller
         $page_id = $request->id;
         $nominal = $request->nominal;
         $purpose = $request->purpose;
+        $user = Auth::user();
 
         $page = Page::find($page_id);
+        $user_point = $res['point'] = $user->point;
    
         //purpose 1 = add points
         if($purpose == 1)
         {
-          try{
+          $user_point = $user_point - $nominal;
+          if($user_point < 0)
+          {
+            $res['err'] = 3;
+            return response()->json($res);
+          }
+
+          $ph = new ProofHistory;
+          $ph->user_id = $user->id;
+          $ph->page_name = $request->page;
+          $ph->debit = $nominal;
+
+          try
+          {
             $page->point += $nominal;
             $page->save();
+            $user->point = $user_point;
+            $user->save();
+            $ph->save();
             $res['err'] = 0;
+            $res['point'] = $user->point;
           }
           catch(QueryException $e)
           {
             //$e->getMessage();
             $res['err'] = 1;
           }
-
           return response()->json($res);
         }
 
@@ -138,10 +156,21 @@ class ProofController extends Controller
         $diff = $page->point - $nominal;
         if($diff >= 0)
         {
+          $user_point = $user_point + $nominal;
+
+          $ph = new ProofHistory;
+          $ph->user_id = $user->id;
+          $ph->page_name = $request->page;
+          $ph->kredit = $nominal;
+
           try{
             $page->point = $diff;
             $page->save();
+            $user->point = $user_point;
+            $user->save();
+            $ph->save();
             $res['err'] = 0;
+            $res['point'] = $user->point;
           }
           catch(QueryException $e)
           {
@@ -154,6 +183,22 @@ class ProofController extends Controller
             $res['err'] = 2;
         }
         return response()->json($res);
+  }
+
+  function proof_history(Request $request)
+  {
+    $mod = $request->get('mod');
+
+    if($mod == null)
+    {
+      $pf = ProofHistory::where('user_id',Auth::id())->get();
+    }
+    else
+    {
+      $pf = ProofHistory::where([['user_id',Auth::id()],['page_name','=',$mod]])->get();
+    }
+
+    return view('user.proof.history',['pf'=>$pf]);
   }
 
 /* END CONTROLLER */

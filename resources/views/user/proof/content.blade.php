@@ -1,6 +1,6 @@
 @if(count($pages) > 0)
   @php $no = 1 @endphp
-  <table id="alocation" class="table" style="width:100%">
+  <table id="alocation" class="table cell-border" style="width:100%">
     <thead>
       <tr>
         <th width="8%" class="text-center">No</th>
@@ -13,8 +13,8 @@
     @foreach($pages AS $row)
       <tr>
         <td class="text-center">{{ $no }}</td>
-        <td class="text-center">{{ $row['name'] }}</td>
-        <td>{{ number_format($row['credit']) }}</td>
+        <td id="pg_{{ $row['id'] }}" class="text-center"><a href="https://{{env('SHORT_LINK')}}/{{$row['name']}}" target="_blank">{{ $row['name'] }}</a></td>
+        <td id="cd_{{ $row['id'] }}"><a href="{{url('proof_history')}}/?mod={{ $row['name'] }}" target="_blank">{{ number_format($row['credit']) }}</a></td>
         <td>
           <button id="pr_{{ $row['id'] }}" type="button" class="btn btn-success text-white btn-sm add">+</button>
           <button id="pr_{{ $row['id'] }}" type="button" class="btn btn-danger text-white btn-sm subs">-</button>
