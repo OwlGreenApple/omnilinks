@@ -14,7 +14,7 @@
       <tr>
         <td class="text-center">{{ $no }}</td>
         <td id="pg_{{ $row['id'] }}" class="text-center"><a href="https://{{env('SHORT_LINK')}}/{{$row['name']}}" target="_blank">{{ $row['name'] }}</a></td>
-        <td id="cd_{{ $row['id'] }}"><a href="{{url('proof_history')}}/?mod={{ $row['name'] }}" target="_blank">{{ number_format($row['credit']) }}</a></td>
+        <td id="cd_{{ $row['id'] }}"><a href="{{url('proof_history')}}/?mod={{ $row['name'] }}" target="_blank">{{ str_replace(",",".",number_format($row['credit'])) }}</a></td>
         <td>
           <button id="pr_{{ $row['id'] }}" type="button" class="btn btn-success text-white btn-sm add">+</button>
           <button id="pr_{{ $row['id'] }}" type="button" class="btn btn-danger text-white btn-sm subs">-</button>
@@ -33,9 +33,11 @@
 
   function table()
   {
-    $("#alocation").DataTable({
-      destroy: true,
-      "pageLength": 5
+    var paging = parseInt('{{$paging}}')-1;
+    var table = $("#alocation").DataTable({
+      "destroy": true,
+      "pageLength": 3
     });
+    table.page(paging).draw( 'page' );
   }
 </script>

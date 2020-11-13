@@ -82,9 +82,10 @@ class ProofController extends Controller
       exit();
     }
 
-    public function display_links()
+    public function display_links(Request $request)
     {
         $page = Page::where('user_id',Auth::id())->get();
+        $datatable_pagination = $request->pagination;
 
         if($page->count() > 0)
         {
@@ -101,11 +102,11 @@ class ProofController extends Controller
             $data[] = [
               'id'=>$row->id,
               'name'=>$names,
-              'credit'=>$row->point
+              'credit'=>$row->point,
             ];
           endforeach;
         }
-        return view('user.proof.content',['pages'=>$data]);
+        return view('user.proof.content',['pages'=>$data,'paging'=>$datatable_pagination]);
     }
 
     public function counting_point(Request $request)
@@ -141,7 +142,7 @@ class ProofController extends Controller
             $user->save();
             $ph->save();
             $res['err'] = 0;
-            $res['point'] = $user->point;
+            $res['point'] = str_replace(",",".",number_format($user->point));
           }
           catch(QueryException $e)
           {
@@ -170,7 +171,7 @@ class ProofController extends Controller
             $user->save();
             $ph->save();
             $res['err'] = 0;
-            $res['point'] = $user->point;
+            $res['point'] = str_replace(",",".",number_format($user->point));
           }
           catch(QueryException $e)
           {

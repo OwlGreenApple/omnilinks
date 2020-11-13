@@ -126,24 +126,26 @@
   function addPoint()
   {
     $("#save_credit_add").click(function(){
+      var paging = $(".current").attr('data-dt-idx');
       var nominal = $("input[name='nominal']").val();
       var id = $(this).attr('data-id');
       var page = $(this).attr('data-page');
-      counting_point(id,nominal,page,1);
+      counting_point(id,nominal,page,paging,1);
     });
   }
 
   function substractPoint()
   {
     $("#save_credit_subs").click(function(){
+      var paging = $(".current").attr('data-dt-idx');
       var nominal = $("input[name='nominal_subs']").val();
       var id = $(this).attr('data-id');
       var page = $(this).attr('data-page');
-      counting_point(id,nominal,page,0);
+      counting_point(id,nominal,page,paging,0);
     });
   }
 
-  function counting_point(id,nominal,page,purpose)
+  function counting_point(id,nominal,page,paging,purpose)
   {
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -166,7 +168,7 @@
             $("#notifier").html('<div class="alert alert-success">Data nominal anda telah di alokasikan.</div>');
             $("#modal_credit , #modal_credit_subs").modal('hide');
             $(".current_point").html(result.point);
-            get_links();
+            get_links(paging);
         }
         
         if(result.err == 1)
@@ -231,11 +233,12 @@
     });
   }
 
-  function get_links()
+  function get_links(pagination =0)
   {
     $.ajax({
       type : 'GET',
       url : '{{ url("display_links") }}',
+      data : {pagination : pagination},
       dataType : 'html',
       success : function(result)
       {
