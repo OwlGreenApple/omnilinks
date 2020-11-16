@@ -179,6 +179,7 @@ return [
 
         Barryvdh\Snappy\ServiceProvider::class,
         'Maatwebsite\Excel\ExcelServiceProvider',
+        Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
     ],
 
     /*
