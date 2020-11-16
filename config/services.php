@@ -14,8 +14,9 @@ return [
     |
     */
     'sendinblue' => [
-       'url' => 'https://api.sendinblue.com/v3.0',
-       'key' => env('SENDINBLUE_KEY'),
+        // api-key or partner-key
+        'key_identifier' => env('SENDINBLUE_KEY_IDENTIFIER', 'api-key'),
+        'key' => env('SENDINBLUE_KEY'),
     ],
     
     'mailgun' => [
