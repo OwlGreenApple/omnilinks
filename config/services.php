@@ -14,7 +14,7 @@ return [
     |
     */
     'sendinblue' => [
-       'url' => 'https://api.sendinblue.com/v2.0',
+       'url' => 'https://api.sendinblue.com/v3.0',
        'key' => env('SENDINBLUE_KEY'),
     ],
     
