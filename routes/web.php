@@ -169,7 +169,6 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //Proof-Shop
     Route::get('activproof','ProofController@index');
-    Route::post('page_point','ProofController@count_page_point');    
     Route::get('display_links','ProofController@display_links');    
     Route::post('counting_point','ProofController@counting_point')->middleware('allocate');    
     Route::get('proof_history/{mod?}','ProofController@proof_history'); 
@@ -227,6 +226,7 @@ if((env('DOMAIN_TYPE')=='shortlink')||(env('APP_ENV')=='local')){
   Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');
+  Route::post('page_point','ProofController@count_page_point');    
   //url
   // Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
   // Route::get('/omn.lkz/{names}','BiolinkController@link');

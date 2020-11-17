@@ -31,7 +31,14 @@ class ProofController extends Controller
     //mengurangi point page per user visit hlmn omli
     public function count_page_point(Request $request)
     {
-      $auth = Auth::id();
+      if (Auth::check() === true) {
+         $auth = Auth::id();
+      }
+      else
+      {
+         $auth = 0;
+      }
+      
       $updated = false;
       $page =  Page::where([['user_id',$request->user_id],['names',$request->page]])->orWhere('premium_names',$request->page)->first();
 

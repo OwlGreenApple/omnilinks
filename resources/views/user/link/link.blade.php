@@ -1950,6 +1950,7 @@ function pointCount(ip)
 {
   $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      Accept : "application/json",
       type: 'POST',
       url: '{{ url("page_point") }}',
       data: {page : '{{$page_name}}',user_id:'{{$user_id}}', ip : ip},
