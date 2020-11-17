@@ -3626,9 +3626,7 @@
                   @endif
 
                   <!-- proof-preview -->
-                  <div id="proof_preview">
-                    @include('user.dashboard.previewproof')
-                  </div>
+                  
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
