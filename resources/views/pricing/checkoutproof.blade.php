@@ -8,8 +8,6 @@
       <div class="card-custom">
         <div class="card cardpad">
 
-          <div class="notif"><!-- display notif --></div>
-
           <form id="proof_order">
               <h2 class="Daftar-Disini">Pilih Paket Anda</h2>
               <div class="form-group">
@@ -17,21 +15,22 @@
                   <label class="text">Pilih Paket:</label>
                   <select class="form-control" name="idproof" >
                     @php $pg = 1 @endphp
-                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! getActivProofPackage()[$pg]['price'] !!} - {!! getActivProofPackage()[$pg]['credit'] !!} Credit</option> 
+                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['price'])) !!} - {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['credit'])) !!} Credit</option> 
 
                     @php $pg = 2 @endphp
-                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! getActivProofPackage()[$pg]['price'] !!} - {!! getActivProofPackage()[$pg]['credit'] !!} Credit</option>  
+                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['price'])) !!} - {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['credit'])) !!} Credit</option>  
 
                     @php $pg = 3 @endphp
-                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! getActivProofPackage()[$pg]['price'] !!} - {!! getActivProofPackage()[$pg]['credit'] !!} Credit</option> 
+                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['price'])) !!} - {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['credit'])) !!} Credit</option> 
 
                     @php $pg = 4 @endphp
-                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! getActivProofPackage()[$pg]['price'] !!} - {!! getActivProofPackage()[$pg]['credit'] !!} Credit</option> 
+                    <option data-price="{!! getActivProofPackage()[$pg]['price'] !!}" data-paket="{!! getActivProofPackage()[$pg]['package'] !!}" value="{{ $id }}"  @if($id==$pg) selected @endif>{!! getActivProofPackage()[$pg]['package'] !!} - IDR {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['price'])) !!} - {!! str_replace(",",".",number_format(getActivProofPackage()[$pg]['credit'])) !!} Credit</option> 
                   </select>
                 </div>
               </div>
 
               <div class="form-group">
+                <div class="notif"><!-- display notif --></div>
                 <div class="col-md-12 col-12">
                   <label class="label-title-test">
                     Total: 
@@ -44,13 +43,14 @@
              
               <div class="form-group">
                 <div class="col-12 col-md-12">
+                  <span class="check_mark"><!-- error --></span>
                   <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
                   <label for="agree-term" class="label-agree-term text">I agree all statements in <a href="{{url('/helps')}}" class="term-service" target="_blank">Terms of service</a></label>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-12 col-md-12">
-                  <input type="submit" name="submit" id="submit" class="col-md-12 col-12 btn btn-primary bsub btn-block" value="Order Sekarang" style="background-color:#ff0000!important;" @endif/>
+                  <input type="submit" name="submit" id="submit" class="col-md-12 col-12 btn btn-primary bsub btn-block" value="Order Sekarang"/>
                 </div>
               </div>
           </form>
@@ -66,6 +66,7 @@
   $(document).ready(function(){
     change_selection();
     display_price();
+    submit_order();
   });
 
   function change_selection()
@@ -77,14 +78,45 @@
 
   function display_price()
   {
-    var price = $("select[name='idproof'] option:selected").attr('data-price');
-    $(".total").html('IDR '+price);
+    var price = parseInt($("select[name='idproof'] option:selected").attr('data-price'));
+    $(".total").html('IDR '+formatNumber(price));
+  }
+
+  function formatNumber(num) 
+  {
+    num = parseInt(num);
+    if(isNaN(num) == true)
+    {
+       return '';
+    }
+    else
+    {
+       return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+    }
+  }
+
+  function submit_order()
+  {
+    $("#submit").click(function(e){
+      e.preventDefault();
+      var is_checked = $("#agree-term").prop('checked');
+      if(is_checked == false)
+      {
+        $(".check_mark").html("<div class='error'>Harap click kotak : <u>I agree all statements in Terms of service</u> di bawah</div>");
+        return false;
+      }
+      else
+      {
+        order();
+      }
+     
+    });
   }
 
   function order(){
     $.ajax({
       type: 'POST',
-      url: "{{url('/check-kupon')}}",
+      url: "{{url('proof_payment')}}",
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
@@ -98,18 +130,24 @@
         $('.div-loading').addClass('background-load');
       },
       success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
         if(result.msg == 0)
         {
-            $(".notif").html('div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>');
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+          $(".notif").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>');
+        }
+
+        if(result.msg == 2)
+        {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+          $(".notif").html('<div class="alert alert-danger">Harga paket tidak valid.</div>');
         }
 
         if(result.msg == 1)
         {
-            $(".notif").html('div class="alert alert-success">Order anda sudah diproses.</div>');
-            location.href="{{ url('thankyou') }}";
+          $(".notif").html('<div class="alert alert-success">Order anda sudah diproses.</div>');
+          location.href="{{ url('thankyou') }}";
         }
       },
       error : function(xhr){

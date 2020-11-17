@@ -14,6 +14,7 @@ use App\UserLog;
 use App\Notification;
 use App\Ads;
 use App\AdsHistory;
+use App\ProofHistory;
 
 use App\Helpers\Helper;
 use Carbon, Crypt;
@@ -49,7 +50,6 @@ class OrderController extends Controller
       'Popular' => 225000, 
       'Elite' => 255000, 
       'Super' => 295000, 
-      
       'Pro Lifetime' => 595000,
     );
 
@@ -352,116 +352,6 @@ class OrderController extends Controller
     return view('pricing.thankyou-confirm-payment');
   }
 
-  private function cek_proof_price($package,$price)
-  {
-    $paket = array(
-      getActivProofPackage()[1]['package'] => getActivProofPackage()[1]['price'],
-      getActivProofPackage()[2]['package'] => getActivProofPackage()[2]['price'],
-      getActivProofPackage()[3]['package'] => getActivProofPackage()[3]['price'],
-      getActivProofPackage()[4]['package'] => getActivProofPackage()[4]['price'],
-    );
-
-    if(isset($paket[$package]))
-    {
-      if($price!=$paket[$package]){
-        return false; 
-      } else {
-        return true;
-      }
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  public function proof_payment(Request $request)
-  {
-    $user = Auth::user();
-    $diskon = 0;
-    //unique code 
-    $unique_code = mt_rand(1, 1000);
-
-    $dt = Carbon::now();
-    $order = new Order;
-    $str = 'OML'.$dt->format('ymdHi');
-    $order_number = Helper::autoGenerateID($order, 'no_order', $str, 3, '0');
-    $order->no_order = $order_number;
-    $order->user_id = $user->id;
-    $order->package =$request->package;
-    $order->jmlpoin=0;
-    $order->coupon_id = '-';
-    $order->total = $request->price + $unique_code;
-    $order->discount = $diskon;
-    $order->grand_total = $request->price - $diskon + $unique_code;
-    $order->status = 0;
-    $order->buktibayar = "";
-    $order->keterangan = "";
-
-    try
-    {
-      $order->save();
-      $order_status = true;
-    }
-    catch(QueryException $e)
-    {
-      // $e->getMessage();
-      $order_status = false;
-    }
-
-    if($order_status == true)
-    {
-      $emaildata = [
-        'order' => $order,
-        'user' => $user,
-        'nama_paket' => $request->package,
-        'no_order' => $order_number,
-      ];
-    
-      Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-        $message->from('info@omnilinkz.com', 'Omnilinkz');
-        $message->to($user->email);
-        $message->subject('[Omnilinkz] Order Nomor '.$order_number);
-      });
-    }
-    else
-    {
-        $res['msg'] = 0;
-        return response()->json($res); 
-    }
-
-    if(!is_null($user->wa_number)){
-      $message = null;
-      $message .= '*Hi '.$user->name.'*,'."\n\n";
-      $message .= "Berikut info pemesanan Omnilinkz :\n";
-      $message .= '*No Order :* '.$order->no_order.''."\n";
-      $message .= '*Nama :* '.$user->name.''."\n";
-      $message .= '*Paket :* '.$order->package.''."\n";
-      // $message .= '*Tgl Pembelian :* '.$dt->format('d-M-Y').''."\n";
-      $message .= '*Total Biaya :*  Rp. '.str_replace(",",".",number_format($order->grand_total))."\n";
-
-      $message .= "Silahkan melakukan pembayaran dengan bank berikut : \n\n";
-      $message .= 'BCA (Sugiarto Lasjim)'."\n";
-      $message .= '8290-812-845'."\n\n";
-      
-      $message .= "Harus diperhatikan juga, kalau jumlah yang di transfer harus *sama persis dengan nominal diatas* supaya _*kami lebih mudah memproses pembelianmu*_.\n\n";
-
-      $message .= '*Sesudah transfer:*'."\n";
-      $message .= '- *Login* ke https://omnilinkz.com'."\n";
-      $message .= '- *Klik* Profile'."\n";
-      $message .= '- Pilih *Order & Confirm*'."\n";
-      $message .= '- *Upload bukti konfirmasi* disana'."\n\n";
-
-      $message .= 'Terima Kasih,'."\n\n";
-      $message .= 'Team Omnilinkz'."\n";
-      $message .= '_*Omnilinkz is part of Activomni.com_';
-      
-      Helper::send_message_queue_system($user->wa_number,$message);
-     }
-     $res['msg'] = 1;
-     return response()->json($res); 
-  }
-
   //checkout klo uda login
   public function confirm_payment(Request $request){
     //buat order user lama
@@ -681,6 +571,18 @@ class OrderController extends Controller
     return $valid;
   }
 
+  private function getActivproofCredit($package)
+  {
+    $paket = array(
+      getActivProofPackage()[1]['package'] => getActivProofPackage()[1]['credit'],
+      getActivProofPackage()[2]['package'] => getActivProofPackage()[2]['credit'],
+      getActivProofPackage()[3]['package'] => getActivProofPackage()[3]['credit'],
+      getActivProofPackage()[4]['package'] => getActivProofPackage()[4]['credit'],
+    );
+
+    return $paket[$package];
+  }
+
   //klo dilunasi lewat admin page
   public function confirm_order(Request $request){
     //konfirmasi pembayaran admin
@@ -690,7 +592,7 @@ class OrderController extends Controller
     $user = User::find($order->user_id);
     $valid=null;
     $type = "";
-    
+
     /*
       'Pro' => 195000, 
       'Popular' => 225000, 
@@ -756,14 +658,30 @@ class OrderController extends Controller
       $type="super";
       $user->membership = 'super';
     }
+    else if(substr($order->package,0,10) === "ActivProof") {
+      $user->point += $this->getActivproofCredit($order->package);
+      $type="activproof";
+    }
     
-    if($valid <> null){
+    if($valid <> null)
+    {
         $formattedDate = $valid->format('Y-m-d H:i:s');
+    }
+    else
+    {
+        $formattedDate = $user->valid_until;
     }
 
     $userlog = new UserLog;
     $userlog->user_id = $user->id;
-    $userlog->type = 'membership';
+    if(substr($order->package,0,10) === "ActivProof") {
+      $userlog->type = 'membership-credit';
+    }
+    else
+    {
+      $userlog->type = 'membership';
+    }
+   
     $userlog->value = $type;
     $userlog->keterangan = 'Confirm Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
    // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
@@ -774,6 +692,24 @@ class OrderController extends Controller
     $user->save();
     $order->save();
 
+    //History Proof
+    if(substr($order->package,0,10) === "ActivProof") {
+      $ph = new ProofHistory;
+      $ph->user_id = $user->id;
+      $ph->page_name = '-';
+      $ph->debit = $this->getActivproofCredit($order->package);
+
+      try
+      {
+        $ph->save();
+      }
+      catch(QueryException $e)
+      {
+        //$e->getMessage();
+      }
+    }
+
+    // ADS
     if(substr($order->package,0,6) === "Top Up"){
       $ads = Ads::find($order->ads_id);
 
@@ -803,7 +739,7 @@ class OrderController extends Controller
 
     $arr['status'] = 'success';
     $arr['message'] = 'Order berhasil dikonfirmasi';
-    $arr['response'] = $this->IsPay($user->email,17,1);
+    // $arr['response'] = $this->IsPay($user->email,17,1);
 
     return $arr;
   }
