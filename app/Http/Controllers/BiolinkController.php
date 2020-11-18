@@ -560,6 +560,8 @@ class BiolinkController extends Controller
     return json_encode($arr);
   }
 
+
+
   public function savetemp(Request $request)
   {
     $user=Auth::user();
@@ -755,7 +757,42 @@ class BiolinkController extends Controller
     else {
       $names=$page->premium_names;
     }
-    
+
+    $mapping = array_map(function ($title,$link,$id,$pixel,$img,$status) {
+      return array(
+          'title' => $title,
+          'bannerlink' => $link,
+          'bannerid' => $id,
+          'bannerpixel' => $pixel,
+          'bannerstatus' => $status,
+          'bannerimg' => $img
+      );
+    },$request->judulBanner,$request->linkBanner,$request->idBanner,$request->bannerpixel,$request->bannerImage,$request->statusBanner);
+
+    if(count($mapping) > 0)
+    {
+      foreach ($mapping as $key => $row):
+        if($row['bannerid']=="" || $row['bannerid']==null)
+        {
+            $banner= new Banner();
+        } 
+        else 
+        {
+          if ($row['bannerstatus']=="delete"){
+            $bannerde= Banner::find($row['bannerid']);
+            if (!is_null($bannerde)){
+              $bannerde->delete();
+            }
+            continue;
+          }
+          // $banner= Banner::where('id','=',$request->idBanner[$i])->first();
+          $banner= Banner::find($request->idBanner[$i]);
+        }
+      endforeach;
+    }
+
+    dd($mapping);
+
     if (!is_null($request->judulBanner)){
       if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super')
       {

@@ -6051,10 +6051,32 @@
     });
     
     $("body").on("click", "#addBanner", function() {
+      var bannerhtml ="";
       idpic+=1;
       let $el;
-      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01" accept="image/*"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div><span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ukuran Gambar 434x200 Skala 2.2:1 (width:height), Max 500KB, JPG,PNG.</span></div>';
-      $el = $(".div-banner").append(elhtml);
+     /* elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01" accept="image/*"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div> <span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ukuran Gambar 434x200 Skala 2.2:1 (width:height), Max 500KB, JPG,PNG.</span></div>';*/
+
+      bannerhtml += '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'">';
+      bannerhtml += '<div class="div-cell">';
+      bannerhtml += '<input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner" />';
+      bannerhtml += '<input type="hidden" name="idBanner[]" value="">';
+      bannerhtml += '<input type="hidden" name="statusBanner[]" class="statusBanner" value="">';
+      bannerhtml += '<input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">';
+
+      bannerhtml += '<select name="bannerpixel[]" class="form-control bannerpixel banner-new"></select>';
+      bannerhtml += '<div class="custom-file">';
+      bannerhtml += '<input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01" accept="image/*">';
+      bannerhtml += '<label class="custom-file-label" for="inputGroupFile01">Choose file</label>';
+      bannerhtml += '</div>';
+      bannerhtml += '</div>';
+
+      bannerhtml += '<div class="div-cell cell-btn btn-deleteBanner">';
+      bannerhtml += '<span><i class="far fa-trash-alt"></i></span>';
+      bannerhtml += '</div>';
+      bannerhtml += '<span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ukuran Gambar 434x200 Skala 2.2:1 (width:height), Max 500KB, JPG,PNG.</span>';
+      bannerhtml += '</div>';
+
+      $el = $(".div-banner").append(bannerhtml);
       $(".banner-new").html(dataView);
       $(".banner-new").val(0);
       if (dataFree == "1") {
