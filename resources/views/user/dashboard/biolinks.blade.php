@@ -2992,7 +2992,8 @@
                     </div>
                     <div class="col-lg-12 mb-3">
                       <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="17" />
-                      <div class="error proof_name"><!-- Error --></div>
+                      <small>Maksimal 17 karakter</small>
+                      <span class="error proof_name"><!-- Error --></span>
                     </div>
 
                     <div class="col-md-2">
@@ -3000,7 +3001,8 @@
                     </div>
                     <div class="col-lg-12 mb-3">
                       <textarea maxlength="60" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
-                      <div class="error proof_text"><!-- Error --></div>
+                      <small>Maksimal 60 karakter</small>
+                      <span class="error proof_text"><!-- Error --></span>
                     </div>
 
                     <div class="col-md-2">
@@ -3010,7 +3012,7 @@
                       <input type="file" class="form-control" name="proof_image" placeholder="Masukkan Text" />
                       <small>Ukuran 100 x100 pixel, tipe harus : jpg, jpeg, png</small>
                       <span class="proof_notes"></span>
-                      <div class="error proof_image"><!-- Error --></div>
+                      <span class="error proof_image"><!-- Error --></span>
                     </div>
 
                     <div class="col-md-2">
@@ -3018,7 +3020,7 @@
                     </div>
                     <div class="col-lg-12 mb-3">
                       <input type="number" value="5" min="1" max="5" class="form-control" name="proof_stars" placeholder="Jumlah bintang" />
-                      <div class="error proof_stars"><!-- Error --></div>
+                      <span class="error proof_stars"><!-- Error --></span>
                     </div>
 
                     <div class="col-md-4 ml-auto pl-md-0 pl-3 text-center">
