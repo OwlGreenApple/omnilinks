@@ -560,8 +560,6 @@ class BiolinkController extends Controller
     return json_encode($arr);
   }
 
-
-
   public function savetemp(Request $request)
   {
     $user=Auth::user();
@@ -758,6 +756,15 @@ class BiolinkController extends Controller
       $names=$page->premium_names;
     }
 
+    //RENOV
+
+    if(count($_FILES['bannerImage']['tmp_name']) > 0):
+      foreach($_FILES['bannerImage']['tmp_name'] as $file)
+      {
+        $files[] = $file;
+      }
+    endif;
+
     $mapping = array_map(function ($title,$link,$id,$pixel,$img,$status) {
       return array(
           'title' => $title,
@@ -767,33 +774,86 @@ class BiolinkController extends Controller
           'bannerstatus' => $status,
           'bannerimg' => $img
       );
-    },$request->judulBanner,$request->linkBanner,$request->idBanner,$request->bannerpixel,$request->bannerImage,$request->statusBanner);
+    },$request->judulBanner,$request->linkBanner,$request->idBanner,$request->bannerpixel,$files,$request->statusBanner);
+
+     // dd($mapping);
 
     if(count($mapping) > 0)
     {
       foreach ($mapping as $key => $row):
+        // add banner
         if($row['bannerid']=="" || $row['bannerid']==null)
         {
             $banner= new Banner();
         } 
         else 
         {
-          if ($row['bannerstatus']=="delete"){
-            $bannerde= Banner::find($row['bannerid']);
-            if (!is_null($bannerde)){
-              $bannerde->delete();
-            }
-            continue;
-          }
-          // $banner= Banner::where('id','=',$request->idBanner[$i])->first();
-          $banner= Banner::find($request->idBanner[$i]);
+            // update
+            $banner= Banner::find($row['bannerid']);
         }
+
+        //delete
+        $bannerde= Banner::find($row['bannerid']);
+        if($row['bannerstatus'] === "delete" && !is_null($bannerde))
+        { 
+          $image_path = $banner->images_banner;
+          try
+          {
+            Storage::disk('s3')->delete($image_path);
+            $bannerde->delete();
+          }
+          catch(QueryException $e)
+          {
+            // $e->getMessage();
+            $arr['status'] = 'error';
+            $arr['message'] = 'Maaf, saat ini server kami terlalu sibuk, mohon coba lagi nanti.';
+            return response()->json($arr);
+          }
+        }
+
+        $banner->users_id = $user->id;
+        $banner->pages_id = $page->id;
+        $banner->title = $row['title'];
+        $banner->link = $row['bannerlink'];
+        $banner->pixel_id = $row['bannerpixel'];
+
+        $image_upload = null;
+        if($row['bannerimg'] <> "" || !empty($row['bannerimg']))
+        {
+          $image_upload = $this->upload_image_banner($user,$banner, $row['bannerimg'],$row['bannerid']);
+        }
+        
+        if($image_upload <> null)
+        {
+          $banner->images_banner = $image_upload;
+        }
+
+        try 
+        {
+          $banner->save();
+        }
+        catch(QueryException $e)
+        {
+          // dd($e->getMessage());
+          $arr['status'] = 'error';
+          $arr['message'] = 'Maaf, saat ini server kami terlalu sibuk, mohon coba lagi nanti.';
+          return response()->json($arr);
+        }
+
       endforeach;
     }
 
-    dd($mapping);
 
-    if (!is_null($request->judulBanner)){
+    $short_link =env('SHORT_LINK');
+    $arr['status'] = 'success';
+    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+    // $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
+   
+    return response()->json($arr);
+
+    // dd('finish');
+
+  /*  if (!is_null($request->judulBanner)){
       if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super')
       {
         $idbanner=$request->idBanner;
@@ -801,6 +861,10 @@ class BiolinkController extends Controller
       
         for($i=0;$i<count($request->judulBanner);$i++)
         {
+          */
+
+
+
           //pengecekan banner 
           /*
           $validator = Validator::make($request->all(), [
@@ -821,7 +885,7 @@ class BiolinkController extends Controller
           }
           */
           
-          if($request->hasFile('bannerImage.'.$i)) {
+          /*if($request->hasFile('bannerImage.'.$i)) {
             $arr_size = getimagesize( $request->file('bannerImage')[$i] );
             $ratio_img = $arr_size[0] / $arr_size[1];
             if ($ratio_img<2.1)  {
@@ -837,8 +901,8 @@ class BiolinkController extends Controller
               return $arr;
             }
           }
-
-          if($idbanner[$i]==""){
+*/
+          /*if($idbanner[$i]==""){
             $banner= new Banner();
             if(!$request->hasFile('bannerImage.'.$i)) {
               $arr['status'] = 'error';
@@ -898,13 +962,40 @@ class BiolinkController extends Controller
 
         }
       }
-    }
+    }*/
+  }
 
-    $arr['status'] = 'success';
-    $short_link =env('SHORT_LINK');
-    // $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
-    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
-    return $arr;
+  private function upload_image_banner($user,$banner,$file,$idbanner)
+  {
+      $dt = Carbon::now();
+      $arr_dir = null;
+      $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+      $filename = $dt->format('ymdHis').'-'.$banner->id.'.jpg';
+
+      //FILTER TO REIZE BANNER IMAGE IF BANNER IMAGE'S HEIGHT > 200
+
+       $banner_image_size = getimagesize($file);
+       $bannerimagewidth = $banner_image_size[0];
+       $bannerimageheight = $banner_image_size[1];
+
+       if($bannerimageheight > 200)
+       {
+          $bannerUpload = $this->resizeImage($file,434,200);
+       }
+       else
+       {
+          $bannerUpload =   file_get_contents($file);
+       }
+
+      if( $banner->images_banner=="0" ||$idbanner=="" || $idbanner==null)
+      {
+        Storage::disk('s3')->put($dir."/".$filename,$bannerUpload, 'public');
+        $arr_dir = $dir."/".$filename;
+      } else {
+        Storage::disk('s3')->put($banner->images_banner,$bannerUpload, 'public');
+      }
+
+      return $arr_dir;
   }
   
   public function addBanner()

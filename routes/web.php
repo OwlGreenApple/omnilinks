@@ -121,8 +121,11 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/biolinks/','BiolinkController@newbio');
     Route::get('/biolinks/{names}/{mod?}','BiolinkController@viewpage');
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
+
+    //banner
     Route::post('/save-template','BiolinkController@savetemp');
     Route::get('/banner/load-banner','BiolinkController@addBanner');
+
     Route::post('/save-link','BiolinkController@savelink');
     Route::post('/savewachat','BiolinkController@savewaChat')->middleware('wachat')->name('savewachat');
     Route::post('savewachatmember','BiolinkController@savewaChatMember')->middleware('wamember')->name('savewachatmember');
