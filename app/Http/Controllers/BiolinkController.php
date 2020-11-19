@@ -204,7 +204,9 @@ class BiolinkController extends Controller
                 ->get();
     $banner=Banner::where('users_id',$user->id)
                   ->where('pages_id',$page->id)
+                  ->orderBy('id','asc')
                   ->get();
+
   	if(!is_null($page)){
   		$pageid=$page->id;
   	}
@@ -468,7 +470,7 @@ class BiolinkController extends Controller
                 ->get();
 
       $banner = Banner::where('pages_id','=',$page->id)
-                  ->orderBy('created_at','ascend')
+                  ->orderBy('id','asc')
                   ->get();
 
       $sort_msg = array_filter(explode(';', $page->sort_msg));
@@ -765,22 +767,36 @@ class BiolinkController extends Controller
       }
     endif;
 
-    $mapping = array_map(function ($title,$link,$id,$pixel,$img,$status) {
-      return array(
-          'title' => $title,
-          'bannerlink' => $link,
-          'bannerid' => $id,
-          'bannerpixel' => $pixel,
-          'bannerstatus' => $status,
-          'bannerimg' => $img
-      );
-    },$request->judulBanner,$request->linkBanner,$request->idBanner,$request->bannerpixel,$files,$request->statusBanner);
+    if (!is_null($request->judulBanner) && ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super')){
+      $mapping = array_map(function ($title,$link,$id,$pixel,$img,$status) {
+        return array(
+            'title' => $title,
+            'bannerlink' => $link,
+            'bannerid' => $id,
+            'bannerpixel' => $pixel,
+            'bannerstatus' => $status,
+            'bannerimg' => $img
+        );
+      },$request->judulBanner,$request->linkBanner,$request->idBanner,$request->bannerpixel,$files,$request->statusBanner);
+    }
+    else
+    {
+      $mapping = 0;
+    }
 
      // dd($mapping);
 
     if(count($mapping) > 0)
     {
       foreach ($mapping as $key => $row):
+
+        if($row['bannerid'] == null && $row['bannerimg'] == "")
+        {
+          $arr['status'] = 'error';
+          $arr['message'] = 'Banner image is required';
+          return response()->json($arr);
+        }
+
         // add banner
         if($row['bannerid']=="" || $row['bannerid']==null)
         {
@@ -867,7 +883,7 @@ class BiolinkController extends Controller
 
     // dd('finish');
 
-  /*  if (!is_null($request->judulBanner)){
+   /* if (!is_null($request->judulBanner)){
       if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super')
       {
         $idbanner=$request->idBanner;
@@ -977,6 +993,7 @@ class BiolinkController extends Controller
         }
       }
     }*/
+
   }
 
   private function upload_image_banner($user,$banner,$file,$idbanner)

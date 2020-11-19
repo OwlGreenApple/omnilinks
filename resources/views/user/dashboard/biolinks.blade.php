@@ -3612,7 +3612,7 @@
                     <div class="slideshow-container">
                       <div class="ap" id="viewbanner">
                       <?php 
-                      if($banner->count()){
+                      if($banner->count() > 0){
                         $ut=0;
                         foreach($banner as $ban) {
                           $ut+=1; 
