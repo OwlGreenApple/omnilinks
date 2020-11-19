@@ -820,6 +820,20 @@ class BiolinkController extends Controller
         $image_upload = null;
         if($row['bannerimg'] <> "" || !empty($row['bannerimg']))
         {
+          $arr_size = getimagesize( $row['bannerimg'] );
+          $ratio_img = $arr_size[0] / $arr_size[1];
+          if ($ratio_img<2.1)  {
+            $arr['status'] = 'error';
+            $temp = $i+1;
+            $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih besar dari 2.1';
+            return response()->json($arr);
+          }
+          if ($ratio_img>2.2)  {
+            $arr['status'] = 'error';
+            $temp = $i+1;
+            $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih kecil dari 2.2';
+            return response()->json($arr);
+          }
           $image_upload = $this->upload_image_banner($user,$banner, $row['bannerimg'],$row['bannerid']);
         }
         

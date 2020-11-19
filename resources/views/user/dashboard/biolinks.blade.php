@@ -1455,27 +1455,28 @@
         }
       },
       success: function(data) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        //var data=jQuery.parseJSON(result);
-        $("#pesanAlert").html(data.message);
-        $("#pesanAlert").show();
+        
         $(window).scrollTop(0);
         if(data.status == "success") {
-          changed = 0;
+          /*changed = 0;
           changelink = 0;
           changechat = 0;
           changepixel = 0;
           changeproof = 0;
           $("#pesanAlert").addClass("alert-success");
-          $("#pesanAlert").removeClass("alert-danger");
+          $("#pesanAlert").removeClass("alert-danger");*/
          
           reloadPage(3);
         }
-        if (data.status == "error") {
-          $("#pesanAlert").addClass("alert-danger");
-          $("#pesanAlert").removeClass("alert-success");
+        if(data.status == "error") {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+
+            //var data=jQuery.parseJSON(result);
+            $("#pesanAlert").html(data.message);
+            $("#pesanAlert").show();
+            $("#pesanAlert").addClass("alert-danger");
+            $("#pesanAlert").removeClass("alert-success");
         }
       },
       error : function(xhr,throwable,other){
