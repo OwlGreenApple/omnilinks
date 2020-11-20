@@ -1915,17 +1915,35 @@
     });
   }
 
-  
+  //SCALE BANNER IMAGE
+  $(window).on('load', function(){
+      resize();
+  });
+
+  function resize()
+  {
+     var cons = 2.17;
+     var hin = 0;
+     /* image banner */
+     $(".banner-image").each(function(i){
+         var width = $(this).eq(i).width();
+         hin = width/cons;
+         hin = Number(hin.toFixed(1));
+         $(this).eq(i).height(hin);
+     });
+  }
+
   function plusSlides(n) {
     showSlides(slideIndex += n );
   }
 
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
+  function currentSlide(n,f) {
+    showSlides(slideIndex = n,f);
   }
 
-  function showSlides(n) {
+  function showSlides(n,f=null) {
     var i;
+    var fr = $(".slideshow-container").attr('fst');
     // let slides = document.getElementsByClassName("mySlides");
     // let slides = document.getElementsByClassName("mySlides");
     if ($('.preview-mobile').hasClass('preview-none')){
@@ -1936,10 +1954,11 @@
       var dots = $(".preview-mobile .dot");
       var slides = $(".preview-mobile .mySlides");
     }
-    // console.log(n);
+    // console.log(n);  
     // console.log(slides.length);
+    
     if (n > slides.length) {// need to be fix
-      slideIndex = 1;
+        slideIndex = 1;
     }
     if (n < 1) {
       slideIndex = slides.length;
@@ -1953,12 +1972,25 @@
     {
       dots[i].className = dots[i].className.replace("activated","");
     }
+
+    if(fr === "first" && n == 1)
+    {
+      slideIndex = 2;
+    }
+
+    if(f == "first")
+    {
+      slideIndex = 1;
+    }
+
     if (slides.length>0) {
       slides[slideIndex-1].style.display = "block";
     }
     if (dots.length>0) {
       dots[slideIndex-1].className +=" activated";
     }
+
+    $(".slideshow-container").attr('fst',null);
   }
   
   function dotsok()
@@ -4796,10 +4828,7 @@
     });
   }
  
-  //SCALE BANNER IMAGE
-  $(window).on('load', function(){
-     resize();
-  });
+  
 
  function load_chat_member(){
     var uid = $("input[name=uuid]").val();
@@ -5113,20 +5142,6 @@
         }
 
       });
-  }
-
-  function resize()
-  {
-     var cons = 2.17;
-     /* image banner */
-     $(".banner-image").each(function(i){
-         var hin = 0;
-         var width = $(this).width();
-
-         hin = width/cons;
-         hin = Number(hin.toFixed(1));
-         $(".banner-image").height(hin);
-     });
   }
 
    //ALERT WHEN USER FORGOT TO SAVE
@@ -6359,7 +6374,8 @@
     <?php } ?>
 
     
-    currentSlide(0);
+    currentSlide(0,"first");
+    $(".slideshow-container").attr('fst',"first");
     slideIndex=0;
     check_rounded();
     $("#poweredview").children().show();

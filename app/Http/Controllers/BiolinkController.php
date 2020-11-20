@@ -204,7 +204,7 @@ class BiolinkController extends Controller
                 ->get();
     $banner=Banner::where('users_id',$user->id)
                   ->where('pages_id',$page->id)
-                  ->orderBy('id','asc')
+                  ->orderBy('id','desc')
                   ->get();
 
   	if(!is_null($page)){
@@ -470,7 +470,7 @@ class BiolinkController extends Controller
                 ->get();
 
       $banner = Banner::where('pages_id','=',$page->id)
-                  ->orderBy('id','asc')
+                  ->orderBy('id','desc')
                   ->get();
 
       $sort_msg = array_filter(explode(';', $page->sort_msg));
@@ -758,8 +758,6 @@ class BiolinkController extends Controller
       $names=$page->premium_names;
     }
 
-    //RENOV
-
     if(count($_FILES['bannerImage']['tmp_name']) > 0):
       foreach($_FILES['bannerImage']['tmp_name'] as $file)
       {
@@ -767,7 +765,8 @@ class BiolinkController extends Controller
       }
     endif;
 
-    if (!is_null($request->judulBanner) && ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super')){
+    if (!is_null($request->judulBanner) && ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super'))
+    {
       $mapping = array_map(function ($title,$link,$id,$pixel,$img,$status) {
         return array(
             'title' => $title,
@@ -833,6 +832,7 @@ class BiolinkController extends Controller
         $banner->link = $row['bannerlink'];
         $banner->pixel_id = $row['bannerpixel'];
 
+        //image filter
         $image_upload = null;
         if($row['bannerimg'] <> "" || !empty($row['bannerimg']))
         {
