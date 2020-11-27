@@ -182,11 +182,12 @@
                   </a>
                 </li>
 
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a class="nav-link navlog" href="{{url('ads-manager')}}">
                     {{ __('Ads') }}
                   </a>
-                </li>                
+                </li>
+                -->
               @endif
 
               <li class="nav-item dropdown pull-right">
