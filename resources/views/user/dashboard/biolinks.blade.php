@@ -2320,13 +2320,19 @@
         <div id="pesanAlert" class="alert mb-0"></div>
       </div>
 
-      <div class=" col-12">
+      <div class="col-12">
         <button class="btn btn-success mt-3 mb-3 btn-premium">
           <i class="fas fa-star"></i> <?php if (is_null($pages->premium_names)) { echo "Get"; } else { echo "Update"; } ?> Custom Link
         </button>
       </div>
+
+      <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
+        @if(Session::has('msg'))
+          <div class="alert alert-success">{{ Session::get('msg') }}</div>
+        @endif
+      </div>
       
-      <div class=" col-12">
+      <div class="col-12">
         <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a> <span id="btn-copy-custom-link" class="btn-copy" data-link="https://{{env('SHORT_LINK')}}/{{$custom_link}}"><i class="fas fa-file"></i></span>
       </div>
 

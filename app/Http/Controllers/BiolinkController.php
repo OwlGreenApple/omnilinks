@@ -18,7 +18,7 @@ use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
-use Auth,Carbon,Validator,Storage,Mail,DB;
+use Auth,Carbon,Validator,Storage,Mail,DB,Session;
 use Ramsey\Uuid\Uuid;
 
 class BiolinkController extends Controller
@@ -758,7 +758,7 @@ class BiolinkController extends Controller
       $names=$page->premium_names;
     }
 
-    /*** BANNER ***/
+    /*** BANNER LOGIC ***/
 
     if(isset($_FILES['bannerImage']['tmp_name']) && count($_FILES['bannerImage']['tmp_name']) > 0):
       foreach($_FILES['bannerImage']['tmp_name'] as $file)
@@ -768,7 +768,7 @@ class BiolinkController extends Controller
     else:
       $short_link =env('SHORT_LINK');
       $arr['status'] = 'success';
-      $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+      Session::flash('msg', 'Update berhasil, silahkan copy link di bawah ini');
       return response()->json($arr);
     endif;
 
@@ -880,11 +880,12 @@ class BiolinkController extends Controller
       endforeach;
     }
 
-     /*** END BANNER ***/
+     /*** END BANNER LOGIC ***/
 
     $short_link =env('SHORT_LINK');
     $arr['status'] = 'success';
-    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+    Session::flash('msg', 'Update berhasil, silahkan copy link di bawah ini');
+    // $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
     // $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
    
     return response()->json($arr);
