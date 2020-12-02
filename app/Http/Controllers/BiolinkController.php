@@ -758,11 +758,18 @@ class BiolinkController extends Controller
       $names=$page->premium_names;
     }
 
-    if(count($_FILES['bannerImage']['tmp_name']) > 0):
+    /*** BANNER ***/
+
+    if(isset($_FILES['bannerImage']['tmp_name']) && count($_FILES['bannerImage']['tmp_name']) > 0):
       foreach($_FILES['bannerImage']['tmp_name'] as $file)
       {
         $files[] = $file;
       }
+    else:
+      $short_link =env('SHORT_LINK');
+      $arr['status'] = 'success';
+      $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+      return response()->json($arr);
     endif;
 
     if (!is_null($request->judulBanner) && ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super'))
@@ -873,6 +880,7 @@ class BiolinkController extends Controller
       endforeach;
     }
 
+     /*** END BANNER ***/
 
     $short_link =env('SHORT_LINK');
     $arr['status'] = 'success';
