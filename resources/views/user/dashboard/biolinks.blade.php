@@ -4279,7 +4279,7 @@
         setRightPost(".wcs_popup");   
     });*/
 
-    $(".alert").delay(2000).fadeOut(3000);
+    $(".alert").delay(5000).fadeOut(3000);
 
     wa_preview_header_text();
     getSelected();
