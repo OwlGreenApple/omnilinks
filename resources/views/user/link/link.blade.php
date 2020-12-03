@@ -1932,7 +1932,7 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
-    $(".proof-wrapper").css({'background-color':'{{ $pages->bio_color }}','color':'{{ $pages->proof_text_color }}'})
+    $(".proof-wrapper").css({'background-color':'@if($pages->is_bio_color !== null){{ $pages->bio_color}}@else #fff @endif','color':'@if($pages->is_bio_color !== null){{ $pages->proof_text_color }}@else #000 @endif'})
     $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
     $('.proof-box > .proof-wrapper:gt(0)').hide();
     runningProof();
