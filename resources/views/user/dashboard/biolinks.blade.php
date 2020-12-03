@@ -3309,7 +3309,7 @@
                         <div class="col-md-4 col-4">
                           <label class="caption">
                             Bio Color
-                            <span class="tooltipstered" title="<div class='panel-heading'>Bio Color</div><div class='panel-content'>Atur warna Bio & Icon Media Sosial sesuai keinginanmu</div>">
+                            <span class="tooltipstered" title="<div class='panel-heading'>Bio Color</div><div class='panel-content'>Atur warna Bio, Icon Media Sosial & Activproof sesuai keinginanmu</div>">
                               <i class="fas fa-question-circle icon-reflink"></i>
                             </span>
                           </label>
