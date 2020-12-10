@@ -17,8 +17,8 @@
   <!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
-  <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
   <?php if(Auth::check()){?>
+    <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/angular.js') }}"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
     <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
@@ -46,7 +46,6 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
   <!-- <link href="{{ asset('css/all.css') }}" rel="stylesheet"> -->
 
   <!-- Font Awesome 5 -->
@@ -57,6 +56,7 @@
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
   
   <?php if(Auth::check()){?>
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
     <link href="{{ asset('datatables/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
     <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
