@@ -18,24 +18,26 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
   <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
-  <script src="{{ asset('js/angular.js') }}"></script>
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
-  <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
-  <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
-  <script src="{{ asset('datatables/datatables/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('datatables/Responsive/js/dataTables.responsive.min.js') }}"></script>
-  <script src="{{ asset('js/moment.js') }}"></script>
-  <script src="{{ asset('js/datetime-moment.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
-  <!-- <script src="{{asset('js/all.js')}}"></script> -->
-  <script src="{{asset('selectize/selectize.js')}}"></script>
-  <!-- countdown timer -->
-  <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
-  <!-- bootstrap datetimepicker -->
-  <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
-  <!-- create link -->
-  <script src="{{asset('js/createlink.js')}}"></script>
-
+  <?php if(Auth::check()){?>
+    <script src="{{ asset('js/angular.js') }}"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
+    <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
+    <script src="{{ asset('datatables/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatables/Responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/datetime-moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
+    <!-- <script src="{{asset('js/all.js')}}"></script> -->
+    <script src="{{asset('selectize/selectize.js')}}"></script>
+    <!-- countdown timer -->
+    <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
+    <!-- bootstrap datetimepicker -->
+    <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
+    <!-- create link -->
+    <script src="{{asset('js/createlink.js')}}"></script>
+  <?php } ?>
+  
   <!-- Font Awesome 5 -->
   <script src="{{asset('assets/fontawesome-5.15.1/js/all.min.js')}}"></script>
 
@@ -52,13 +54,19 @@
 
   <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
-  <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
-  <link href="{{ asset('datatables/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
-  <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
-
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
-  <link rel="stylesheet" href="{{asset('selectize/selectize.css')}}">
+  
+  <?php if(Auth::check()){?>
+    <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
+    <link href="{{ asset('datatables/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
+    <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
 
+    <link rel="stylesheet" href="{{asset('selectize/selectize.css')}}">
+
+    <!-- proof -->
+    <link rel="stylesheet" href="{{asset('css/proof.css')}}">
+  <?php } ?>
+  
   @if(Request::is('pricing')) 
   <link rel="stylesheet" href="{{ asset('css/style-pricing.css') }}"/>
   @endif
@@ -71,9 +79,6 @@
   <!-- bootstrap datetimepicker -->
   <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"/>
 
-  <!-- proof -->
-  <link rel="stylesheet" href="{{asset('css/proof.css')}}">
-  
   <?php if ( env('APP_ENV') !== "local" ) { ?>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>
