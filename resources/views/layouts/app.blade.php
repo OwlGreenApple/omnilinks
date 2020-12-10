@@ -36,11 +36,12 @@
     <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
     <!-- create link -->
     <script src="{{asset('js/createlink.js')}}"></script>
+    
+    <!-- Font Awesome 5 -->
+    <script src="{{asset('assets/fontawesome-5.15.1/js/all.min.js')}}"></script>
+
   <?php } ?>
   
-  <!-- Font Awesome 5 -->
-  <script src="{{asset('assets/fontawesome-5.15.1/js/all.min.js')}}"></script>
-
   <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 
   <!-- Styles -->
@@ -48,14 +49,14 @@
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
   <!-- <link href="{{ asset('css/all.css') }}" rel="stylesheet"> -->
 
-  <!-- Font Awesome 5 -->
-  <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
-
   <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
   
   <?php if(Auth::check()){?>
+    <!-- Font Awesome 5 -->
+    <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
     <link href="{{ asset('datatables/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
