@@ -97,7 +97,8 @@
     function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-482312235'); 
   </script>
   <?php } ?>
-  
+
+  <?php if(Auth::check()){?>
   <script>
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
@@ -106,6 +107,7 @@
       });
     });
   </script>
+  <?php } ?>
 </head>
 
 <body>
