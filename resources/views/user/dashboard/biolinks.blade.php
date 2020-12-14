@@ -1973,6 +1973,7 @@
       dots[i].className = dots[i].className.replace("activated","");
     }
 
+    // first slides 
     if(fr === "first" && n == 1)
     {
       slideIndex = 2;

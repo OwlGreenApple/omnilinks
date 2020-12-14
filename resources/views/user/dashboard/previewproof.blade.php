@@ -27,36 +27,57 @@
 <script type="text/javascript">
 
 $(function(){
-  $('.proof-box-preview > .proof-wrapper-preview:gt(1)').css({position:'absolute','top':0,'left':0});
+  /*$('.proof-box-preview > .proof-wrapper-preview:gt(1)').css({position:'absolute','top':0,'left':0});
   $('.proof-box-preview > .proof-wrapper-preview:gt(0)').hide();
-  setTimeout(function(){runningProof();},5000);
+  setTimeout(function(){runningProof();},5000);*/
+  runningProof();
 });
 
 /* run animation display */
-  function runningProof()
-  {
-    var total = $(".proof-wrapper-preview").length;
-    var counting = 0;
-    var timer = 5000;
+ function runningProof()
+{
+  var total = $(".proof-wrapper-preview").length;
+  var counting = 0;
+  var delay = 1000;
+  var timing = 5000;
 
-      var run = setInterval(
-        function(){
-          $('.proof-box-preview > :first-child').fadeOut(1000).css({position:'absolute','top':0,'left':0}).next('.proof-wrapper-preview').css({position:'relative'}).fadeIn(1000).end().appendTo('.proof-box-preview');
-            counting++;
+  var run = setInterval(
+    function(){
+      $('.proof-box-preview').css({'width':'260px','height':'99.8px'}); //make animation stable
+      animateProof(counting);
+      counting++;
 
-          //put php logic according on setting
-          <?php 
-            if($pages->proof_settings == 0):
-          ?>
-              if(counting == total)
-              {
-                  $('.proof-wrapper-preview').hide();
-                  clearInterval(run);
-              }
-          <?php
-            endif;
-          ?>
-        }, 
-      timer);
-  }
+      //put php logic according on setting
+      <?php 
+        if($pages->proof_settings == 0):
+      ?>
+          if(counting == total)
+          {
+              $('.proof-wrapper-preview').hide();
+              clearInterval(run);  
+              $('.proof-box-preview').css({'height':'auto'})            
+          }
+      <?php
+        endif;
+      ?>
+
+      if(counting == total)
+      {
+         counting = 0;    
+      }
+
+    }, 
+  timing);
+}
+
+function animateProof(interval)
+{
+    $('.proof-wrapper-preview').eq(interval).css({ 'display' : 'inline-flex'}).animate({
+        top : 0,
+    }, 350, function(){
+      $(this).delay(4000).fadeOut(function(){
+        $(this).css({'top' : '50px'});
+      });
+    });
+}
 </script>

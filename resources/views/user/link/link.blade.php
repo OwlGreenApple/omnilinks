@@ -1932,9 +1932,12 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
+
+    //set proof background and text default if there is no color.
     $(".proof-wrapper").css({'background-color':'@if($pages->is_bio_color !== null){{ $pages->bio_color}}@else #fff @endif','color':'@if($pages->is_bio_color !== null){{ $pages->proof_text_color }}@else #000 @endif'})
-    $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
-    $('.proof-box > .proof-wrapper:gt(0)').hide();
+    // $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
+    // $('.proof-box > .proof-wrapper:gt(0)').hide();
+
     runningProof();
     getClientIP();
 });
@@ -1973,28 +1976,44 @@ function runningProof()
   var delay = 1000;
   var timing = 5000;
 
-    var run = setInterval(
-      function(){
-        $('.proof-box > :first-child').fadeOut(1000).css({position:'absolute','top':0,'left':0}).next('.proof-wrapper').css({position:'relative'}).fadeIn(1000).end().appendTo('.proof-box');
-        counting++;
+  var run = setInterval(
+    function(){
+      $('.proof-box').css({'width':'360px','height':'99.8px'}); //make animation stable
+      animateProof(counting);
+      counting++;
 
-        //put php logic according on setting
-        <?php 
-          if($pages->proof_settings == 0):
-        ?>
-            if(counting == total)
-            {
-             /* setTimeout(function(){*/
-                $('.proof-wrapper').hide();
-                clearInterval(run);
-             /* },delay);*/
-              
-            }
-        <?php
-          endif;
-        ?>
-      }, 
-    timing);
+      //put php logic according on setting
+      <?php 
+        if($pages->proof_settings == 0):
+      ?>
+          if(counting == total)
+          {
+              $('.proof-wrapper').hide();
+              clearInterval(run);  
+              $('.proof-box').css({'height':'auto'})            
+          }
+      <?php
+        endif;
+      ?>
+
+      if(counting == total)
+      {
+         counting = 0;    
+      }
+
+    }, 
+  timing);
+}
+
+function animateProof(interval)
+{
+    $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
+        top : 0,
+    }, 350, function(){
+      $(this).delay(4000).fadeOut(function(){
+        $(this).css({'top' : '50px'});
+      });
+    });
 }
 
 </script>
