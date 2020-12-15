@@ -72,12 +72,15 @@ $(function(){
 
 function animateProof(interval)
 {
-    $('.proof-wrapper-preview').eq(interval).css({ 'display' : 'inline-flex'}).animate({
-        top : 0,
-    }, 350, function(){
-      $(this).delay(4000).fadeOut(function(){
-        $(this).css({'top' : '50px'});
-      });
+  var speed = 350;
+  var delay = 3150
+  
+  $('.proof-wrapper-preview').eq(interval).css({ 'display' : 'inline-flex'}).animate({
+      top : 0,
+  }, speed, function(){
+    $(this).delay(delay).fadeOut(function(){
+      $(this).css({'top' : '50px'});
     });
+  });
 }
 </script>

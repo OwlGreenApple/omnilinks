@@ -1402,7 +1402,8 @@
   
   <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
     <div class="row justify-content-center service">
-      <div class="col-lg-8 col-md-8 col-12 mb-4 row">
+      <div class="col-lg-7 col-md-8 col-12 mb-4 row">
+
         @if($pages->point > 0)
             <!-- proof -->
             @if($proof->count() > 0)
@@ -2007,10 +2008,12 @@ function runningProof()
 
 function animateProof(interval)
 {
+    var speed = 350;
+    var delay = 3150
     $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
         top : 0,
-    }, 350, function(){
-      $(this).delay(4000).fadeOut(function(){
+    }, speed, function(){
+      $(this).delay(delay).fadeOut(function(){
         $(this).css({'top' : '50px'});
       });
     });

@@ -14,7 +14,7 @@
   position: relative;
   color : #000;
   width : 100%;
-  max-width : 360px;
+  max-width : 420px;
   height : auto;
   background-color: #fff;
   border : 2px solid #f7f7f7;
@@ -22,16 +22,26 @@
   padding : 10px;
   display : none;
   top : 50px;
+  align-items : center;
   /*display : inline-flex;*/
+}
+
+.proof-desc small {
+  font-size : 10px !important;
+  color : #0000ee;
 }
 
 .proof-desc small i, .proof-wrapper-preview small svg {
   color : #26C281 !important;
 }
 
+.proof_image {
+  vertical-align: middle;
+}
+
 .proof_image img {
   width : 100%;
-  max-width : 100px;
+  max-width : 65px;
 }
 
 .proof-desc{
@@ -46,8 +56,7 @@
 
 .proof_star,.proof_star_preview {
   text-align: right;
-  width : 40%;
-  margin-top: -4px;
+  margin-top: -3px;
   color : #ffc100 !important;
   font-size : 10px;
 }
@@ -55,15 +64,17 @@
 .proof_name,.proof_name_preview {
   font-weight : bold;
   line-height: 12px;
-  width : 80%;
-  font-size : 14px;
+  width : auto;
+  margin-right : 15px;
+  font-size : 1em;
 }
 
 .proof_comments,.proof_comments_preview {
   line-height : 17px;
   padding-top : 6px;
   font-style: italic;
-  font-size : 12px;
+  font-size : 14px;
+  min-height : 23px;
 }
 
 /* Preview */
@@ -87,7 +98,7 @@
   line-height : 14px;
 }
 
-.proof-wrapper-preview .proof_image img {
+.proof-wrapper-preview {
   max-width : 90px;
 }
 
