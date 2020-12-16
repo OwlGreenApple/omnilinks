@@ -1994,7 +1994,7 @@ function runningProof()
 
   run = setInterval(
     function(){
-      $('.proof-box').css({'max-width':'420px','min-height':'99.8px'}); //make animation stable
+      $('.proof-box').css({'max-width':'420px','height':'152px'}); //make animation stable
       animateProof(counting);
       counting++;
 
@@ -2019,6 +2019,23 @@ function runningProof()
 
     }, 
   timing);
+}
+
+function animateProof(interval)
+{
+  var speed = 350;
+  var delay = 3150
+
+  $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
+      top : 0,
+   }, {
+    duration : speed,
+    complete : function(){
+      $(this).delay(delay).fadeOut(function(){
+        $(this).css({'top' : '120px'});
+      });
+    }
+  });
 }
 
 function getClientIP()
@@ -2046,25 +2063,6 @@ function pointCount(ip)
         // console.log(xhr.responseText);
       }
     });
-}
-
-
-
-function animateProof(interval)
-{
-  var speed = 350;
-  var delay = 3150
-
-  $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
-      top : 0,
-   }, {
-    duration : speed,
-    complete : function(){
-      $(this).delay(delay).fadeOut(function(){
-        $(this).css({'top' : '120px'});
-      });
-    }
-  });
 }
 
 </script>

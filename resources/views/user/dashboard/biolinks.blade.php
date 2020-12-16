@@ -1423,8 +1423,8 @@
     var desc = $("#description").html();
     var desc_text = $("#description").text();
 
-    // console.log(desc_text.length);
-    // return false;
+   /* console.log(desc_text.length);
+    return false;*/
 
     if(desc_text.length > 80)
     {
@@ -4835,8 +4835,6 @@
     });
   }
  
-  
-
  function load_chat_member(){
     var uid = $("input[name=uuid]").val();
     var data = '';
@@ -5386,7 +5384,7 @@
         $(this).find("div").removeAttr('style');
         // $(this).find("remove").replaceWith("<br>");
 
-        if(desctext >= 80)
+        if(desctext >= 104)
         {
             return false;
         }
@@ -5395,7 +5393,7 @@
           newLines = $(this).find("div").length;
         }
 
-        if(e.keyCode == 13 && newLines >= 2) {
+        if(e.keyCode == 13 && newLines >= 3) {
           return false;
         }
         else {

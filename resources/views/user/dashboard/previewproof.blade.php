@@ -85,7 +85,7 @@ $(function(){
 
   run = setInterval(
     function(){
-      $('.proof-box-preview').css({'width':'260px','min-height':'99.8px'}); //make animation stable
+      $('.proof-box-preview').css({'width':'260px','height':'152px'}); //make animation stable
       animateProof(counting);
       counting++;
 

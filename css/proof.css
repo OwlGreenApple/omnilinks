@@ -90,8 +90,8 @@
 }
 
 .proof_name_preview {
-  font-size:12px;
-  width : 68%;
+  font-size:11px;
+  width : 66%;
   margin-right : 0;
 }
 
@@ -101,7 +101,7 @@
 }
  
 .proof_comments_preview {
-  font-size:9px;
+  font-size:10px;
   line-height : 14px;
 }
 
@@ -154,11 +154,11 @@
 
 @media(max-width:330px) {
   .proof_name {
-    width: 56%
+    width: 62%;
+    font-size : 13px;
   }
 
   .proof_star {
-    width: 32%;
     margin-top: -1px;
     font-size : 7px;
   }
