@@ -1423,8 +1423,8 @@
     var desc = $("#description").html();
     var desc_text = $("#description").text();
 
-   /* console.log(desc_text.length);
-    return false;*/
+    // console.log(desc_text.length);
+    // return false;
 
     if(desc_text.length > 80)
     {
@@ -3032,18 +3032,18 @@
                       <label class="control-label">Name</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="17" />
-                      <small>Maksimal 17 karakter</small>
-                      <span class="error proof_name"><!-- Error --></span>
+                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="16" />
+                      <small>Maksimal 16 karakter</small>
+                      <div class="error proof_name"><!-- Error --></div>
                     </div>
 
                     <div class="col-md-2">
                       <label class="control-label">Text</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <textarea maxlength="60" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
-                      <small>Maksimal 60 karakter</small>
-                      <span class="error proof_text"><!-- Error --></span>
+                      <textarea maxlength="180" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <small>Maksimal 180 karakter</small>
+                      <div class="error proof_text"><!-- Error --></div>
                     </div>
 
                     <div class="col-md-2">

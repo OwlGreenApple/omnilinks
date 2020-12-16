@@ -1407,7 +1407,7 @@
         @if($pages->point > 0)
             <!-- proof -->
             @if($proof->count() > 0)
-              <div class="col-lg-7 proof-box">
+              <div class="col-lg-12 proof-box">
               @foreach($proof as $row)
               <div class="proof-wrapper">
                   <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
@@ -1902,6 +1902,7 @@ and add more";
 @endif
 
 <script type="text/javascript">
+  var run;
   $('body').css("height",$( window ).height()+"px");
 
   //MAKE WA BUTTON TO ALWAYS ON CENTER
@@ -1925,6 +1926,26 @@ and add more";
     }
   }
 
+/* if user switch another tab , the animation stop, but if return otherwise */
+var vis = (function(){
+    var stateKey, eventKey, keys = {
+        hidden: "visibilitychange",
+        webkitHidden: "webkitvisibilitychange",
+        mozHidden: "mozvisibilitychange",
+        msHidden: "msvisibilitychange"
+    };
+    for (stateKey in keys) {
+        if (stateKey in document) {
+            eventKey = keys[stateKey];
+            break;
+        }
+    }
+    return function(c) {
+        if (c) document.addEventListener(eventKey, c);
+        return !document[stateKey];
+    }
+})();
+/****/
 
 $(document).ready(function() {
     setRightPost(".wcs_popup");
@@ -1938,10 +1959,67 @@ $(document).ready(function() {
     $(".proof-wrapper").css({'background-color':'@if($pages->is_bio_color !== null){{ $pages->bio_color}}@else #fff @endif','color':'@if($pages->is_bio_color !== null){{ $pages->proof_text_color }}@else #000 @endif'})
     // $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
     // $('.proof-box > .proof-wrapper:gt(0)').hide();
-
-    runningProof();
     getClientIP();
+    runningProof();
+
+    vis(function(){
+       // document.title = vis() ? 'Visible' : 'Not visible';
+       if(vis()){
+        <?php 
+          if($pages->proof_settings !== 0):
+        ?>
+          runningProof();
+        <?php 
+          else:
+        ?>
+          $('.proof-box').removeAttr('style'); 
+        <?php
+          endif;
+        ?>
+        
+       }
+       else
+       {
+        clearInterval(run);  
+       }
+    });
+
 });
+
+function runningProof()
+{
+  var total = $(".proof-wrapper").length;
+  var counting = 0;
+  var timing = 5500;
+
+  run = setInterval(
+    function(){
+      $('.proof-box').css({'max-width':'420px','min-height':'99.8px'}); //make animation stable
+      animateProof(counting);
+      counting++;
+
+      //put php logic according on setting
+      <?php 
+        if($pages->proof_settings == 0):
+      ?>
+          if(counting == total)
+          {
+              $('.proof-wrapper').hide();
+              clearInterval(run);  
+              $('.proof-box').removeAttr('style');            
+          }
+      <?php
+        endif;
+      ?>
+
+      if(counting == total)
+      {
+         counting = 0;    
+      }
+
+    }, 
+  timing);
+}
 
 function getClientIP()
 {
@@ -1970,53 +2048,23 @@ function pointCount(ip)
     });
 }
 
-function runningProof()
-{
-  var total = $(".proof-wrapper").length;
-  var counting = 0;
-  var delay = 1000;
-  var timing = 5000;
 
-  var run = setInterval(
-    function(){
-      $('.proof-box').css({'width':'360px','height':'99.8px'}); //make animation stable
-      animateProof(counting);
-      counting++;
-
-      //put php logic according on setting
-      <?php 
-        if($pages->proof_settings == 0):
-      ?>
-          if(counting == total)
-          {
-              $('.proof-wrapper').hide();
-              clearInterval(run);  
-              $('.proof-box').css({'height':'auto'})            
-          }
-      <?php
-        endif;
-      ?>
-
-      if(counting == total)
-      {
-         counting = 0;    
-      }
-
-    }, 
-  timing);
-}
 
 function animateProof(interval)
 {
-    var speed = 350;
-    var delay = 3150
-    $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
-        top : 0,
-    }, speed, function(){
+  var speed = 350;
+  var delay = 3150
+
+  $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
+      top : 0,
+   }, {
+    duration : speed,
+    complete : function(){
       $(this).delay(delay).fadeOut(function(){
-        $(this).css({'top' : '50px'});
+        $(this).css({'top' : '120px'});
       });
-    });
+    }
+  });
 }
 
 </script>

@@ -26,11 +26,54 @@
 
 <script type="text/javascript">
 
+
+/* if user switch another tab , the animation stop, but if return otherwise */
+var run;
+var vis = (function(){
+  var stateKey, eventKey, keys = {
+      hidden: "visibilitychange",
+      webkitHidden: "webkitvisibilitychange",
+      mozHidden: "mozvisibilitychange",
+      msHidden: "msvisibilitychange"
+  };
+  for (stateKey in keys) {
+      if (stateKey in document) {
+          eventKey = keys[stateKey];
+          break;
+      }
+  }
+  return function(c) {
+      if (c) document.addEventListener(eventKey, c);
+      return !document[stateKey];
+  }
+})();
+/****/
+
 $(function(){
-  /*$('.proof-box-preview > .proof-wrapper-preview:gt(1)').css({position:'absolute','top':0,'left':0});
-  $('.proof-box-preview > .proof-wrapper-preview:gt(0)').hide();
-  setTimeout(function(){runningProof();},5000);*/
   runningProof();
+
+  //call switch tab
+  vis(function(){
+     // document.title = vis() ? 'Visible' : 'Not visible';
+     if(vis()){
+      <?php 
+        if($pages->proof_settings !== 0):
+      ?>
+        runningProof();
+      <?php 
+        else:
+      ?>
+        $('.proof-box-preview').removeAttr('style'); 
+      <?php
+        endif;
+      ?>
+      
+     }
+     else
+     {
+      clearInterval(run);  
+     }
+  });
 });
 
 /* run animation display */
@@ -38,12 +81,11 @@ $(function(){
 {
   var total = $(".proof-wrapper-preview").length;
   var counting = 0;
-  var delay = 1000;
-  var timing = 5000;
+  var timing = 5500;
 
-  var run = setInterval(
+  run = setInterval(
     function(){
-      $('.proof-box-preview').css({'width':'260px','height':'99.8px'}); //make animation stable
+      $('.proof-box-preview').css({'width':'260px','min-height':'99.8px'}); //make animation stable
       animateProof(counting);
       counting++;
 
@@ -55,7 +97,7 @@ $(function(){
           {
               $('.proof-wrapper-preview').hide();
               clearInterval(run);  
-              $('.proof-box-preview').css({'height':'auto'})            
+              $('.proof-box-preview').removeAttr('style');            
           }
       <?php
         endif;
@@ -77,10 +119,13 @@ function animateProof(interval)
   
   $('.proof-wrapper-preview').eq(interval).css({ 'display' : 'inline-flex'}).animate({
       top : 0,
-  }, speed, function(){
-    $(this).delay(delay).fadeOut(function(){
-      $(this).css({'top' : '50px'});
-    });
+   }, {
+    duration : speed,
+    complete : function(){
+      $(this).delay(delay).fadeOut(function(){
+        $(this).css({'top' : '120px'});
+      });
+    }
   });
 }
 </script>

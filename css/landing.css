@@ -69,7 +69,8 @@ p,span {
 
 .error {
   color : #e3342f;
-  font-size: 12px;
+  font-size: 12px !important;
+  font-weight : bold;
 }
 
 .dropdown-menu {
