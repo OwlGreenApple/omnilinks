@@ -81,11 +81,12 @@ $(function(){
 {
   var total = $(".proof-wrapper-preview").length;
   var counting = 0;
-  var timing = 5500;
+  var timing = 9000;
 
   run = setInterval(
     function(){
-      $('.proof-box-preview').css({'width':'260px','height':'145px'}); //make animation stable
+      $("#proof-fix-preview").css('margin-top','0.75rem'); 
+      $('.proof-box-preview').css({'width':'260px','height':'138px'}); //make animation stable
       animateProof(counting);
       counting++;
 
@@ -98,8 +99,9 @@ $(function(){
             setTimeout(function(){
               clearInterval(run);
               $('.proof-wrapper-preview').hide();
-              $('.proof-box-preview').removeAttr('style');    
-            },4500);      
+              $('.proof-box-preview').removeAttr('style');  
+              $("#proof-fix-preview").css('margin-top','1.5rem'); 
+            },8000);      
           }
       <?php
         endif;
@@ -117,7 +119,7 @@ $(function(){
 function animateProof(interval)
 {
   var speed = 350;
-  var delay = 3150
+  var delay = 6650
   
   $('.proof-wrapper-preview').eq(interval).css({ 'display' : 'inline-flex'}).animate({
       top : 0,

@@ -1400,9 +1400,9 @@
     </div>
   </div>  
   
-  <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
+  <div id="proof-fix" class="col-md-12 col-12" style="min-height: 100%">
     <div class="row justify-content-center service">
-      <div class="col-lg-7 col-md-8 col-12 mb-4 row">
+      <div class="col-lg-7 col-md-8 col-12 mb-4">
 
         @if($pages->point > 0)
             <!-- proof -->
@@ -1430,37 +1430,41 @@
             </div>
             @endif 
         @endif
+        <!-- end proof -->
 
-        <div class="offset-md-1 col-md-5 col-5">
-            <div class="div-imagetitle">
-              <img src="<?php 
-              // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
-              $viewpicture = asset('/image/no-photo.jpg');
-              if(!is_null($pages->image_pages)){
-                // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
-                $viewpicture = Storage::disk('s3')->url($pages->image_pages);
-              }
-              // echo Storage::disk('s3')->url($pages->image_pages);
-              echo $viewpicture;
-              ?>" class="imagetitle">
-            </div>
-        </div>
+        <div class="row">
+          <div class="offset-md-1 col-md-5 col-5">
+              <div class="div-imagetitle">
+                <img src="<?php 
+                // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
+                $viewpicture = asset('/image/no-photo.jpg');
+                if(!is_null($pages->image_pages)){
+                  // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                  $viewpicture = Storage::disk('s3')->url($pages->image_pages);
+                }
+                // echo Storage::disk('s3')->url($pages->image_pages);
+                echo $viewpicture;
+                ?>" class="imagetitle">
+              </div>
+          </div>
         
-        <div class="col-md-5 col-7">
-          <span class="header-txt title">
-            <?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>
-          </span>
-          <input type="hidden" id="hidden-description" value="{{$pages->description}}">
-          <span class="header-txt txt" style="word-break: break-word;" id="description">
-<?php if(!is_null($pages->description)) { 
-                            echo $pages->description;
-                          }else {
-                            echo "This is your new text content. <br>
-You can modify this text <br>
-and add more";
-                          }?>
-          </span>
-        </div>
+          <div class="col-md-5 col-7">
+            <span class="header-txt title">
+              <?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>
+            </span>
+            <input type="hidden" id="hidden-description" value="{{$pages->description}}">
+            <span class="header-txt txt" style="word-break: break-word;" id="description">
+  <?php if(!is_null($pages->description)) { 
+                              echo $pages->description;
+                            }else {
+                              echo "This is your new text content. <br>
+  You can modify this text <br>
+  and add more";
+                            }?>
+            </span>
+          </div>
+        </div><!-- end row -->
+        <!-- end title -->
       </div>
       
       @if($membership!=='free')
@@ -1995,11 +1999,12 @@ function runningProof()
   var total = $(".proof-wrapper").length;
   // console.log(total);
   var counting = 0;
-  var timing = 5500;
+  var timing = 9000;
 
   run = setInterval(
      function(){
-      $('.proof-box').css({'max-width':'420px','height':'152px'}); //make animation stable
+      $("#proof-fix").css('margin-top','1rem');
+      $('.proof-box').css({'max-width':'420px','height':'138px'}); //make animation stable
       animateProof(counting);
       counting++;
       
@@ -2012,8 +2017,9 @@ function runningProof()
             setTimeout(function(){
               clearInterval(run);
               $('.proof-wrapper').hide();
-              $('.proof-box').removeAttr('style');    
-            },4500);  
+              $('.proof-box').removeAttr('style');   
+              $("#proof-fix").css('margin-top','3rem'); 
+            },8000);  
           }
       <?php
         endif;
@@ -2031,7 +2037,7 @@ function runningProof()
 function animateProof(interval)
 {
   var speed = 350;
-  var delay = 3150
+  var delay = 6650
 
   $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
       top : 0,

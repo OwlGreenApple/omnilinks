@@ -1423,12 +1423,12 @@
     var desc = $("#description").html();
     var desc_text = $("#description").text();
 
-    // console.log(desc_text.length);
-    // return false;
+    /*console.log(desc_text.length);
+    return false;*/
 
-    if(desc_text.length > 80)
+    if(desc_text.length > 104)
     {
-      alert("Deskripsi melebihi 80 karakter");
+      alert("Deskripsi melebihi 104 karakter");
       return false;
     }
 
@@ -3041,8 +3041,8 @@
                       <label class="control-label">Text</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <textarea maxlength="120" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
-                      <small>Maksimal 120 karakter</small>
+                      <textarea maxlength="130" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <small>Maksimal 130 karakter</small>
                       <div class="error proof_text"><!-- Error --></div>
                     </div>
 
@@ -3118,7 +3118,7 @@
                             </textarea> -->
 
                           <!-- <div id="description" contenteditable="true"> -->
-                          <div id="description" placeholder="Maksimal 80 Karakter" contenteditable="true">{!! $description !!}</div>
+                          <div id="description" placeholder="Maksimal 104 Karakter" contenteditable="true">{!! $description !!}</div>
 
                           <fieldset>
 
@@ -3612,7 +3612,7 @@
               <div class="mobile1">
                 <div class="screen " id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
-                  <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
+                  <header id="proof-fix-preview" class="col-md-12" style="padding-top: 17px; padding-bottom: 12px;">
 
                   <!-- proof-preview -->
                   <div id="proof_preview" proof-text="black" >

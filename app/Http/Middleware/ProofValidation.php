@@ -17,7 +17,7 @@ class ProofValidation
     {
         $rules = [
           'proof_name'=> ['required','min:4','max:14'],
-          'proof_text'=> ['required','min:4','max:120'],
+          'proof_text'=> ['required','min:4','max:130'],
           'proof_stars'=> ['required','min:1','max:5','numeric']
         ];
 

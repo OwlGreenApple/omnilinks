@@ -3,6 +3,14 @@
   created : tue 03-Nov-2020;
 */
 
+#proof-fix {
+  margin-top : 3rem;
+}
+
+#proof-fix-preview {
+  margin-top : 1.5rem;
+}
+
 .proof-box,.proof-box-preview {
  margin-left : auto;
  margin-right : auto;
@@ -44,8 +52,8 @@
 }
 
 .proof_image img {
-  width : 100%;
-  max-width : 65px;
+  width : 65px !important;
+  height : 65px !important;
 }
 
 .proof-desc{
@@ -167,6 +175,6 @@
     padding-top : 0;
     line-height: 14px;
     padding-top : 7px;
-    font-size : 12px;
+    font-size : 14px;
   }
 }
