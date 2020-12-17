@@ -85,7 +85,7 @@ $(function(){
 
   run = setInterval(
     function(){
-      $('.proof-box-preview').css({'width':'260px','height':'152px'}); //make animation stable
+      $('.proof-box-preview').css({'width':'260px','height':'145px'}); //make animation stable
       animateProof(counting);
       counting++;
 
@@ -95,9 +95,11 @@ $(function(){
       ?>
           if(counting == total)
           {
+            setTimeout(function(){
+              clearInterval(run);
               $('.proof-wrapper-preview').hide();
-              clearInterval(run);  
-              $('.proof-box-preview').removeAttr('style');            
+              $('.proof-box-preview').removeAttr('style');    
+            },4500);      
           }
       <?php
         endif;

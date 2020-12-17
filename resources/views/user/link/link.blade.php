@@ -1964,49 +1964,54 @@ $(document).ready(function() {
 
     vis(function(){
        // document.title = vis() ? 'Visible' : 'Not visible';
-       if(vis()){
-        <?php 
-          if($pages->proof_settings !== 0):
-        ?>
-          runningProof();
-        <?php 
-          else:
-        ?>
-          $('.proof-box').removeAttr('style'); 
-        <?php
-          endif;
-        ?>
-        
+       if(vis())
+       {
+          <?php 
+            if($pages->proof_settings !== 0):
+          ?>
+            runningProof();
+          <?php 
+            else:
+          ?>
+            $('.proof-box').removeAttr('style'); 
+          <?php
+            endif;
+          ?>
        }
        else
        {
-        clearInterval(run);  
+          clearInterval(run);  
        }
     });
 
 });
 
+
 function runningProof()
 {
+  var complete = null;
   var total = $(".proof-wrapper").length;
+  // console.log(total);
   var counting = 0;
   var timing = 5500;
 
   run = setInterval(
-    function(){
+    async function(){
       $('.proof-box').css({'max-width':'420px','height':'152px'}); //make animation stable
       animateProof(counting);
       counting++;
-
+      
       //put php logic according on setting
       <?php 
         if($pages->proof_settings == 0):
       ?>
           if(counting == total)
           {
+            setTimeout(function(){
+              clearInterval(run);
               $('.proof-wrapper').hide();
-              clearInterval(run);  
-              $('.proof-box').removeAttr('style');            
+              $('.proof-box').removeAttr('style');    
+            },4500);  
           }
       <?php
         endif;
