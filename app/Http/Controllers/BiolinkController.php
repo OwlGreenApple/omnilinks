@@ -514,8 +514,6 @@ class BiolinkController extends Controller
 
       $proof = $this->getProof($page->id);
 
-      dd($user->valid_until);
-
       return view('user.link.link')
               ->with('pages',$page)
               ->with('membership',$user->membership)
