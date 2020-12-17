@@ -10,6 +10,7 @@ use App\Helpers\Helper;
 use App\Page;
 use App\Link;
 use App\Banner;
+use App\Proof;
 use App\ProofHistory;
 use App\User;
 use App\Order;
@@ -49,8 +50,10 @@ class ProofController extends Controller
          exit();
       }
 
+      $available_proof = Proof::where('page_id',$page->id)->get()->count();
+
       $current_page_point = $page->point;
-      if($current_page_point > 0)
+      if($current_page_point > 0 && $available_proof > 0)
       {
           $updated_page_point = $current_page_point - 1;
       }
@@ -71,12 +74,21 @@ class ProofController extends Controller
         exit();
       }
 
+      $ip = $request->ip;
+      // $ip = 'down';
+      if($ip === 'down')
+      {
+        $total_no_ip = ProofHistory::where([['page_name',$request->page],['ip_address','LIKE','%0.0.0%']])->whereRaw("DATE_FORMAT(created_at,'%Y-%m-%d') = CURDATE()")->get();
+
+        $ip = '0.0.0.'.$total_no_ip->count();
+      }
+
       if($updated == true)
       {
         $ph = new ProofHistory;
         $ph->user_id = $request->user_id;
         $ph->page_name = $request->page;
-        $ph->ip_address = $request->ip;
+        $ph->ip_address = $ip;
         $ph->kredit = 1;
 
         try

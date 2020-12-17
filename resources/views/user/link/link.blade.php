@@ -1947,6 +1947,7 @@ var vis = (function(){
 })();
 /****/
 
+
 $(document).ready(function() {
     setRightPost(".wcs_popup");
     setMargins(".wcs_fixed_right");
@@ -1959,9 +1960,10 @@ $(document).ready(function() {
     $(".proof-wrapper").css({'background-color':'@if($pages->is_bio_color !== null){{ $pages->bio_color}}@else #fff @endif','color':'@if($pages->is_bio_color !== null){{ $pages->proof_text_color }}@else #000 @endif'})
     // $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
     // $('.proof-box > .proof-wrapper:gt(0)').hide();
+
     getClientIP();
     runningProof();
-
+    // prevent animation run when user focused on another tab
     vis(function(){
        // document.title = vis() ? 'Visible' : 'Not visible';
        if(vis())
@@ -1996,7 +1998,7 @@ function runningProof()
   var timing = 5500;
 
   run = setInterval(
-    async function(){
+     function(){
       $('.proof-box').css({'max-width':'420px','height':'152px'}); //make animation stable
       animateProof(counting);
       counting++;
@@ -2043,18 +2045,32 @@ function animateProof(interval)
   });
 }
 
+
 function getClientIP()
 {
-  $.getJSON("https://api.ipify.org/?format=json", function(e) {
+  /*$.getJSON("http://api.ipify.org/?format=json", function(e) {
     pointCount(e.ip);
-  });
+  });*/
+  $.ajax({
+    type: 'GET',
+    url: 'https://api.ipify.org/?format=json',
+    dataType:'json',
+    success : function(e)
+    {
+      pointCount(e.ip);
+    },
+    error:function(xhr,throwable,err)
+    {
+      pointCount("down");
+    }
+  })
 }
 
 function pointCount(ip)
 {
   $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-      Accept : "application/json",
+      // Accept : "application/json",
       type: 'POST',
       url: '{{ url("page_point") }}',
       data: {page : '{{$page_name}}',user_id:'{{$user_id}}', ip : ip},
