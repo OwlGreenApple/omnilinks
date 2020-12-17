@@ -16,8 +16,8 @@ class ProofValidation
     public function handle($request, Closure $next)
     {
         $rules = [
-          'proof_name'=> ['required','min:4','max:16'],
-          'proof_text'=> ['required','min:4','max:180'],
+          'proof_name'=> ['required','min:4','max:14'],
+          'proof_text'=> ['required','min:4','max:120'],
           'proof_stars'=> ['required','min:1','max:5','numeric']
         ];
 
