@@ -26,7 +26,6 @@
 
 <script type="text/javascript">
 
-
 /* if user switch another tab , the animation stop, but if return otherwise */
 var run;
 var vis = (function(){

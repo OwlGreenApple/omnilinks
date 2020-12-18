@@ -4298,9 +4298,54 @@
     load_proof();
     change_proof_settings();
     setWAPopupPos();
+
+    setTimeout(function(){
+      proof_text_color();
+    },1000);
     //proof_preview();
     //callMaintainPlus();
   });
+
+  // give default color to proof tetx when page loaded
+  function proof_text_color(){
+      var color = $('.description').css('Color');
+      color = hexc(color);
+      $("#proof_preview").attr('proof-text',hexToRgb(color));
+  }
+
+  // convert RGB to HEX color (ex : #0000)
+  function hexc(colorval) {
+    var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    delete(parts[0]);
+    for (var i = 1; i <= 3; ++i) {
+      parts[i] = parseInt(parts[i]).toString(16);
+      if (parts[i].length == 1) parts[i] = '0' + parts[i];
+    }
+    color = '#' + parts.join('');
+    return color;
+  }
+
+  //TO MEASURE COLOR DEPTH TO DETERMINE TEXT WHITE OR BLACK
+    function hexToRgb(hex) {
+      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+      });
+
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+      var r = parseInt(result[1], 16);
+      var g = parseInt(result[2], 16);
+      var b = parseInt(result[3], 16);
+      var yiq = ((r*299)+(g*587)+(b*114))/1000;
+     /* return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;*/
+      return (yiq >= 128) ? 'black' : 'white';
+    }
 
    function setWAPopupPos() {
     var default_len = 113;
@@ -5865,28 +5910,6 @@
           $('#sm-preview li a').css("color","#fff");
         }
       }
-    }
-
-    //TO MEASURE COLOR DEPTH TO DETERMINE TEXT WHITE OR BLACK
-    function hexToRgb(hex) {
-      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-        return r + r + g + g + b + b;
-      });
-
-      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-
-      var r = parseInt(result[1], 16);
-      var g = parseInt(result[2], 16);
-      var b = parseInt(result[3], 16);
-      var yiq = ((r*299)+(g*587)+(b*114))/1000;
-     /* return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      } : null;*/
-      return (yiq >= 128) ? 'black' : 'white';
     }
 
     $('#colorpickerBioColor').farbtastic('#bioColor');
