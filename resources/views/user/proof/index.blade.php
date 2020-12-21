@@ -13,6 +13,8 @@
               <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
               <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
               <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+              <div class="notes">Rp/click : {!! getActivProofPackage()[$x]['cpl'] !!}</div>
+              <div class="notes">Click Paket : {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!}</div>
               <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
@@ -22,6 +24,8 @@
               <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
               <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
               <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+               <div class="notes">Rp/click : {!! getActivProofPackage()[$x]['cpl'] !!}</div>
+              <div class="notes">Click Paket : {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!}</div>
               <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
@@ -31,6 +35,8 @@
               <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
               <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
               <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+              <div class="notes">Rp/click : {!! getActivProofPackage()[$x]['cpl'] !!}</div>
+              <div class="notes">Click Paket : {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!}</div>
               <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
@@ -40,6 +46,8 @@
               <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
               <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
               <div class="notes">{!! str_replace(",",".",number_format(getActivProofPackage()[$x]['credit'])) !!} Credits</div>
+               <div class="notes">Rp/click : {!! getActivProofPackage()[$x]['cpl'] !!}</div>
+              <div class="notes">Click Paket : {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!}</div>
               <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
