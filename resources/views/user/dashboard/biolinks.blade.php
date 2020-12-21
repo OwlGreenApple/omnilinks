@@ -3041,8 +3041,8 @@
                       <label class="control-label">Text</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <textarea maxlength="130" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
-                      <small>Maksimal 130 karakter</small>
+                      <textarea maxlength="125" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <small>Maksimal 125 karakter</small>
                       <div class="error proof_text"><!-- Error --></div>
                     </div>
 
