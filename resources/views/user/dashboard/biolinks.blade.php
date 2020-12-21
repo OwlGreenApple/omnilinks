@@ -2330,11 +2330,11 @@
       <!-- form API -->
       <div class="col-12 mb-2">
         <div class="form-check">
-            <input id="connect_activrespon" type="checkbox" class="form-check-input">
+            <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check">
             <label class="form-check-label">Connect Activrespon</label>
         </div>
         <div class="form-check">
-            <input id="connect_mailchimp" type="checkbox" class="form-check-input">
+            <input id="connect_mailchimp" type="checkbox" class="form-check-input connect_check">
             <label class="form-check-label">Connect Mailchimp</label>
         </div>
       </div>
@@ -3695,7 +3695,9 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
-                
+                  
+                  <!-- social media links -->
+
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
                       <a href="#" class="btn btn-md btnview txthov" style="width: 100%;font-size:11px;height: 40px;padding: 10px;" id="walinkview">
@@ -3742,6 +3744,31 @@
                       </a>
                     </li>
                   </ul>
+
+                  <!-- form connect API -->
+
+                  <form id="connect_preview" class="col-12 mb-2">
+                    <div class="form-group mt-3 mb-4 row">
+                      <div class="col-lg-12 mb-3">
+                        <input type="text" class="form-control" name="api_name" placeholder="Nama" maxlength="50" />
+                        <div class="error api_name"><!-- Error --></div>
+                      </div>
+
+                      <div class="col-lg-12 mb-3">
+                        <input type="email" class="form-control" name="api_email" placeholder="Email" />
+                        <div class="error api_email"><!-- Error --></div>
+                      </div>
+
+                      <div class="col-lg-12 mb-3">
+                        <input type="phone" class="form-control" name="api_phone" placeholder="Email" />
+                        <div class="error api_phone"><!-- Error --></div>
+                      </div>
+
+                      <div class="col-12">
+                       <button class="btn btnview col-lg-12">Submit</button>
+                      </div>
+                    </div>
+                  </form>
 
                   <!-- links -->
 
@@ -4316,9 +4343,30 @@
     setTimeout(function(){
       proof_text_color();
     },1000);
+    checkbox_connect_api();
     //proof_preview();
     //callMaintainPlus();
   });
+
+  function checkbox_connect_api()
+  {
+    var checked = 0;
+    $(".connect_check").each(function(e){
+      if($(this).is(':checked') == true)
+      {
+        checked++;
+      }
+    });
+
+    if(checked > 0)
+    {
+      $("#connect_preview").show();
+    }
+    else
+    {
+      $("#connect_preview").hide();
+    }
+  }
 
   // give default color to proof tetx when page loaded
   function proof_text_color(){
