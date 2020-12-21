@@ -2327,6 +2327,18 @@
         </button>
       </div>
 
+      <div class="col-12 mb-2">
+        <!-- backyard -->
+        <div class="form-check">
+          <input id="connect_activrespon" type="checkbox" class="form-check-input">
+          <label class="form-check-label">Connect Activrespon</label>
+        </div>
+        <div class="form-check">
+          <input id="connect_mailchimp" type="checkbox" class="form-check-input">
+          <label class="form-check-label">Connect Mailchimp</label>
+        </div>
+      </div>
+
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
         @if(Session::has('msg'))
           <div class="alert alert-success">{{ Session::get('msg') }}</div>
@@ -3683,6 +3695,8 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
+
+                  <!-- social media links -->
                 
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
