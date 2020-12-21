@@ -28,6 +28,8 @@
   </table>
 @endif
 
+<!-- data table -->
+
 <script>
   $(function(){
     table();
