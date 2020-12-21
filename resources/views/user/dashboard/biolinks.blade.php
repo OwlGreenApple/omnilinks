@@ -2327,6 +2327,18 @@
         </button>
       </div>
 
+      <!-- form API -->
+      <div class="col-12 mb-2">
+        <div class="form-check">
+            <input id="connect_activrespon" type="checkbox" class="form-check-input">
+            <label class="form-check-label">Connect Activrespon</label>
+        </div>
+        <div class="form-check">
+            <input id="connect_mailchimp" type="checkbox" class="form-check-input">
+            <label class="form-check-label">Connect Mailchimp</label>
+        </div>
+      </div>
+
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
         @if(Session::has('msg'))
           <div class="alert alert-success">{{ Session::get('msg') }}</div>
@@ -3730,6 +3742,8 @@
                       </a>
                     </li>
                   </ul>
+
+                  <!-- links -->
 
                   <div class="row display_links" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                     <!-- display preview links here .display_links -->
