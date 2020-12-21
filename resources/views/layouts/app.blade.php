@@ -17,48 +17,57 @@
   <!--<script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{asset('js/pricing.js')}}"></script>
-  <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
-  <script src="{{ asset('js/angular.js') }}"></script>
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
-  <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
-  <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
-  <script src="{{ asset('datatables/datatables/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('datatables/Responsive/js/dataTables.responsive.min.js') }}"></script>
-  <script src="{{ asset('js/moment.js') }}"></script>
-  <script src="{{ asset('js/datetime-moment.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
-  <!-- <script src="{{asset('js/all.js')}}"></script> -->
-  <script src="{{asset('selectize/selectize.js')}}"></script>
-  <!-- countdown timer -->
-  <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
-  <!-- bootstrap datetimepicker -->
-  <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
-  <!-- create link -->
-  <script src="{{asset('js/createlink.js')}}"></script>
+  <?php if(Auth::check()){?>
+    <script src="{{ asset('jquery-ui-1.12.1/jquery-ui.js') }}"></script>
+    <script src="{{ asset('js/angular.js') }}"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>-->
+    <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
+    <script src="{{ asset('datatables/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatables/Responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/datetime-moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/canvasjs/canvasjs.min.js') }}"></script>
+    <!-- <script src="{{asset('js/all.js')}}"></script> -->
+    <script src="{{asset('selectize/selectize.js')}}"></script>
+    <!-- countdown timer -->
+    <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
+    <!-- bootstrap datetimepicker -->
+    <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
+    <!-- create link -->
+    <script src="{{asset('js/createlink.js')}}"></script>
+    
+    <!-- Font Awesome 5 -->
+    <script src="{{asset('assets/fontawesome-5.15.1/js/all.min.js')}}"></script>
 
-  <!-- Font Awesome 5 -->
-  <script src="{{asset('assets/fontawesome-5.15.1/js/all.min.js')}}"></script>
-
+  <?php } ?>
+  
   <!--<link rel="dns-prefetch" href="//fonts.gstatic.com">-->
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
   <!-- <link href="{{ asset('css/all.css') }}" rel="stylesheet"> -->
-
-  <!-- Font Awesome 5 -->
-  <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
 
   <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
-  <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
-  <link href="{{ asset('datatables/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
-  <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
-
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
-  <link rel="stylesheet" href="{{asset('selectize/selectize.css')}}">
+  
+  <?php if(Auth::check()){?>
+    <!-- Font Awesome 5 -->
+    <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
+    <link href="{{ asset('datatables/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"></link>
+    <link href="{{ asset('datatables/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet"></link>
+
+    <link rel="stylesheet" href="{{asset('selectize/selectize.css')}}">
+
+    <!-- proof -->
+    <link rel="stylesheet" href="{{asset('css/proof.css')}}">
+  <?php } ?>
+  
   @if(Request::is('pricing')) 
   <link rel="stylesheet" href="{{ asset('css/style-pricing.css') }}"/>
   @endif
@@ -71,9 +80,6 @@
   <!-- bootstrap datetimepicker -->
   <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"/>
 
-  <!-- proof -->
-  <link rel="stylesheet" href="{{asset('css/proof.css')}}">
-  
   <?php if ( env('APP_ENV') !== "local" ) { ?>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81228145-4"></script>
@@ -91,7 +97,8 @@
     function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-482312235'); 
   </script>
   <?php } ?>
-  
+
+  <?php if(Auth::check()){?>
   <script>
     $(document).ready(function() {
       $('.tooltipstered').tooltipster({
@@ -100,6 +107,7 @@
       });
     });
   </script>
+  <?php } ?>
 </head>
 
 <body>
@@ -182,11 +190,12 @@
                   </a>
                 </li>
 
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a class="nav-link navlog" href="{{url('ads-manager')}}">
                     {{ __('Ads') }}
                   </a>
-                </li>                
+                </li>
+                -->
               @endif
 
               <li class="nav-item dropdown pull-right">

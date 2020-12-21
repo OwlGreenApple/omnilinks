@@ -647,21 +647,23 @@ class OrderController extends Controller
       $user->membership = 'super';
     }
     
-    if($valid <> null){
-        $formattedDate = $valid->format('Y-m-d H:i:s');
+    if(substr($order->package,0,6) <> "Top Up"){
+      if($valid <> null){
+          $formattedDate = $valid->format('Y-m-d H:i:s');
+      }
+
+      $userlog = new UserLog;
+      $userlog->user_id = $user->id;
+      $userlog->type = 'membership';
+      $userlog->value = $type;
+      $userlog->keterangan = 'Confirm Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
+     // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
+      $userlog->save();
+
+      $user->valid_until = $valid;
+      $user->is_member = 1;
+      $user->save();
     }
-
-    $userlog = new UserLog;
-    $userlog->user_id = $user->id;
-    $userlog->type = 'membership';
-    $userlog->value = $type;
-    $userlog->keterangan = 'Confirm Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
-   // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
-    $userlog->save();
-
-    $user->valid_until = $valid;
-    $user->is_member = 1;
-    $user->save();
     $order->save();
 
     if(substr($order->package,0,6) === "Top Up"){
