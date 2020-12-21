@@ -4,18 +4,6 @@
 
 <div id="apf" class="container mb-5 main-cont">
 
-    <div class="col-md-9 pr-0 div-btn mx-auto mb-5">
-        <div class="row">
-          <div class="col-lg-4 col-md-3 pl-md-3 pl-0 pr-0">
-            <h4>Total Credits : <b class="current_point">{{ $total_proof_credit }}</b></h4>
-          </div>
-
-          <div class="ml-lg-auto ml-md-auto mr-3 ml-3 col-lg-4 col-md-5 col-12 pl-md-3 pl-0 pr-0 mb-3 text-right">
-            <a href="{{ url('proof_history') }}" class="btn btn-primary btn-lg">History</a>
-          </div>
-        </div>
-    </div>
-
     <div class="col-md-12 pr-0 div-btn mx-auto mt-3 mb-3">
         <div class="text-md-left text-center mb-5"><p><b><h3>Top Up Activproof Credit</h3></b></p></div>
         <div class="row">
@@ -60,7 +48,12 @@
     </div>
 
     <div class="col-md-12 pr-0 div-btn mx-auto mt-5">
-      <div class="text-md-left text-center mb-5"><p><b><h3>Alokasi Activproof Credit</h3></b></p></div>
+      <div class="text-md-left text-center mb-3"><span><p><b><h3>Alokasi Activproof Credit<a href="{{ url('proof_history') }}" class="btn btn-primary ml-3">History</a></h3></b></span></p></div>
+        
+      <div class="col-md-9 pr-0 div-btn mb-3 row">
+        <h4>Total Credits : <b class="current_point">{{ $total_proof_credit }}</b></h4>
+      </div>
+
       <span id="notifier"><!-- display message --></span>
       <div class="table-responsive" id="content"><!-- display table --></div>
     </div>

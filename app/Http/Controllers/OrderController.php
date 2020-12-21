@@ -686,8 +686,9 @@ class OrderController extends Controller
     $userlog->keterangan = 'Confirm Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
    // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
     $userlog->save();
-
-    $user->valid_until = $valid;
+    if(substr($order->package,0,10) <> "ActivProof") {
+      $user->valid_until = $valid;
+    }
     $user->is_member = 1;
     $user->save();
     $order->save();

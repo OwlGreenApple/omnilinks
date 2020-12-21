@@ -124,6 +124,7 @@ class ProofController extends Controller
             'id'=>$row->id,
             'name'=>$names,
             'credit'=>$row->point,
+            'edit_link'=>url('biolinks').'/'.$row->uid
           ];
         endforeach;
       }
@@ -302,11 +303,13 @@ class ProofController extends Controller
         'no_order' => $order_number,
       ];
     
-      Mail::send('emails.topupactivproof', $emaildata, function ($message) use ($user,$order_number) {
-        $message->from('info@omnilinkz.com', 'Omnilinkz');
-        $message->to($user->email);
-        $message->subject('[Omnilinkz] Order Nomor '.$order_number);
-      });
+      if(env('APP_ENV') !== 'local'){
+          Mail::send('emails.topupactivproof', $emaildata, function ($message) use ($user,$order_number) {
+            $message->from('info@omnilinkz.com', 'Omnilinkz');
+            $message->to($user->email);
+            $message->subject('[Omnilinkz] Order Nomor '.$order_number);
+          });
+      }
     }
     else
     {
