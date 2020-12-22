@@ -239,6 +239,11 @@ class BiolinkController extends Controller
       $description = "";
     }
 
+    //connect API
+
+    ($page->connect_activrespon == 1)?$ca = 'checked':$ca = '';
+    ($page->connect_mailchimp == 1)?$cm = 'checked':$cm = '';
+
     //proof
     $proof = $this->getProof($pageid);
     $proof_text_color = $page->proof_text_color;
@@ -256,7 +261,9 @@ class BiolinkController extends Controller
       'custom_link'=>$custom_link,
       'description'=>$description,
       'proof'=>$proof,
-      'proof_text_color'=>$proof_text_color
+      'proof_text_color'=>$proof_text_color,
+      'connect_activrespon'=>$ca,
+      'connect_mailchimp'=>$cm
     ]);  
   }
 

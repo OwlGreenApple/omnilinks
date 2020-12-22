@@ -2328,15 +2328,37 @@
       </div>
 
       <!-- form API -->
-      <div class="col-12 mb-2">
+      <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
         <div class="form-check">
-            <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check">
-            <label class="form-check-label">Connect Activrespon</label>
+            <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check"  {{$connect_activrespon}}>
+            <label class="form-check-label">Connect Activrespon <span class="tooltipstered" title="<div class='panel-content'>Jika anda punya akun activrespon, maka anda bisa me-connect-kan form ke list activrespon</div>">
+              <i class="fas fa-question-circle icon-reflink"></i>
+              </span>
+            </label>
         </div>
         <div class="form-check">
-            <input id="connect_mailchimp" type="checkbox" class="form-check-input connect_check">
-            <label class="form-check-label">Connect Mailchimp</label>
+            <input id="connect_mailchimp" type="checkbox" class="form-check-input connect_check" {{$connect_mailchimp}}>
+            <label class="form-check-label">Connect Mailchimp <span class="tooltipstered" title="<div class='panel-content'>Jika anda punya akun mailchimp, maka anda bisa me-connect-kan form ke akun mailchimp</div>">
+              <i class="fas fa-question-circle icon-reflink"></i>
+              </span></label>
         </div>
+
+        <form id="save_connect" class="row mt-2 mb-3">
+          <div class="col-lg-9 col-md-12 col-sm-12 col-12">
+            <!-- activrespon -->
+            <div class="form-group">
+              <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id"/>
+            </div>
+            <!-- mailchimp -->
+            <div class="form-group">
+              <input placeholder="Mailchimp API-KEY" type="text" class="form-control" maxlength="190" name="api_key"/>
+            </div>
+            <div class="form-group">
+              <input placeholder="Mailchimp Server" type="text" class="form-control" maxlength="190" name="server"/>
+            </div>
+            <button class="btn btn-primary btn-sm">Save</button>
+          </div>
+        </form>
       </div>
 
       <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
@@ -3760,7 +3782,7 @@
                       </div>
 
                       <div class="col-lg-12 mb-3">
-                        <input type="phone" class="form-control" name="api_phone" placeholder="Email" />
+                        <input type="phone" class="form-control" name="api_phone" placeholder="Phone" />
                         <div class="error api_phone"><!-- Error --></div>
                       </div>
 
@@ -4343,6 +4365,7 @@
     setTimeout(function(){
       proof_text_color();
     },1000);
+    run_checkbox_connect_api();
     checkbox_connect_api();
     //proof_preview();
     //callMaintainPlus();
@@ -4360,12 +4383,39 @@
 
     if(checked > 0)
     {
-      $("#connect_preview").show();
+      $("#connect_preview, #save_connect").show();
     }
     else
     {
-      $("#connect_preview").hide();
+      $("#connect_preview, #save_connect").hide();
     }
+
+    if($("#connect_activrespon").is(":checked") == true)
+    {
+      $("input[name='list_id']").show();
+    }
+    else
+    {
+      $("input[name='list_id']").hide();
+    }
+
+    if($("#connect_mailchimp").is(":checked") == true)
+    {
+      $("input[name='api_key']").show();
+      $("input[name='server']").show();
+    }
+    else
+    {
+      $("input[name='api_key']").hide();
+      $("input[name='server']").hide();
+    }
+  }
+
+  function run_checkbox_connect_api()
+  {
+    $(".connect_check").click(function(){
+      checkbox_connect_api();
+    });
   }
 
   // give default color to proof tetx when page loaded
