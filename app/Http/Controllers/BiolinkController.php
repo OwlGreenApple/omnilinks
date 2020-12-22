@@ -14,6 +14,7 @@ use App\Console\Commands\CropProfileImage;
 
 use App\Helpers\Helper;
 use App\Mail\NotifClickFreeUser; 
+use App\Rules\CheckValidPageID; 
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
@@ -240,7 +241,6 @@ class BiolinkController extends Controller
     }
 
     //connect API
-
     ($page->connect_activrespon == 1)?$ca = 'checked':$ca = '';
     ($page->connect_mailchimp == 1)?$cm = 'checked':$cm = '';
 
@@ -263,7 +263,7 @@ class BiolinkController extends Controller
       'proof'=>$proof,
       'proof_text_color'=>$proof_text_color,
       'connect_activrespon'=>$ca,
-      'connect_mailchimp'=>$cm
+      'connect_mailchimp'=>$cm,
     ]);  
   }
 
@@ -394,6 +394,69 @@ class BiolinkController extends Controller
       return response()->json($data);
   }
 
+  //SAVE SETTINGS TO CONNECT MAILCHIMP AND ACTIVRESPON
+  public function save_connect(Request $request)
+  {
+    $page_id = (int)strip_tags($request->page_id);
+    $list_id = strip_tags($request->list_id);
+    $api_key = strip_tags($request->api_key);
+    $server_mailchimp = strip_tags($request->server_mailchimp);
+    $connect_activrespon = (int)strip_tags($request->connect_activrespon);
+    $connect_mailchimp = (int)strip_tags($request->connect_mailchimp);
+
+    $rules = [
+      'page_id'=>['numeric',new CheckValidPageID],
+      'list_id'=>['max : 190'], //activrespon api key
+      'api_key'=>['max : 190'], // mailchimp api key
+      'server_mailchimp'=>['max : 190'] // mailchimp server
+    ];
+
+    $validator = Validator::make($request->all(),$rules);
+
+    if($validator->fails() == true)
+    {
+      $err = $validator->errors();
+      $errors = [
+        'error'=>2,
+        'page_id'=>$err->first('page_id'),
+        'list_id'=>$err->first('list_id'),
+        'api_key'=>$err->first('api_key'),
+        'server_mailchimp'=>$err->first('server_mailchimp'),
+      ];
+
+      return response()->json($errors);
+    }
+
+    $page = Page::find($page_id);
+
+    // dd($page);
+
+    if($connect_activrespon == 1 && !is_null($page))
+    {
+      $data_page['connect_activrespon'] = $connect_activrespon;
+      $data_page['list_id'] = $list_id;
+    }
+
+    if($connect_mailchimp == 1 && !is_null($page))
+    {
+      $data_page['connect_mailchimp'] = $connect_mailchimp;
+      $data_page['api_key_mc'] = $api_key;
+      $data_page['server_mailchimp'] = $server_mailchimp;
+    }
+
+    try
+    {
+      Page::where('id',$page_id)->update($data_page);
+      return response()->json(['error'=>0]);
+    }
+    catch(QueryException $e)
+    {
+      // echo $e->getMessage();
+      return response()->json(['error'=>1]);
+    }
+  }
+
+  //display wachat
   public function getWAchatButton($pageid)
   {
       $chatdata = array();

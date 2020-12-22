@@ -4,6 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use App\Page;
+use Auth;
 
 class CheckValidPageID implements Rule
 {
@@ -26,7 +27,7 @@ class CheckValidPageID implements Rule
      */
     public function passes($attribute, $value)
     {
-        $page = Page::find($value);
+        $page = Page::where([['id',$value],['user_id',Auth::id()]]);
         if(is_null($page))
         {
             return false;

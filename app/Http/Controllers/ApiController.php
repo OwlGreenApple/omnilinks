@@ -68,6 +68,44 @@ class ApiController extends Controller
     return json_encode($arr);
   }
 
+  public function sendDataAPI(Request $request)
+  {
+    if(env('APP_NAME') == 'local')
+    {
+      $url = url('get-webhook');
+    }
+    else
+    {
+      $url = "https://activrespon.com/dashboard/get_data_api";
+    }
+
+    $data = array(
+      "from_omnilinkz" => '$2y$10$JMoAeSl6aV0JCHmTNNafTOuNlMg/S7Yo8a6LUauEZe4Rcy.YdU37S',
+      "api_key" => $request->api_key,
+      "name" => $request->api_name,
+      "email" => $request->api_email,
+      "phone" => $request->api_phone,
+    );
+
+    $data_string = json_encode($data);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json'
+    ));
+    $res=curl_exec($ch);
+
+    dd($res);
+    return $res;
+  }
+
   public function sendmailfromactivwa(Request $request)
   {
       $data = json_decode($request->getContent(),true);

@@ -18,7 +18,7 @@ class AddColIsConnectApiFromPages extends Migration
             $table->string('list_id')->nullable()->after('connect_activrespon');
             $table->boolean('connect_mailchimp')->default(0)->after('list_id');
             $table->string('api_key_mc')->nullable()->after('connect_mailchimp');
-            $table->string('server')->nullable()->after('api_key_mc');
+            $table->string('server_mailchimp')->nullable()->after('api_key_mc');
         });
     }
 

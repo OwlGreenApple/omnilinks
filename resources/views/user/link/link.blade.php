@@ -1647,6 +1647,33 @@
         <?php } ?>
       </ul>
 
+      <!-- form connect API -->
+      @if($pages->connect_activrespon > 0 || $pages->connect_mailchimp > 0)
+        <form id="connect_preview" class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
+          <div class="form-group mt-3 mb-4">
+            <div class="col-lg-12 mb-3">
+              <input type="text" class="form-control" name="api_name" placeholder="Nama" maxlength="50" />
+              <div class="error api_name"><!-- Error --></div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
+              <input type="email" class="form-control" name="api_email" placeholder="Email" />
+              <div class="error api_email"><!-- Error --></div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
+              <input type="phone" class="form-control" name="api_phone" placeholder="Phone" />
+              <div class="error api_phone"><!-- Error --></div>
+            </div>
+
+            <div class="col-12 txthov">
+             <button class="btn btn-block">Submit</button>
+            </div>
+          </div>
+        </form>
+      @endif
+
+      <!-- links -->
       <ul class="col-lg-7 col-md-8 mb-4">
         <?php
         $ctr = 0;
@@ -1991,6 +2018,54 @@ $(document).ready(function() {
     });
 
 });
+
+function sendAPIdata()
+{
+  $("#connect_preview").submit(function(e){
+    e.preventDefault();
+    var data = $(this).serializeArray();
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: 'POST',
+      data: data,
+      url: "{{ url('save-api') }}",
+      dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      }, 
+      success: function(result) 
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        if(result.error == 1)
+        {
+          $(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>')
+        }
+        else if(result.error == 2)
+        {
+          $(".err_server_mailchimp").html(result.server_mailchimp);
+          $(".err_list_id").html(result.list_id);
+          $(".err_api_key").html(result.api_key);
+        }
+        else
+        {
+          $(".err_connect").html('<div class="alert alert-success">Form connect telah aktif.</div>')
+        }
+      },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+    //end ajax
+  });
+}
 
 
 function runningProof()

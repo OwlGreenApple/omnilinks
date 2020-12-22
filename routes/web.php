@@ -155,6 +155,10 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('delete-proof','BiolinkController@delProof');
     Route::get('proof_settings','BiolinkController@settingProof');
 
+    //connect API
+    Route::post('save-connect','BiolinkController@save_connect');
+    Route::post('save-api','ApiController@sendDataAPI');
+    
     //makesinglelink
     Route::get('/singlelink','SingleLinkController@newsingle');
     Route::post('/save-singlelink','SingleLinkController@single');

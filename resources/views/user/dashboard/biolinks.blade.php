@@ -2329,6 +2329,7 @@
 
       <!-- form API -->
       <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
+        <span class="err_connect"><!-- notification --></span>
         <div class="form-check">
             <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check"  {{$connect_activrespon}}>
             <label class="form-check-label">Connect Activrespon <span class="tooltipstered" title="<div class='panel-content'>Jika anda punya akun activrespon, maka anda bisa me-connect-kan form ke list activrespon</div>">
@@ -2347,14 +2348,17 @@
           <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <!-- activrespon -->
             <div class="form-group">
-              <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id"/>
+              <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id" value="{{ $pages->list_id }}"/>
+              <span class="error err_list_id"></span>
             </div>
             <!-- mailchimp -->
             <div class="form-group">
-              <input placeholder="Mailchimp API-KEY" type="text" class="form-control" maxlength="190" name="api_key"/>
+              <input placeholder="Mailchimp API-KEY" type="text" class="form-control" maxlength="190" name="api_key" value="{{ $pages->api_key_mc }}"/>
+              <span class="error err_api_key"></span>
             </div>
             <div class="form-group">
-              <input placeholder="Mailchimp Server" type="text" class="form-control" maxlength="190" name="server"/>
+              <input placeholder="Mailchimp Server" type="text" class="form-control" maxlength="190" name="server_mailchimp" value="{{ $pages->server_mailchimp }}"/>
+              <span class="error err_server_mailchimp"></span>
             </div>
             <button class="btn btn-primary btn-sm">Save</button>
           </div>
@@ -3769,25 +3773,22 @@
 
                   <!-- form connect API -->
 
-                  <form id="connect_preview" class="col-12 mb-2">
+                  <form class="col-12 mb-2">
                     <div class="form-group mt-3 mb-4 row">
                       <div class="col-lg-12 mb-3">
-                        <input type="text" class="form-control" name="api_name" placeholder="Nama" maxlength="50" />
-                        <div class="error api_name"><!-- Error --></div>
+                        <input type="text" class="form-control" placeholder="Nama" maxlength="50" />
                       </div>
 
                       <div class="col-lg-12 mb-3">
-                        <input type="email" class="form-control" name="api_email" placeholder="Email" />
-                        <div class="error api_email"><!-- Error --></div>
+                        <input type="email" class="form-control" placeholder="Email" />
                       </div>
 
                       <div class="col-lg-12 mb-3">
-                        <input type="phone" class="form-control" name="api_phone" placeholder="Phone" />
-                        <div class="error api_phone"><!-- Error --></div>
+                        <input type="phone" class="form-control" placeholder="Phone" />
                       </div>
 
                       <div class="col-12">
-                       <button class="btn btnview col-lg-12">Submit</button>
+                       <button type="button" class="btn btnview col-lg-12">Submit</button>
                       </div>
                     </div>
                   </form>
@@ -4367,9 +4368,64 @@
     },1000);
     run_checkbox_connect_api();
     checkbox_connect_api();
+    save_connect();
     //proof_preview();
     //callMaintainPlus();
   });
+
+  function save_connect()
+  {
+    $("#save_connect").submit(function(e){
+      e.preventDefault();
+      var data = $(this).serializeArray();
+      data.push(
+        {'name': 'connect_activrespon','value':$("#connect_activrespon").attr('data')},
+        {'name': 'connect_mailchimp','value':$("#connect_mailchimp").attr('data')},
+        {'name': 'page_id','value':'{{ $pages->id }}'}
+      );
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        data: data,
+        url: "{{ url('save-connect') }}",
+        dataType: 'json',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        }, 
+        success: function(result) 
+        {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          if(result.error == 1)
+          {
+            $(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>')
+          }
+          else if(result.error == 2)
+          {
+            $(".err_server_mailchimp").html(result.server_mailchimp);
+            $(".err_list_id").html(result.list_id);
+            $(".err_api_key").html(result.api_key);
+          }
+          else
+          {
+            $(".err_connect").html('<div class="alert alert-success">Form connect telah aktif.</div>')
+          }
+        },
+        error : function(xhr){
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+          console.log(xhr.responseText);
+        }
+      });
+      //end ajax
+    });
+  }
 
   function checkbox_connect_api()
   {
@@ -4393,21 +4449,25 @@
     if($("#connect_activrespon").is(":checked") == true)
     {
       $("input[name='list_id']").show();
+      $("#connect_activrespon").attr('data',1);
     }
     else
     {
+      $("#connect_activrespon").attr('data',0);
       $("input[name='list_id']").hide();
     }
 
     if($("#connect_mailchimp").is(":checked") == true)
     {
       $("input[name='api_key']").show();
-      $("input[name='server']").show();
+      $("input[name='server_mailchimp']").show();
+      $("#connect_mailchimp").attr('data',1);
     }
     else
     {
+      $("#connect_mailchimp").attr('data',0);
       $("input[name='api_key']").hide();
-      $("input[name='server']").hide();
+      $("input[name='server_mailchimp']").hide();
     }
   }
 
