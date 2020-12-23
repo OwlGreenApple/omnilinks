@@ -1426,9 +1426,9 @@
    /* console.log(desc_text.length);
     return false;*/
 
-    if(desc_text.length > 80)
+    if(desc_text.length > 104)
     {
-      alert("Deskripsi melebihi 80 karakter");
+      alert("Deskripsi melebihi 104 karakter");
       return false;
     }
 
@@ -3027,7 +3027,7 @@
                             </textarea> -->
 
                           <!-- <div id="description" contenteditable="true"> -->
-                          <div id="description" placeholder="Maksimal 80 Karakter" contenteditable="true">{!! $description !!}</div>
+                          <div id="description" placeholder="Maksimal 104 Karakter" contenteditable="true">{!! $description !!}</div>
 
                           <fieldset>
 
@@ -5345,7 +5345,7 @@
         $(this).find("div").removeAttr('style');
         // $(this).find("remove").replaceWith("<br>");
 
-        if(desctext >= 80)
+        if(desctext >= 104)
         {
             return false;
         }
@@ -5354,7 +5354,7 @@
           newLines = $(this).find("div").length;
         }
 
-        if(e.keyCode == 13 && newLines >= 2) {
+        if(e.keyCode == 13 && newLines >= 3) {
           return false;
         }
         else {
