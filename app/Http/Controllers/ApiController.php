@@ -70,15 +70,7 @@ class ApiController extends Controller
 
   public function sendDataAPI(Request $request)
   {
-    if(env('APP_NAME') == 'local')
-    {
-      $url = url('get-webhook');
-    }
-    else
-    {
-      $url = "https://activrespon.com/dashboard/get_data_api";
-    }
-
+    $url = "https://activrespon.com/dashboard/get_data_api";
     $data = array(
       "from_omnilinkz" => '$2y$10$JMoAeSl6aV0JCHmTNNafTOuNlMg/S7Yo8a6LUauEZe4Rcy.YdU37S',
       "api_key" => $request->api_key,
@@ -100,9 +92,10 @@ class ApiController extends Controller
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Content-Type: application/json'
     ));
+    
     $res=curl_exec($ch);
 
-    dd($res);
+    // dd($res);
     return $res;
   }
 

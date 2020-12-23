@@ -35,6 +35,7 @@ if(env('DOMAIN_TYPE')=='main'){
   //Route::get('testmail','ApiController@testmail');
   Route::post('generate-coupon', 'ApiController@generate_coupon');
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
+  Route::post('save-api','ApiController@sendDataAPI');
 
   //information
   Route::get('/about',function(){
@@ -157,7 +158,6 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //connect API
     Route::post('save-connect','BiolinkController@save_connect');
-    Route::post('save-api','ApiController@sendDataAPI');
     
     //makesinglelink
     Route::get('/singlelink','SingleLinkController@newsingle');

@@ -1,3 +1,7 @@
+.error {
+  color : red !important;
+}
+
 .imagetitle{
   border-radius: 50%; 
   width:100%;

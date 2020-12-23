@@ -1649,6 +1649,7 @@
 
       <!-- form connect API -->
       @if($pages->connect_activrespon > 0 || $pages->connect_mailchimp > 0)
+        <div class="err_connect col-lg-7 col-md-12 col-sm-12 col-12 mb-1"><!-- notification --></div>
         <form id="connect_preview" class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
           <div class="form-group mt-3 mb-4">
             <div class="col-lg-12 mb-3">
@@ -2016,7 +2017,7 @@ $(document).ready(function() {
           clearInterval(run);  
        }
     });
-
+    sendAPIdata();
 });
 
 function sendAPIdata()
@@ -2024,6 +2025,9 @@ function sendAPIdata()
   $("#connect_preview").submit(function(e){
     e.preventDefault();
     var data = $(this).serializeArray();
+    data.push(
+      {'name': 'api_key','value':'{{$pages->list_id}}'}
+    );
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -2043,18 +2047,16 @@ function sendAPIdata()
         $('.div-loading').removeClass('background-load');
 
         if(result.error == 1)
-        {
-          $(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>')
-        }
-        else if(result.error == 2)
-        {
-          $(".err_server_mailchimp").html(result.server_mailchimp);
-          $(".err_list_id").html(result.list_id);
-          $(".err_api_key").html(result.api_key);
+        {     
+          $(".api_name").html(result.name);
+          $(".api_email").html(result.email);
+          $(".api_phone").html(result.phone);
         }
         else
         {
-          $(".err_connect").html('<div class="alert alert-success">Form connect telah aktif.</div>')
+           $(".err_connect").html('<div class="alert alert-success">'+result.response+'</div>')
+           $(".error").hide();
+           empty_form();
         }
       },
       error : function(xhr){
@@ -2067,6 +2069,10 @@ function sendAPIdata()
   });
 }
 
+function empty_form()
+{
+  $("#connect_preview input").val('');
+}
 
 function runningProof()
 {
