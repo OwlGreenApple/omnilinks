@@ -13,6 +13,7 @@ use App\Ads;
 use App\Coupon;
 use App\User;
 use App\AdsHistory;
+use App\Page;
 use App\Mail\SendMailActivWA;
 
 use Auth, DB, Validator, DateTime, Mail, MailchimpMarketing, GuzzleHttp; 
@@ -134,8 +135,14 @@ class ApiController extends Controller
   //TO ADD CONTACTS / SUBSCRIBER INTO AUDIENCE/LIST ON MAILCHIMP 
   public function connect_mailchimp(Request $request)
   {
-    $pageid = $request->pageid;
-    $page = Page::find($pageid);
+    $pagename = strip_tags($request->pagename);
+    $page = Page::where('names',$pagename)->first();
+
+    if(is_null($page))
+    {
+      $err['success'] = 2;
+      return response()->json($err);
+    }
 
     $mailchimp = new MailchimpMarketing\ApiClient();
     $mailchimp->setConfig([
@@ -143,7 +150,7 @@ class ApiController extends Controller
       'server' => $page->server_mailchimp
     ]);
 
-    $list_id = $page->audience_id;
+    $list_id = strip_tags($page->audience_id);
     $email = strip_tags($request->api_mc_email);
     $fname = strip_tags($request->api_mc_fname);
     $lname = strip_tags($request->api_mc_lname);
