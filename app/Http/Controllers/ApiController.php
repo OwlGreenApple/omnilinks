@@ -15,10 +15,42 @@ use App\User;
 use App\AdsHistory;
 use App\Mail\SendMailActivWA;
 
-use Auth, DB, Validator, DateTime, Mail; 
+use Auth, DB, Validator, DateTime, Mail, MailchimpMarketing, GuzzleHttp; 
 
 class ApiController extends Controller
 {
+
+  public function mailchimptest()
+  {
+    $mailchimp = new MailchimpMarketing\ApiClient();
+    //gunomni
+    $mailchimp->setConfig([
+      'apiKey' => '9cb684b131f1036f459c78d7ae22b1dd-us7',
+      'server' => 'us7'
+    ]);
+
+    $list_id = 'fb481e8c8a';
+
+    try {
+      $response = $mailchimp->lists->addListMember($list_id, [
+          "email_address" => "testing@mail.com",
+          "status" => "subscribed",
+          "merge_fields" => [
+            "FNAME" => "testa",
+            "LNAME" => "McVankab"
+          ]
+      ]);
+      print_r(json_encode($response));
+    } catch (GuzzleHttp\Exception\ClientException $e) {
+        $error = $e->getResponse()->getBody()->getContents();
+        $err = json_decode($error,true);
+        print_r($err['title']);
+    }
+
+    // $response = $mailchimp->ping->get();
+    // $response = $mailchimp->lists->getAllLists();
+  }
+
   public function generate_coupon(Request $request)
   {
     $data = json_decode($request->getContent(),true);
@@ -97,6 +129,42 @@ class ApiController extends Controller
 
     // dd($res);
     return $res;
+  }
+
+  //TO ADD CONTACTS / SUBSCRIBER INTO AUDIENCE/LIST ON MAILCHIMP 
+  public function connect_mailchimp(Request $request)
+  {
+    $pageid = $request->pageid;
+    $page = Page::find($pageid);
+
+    $mailchimp = new MailchimpMarketing\ApiClient();
+    $mailchimp->setConfig([
+      'apiKey' => $page->api_key_mc,
+      'server' => $page->server_mailchimp
+    ]);
+
+    $list_id = $page->audience_id;
+    $email = strip_tags($request->api_mc_email);
+    $fname = strip_tags($request->api_mc_fname);
+    $lname = strip_tags($request->api_mc_lname);
+
+    try {
+      $response = $mailchimp->lists->addListMember($list_id, [
+          "email_address" => $email,
+          "status" => "subscribed",
+          "merge_fields" => [
+            "FNAME" => $fname,
+            "LNAME" => $lname
+          ]
+      ]);
+
+      $err['success'] = 1;
+    } catch (GuzzleHttp\Exception\ClientException $e) {
+      $error = $e->getResponse()->getBody()->getContents();
+      $err = json_decode($error,true);
+      $err['success'] = 0;
+    }
+    return response()->json($err);
   }
 
   public function sendmailfromactivwa(Request $request)

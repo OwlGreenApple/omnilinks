@@ -1649,7 +1649,7 @@
 
       <!-- form connect API -->
       @if($pages->connect_activrespon > 0 || $pages->connect_mailchimp > 0)
-        <div class="err_connect col-lg-7 col-md-12 col-sm-12 col-12 mb-1"><!-- notification --></div>
+        <div style="padding-left : 30px;padding-right : 30px" class="err_connect col-lg-7 col-md-12 col-sm-12 col-12 mb-1"><!-- notification --></div>
         <form id="connect_preview" class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
           <div class="form-group mt-3 mb-4">
             <div class="col-lg-12 mb-3">
@@ -2048,6 +2048,7 @@ function sendAPIdata()
 
         if(result.error == 1)
         {     
+          $(".error").show();
           $(".api_name").html(result.name);
           $(".api_email").html(result.email);
           $(".api_phone").html(result.phone);
