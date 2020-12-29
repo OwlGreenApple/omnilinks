@@ -394,6 +394,46 @@ class BiolinkController extends Controller
       return response()->json($data);
   }
 
+  //check valid key activrespon
+  private function check_valid_api_key($api_key)
+  {
+    $url = "https://activrespon.com/dashboard/get_data_api";
+
+    $data = array(
+      "from_omnilinkz" => '$2y$10$JMoAeSl6aV0JCHmTNNafTOuNlMg/S7Yo8a6LUauEZe4Rcy.YdU37S',
+      "api_key" => $api_key,
+      "check"=>1
+    );
+
+    $data_string = json_encode($data);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json'
+    ));
+    
+    $res=curl_exec($ch);
+
+    $json = json_decode($res,true);
+
+    if($json['error'] == 0)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+    
+  }
+
   //SAVE SETTINGS TO CONNECT MAILCHIMP AND ACTIVRESPON
   public function save_connect(Request $request)
   {
@@ -404,6 +444,11 @@ class BiolinkController extends Controller
     $audience_id = strip_tags($request->audience_id);
     $connect_activrespon = (int)strip_tags($request->connect_activrespon);
     $connect_mailchimp = (int)strip_tags($request->connect_mailchimp);
+
+    if($this->check_valid_api_key($api_key) == false)
+    {
+       return response()->json(['error'=>1,'msg'=>1]);
+    }
 
     $rules['page_id'] = ['numeric',new CheckValidPageID];
     if($connect_activrespon == 1)

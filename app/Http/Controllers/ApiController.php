@@ -20,7 +20,6 @@ use Auth, DB, Validator, DateTime, Mail, MailchimpMarketing, GuzzleHttp;
 
 class ApiController extends Controller
 {
-
   public function mailchimptest()
   {
     $mailchimp = new MailchimpMarketing\ApiClient();
