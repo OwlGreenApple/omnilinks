@@ -1664,7 +1664,7 @@
             </div>
 
             <div class="col-lg-12 mb-3">
-              <input type="phone" class="form-control" name="api_phone" placeholder="Phone" />
+              <input type="phone" class="form-control" name="api_phone" placeholder="Phone example : +628xxxxxxx" />
               <div class="error api_phone"><!-- Error --></div>
             </div>
 
@@ -2010,6 +2010,7 @@ var vis = (function(){
 
 
 $(document).ready(function() {
+    $(".alert").delay(5000).fadeOut(3000);
     setRightPost(".wcs_popup");
     setMargins(".wcs_fixed_right");
     $(window).resize(function() {
@@ -2082,11 +2083,16 @@ function sendAPImailchimp()
         }
         else if(result.success == 2)
         {
-          $(".err_connect_mc").html('<div class="alert alert-danger mb-3">Invalid Page!</div>')
+          $(".error").show();
+          (result.api_mc_fname !== undefined)? $(".api_mc_fname").html(result.api_mc_fname):$(".api_mc_fname").html('');
+          (result.api_mc_lname !== undefined)? $(".api_mc_lname").html(result.api_mc_lname):$(".api_mc_lname").html('');
+          (result.api_mc_email !== undefined)? $(".api_mc_email").html(result.api_mc_email):$(".api_mc_email").html('');
+          (result.pagename !== undefined)? $(".err_connect_mc").html('<div class="alert alert-danger mb-3">'+result.pagename+'</div>'):$(".err_connect_mc").html('');
         }
         else
         {
            $(".err_connect_mc").html('<div class="alert alert-success mb-3">Thank you for join us.</div>')
+           $(".error").hide();
            empty_form();
           
         }
@@ -2108,7 +2114,7 @@ function sendAPIdata()
     e.preventDefault();
     var data = $(this).serializeArray();
     data.push(
-      {'name': 'api_key','value':'{{$pages->list_id}}'}
+      {'name': 'pagename','value':'{{$pages->names}}'}
     );
     $.ajax({
       headers: {
@@ -2134,6 +2140,7 @@ function sendAPIdata()
           $(".api_name").html(result.name);
           $(".api_email").html(result.email);
           $(".api_phone").html(result.phone);
+          (result.db !== undefined)?  $(".err_connect").html('<div class="alert alert-danger mb-3">'+result.db+'</div>'): $(".err_connect").html('');
         }
         else
         {

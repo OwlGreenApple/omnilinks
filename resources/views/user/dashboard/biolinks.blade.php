@@ -2349,16 +2349,35 @@
             <!-- activrespon -->
             <div class="form-group">
               <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id" value="{{ $pages->list_id }}"/>
-              <span class="error err_list_id"></span>
+              <div class="error err_list_id"></div>
             </div>
+
             <!-- mailchimp -->
-            <div class="form-group">
-              <input placeholder="Mailchimp API-KEY" type="text" class="form-control" maxlength="190" name="api_key" value="{{ $pages->api_key_mc }}"/>
-              <span class="error err_api_key"></span>
-            </div>
-            <div class="form-group">
-              <input placeholder="Mailchimp Server" type="text" class="form-control" maxlength="190" name="server_mailchimp" value="{{ $pages->server_mailchimp }}"/>
-              <span class="error err_server_mailchimp"></span>
+            <div id="mailchimp" class="mb-2">
+              <div class="form-group d-flex">
+                <input placeholder="Mailchimp API-KEY" type="text" class="form-control mr-2" maxlength="190" name="api_key" value="{{ $pages->api_key_mc }}"/>
+                <span class="tooltipstered" title="<div class='panel-content'>login dahulu pada akun mailchimp anda <br/> dan masuk pada : <br/> Account &rarr; Extras &rarr; API keys<br/>Account terletak pada menu bagian paling bawah sebelah kiri,<br/> dan apabila cursor diarahkan akan mengeluarkan text username anda</div>">
+                <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+              <div class="error err_api_key"></div>
+
+              <div class="form-group d-flex">
+                <input placeholder="Mailchimp Server" type="text" class="form-control mr-2" maxlength="190" name="server_mailchimp" value="{{ $pages->server_mailchimp }}"/>
+                <span class="tooltipstered" title="<div class='panel-content'>Login dahulu pada akun mailchimp anda,<br/> arahkan cursor anda pada address bar dan copy usx,<br/> contoh : https://us9.admin.mailchimp.com/ <br/> maka anda cukup meng-copy yang <b>us9</b> saja.</div>">
+                <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div> 
+              <div class="error err_server_mailchimp"></div>
+
+              <div class="form-group d-flex">
+                <input placeholder="Mailchimp Audience/List id" type="text" class="form-control mr-2" maxlength="100" name="audience_id" value="{{ $pages->audience_id }}"/>
+                 <span class="tooltipstered" title="<div class='panel-content'>Login dahulu pada akun mailchimp anda, pilih menu : <br/> Audience &rarr; All contacts &rarr; Settings &rarr; Audience names and defaults <br/> pada text Audience ID ada code seperti ini : <b>fa483e0c87</b> </div>">
+                <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+              <div class="error err_audience_id"></div>
+            <!-- end mailchimp -->
             </div>
             <button class="btn btn-primary btn-sm">Save</button>
           </div>
@@ -3771,9 +3790,10 @@
                     </li>
                   </ul>
 
-                  <!-- form connect API -->
+                  <!-- form connect API activrespon -->
 
-                  <form class="col-12 mb-2">
+                  <form id="connect_preview_activrespon" class="col-12 mb-2">
+                    <h5 class="description text-center"><b>Form Activrespon</b></h5>
                     <div class="form-group mt-3 mb-4 row">
                       <div class="col-lg-12 mb-3">
                         <input type="text" class="form-control" placeholder="Nama" maxlength="50" />
@@ -3784,7 +3804,30 @@
                       </div>
 
                       <div class="col-lg-12 mb-3">
-                        <input type="phone" class="form-control" placeholder="Phone" />
+                        <input type="phone" class="form-control" placeholder="Phone example +628xxxxxxx" />
+                      </div>
+
+                      <div class="col-12">
+                       <button type="button" class="btn btnview col-lg-12">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+
+                  <!-- form connect API mailchimp -->
+
+                  <form id="connect_preview_mailchimp" class="col-12 mb-2">
+                    <h5 class="description text-center"><b>Form Mailchimp</b></h5>
+                    <div class="form-group mt-3 mb-4 row">
+                      <div class="col-lg-12 mb-3">
+                        <input type="email" class="form-control" placeholder="Email" />
+                      </div>
+
+                      <div class="col-lg-12 mb-3">
+                        <input type="text" class="form-control" placeholder="First Name" />
+                      </div>
+
+                      <div class="col-lg-12 mb-3">
+                        <input type="text" class="form-control" placeholder="Last Name" />
                       </div>
 
                       <div class="col-12">
@@ -4344,8 +4387,6 @@
         setRightPost(".wcs_popup");   
     });*/
 
-    $(".alert").delay(5000).fadeOut(3000);
-
     wa_preview_header_text();
     getSelected();
     displayWaText();
@@ -4377,6 +4418,7 @@
   {
     $("#save_connect").submit(function(e){
       e.preventDefault();
+      var check_len = $(".connect_check:checked").length;
       var data = $(this).serializeArray();
       data.push(
         {'name': 'connect_activrespon','value':$("#connect_activrespon").attr('data')},
@@ -4408,13 +4450,21 @@
           }
           else if(result.error == 2)
           {
-            $(".err_server_mailchimp").html(result.server_mailchimp);
+            $(".error").show();
             $(".err_list_id").html(result.list_id);
+            $(".err_server_mailchimp").html(result.server_mailchimp);
             $(".err_api_key").html(result.api_key);
+            $(".err_audience_id").html(result.audience_id);
           }
           else
           {
-            $(".err_connect").html('<div class="alert alert-success">Form connect telah aktif.</div>')
+            $(".error").hide();
+            $(".err_connect").html('<div class="alert alert-success">Form status telah diubah.</div>')
+            if(check_len < 1)
+            {
+              $("#save_connect").hide();
+            }
+            $(".alert").delay(5000).fadeOut(3000);
           }
         },
         error : function(xhr){
@@ -4427,7 +4477,7 @@
     });
   }
 
-  function checkbox_connect_api()
+  function checkbox_connect_api(press)
   {
     var checked = 0;
     $(".connect_check").each(function(e){
@@ -4437,44 +4487,44 @@
       }
     });
 
-    if(checked > 0)
+    if(checked > 0 || press == 1)
     {
-      $("#connect_preview, #save_connect").show();
+      $("#save_connect").show();
     }
     else
     {
-      $("#connect_preview, #save_connect").hide();
+      $("#save_connect").hide();
     }
 
     if($("#connect_activrespon").is(":checked") == true)
     {
       $("input[name='list_id']").show();
+      $("#connect_preview_activrespon").show();
       $("#connect_activrespon").attr('data',1);
     }
     else
     {
       $("#connect_activrespon").attr('data',0);
+      $("#connect_preview_activrespon").hide();
       $("input[name='list_id']").hide();
-    }
+    } 
 
     if($("#connect_mailchimp").is(":checked") == true)
     {
-      $("input[name='api_key']").show();
-      $("input[name='server_mailchimp']").show();
+      $("#mailchimp, #connect_preview_mailchimp").show();
       $("#connect_mailchimp").attr('data',1);
     }
     else
     {
       $("#connect_mailchimp").attr('data',0);
-      $("input[name='api_key']").hide();
-      $("input[name='server_mailchimp']").hide();
+      $("#mailchimp, #connect_preview_mailchimp").hide();
     }
   }
 
   function run_checkbox_connect_api()
   {
     $(".connect_check").click(function(){
-      checkbox_connect_api();
+      checkbox_connect_api(1);
     });
   }
 

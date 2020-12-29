@@ -37,7 +37,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('generate-coupon', 'ApiController@generate_coupon');
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
   Route::post('save-api','ApiController@sendDataAPI');
-  Route::post('save-mailchimp','ApiController@connect_mailchimp');
+  Route::post('save-mailchimp','ApiController@connect_mailchimp')->middleware('mailchimp');
 
   //information
   Route::get('/about',function(){

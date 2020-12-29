@@ -104,9 +104,21 @@ class ApiController extends Controller
   public function sendDataAPI(Request $request)
   {
     $url = "https://activrespon.com/dashboard/get_data_api";
+    $pagename = strip_tags($request->pagename);
+    $page = Page::where('names',$pagename)->first();
+
+    if(is_null($page))
+    {
+      $err['error'] = 1;
+      $err['db'] = 'Invalid Page!';
+      return response()->json($err);
+    }
+
+    $api_key = $page->list_id;
+
     $data = array(
       "from_omnilinkz" => '$2y$10$JMoAeSl6aV0JCHmTNNafTOuNlMg/S7Yo8a6LUauEZe4Rcy.YdU37S',
-      "api_key" => $request->api_key,
+      "api_key" => $api_key,
       "name" => $request->api_name,
       "email" => $request->api_email,
       "phone" => $request->api_phone,
@@ -141,6 +153,7 @@ class ApiController extends Controller
     if(is_null($page))
     {
       $err['success'] = 2;
+      $err['pagename'] = 'Invalid Page!';
       return response()->json($err);
     }
 

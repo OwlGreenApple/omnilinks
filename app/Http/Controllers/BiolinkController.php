@@ -401,15 +401,32 @@ class BiolinkController extends Controller
     $list_id = strip_tags($request->list_id);
     $api_key = strip_tags($request->api_key);
     $server_mailchimp = strip_tags($request->server_mailchimp);
+    $audience_id = strip_tags($request->audience_id);
     $connect_activrespon = (int)strip_tags($request->connect_activrespon);
     $connect_mailchimp = (int)strip_tags($request->connect_mailchimp);
 
-    $rules = [
-      'page_id'=>['numeric',new CheckValidPageID],
-      'list_id'=>['max : 190'], //activrespon api key
-      'api_key'=>['max : 190'], // mailchimp api key
-      'server_mailchimp'=>['max : 190'] // mailchimp server
-    ];
+    $rules['page_id'] = ['numeric',new CheckValidPageID];
+    if($connect_activrespon == 1)
+    {
+      $rules['list_id'] = ['required','max : 100']; //activrespon api key
+    }
+    else
+    {
+      $rules['list_id'] = ['max : 100'];
+    }
+
+    if($connect_mailchimp == 1)
+    {
+      $rules['api_key'] = ['required','max : 100']; // mailchimp api key
+      $rules['server_mailchimp'] = ['required','max : 30']; // mailchimp server
+      $rules['audience_id'] = ['required','max : 50']; // mailchimp list id / audience id
+    }
+    else
+    {
+      $rules['api_key'] = ['max : 100']; // mailchimp api key
+      $rules['server_mailchimp'] = ['max : 30']; // mailchimp server
+      $rules['audience_id'] = ['max : 50']; // mailchimp list id / audience id
+    }
 
     $validator = Validator::make($request->all(),$rules);
 
@@ -422,6 +439,7 @@ class BiolinkController extends Controller
         'list_id'=>$err->first('list_id'),
         'api_key'=>$err->first('api_key'),
         'server_mailchimp'=>$err->first('server_mailchimp'),
+        'audience_id'=>$err->first('audience_id'),
       ];
 
       return response()->json($errors);
@@ -431,17 +449,19 @@ class BiolinkController extends Controller
 
     // dd($page);
 
+    $data_page['connect_activrespon'] = $connect_activrespon;
+    $data_page['connect_mailchimp'] = $connect_mailchimp;
+
     if($connect_activrespon == 1 && !is_null($page))
     {
-      $data_page['connect_activrespon'] = $connect_activrespon;
       $data_page['list_id'] = $list_id;
     }
 
     if($connect_mailchimp == 1 && !is_null($page))
     {
-      $data_page['connect_mailchimp'] = $connect_mailchimp;
       $data_page['api_key_mc'] = $api_key;
       $data_page['server_mailchimp'] = $server_mailchimp;
+      $data_page['audience_id'] = $audience_id;
     }
 
     try
