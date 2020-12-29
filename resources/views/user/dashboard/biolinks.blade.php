@@ -4446,7 +4446,7 @@
 
           if(result.error == 1)
           {
-            $(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>')
+            (result.msg == 1) ? $(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>'):$(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>');
           }
           else if(result.error == 2)
           {
