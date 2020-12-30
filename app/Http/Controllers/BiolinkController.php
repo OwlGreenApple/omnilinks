@@ -456,7 +456,7 @@ class BiolinkController extends Controller
     }
 
      //VALIDATE MAILCHIM : SERVER,API KEY,LIST/AUDIENCE
-    if($apicontroller->mailchimp_valid_api($api_key,$server_mailchimp) == false && $api_key !== "" && $server_mailchimp !== "")
+    if($apicontroller->mailchimp_valid_api($api_key,$server_mailchimp) == false && ($api_key !== "" || $server_mailchimp !== ""))
     {
       $err['error'] = 1;
       $err['msg'] = 2;
