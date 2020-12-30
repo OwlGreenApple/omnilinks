@@ -2332,14 +2332,14 @@
         <span class="err_connect"><!-- notification --></span>
         <div class="form-check">
             <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check"  {{$connect_activrespon}}>
-            <label class="form-check-label">Connect Activrespon <span class="tooltipstered" title="<div class='panel-content'>Jika anda punya akun activrespon, maka anda bisa me-connect-kan form ke list activrespon</div>">
+            <label class="form-check-label">Connect Activrespon <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun activrespon,<br/> maka anda bisa me-connect-kan form ke list activrespon</div>">
               <i class="fas fa-question-circle icon-reflink"></i>
               </span>
             </label>
         </div>
         <div class="form-check">
             <input id="connect_mailchimp" type="checkbox" class="form-check-input connect_check" {{$connect_mailchimp}}>
-            <label class="form-check-label">Connect Mailchimp <span class="tooltipstered" title="<div class='panel-content'>Jika anda punya akun mailchimp, maka anda bisa me-connect-kan form ke akun mailchimp</div>">
+            <label class="form-check-label">Connect Mailchimp <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun mailchimp,<br/> maka anda bisa me-connect-kan form ke audience/list pada akun mailchimp anda</div>">
               <i class="fas fa-question-circle icon-reflink"></i>
               </span></label>
         </div>
@@ -4446,7 +4446,11 @@
 
           if(result.error == 1)
           {
-            (result.msg == 1) ? $(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>'):$(".err_connect").html('<div class="alert alert-danger">Server kami terlalu sibuk, mohon coba lagi nanti.</div>');
+            //activrespon
+            (result.msg == 1) ? $(".err_connect").html('<div class="alert alert-danger">Invalid API-KEY Activrespon.</div>'):'';
+
+            //mailchimp
+            (result.msg == 2) ? $(".err_connect").html('<div class="alert alert-danger">Invalid API-KEY or server Mailchimp!</div>'):'';
           }
           else if(result.error == 2)
           {

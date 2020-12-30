@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Auth,Carbon,Validator,Storage,Mail,DB,Session;
 use Ramsey\Uuid\Uuid;
+use App\Http\Controllers\ApiController;
 
 class BiolinkController extends Controller
 { 
@@ -394,7 +395,7 @@ class BiolinkController extends Controller
       return response()->json($data);
   }
 
-  //check valid key activrespon
+  //check valid api key activrespon
   private function check_valid_api_key($api_key)
   {
     $url = "https://activrespon.com/dashboard/get_data_api";
@@ -438,16 +439,28 @@ class BiolinkController extends Controller
   public function save_connect(Request $request)
   {
     $page_id = (int)strip_tags($request->page_id);
-    $list_id = strip_tags($request->list_id);
-    $api_key = strip_tags($request->api_key);
+    $list_id = strip_tags($request->list_id); //activrespon api key
+
+    $apicontroller = new ApiController;
+    $api_key = strip_tags($request->api_key); //mailchimp api key
     $server_mailchimp = strip_tags($request->server_mailchimp);
     $audience_id = strip_tags($request->audience_id);
+
     $connect_activrespon = (int)strip_tags($request->connect_activrespon);
     $connect_mailchimp = (int)strip_tags($request->connect_mailchimp);
 
-    if($this->check_valid_api_key($api_key) == false)
+    //CHECK USER API KEY VALID OR OTHERWISE ON ACTIVRESPON
+    if($this->check_valid_api_key($list_id) == false && $list_id !== "")
     {
        return response()->json(['error'=>1,'msg'=>1]);
+    }
+
+     //VALIDATE MAILCHIM : SERVER,API KEY,LIST/AUDIENCE
+    if($apicontroller->mailchimp_valid_api($api_key,$server_mailchimp) == false && $api_key !== "" && $server_mailchimp !== "")
+    {
+      $err['error'] = 1;
+      $err['msg'] = 2;
+      return response()->json($err);
     }
 
     $rules['page_id'] = ['numeric',new CheckValidPageID];

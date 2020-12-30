@@ -21,7 +21,6 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('migrate-to-activwa', 'HomeController@migrate_to_activwa');
   Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
   Route::get('test-shell-0312', 'HomeController@test_shell');
-  Route::get('testmailchimp', 'ApiController@mailchimptest');
   // Route::get('/use','UserController@index');
   // Route::post('/user/create','UserController@create');
   // Route::get('/use/{id}/edit','UserController@edit');
@@ -32,12 +31,13 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');
 
-  //API 
-  Route::get('testing','ApiController@testing');
+  //API
+  
   //Route::get('testmail','ApiController@testmail');
   Route::post('generate-coupon', 'ApiController@generate_coupon');
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
   Route::post('save-api','ApiController@sendDataAPI');
+  // Route::get('validation-mailchimp', 'ApiController@mailchimp_valid_api');
   Route::post('save-mailchimp','ApiController@connect_mailchimp')->middleware('mailchimp');
 
   //information

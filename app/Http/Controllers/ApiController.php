@@ -20,37 +20,6 @@ use Auth, DB, Validator, DateTime, Mail, MailchimpMarketing, GuzzleHttp;
 
 class ApiController extends Controller
 {
-  public function mailchimptest()
-  {
-    $mailchimp = new MailchimpMarketing\ApiClient();
-    //gunomni
-    $mailchimp->setConfig([
-      'apiKey' => '9cb684b131f1036f459c78d7ae22b1dd-us7',
-      'server' => 'us7'
-    ]);
-
-    $list_id = 'fb481e8c8a';
-
-    try {
-      $response = $mailchimp->lists->addListMember($list_id, [
-          "email_address" => "testing@mail.com",
-          "status" => "subscribed",
-          "merge_fields" => [
-            "FNAME" => "testa",
-            "LNAME" => "McVankab"
-          ]
-      ]);
-      print_r(json_encode($response));
-    } catch (GuzzleHttp\Exception\ClientException $e) {
-        $error = $e->getResponse()->getBody()->getContents();
-        $err = json_decode($error,true);
-        print_r($err['title']);
-    }
-
-    // $response = $mailchimp->ping->get();
-    // $response = $mailchimp->lists->getAllLists();
-  }
-
   public function generate_coupon(Request $request)
   {
     $data = json_decode($request->getContent(),true);
@@ -100,6 +69,7 @@ class ApiController extends Controller
     return json_encode($arr);
   }
 
+  //CONNECT ACTIVRESPON
   public function sendDataAPI(Request $request)
   {
     $url = "https://activrespon.com/dashboard/get_data_api";
@@ -141,6 +111,33 @@ class ApiController extends Controller
 
     // dd($res);
     return $res;
+  }
+
+  //TO ADD VALIDATE OWNER MAILCHIMP API KEY
+  public function mailchimp_valid_api($api_key,$server)
+  //$api_key,$server_mailchimp,$audience_id
+  {
+    $mailchimp = new MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+      'apiKey' => $api_key,
+      'server' => $server
+    ]);
+
+    try
+    {
+        $mailchimp->ping->get();
+        return true;
+    }
+    catch(GuzzleHttp\Exception\ConnectException $e)
+    {
+        return false;
+    }
+    catch(GuzzleHttp\Exception\ClientException $e)
+    {
+        return false;
+    }
+    // $response = $mailchimp->lists->getAllLists();
   }
 
   //TO ADD CONTACTS / SUBSCRIBER INTO AUDIENCE/LIST ON MAILCHIMP 
