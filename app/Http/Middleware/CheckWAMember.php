@@ -29,10 +29,11 @@ class CheckWAMember
         $temp_arr['uuid'] = ['required'];
         $temp_arr['pageid'] = ['required'];
         $temp_arr['chat_member_text'] = ['max:190'];
+        $temp_arr['chat_member_photo'] = ['max:1024'];
 
          $messages = [
             'required' => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
-            'max'    => 'Maksimal :attribute adalah :max karakter.',
+            'max'    => 'Maksimal :attribute adalah :max.',
         ];
         
         $validator = Validator::make($request->all(), $temp_arr, $messages); 
@@ -112,7 +113,7 @@ class CheckWAMember
               if($check == false)
               {
                 $response['status'] = "error";
-                $response['message'] = 'Maximum ukuran file size adalah 50Mb.';
+                $response['message'] = 'Maaf server kami terlalu sibuk, mohon coba lagi nanti.';
                 return response()->json($response);
               }
 
