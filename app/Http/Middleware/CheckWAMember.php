@@ -99,9 +99,10 @@ class CheckWAMember
          $valid_ext = false;
          if(!empty($photo))
           {
-              if($arr_size = @getimagesize($photo))
+              if(@getimagesize($photo))
               {
                 $check = true;
+                $arr_size = getimagesize($photo);
               }
               else
               {
