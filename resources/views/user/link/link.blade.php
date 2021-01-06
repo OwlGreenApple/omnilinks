@@ -36,7 +36,7 @@
 </head>
 
 <script type="text/javascript">
-  var urlbanner, template = [];
+  var urlbanner = [], template;
   var templates = [
     {
      "id": 1,
