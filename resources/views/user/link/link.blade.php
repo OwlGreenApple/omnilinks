@@ -36,7 +36,7 @@
 </head>
 
 <script type="text/javascript">
-  var urlbanner = [], template;
+  var urlbanner, template = [];
   var templates = [
     {
      "id": 1,
@@ -1456,11 +1456,11 @@ and add more";
                 @foreach($banner as $ban)
                   <div class="imageHolder">
                     <!--<a href="{{url('click/banner/'.$ban->id)}}" target="_blank">-->
-                    <!--<a href="<?php echo env('APP_URL').'/click/banner/'.$ban->id ?>" target="_blank">-->
+                    <!--<a href="<php echo env('APP_URL').'/click/banner/'.$ban->id ?>" target="_blank">-->
                       <script type="text/javascript">
                         urlbanner.push('<?php echo env('APP_URL').'/click/banner/'.$ban->id ?>');
                       </script>
-                      <!--<img src="<?php 
+                      <!--<img src="<php 
                       // echo url(Storage::disk('local')->url('app/'.$banner->images_banner));
                         if(!is_null($ban->images_banner)){
                           echo Storage::disk('s3')->url($ban->images_banner);
@@ -2203,7 +2203,8 @@ function stylingYoutube()
     
     $('body').on('click','.imageHolder', function(e) {
       var url = urlbanner[slideIndex];
-      call_mylink(url);
+      console.log(url);
+      // call_mylink(url);
     });
     
     $("body").on("click",".link-ajax-no-script",function(e){

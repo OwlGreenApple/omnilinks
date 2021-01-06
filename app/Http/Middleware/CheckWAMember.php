@@ -99,7 +99,22 @@ class CheckWAMember
          $valid_ext = false;
          if(!empty($photo))
           {
-              $arr_size = getimagesize($photo);
+              if($arr_size = @getimagesize($photo))
+              {
+                $check = true;
+              }
+              else
+              {
+                $check = false;
+              }
+
+              if($check == false)
+              {
+                $response['status'] = "error";
+                $response['message'] = 'Maximum ukuran file size adalah 50Mb.';
+                return response()->json($response);
+              }
+
               $imagewidth = $arr_size[0];
               $imageheight = $arr_size[1];
               $ext = $photo->getClientOriginalExtension();
