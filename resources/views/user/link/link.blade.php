@@ -2203,8 +2203,7 @@ function stylingYoutube()
     
     $('body').on('click','.imageHolder', function(e) {
       var url = urlbanner[slideIndex];
-      console.log(url);
-      // call_mylink(url);
+      call_mylink(url);
     });
     
     $("body").on("click",".link-ajax-no-script",function(e){
