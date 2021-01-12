@@ -3,23 +3,77 @@
 	created : Nov 12 2020
 */
 
-#apf .shop {
-	padding : 20px;
-	font-size : 28px;
-	border : 1px solid #ced4da;
+
+#apf .shop, #apf .special .shop {
+	padding : 10px;
+	font-size : 25px;
 	text-align: center;
     font-weight: bold;
-    border-radius: 20px;
-    background-color : #f7f9ea ;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom : 1px solid #084899;
+	background: linear-gradient(0deg, rgba(8,72,153,1) 0, rgba(138,189,255,1) 100%);
+	color : #fff;
 }
 
-#apf .shop .btn {
+#apf .price, #apf .special .price {
+    color: #fff;
+    text-align: center;
+    padding: 35px 20px;
+    padding-top: 20px;
+    background-color: #084899;
+}
+
+#apf .price .notes, #apf .special .price .notes {
+	font-size : 40px;
+	font-weight: bold;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+#apf .feature, #apf .special .feature {
+	padding : 20px;
+    background-color : #fff;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#apf .feature .btn, #apf .special .feature .btn {
 	font-weight: bold;
     font-size: 18px;
     width: 100%;
+	background: linear-gradient(0deg, rgba(8,72,153,1) 50%, rgba(138,189,255,1) 100%);
+	color : #fff;
 }
 
-#apf .notes {
-	font-size : 20px;
-	font-weight: 500;
+#apf .feature .notes {
+    font-size: 32px;
+    font-weight: 500;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+/* SPECIAL PRICE */
+
+#apf .special {
+   margin-top: -26px;
+}
+
+#apf .special .shop {
+    border-bottom : 1px solid #8ac300;
+	background: linear-gradient(0deg, rgba(138,195,0,1) 0%, rgba(224,255,151,1) 100%);
+}
+
+#apf .special .price {
+    background-color: rgba(138,195,0,1);
+}
+
+#apf .special .price{
+	padding-top : 44px;
+	padding-bottom : 36px;
+}
+
+#apf .special .feature .btn {
+	background: linear-gradient(0deg, rgba(138,195,0,1) 50%, rgba(224,255,151,1) 100%);
+	border-color : transparent !important;
 }

@@ -8,40 +8,48 @@
         <div class="text-md-left text-center mb-5"><p><b><h3>Top Up Activproof Credit</h3></b></p></div>
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-3 col-3">
-            <div class="shop">
-              @php $x = 1 @endphp
-              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
+            @php $x = 1 @endphp
+            <div class="shop">{!! getActivProofPackage()[$x]['package'] !!}</div>
+            <div class="price">
               <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+            </div>
+            <div class="feature">
+              <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!} Views</div>
+              <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-3 special">
+            @php $x = 2 @endphp
+            <div class="shop">{!! getActivProofPackage()[$x]['package'] !!}</div>
+            <div class="price">
+              <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+            </div>
+            <div class="feature">
               <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!} Views</div>
               <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3 col-3">
-            <div class="shop">
-               @php $x = 2 @endphp
-              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
+             @php $x = 3 @endphp
+            <div class="shop">{!! getActivProofPackage()[$x]['package'] !!}</div>
+            <div class="price">
               <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+            </div>
+            <div class="feature">
               <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!} Views</div>
               <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3 col-3">
-            <div class="shop">
-              @php $x = 3 @endphp
-              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
-              <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
-              <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!} Views</div>
-              <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-3 col-3">
-            <div class="shop">
-              @php $x = 4 @endphp
-              <div>{!! getActivProofPackage()[$x]['package'] !!}</div>
-              <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
-              <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!} Views</div>
-              <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
-            </div>
+             @php $x = 4 @endphp
+             <div class="shop">{!! getActivProofPackage()[$x]['package'] !!}</div>
+             <div class="price">
+                <div class="notes">Rp {!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['price'])) !!}</div>
+              </div>
+              <div class="feature">
+                <div class="notes">{!!  str_replace(",",".",number_format(getActivProofPackage()[$x]['paket'])) !!} Views</div>
+                <a href="{{url('checkout_proof')}}/{{ $x }}" class="btn btn-primary">Beli</a>
+              </div>
           </div>
           <!-- --> 
         </div>
