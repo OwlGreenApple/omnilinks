@@ -29,10 +29,11 @@ class CheckWAMember
         $temp_arr['uuid'] = ['required'];
         $temp_arr['pageid'] = ['required'];
         $temp_arr['chat_member_text'] = ['max:190'];
+        $temp_arr['chat_member_photo'] = ['max:1024'];
 
          $messages = [
             'required' => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
-            'max'    => 'Maksimal :attribute adalah :max karakter.',
+            'max'    => 'Maksimal :attribute adalah :max.',
         ];
         
         $validator = Validator::make($request->all(), $temp_arr, $messages); 
@@ -99,7 +100,23 @@ class CheckWAMember
          $valid_ext = false;
          if(!empty($photo))
           {
-              $arr_size = getimagesize($photo);
+              if(@getimagesize($photo))
+              {
+                $check = true;
+                $arr_size = getimagesize($photo);
+              }
+              else
+              {
+                $check = false;
+              }
+
+              if($check == false)
+              {
+                $response['status'] = "error";
+                $response['message'] = 'Maaf server kami terlalu sibuk, mohon coba lagi nanti.';
+                return response()->json($response);
+              }
+
               $imagewidth = $arr_size[0];
               $imageheight = $arr_size[1];
               $ext = $photo->getClientOriginalExtension();
