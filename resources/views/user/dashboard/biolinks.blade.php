@@ -1487,16 +1487,50 @@
     });
   }
 
+  function rearray_serialize(data)
+  {
+    var obj;
+    var arr = [];
+    data = data.split("&");
+    var gdata = data;
+    var len = data.length;
+
+    //data name
+    data = data[0].split("="); //just to take data name
+    var data_name = data[0].split('[]')[0];
+   
+    //data value
+    for(x=0;x<len;x++)
+    {
+      var data_value = gdata[x].split("=")[1];
+      arr.push(data_value);
+    }
+
+    // convert array to object
+    arr = Object.assign({}, arr); 
+    obj = { [data_name] : arr };
+    // console.log(obj);
+    return obj;
+  }
+
   function tambahPages() {
     var youtube_id = $('input[name="embed"]').val();
+    var data = new FormData($("#savelink")[0]);
+    var msg = rearray_serialize($('.sortable-msg').sortable('serialize'));
+    data.append('msg',JSON.stringify(msg));
+
     $.ajax({
       type: 'POST',
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
+      processData:false,
+      cache:false,
+      contentType: false,
       dataType: 'text',
-      data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'),
-      url: "<?php echo url('/save-link');?>",
+      /*data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'),*/ 
+      data : data,
+      url: "{{ url('save-link') }}",
       beforeSend: function()
       {
         $('#loader').show();
@@ -2347,13 +2381,25 @@
         <form id="save_connect" class="row mt-2 mb-3">
           <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <!-- activrespon -->
-            <div class="form-group">
-              <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id" value="{{ $pages->list_id }}"/>
-              <div class="error err_list_id"></div>
+            <div id="activrespon">
+              <div class="form-group">
+                <input placeholder="Form Activrespon" type="text" class="form-control" maxlength="190" name="act_form_text" value="{{ $pages->act_form_text }}"/>
+                <div class="error err_act_form_text"></div>
+              </div>
+
+              <div class="form-group">
+                <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id" value="{{ $pages->list_id }}"/>
+                <div class="error err_list_id"></div>
+              </div>
             </div>
 
             <!-- mailchimp -->
             <div id="mailchimp" class="mb-2">
+              <div class="form-group d-flex">
+                <input placeholder="Form Mailchimp" type="text" class="form-control" maxlength="190" name="mc_form_text" value="{{ $pages->mc_form_text }}"/>
+                <div class="error err_mc_form_text"></div>
+              </div>
+
               <div class="form-group d-flex">
                 <input placeholder="Mailchimp API-KEY" type="text" class="form-control mr-2" maxlength="190" name="api_key" value="{{ $pages->api_key_mc }}"/>
                 <span class="tooltipstered" title="<div class='panel-content'>login dahulu pada akun mailchimp anda <br/> dan masuk pada : <br/> Account &rarr; Extras &rarr; API keys<br/>Account terletak pada menu bagian paling bawah sebelah kiri,<br/> dan apabila cursor diarahkan akan mengeluarkan text username anda</div>">
@@ -2379,7 +2425,12 @@
               <div class="error err_audience_id"></div>
             <!-- end mailchimp -->
             </div>
-            <button class="btn btn-primary btn-sm">Save</button>
+            <select name="position_api" class="form-control mb-2">
+              <option value="0">Tampilkan di atas</option>
+              <option value="1">Tampilkan di bawah</option>
+            </select>
+            <div class="error err_position_api"></div>
+            <button class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>
@@ -2667,7 +2718,7 @@
                   
                   <div class="mb-5">
                     <ul class="sortable-link a">
-                      
+                      <!-- link displayed here -->
                     </ul>
                   </div>
 
@@ -3790,51 +3841,58 @@
                     </li>
                   </ul>
 
+                  <!-- FORM API -->
+                  <div id="form_api_0">
                   <!-- form connect API activrespon -->
 
-                  <form id="connect_preview_activrespon" class="col-12 mb-2">
-                    <h5 class="description text-center"><b>Form Activrespon</b></h5>
-                    <div class="form-group mt-3 mb-4 row">
-                      <div class="col-lg-12 mb-3">
-                        <input type="text" class="form-control" placeholder="Nama" maxlength="50" />
-                      </div>
+                  <div id="form_api_move">
+                    <form id="connect_preview_activrespon" class="col-12 mb-2">
+                      <h5 class="description text-center"><b id="act_text">{{ $pages->act_form_text }}</b></h5>
+                      <div class="form-group mt-3 mb-4 row">
+                        <div class="col-lg-12 mb-3">
+                          <input type="text" class="form-control" placeholder="Nama" maxlength="50" />
+                        </div>
 
-                      <div class="col-lg-12 mb-3">
-                        <input type="email" class="form-control" placeholder="Email" />
-                      </div>
+                        <div class="col-lg-12 mb-3">
+                          <input type="email" class="form-control" placeholder="Email" />
+                        </div>
 
-                      <div class="col-lg-12 mb-3">
-                        <input type="phone" class="form-control" placeholder="Phone example +628xxxxxxx" />
-                      </div>
+                        <div class="col-lg-12 mb-3">
+                          <input type="phone" class="form-control" placeholder="Phone example +628xxxxxxx" />
+                        </div>
 
-                      <div class="col-12">
-                       <button type="button" class="btn btnview col-lg-12">Submit</button>
+                        <div class="col-12">
+                         <button type="button" class="btn btnview col-lg-12">Submit</button>
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
 
-                  <!-- form connect API mailchimp -->
+                    <!-- form connect API mailchimp -->
 
-                  <form id="connect_preview_mailchimp" class="col-12 mb-2">
-                    <h5 class="description text-center"><b>Form Mailchimp</b></h5>
-                    <div class="form-group mt-3 mb-4 row">
-                      <div class="col-lg-12 mb-3">
-                        <input type="email" class="form-control" placeholder="Email" />
+                    <form id="connect_preview_mailchimp" class="col-12 mb-2">
+                      <h5 class="description text-center"><b id="mc_text">{{ $pages->mc_form_text }}</b></h5>
+                      <div class="form-group mt-3 mb-4 row">
+                        <div class="col-lg-12 mb-3">
+                          <input type="email" class="form-control" placeholder="Email" />
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <input type="text" class="form-control" placeholder="First Name" />
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <input type="text" class="form-control" placeholder="Last Name" />
+                        </div>
+
+                        <div class="col-12">
+                         <button type="button" class="btn btnview col-lg-12">Submit</button>
+                        </div>
                       </div>
+                    </form>
+                  <!-- end form_api_move -->
+                  </div>
 
-                      <div class="col-lg-12 mb-3">
-                        <input type="text" class="form-control" placeholder="First Name" />
-                      </div>
-
-                      <div class="col-lg-12 mb-3">
-                        <input type="text" class="form-control" placeholder="Last Name" />
-                      </div>
-
-                      <div class="col-12">
-                       <button type="button" class="btn btnview col-lg-12">Submit</button>
-                      </div>
-                    </div>
-                  </form>
+                  </div>
 
                   <!-- links -->
 
@@ -3860,6 +3918,10 @@
                       @endif
                     </ul>
                   </div>
+
+                  <!-- FORM API BOTTOM -->
+                  <div id="form_api_1"><!-- kalo user pilih opsi tampilkan di bawah --></div>
+
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
                     <li class="col linked hide" id="youtubeviewid">
@@ -4410,9 +4472,24 @@
     run_checkbox_connect_api();
     checkbox_connect_api();
     save_connect();
+    move_api_form("{{$pages->position_api}}");
     //proof_preview();
     //callMaintainPlus();
   });
+
+  function move_api_form(tab)
+  {
+    /*when page load*/
+    var move = $("#form_api_"+tab);
+    $("#form_api_move").appendTo(move);
+
+    /*when user choose option*/
+    $("select[name='position_api']").change(function(){
+      var value= $(this).val();
+      $("#form_api_move").appendTo($("#form_api_"+value));
+    });
+  }
+
 
   function save_connect()
   {
@@ -4459,6 +4536,9 @@
             $(".err_server_mailchimp").html(result.server_mailchimp);
             $(".err_api_key").html(result.api_key);
             $(".err_audience_id").html(result.audience_id);
+            $(".err_act_form_text").html(result.act_form_text);
+            $(".err_mc_form_text").html(result.mc_form_text);
+            $(".err_position_api").html(result.position_api);
           }
           else
           {
@@ -4484,6 +4564,7 @@
   function checkbox_connect_api(press)
   {
     var checked = 0;
+    var position_api = "{!! $pages->position_api !!}";
     $(".connect_check").each(function(e){
       if($(this).is(':checked') == true)
       {
@@ -4502,7 +4583,7 @@
 
     if($("#connect_activrespon").is(":checked") == true)
     {
-      $("input[name='list_id']").show();
+      $("#activrespon").show();
       $("#connect_preview_activrespon").show();
       $("#connect_activrespon").attr('data',1);
     }
@@ -4510,7 +4591,7 @@
     {
       $("#connect_activrespon").attr('data',0);
       $("#connect_preview_activrespon").hide();
-      $("input[name='list_id']").hide();
+      $("#activrespon").hide();
     } 
 
     if($("#connect_mailchimp").is(":checked") == true)
@@ -4523,10 +4604,24 @@
       $("#connect_mailchimp").attr('data',0);
       $("#mailchimp, #connect_preview_mailchimp").hide();
     }
+
+    //pasang posisi value sesuai dari yang dipasang oleh user
+    $("select[name='position_api'] option[value='"+position_api+"']").prop('selected',true);
   }
 
   function run_checkbox_connect_api()
   {
+    /*preview for api title text*/
+    $("input[name='act_form_text']").on('keypress keyup',function(){
+      var text_ac = $(this).val();
+      $("#act_text").html(text_ac);
+    });
+    $("input[name='mc_form_text']").on('keypress keyup',function(){
+      var text_mc = $(this).val();
+      $("#mc_text").html(text_mc);
+    });
+
+    /*run connect check when user click*/
     $(".connect_check").click(function(){
       checkbox_connect_api(1);
     });
@@ -6742,6 +6837,7 @@
                     '<input class="delete-link" type="hidden" name="deletelink[]" value="">'+
                     '<input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
                     '<input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">'+
+                    '<input type="file" name="icon_link[]" class="form-control" />'+
                   '</div>'+
                 '</div>'+
               '</div>'+

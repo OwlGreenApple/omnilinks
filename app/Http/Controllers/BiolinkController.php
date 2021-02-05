@@ -449,6 +449,10 @@ class BiolinkController extends Controller
     $connect_activrespon = (int)strip_tags($request->connect_activrespon);
     $connect_mailchimp = (int)strip_tags($request->connect_mailchimp);
 
+    $act_form_text = strip_tags($request->act_form_text);
+    $mc_form_text = strip_tags($request->mc_form_text);
+    $position_api = strip_tags($request->position_api);
+
     //CHECK USER API KEY VALID OR OTHERWISE ON ACTIVRESPON
     if($this->check_valid_api_key($list_id) == false && $list_id !== "")
     {
@@ -464,6 +468,10 @@ class BiolinkController extends Controller
     }
 
     $rules['page_id'] = ['numeric',new CheckValidPageID];
+    $rules['position_api'] = ['required','numeric','min:0','max:1'];
+
+    //if connect activrespon checked
+    $rules['act_form_text'] = ['max : 190']; //activrespon api key
     if($connect_activrespon == 1)
     {
       $rules['list_id'] = ['required','max : 100']; //activrespon api key
@@ -473,6 +481,8 @@ class BiolinkController extends Controller
       $rules['list_id'] = ['max : 100'];
     }
 
+    //if connect mailchimp checked
+    $rules['mc_form_text'] = ['max : 190']; //activrespon api key
     if($connect_mailchimp == 1)
     {
       $rules['api_key'] = ['required','max : 100']; // mailchimp api key
@@ -495,9 +505,12 @@ class BiolinkController extends Controller
         'error'=>2,
         'page_id'=>$err->first('page_id'),
         'list_id'=>$err->first('list_id'),
+        'act_form_text'=>$err->first('act_form_text'),
         'api_key'=>$err->first('api_key'),
         'server_mailchimp'=>$err->first('server_mailchimp'),
         'audience_id'=>$err->first('audience_id'),
+        'mc_form_text'=>$err->first('mc_form_text'),
+        'position_api'=>$err->first('position_api'),
       ];
 
       return response()->json($errors);
@@ -509,10 +522,12 @@ class BiolinkController extends Controller
 
     $data_page['connect_activrespon'] = $connect_activrespon;
     $data_page['connect_mailchimp'] = $connect_mailchimp;
+    $data_page['position_api'] = $position_api;
 
     if($connect_activrespon == 1 && !is_null($page))
     {
       $data_page['list_id'] = $list_id;
+      $data_page['act_form_text'] = $act_form_text;
     }
 
     if($connect_mailchimp == 1 && !is_null($page))
@@ -520,6 +535,7 @@ class BiolinkController extends Controller
       $data_page['api_key_mc'] = $api_key;
       $data_page['server_mailchimp'] = $server_mailchimp;
       $data_page['audience_id'] = $audience_id;
+      $data_page['mc_form_text'] = $mc_form_text;
     }
 
     try
@@ -1199,6 +1215,9 @@ class BiolinkController extends Controller
 
   public function savelink(Request $request)
   {
+    dd($request->all());
+    // dd(json_decode($request->msg,true));
+
     $temp_arr = array();
     if (in_array("wa", $request->sortmsg)) {
       $temp_arr['wa'] = ['required', 'max:191'];
@@ -1234,6 +1253,7 @@ class BiolinkController extends Controller
           $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
           // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
           $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
+          $temp_arr['icon_link.'.$i] = ['max:300','mimes:jpeg,jpg,png'];
         }
         else
         {
@@ -1371,6 +1391,7 @@ class BiolinkController extends Controller
         return $arr;
       }*/
 
+      // LINK LOGIC
       for ($i=0; $i <count($request->title); $i++)
       {   
 
@@ -1424,7 +1445,22 @@ class BiolinkController extends Controller
           $url->pixel_id = 0;
         }
 
-        $url->save();
+        //icon link logic
+        if($request->file('icon_link')[$i] !== null)
+        {
+          $icon_link = $this->icon_link_filter($request->file('icon_link')[$i],$page);
+          $url->icon_link = $icon_link;
+        }
+
+        try
+        {
+          $url->save();
+        }
+        catch(QueryException $e)
+        {
+          //$e->getMessage();
+        }
+        
 
         /*if($sort_link=='')
         {
@@ -1567,6 +1603,33 @@ class BiolinkController extends Controller
     // $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
    
   	return $arr;
+  }
+
+  private function icon_link_filter($file,$page)
+  {
+    //RESIZE FILE IF OVER 100PX
+      $user = Auth::user();
+      $arr_size = getimagesize($file);
+      $imagewidth = $arr_size[0];
+      $imageheight = $arr_size[1];
+      
+      if($imagewidth > 52 || $imageheight > 52)
+      {
+          $imageUpload = $this->resizeImage($file,52,52);
+      }
+      else
+      {
+          $imageUpload =  file_get_contents($file);
+      }
+    
+      $dt = Carbon::now();
+      $ext = $file->getClientOriginalExtension();
+      $dir = 'icon_link/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+      $filename = $dt->format('ymdHi').'-'.$page->id.'.'.$ext;
+      Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
+      $icon_image_path = $dir."/".$filename;
+
+      return $icon_image_path;
   }
 
   public function test(Request $request)

@@ -23,6 +23,7 @@
                                       <input class="delete-link" type="hidden" name="deletelink[]" value="">
                                       <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" placeholder="Title" class="form-control focuslink-update">
                                       <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
+                                       <input type="file" name="iconlink[]" class="form-control" />
                                     </div>
                                   </div>
                                 </div>
