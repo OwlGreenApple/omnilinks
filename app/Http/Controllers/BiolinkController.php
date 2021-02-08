@@ -1493,6 +1493,7 @@ class BiolinkController extends Controller
             return $arr;
           }
         }*/
+        sleep(1);
       }
     endif;
     
