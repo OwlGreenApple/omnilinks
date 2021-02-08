@@ -1487,6 +1487,7 @@
     });
   }
 
+  //to make serialize to normal data
   function rearray_serialize(data)
   {
     var obj;
@@ -1516,8 +1517,8 @@
   function tambahPages() {
     var youtube_id = $('input[name="embed"]').val();
     var data = new FormData($("#savelink")[0]);
-    var msg = rearray_serialize($('.sortable-msg').sortable('serialize'));
-    data.append('msg',JSON.stringify(msg));
+    /*var msg = rearray_serialize($('.sortable-msg').sortable('serialize'));
+    data.append('msg',JSON.stringify(msg));*/
 
     $.ajax({
       type: 'POST',
@@ -1528,7 +1529,8 @@
       cache:false,
       contentType: false,
       dataType: 'text',
-      /*data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'),*/ 
+      /*data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'), */
+      // data: $("#savelink").serialize(), 
       data : data,
       url: "{{ url('save-link') }}",
       beforeSend: function()
@@ -3904,7 +3906,12 @@
                           <li id="link-preview-{{$link->id}}">
                               @if($link->options == 1)
                                 <span id="link-url-update-{{$link->id}}-get" class="embed-ln-{{$link->id}}">
-                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">{{$link->title}}</a>
+                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov @if($link->icon_link !== null)image_icon_link_btn @endif" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">
+                                    @if($link->icon_link !== null) 
+                                      <img src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
+                                    @endif
+                                    {{$link->title}}
+                                  </a>
                                 </span>
                               @else
                                 <span id="link-url-update-{{$link->id}}-get" class="embed-{{$link->id}}">

@@ -963,7 +963,7 @@ class BiolinkController extends Controller
         if($row['bannerid'] == null && $row['bannerimg'] == "")
         {
           $arr['status'] = 'error';
-          $arr['message'] = 'Banner image is required';
+          $arr['message'] = 'Banner image tidak boleh kosong';
           return response()->json($arr);
         }
 
@@ -1215,7 +1215,7 @@ class BiolinkController extends Controller
 
   public function savelink(Request $request)
   {
-    dd($request->all());
+    // dd($request->all());
     // dd(json_decode($request->msg,true));
 
     $temp_arr = array();
@@ -1365,7 +1365,7 @@ class BiolinkController extends Controller
     
     //dicheck dulu
     $counter_new = 0; $counter_update = 0; $counter_delete = 0;
-    if (!is_null($request->title)){
+    if (!is_null($request->title)):
       /*
       for ($i=0; $i <count($request->title); $i++)
       { 
@@ -1445,10 +1445,14 @@ class BiolinkController extends Controller
           $url->pixel_id = 0;
         }
 
-        //icon link logic
-        if($request->file('icon_link')[$i] !== null)
+        //ICON LINK
+        $iconlink = $_FILES['iconlink']['tmp_name']; //replacement of $request->file()
+        $icname = $_FILES['iconlink']['name']; //file name for extension
+        if($iconlink[$i] !== "")
         {
-          $icon_link = $this->icon_link_filter($request->file('icon_link')[$i],$page);
+          // SEND IMAGE ICON TO S3
+          $icon_link = $this->icon_link_filter($iconlink[$i],$page,$icname[$i]);
+          //SAVE IMAGE ICON PATH / LINK
           $url->icon_link = $icon_link;
         }
 
@@ -1481,7 +1485,7 @@ class BiolinkController extends Controller
           }
         }*/
       }
-    }
+    endif;
     
     $sort_msg = '';
     
@@ -1605,7 +1609,7 @@ class BiolinkController extends Controller
   	return $arr;
   }
 
-  private function icon_link_filter($file,$page)
+  private function icon_link_filter($file,$page,$fname)
   {
     //RESIZE FILE IF OVER 100PX
       $user = Auth::user();
@@ -1613,17 +1617,18 @@ class BiolinkController extends Controller
       $imagewidth = $arr_size[0];
       $imageheight = $arr_size[1];
       
-      if($imagewidth > 52 || $imageheight > 52)
+      if($imagewidth > 48 || $imageheight > 48)
       {
-          $imageUpload = $this->resizeImage($file,52,52);
+          $imageUpload = $this->resizeImage($file,48,48);
       }
       else
       {
           $imageUpload =  file_get_contents($file);
       }
-    
+
+     
       $dt = Carbon::now();
-      $ext = $file->getClientOriginalExtension();
+      $ext = explode(".",$fname)[1];
       $dir = 'icon_link/'.explode(' ',trim($user->name))[0].'-'.$user->id;
       $filename = $dt->format('ymdHi').'-'.$page->id.'.'.$ext;
       Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');

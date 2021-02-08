@@ -1662,7 +1662,10 @@
             @if($link->options == 1)
             <li class="col-md-12 col-12 mb-3"> 
               <a href="#" data-href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov link-ajax">
-                <button class="btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
+                <button class="@if($link->icon_link !== null) image_icon_link_btn @endif btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
+                  @if($link->icon_link !== null) 
+                    <img src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
+                  @endif
                   <span class="textbutton">
                     {{$link->title}}
                   </span>
