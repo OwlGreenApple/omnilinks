@@ -21,19 +21,20 @@
                                     <div class="sel_{{$link->id}}">
                                       <input type="hidden" name="idlink[]" value="{{$link->id}}">
                                       <input class="delete-link" type="hidden" name="deletelink[]" value="">
-                                      <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" placeholder="Title" class="form-control focuslink-update">
+                                      <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" data-id="{{$link->id}}" placeholder="Title" class="form-control focuslink-update">
                                       <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
-                                       <input type="file" name="iconlink[]" class="form-control" />
+                                      <input data-file="title-{{$link->id}}-view-update" type="file" name="iconlink[]" class="form-control img_icon_preview" />
+                                      <small>Rasio ukuran icon 1:1 contoh : 48px x 48px</small>
                                     </div>
                                   </div>
                                 </div>
+
                                 <div class="col-md-12 col-12 pr-0 pl-0">
                                   <!-- Youtube Embed Gij0QNsJRxI -->
                                     <input type="text" name="embed[]" class="form-control em_{{$link->id}} emb" value="{{$link->youtube_embed}}" placeholder="masukkan youtube link">
 
                                     <select name="linkpixel[]" id="linkpixel-{{$link->id}}-update" class="form-control linkpixel lnp_{{$link->id}}" data-pixel-id="{{$link->pixel_id}}">
                                     </select>
-                                    
                                 </div> 
                               </div>
                               

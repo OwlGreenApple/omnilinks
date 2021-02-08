@@ -87,15 +87,16 @@ a:hover {
 
 .image_icon_link {
   position: absolute;
-  width: 48px;
-  left: 18px;
-  top: 2px;
+  width: 40px;
+  height: 40px;
+  left: 23px;
+  top: 7px;
 }
 
 .image_icon_link_btn {
   border-radius: 28px;
   padding-top: 13px;
-  padding-bottom: 12px;
+  padding-bottom: 13px;
 }
 
 @media(min-width : 280px) and (max-width:359px){

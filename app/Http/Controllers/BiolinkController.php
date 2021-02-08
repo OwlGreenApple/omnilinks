@@ -1400,16 +1400,25 @@ class BiolinkController extends Controller
           $url=new Link();
           $counter_new += 1;
         }
+        elseif($deletelink[$i]=='delete')
+        {
+          $icon_link = null;
+          $linkku=Link::find($request->idlink[$i]);
+
+          if (!is_null($linkku)){
+            $icon_link = $linkku->icon_link;
+            $counter_delete += 1;
+            $linkku->delete();
+          }
+
+          if($icon_link !== null)
+          {
+            Storage::disk('s3')->delete($icon_link);
+          }
+          continue;
+        }
         else
         {
-          if ($deletelink[$i]=='delete') {
-            $linkku=Link::find($request->idlink[$i]);
-            if (!is_null($linkku)){
-              $counter_delete += 1;
-              $linkku->delete();
-            }
-            continue;
-          }
           // $url=Link::where('id','=',$id[$i])->first();
           $counter_update += 1;
           $url=Link::find($request->idlink[$i]);
@@ -1617,9 +1626,9 @@ class BiolinkController extends Controller
       $imagewidth = $arr_size[0];
       $imageheight = $arr_size[1];
       
-      if($imagewidth > 48 || $imageheight > 48)
+      if($imagewidth > 40 || $imageheight > 40)
       {
-          $imageUpload = $this->resizeImage($file,48,48);
+          $imageUpload = $this->resizeImage($file,40,40);
       }
       else
       {
@@ -1630,7 +1639,7 @@ class BiolinkController extends Controller
       $dt = Carbon::now();
       $ext = explode(".",$fname)[1];
       $dir = 'icon_link/'.explode(' ',trim($user->name))[0].'-'.$user->id;
-      $filename = $dt->format('ymdHi').'-'.$page->id.'.'.$ext;
+      $filename = $dt->format('ymdHis').'-'.$page->id.'.'.$ext;
       Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
       $icon_image_path = $dir."/".$filename;
 

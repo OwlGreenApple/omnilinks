@@ -3906,11 +3906,13 @@
                           <li id="link-preview-{{$link->id}}">
                               @if($link->options == 1)
                                 <span id="link-url-update-{{$link->id}}-get" class="embed-ln-{{$link->id}}">
-                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov @if($link->icon_link !== null)image_icon_link_btn @endif" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">
+                                  <a id="textprev-update-{{$link->id}}" href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov @if($link->icon_link !== null)image_icon_link_btn @endif" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">
                                     @if($link->icon_link !== null) 
-                                      <img src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
+                                      <img id="preview_title-{{$link->id}}-view-update" src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
+                                    @else
+                                      <img id="preview_title-{{$link->id}}-view-update" class="rounded-circle image_icon_link" />
                                     @endif
-                                    {{$link->title}}
+                                   {{$link->title}}
                                   </a>
                                 </span>
                               @else
@@ -5196,6 +5198,7 @@
     chat_preview_enable();
     chat_buzz_enable();
     descPlaceholder();
+    upload_image_icon();
   });
 
   function descPlaceholder()
@@ -5786,8 +5789,52 @@
          tempStr = $('#description').html();
          $('#outputdescription').html(tempStr);
       });
+
+    //CHANGE TEXT ON PREVIEW LINK
+    
+    //NEW LINK
+    $(document).on('keyup keypress','.focuslink',function(){
+      var number_id = $(this).attr('data-id');
+      var value = $(this).val();
+      var len = value.length;
+
+      var prevtext = $("#textprev-new-"+number_id)[0];
+      prevtext.lastChild.nodeValue=value;
       
-    $(document).on('focus','.focuslink',function(){
+      if(len >= 16)
+      {
+        return false;
+      }
+
+      if (len <= 0) {
+        prevtext.lastChild.nodeValue='Masukkan Link';
+      }
+    });
+
+    //UPDATE LINK
+    $(document).on('keyup keypress',".focuslink-update",function()
+    {
+      var number_id = $(this).attr('data-id');
+      var value = $(this).val();
+      var len = value.length;
+
+      var prevtext = $("#textprev-update-"+number_id)[0];
+      prevtext.lastChild.nodeValue=value;
+      
+      if(len >= 16)
+      {
+        return false;
+      }
+
+      if (len <= 0) {
+        prevtext.lastChild.nodeValue='Masukkan Link';
+      }
+
+    });
+
+
+   /* OLD CODE 
+     $(document).on('focus','.focuslink',function(){
       let inputlinkview=$(this);
       let getoutputviewlink=inputlinkview.attr('id');
       let outputviewlink=$('.'+getoutputviewlink+'-get');
@@ -5798,17 +5845,19 @@
          }
       });
     });
+
     $(document).on('focus','.focuslink-update',function(){
       let inputlinkview=$(this);
       let getoutputviewlink=inputlinkview.attr('id');
       let outputviewlink=$('.'+getoutputviewlink);
+
       $(document).on('keyup',inputlinkview,function(){
         outputviewlink.text(inputlinkview.val());
         if (inputlinkview.val()=='') {
           outputviewlink.text('Masukkan Link');
         }
-      });
-    });
+      }); 
+    });*/
 
     $('.outlined').click(function() {
       check_outlined();
@@ -6842,9 +6891,10 @@
                   '<div class="sel_new_'+counterLink+'">'+
                     '<input type="hidden" name="idlink[]" value="new">'+
                     '<input class="delete-link" type="hidden" name="deletelink[]" value="">'+
-                    '<input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
+                    '<input data-id="'+counterLink+'" type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
                     '<input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">'+
-                    '<input type="file" name="icon_link[]" class="form-control" />'+
+                    '<input data-file="title-'+ counterLink +'-view-get" type="file" name="iconlink[]" class="form-control img_icon_preview" />'+
+                    '<small>Rasio ukuran icon 1:1 contoh : 48px x 48px</small>'+
                   '</div>'+
                 '</div>'+
               '</div>'+
@@ -6864,19 +6914,39 @@
         //back_target
         $("#viewLink").append('<li class="">'+
           '<span id="link-url-new_' + counterLink + '-preview" class="embed-ln-new_'+counterLink+'">'+
-          '<a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li></span>');
+          '<a id="textprev-new-'+counterLink+'" href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">'+'<img class="rounded-circle image_icon_link" id="preview_title-'+counterLink+'-view-get" />'+'Masukkan Link</a></li></span>');
         check_outlined();
         check_rounded();
         $('#linkpixel-' + counterLink).html(dataView);
         $('#linkpixel-' + counterLink ).val(0);
         //loadPixel(0,'#linkpixel-' + counterLink );
-        
     });
     
 	
   }); //end document ready
-      
 
+  function upload_image_icon()
+  {
+    $("body").on("change",".img_icon_preview",function(){
+      var id = $(this).attr('data-file');
+      // var len = $('#preview_'+id).length; 
+      $("."+id).addClass('image_icon_link_btn');
+      readURL(this,id);
+    });
+  }
+
+  //PREVIEW IMAGE ICON ON BUTTON
+  function readURL(input,id) {
+    if (input.files && input.files[0]) {
+
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#preview_'+id).attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+  }
  
     // $(document).on('click','.marker',function(){
     //      $('#backtheme').val('');
