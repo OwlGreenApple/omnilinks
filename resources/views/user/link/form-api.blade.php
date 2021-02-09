@@ -1,5 +1,11 @@
  @if($pages->connect_activrespon > 0)
-  <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2 text-center header-txt"><h4><b>{{ $pages->act_form_text }}</b></h4></div>
+  <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2 text-center header-txt"><h4><b id="act_text">{{ $pages->act_form_text }}</b></h4></div>
+
+  <!-- bottom form title -->
+  @if($pages->act_form_bottom !== null || $pages->act_form_bottom !== "")
+    <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2 text-center header-txt"><h4><b id="act_bottom_text">{{ $pages->act_form_bottom }}</b></h4></div>
+  @endif
+
   <div style="padding-left : 30px;padding-right : 30px" class="err_connect col-lg-7 col-md-12 col-sm-12 col-12"><!-- notification --></div>
   <form id="connect_preview" class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
     <div class="form-group mb-2">
@@ -27,7 +33,12 @@
 
 <!-- form connect API mailchimp -->
 @if($pages->connect_mailchimp > 0)
-  <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2 text-center header-txt"><h4><b>{{ $pages->mc_form_text }}</b></h4></div>
+  <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2 text-center header-txt"><h4><b id="mc_text">{{ $pages->mc_form_text }}</b></h4></div>
+
+  @if($pages->mc_form_bottom !== null || $pages->mc_form_bottom !== "")
+    <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2 text-center header-txt"><h4><b id="mc_bottom_text">{{ $pages->mc_form_bottom }}</b></h4></div>
+  @endif
+
   <div style="padding-left : 30px;padding-right : 30px" class="err_connect_mc col-lg-7 col-md-12 col-sm-12 col-12 mb-1"><!-- notification --></div>
   <form id="connect_mailchimp" class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
     <div class="form-group mb-4">

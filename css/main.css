@@ -179,6 +179,11 @@ table tr:nth-child(even) td {
   position: relative;
 }
 
+/* STYLING FORM API TEXT PREVIEW */
+#act_text, #act_bottom_text, #mc_text, #mc_bottom_text {
+  word-break: break-word;
+}
+
 /* WA CHAT */
 
 .del_chat_member, .del_chat_member > i, .edit_wa_member {

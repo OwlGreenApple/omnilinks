@@ -450,7 +450,9 @@ class BiolinkController extends Controller
     $connect_mailchimp = (int)strip_tags($request->connect_mailchimp);
 
     $act_form_text = strip_tags($request->act_form_text);
+    $act_form_bottom = strip_tags($request->act_form_bottom);
     $mc_form_text = strip_tags($request->mc_form_text);
+    $mc_form_bottom = strip_tags($request->mc_form_bottom);
     $position_api = strip_tags($request->position_api);
 
     //CHECK USER API KEY VALID OR OTHERWISE ON ACTIVRESPON
@@ -466,12 +468,13 @@ class BiolinkController extends Controller
       $err['msg'] = 2;
       return response()->json($err);
     }
-
+    //$act_form_bottom $mc_form_bottom
     $rules['page_id'] = ['numeric',new CheckValidPageID];
     $rules['position_api'] = ['required','numeric','min:0','max:1'];
 
     //if connect activrespon checked
-    $rules['act_form_text'] = ['max : 190']; //activrespon api key
+    $rules['act_form_text'] = ['max : 190']; //activrespon form title
+    $rules['act_form_bottom'] = ['max : 190']; //activrespon form title bottom
     if($connect_activrespon == 1)
     {
       $rules['list_id'] = ['required','max : 100']; //activrespon api key
@@ -482,7 +485,8 @@ class BiolinkController extends Controller
     }
 
     //if connect mailchimp checked
-    $rules['mc_form_text'] = ['max : 190']; //activrespon api key
+    $rules['mc_form_text'] = ['max : 190']; //mailchimp form title
+    $rules['mc_form_bottom'] = ['max : 190']; //mailchimp form title botton
     if($connect_mailchimp == 1)
     {
       $rules['api_key'] = ['required','max : 100']; // mailchimp api key
@@ -506,10 +510,12 @@ class BiolinkController extends Controller
         'page_id'=>$err->first('page_id'),
         'list_id'=>$err->first('list_id'),
         'act_form_text'=>$err->first('act_form_text'),
+        'act_form_bottom'=>$err->first('act_form_bottom'),
         'api_key'=>$err->first('api_key'),
         'server_mailchimp'=>$err->first('server_mailchimp'),
         'audience_id'=>$err->first('audience_id'),
         'mc_form_text'=>$err->first('mc_form_text'),
+        'mc_form_bottom'=>$err->first('mc_form_bottom'),
         'position_api'=>$err->first('position_api'),
       ];
 
@@ -528,6 +534,7 @@ class BiolinkController extends Controller
     {
       $data_page['list_id'] = $list_id;
       $data_page['act_form_text'] = $act_form_text;
+      $data_page['act_form_bottom'] = $act_form_bottom;
     }
 
     if($connect_mailchimp == 1 && !is_null($page))
@@ -536,6 +543,7 @@ class BiolinkController extends Controller
       $data_page['server_mailchimp'] = $server_mailchimp;
       $data_page['audience_id'] = $audience_id;
       $data_page['mc_form_text'] = $mc_form_text;
+      $data_page['mc_form_bottom'] = $mc_form_bottom;
     }
 
     try
@@ -1493,7 +1501,7 @@ class BiolinkController extends Controller
             return $arr;
           }
         }*/
-        sleep(1);
+        sleep(1);//to prevent same file renaming
       }
     endif;
     

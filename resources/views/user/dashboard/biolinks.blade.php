@@ -2387,6 +2387,11 @@
               <div class="form-group">
                 <input placeholder="Form Activrespon" type="text" class="form-control" maxlength="190" name="act_form_text" value="{{ $pages->act_form_text }}"/>
                 <div class="error err_act_form_text"></div>
+              </div> 
+
+              <div class="form-group">
+                <input placeholder="Form Activrespon Bottom" type="text" class="form-control" maxlength="190" name="act_form_bottom" value="{{ $pages->act_form_bottom }}"/>
+                <div class="error err_act_form_bottom"></div>
               </div>
 
               <div class="form-group">
@@ -2400,6 +2405,11 @@
               <div class="form-group d-flex">
                 <input placeholder="Form Mailchimp" type="text" class="form-control" maxlength="190" name="mc_form_text" value="{{ $pages->mc_form_text }}"/>
                 <div class="error err_mc_form_text"></div>
+              </div>
+
+              <div class="form-group d-flex">
+                <input placeholder="Form Mailchimp Bottom" type="text" class="form-control" maxlength="190" name="mc_form_bottom" value="{{ $pages->mc_form_bottom }}"/>
+                <div class="error err_mc_form_bottom"></div>
               </div>
 
               <div class="form-group d-flex">
@@ -3850,6 +3860,8 @@
                   <div id="form_api_move">
                     <form id="connect_preview_activrespon" class="col-12 mb-2">
                       <h5 class="description text-center"><b id="act_text">{{ $pages->act_form_text }}</b></h5>
+                      <h5 class="description text-center"><b id="act_bottom_text">{{ $pages->act_form_bottom }}</b></h5>
+                      
                       <div class="form-group mt-3 mb-4 row">
                         <div class="col-lg-12 mb-3">
                           <input type="text" class="form-control" placeholder="Nama" maxlength="50" />
@@ -3873,6 +3885,8 @@
 
                     <form id="connect_preview_mailchimp" class="col-12 mb-2">
                       <h5 class="description text-center"><b id="mc_text">{{ $pages->mc_form_text }}</b></h5>
+                      <h5 class="description text-center"><b id="mc_bottom_text">{{ $pages->mc_form_bottom }}</b></h5>
+
                       <div class="form-group mt-3 mb-4 row">
                         <div class="col-lg-12 mb-3">
                           <input type="email" class="form-control" placeholder="Email" />
@@ -4546,7 +4560,9 @@
             $(".err_api_key").html(result.api_key);
             $(".err_audience_id").html(result.audience_id);
             $(".err_act_form_text").html(result.act_form_text);
+            $(".err_act_form_bottom").html(result.act_form_bottom);
             $(".err_mc_form_text").html(result.mc_form_text);
+            $(".err_mc_form_bottom").html(result.mc_form_bottom);
             $(".err_position_api").html(result.position_api);
           }
           else
@@ -4628,6 +4644,15 @@
     $("input[name='mc_form_text']").on('keypress keyup',function(){
       var text_mc = $(this).val();
       $("#mc_text").html(text_mc);
+    }); 
+
+    $("input[name='act_form_bottom']").on('keypress keyup',function(){
+      var text_ac_bt = $(this).val();
+      $("#act_bottom_text").html(text_ac_bt);
+    });
+    $("input[name='mc_form_bottom']").on('keypress keyup',function(){
+      var text_mc_bt = $(this).val();
+      $("#mc_bottom_text").html(text_mc_bt);
     });
 
     /*run connect check when user click*/

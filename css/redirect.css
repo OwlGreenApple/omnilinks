@@ -99,6 +99,12 @@ a:hover {
   padding-bottom: 13px;
 }
 
+
+/* STYLING FORM API FORM */
+#act_text, #act_bottom_text, #mc_text, #mc_bottom_text {
+  word-break: break-word;
+}
+
 @media(min-width : 280px) and (max-width:359px){
   .textbutton{
     font-size : 12px;
