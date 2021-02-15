@@ -1865,7 +1865,8 @@ and add more";
 <script src="{{asset('js/myScript.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
-<script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
+<script src="{{ asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
+<script defer src="{{asset('js/running_banner.js') }}" ></script>
 
 @if($pages->enable_chat == 1)
 <script type="text/javascript">
@@ -1896,7 +1897,6 @@ and add more";
       $(classes).css("left", -gtdefault+'px');    
     }
   }
-
 
 $(document).ready(function() {
     setRightPost(".wcs_popup");
