@@ -2,16 +2,18 @@
 	to make banner run automatically every 3 seconds
 */
 
+var secs = 3000;
+
 $(function()
 {
 	setTimeout(function(){
 		banner_auto_run()
-	},3000);
+	},secs);
 });
 
 function banner_auto_run()
 {
 	setInterval(function(){
 		$(".rightArrow").trigger("click");
-	},3000);
+	},secs);
 }
