@@ -3924,7 +3924,7 @@
                                     @if($link->icon_link !== null) 
                                       <img id="preview_title-{{$link->id}}-view-update" src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
                                     @else
-                                      <img id="preview_title-{{$link->id}}-view-update" class="rounded-circle image_icon_link" />
+                                      <img src="{{ url('/image/transparent.png') }}" id="preview_title-{{$link->id}}-view-update" class="rounded-circle image_icon_link" />
                                     @endif
                                    {{$link->title}}
                                   </a>
