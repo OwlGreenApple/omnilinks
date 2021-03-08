@@ -69,6 +69,9 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('/confirm-payment','OrderController@confirm_payment');
   Route::get('/thankyou','OrderController@thankyou');
 
+  //Test
+  Route::get('/tes','BiolinkController@test');
+
   Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/verifyemail/{cryptedcode}','HomeController@verifyemail');
     //coupon 
@@ -142,7 +145,6 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //makepixel
     Route::post('/save-pixel','BiolinkController@savepixel');
-    Route::get('/test-pixel','BiolinkController@test');
     Route::get('/load-pixel','BiolinkController@loadpixel');
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 

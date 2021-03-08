@@ -13,6 +13,7 @@ use App\WAChatMember as wachat;
 use App\Console\Commands\CropProfileImage;
 
 use App\Helpers\Helper;
+use App\Rules\TrustedUrlCheck;
 use App\Mail\NotifClickFreeUser; 
 use App\Http\Controllers\DashboardController;
 
@@ -898,7 +899,7 @@ class BiolinkController extends Controller
         { 
           $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
           // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
-          $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
+          $temp_arr['url.'.$i] = ['required', 'string', 'max:191', new TrustedUrlCheck($i)];
         }
         else
         {
@@ -1228,7 +1229,7 @@ class BiolinkController extends Controller
 
   public function test(Request $request)
   {
-     return view('checkjs',['data'=>$request->script]);
+     // return view('checkjs',['data'=>$request->script]);
   }
 
   public function savepixel(Request $request)
