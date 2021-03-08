@@ -172,6 +172,10 @@ if(env('DOMAIN_TYPE')=='main'){
 
 
   Route::group(['middleware'=>['web','auth','thisadmin']],function(){
+
+    /* TO FLAGGING INAPPROPIATE LINK */
+    Route::get('flag-link', 'UserController@flag_link');
+
     /* Super Admin page */
     Route::get('super-admin', 'UserController@user_list');
     Route::get('check-super/{id}', 'UserController@check_super');

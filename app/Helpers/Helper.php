@@ -137,7 +137,69 @@ class Helper
       curl_close($curl);
       return $response;
   }
-  
+
+  /*TO CHECK TRUSTED lINK FROM KOMINFO.GO.ID*/
+  public static function CheckTrustedLink($value)
+  {
+    $status = null;
+    $curl = curl_init();
+    $data = array(
+        'name'=>self::filter_url($value)
+    );
+
+    $url = "https://trustpositif.kominfo.go.id/Rest_server/getrecordsname_home";
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $url,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_SSL_VERIFYHOST=>0,
+      CURLOPT_SSL_VERIFYPEER=>0,
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTREDIR => 3,
+      CURLOPT_POSTFIELDS => json_encode($data),
+      CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+
+    if ($err) {
+      // return false;
+      echo "cURL Error #:" . $err;
+    } 
+    else
+    {
+      $status = json_decode($response,true)['values'][0]['Status'];
+    }
+
+    if($status == 'Ada')
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    } 
+  }
+
+  // remove http and another parameter
+  private static function filter_url($url)
+  {
+    $filter = explode('/',$url);
+    if(isset($filter[2]))
+    {
+      return $filter[2];
+    }
+    else
+    {
+      return 'trustpositif.kominfo.go.id';
+    }
+  }
+
+/* end class */
 }
 
 ?>

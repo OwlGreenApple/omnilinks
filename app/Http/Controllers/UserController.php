@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserLog;
+use App\Link;
+use App\Helpers\Helper;
 
 use App\Http\Controllers\OrderController;
 
@@ -333,6 +335,24 @@ class UserController extends Controller
         return redirect("");
       } else {
         return "NOT AUTHORIZED";
+      }
+    }
+
+    public function flag_link()
+    {
+      $list_links = Link::select('link','id')->get();
+
+      if($list_links->count() > 0)
+      {
+        foreach($list_links as $row):
+          $check = Helper::CheckTrustedLink($row->link);
+          if($check == false)
+          {
+            $flagged = Link::find($row->id);
+            $flagged->not_valid = 1;
+            $flagged->save();
+          }
+        endforeach;
       }
     }
 

@@ -576,7 +576,7 @@ class BiolinkController extends Controller
         { 
           $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:191'];
           // $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:191'];
-          $temp_arr['linkBanner.'.$i] = ['required', 'max:191'];
+          $temp_arr['linkBanner.'.$i] = ['required', 'max:191',new TrustedUrlCheck($i)];
           // Validate url
           if (filter_var($request->linkBanner[$i], FILTER_VALIDATE_URL)) {
               // echo("$url is a valid URL");
