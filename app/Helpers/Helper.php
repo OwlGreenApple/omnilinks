@@ -186,7 +186,7 @@ class Helper
   }
 
   // remove http and another parameter
-  private static function filter_url($url)
+  public static function filter_url($url)
   {
     $filter = explode('/',$url);
     if(isset($filter[2]))

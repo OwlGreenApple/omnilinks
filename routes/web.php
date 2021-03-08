@@ -175,6 +175,7 @@ if(env('DOMAIN_TYPE')=='main'){
 
     /* TO FLAGGING INAPPROPIATE LINK */
     Route::get('flag-link', 'UserController@flag_link');
+    Route::get('flag-link-banner', 'UserController@flag_link_banner');
 
     /* Super Admin page */
     Route::get('super-admin', 'UserController@user_list');
