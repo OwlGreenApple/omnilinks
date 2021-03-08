@@ -394,7 +394,36 @@
         </span>
       </div>
     </div>
-
+    <h5>
+Pengumuman penting<br>
+Untuk semua pelanggan Omnilinkz, ada perubahan URL shortener, yang terbaru menjadi omli.club/xxxxxx <br>
+silahkan perbaharui link url kalian masing-masing. <br>
+URL dirubah karena domain sebelumnya terkena internet positif. Ini bisa jadi dikarenakan ada pelanggan yang <br>
+menggunakan URL shortener untuk link yang masuk dalam daftar internet positif. <br>
+<br>
+Admin akan menyisir semua link yang dibuat dan jika ditemukan pelanggaran, <br>
+maka akun user bersangkutan akan langsung ditutup dan di blacklist dari omnilinkz. <br>
+<br>
+Link yang tidak diperbolehkan adalah: <br>
+Informasi/Dokumen Elektronik yang melanggar Peraturan Perundang-Undangan<br>
+<br>
+Pornografi/Pornografi Anak<br>
+Perjudian<br>
+Pemerasan<br>
+Penipuan<br>
+Kekerasan/Kekerasan Anak<br>
+Fitnah/Pencemaran Nama Baik<br>
+Pelanggaran Kekayaan Intelektual<br>
+Produk dengan Aturan Khusus<br>
+Provokasi SARA<br>
+Berita Bohong<br>
+Terorisme/Radikalisme<br>
+Informasi/Dokumen Elektronik Melanggar UU Lainnnya<br>
+<br>
+Terima kasih atas kerjasamanya<br>
+<br>
+Admin    
+    </h5>
     <h5>Jumlah Link : <b>{{ $total_link }}</b></h5>
 
     <div class="pager menu-mobile"></div>
