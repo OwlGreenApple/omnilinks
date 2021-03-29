@@ -2366,13 +2366,13 @@
       <!-- form API -->
       <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
         <span class="err_connect"><!-- notification --></span>
-        <div class="form-check">
-            <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check"  {{$connect_activrespon}}>
+       <!--  <div class="form-check">
+            <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check"  $connect_activrespon>
             <label class="form-check-label">Connect Activrespon <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun activrespon,<br/> maka anda bisa me-connect-kan form ke list activrespon</div>">
               <i class="fas fa-question-circle icon-reflink"></i>
               </span>
             </label>
-        </div>
+        </div> -->
         <div class="form-check">
             <input id="connect_mailchimp" type="checkbox" class="form-check-input connect_check" {{$connect_mailchimp}}>
             <label class="form-check-label">Connect Mailchimp <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun mailchimp,<br/> maka anda bisa me-connect-kan form ke audience/list pada akun mailchimp anda</div>">
