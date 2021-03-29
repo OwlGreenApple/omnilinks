@@ -31,7 +31,7 @@
 
   <!-- icomoon -->
   <link rel="stylesheet" href="{{asset('assets/icomoon/style.css')}}"/>
-
+  
   <title>Link</title>
 </head>
 
@@ -1488,11 +1488,11 @@
                 @foreach($banner as $ban)
                   <div class="imageHolder">
                     <!--<a href="{{url('click/banner/'.$ban->id)}}" target="_blank">-->
-                    <!--<a href="<?php echo env('APP_URL').'/click/banner/'.$ban->id ?>" target="_blank">-->
+                    <!--<a href="<php echo env('APP_URL').'/click/banner/'.$ban->id ?>" target="_blank">-->
                       <script type="text/javascript">
                         urlbanner.push('<?php echo env('APP_URL').'/click/banner/'.$ban->id ?>');
                       </script>
-                      <!--<img src="<?php 
+                      <!--<img src="<php 
                       // echo url(Storage::disk('local')->url('app/'.$banner->images_banner));
                         if(!is_null($ban->images_banner)){
                           echo Storage::disk('s3')->url($ban->images_banner);
@@ -1911,7 +1911,8 @@
 <script src="{{asset('js/myScript.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment.min.js')}}"></script>
 <script src="{{asset('assets/whatsapp-chat-support/components/moment/moment-timezone-with-data.min.js')}}"></script>
-<script src="{{asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
+<script src="{{ asset('assets/whatsapp-chat-support/whatsapp-chat-support.js')}}"></script>
+<script defer src="{{asset('js/running_banner.js') }}" ></script>
 
 @if($pages->enable_chat == 1)
 <script type="text/javascript">
@@ -1944,6 +1945,7 @@
     }
   }
 
+<<<<<<< HEAD
 /* if user switch another tab , the animation stop, but if return otherwise */
 var vis = (function(){
     var stateKey, eventKey, keys = {
@@ -1966,10 +1968,13 @@ var vis = (function(){
 /****/
 
 
+=======
+>>>>>>> master
 $(document).ready(function() {
     $(".alert").delay(5000).fadeOut(3000);
     setRightPost(".wcs_popup");
     setMargins(".wcs_fixed_right");
+
     $(window).resize(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
@@ -2219,7 +2224,10 @@ function pointCount(ip)
       }
     });
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 </script>
 
 <script type="text/javascript">
