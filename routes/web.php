@@ -233,7 +233,7 @@ if(env('DOMAIN_TYPE')=='main'){
 }
 
 if((env('DOMAIN_TYPE')=='shortlink')||(env('APP_ENV')=='local')){
-  Route::get('logs-0312', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+  Route::get('logs-8877', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');
   Route::post('page_point','ProofController@count_page_point');    

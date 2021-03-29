@@ -24,6 +24,7 @@
         "mailchimp/marketing": "^3.0",
         "ramsey/uuid": "^3.8",
         "rap2hpoutre/laravel-log-viewer": "^1.0",
+        "webup/laravel-sendinblue": "^2.0",
         "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
     },
     "require-dev": {

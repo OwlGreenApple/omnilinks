@@ -663,6 +663,7 @@ class OrderController extends Controller
       $type="activproof";
     }
     
+<<<<<<< HEAD
     if($valid <> null)
     {
         $formattedDate = $valid->format('Y-m-d H:i:s');
@@ -691,6 +692,25 @@ class OrderController extends Controller
     }
     $user->is_member = 1;
     $user->save();
+=======
+    if(substr($order->package,0,6) <> "Top Up"){
+      if($valid <> null){
+          $formattedDate = $valid->format('Y-m-d H:i:s');
+      }
+
+      $userlog = new UserLog;
+      $userlog->user_id = $user->id;
+      $userlog->type = 'membership';
+      $userlog->value = $type;
+      $userlog->keterangan = 'Confirm Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
+     // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
+      $userlog->save();
+
+      $user->valid_until = $valid;
+      $user->is_member = 1;
+      $user->save();
+    }
+>>>>>>> master
     $order->save();
 
     //History Proof

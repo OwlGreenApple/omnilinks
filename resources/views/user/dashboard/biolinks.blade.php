@@ -2488,11 +2488,11 @@
                 </a>
               </li> 
 
-              <li class="nav-item">
+            <!--   <li class="nav-item">
                 <a href="#proof" class="nav-link link @if($mod == 2) active @endif" role="tab" data-toggle="tab">
                   Activproof
                 </a>
-              </li>
+              </li> -->
               <?php } ?>
 
               <li class="nav-item">
@@ -3806,6 +3806,12 @@
                   
                   <!-- social media links -->
 
+<<<<<<< HEAD
+=======
+                  <!-- proof-preview -->
+                  
+                
+>>>>>>> master
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
                       <a href="#" class="btn btn-md btnview txthov" style="width: 100%;font-size:11px;height: 40px;padding: 10px;" id="walinkview">
