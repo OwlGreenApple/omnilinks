@@ -208,7 +208,6 @@
 =======
                 </li>
                 -->
->>>>>>> master
               @endif
 
               <li class="nav-item dropdown pull-right">
