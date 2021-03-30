@@ -271,6 +271,8 @@ class BiolinkController extends Controller
 
   public function saveProof(Request $request)
   {
+
+      dd($request->all());
       if($request->status == 0)
       {
          $proof = new Proof;
