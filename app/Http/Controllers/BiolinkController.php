@@ -293,6 +293,8 @@ class BiolinkController extends Controller
         Storage::disk('s3')->delete($filename);
       }
 
+        dd('debug');
+
       if($request->file('proof_image') <> null)
       {
         $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
@@ -316,7 +318,6 @@ class BiolinkController extends Controller
         $data['error'] = 1;
       }
 
-      dd($data);
       return response()->json($data);
   }
 
