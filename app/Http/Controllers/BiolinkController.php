@@ -295,8 +295,8 @@ class BiolinkController extends Controller
 
       if($request->file('proof_image') <> null)
       {
-        // $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
-        $imageUpload = $request->file('proof_image');
+        $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
+        // $imageUpload = $request->file('proof_image');
         $dt = Carbon::now();
         $ext = $request->file('proof_image')->getClientOriginalExtension();
         $dir = 'proof_page/'.explode(' ',trim(Auth::user()->name))[0].'-'.Auth::user()->id;
