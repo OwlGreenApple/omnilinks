@@ -662,8 +662,7 @@ class OrderController extends Controller
       $user->point += $this->getActivproofCredit($order->package);
       $type="activproof";
     }
-    
-<<<<<<< HEAD
+    /*<<<<<*/
     if($valid <> null)
     {
         $formattedDate = $valid->format('Y-m-d H:i:s');
@@ -692,7 +691,9 @@ class OrderController extends Controller
     }
     $user->is_member = 1;
     $user->save();
-=======
+
+    /*=======*/
+
     if(substr($order->package,0,6) <> "Top Up"){
       if($valid <> null){
           $formattedDate = $valid->format('Y-m-d H:i:s');
@@ -710,7 +711,7 @@ class OrderController extends Controller
       $user->is_member = 1;
       $user->save();
     }
->>>>>>> master
+    /*>>>>>>> master*/
     $order->save();
 
     //History Proof

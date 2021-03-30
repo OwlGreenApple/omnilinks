@@ -3,6 +3,7 @@ Yg harus di test :
 1. centang connect-mailchimp :
 	* buat akun mailchimp
 	* ikuti petunjuk pada icon "?" .
+	* form bisa dipindah atas dan bawah.
 
 2. menampilkan icon gambar pada tombol link:
 	* klik "choose file" kemudian pilih gambar yg ingin ditampilkan, sesuaikan dengan rasio 1:1 cth : 48 x 48 px
@@ -19,10 +20,15 @@ Yg harus di test :
 
 5. Activproof
 	* panjang karakter maksimal 125.
-	* poin akan berkurang apabila user menggunakkan dari ip yang berbeda.
+	* poin akan berkurang apabila user menggunakkan dari ip yang berbeda dan tidak dalam keadaan login.
 	* poin tidak berkurang apabila user melihat activproof pada saat user dalam keadaan login.
 	* poin berkurang maksimal 3 apabila user berasal dari ip yg sama dalam 1 hari (untuk mengetest silahkan ganti wi-fi apabila sdh berkurang 3x).
 	* poin activproof apabila di kurangi / ditambah akan merubah total poin.
 	* activproof tidak tampil apabila point page = 0.
 	* user bisa beli activproof poin.
 	* history activproof.
+
+6. centang connect-activrespon :
+	* Login dulu ke activrespon.com kemudian ke halaman list, klik generate kemudian copy dan isikan pada kolom API-key.
+	* isikan judul kolom pada atas dan bawah.
+	* form bisa dipindah atas dan bawah.
