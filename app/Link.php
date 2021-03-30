@@ -11,6 +11,5 @@ class Link extends Model
       - 0 = valid
       - 1 = invalid
     */
-
     protected $table = "links";
 }

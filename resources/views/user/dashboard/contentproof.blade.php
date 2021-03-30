@@ -11,10 +11,10 @@
     <div class="card card-none mb-3">
       <div class="card-header card-gray">
         <span data-toggle="collapse" data-target="#detail-{{$proof->id}}" aria-expanded="true" aria-controls="detail-{{$proof->id}}">
-          {{$proof->name}}
-          <span class="ml-2">
+          <span style="font-family:Nunito,sans-serif">{{$proof->name}}</span>
+         <!--  <span class="ml-2">
             <i class="fas fa-sort-down"></i>  
-          </span>
+          </span> -->
         </span>
 
         <button type="button" dataid="{{$proof->id}}" class="btn btn-sm btn-danger float-right btn-delete-proof">
@@ -42,9 +42,8 @@
                   </div>
                 </div>
 
-                <div class="proof_comments">
-                 {{ $proof->text }}
-                </div>
+                <div class="proof_comments">{{ $proof->text }}</div>
+                <small><i class="fas fa-check"></i> Activproof</small>
             </div>
         </div>
         <!-- -->

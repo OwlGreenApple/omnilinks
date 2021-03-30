@@ -1423,7 +1423,7 @@
     var desc = $("#description").html();
     var desc_text = $("#description").text();
 
-   /* console.log(desc_text.length);
+    /*console.log(desc_text.length);
     return false;*/
 
     if(desc_text.length > 104)
@@ -1433,6 +1433,7 @@
     }
 
     formData.append('description',desc);
+    formData.append('proof_text_color',$("#proof_preview").attr('proof-text'));
    
     $.ajax({
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -1454,25 +1455,28 @@
         }
       },
       success: function(data) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
-        //var data=jQuery.parseJSON(result);
-        $("#pesanAlert").html(data.message);
-        $("#pesanAlert").show();
+        
         $(window).scrollTop(0);
         if(data.status == "success") {
-          changed = 0;
+          /*changed = 0;
           changelink = 0;
           changechat = 0;
           changepixel = 0;
           changeproof = 0;
           $("#pesanAlert").addClass("alert-success");
-          $("#pesanAlert").removeClass("alert-danger");
+          $("#pesanAlert").removeClass("alert-danger");*/
+         
+          reloadPage(3);
         }
-        if (data.status == "error") {
-          $("#pesanAlert").addClass("alert-danger");
-          $("#pesanAlert").removeClass("alert-success");
+        if(data.status == "error") {
+            $('#loader').hide();
+            $('.div-loading').removeClass('background-load');
+
+            //var data=jQuery.parseJSON(result);
+            $("#pesanAlert").html(data.message);
+            $("#pesanAlert").show();
+            $("#pesanAlert").addClass("alert-danger");
+            $("#pesanAlert").removeClass("alert-success");
         }
       },
       error : function(xhr,throwable,other){
@@ -1483,16 +1487,52 @@
     });
   }
 
+  //to make serialize to normal data
+  function rearray_serialize(data)
+  {
+    var obj;
+    var arr = [];
+    data = data.split("&");
+    var gdata = data;
+    var len = data.length;
+
+    //data name
+    data = data[0].split("="); //just to take data name
+    var data_name = data[0].split('[]')[0];
+   
+    //data value
+    for(x=0;x<len;x++)
+    {
+      var data_value = gdata[x].split("=")[1];
+      arr.push(data_value);
+    }
+
+    // convert array to object
+    arr = Object.assign({}, arr); 
+    obj = { [data_name] : arr };
+    // console.log(obj);
+    return obj;
+  }
+
   function tambahPages() {
     var youtube_id = $('input[name="embed"]').val();
+    var data = new FormData($("#savelink")[0]);
+    /*var msg = rearray_serialize($('.sortable-msg').sortable('serialize'));
+    data.append('msg',JSON.stringify(msg));*/
+
     $.ajax({
       type: 'POST',
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
+      processData:false,
+      cache:false,
+      contentType: false,
       dataType: 'text',
-      data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'),
-      url: "<?php echo url('/save-link');?>",
+      /*data: $("#savelink").serialize() + '&' + $('.sortable-msg').sortable('serialize') + '&' + $('.sortable-link').sortable('serialize') + '&' + $('.sortable-sosmed').sortable('serialize'), */
+      // data: $("#savelink").serialize(), 
+      data : data,
+      url: "{{ url('save-link') }}",
       beforeSend: function()
       {
         $('#loader').show();
@@ -1753,6 +1793,7 @@
       }
     });
   }
+
   loadPixel();
 
   function loadPixelPage() {
@@ -1910,17 +1951,35 @@
     });
   }
 
-  
+  //SCALE BANNER IMAGE
+  $(window).on('load', function(){
+      resize();
+  });
+
+  function resize()
+  {
+     var cons = 2.17;
+     var hin = 0;
+     /* image banner */
+     $(".banner-image").each(function(i){
+         var width = $(this).eq(i).width();
+         hin = width/cons;
+         hin = Number(hin.toFixed(1));
+         $(this).eq(i).height(hin);
+     });
+  }
+
   function plusSlides(n) {
     showSlides(slideIndex += n );
   }
 
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
+  function currentSlide(n,f) {
+    showSlides(slideIndex = n,f);
   }
 
-  function showSlides(n) {
+  function showSlides(n,f=null) {
     var i;
+    var fr = $(".slideshow-container").attr('fst');
     // let slides = document.getElementsByClassName("mySlides");
     // let slides = document.getElementsByClassName("mySlides");
     if ($('.preview-mobile').hasClass('preview-none')){
@@ -1931,10 +1990,11 @@
       var dots = $(".preview-mobile .dot");
       var slides = $(".preview-mobile .mySlides");
     }
-    // console.log(n);
+    // console.log(n);  
     // console.log(slides.length);
+    
     if (n > slides.length) {// need to be fix
-      slideIndex = 1;
+        slideIndex = 1;
     }
     if (n < 1) {
       slideIndex = slides.length;
@@ -1948,12 +2008,26 @@
     {
       dots[i].className = dots[i].className.replace("activated","");
     }
+
+    // first slides 
+    if(fr === "first" && n == 1)
+    {
+      slideIndex = 2;
+    }
+
+    if(f == "first")
+    {
+      slideIndex = 1;
+    }
+
     if (slides.length>0) {
       slides[slideIndex-1].style.display = "block";
     }
     if (dots.length>0) {
       dots[slideIndex-1].className +=" activated";
     }
+
+    $(".slideshow-container").attr('fst',null);
   }
   
   function dotsok()
@@ -2024,6 +2098,7 @@
       }
       if ($('#is_bio_color').prop("checked") == true) {
         $('.description').css("color",$("#bioColor").val());
+        $('.proof-wrapper-preview').css("background-color",$("#bioColor").val());
         $('#sm-preview li a').css("color",$("#bioColor").val()+" !important");
         $('.powered-omnilinks a').css("color",$("#bioColor").val()+" !important");
       }
@@ -2042,6 +2117,7 @@
       }
       if ($('#is_bio_color').prop("checked") == false) {
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
       }
@@ -2281,13 +2357,103 @@
         <div id="pesanAlert" class="alert mb-0"></div>
       </div>
 
-      <div class=" col-12">
+      <div class="col-12">
         <button class="btn btn-success mt-3 mb-3 btn-premium">
           <i class="fas fa-star"></i> <?php if (is_null($pages->premium_names)) { echo "Get"; } else { echo "Update"; } ?> Custom Link
         </button>
       </div>
+
+      <!-- form API -->
+      <div class="col-lg-7 col-md-12 col-sm-12 col-12 mb-2">
+        <span class="err_connect"><!-- notification --></span>
+       <!--  <div class="form-check">
+            <input id="connect_activrespon" type="checkbox" class="form-check-input connect_check"  $connect_activrespon>
+            <label class="form-check-label">Connect Activrespon <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun activrespon,<br/> maka anda bisa me-connect-kan form ke list activrespon</div>">
+              <i class="fas fa-question-circle icon-reflink"></i>
+              </span>
+            </label>
+        </div> -->
+        <div class="form-check">
+            <input id="connect_mailchimp" type="checkbox" class="form-check-input connect_check" {{$connect_mailchimp}}>
+            <label class="form-check-label">Connect Mailchimp <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun mailchimp,<br/> maka anda bisa me-connect-kan form ke audience/list pada akun mailchimp anda</div>">
+              <i class="fas fa-question-circle icon-reflink"></i>
+              </span></label>
+        </div>
+
+        <form id="save_connect" class="row mt-2 mb-3">
+          <div class="col-lg-9 col-md-12 col-sm-12 col-12">
+            <!-- activrespon -->
+            <div id="activrespon">
+              <div class="form-group">
+                <input placeholder="Form Activrespon" type="text" class="form-control" maxlength="190" name="act_form_text" value="{{ $pages->act_form_text }}"/>
+                <div class="error err_act_form_text"></div>
+              </div> 
+
+              <div class="form-group">
+                <input placeholder="Form Activrespon Bottom" type="text" class="form-control" maxlength="190" name="act_form_bottom" value="{{ $pages->act_form_bottom }}"/>
+                <div class="error err_act_form_bottom"></div>
+              </div>
+
+              <div class="form-group">
+                <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id" value="{{ $pages->list_id }}"/>
+                <div class="error err_list_id"></div>
+              </div>
+            </div>
+
+            <!-- mailchimp -->
+            <div id="mailchimp" class="mb-2">
+              <div class="form-group d-flex">
+                <input placeholder="Form Mailchimp" type="text" class="form-control" maxlength="190" name="mc_form_text" value="{{ $pages->mc_form_text }}"/>
+                <div class="error err_mc_form_text"></div>
+              </div>
+
+              <div class="form-group d-flex">
+                <input placeholder="Form Mailchimp Bottom" type="text" class="form-control" maxlength="190" name="mc_form_bottom" value="{{ $pages->mc_form_bottom }}"/>
+                <div class="error err_mc_form_bottom"></div>
+              </div>
+
+              <div class="form-group d-flex">
+                <input placeholder="Mailchimp API-KEY" type="text" class="form-control mr-2" maxlength="190" name="api_key" value="{{ $pages->api_key_mc }}"/>
+                <span class="tooltipstered" title="<div class='panel-content'>login dahulu pada akun mailchimp anda <br/> dan masuk pada : <br/> Account &rarr; Extras &rarr; API keys<br/>Account terletak pada menu bagian paling bawah sebelah kiri,<br/> dan apabila cursor diarahkan akan mengeluarkan text username anda</div>">
+                <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+              <div class="error err_api_key"></div>
+
+              <div class="form-group d-flex">
+                <input placeholder="Mailchimp Server" type="text" class="form-control mr-2" maxlength="190" name="server_mailchimp" value="{{ $pages->server_mailchimp }}"/>
+                <span class="tooltipstered" title="<div class='panel-content'>Login dahulu pada akun mailchimp anda,<br/> arahkan cursor anda pada address bar dan copy usx,<br/> contoh : https://us9.admin.mailchimp.com/ <br/> maka anda cukup meng-copy yang <b>us9</b> saja.</div>">
+                <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div> 
+              <div class="error err_server_mailchimp"></div>
+
+              <div class="form-group d-flex">
+                <input placeholder="Mailchimp Audience/List id" type="text" class="form-control mr-2" maxlength="100" name="audience_id" value="{{ $pages->audience_id }}"/>
+                 <span class="tooltipstered" title="<div class='panel-content'>Login dahulu pada akun mailchimp anda, pilih menu : <br/> Audience &rarr; All contacts &rarr; Settings &rarr; Audience names and defaults <br/> pada text Audience ID ada code seperti ini : <b>fa483e0c87</b> </div>">
+                <i class="fas fa-question-circle icon-reflink"></i>
+                </span>
+              </div>
+              <div class="error err_audience_id"></div>
+            <!-- end mailchimp -->
+            </div>
+            <select name="position_api" class="form-control mb-2">
+              <option value="0">Tampilkan di atas</option>
+              <option value="1">Tampilkan di bawah</option>
+            </select>
+            <div class="error err_position_api"></div>
+            <button class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="offset-lg-0 col-lg-7 offset-md-1 col-md-10">
+        @if(Session::has('msg'))
+          <div class="alert alert-success">{{ Session::get('msg') }}</div>
+        @endif
+      </div>
       
-      <div class=" col-12">
+      <div class="col-12">
         <a href="https://{{env('SHORT_LINK')}}/{{$custom_link}}" target="_blank" id="custom-link-show">https://{{env('SHORT_LINK')}}/{{$custom_link}}</a> <span id="btn-copy-custom-link" class="btn-copy" data-link="https://{{env('SHORT_LINK')}}/{{$custom_link}}"><i class="fas fa-file"></i></span>
       </div>
 
@@ -2298,13 +2464,13 @@
           <div class="card-body">
             <ul class="mb-4 nav nav-tabs">
               <li class="nav-item">
-                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
+                <a href="#link" class="nav-link link @php $x = 0 @endphp @if($mod == 1 || $mod == 2 || $mod == 3) @php $x = 1 @endphp @endif @if($x==0) active @endif" role="tab" data-toggle="tab">
                   Link
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="#style" class="nav-link link" role="tab" data-toggle="tab">
+                <a href="#style" class="nav-link link @if($mod == 3) active @endif" role="tab" data-toggle="tab">
                   Tampilan
                 </a>
               </li>
@@ -2322,11 +2488,11 @@
                 </a>
               </li> 
 
-            <!--   <li class="nav-item">
+              <li class="nav-item">
                 <a href="#proof" class="nav-link link @if($mod == 2) active @endif" role="tab" data-toggle="tab">
                   Activproof
                 </a>
-              </li> -->
+              </li>
               <?php } ?>
 
               <li class="nav-item">
@@ -2348,7 +2514,7 @@
             <div class="tab-content">
 
               <!-- tab 1-->
-              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
+              <div role="tabpanel" class="tab-pane fade in @php $x = 0 @endphp @if($mod == 1 || $mod == 2 || $mod == 3) @php $x = 1 @endphp @endif @if($x==0) active show @endif" id="link">
 
                 <form method="post" id="savelink" action="{{url('save-link')}}" novalidate>
                   {{ csrf_field() }}
@@ -2564,7 +2730,7 @@
                   
                   <div class="mb-5">
                     <ul class="sortable-link a">
-                      
+                      <!-- link displayed here -->
                     </ul>
                   </div>
 
@@ -2576,6 +2742,7 @@
                     Facebook : https://facebook.com/username-facebook <br>
                     Instagram : username-instagram <br>
                     Twitter : username-twitter <br>
+                    Tiktok : username-tiktok <br>
                     </div>">
                       <i class="fas fa-question-circle icon-reflink"></i>
                     </span>
@@ -2756,6 +2923,48 @@
                       </div>
                     </li>
                   </ul>
+
+                  <!-- -modal option for social media -->
+                  <div class="modal fade" id="modal-social-media" tabindex="-1" role="dialog"aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Choose Social Media
+                                </div>
+                                <div class="modal-body">
+                                  <!-- Youtube -->
+                                  <div class="form-check">
+                                      <input id="check_youtube" type="checkbox" class="form-check-input check_social" data-check="youtube">
+                                      <label class="form-check-label"><i class="fab fa-youtube"></i> Youtube</label>
+                                  </div>
+                                  <!-- Facebook -->
+                                  <div class="form-check">
+                                      <input id="check_fb" type="checkbox" class="form-check-input check_social" data-check="fb">
+                                      <label class="form-check-label"><i class="fab fa-facebook-f"></i> Facebook</label>
+                                  </div>
+                                  <!-- Twitter -->
+                                  <div class="form-check">
+                                      <input id="check_twitter" type="checkbox" class="form-check-input check_social" data-check="twitter">
+                                      <label class="form-check-label"><i class="fab fa-twitter"></i> Twitter</label>
+                                  </div>
+                                  <!--  Instagram -->
+                                  <div class="form-check">
+                                      <input id="check_ig" type="checkbox" class="form-check-input check_social" data-check="ig">
+                                      <label class="form-check-label"><i class="fab fa-instagram"></i> Instagram</label>
+                                  </div>
+                                  <!--  Tiktok -->
+                                  <div class="form-check">
+                                      <input id="check_tiktok" type="checkbox" class="form-check-input check_social" data-check="tiktok">
+                                      <label class="form-check-label"><i class="fab fa-tiktok"></i> Tiktok</label>
+                                  </div>
+                                  <!-- end -->
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" data-dismiss="modal" class="btn" >Close </button>
+                                </div>
+                            </div>
+                        </div>
+                      </div> 
 
                   <div class="as offset-md-8 col-md-4 pr-0 menu-nomobile">
                     <button type="button" id="btn-save-link" class="btn btn-primary btn-block btn-biolinks btn-save-link">
@@ -2943,7 +3152,8 @@
                       <label class="control-label">Name</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="17" />
+                      <input type="text" class="form-control" name="proof_name" placeholder="Masukkan Nama" maxlength="14" />
+                      <small>Maksimal 14 karakter</small>
                       <div class="error proof_name"><!-- Error --></div>
                     </div>
 
@@ -2951,7 +3161,8 @@
                       <label class="control-label">Text</label>  
                     </div>
                     <div class="col-lg-12 mb-3">
-                      <textarea maxlength="60" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <textarea maxlength="125" class="form-control" name="proof_text" placeholder="Masukkan Text"></textarea>
+                      <small>Maksimal 125 karakter</small>
                       <div class="error proof_text"><!-- Error --></div>
                     </div>
 
@@ -2962,7 +3173,7 @@
                       <input type="file" class="form-control" name="proof_image" placeholder="Masukkan Text" />
                       <small>Ukuran 100 x100 pixel, tipe harus : jpg, jpeg, png</small>
                       <span class="proof_notes"></span>
-                      <div class="error proof_image"><!-- Error --></div>
+                      <span class="error proof_image"><!-- Error --></span>
                     </div>
 
                     <div class="col-md-2">
@@ -2970,7 +3181,7 @@
                     </div>
                     <div class="col-lg-12 mb-3">
                       <input type="number" value="5" min="1" max="5" class="form-control" name="proof_stars" placeholder="Jumlah bintang" />
-                      <div class="error proof_stars"><!-- Error --></div>
+                      <span class="error proof_stars"><!-- Error --></span>
                     </div>
 
                     <div class="col-md-4 ml-auto pl-md-0 pl-3 text-center">
@@ -2996,7 +3207,7 @@
               </div>
               
               <!-- TAB 2 -- Tampilan -->
-              <div role="tabpanel" class="tab-pane fade in " id="style">
+              <div role="tabpanel" class="tab-pane fade in @if($mod==3) active show @endif" id="style">
                 <form method="post" id="saveTemplate" enctype="multipart/form-data">
 
                   {{ csrf_field() }}
@@ -3059,46 +3270,8 @@
                             Banner Promo
                           </span>
                           <div class="contentBanner mb-4">
-                            <div class="c div-banner">
-                              @if($banner->count())
-                              <?php $uc=0; ?>
-                                @foreach($banner as $ban)
-                                <?php $uc+=1; ?>
-                                <div class="div-table list-banner mb-4" picture-id="picture-id-<?=$uc?>">
-                                  <div class="div-cell">
-                                    <input type="text" name="judulBanner[]" value="{{$ban->title}}" class="form-control" placeholder="Judul banner">
-                                    <input type="hidden" name="idBanner[]" value="{{$ban->id}}">
-                                    <input type="hidden" name="statusBanner[]" class="statusBanner" value="">
-                                    <input type="text" name="linkBanner[]" value="{{$ban->link}}" class="form-control" placeholder="masukkan link">
-
-                                    <select name="bannerpixel[]" class="form-control bannerpixel bannerpixel-{{$ban->id}}">
-                                    </select>
-                                    <div class="custom-file">
-                                      <input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-<?=$uc?>" aria-describedby="inputGroupFileAddon01" accept="image/*">
-
-                                      <label class="custom-file-label" for="inputGroupFile01">
-                                        <?php 
-                                          if ($ban->images_banner=="0"){
-                                            echo asset('/image/434x200.jpg');
-                                          }
-                                          else {
-                                            echo basename($ban->images_banner);
-                                          }
-                                        ?>
-                                      </label>
-                                    </div>
-                                  </div>
-                                @if(Auth::user()->membership!='free')
-                                  <div class="div-cell cell-btn btn-deleteBannerUpdate">
-                                    <span>
-                                      <i class="far fa-trash-alt"></i>
-                                    </span>
-                                  </div>
-                                @endif  
-                                <span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ukuran Gambar 434x200 Skala 2.2:1 (width:height), Max 500KB, JPG,PNG.</span>
-                                </div>
-                                @endforeach
-                              @endif
+                            <div id="loadbanner" class="c div-banner">
+                              @include('user.dashboard.bannerload')
                             </div>
                           </div>
                         @endif
@@ -3257,7 +3430,7 @@
                         <div class="col-md-4 col-4">
                           <label class="caption">
                             Bio Color
-                            <span class="tooltipstered" title="<div class='panel-heading'>Bio Color</div><div class='panel-content'>Atur warna Bio & Icon Media Sosial sesuai keinginanmu</div>">
+                            <span class="tooltipstered" title="<div class='panel-heading'>Bio Color</div><div class='panel-content'>Atur warna Bio, Icon Media Sosial & Activproof sesuai keinginanmu</div>">
                               <i class="fas fa-question-circle icon-reflink"></i>
                             </span>
                           </label>
@@ -3559,7 +3732,13 @@
               <div class="mobile1">
                 <div class="screen " id="phonecolor" style="border:none; overflow-y:auto; ">
                   <!--screen-->
-                  <header class="col-md-12 mt-4" style="padding-top: 17px; padding-bottom: 12px;">
+                  <header id="proof-fix-preview" class="col-md-12" style="padding-top: 17px; padding-bottom: 12px;">
+
+                  <!-- proof-preview -->
+                  <div id="proof_preview" proof-text="black" >
+                    @include('user.dashboard.previewproof')
+                  </div>
+
                     <div class="row">
                       <div class="col-md-2 col-3">
                         <div class="div-picture">
@@ -3592,7 +3771,7 @@
                     <div class="slideshow-container">
                       <div class="ap" id="viewbanner">
                       <?php 
-                      if($banner->count()){
+                      if($banner->count() > 0){
                         $ut=0;
                         foreach($banner as $ban) {
                           $ut+=1; 
@@ -3624,10 +3803,10 @@
                     <div style="text-align:center ; margin-top: -25px;" id="dot-view"></div>
                   </div>
                   @endif
+                  
+                  <!-- social media links -->
 
                   <!-- proof-preview -->
-                  
-                
                   <ul class="row links messengers links-num-1 "id="getview" style="margin-top: 12px; margin-left: 15px; margin-right: 10px;">
                     <li class="link col pl-1 pr-1 hide" id="waviewid"> 
                       <a href="#" class="btn btn-md btnview txthov" style="width: 100%;font-size:11px;height: 40px;padding: 10px;" id="walinkview">
@@ -3674,6 +3853,66 @@
                       </a>
                     </li>
                   </ul>
+
+                  <!-- FORM API -->
+                  <div id="form_api_0">
+                  <!-- form connect API activrespon -->
+
+                  <div id="form_api_move">
+                    <form id="connect_preview_activrespon" class="col-12 mb-2">
+                      <h5 class="description text-center"><b id="act_text">{{ $pages->act_form_text }}</b></h5>
+                      <h5 class="description text-center"><b id="act_bottom_text">{{ $pages->act_form_bottom }}</b></h5>
+                      
+                      <div class="form-group mt-3 mb-4 row">
+                        <div class="col-lg-12 mb-3">
+                          <input type="text" class="form-control" placeholder="Nama" maxlength="50" />
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <input type="email" class="form-control" placeholder="Email" />
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <input type="phone" class="form-control" placeholder="Phone example +628xxxxxxx" />
+                        </div>
+
+                        <div class="col-12">
+                         <button type="button" class="btn btnview col-lg-12">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+
+                    <!-- form connect API mailchimp -->
+
+                    <form id="connect_preview_mailchimp" class="col-12 mb-2">
+                      <h5 class="description text-center"><b id="mc_text">{{ $pages->mc_form_text }}</b></h5>
+                      <h5 class="description text-center"><b id="mc_bottom_text">{{ $pages->mc_form_bottom }}</b></h5>
+
+                      <div class="form-group mt-3 mb-4 row">
+                        <div class="col-lg-12 mb-3">
+                          <input type="email" class="form-control" placeholder="Email" />
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <input type="text" class="form-control" placeholder="First Name" />
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <input type="text" class="form-control" placeholder="Last Name" />
+                        </div>
+
+                        <div class="col-12">
+                         <button type="button" class="btn btnview col-lg-12">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  <!-- end form_api_move -->
+                  </div>
+
+                  </div>
+
+                  <!-- links -->
+
                   <div class="row display_links" style="font-size: xx-small; margin-left: 3px; margin-right: 2px; font-weight: 700;">
                     <!-- display preview links here .display_links -->
                     <ul class="col-md-12" id="viewLink" >
@@ -3682,7 +3921,14 @@
                           <li id="link-preview-{{$link->id}}">
                               @if($link->options == 1)
                                 <span id="link-url-update-{{$link->id}}-get" class="embed-ln-{{$link->id}}">
-                                  <a href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">{{$link->title}}</a>
+                                  <a id="textprev-update-{{$link->id}}" href="#" class="btn btn-md btnview title-{{$link->id}}-view-update txthov @if($link->icon_link !== null)image_icon_link_btn @endif" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">
+                                    @if($link->icon_link !== null) 
+                                      <img id="preview_title-{{$link->id}}-view-update" src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
+                                    @else
+                                      <img src="{{ url('/image/transparent.png') }}" id="preview_title-{{$link->id}}-view-update" class="rounded-circle image_icon_link" />
+                                    @endif
+                                   {{$link->title}}
+                                  </a>
                                 </span>
                               @else
                                 <span id="link-url-update-{{$link->id}}-get" class="embed-{{$link->id}}">
@@ -3696,6 +3942,10 @@
                       @endif
                     </ul>
                   </div>
+
+                  <!-- FORM API BOTTOM -->
+                  <div id="form_api_1"><!-- kalo user pilih opsi tampilkan di bawah --></div>
+
                   <!-- SM preview -->
                   <ul class="row rows " style="padding-left: 27px; padding-right: 44px;" id="sm-preview">
                     <li class="col linked hide" id="youtubeviewid">
@@ -4223,8 +4473,6 @@
         setRightPost(".wcs_popup");   
     });*/
 
-    $(".alert").delay(2000).fadeOut(3000);
-
     wa_preview_header_text();
     getSelected();
     displayWaText();
@@ -4240,15 +4488,225 @@
     resetProof();
     load_proof();
     change_proof_settings();
-    setPopupPos();
+    setWAPopupPos();
+
+    setTimeout(function(){
+      proof_text_color();
+    },1000);
+    run_checkbox_connect_api();
+    checkbox_connect_api();
+    save_connect();
+    move_api_form("{{$pages->position_api}}");
     //proof_preview();
     //callMaintainPlus();
   });
 
-   function setPopupPos() {
+  function move_api_form(tab)
+  {
+    /*when page load*/
+    var move = $("#form_api_"+tab);
+    $("#form_api_move").appendTo(move);
+
+    /*when user choose option*/
+    $("select[name='position_api']").change(function(){
+      var value= $(this).val();
+      $("#form_api_move").appendTo($("#form_api_"+value));
+    });
+  }
+
+
+  function save_connect()
+  {
+    $("#save_connect").submit(function(e){
+      e.preventDefault();
+      var check_len = $(".connect_check:checked").length;
+      var data = $(this).serializeArray();
+      data.push(
+        {'name': 'connect_activrespon','value':$("#connect_activrespon").attr('data')},
+        {'name': 'connect_mailchimp','value':$("#connect_mailchimp").attr('data')},
+        {'name': 'page_id','value':'{{ $pages->id }}'}
+      );
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        data: data,
+        url: "{{ url('save-connect') }}",
+        dataType: 'json',
+        beforeSend: function()
+        {
+          $('#loader').show();
+          $('.div-loading').addClass('background-load');
+        }, 
+        success: function(result) 
+        {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+
+          if(result.error == 1)
+          {
+            //activrespon
+            (result.msg == 1) ? $(".err_connect").html('<div class="alert alert-danger">Invalid API-KEY Activrespon.</div>'):'';
+
+            //mailchimp
+            (result.msg == 2) ? $(".err_connect").html('<div class="alert alert-danger">Invalid API-KEY or server Mailchimp!</div>'):'';
+          }
+          else if(result.error == 2)
+          {
+            $(".error").show();
+            $(".err_list_id").html(result.list_id);
+            $(".err_server_mailchimp").html(result.server_mailchimp);
+            $(".err_api_key").html(result.api_key);
+            $(".err_audience_id").html(result.audience_id);
+            $(".err_act_form_text").html(result.act_form_text);
+            $(".err_act_form_bottom").html(result.act_form_bottom);
+            $(".err_mc_form_text").html(result.mc_form_text);
+            $(".err_mc_form_bottom").html(result.mc_form_bottom);
+            $(".err_position_api").html(result.position_api);
+          }
+          else
+          {
+            $(".error").hide();
+            $(".err_connect").html('<div class="alert alert-success">Form status telah diubah.</div>')
+            if(check_len < 1)
+            {
+              $("#save_connect").hide();
+            }
+            $(".alert").delay(5000).fadeOut(3000);
+          }
+        },
+        error : function(xhr){
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+          console.log(xhr.responseText);
+        }
+      });
+      //end ajax
+    });
+  }
+
+  function checkbox_connect_api(press)
+  {
+    var checked = 0;
+    var position_api = "{!! $pages->position_api !!}";
+    $(".connect_check").each(function(e){
+      if($(this).is(':checked') == true)
+      {
+        checked++;
+      }
+    });
+
+    if(checked > 0 || press == 1)
+    {
+      $("#save_connect").show();
+    }
+    else
+    {
+      $("#save_connect").hide();
+    }
+
+    if($("#connect_activrespon").is(":checked") == true)
+    {
+      $("#activrespon").show();
+      $("#connect_preview_activrespon").show();
+      $("#connect_activrespon").attr('data',1);
+    }
+    else
+    {
+      $("#connect_activrespon").attr('data',0);
+      $("#connect_preview_activrespon").hide();
+      $("#activrespon").hide();
+    } 
+
+    if($("#connect_mailchimp").is(":checked") == true)
+    {
+      $("#mailchimp, #connect_preview_mailchimp").show();
+      $("#connect_mailchimp").attr('data',1);
+    }
+    else
+    {
+      $("#connect_mailchimp").attr('data',0);
+      $("#mailchimp, #connect_preview_mailchimp").hide();
+    }
+
+    //pasang posisi value sesuai dari yang dipasang oleh user
+    $("select[name='position_api'] option[value='"+position_api+"']").prop('selected',true);
+  }
+
+  function run_checkbox_connect_api()
+  {
+    /*preview for api title text*/
+    $("input[name='act_form_text']").on('keypress keyup',function(){
+      var text_ac = $(this).val();
+      $("#act_text").html(text_ac);
+    });
+    $("input[name='mc_form_text']").on('keypress keyup',function(){
+      var text_mc = $(this).val();
+      $("#mc_text").html(text_mc);
+    }); 
+
+    $("input[name='act_form_bottom']").on('keypress keyup',function(){
+      var text_ac_bt = $(this).val();
+      $("#act_bottom_text").html(text_ac_bt);
+    });
+    $("input[name='mc_form_bottom']").on('keypress keyup',function(){
+      var text_mc_bt = $(this).val();
+      $("#mc_bottom_text").html(text_mc_bt);
+    });
+
+    /*run connect check when user click*/
+    $(".connect_check").click(function(){
+      checkbox_connect_api(1);
+    });
+  }
+
+  // give default color to proof tetx when page loaded
+  function proof_text_color(){
+      var color = $('.description').css('Color');
+      color = hexc(color);
+      $("#proof_preview").attr('proof-text',hexToRgb(color));
+  }
+
+  // convert RGB to HEX color (ex : #0000)
+  function hexc(colorval) {
+    var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    delete(parts[0]);
+    for (var i = 1; i <= 3; ++i) {
+      parts[i] = parseInt(parts[i]).toString(16);
+      if (parts[i].length == 1) parts[i] = '0' + parts[i];
+    }
+    color = '#' + parts.join('');
+    return color;
+  }
+
+  //TO MEASURE COLOR DEPTH TO DETERMINE TEXT WHITE OR BLACK
+    function hexToRgb(hex) {
+      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+      });
+
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+      var r = parseInt(result[1], 16);
+      var g = parseInt(result[2], 16);
+      var b = parseInt(result[3], 16);
+      var yiq = ((r*299)+(g*587)+(b*114))/1000;
+     /* return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;*/
+      return (yiq >= 128) ? 'black' : 'white';
+    }
+
+   function setWAPopupPos() {
     var default_len = 113;
     var textlen = $(".wcs_text").text().length - 2;
-    var diff_len = textlen * 3.65;
+    var diff_len = textlen * 3.6;
     var total_len = default_len - diff_len;
     $(".wcs_popup").css({'left':'-'+total_len+'px','width':'280px'});   
   }
@@ -4766,6 +5224,7 @@
     chat_preview_enable();
     chat_buzz_enable();
     descPlaceholder();
+    upload_image_icon();
   });
 
   function descPlaceholder()
@@ -4778,11 +5237,6 @@
     });
   }
  
-  //SCALE BANNER IMAGE
-  $(window).on('load', function(){
-     resize();
-  });
-
  function load_chat_member(){
     var uid = $("input[name=uuid]").val();
     var data = '';
@@ -5097,20 +5551,6 @@
       });
   }
 
-  function resize()
-  {
-     var cons = 2.17;
-     /* image banner */
-     $(".banner-image").each(function(i){
-         var hin = 0;
-         var width = $(this).width();
-
-         hin = width/cons;
-         hin = Number(hin.toFixed(1));
-         $(".banner-image").height(hin);
-     });
-  }
-
    //ALERT WHEN USER FORGOT TO SAVE
    $( ":input" ).change(function() {
       changed = $(this).closest('#saveTemplate').data('changed', true);
@@ -5203,6 +5643,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         
@@ -5374,8 +5815,52 @@
          tempStr = $('#description').html();
          $('#outputdescription').html(tempStr);
       });
+
+    //CHANGE TEXT ON PREVIEW LINK
+    
+    //NEW LINK
+    $(document).on('keyup keypress','.focuslink',function(){
+      var number_id = $(this).attr('data-id');
+      var value = $(this).val();
+      var len = value.length;
+
+      var prevtext = $("#textprev-new-"+number_id)[0];
+      prevtext.lastChild.nodeValue=value;
       
-    $(document).on('focus','.focuslink',function(){
+      if(len >= 16)
+      {
+        return false;
+      }
+
+      if (len <= 0) {
+        prevtext.lastChild.nodeValue='Masukkan Link';
+      }
+    });
+
+    //UPDATE LINK
+    $(document).on('keyup keypress',".focuslink-update",function()
+    {
+      var number_id = $(this).attr('data-id');
+      var value = $(this).val();
+      var len = value.length;
+
+      var prevtext = $("#textprev-update-"+number_id)[0];
+      prevtext.lastChild.nodeValue=value;
+      
+      if(len >= 16)
+      {
+        return false;
+      }
+
+      if (len <= 0) {
+        prevtext.lastChild.nodeValue='Masukkan Link';
+      }
+
+    });
+
+
+   /* OLD CODE 
+     $(document).on('focus','.focuslink',function(){
       let inputlinkview=$(this);
       let getoutputviewlink=inputlinkview.attr('id');
       let outputviewlink=$('.'+getoutputviewlink+'-get');
@@ -5386,17 +5871,19 @@
          }
       });
     });
+
     $(document).on('focus','.focuslink-update',function(){
       let inputlinkview=$(this);
       let getoutputviewlink=inputlinkview.attr('id');
       let outputviewlink=$('.'+getoutputviewlink);
+
       $(document).on('keyup',inputlinkview,function(){
         outputviewlink.text(inputlinkview.val());
         if (inputlinkview.val()=='') {
           outputviewlink.text('Masukkan Link');
         }
-      });
-    });
+      }); 
+    });*/
 
     $('.outlined').click(function() {
       check_outlined();
@@ -5523,6 +6010,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
@@ -5537,6 +6025,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
+        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
@@ -5560,11 +6049,13 @@
       $('.btnview').css("background-color","transparent");
       $('.btnview').css("color",outline);
       $('.description').css("color",outline);
+      $('.proof-wrapper-preview').css("background-color",outline);
       $('#sm-preview li a').css("color",outline+" !important");
     <?php } else {?>
       $('.btnview').css("background-color",outline);
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
+      $('.proof-wrapper-preview').css("background-color","#fff");
       $('#sm-preview li a').css("color","#fff !important");
     <?php } ?>
     
@@ -5573,10 +6064,12 @@
       $("#textColor").val("<?php echo $pages->text_color; ?>");
       $('.btnview').css("color","<?php echo $pages->text_color; ?>");
       $('.description').css("color","<?php echo $pages->text_color; ?>");
+      $('.proof-wrapper-preview').css("background-color","<?php echo $pages->text_color; ?>");
       $('#sm-preview li a').css("color","<?php echo $pages->text_color; ?>");
     <?php } else {?>
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
+      $('.proof-wrapper-preview').css("background-color","#fff");
       $('#sm-preview li a').css("color","#fff");
     <?php } ?>
     
@@ -5585,10 +6078,12 @@
       $("#bioColor").val("<?php echo $pages->bio_color; ?>");
       $('.powered-omnilinks a').css("color","<?php echo $pages->bio_color; ?>");
       $('.description').css("color","<?php echo $pages->bio_color; ?>");
+      $('.proof-wrapper-preview').css({"background-color":"<?php echo $pages->bio_color; ?>",color: '{{$proof_text_color}}' });
       $('#sm-preview li a').css("color","<?php echo $pages->bio_color; ?>");
     <?php } else {?>
       $('.powered-omnilinks a').css("color","#fff");
       $('.description').css("color","#fff");
+      $('.proof-wrapper-preview').css({"background-color":"#fff",color:'{{$proof_text_color}}'});
       $('#sm-preview li a').css("color","#fff");
     <?php } ?>
     
@@ -5751,6 +6246,7 @@
       }
       $('.btnview').css("color",color);
       $('.description').css("color",color);
+      $('.proof-wrapper-preview').css("background-color",color);
       $('#sm-preview li a').css("color",color);
     }
     $('#colorpickerOutlineButton').farbtastic('#colorOutlineButton');
@@ -5803,15 +6299,22 @@
       if ($('#is_bio_color').val()=="1") {
         $('.powered-omnilinks a').css("color",color);
         $('.description').css("color",color);
+        $('.proof-wrapper-preview').css("background-color",color);
+        $('.proof-wrapper-preview').css("color",hexToRgb(color));
+        $("#proof_preview").attr('proof-text',hexToRgb(color));
         $('#sm-preview li a').css("color",color);
       } else {
         if ( ($('#modeBackground').val()=="gradient") || ($('#modeBackground').val()=="solid") ) {
           $('.powered-omnilinks a').css("color","#fff");
           $('.description').css("color","#fff");
+          $('.proof-wrapper-preview').css("background-color","#fff");
+          $('.proof-wrapper-preview').css("color","#000");
+          $("#proof_preview").attr('proof-text','black');
           $('#sm-preview li a').css("color","#fff");
         }
       }
     }
+
     $('#colorpickerBioColor').farbtastic('#bioColor');
     pickerbtn = $.farbtastic('#colorpickerBioColor');
     // picker.setColor("#b6b6ff");
@@ -5821,6 +6324,7 @@
     //pickerbtn.linkTo(onTextColorChange);
     $("#link-bio-color").on('click', function(e) {
       e.preventDefault();
+      $(".proof-wrapper-preview").eq(0).show();
       $('#modal-color-picker-bio-color').modal('toggle');
     });
     $(document).on('click', '.btn-apply-bio', function() {
@@ -5957,10 +6461,32 @@
     });
     
     $("body").on("click", "#addBanner", function() {
+      var bannerhtml ="";
       idpic+=1;
       let $el;
-      elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]"  class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01" accept="image/*"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div><span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ukuran Gambar 434x200 Skala 2.2:1 (width:height), Max 500KB, JPG,PNG.</span></div>';
-      $el = $(".div-banner").append(elhtml);
+     /* elhtml = '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'"><div class="div-cell"><input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner"><input type="hidden" name="idBanner[]" value=""><input type="hidden" name="statusBanner[]" class="statusBanner" value=""><input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link"><select name="bannerpixel[]" class="form-control bannerpixel banner-new"></select><div class="custom-file"><input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01" accept="image/*"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div></div><div class="div-cell cell-btn btn-deleteBanner"><span><i class="far fa-trash-alt"></i></span></div> <span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ukuran Gambar 434x200 Skala 2.2:1 (width:height), Max 500KB, JPG,PNG.</span></div>';*/
+
+      bannerhtml += '<div class="div-table list-banner mb-4" picture-id="picture-id-'+idpic+'">';
+      bannerhtml += '<div class="div-cell">';
+      bannerhtml += '<input type="text" name="judulBanner[]" value="" class="form-control banner-title" placeholder="Judul banner" />';
+      bannerhtml += '<input type="hidden" name="idBanner[]" value="">';
+      bannerhtml += '<input type="hidden" name="statusBanner[]" class="statusBanner" value="">';
+      bannerhtml += '<input type="text" name="linkBanner[]" value="" class="form-control" placeholder="masukkan link">';
+
+      bannerhtml += '<select name="bannerpixel[]" class="form-control bannerpixel banner-new"></select>';
+      bannerhtml += '<div class="custom-file">';
+      bannerhtml += '<input type="file" name="bannerImage[]" class="custom-file-input pictureClass" id="input-picture-'+idpic+'" aria-describedby="inputGroupFileAddon01" accept="image/*">';
+      bannerhtml += '<label class="custom-file-label" for="inputGroupFile01">Choose file</label>';
+      bannerhtml += '</div>';
+      bannerhtml += '</div>';
+
+      bannerhtml += '<div class="div-cell cell-btn btn-deleteBanner">';
+      bannerhtml += '<span><i class="far fa-trash-alt"></i></span>';
+      bannerhtml += '</div>';
+      bannerhtml += '<span style="position: absolute;top: 148px;left: 10px;font-size:10px;font-style: italic;">Ukuran Gambar 434x200 Skala 2.2:1 (width:height), Max 500KB, JPG,PNG.</span>';
+      bannerhtml += '</div>';
+
+      $el = $(".div-banner").append(bannerhtml);
       $(".banner-new").html(dataView);
       $(".banner-new").val(0);
       if (dataFree == "1") {
@@ -6148,6 +6674,7 @@
       $count_3 = 0;
       
       $counter = 1;
+      if (count($arr)>0) {
       foreach($arr as $data){
         
         
@@ -6182,7 +6709,7 @@
             $count_3 = 0;
           } 
         
-      } ?>
+      }} ?>
       sortMeBy("data-category", "ul.sortable-msg", "li", "asc");
       sortMeBy("data-category", "ul#getview", "li", "asc");
     <?php }
@@ -6226,6 +6753,7 @@
     if (!is_null($pages->sort_sosmed)) {
       $arr = explode(";",$pages->sort_sosmed);
       $counter = 1;
+      if (count($arr)>0) {
       foreach($arr as $data){
     ?>
         $("#sosmed-"+"<?php echo $data; ?>").attr("data-category","<?php echo $counter; ?>");
@@ -6237,10 +6765,12 @@
         $("#"+"<?php echo $data; ?>"+"viewid").attr("data-category","<?php echo $counter; ?>");
         $("#"+"<?php echo $data; ?>"+"viewid").removeClass("hide");
         $("#"+"<?php echo $data; ?>"+"viewid").addClass("shown-sm");
+
+        $("#check_"+'{{ $data }}').prop('checked',true);
         // changeLengthMedia();
     <?php 
         $counter += 1;
-      } ?>
+      }} ?>
       sortMeBy("data-category", "ul.sortable-sosmed", "li", "asc");
       sortMeBy("data-category", "ul#sm-preview", "li", "asc");
     <?php }
@@ -6270,10 +6800,13 @@
         $("#sosmed-fb>div").find(".input-hidden").val($("#sosmed-fb>div").find(".input-hidden").attr("data-val"));
         $("#sosmed-fb>div").removeClass("hide");
         $("#fbviewid").removeClass("hide");
+
+        $(".check_social").prop('checked',true);
     <?php } ?>
 
     
-    currentSlide(0);
+    currentSlide(0,"first");
+    $(".slideshow-container").attr('fst',"first");
     slideIndex=0;
     check_rounded();
     $("#poweredview").children().show();
@@ -6384,8 +6917,10 @@
                   '<div class="sel_new_'+counterLink+'">'+
                     '<input type="hidden" name="idlink[]" value="new">'+
                     '<input class="delete-link" type="hidden" name="deletelink[]" value="">'+
-                    '<input type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
+                    '<input data-id="'+counterLink+'" type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
                     '<input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">'+
+                    '<input data-file="title-'+ counterLink +'-view-get" type="file" name="iconlink[]" class="form-control img_icon_preview" />'+
+                    '<small>Rasio ukuran icon 1:1 contoh : 48px x 48px</small>'+
                   '</div>'+
                 '</div>'+
               '</div>'+
@@ -6405,19 +6940,39 @@
         //back_target
         $("#viewLink").append('<li class="">'+
           '<span id="link-url-new_' + counterLink + '-preview" class="embed-ln-new_'+counterLink+'">'+
-          '<a href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">Masukkan Link</a></li></span>');
+          '<a id="textprev-new-'+counterLink+'" href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">'+'<img class="rounded-circle image_icon_link" id="preview_title-'+counterLink+'-view-get" />'+'Masukkan Link</a></li></span>');
         check_outlined();
         check_rounded();
         $('#linkpixel-' + counterLink).html(dataView);
         $('#linkpixel-' + counterLink ).val(0);
         //loadPixel(0,'#linkpixel-' + counterLink );
-        
     });
     
 	
   }); //end document ready
-      
 
+  function upload_image_icon()
+  {
+    $("body").on("change",".img_icon_preview",function(){
+      var id = $(this).attr('data-file');
+      // var len = $('#preview_'+id).length; 
+      $("."+id).addClass('image_icon_link_btn');
+      readURL(this,id);
+    });
+  }
+
+  //PREVIEW IMAGE ICON ON BUTTON
+  function readURL(input,id) {
+    if (input.files && input.files[0]) {
+
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#preview_'+id).attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+  }
  
     // $(document).on('click','.marker',function(){
     //      $('#backtheme').val('');

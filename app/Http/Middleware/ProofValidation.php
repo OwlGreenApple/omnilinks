@@ -16,8 +16,8 @@ class ProofValidation
     public function handle($request, Closure $next)
     {
         $rules = [
-          'proof_name'=> ['required','min:4','max:17'],
-          'proof_text'=> ['required','min:4','max:60'],
+          'proof_name'=> ['required','min:4','max:14'],
+          'proof_text'=> ['required','min:4','max:125'],
           'proof_stars'=> ['required','min:1','max:5','numeric']
         ];
 
@@ -32,8 +32,8 @@ class ProofValidation
 
         $message = [
           'required'=>'Data tidak boleh kosong',
-          'min'=>'Data minimal :min',
-          'max'=>'Data maximal :max',
+          'min'=>'Data minimal :min karakter',
+          'max'=>'Data maximal :max karakter',
           'numeric'=>'Data harus berupda angka',
           'mimes'=>'File harus dalam bentuk : jpeg,jpg,png',
         ];

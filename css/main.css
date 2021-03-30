@@ -163,6 +163,27 @@ table tr:nth-child(even) td {
   animation: spin 2s linear infinite;
 }
 
+/*link button*/
+.image_icon_link {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 6px;
+  top: 4px;
+}
+
+.image_icon_link_btn {
+  border-radius: 28px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  position: relative;
+}
+
+/* STYLING FORM API TEXT PREVIEW */
+#act_text, #act_bottom_text, #mc_text, #mc_bottom_text {
+  word-break: break-word;
+}
+
 /* WA CHAT */
 
 .del_chat_member, .del_chat_member > i, .edit_wa_member {

@@ -1400,39 +1400,71 @@
     </div>
   </div>  
   
-  <div class="col-md-12 col-12 mt-5" style="min-height: 100%">
+  <div id="proof-fix" class="col-md-12 col-12" style="min-height: 100%">
     <div class="row justify-content-center service">
-      <div class="col-lg-7 col-md-8 col-12 mb-4 row">
-        <div class="offset-md-1 col-md-5 col-5">
-            <div class="div-imagetitle">
-              <img src="<?php 
-              // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
-              $viewpicture = asset('/image/no-photo.jpg');
-              if(!is_null($pages->image_pages)){
-                // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
-                $viewpicture = Storage::disk('s3')->url($pages->image_pages);
-              }
-              // echo Storage::disk('s3')->url($pages->image_pages);
-              echo $viewpicture;
-              ?>" class="imagetitle">
+      <div class="col-lg-7 col-md-8 col-12 mb-4">
+
+        @if($pages->point > 0)
+            <!-- proof -->
+            @if($proof->count() > 0)
+              <div class="col-lg-12 proof-box">
+              @foreach($proof as $row)
+              <div class="proof-wrapper">
+                  <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+               
+                  <div class="proof-desc">
+                      <div class="proof_profile">
+                        <div class="proof_name">{{ $row->name }}</div>
+                        <div class="proof_star">
+                          @for($x=1;$x<=$row->star;$x++)
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                          @endfor
+                        </div>
+                      </div>
+
+                      <div class="proof_comments">"{{ $row->text }}"</div>
+                      <small><i class="fas fa-check"></i> Activproof</small>
+                  </div>
+              </div>
+              @endforeach
             </div>
-        </div>
+            @endif 
+        @endif
+        <!-- end proof -->
+
+        <div class="row">
+          <div class="offset-md-1 col-md-5 col-5">
+              <div class="div-imagetitle">
+                <img src="<?php 
+                // echo url(Storage::disk('local')->url('app/'.$pages->image_pages));
+                $viewpicture = asset('/image/no-photo.jpg');
+                if(!is_null($pages->image_pages)){
+                  // echo url(Storage::disk('local')->url('app/'.$pages->image_pages)); 
+                  $viewpicture = Storage::disk('s3')->url($pages->image_pages);
+                }
+                // echo Storage::disk('s3')->url($pages->image_pages);
+                echo $viewpicture;
+                ?>" class="imagetitle">
+              </div>
+          </div>
         
-        <div class="col-md-5 col-7">
-          <span class="header-txt title">
-            <?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>
-          </span>
-          <input type="hidden" id="hidden-description" value="{{$pages->description}}">
-          <span class="header-txt txt" style="word-break: break-word;" id="description">
-<?php if(!is_null($pages->description)) { 
-                            echo $pages->description;
-                          }else {
-                            echo "This is your new text content. <br>
-You can modify this text <br>
-and add more";
-                          }?>
-          </span>
-        </div>
+          <div class="col-md-5 col-7">
+            <span class="header-txt title">
+              <?php if (is_null($pages->page_title)) { echo "Your Title Here"; } else { echo $pages->page_title; } ?>
+            </span>
+            <input type="hidden" id="hidden-description" value="{{$pages->description}}">
+            <span class="header-txt txt" style="word-break: break-word;" id="description">
+  <?php if(!is_null($pages->description)) { 
+                              echo $pages->description;
+                            }else {
+                              echo "This is your new text content. <br>
+  You can modify this text <br>
+  and add more";
+                            }?>
+            </span>
+          </div>
+        </div><!-- end row -->
+        <!-- end title -->
       </div>
       
       @if($membership!=='free')
@@ -1615,6 +1647,12 @@ and add more";
         <?php } ?>
       </ul>
 
+      <!-- form connect API activrespon TOP -->
+      @if($pages->position_api == 0)
+        @include('user.link.form-api')
+      @endif
+
+      <!-- links -->
       <ul class="col-lg-7 col-md-8 mb-4">
         <?php
         $ctr = 0;
@@ -1624,7 +1662,10 @@ and add more";
             @if($link->options == 1)
             <li class="col-md-12 col-12 mb-3"> 
               <a href="#" data-href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov link-ajax">
-                <button class="btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
+                <button class="@if($link->icon_link !== null) image_icon_link_btn @endif btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
+                  @if($link->icon_link !== null) 
+                    <img src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
+                  @endif
                   <span class="textbutton">
                     {{$link->title}}
                   </span>
@@ -1642,6 +1683,11 @@ and add more";
           @endforeach
         @endif
       </ul>
+
+      <!-- form connect API activrespon BOTTOM -->
+      @if($pages->position_api == 1)
+        @include('user.link.form-api')
+      @endif
 
       <ul class="col-lg-7 col-md-8 mb-5 row" id="icon-sosmed">
         <?php 
@@ -1875,6 +1921,7 @@ and add more";
 @endif
 
 <script type="text/javascript">
+  var run;
   $('body').css("height",$( window ).height()+"px");
 
   //MAKE WA BUTTON TO ALWAYS ON CENTER
@@ -1898,7 +1945,28 @@ and add more";
     }
   }
 
+/* if user switch another tab , the animation stop, but if return otherwise */
+var vis = (function(){
+    var stateKey, eventKey, keys = {
+        hidden: "visibilitychange",
+        webkitHidden: "webkitvisibilitychange",
+        mozHidden: "mozvisibilitychange",
+        msHidden: "msvisibilitychange"
+    };
+    for (stateKey in keys) {
+        if (stateKey in document) {
+            eventKey = keys[stateKey];
+            break;
+        }
+    }
+    return function(c) {
+        if (c) document.addEventListener(eventKey, c);
+        return !document[stateKey];
+    }
+})();
+
 $(document).ready(function() {
+    $(".alert").delay(5000).fadeOut(3000);
     setRightPost(".wcs_popup");
     setMargins(".wcs_fixed_right");
 
@@ -1906,52 +1974,252 @@ $(document).ready(function() {
         setMargins(".wcs_fixed_right"); 
         setRightPost(".wcs_popup");   
     });
+
+    //set proof background and text default if there is no color.
+    $(".proof-wrapper").css({'background-color':'@if($pages->is_bio_color !== null){{ $pages->bio_color}}@else #fff @endif','color':'@if($pages->is_bio_color !== null){{ $pages->proof_text_color }}@else #000 @endif'})
+    // $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
+    // $('.proof-box > .proof-wrapper:gt(0)').hide();
+
+    getClientIP();
     runningProof();
-    stylingYoutube();
+    // prevent animation run when user focused on another tab
+    vis(function(){
+       // document.title = vis() ? 'Visible' : 'Not visible';
+       if(vis())
+       {
+          <?php 
+            if($pages->proof_settings !== 0):
+          ?>
+            runningProof();
+          <?php 
+            else:
+          ?>
+            $('.proof-box').removeAttr('style'); 
+          <?php
+            endif;
+          ?>
+       }
+       else
+       {
+          clearInterval(run);  
+       }
+    });
+    sendAPIdata();
+    sendAPImailchimp();
 });
+
+function sendAPImailchimp()
+{
+  $("#connect_mailchimp").submit(function(e){
+    e.preventDefault();
+    var data = $(this).serializeArray();
+    data.push(
+      {'name': 'pagename','value':'{{$pages->names}}'}
+    );
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: 'POST',
+      data: data,
+      url: "{{ url('save-mailchimp') }}",
+      dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      }, 
+      success: function(result) 
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        if(result.success == 0)
+        {     
+          $(".err_connect_mc").html('<div class="alert alert-danger mb-3">'+result.title+'</div>')
+        }
+        else if(result.success == 2)
+        {
+          $(".error").show();
+          (result.api_mc_fname !== undefined)? $(".api_mc_fname").html(result.api_mc_fname):$(".api_mc_fname").html('');
+          (result.api_mc_lname !== undefined)? $(".api_mc_lname").html(result.api_mc_lname):$(".api_mc_lname").html('');
+          (result.api_mc_email !== undefined)? $(".api_mc_email").html(result.api_mc_email):$(".api_mc_email").html('');
+          (result.pagename !== undefined)? $(".err_connect_mc").html('<div class="alert alert-danger mb-3">'+result.pagename+'</div>'):$(".err_connect_mc").html('');
+        }
+        else
+        {
+           $(".err_connect_mc").html('<div class="alert alert-success mb-3">Thank you for join us.</div>')
+           $(".error").hide();
+           empty_form();
+          
+        }
+      },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+    //end ajax
+  });
+}
+
+
+function sendAPIdata()
+{
+  $("#connect_preview").submit(function(e){
+    e.preventDefault();
+    var data = $(this).serializeArray();
+    data.push(
+      {'name': 'pagename','value':'{{$pages->names}}'}
+    );
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: 'POST',
+      data: data,
+      url: "{{ url('save-api') }}",
+      dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      }, 
+      success: function(result) 
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        if(result.error == 1)
+        {     
+          $(".error").show();
+          $(".api_name").html(result.name);
+          $(".api_email").html(result.email);
+          $(".api_phone").html(result.phone);
+          (result.db !== undefined)?  $(".err_connect").html('<div class="alert alert-danger mb-3">'+result.db+'</div>'): $(".err_connect").html('');
+        }
+        else
+        {
+           $(".err_connect").html('<div class="alert alert-success mb-3">'+result.response+'</div>')
+           $(".error").hide();
+           empty_form();
+        }
+      },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+    //end ajax
+  });
+}
+
+function empty_form()
+{
+  $("#connect_preview input,#connect_mailchimp input").val('');
+}
 
 function runningProof()
 {
+  var complete = null;
   var total = $(".proof-wrapper").length;
+  // console.log(total);
   var counting = 0;
-  var delay = 1000;
+  var timing = 9000;
 
-  $('.proof-wrapper:gt(0)').hide();
-    var run = setInterval(
-      function(){
-        $('.proof-box > :first-child').fadeOut().next('.proof-wrapper').delay(delay).fadeIn().addClass('animate-buzz').end().appendTo('.proof-box');
-        counting++;
+  run = setInterval(
+     function(){
+      $("#proof-fix").css('margin-top','1rem');
+      $('.proof-box').css({'max-width':'420px','height':'138px'}); //make animation stable
+      animateProof(counting);
+      counting++;
+      
+      //put php logic according on setting
+      <?php 
+        if($pages->proof_settings == 0):
+      ?>
+          if(counting == total)
+          {
+            setTimeout(function(){
+              clearInterval(run);
+              $('.proof-wrapper').hide();
+              $('.proof-box').removeAttr('style');   
+              $("#proof-fix").css('margin-top','3rem'); 
+            },8000);  
+          }
+      <?php
+        endif;
+      ?>
 
-        //put php logic according on setting
-        <?php 
-          if($pages->proof_settings == 0):
-        ?>
-            if(counting == total)
-            {
-              setTimeout(function(){
-                $('.proof-wrapper').hide();
-                clearInterval(run);
-              },delay);
-              
-            }
-        <?php
-          endif;
-        ?>
-      }, 
-    5000);
+      if(counting == total)
+      {
+         counting = 0;    
+      }
+
+    }, 
+  timing);
 }
 
-function stylingYoutube()
+function animateProof(interval)
 {
-  /*$(".embed-responsive-item").on("load", function() {
-    let head = $(".embed-responsive-item").contents().find("head");
-    let css = '<xxx>.test-add{ color : red}</xxx>';
-    $(head).append(css);
-  });*/
-  var html = 'Hello from <img src="http://stackoverflow.com/favicon.ico" alt="SO">';
-  var iframe = $('.embed-responsive-item');
-  iframe.src = 'data:text/html,' + encodeURIComponent(html);
+  var speed = 350;
+  var delay = 6650
+
+  $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
+      top : 0,
+   }, {
+    duration : speed,
+    complete : function(){
+      $(this).delay(delay).fadeOut(function(){
+        $(this).css({'top' : '120px'});
+      });
+    }
+  });
 }
+
+
+function getClientIP()
+{
+  /*$.getJSON("http://api.ipify.org/?format=json", function(e) {
+    pointCount(e.ip);
+  });*/
+  $.ajax({
+    type: 'GET',
+    url: 'https://api.ipify.org/?format=json',
+    dataType:'json',
+    success : function(e)
+    {
+      pointCount(e.ip);
+    },
+    error:function(xhr,throwable,err)
+    {
+      pointCount("down");
+    }
+  })
+}
+
+function pointCount(ip)
+{
+  $.ajax({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+      // Accept : "application/json",
+      type: 'POST',
+      url: '{{ url("page_point") }}',
+      data: {page : '{{$page_name}}',user_id:'{{$user_id}}', ip : ip},
+      dataType:'json',
+     /* success: function(result) 
+      {
+        alert(result.msg);
+      },*/
+      error:function(xhr,throwable,err)
+      {
+        // console.log(xhr.responseText);
+      }
+    });
+}
+
 </script>
 
 <script type="text/javascript">

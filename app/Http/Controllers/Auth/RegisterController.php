@@ -85,7 +85,7 @@ class RegisterController extends Controller
       'password' => Hash::make($data['password']),
       // 'membership' => 'free',
       'membership' => 'popular',
-      'wa_number' => '62'.$data['wa_number'],
+      'wa_number' => '62'.strip_tags($data['wa_number']),
     ]);
 
 		//New system, to activrespon list

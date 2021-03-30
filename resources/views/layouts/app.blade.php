@@ -71,6 +71,10 @@
   @if(Request::is('pricing')) 
   <link rel="stylesheet" href="{{ asset('css/style-pricing.css') }}"/>
   @endif
+
+  @if(Request::is('activproof')) 
+  <link rel="stylesheet" href="{{ asset('css/activproof.css') }}"/>
+  @endif
   
   @if(Request::is('kupon')) 
   <link rel="stylesheet" href="{{ asset('css/kupon.css') }}"/>
@@ -190,11 +194,18 @@
                   </a>
                 </li>
 
+                 <li class="nav-item">
+                  <a class="nav-link navlog" href="{{url('activproof')}}">
+                    {{ __('Activproof') }}
+                  </a>
+                </li>         
+
                 <!--<li class="nav-item">
                   <a class="nav-link navlog" href="{{url('ads-manager')}}">
                     {{ __('Ads') }}
                   </a>
-                </li>
+
+                </li>           
                 -->
               @endif
 

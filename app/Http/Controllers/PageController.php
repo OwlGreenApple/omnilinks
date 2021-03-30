@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use App\Page;
 use App\Link;
 use App\Banner;
+use App\ProofHistory;
 
-use Validator;
+use Validator, Auth, Carbon;
 
 class PageController extends Controller
 {
@@ -61,4 +63,5 @@ class PageController extends Controller
       }
     }
 
+/* END CONTROLLER */
 }
