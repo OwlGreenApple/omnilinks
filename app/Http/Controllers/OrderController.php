@@ -662,7 +662,7 @@ class OrderController extends Controller
       $user->point += $this->getActivproofCredit($order->package);
       $type="activproof";
     }
-    /*<<<<<*/
+    /*<<<<< CONFLICT*/
     if($valid <> null)
     {
         $formattedDate = $valid->format('Y-m-d H:i:s');
