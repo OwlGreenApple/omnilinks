@@ -16,7 +16,6 @@ use App\Helpers\Helper;
 use App\Rules\TrustedUrlCheck;
 use App\Mail\NotifClickFreeUser; 
 use App\Rules\CheckValidPageID; 
-use App\Rules\TrustedUrlCheck; 
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;

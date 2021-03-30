@@ -157,7 +157,7 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 
     //proof
-    Route::post('save-proof','BiolinkController@saveProof')->middleware('proof');
+    Route::post('save-proof','BiolinkController@saveProof')/*->middleware('proof')*/;
     Route::get('load-proof','BiolinkController@loadProof');
     Route::get('delete-proof','BiolinkController@delProof');
     Route::get('proof_settings','BiolinkController@settingProof');
