@@ -24,4 +24,5 @@ Yg harus di test :
 	* poin berkurang maksimal 3 apabila user berasal dari ip yg sama dalam 1 hari (untuk mengetest silahkan ganti wi-fi apabila sdh berkurang 3x).
 	* poin activproof apabila di kurangi / ditambah akan merubah total poin.
 	* activproof tidak tampil apabila point page = 0.
+	* user bisa beli activproof poin.
 	* history activproof.
