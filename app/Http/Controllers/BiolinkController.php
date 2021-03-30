@@ -271,8 +271,7 @@ class BiolinkController extends Controller
 
   public function saveProof(Request $request)
   {
-
-      dd($request->all());
+      // dd($request->all());
       if($request->status == 0)
       {
          $proof = new Proof;
@@ -309,13 +308,15 @@ class BiolinkController extends Controller
       {
         $proof->save();
         $data['data'] = 1;
+        $data['error'] = 0;
       }
       catch(QueryException $e)
       {
         $data['data'] = 0;
+        $data['error'] = 1;
       }
 
-      $data['error'] = 0;
+      dd($data);
       return response()->json($data);
   }
 
