@@ -16,7 +16,7 @@ Yg harus di test :
 		- banner link
 
 4. Banner pada halaman omli :
-	* harus jalan secara otomatis setiap 3 detik
+	* harus jalan secara otomatis setiap 5 detik
 
 5. Activproof
 	* panjang karakter maksimal 125.
