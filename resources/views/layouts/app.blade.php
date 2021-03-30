@@ -194,19 +194,18 @@
                   </a>
                 </li>
 
+                 <li class="nav-item">
+                  <a class="nav-link navlog" href="{{url('activproof')}}">
+                    {{ __('Activproof') }}
+                  </a>
+                </li>         
+
                 <!--<li class="nav-item">
                   <a class="nav-link navlog" href="{{url('ads-manager')}}">
                     {{ __('Ads') }}
                   </a>
-<<<<<<< HEAD
+
                 </li>           
-                <li class="nav-item">
-                  <a class="nav-link navlog" href="{{url('activproof')}}">
-                    {{ __('Activproof') }}
-                  </a>
-                </li>                
-=======
-                </li>
                 -->
               @endif
 
