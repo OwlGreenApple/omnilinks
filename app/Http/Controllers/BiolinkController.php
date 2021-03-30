@@ -2126,7 +2126,7 @@ class BiolinkController extends Controller
             imagedestroy($src);
         break;
       }
-      dd($image_contents);
+      // dd($image_contents);
       return $image_contents;
   }
 
