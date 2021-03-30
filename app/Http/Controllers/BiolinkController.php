@@ -2066,6 +2066,7 @@ class BiolinkController extends Controller
   //RESIZE IMAGE
   public function resizeImage($file, $w, $h, $crop=false){
     list($width, $height) = getimagesize($file);
+       dd($width);
         $r = $width / $height;
         if ($crop) {
             if ($width > $height) {
