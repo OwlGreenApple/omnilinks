@@ -781,7 +781,7 @@ class BiolinkController extends Controller
             $arr['message'] = "Banner Link ".$i." tidak valid";
             return $arr;
           }
-          $temp_arr['bannerImage.'.$i] = ['image', 'max:1000'];
+          $temp_arr['bannerImage.'.$i] = ['mimes:jpeg,jpg,png', 'max:1000'];
         }
       }
     }
