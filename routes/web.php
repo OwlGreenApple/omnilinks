@@ -26,6 +26,7 @@ if(env('DOMAIN_TYPE')=='main'){
   // Route::get('/use/{id}/edit','UserController@edit');
   // Route::post('/use/{id}/update','UserController@update');
   // Route::get('/use/{id}/delete','UserController@delete');
+
   Auth::routes();
   
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
@@ -191,6 +192,10 @@ if(env('DOMAIN_TYPE')=='main'){
     /* Super Admin page */
     Route::get('super-admin', 'UserController@user_list');
     Route::get('check-super/{id}', 'UserController@check_super');
+
+    /* TO FLAGGING INAPPROPIATE LINK */
+    Route::get('flag-link', 'UserController@flag_link');
+    Route::get('flag-link-banner', 'UserController@flag_link_banner');
   
     //admin order
     Route::get('/list-order',function(){

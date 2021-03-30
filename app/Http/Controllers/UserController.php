@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserLog;
+use App\Helpers\Helper;
+use App\Link;
+use App\Banner;
 
 use App\Http\Controllers\OrderController;
 
@@ -333,6 +336,56 @@ class UserController extends Controller
         return redirect("");
       } else {
         return "NOT AUTHORIZED";
+      }
+    }
+
+    /* TO FLAG INAPPROPIATE LINK FROM TABLE LINKS */
+    public function flag_link()
+    {
+      $list_links = Link::select('link','id')->get();
+
+      if($list_links->count() > 0)
+      {
+        foreach($list_links as $row):
+          $check_url = Helper::filter_url($row->link);
+          if($check_url == 'omli.xyz')
+          {
+            continue;
+          }
+
+          $check = Helper::CheckTrustedLink($row->link);
+          if($check == false)
+          {
+            $flagged = Link::find($row->id);
+            $flagged->not_valid = 1;
+            $flagged->save();
+          }
+        endforeach;
+      }
+    }
+
+    /* TO FLAG INAPPROPIATE LINK FROM TABLE BANNER */
+    public function flag_link_banner()
+    {
+      $list_links = Banner::select('link','id')->get();
+
+      if($list_links->count() > 0)
+      {
+        foreach($list_links as $row):
+          $check_url = Helper::filter_url($row->link);
+          if($check_url == 'omli.xyz')
+          {
+            continue;
+          }
+
+          $check = Helper::CheckTrustedLink($row->link);
+          if($check == false)
+          {
+            $flagged = Banner::find($row->id);
+            $flagged->not_valid = 1;
+            $flagged->save();
+          }
+        endforeach;
       }
     }
 
