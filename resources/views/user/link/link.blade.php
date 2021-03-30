@@ -1945,7 +1945,7 @@
     }
   }
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD*/
 /* if user switch another tab , the animation stop, but if return otherwise */
 var vis = (function(){
     var stateKey, eventKey, keys = {
@@ -1967,9 +1967,9 @@ var vis = (function(){
 })();
 /****/
 
-
+/*
 =======
->>>>>>> master
+>>>>>>> master*/
 $(document).ready(function() {
     $(".alert").delay(5000).fadeOut(3000);
     setRightPost(".wcs_popup");
