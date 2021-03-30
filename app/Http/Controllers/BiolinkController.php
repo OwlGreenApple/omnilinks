@@ -293,11 +293,10 @@ class BiolinkController extends Controller
         Storage::disk('s3')->delete($filename);
       }
 
-        dd('debug');
-
       if($request->file('proof_image') <> null)
       {
         $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
+        dd('debug');
         $dt = Carbon::now();
         $ext = $request->file('proof_image')->getClientOriginalExtension();
         $dir = 'proof_page/'.explode(' ',trim(Auth::user()->name))[0].'-'.Auth::user()->id;
