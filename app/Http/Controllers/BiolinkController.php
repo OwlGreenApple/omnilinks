@@ -296,7 +296,6 @@ class BiolinkController extends Controller
       if($request->file('proof_image') <> null)
       {
         $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
-        dd($imageUpload);
         $dt = Carbon::now();
         $ext = $request->file('proof_image')->getClientOriginalExtension();
         $dir = 'proof_page/'.explode(' ',trim(Auth::user()->name))[0].'-'.Auth::user()->id;
@@ -2066,7 +2065,6 @@ class BiolinkController extends Controller
   //RESIZE IMAGE
   public function resizeImage($file, $w, $h, $crop=false){
     list($width, $height) = getimagesize($file);
-       dd($width);
         $r = $width / $height;
         if ($crop) {
             if ($width > $height) {
@@ -2127,6 +2125,7 @@ class BiolinkController extends Controller
             imagedestroy($src);
         break;
       }
+      dd($image_contents);
       return $image_contents;
   }
 
