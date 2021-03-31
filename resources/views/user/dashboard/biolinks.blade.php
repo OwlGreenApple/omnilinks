@@ -6010,7 +6010,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
-        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
+        // $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
@@ -6025,7 +6025,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
-        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
+        // $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         check_outlined();
@@ -6049,13 +6049,13 @@
       $('.btnview').css("background-color","transparent");
       $('.btnview').css("color",outline);
       $('.description').css("color",outline);
-      $('.proof-wrapper-preview').css("background-color",outline);
+      // $('.proof-wrapper-preview').css("background-color",outline);
       $('#sm-preview li a').css("color",outline+" !important");
     <?php } else {?>
       $('.btnview').css("background-color",outline);
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
-      $('.proof-wrapper-preview').css("background-color","#fff");
+      // $('.proof-wrapper-preview').css("background-color","#fff");
       $('#sm-preview li a').css("color","#fff !important");
     <?php } ?>
     
@@ -6064,12 +6064,12 @@
       $("#textColor").val("<?php echo $pages->text_color; ?>");
       $('.btnview').css("color","<?php echo $pages->text_color; ?>");
       $('.description').css("color","<?php echo $pages->text_color; ?>");
-      $('.proof-wrapper-preview').css("background-color","<?php echo $pages->text_color; ?>");
+      // $('.proof-wrapper-preview').css("background-color","<?php echo $pages->text_color; ?>");
       $('#sm-preview li a').css("color","<?php echo $pages->text_color; ?>");
     <?php } else {?>
       $('.btnview').css("color","#fff");
       $('.description').css("color","#fff");
-      $('.proof-wrapper-preview').css("background-color","#fff");
+      // $('.proof-wrapper-preview').css("background-color","#fff");
       $('#sm-preview li a').css("color","#fff");
     <?php } ?>
     
