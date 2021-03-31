@@ -1975,7 +1975,7 @@ $(document).ready(function() {
         setRightPost(".wcs_popup");   
     });
 
-    //set proof background and text default if there is no color.
+      //PROOF BACKGROUND --- if is_bio_color = null
     $(".proof-wrapper").css({'background-color':'@if($pages->is_bio_color !== null){{ $pages->bio_color}}@else #fff @endif','color':'@if($pages->is_bio_color !== null){{ $pages->proof_text_color }}@else #000 @endif'})
     // $('.proof-box > .proof-wrapper:gt(1)').css({position:'absolute','top':0,'left':0})
     // $('.proof-box > .proof-wrapper:gt(0)').hide();
@@ -2324,6 +2324,7 @@ function pointCount(ip)
         <?php } ?>  
       <?php 
       } ?>  
+
       <?php 
       if($pages->is_bio_color) { ?>  
         $('.header-txt').css("color","<?php echo $pages->bio_color; ?>");
@@ -2332,6 +2333,7 @@ function pointCount(ip)
         
       <?php 
       } ?>  
+
     @if((!is_null($pages->wallpaper))||(!is_null($pages->gif_template)))
       <?php 
       if(!$pages->is_outlined) { ?>  
