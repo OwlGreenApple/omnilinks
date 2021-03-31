@@ -761,7 +761,7 @@ class BiolinkController extends Controller
     $temp_arr = array();
     $temp_arr['judul'] = ['required', 'string',  'max:191' ];
     // $temp_arr['imagepages'] = ['image', 'max:1000', 'dimensions:max_width=150,min_height=150'];
-    $temp_arr['imagepages'] = ['image', 'max:1000' ];
+    $temp_arr['imagepages'] = ['mimes:jpeg,jpg,png', 'max:1000' ];
 
     if (!is_null($request->judulBanner)){
       if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super') 
