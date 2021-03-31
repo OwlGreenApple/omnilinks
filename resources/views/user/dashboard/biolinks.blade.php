@@ -2117,7 +2117,7 @@
       }
       if ($('#is_bio_color').prop("checked") == false) {
         $('.description').css("color",template.bio_font_color);
-        $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
+        // $('.proof-wrapper-preview').css("background-color",template.bio_font_color);
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
       }
@@ -5643,8 +5643,7 @@
         $('.btnview').css("background-color",template.button_color);
         $('.btnview').css("color",template.font_button_color);
         $('.description').css("color",template.bio_font_color);
-       /* $('.proof-wrapper-preview').css("background-color",template.button_color);
-        $('.proof-wrapper-preview').css("color",template.bio_font_color);*/
+       /* $('.proof-wrapper-preview').css("background-color",template.button_color);*/
         $('#sm-preview li a').css("color",template.bio_font_color+" !important");
         $('.powered-omnilinks a').css("color",template.bio_font_color+" !important");
         
