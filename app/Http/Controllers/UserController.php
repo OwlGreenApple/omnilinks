@@ -339,10 +339,7 @@ class UserController extends Controller
       }
     }
 
-<<<<<<< HEAD
-=======
     /* TO FLAG INAPPROPIATE LINK FROM TABLE LINKS */
->>>>>>> 55392246e2c2dce5128aa4614dbefd0c9449af3d
     public function flag_link()
     {
       $list_links = Link::select('link','id')->get();
@@ -350,15 +347,12 @@ class UserController extends Controller
       if($list_links->count() > 0)
       {
         foreach($list_links as $row):
-<<<<<<< HEAD
-=======
           $check_url = Helper::filter_url($row->link);
           if($check_url == 'omli.xyz')
           {
             continue;
           }
 
->>>>>>> 55392246e2c2dce5128aa4614dbefd0c9449af3d
           $check = Helper::CheckTrustedLink($row->link);
           if($check == false)
           {
@@ -370,8 +364,6 @@ class UserController extends Controller
       }
     }
 
-<<<<<<< HEAD
-=======
     /* TO FLAG INAPPROPIATE LINK FROM TABLE BANNER */
     public function flag_link_banner()
     {
@@ -397,7 +389,6 @@ class UserController extends Controller
       }
     }
 
->>>>>>> 55392246e2c2dce5128aa4614dbefd0c9449af3d
     /*public function index(Request $request)
     {
        if($request->has('cari'))

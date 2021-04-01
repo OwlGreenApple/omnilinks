@@ -641,11 +641,11 @@ class BiolinkController extends Controller
       $page->save();
 
       
-      $links = Link::where('pages_id','=',$page->id)
+      $links = Link::where([['pages_id','=',$page->id],['not_valid','=',0]])
                 ->orderBy('created_at','descend')
                 ->get();
 
-      $banner = Banner::where('pages_id','=',$page->id)
+      $banner = Banner::where([['pages_id','=',$page->id],['not_valid','=',0]])
                   ->orderBy('id','desc')
                   ->get();
 
