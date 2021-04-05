@@ -141,6 +141,7 @@ class Helper
   /*TO CHECK TRUSTED lINK FROM KOMINFO.GO.ID*/
   public static function CheckTrustedLink($value)
   {
+    dd(self::filter_url($value));
     $status = null;
     $curl = curl_init();
     $data = array(

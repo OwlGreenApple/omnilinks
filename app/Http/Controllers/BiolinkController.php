@@ -750,12 +750,22 @@ class BiolinkController extends Controller
     $desc = $request->description;
      
     /* FILTER FOR SECURITY REPLACEMENT STRIPTAGS */
-    preg_match_all('/&lt;script&gt;|&lt;script.*&gt;/im', $desc, $patternopen);
+    preg_match_all('/&lt;script&gt;|&lt;script.*&gt;|&lt;a.*&gt;/im', $desc, $patternopen);
     $opentag = count($patternopen[0]);
    
     if($opentag > 0)
     {
-       $desc = preg_replace("/&lt;script.*&gt;|&lt;script&gt;|&lt;\/script&gt;|\(|\)/im", "", $desc);
+       $desc = preg_replace("/&lt;script.*&gt;|&lt;script&gt;|&lt;\/script&gt;|\(|\)|href\=\".*\"/im", "", $desc);
+    }
+
+    //TRUSTPOSITIF FILTER
+    $dt = self::desc_trust_positif($desc);
+
+    if(count($dt) > 0)
+    {
+      $arr['status'] = 'error';
+      $arr['message'] = "Maaf, deskripsi anda mengandung link yang diblokir oleh kominfo";
+      return $arr;
     }
 
     $temp_arr = array();
@@ -1179,6 +1189,29 @@ class BiolinkController extends Controller
       }
     }*/
 
+  }
+
+  // DESCRIPTION ARRAY EXPLODE FOR TRUST POSITIF BLOCK
+  public static function desc_trust_positif($desc)
+  {
+    $dt = array();
+    $desc = explode('href=',$desc);
+
+    if(count($desc) > 0):
+      foreach($desc as $filter)
+      {
+        $exp = explode('"',$filter);
+        print_r($exp);
+        if(isset($exp[1])):
+          if(Helper::CheckTrustedLink($exp[1]) == false)
+          {
+            $dt[] = $exp[1];
+          }
+        endif;
+      }
+    endif;
+    dd('');
+    return $dt;
   }
 
   private function upload_image_banner($user,$banner,$file,$idbanner)

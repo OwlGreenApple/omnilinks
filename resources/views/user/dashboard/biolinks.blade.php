@@ -4989,10 +4989,16 @@
     $('#make-bold').click(function(event){
         event.preventDefault();
         var url = $("#url").val();
+        var reg = new RegExp(/^http\:\/\/|^https\:\/\//);
+        var check_http = reg.test(url);
 
-        if(url === '')
+        if(check_http == false)
         {
-          alert("Kolom url tidak boleh kosong");
+          alert("Kolom link harus menggunakkan http:// atau https://");
+        }
+        else if(url === '')
+        {
+          alert("Kolom link tidak boleh kosong");
         }
         else
         {
