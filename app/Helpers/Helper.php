@@ -203,7 +203,7 @@ class Helper
   // DUE TRUSTPOSITIF UNABLE TO FILTER IF URL CONTAIN WWW
   private static function remove_subdomain($url)
   {
-     if(preg_match('/^(.*)\./i', $url))
+     if(preg_match('/^\:\/\/(.*)|^(.*)\.(.*)\.(.*?)/i', $url))
      {
         $url = preg_replace('/^(.*?)\./i',"",$url);
      }
