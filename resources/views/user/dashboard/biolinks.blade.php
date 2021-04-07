@@ -1477,6 +1477,7 @@
             $("#pesanAlert").show();
             $("#pesanAlert").addClass("alert-danger");
             $("#pesanAlert").removeClass("alert-success");
+            $(".alert-success").hide();
         }
       },
       error : function(xhr,throwable,other){
