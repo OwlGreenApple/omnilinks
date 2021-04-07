@@ -14,6 +14,12 @@ Yg harus di test :
 	* apabila dimasukkan maka akan tervalidasi / keluar pesan pada :
 		- link
 		- banner link
+	* pada kolom deskripsi (tampilan):
+		- kolom link akan mengeluarkan peringatan apabila user memasukkan link tanpa http / https.
+		- keluar error message apabila user memasukkan link yg diblokir oleh kominfo cth :
+			- https://test.vimeo.com
+			- https://www.vimeo.com
+			- https://vimeo.com
 
 4. Banner pada halaman omli :
 	* harus jalan secara otomatis setiap 5 detik
