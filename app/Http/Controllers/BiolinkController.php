@@ -1195,22 +1195,19 @@ class BiolinkController extends Controller
   public static function desc_trust_positif($desc)
   {
     $dt = array();
-    $desc = explode('href=',$desc);
-
+    $desc = explode('"',$desc);
+    $desc = preg_grep('/www\.(.*)\.(.*?)/i',$desc);
+  
     if(count($desc) > 0):
       foreach($desc as $filter)
       {
-        $exp = explode('"',$filter);
-        print_r($exp);
-        if(isset($exp[1])):
-          if(Helper::CheckTrustedLink($exp[1]) == false)
-          {
-            $dt[] = $exp[1];
-          }
-        endif;
+        if(Helper::CheckTrustedLink($filter) == false)
+        {
+          $dt[] = $filter;
+        }
       }
     endif;
-    dd('');
+    
     return $dt;
   }
 

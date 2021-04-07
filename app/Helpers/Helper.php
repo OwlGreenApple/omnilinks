@@ -141,7 +141,6 @@ class Helper
   /*TO CHECK TRUSTED lINK FROM KOMINFO.GO.ID*/
   public static function CheckTrustedLink($value)
   {
-    dd(self::filter_url($value));
     $status = null;
     $curl = curl_init();
     $data = array(
@@ -192,12 +191,22 @@ class Helper
     $filter = explode('/',$url);
     if(isset($filter[2]))
     {
-      return $filter[2];
+      return self::remove_www($filter[2]);
     }
     else
     {
       return 'trustpositif.kominfo.go.id';
     }
+  }
+
+  // DUE TRUSTPOSITIF UNABLE TO FILTER IF URL CONTAIN WWW
+  private static function remove_www($url)
+  {
+     if(preg_match('/^www\./i', $url))
+     {
+        $url = str_replace("www.","",$url);
+     }
+     return $url;
   }
 
 /*end class*/ 

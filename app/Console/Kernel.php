@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('check:membership')->dailyAt('07:00');
         $schedule->command('notif:orderuser')->dailyAt('08:00');
         $schedule->command('delete:page')->dailyAt('00:00');
-        $schedule->command('check:trusted')->hourly();
+        $schedule->command('check:trusted')->dailyAt('01:00');
+        $schedule->command('check:desc')->dailyAt('02:00');
     }
 
     /**
