@@ -4989,7 +4989,7 @@
     $('#make-bold').click(function(event){
         event.preventDefault();
         var url = $("#url").val();
-        var reg = new RegExp(/^http\:\/\/|^https\:\/\//);
+        var reg = new RegExp(/^http\:\/\/|^https\:\/\//i);
         var check_http = reg.test(url);
 
         if(check_http == false)

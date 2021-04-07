@@ -1196,7 +1196,7 @@ class BiolinkController extends Controller
   {
     $dt = array();
     $desc = explode('"',$desc);
-    $desc = preg_grep('/www\.(.*)\.(.*?)/i',$desc);
+    $desc = preg_grep('/\:\/\/(.*)\.(.*?)/i',$desc);
   
     if(count($desc) > 0):
       foreach($desc as $filter)
