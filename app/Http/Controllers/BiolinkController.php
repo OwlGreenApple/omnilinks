@@ -1197,7 +1197,7 @@ class BiolinkController extends Controller
     $dt = array();
     $desc = explode('"',$desc);
     $desc = preg_grep('/\:\/\/(.*)\.(.*?)/i',$desc);
-     
+
     if(count($desc) > 0):
       foreach($desc as $filter)
       {
@@ -1698,8 +1698,24 @@ class BiolinkController extends Controller
   {
     $temp_arr = array();
     $pixel_proof = null;
-    $temp_arr['script'] = ['required', 'string' ];
-    $pixelscript = $request->script;
+    $jenis_pixel = strip_tags($request->jenis_pixel);
+
+    //VLIDATION TO DETERMINE FB PIXEL OR NOT
+    if($jenis_pixel == 'fb')
+    {
+      $temp_arr['fb_id'] = ['required', 'string'];
+      $temp_arr['fb_event'] = ['required'];
+
+      if($request->fb_event == 'CustomEvent')
+      {
+        $temp_arr['fb_custom_event'] = ['required','max:190'];
+      }
+    }
+    else
+    {
+      $temp_arr['script'] = ['required', 'string' ];
+    }
+    
     $temp_arr['title'] = ['required','string','max:190'];
 
     $messages = [
@@ -1711,7 +1727,8 @@ class BiolinkController extends Controller
         'in'      => 'The :attribute must be one of the following types: :values',*/
     ];
 
-    $validator = Validator::make($request->all(), $temp_arr, $messages); 
+    $validator = Validator::make($request->all(), $temp_arr, $messages);
+    $pixelscript = $request->script; 
     
     if($validator->fails()) {
       $arr['status'] = 'error';
@@ -1728,7 +1745,7 @@ class BiolinkController extends Controller
     $opentag = count($patternopen[0]);
     $closetag = count($patternclose[0]);
 
-    if(($opentag <> $closetag) || $opentag < 1)
+    if(($opentag <> $closetag) || $opentag < 1 && $jenis_pixel <> 'fb')
     {
         $data['status'] = 'error';
         $data['message'] = 'Mohon gunakan javascript yang valid'; 

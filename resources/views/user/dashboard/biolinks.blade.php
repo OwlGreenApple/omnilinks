@@ -3082,6 +3082,41 @@
                     Pixel Retargetting
                   </span>
 
+                  <div class="fb-pixel-option">
+                    <div class="form-group">
+                        <label class="control-label">Pixel ID</label>  
+                        <input type="text" class="form-control" name="fb_id" />
+                    </div> 
+
+                    <div class="form-group">
+                        <label class="control-label">FB Pixel Event</label>  
+                        <select class="form-control" name="fb_event">
+                          <option value="AddPaymentInfo">AddPaymentInfo</option>
+                          <option value="AddToCart">AddToCart</option>
+                          <option value="AddToWishlist">AddToWishlist</option>
+                          <option value="CompleteRegistration">CompleteRegistration</option>
+                          <option value="Contact">Contact</option>
+                          <option value="CustomizeProduct">CustomizeProduct</option>
+                          <option value="Donate">Donate</option>
+                          <option value="FindLocation">FindLocation</option>
+                          <option value="InitiateCheckout">InitiateCheckout</option>
+                          <option value="Lead">Lead</option>
+                          <option value="Purchase">Purchase</option>
+                          <option value="Schedule">Schedule</option>
+                          <option value="Search">Search</option>
+                          <option value="StartTrial">StartTrial</option>
+                          <option value="SubmitApplication">SubmitApplication</option>
+                          <option value="Subscribe">Subscribe</option>
+                          <option value="ViewContent">ViewContent</option>
+                          <option value="CustomEvent">Custom Event</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="fb_custom_event" placeholder="Nama Event" />
+                    </div>
+                  </div> 
+
                   <textarea class="form-control mt-3" name="script" id="script" style="height:100px"></textarea>
 
                   <div class="form-group mt-3 mb-4 row">
@@ -5232,8 +5267,64 @@
     chat_buzz_enable();
     descPlaceholder();
     upload_image_icon();
+    change_pixel();
+    fb_pixel_detector();
+    fb_custom_event();
+    fb_custom_event_sel();
   });
 
+  /* FB custom event */
+  function fb_custom_event_sel()
+  {
+    $("select[name='fb_event']").change(() => {
+      fb_custom_event();
+    });
+  }
+
+  function fb_custom_event()
+  {
+    var fb_event = $("select[name='fb_event'] > option:selected").val();
+    if(fb_event == 'CustomEvent')
+    {
+      $("input[name='fb_custom_event']").prop('disabled',false);
+      $("input[name='fb_custom_event']").show();
+    }
+    else
+    {
+      $("input[name='fb_custom_event']").prop('disabled',true);
+      $("input[name='fb_custom_event']").hide();
+    }
+  }
+
+  /*CHANGE PIXEL OPTIONS*/
+  function change_pixel()
+  {
+    $("#jenis_pixel").change(function(){
+      fb_pixel_detector();
+      fb_custom_event();
+    });
+  }
+
+  /*TO DETECT IF PIXEL DROPDOWN SELECTED ON FBPIXEL*/
+  function fb_pixel_detector(sel)
+  {
+    var sel = $("select[name='jenis_pixel'] > option:selected").val();
+    if(sel == 'fb')
+    {
+      $(".fb-pixel-option").show();
+      $("#script").val('').hide();
+      $(".fb-pixel-option > .form-group > input, .fb-pixel-option > .form-group > select").prop('disabled',false);
+    }
+    else
+    {
+      $(".fb-pixel-option").hide();
+      $("#script").show();
+      $(".fb-pixel-option > .form-group > input, .fb-pixel-option > .form-group > select").prop('disabled',true);
+      $("select[name='fb_event'] > option[value='AddPaymentInfo']").prop('selected',true);
+    }
+  }
+
+  /*PLACE HOLDER DESCRIPTION*/
   function descPlaceholder()
   {
     $("#description").focusout(function(){
