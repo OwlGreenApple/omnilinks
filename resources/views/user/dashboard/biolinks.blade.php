@@ -1417,6 +1417,7 @@
     });
   }
   
+  /*SAVE TAMPILAN AND DESCRIPTION*/
   function tambahTemp() {
     var form = $('#saveTemplate')[0];
     var formData = new FormData(form);
@@ -1590,6 +1591,7 @@
     });
   }
 
+  // SAVE PIXEL
   function tambahpixel(proof) 
   {
     //CHECK WHETHER SCRIPT HAS ERROR OR NOT
@@ -1636,6 +1638,7 @@
         $('#script').val("");
         $('#judul').val("");
         $('#editidpixel').val("");
+        $(".error").hide();
         $(window).scrollTop(0);
         refreshpixel();
         loadPixelPage();
@@ -1666,6 +1669,13 @@
         if (data.statustitle == "error") {
           $(".alertTitle").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-danger");
+          location.href="#pesanAlert";
+        } 
+        if (data.statusfb == "error") {
+          $(".error").show();
+          $(".fb_id").html(data.fb_id);
+          $(".fb_event").html(data.fb_event);
+          $(".fb_custom_event").html(data.fb_custom_event);
           location.href="#pesanAlert";
         }
         
@@ -3086,6 +3096,7 @@
                     <div class="form-group">
                         <label class="control-label">Pixel ID</label>  
                         <input type="text" class="form-control" name="fb_id" />
+                        <span class="error fb_id"><!-- error --></span>
                     </div> 
 
                     <div class="form-group">
@@ -3110,10 +3121,12 @@
                           <option value="ViewContent">ViewContent</option>
                           <option value="CustomEvent">Custom Event</option>
                         </select>
+                        <span class="error fb_event"><!-- error --></span>
                     </div>
 
                     <div class="form-group">
                         <input type="text" class="form-control" name="fb_custom_event" placeholder="Nama Event" />
+                        <span class="error fb_custom_event"><!-- error --></span>
                     </div>
                   </div> 
 
@@ -6726,6 +6739,7 @@
     $('.btn-reset').click(function() {
       $('#pesanAlert').removeClass('alert-danger');
       $('#pesanAlert').children().remove();
+      $("input[name='fb_custom_event']").hide();
     });
 
     $(document).on('click', '.btn-editwa', function(e) {

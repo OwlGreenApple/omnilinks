@@ -16,6 +16,7 @@ use App\Helpers\Helper;
 use App\Rules\TrustedUrlCheck;
 use App\Mail\NotifClickFreeUser; 
 use App\Rules\CheckValidPageID; 
+use App\Rules\CheckFBEvents; 
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
@@ -1698,24 +1699,46 @@ class BiolinkController extends Controller
   {
     $temp_arr = array();
     $pixel_proof = null;
+    $pixelscript = '';
     $jenis_pixel = strip_tags($request->jenis_pixel);
+    $fb_pixel_id = strip_tags($request->fb_id);
+    $fb_event = strip_tags($request->fb_event);
+    $fb_custom_event = strip_tags($request->fb_custom_event);
 
     //VLIDATION TO DETERMINE FB PIXEL OR NOT
     if($jenis_pixel == 'fb')
     {
       $temp_arr['fb_id'] = ['required', 'string'];
-      $temp_arr['fb_event'] = ['required'];
+      $temp_arr['fb_event'] = ['required', new CheckFBEvents];
 
       if($request->fb_event == 'CustomEvent')
       {
         $temp_arr['fb_custom_event'] = ['required','max:190'];
       }
+
+      $pixelscript .= "<!-- Facebook Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)"; 
+      $pixelscript .= "return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; "; 
+      $pixelscript .= "if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);"; 
+      $pixelscript .= "t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}"; 
+      $pixelscript .= "(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');"; 
+
+      // IF CUSTOM EVENT
+      if($request->fb_event == 'CustomEvent')
+      {
+        $pixelscript .= "fbq('init', '".$fb_pixel_id."'); fbq('trackCustom', ".$fb_custom_event."); </script>";
+      }
+      else
+      {
+        $pixelscript .= "fbq('init', '".$fb_pixel_id."'); fbq('track', ".$fb_event."); </script>";
+      } 
+      $pixelscript .= '<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id='.$fb_pixel_id.'&ev=PageView&noscript=1" /></noscript> <!-- End Facebook Pixel Code -->'; 
     }
     else
     {
       $temp_arr['script'] = ['required', 'string' ];
+      $pixelscript = $request->script; 
     }
-    
+
     $temp_arr['title'] = ['required','string','max:190'];
 
     $messages = [
@@ -1728,19 +1751,23 @@ class BiolinkController extends Controller
     ];
 
     $validator = Validator::make($request->all(), $temp_arr, $messages);
-    $pixelscript = $request->script; 
+   
     
-    if($validator->fails()) {
+    if($validator->fails()) {  
       $arr['status'] = 'error';
       $arr['message'] = $validator->errors()->first('script');
+      $arr['statusfb'] = 'error';
+      $arr['fb_id'] = $validator->errors()->first('fb_id');
+      $arr['fb_event'] = $validator->errors()->first('fb_event');
+      $arr['fb_custom_event'] = $validator->errors()->first('fb_custom_event');
       $arr['statustitle'] = 'error';
       $arr['errtitle'] = $validator->errors()->first('title');
       return $arr;
     }
 
     //TO CHECK CORRECT SCRIPT WRITTING
-    preg_match_all('/<script>|<script.*?>/im', $pixelscript, $patternopen);
-    preg_match_all('/<\/script>/im', $pixelscript, $patternclose);
+    preg_match_all('/\<script\>|\<script.*\>/im', $pixelscript, $patternopen);
+    preg_match_all('/\<\/script\>/im', $pixelscript, $patternclose);
 
     $opentag = count($patternopen[0]);
     $closetag = count($patternclose[0]);
@@ -1770,7 +1797,7 @@ class BiolinkController extends Controller
   	$pixel->users_id=$user->id;
   	$pixel->title=strip_tags($request->title);
     $pixel->jenis_pixel=strip_tags($request->jenis_pixel);
-  	$pixel->script=$request->script; 
+  	$pixel->script=$pixelscript; 
   	$pixel->save();
   	// return redirect('/biolinks/'.$uuid);
     
