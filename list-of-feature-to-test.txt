@@ -20,6 +20,7 @@ Yg harus di test :
 			- https://test.vimeo.com
 			- https://www.vimeo.com
 			- https://vimeo.com
+	(*) test cronjob pada desc dan banner, link
 
 4. Banner pada halaman omli :
 	* harus jalan secara otomatis setiap 5 detik
@@ -33,6 +34,9 @@ Yg harus di test :
 	* activproof tidak tampil apabila point page = 0.
 	* user bisa beli activproof poin.
 	* history activproof.
+	
+  admin-page :
+    * pada halaman list-user bisa untuk menambahkan jumlah views activproof.
 
 6. centang connect-activrespon :
 	* Login dulu ke activrespon.com kemudian ke halaman list, klik generate kemudian copy dan isikan pada kolom API-key.

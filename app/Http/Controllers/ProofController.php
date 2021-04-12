@@ -107,6 +107,7 @@ class ProofController extends Controller
     {
       $page = Page::where('user_id',Auth::id())->get();
       $datatable_pagination = $request->pagination;
+      $data = [];
 
       if($page->count() > 0)
       {

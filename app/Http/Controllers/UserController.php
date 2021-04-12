@@ -128,6 +128,7 @@ class UserController extends Controller
       $user->username = $request->username;
       $user->is_admin = $request->is_admin;
       $user->membership = $request->membership;
+      $user->point += $request->proof_views; 
 
       if(isset($request->unlimited)){
         // $user->valid_until = null;

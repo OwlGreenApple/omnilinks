@@ -21,10 +21,6 @@
     $.fn.dataTable.moment( 'ddd, DD MMM YYYY' );
 
     refresh_page();
-
-    $('.formatted-date').datepicker({
-      dateFormat: 'yy/mm/dd',
-    });
   });
 
   function refresh_page(){
@@ -336,6 +332,15 @@
           </div>
 
           <div class="form-group row">
+            <label class="col-md-3 col-12">
+              <b>Activproof Views</b> 
+            </label>
+            <div class="col-md-9 col-12">
+              <input type="number" min="0" class="form-control" name="proof_views">
+            </div>
+          </div>
+
+          <div class="form-group row">
             <label class="col-md-3 col-12 password-field">
               <b>Password</b> 
             </label>
@@ -416,6 +421,12 @@
 
 <script type="text/javascript">
 
+  $(function(){
+    jQuery('.formatted-date').datetimepicker({
+      format: 'YYYY-MM-DD h:m:s'
+    });
+  });
+
   window.onload = function () {
 
   var users = [];
@@ -495,6 +506,7 @@
       $('#unlimited').prop('checked', false);
     }
     
+    // HIDE PASSWORD FIELD
     $('.password-field').hide();
     
     $('#id_edit').val($(this).attr('data-id'));
@@ -516,9 +528,7 @@
     $('.password-field').show();
     $('#password').val('');
     $('#password-confirm').val('');
-
     $('#id_edit').val('');
-
     $('#add-user').modal('show');
   });
 
