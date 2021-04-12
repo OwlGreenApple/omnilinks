@@ -186,7 +186,10 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::post('counting_point','ProofController@counting_point')->middleware('allocate');    
     Route::get('proof_history/{mod?}','ProofController@proof_history'); 
     Route::get('checkout_proof/{id}','ProofController@checkout_proof');   
-    Route::post('proof_payment','ProofController@proof_payment');   
+    Route::post('proof_payment','ProofController@proof_payment');  
+
+    //WA GENERATOR
+    Route::get('/wa-generator','ApiController@wa_generator');  
   });
 
 
@@ -239,7 +242,7 @@ if(env('DOMAIN_TYPE')=='main'){
     //List Ads 
     Route::get('/list-ads','AdsController@index');
     Route::get('/list-ads/load-ads','AdsController@load_ads');  
-    Route::get('/list-ads/view-log','AdsController@view_log');  
+    Route::get('/list-ads/view-log','AdsController@view_log'); 
   });
 }
 

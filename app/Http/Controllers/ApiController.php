@@ -223,5 +223,12 @@ class ApiController extends Controller
         }
   }
 
+  // WA GENERATOR
+
+  public function wa_generator()
+  {
+    return view('user.wagenerator.index');
+  }
+
 /* end class */
 }

@@ -81,6 +81,10 @@
   @endif
   <link rel="stylesheet" href="{{ asset('jquery-countdown/jQuery.countdownTimer.css') }}"/>
 
+  @if(Request::is('wa-generator')) 
+  <link rel="stylesheet" href="{{ asset('css/wa-generator.css') }}"/>
+  @endif
+
   <!-- bootstrap datetimepicker -->
   <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"/>
 

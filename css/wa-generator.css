@@ -1,0 +1,13 @@
+/*
+	Mon April 12 2021
+*/
+
+.bg-generator {
+	background: url('images/bg-generator.jpg') center;
+	height: 440px;
+    background-size: cover;
+}
+
+.bg-generator .container {
+	color : #fff;
+}
