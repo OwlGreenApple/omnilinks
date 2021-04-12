@@ -95,25 +95,32 @@
         $('#loader').show();
         $('.div-loading').addClass('background-load');
       },
+      statusCode: {
+        404: function() {
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+        },
+        200 : function(){
+          $('#loader').hide();
+          $('.div-loading').removeClass('background-load');
+        }
+      }
       success: function(result) {
-        $('#loader').hide();
-        $('.div-loading').removeClass('background-load');
-
         var data = jQuery.parseJSON(result);
         
         if(data.status=='success'){
+          refresh_page()
           $('#pesan').html(data.message);
           $('#pesan').addClass('alert-success');
           $('#pesan').removeClass('alert-warning');
           $('#pesan').show();
-          setTimeout(function(){refresh_page();},2000);
         } else {
           $('#pesan').html(data.message);
           $('#pesan').removeClass('alert-success');
           $('#pesan').addClass('alert-warning');
           $('#pesan').show();
         }
-      }
+      },
     });
   }
 
