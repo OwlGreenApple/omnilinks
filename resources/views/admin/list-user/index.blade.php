@@ -104,7 +104,7 @@
           $('#loader').hide();
           $('.div-loading').removeClass('background-load');
         }
-      }
+      },
       success: function(result) {
         var data = jQuery.parseJSON(result);
         
