@@ -102,12 +102,11 @@
         var data = jQuery.parseJSON(result);
         
         if(data.status=='success'){
-          refresh_page();
-
           $('#pesan').html(data.message);
           $('#pesan').addClass('alert-success');
           $('#pesan').removeClass('alert-warning');
           $('#pesan').show();
+          setTimeout(function(){refresh_page();},2000);
         } else {
           $('#pesan').html(data.message);
           $('#pesan').removeClass('alert-success');
