@@ -42,3 +42,13 @@ Yg harus di test :
 	* Login dulu ke activrespon.com kemudian ke halaman list, klik generate kemudian copy dan isikan pada kolom API-key.
 	* isikan judul kolom pada atas dan bawah.
 	* form bisa dipindah atas dan bawah.
+
+7. wa-generator
+	* masukkan no WA
+	* masukkan teks pesan
+	* apabila link di generate menghasilkan :
+		https://api.whatsapp.com/send?phone=62800000000&text=Dapatkan%20promo%20terbaru%20Omnilinkz
+		ket : 
+			- no : 62800000000 tidak boleh ada tanda + meski user memasukkan tanda +
+			- teks pesan apabila mengandung spasi hrs diganti %20
+	* tombol 'copy link' apabila di klik akan meng-copy link tersebut dan mengeluarkan pesan 	:Button Copied!
