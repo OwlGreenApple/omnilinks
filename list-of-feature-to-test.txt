@@ -50,5 +50,5 @@ Yg harus di test :
 		https://api.whatsapp.com/send?phone=62800000000&text=Dapatkan%20promo%20terbaru%20Omnilinkz
 		ket : 
 			- no : 62800000000 tidak boleh ada tanda + meski user memasukkan tanda +
-			- teks pesan apabila mengandung spasi hrs diganti %20
+			- teks pesan apabila mengandung spasi hrs diganti %20, contoh : test pesan => test%20pesan
 	* tombol 'copy link' apabila di klik akan meng-copy link tersebut dan mengeluarkan pesan 	:Button Copied!
