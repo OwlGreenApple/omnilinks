@@ -2,7 +2,7 @@
 	to make banner run automatically every 3 seconds
 */
 
-var secs = 3000;
+var secs = 5000;
 
 $(function()
 {

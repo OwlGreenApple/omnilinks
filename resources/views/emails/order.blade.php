@@ -1,4 +1,4 @@
-Terima kasih, anda telah melakukan pemesanan Omnilinkz service.<br>
+Terima kasih, anda telah melakukan pemesanan topup Activproof service.<br>
 Info Order anda adalah sebagai berikut <br>
 <br>
 <strong>No Order :</strong> {{$no_order}} <br>

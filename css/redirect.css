@@ -1,3 +1,7 @@
+.error {
+  color : red !important;
+}
+
 .imagetitle{
   border-radius: 50%; 
   width:100%;
@@ -77,6 +81,28 @@ a:hover {
 
 .header-txt > a:hover {
   text-decoration: underline;
+}
+
+/*link button*/
+
+.image_icon_link {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 23px;
+  top: 7px;
+}
+
+.image_icon_link_btn {
+  border-radius: 28px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+
+/* STYLING FORM API FORM */
+#act_text, #act_bottom_text, #mc_text, #mc_bottom_text {
+  word-break: break-word;
 }
 
 @media(min-width : 280px) and (max-width:359px){

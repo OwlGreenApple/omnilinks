@@ -1,0 +1,54 @@
+Yg harus di test : 
+
+1. centang connect-mailchimp :
+	* buat akun mailchimp
+	* ikuti petunjuk pada icon "?" .
+	* form bisa dipindah atas dan bawah.
+
+2. menampilkan icon gambar pada tombol link:
+	* klik "choose file" kemudian pilih gambar yg ingin ditampilkan, sesuaikan dengan rasio 1:1 cth : 48 x 48 px
+	* gambar bisa keluar pada preview
+	* dan gambar bisa keluar pada halaman omli.club
+
+3. situs / link yg di blokir keminfo (trust positif) :
+	* apabila dimasukkan maka akan tervalidasi / keluar pesan pada :
+		- link
+		- banner link
+	* pada kolom deskripsi (tampilan):
+		- kolom link akan mengeluarkan peringatan apabila user memasukkan link tanpa http / https.
+		- keluar error message apabila user memasukkan link yg diblokir oleh kominfo cth :
+			- https://test.vimeo.com
+			- https://www.vimeo.com
+			- https://vimeo.com
+	(*) test cronjob pada desc dan banner, link
+
+4. Banner pada halaman omli :
+	* harus jalan secara otomatis setiap 5 detik
+
+5. Activproof
+	* panjang karakter maksimal 125.
+	* poin akan berkurang apabila user menggunakkan dari ip yang berbeda dan tidak dalam keadaan login.
+	* poin tidak berkurang apabila user melihat activproof pada saat user dalam keadaan login.
+	* poin berkurang maksimal 3 apabila user berasal dari ip yg sama dalam 1 hari (untuk mengetest silahkan ganti wi-fi apabila sdh berkurang 3x).
+	* poin activproof apabila di kurangi / ditambah akan merubah total poin.
+	* activproof tidak tampil apabila point page = 0.
+	* user bisa beli activproof poin.
+	* history activproof.
+	
+  admin-page :
+    * pada halaman list-user bisa untuk menambahkan jumlah views activproof.
+
+6. centang connect-activrespon :
+	* Login dulu ke activrespon.com kemudian ke halaman list, klik generate kemudian copy dan isikan pada kolom API-key.
+	* isikan judul kolom pada atas dan bawah.
+	* form bisa dipindah atas dan bawah.
+
+7. wa-generator
+	* masukkan no WA
+	* masukkan teks pesan
+	* apabila link di generate menghasilkan :
+		https://api.whatsapp.com/send?phone=62800000000&text=Dapatkan%20promo%20terbaru%20Omnilinkz
+		ket : 
+			- no : 62800000000 tidak boleh ada tanda + meski user memasukkan tanda +
+			- teks pesan apabila mengandung spasi hrs diganti %20, contoh : test pesan => test%20pesan
+	* tombol 'copy link' apabila di klik akan meng-copy link tersebut dan mengeluarkan pesan 	:Button Copied!

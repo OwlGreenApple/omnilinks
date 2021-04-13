@@ -15,11 +15,15 @@ use App\Console\Commands\CropProfileImage;
 use App\Helpers\Helper;
 use App\Rules\TrustedUrlCheck;
 use App\Mail\NotifClickFreeUser; 
+use App\Rules\CheckValidPageID; 
+use App\Rules\CheckFBEvents; 
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
-use Auth,Carbon,Validator,Storage,Mail,DB;
+use Illuminate\Database\QueryException;
+use Auth,Carbon,Validator,Storage,Mail,DB,Session;
 use Ramsey\Uuid\Uuid;
+use App\Http\Controllers\ApiController;
 
 class BiolinkController extends Controller
 { 
@@ -204,7 +208,9 @@ class BiolinkController extends Controller
                 ->get();
     $banner=Banner::where('users_id',$user->id)
                   ->where('pages_id',$page->id)
+                  ->orderBy('id','desc')
                   ->get();
+
   	if(!is_null($page)){
   		$pageid=$page->id;
   	}
@@ -237,8 +243,13 @@ class BiolinkController extends Controller
       $description = "";
     }
 
+    //connect API
+    ($page->connect_activrespon == 1)?$ca = 'checked':$ca = '';
+    ($page->connect_mailchimp == 1)?$cm = 'checked':$cm = '';
+
     //proof
     $proof = $this->getProof($pageid);
+    $proof_text_color = $page->proof_text_color;
 
     return view('user.dashboard.biolinks')->with([
     	'uuid'=>$uuid,
@@ -252,12 +263,16 @@ class BiolinkController extends Controller
       'mod'=>$mod,
       'custom_link'=>$custom_link,
       'description'=>$description,
-      'proof'=>$proof
+      'proof'=>$proof,
+      'proof_text_color'=>$proof_text_color,
+      'connect_activrespon'=>$ca,
+      'connect_mailchimp'=>$cm,
     ]);  
   }
 
   public function saveProof(Request $request)
   {
+      // dd($request->all());
       if($request->status == 0)
       {
          $proof = new Proof;
@@ -282,6 +297,7 @@ class BiolinkController extends Controller
       if($request->file('proof_image') <> null)
       {
         $imageUpload = $this->resizeImage($request->file('proof_image'),100,100);
+        // $imageUpload = $request->file('proof_image');
         $dt = Carbon::now();
         $ext = $request->file('proof_image')->getClientOriginalExtension();
         $dir = 'proof_page/'.explode(' ',trim(Auth::user()->name))[0].'-'.Auth::user()->id;
@@ -294,13 +310,14 @@ class BiolinkController extends Controller
       {
         $proof->save();
         $data['data'] = 1;
+        $data['error'] = 0;
       }
       catch(QueryException $e)
       {
         $data['data'] = 0;
+        $data['error'] = 1;
       }
 
-      $data['error'] = 0;
       return response()->json($data);
   }
 
@@ -329,15 +346,16 @@ class BiolinkController extends Controller
       $pageid = $request->pageid;
       $preview = $request->preview;
       $query = $this->getProof($pageid);
-      $pages = Page::where('id','=',$pageid)->first();
+      $page = Page::where('id','=',$pageid)->first();
+      $proof_text_color = $page->proof_text_color;
 
       if($preview == 1)
       {
-        return view('user.dashboard.previewproof',['proof'=>$query]);
+        return view('user.dashboard.previewproof',['proof'=>$query,'proof_text_color'=>$proof_text_color]);
       }
       else
       {
-        return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$pages]);
+        return view('user.dashboard.contentproof',['query'=>$query,'pages'=>$page]);
       }   
   }
 
@@ -382,6 +400,170 @@ class BiolinkController extends Controller
       return response()->json($data);
   }
 
+  //check valid api key activrespon
+  private function check_valid_api_key($api_key)
+  {
+    $url = "https://activrespon.com/dashboard/get_data_api";
+
+    $data = array(
+      "from_omnilinkz" => '$2y$10$JMoAeSl6aV0JCHmTNNafTOuNlMg/S7Yo8a6LUauEZe4Rcy.YdU37S',
+      "api_key" => $api_key,
+      "check"=>1
+    );
+
+    $data_string = json_encode($data);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json'
+    ));
+    
+    $res=curl_exec($ch);
+
+    $json = json_decode($res,true);
+
+    if($json['error'] == 0)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+    
+  }
+
+  //SAVE SETTINGS TO CONNECT MAILCHIMP AND ACTIVRESPON
+  public function save_connect(Request $request)
+  {
+    $page_id = (int)strip_tags($request->page_id);
+    $list_id = strip_tags($request->list_id); //activrespon api key
+
+    $apicontroller = new ApiController;
+    $api_key = strip_tags($request->api_key); //mailchimp api key
+    $server_mailchimp = strip_tags($request->server_mailchimp);
+    $audience_id = strip_tags($request->audience_id);
+
+    $connect_activrespon = (int)strip_tags($request->connect_activrespon);
+    $connect_mailchimp = (int)strip_tags($request->connect_mailchimp);
+
+    $act_form_text = strip_tags($request->act_form_text);
+    $act_form_bottom = strip_tags($request->act_form_bottom);
+    $mc_form_text = strip_tags($request->mc_form_text);
+    $mc_form_bottom = strip_tags($request->mc_form_bottom);
+    $position_api = strip_tags($request->position_api);
+
+    //CHECK USER API KEY VALID OR OTHERWISE ON ACTIVRESPON
+    if($this->check_valid_api_key($list_id) == false && $list_id !== "")
+    {
+       return response()->json(['error'=>1,'msg'=>1]);
+    }
+
+     //VALIDATE MAILCHIM : SERVER,API KEY,LIST/AUDIENCE
+    if($apicontroller->mailchimp_valid_api($api_key,$server_mailchimp) == false && ($api_key !== "" || $server_mailchimp !== ""))
+    {
+      $err['error'] = 1;
+      $err['msg'] = 2;
+      return response()->json($err);
+    }
+    //$act_form_bottom $mc_form_bottom
+    $rules['page_id'] = ['numeric',new CheckValidPageID];
+    $rules['position_api'] = ['required','numeric','min:0','max:1'];
+
+    //if connect activrespon checked
+    $rules['act_form_text'] = ['max : 190']; //activrespon form title
+    $rules['act_form_bottom'] = ['max : 190']; //activrespon form title bottom
+    if($connect_activrespon == 1)
+    {
+      $rules['list_id'] = ['required','max : 100']; //activrespon api key
+    }
+    else
+    {
+      $rules['list_id'] = ['max : 100'];
+    }
+
+    //if connect mailchimp checked
+    $rules['mc_form_text'] = ['max : 190']; //mailchimp form title
+    $rules['mc_form_bottom'] = ['max : 190']; //mailchimp form title botton
+    if($connect_mailchimp == 1)
+    {
+      $rules['api_key'] = ['required','max : 100']; // mailchimp api key
+      $rules['server_mailchimp'] = ['required','max : 30']; // mailchimp server
+      $rules['audience_id'] = ['required','max : 50']; // mailchimp list id / audience id
+    }
+    else
+    {
+      $rules['api_key'] = ['max : 100']; // mailchimp api key
+      $rules['server_mailchimp'] = ['max : 30']; // mailchimp server
+      $rules['audience_id'] = ['max : 50']; // mailchimp list id / audience id
+    }
+
+    $validator = Validator::make($request->all(),$rules);
+
+    if($validator->fails() == true)
+    {
+      $err = $validator->errors();
+      $errors = [
+        'error'=>2,
+        'page_id'=>$err->first('page_id'),
+        'list_id'=>$err->first('list_id'),
+        'act_form_text'=>$err->first('act_form_text'),
+        'act_form_bottom'=>$err->first('act_form_bottom'),
+        'api_key'=>$err->first('api_key'),
+        'server_mailchimp'=>$err->first('server_mailchimp'),
+        'audience_id'=>$err->first('audience_id'),
+        'mc_form_text'=>$err->first('mc_form_text'),
+        'mc_form_bottom'=>$err->first('mc_form_bottom'),
+        'position_api'=>$err->first('position_api'),
+      ];
+
+      return response()->json($errors);
+    }
+
+    $page = Page::find($page_id);
+
+    // dd($page);
+
+    $data_page['connect_activrespon'] = $connect_activrespon;
+    $data_page['connect_mailchimp'] = $connect_mailchimp;
+    $data_page['position_api'] = $position_api;
+
+    if($connect_activrespon == 1 && !is_null($page))
+    {
+      $data_page['list_id'] = $list_id;
+      $data_page['act_form_text'] = $act_form_text;
+      $data_page['act_form_bottom'] = $act_form_bottom;
+    }
+
+    if($connect_mailchimp == 1 && !is_null($page))
+    {
+      $data_page['api_key_mc'] = $api_key;
+      $data_page['server_mailchimp'] = $server_mailchimp;
+      $data_page['audience_id'] = $audience_id;
+      $data_page['mc_form_text'] = $mc_form_text;
+      $data_page['mc_form_bottom'] = $mc_form_bottom;
+    }
+
+    try
+    {
+      Page::where('id',$page_id)->update($data_page);
+      return response()->json(['error'=>0]);
+    }
+    catch(QueryException $e)
+    {
+      // echo $e->getMessage();
+      return response()->json(['error'=>1]);
+    }
+  }
+
+  //display wachat
   public function getWAchatButton($pageid)
   {
       $chatdata = array();
@@ -460,12 +642,12 @@ class BiolinkController extends Controller
       $page->save();
 
       
-      $links = Link::where('pages_id','=',$page->id)
+      $links = Link::where([['pages_id','=',$page->id],['not_valid','=',0]])
                 ->orderBy('created_at','descend')
                 ->get();
 
-      $banner = Banner::where('pages_id','=',$page->id)
-                  ->orderBy('created_at','ascend')
+      $banner = Banner::where([['pages_id','=',$page->id],['not_valid','=',0]])
+                  ->orderBy('id','desc')
                   ->get();
 
       $sort_msg = array_filter(explode(';', $page->sort_msg));
@@ -498,7 +680,7 @@ class BiolinkController extends Controller
         $ads = null;
       }
       
-      #wachat member
+      //wachat member
       $wachat = $this->getWAchatButton($page->id);
       $validmember = false;
 
@@ -522,6 +704,8 @@ class BiolinkController extends Controller
               ->with('wachat',$wachat)
               ->with('valid',$validmember)
               ->with('proof',$proof)
+              ->with('page_name',$names)
+              ->with('user_id',$page->user_id)
               ;
   }
 
@@ -563,11 +747,32 @@ class BiolinkController extends Controller
       $arr['message'] = "Silahkan Login ulang, <a href='".url('login')."'>klik</a>";
       return $arr;
     }
-    
+
+    $desc = $request->description;
+     
+    /* FILTER FOR SECURITY REPLACEMENT STRIPTAGS */
+    preg_match_all('/&lt;script&gt;|&lt;script.*&gt;|&lt;a.*&gt;/im', $desc, $patternopen);
+    $opentag = count($patternopen[0]);
+   
+    if($opentag > 0)
+    {
+       $desc = preg_replace("/&lt;script.*&gt;|&lt;script&gt;|&lt;\/script&gt;|\(|\)|href\=\".*\"/im", "", $desc);
+    }
+
+    //TRUSTPOSITIF FILTER
+    $dt = self::desc_trust_positif($desc);
+
+    if(count($dt) > 0)
+    {
+      $arr['status'] = 'error';
+      $arr['message'] = "Maaf, deskripsi anda mengandung link yang diblokir oleh kominfo";
+      return $arr;
+    }
+
     $temp_arr = array();
     $temp_arr['judul'] = ['required', 'string',  'max:191' ];
     // $temp_arr['imagepages'] = ['image', 'max:1000', 'dimensions:max_width=150,min_height=150'];
-    $temp_arr['imagepages'] = ['image', 'max:1000' ];
+    $temp_arr['imagepages'] = ['mimes:jpeg,jpg,png', 'max:1000' ];
 
     if (!is_null($request->judulBanner)){
       if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super') 
@@ -587,7 +792,7 @@ class BiolinkController extends Controller
             $arr['message'] = "Banner Link ".$i." tidak valid";
             return $arr;
           }
-          $temp_arr['bannerImage.'.$i] = ['image', 'max:1000'];
+          $temp_arr['bannerImage.'.$i] = ['mimes:jpeg,jpg,png', 'max:1000'];
         }
       }
     }
@@ -640,7 +845,7 @@ class BiolinkController extends Controller
     }
     
     $page->page_title=$request->judul;
-    $page->description=$request->description;
+    $page->description=$desc;
     // $page->link_utama=$request->link;
     
     if(!is_null($request->file('imagepages')))
@@ -648,7 +853,7 @@ class BiolinkController extends Controller
       // $path = Storage::putFile('template',$request->file('imagepages')); 
       // $page->image_pages = $path;
 
-      #RESIZE FILE IF OVER 100PX
+      //RESIZE FILE IF OVER 100PX
       $arr_size = getimagesize($request->file('imagepages'));
       $imagewidth = $arr_size[0];
       $imageheight = $arr_size[1];
@@ -724,6 +929,7 @@ class BiolinkController extends Controller
     $page->is_text_color=$request->is_text_color;
     $page->bio_color=$request->bioColor;
     $page->is_bio_color=$request->is_bio_color;
+    $page->proof_text_color=$request->proof_text_color;
 
     /*if(Auth::user()->membership=='elite'){
       $page->powered=0;
@@ -738,8 +944,142 @@ class BiolinkController extends Controller
     else {
       $names=$page->premium_names;
     }
-    
-    if (!is_null($request->judulBanner)){
+
+    /*** BANNER LOGIC ***/
+
+    if(isset($_FILES['bannerImage']['tmp_name']) && count($_FILES['bannerImage']['tmp_name']) > 0):
+      foreach($_FILES['bannerImage']['tmp_name'] as $file)
+      {
+        $files[] = $file;
+      }
+    else:
+      $short_link =env('SHORT_LINK');
+      $arr['status'] = 'success';
+      Session::flash('msg', 'Update berhasil, silahkan copy link di bawah ini');
+      return response()->json($arr);
+    endif;
+
+    if (!is_null($request->judulBanner) && ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super'))
+    {
+      $mapping = array_map(function ($title,$link,$id,$pixel,$img,$status) {
+        return array(
+            'title' => $title,
+            'bannerlink' => $link,
+            'bannerid' => $id,
+            'bannerpixel' => $pixel,
+            'bannerstatus' => $status,
+            'bannerimg' => $img
+        );
+      },$request->judulBanner,$request->linkBanner,$request->idBanner,$request->bannerpixel,$files,$request->statusBanner);
+    }
+    else
+    {
+      $mapping = 0;
+    }
+
+     // dd($mapping);
+
+    if(count($mapping) > 0)
+    {
+      foreach ($mapping as $key => $row):
+
+        if($row['bannerid'] == null && $row['bannerimg'] == "")
+        {
+          $arr['status'] = 'error';
+          $arr['message'] = 'Banner image tidak boleh kosong';
+          return response()->json($arr);
+        }
+
+        // add banner
+        if($row['bannerid']=="" || $row['bannerid']==null)
+        {
+            $banner= new Banner();
+        } 
+        else 
+        {
+            // update
+            $banner= Banner::find($row['bannerid']);
+        }
+
+        //delete
+        $bannerde= Banner::find($row['bannerid']);
+        if($row['bannerstatus'] === "delete" && !is_null($bannerde))
+        { 
+          $image_path = $banner->images_banner;
+          try
+          {
+            Storage::disk('s3')->delete($image_path);
+            $bannerde->delete();
+          }
+          catch(QueryException $e)
+          {
+            // $e->getMessage();
+            $arr['status'] = 'error';
+            $arr['message'] = 'Maaf, saat ini server kami terlalu sibuk, mohon coba lagi nanti.';
+            return response()->json($arr);
+          }
+        }
+
+        $banner->users_id = $user->id;
+        $banner->pages_id = $page->id;
+        $banner->title = $row['title'];
+        $banner->link = $row['bannerlink'];
+        $banner->pixel_id = $row['bannerpixel'];
+
+        //image filter
+        $image_upload = null;
+        if($row['bannerimg'] <> "" || !empty($row['bannerimg']))
+        {
+          $arr_size = getimagesize( $row['bannerimg'] );
+          $ratio_img = $arr_size[0] / $arr_size[1];
+          if ($ratio_img<2.1)  {
+            $arr['status'] = 'error';
+            $temp = $i+1;
+            $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih besar dari 2.1';
+            return response()->json($arr);
+          }
+          if ($ratio_img>2.2)  {
+            $arr['status'] = 'error';
+            $temp = $i+1;
+            $arr['message'] ='Image ke-'. $temp .' -> ratio width / height harus lebih kecil dari 2.2';
+            return response()->json($arr);
+          }
+          $image_upload = $this->upload_image_banner($user,$banner, $row['bannerimg'],$row['bannerid']);
+        }
+        
+        if($image_upload <> null)
+        {
+          $banner->images_banner = $image_upload;
+        }
+
+        try 
+        {
+          $banner->save();
+        }
+        catch(QueryException $e)
+        {
+          // dd($e->getMessage());
+          $arr['status'] = 'error';
+          $arr['message'] = 'Maaf, saat ini server kami terlalu sibuk, mohon coba lagi nanti.';
+          return response()->json($arr);
+        }
+
+      endforeach;
+    }
+
+     /*** END BANNER LOGIC ***/
+
+    $short_link =env('SHORT_LINK');
+    $arr['status'] = 'success';
+    Session::flash('msg', 'Update berhasil, silahkan copy link di bawah ini');
+    // $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+    // $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
+   
+    return response()->json($arr);
+
+    // dd('finish');
+
+   /* if (!is_null($request->judulBanner)){
       if ($user->membership=='pro' or  $user->membership=='elite' or  $user->membership=='popular' or  $user->membership=='super')
       {
         $idbanner=$request->idBanner;
@@ -747,6 +1087,10 @@ class BiolinkController extends Controller
       
         for($i=0;$i<count($request->judulBanner);$i++)
         {
+          */
+
+
+
           //pengecekan banner 
           /*
           $validator = Validator::make($request->all(), [
@@ -767,7 +1111,7 @@ class BiolinkController extends Controller
           }
           */
           
-          if($request->hasFile('bannerImage.'.$i)) {
+          /*if($request->hasFile('bannerImage.'.$i)) {
             $arr_size = getimagesize( $request->file('bannerImage')[$i] );
             $ratio_img = $arr_size[0] / $arr_size[1];
             if ($ratio_img<2.1)  {
@@ -783,15 +1127,16 @@ class BiolinkController extends Controller
               return $arr;
             }
           }
-
-          if($idbanner[$i]==""){
+*/
+          /*if($idbanner[$i]==""){
             $banner= new Banner();
             if(!$request->hasFile('bannerImage.'.$i)) {
               $arr['status'] = 'error';
               $arr['message'] = 'Banner image is required';
               return $arr;
             }
-          } else {
+          } 
+          else {
             if ($statusbanner[$i]=="delete"){
               $bannerde= Banner::find($request->idBanner[$i]);
               if (!is_null($bannerde)){
@@ -817,7 +1162,7 @@ class BiolinkController extends Controller
             // dd($dir."/".$filename);
             // if($idbanner[$i]==""){
 
-            #FILTER TO REIZE BANNER IMAGE IF BANNER IMAGE'S HEIGHT > 200
+            //FILTER TO REIZE BANNER IMAGE IF BANNER IMAGE'S HEIGHT > 200
 
              $banner_image_size = getimagesize($request->file('bannerImage')[$i]);
              $bannerimagewidth = $banner_image_size[0];
@@ -843,13 +1188,61 @@ class BiolinkController extends Controller
 
         }
       }
-    }
+    }*/
 
-    $arr['status'] = 'success';
-    $short_link =env('SHORT_LINK');
-    // $arr['message'] = 'Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
-    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
-    return $arr;
+  }
+
+  // DESCRIPTION ARRAY EXPLODE FOR TRUST POSITIF BLOCK
+  public static function desc_trust_positif($desc)
+  {
+    $dt = array();
+    $desc = explode('"',$desc);
+    $desc = preg_grep('/\:\/\/(.*)\.(.*?)/i',$desc);
+
+    if(count($desc) > 0):
+      foreach($desc as $filter)
+      {
+        if(Helper::CheckTrustedLink($filter) == false)
+        {
+          $dt[] = $filter;
+        }
+      }
+    endif;
+    
+    return $dt;
+  }
+
+  private function upload_image_banner($user,$banner,$file,$idbanner)
+  {
+      $dt = Carbon::now();
+      $arr_dir = null;
+      $dir = 'banner/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+      $filename = $dt->format('ymdHis').'-'.$banner->id.'.jpg';
+
+      //FILTER TO REIZE BANNER IMAGE IF BANNER IMAGE'S HEIGHT > 200
+
+       $banner_image_size = getimagesize($file);
+       $bannerimagewidth = $banner_image_size[0];
+       $bannerimageheight = $banner_image_size[1];
+
+       if($bannerimageheight > 200)
+       {
+          $bannerUpload = $this->resizeImage($file,434,200);
+       }
+       else
+       {
+          $bannerUpload =   file_get_contents($file);
+       }
+
+      if( $banner->images_banner=="0" ||$idbanner=="" || $idbanner==null)
+      {
+        Storage::disk('s3')->put($dir."/".$filename,$bannerUpload, 'public');
+        $arr_dir = $dir."/".$filename;
+      } else {
+        Storage::disk('s3')->put($banner->images_banner,$bannerUpload, 'public');
+      }
+
+      return $arr_dir;
   }
   
   public function addBanner()
@@ -865,6 +1258,9 @@ class BiolinkController extends Controller
 
   public function savelink(Request $request)
   {
+    // dd($request->all());
+    // dd(json_decode($request->msg,true));
+
     $temp_arr = array();
     if (in_array("wa", $request->sortmsg)) {
       $temp_arr['wa'] = ['required', 'max:191'];
@@ -899,7 +1295,8 @@ class BiolinkController extends Controller
         { 
           $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
           // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
-          $temp_arr['url.'.$i] = ['required', 'string', 'max:191', new TrustedUrlCheck($i)];
+          $temp_arr['url.'.$i] = ['required', 'string', 'max:191',new TrustedUrlCheck($i)];
+          $temp_arr['icon_link.'.$i] = ['max:300','mimes:jpeg,jpg,png'];
         }
         else
         {
@@ -986,16 +1383,16 @@ class BiolinkController extends Controller
       $page->messenger_pixel_id=0;
     }
 
-  	$page->wa_link=$request->wa;
-  	$page->fb_link=$request->fb;
-  	$page->twitter_link=$request->twitter;
-  	$page->telegram_link=$request->telegram;
-  	$page->skype_link=$request->skype;
-  	$page->youtube_link=$request->youtube; 	
-    $page->ig_link=$request->ig;
-    $page->tk_link=$request->tiktok;
-    $page->line_link=$request->line;
-    $page->messenger_link=$request->messenger;
+  	$page->wa_link=strip_tags($request->wa);
+  	$page->fb_link=strip_tags($request->fb);
+  	$page->twitter_link=strip_tags($request->twitter);
+  	$page->telegram_link=strip_tags($request->telegram);
+  	$page->skype_link=strip_tags($request->skype);
+  	$page->youtube_link=strip_tags($request->youtube);
+    $page->ig_link=strip_tags($request->ig);
+    $page->tk_link=strip_tags($request->tiktok);
+    $page->line_link=strip_tags($request->line);
+    $page->messenger_link=strip_tags($request->messenger);
 
     $page->is_click_bait=$request->is_click_bait;
 
@@ -1011,7 +1408,7 @@ class BiolinkController extends Controller
     
     //dicheck dulu
     $counter_new = 0; $counter_update = 0; $counter_delete = 0;
-    if (!is_null($request->title)){
+    if (!is_null($request->title)):
       /*
       for ($i=0; $i <count($request->title); $i++)
       { 
@@ -1037,6 +1434,7 @@ class BiolinkController extends Controller
         return $arr;
       }*/
 
+      // LINK LOGIC
       for ($i=0; $i <count($request->title); $i++)
       {   
 
@@ -1045,16 +1443,25 @@ class BiolinkController extends Controller
           $url=new Link();
           $counter_new += 1;
         }
+        elseif($deletelink[$i]=='delete')
+        {
+          $icon_link = null;
+          $linkku=Link::find($request->idlink[$i]);
+
+          if (!is_null($linkku)){
+            $icon_link = $linkku->icon_link;
+            $counter_delete += 1;
+            $linkku->delete();
+          }
+
+          if($icon_link !== null)
+          {
+            Storage::disk('s3')->delete($icon_link);
+          }
+          continue;
+        }
         else
         {
-          if ($deletelink[$i]=='delete') {
-            $linkku=Link::find($request->idlink[$i]);
-            if (!is_null($linkku)){
-              $counter_delete += 1;
-              $linkku->delete();
-            }
-            continue;
-          }
           // $url=Link::where('id','=',$id[$i])->first();
           $counter_update += 1;
           $url=Link::find($request->idlink[$i]);
@@ -1076,21 +1483,40 @@ class BiolinkController extends Controller
         $url->pages_id=$page->id;
         $url->names=null;
         $url->users_id=$user->id;
-        $url->options=$request->options[$i];
-        $url->title=$request->title[$i];
-        $url->link=$request->url[$i];
-        $url->youtube_embed = $request->embed[$i];
+        $url->options=strip_tags($request->options[$i]);
+        $url->title=strip_tags($request->title[$i]);
+        $url->link=strip_tags($request->url[$i]);
+        $url->youtube_embed = strip_tags($request->embed[$i]);
 
         if($free == false)
         {
-          $url->pixel_id = $request->linkpixel[$i];
+          $url->pixel_id = strip_tags($request->linkpixel[$i]);
         }
         else
         {
           $url->pixel_id = 0;
         }
 
-        $url->save();
+        //ICON LINK
+        $iconlink = $_FILES['iconlink']['tmp_name']; //replacement of $request->file()
+        $icname = $_FILES['iconlink']['name']; //file name for extension
+        if($iconlink[$i] !== "")
+        {
+          // SEND IMAGE ICON TO S3
+          $icon_link = $this->icon_link_filter($iconlink[$i],$page,$icname[$i]);
+          //SAVE IMAGE ICON PATH / LINK
+          $url->icon_link = $icon_link;
+        }
+
+        try
+        {
+          $url->save();
+        }
+        catch(QueryException $e)
+        {
+          //$e->getMessage();
+        }
+        
 
         /*if($sort_link=='')
         {
@@ -1110,9 +1536,9 @@ class BiolinkController extends Controller
             return $arr;
           }
         }*/
+        sleep(1);//to prevent same file renaming
       }
-    }
-    
+    endif;
     
     $sort_msg = '';
     
@@ -1183,9 +1609,9 @@ class BiolinkController extends Controller
       // }
     }
 
-    $page->sort_link = $sort_link;
-    $page->sort_msg = $sort_msg;
-    $page->sort_sosmed = $sort_sosmed;
+    $page->sort_link = strip_tags($sort_link);
+    $page->sort_msg = strip_tags($sort_msg);
+    $page->sort_sosmed = strip_tags($sort_sosmed);
     // $page->save();
 
     /*if((is_null($page->wa_link) && is_null($page->skype_link) && !is_null($page->telegram_link)) || (!is_null($page->wa_link) && is_null($page->skype_link) && is_null($page->telegram_link)) || (is_null($page->wa_link) && !is_null($page->skype_link) && is_null($page->telegram_link)))
@@ -1217,14 +1643,51 @@ class BiolinkController extends Controller
     {
       $page->colom_sosmed='col-md-3 col-3 text-center';
     }*/
-    $page->save();
-
-    $arr['status'] = 'success';
+    try
+    {
+      $page->save();
+      $arr['status'] = 'success';
+      $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+    }
+    catch(QueryException $e)
+    {
+      // dd($e->getMessage());
+      $arr['status'] = 'error';
+      $arr['message'] = 'Server kami terlalu sibuk, silahkan dicoba lagi nanti.';
+    }
 
     $short_link = env('SHORT_LINK');
     // $arr['message'] ='Letakkan link berikut di Bio Instagram <a href="https://'.$short_link.'/'.$names.'" target="_blank">'.$short_link.'/'.$names.'</a> &nbsp; <span class="btn-copy" data-link="https://'.$short_link.'/'.$names.'"><i class="fas fa-file"></i></span>';
-    $arr['message'] = 'Update berhasil, silahkan copy link di bawah ini';
+   
   	return $arr;
+  }
+
+  private function icon_link_filter($file,$page,$fname)
+  {
+    //RESIZE FILE IF OVER 100PX
+      $user = Auth::user();
+      $arr_size = getimagesize($file);
+      $imagewidth = $arr_size[0];
+      $imageheight = $arr_size[1];
+      
+      if($imagewidth > 40 || $imageheight > 40)
+      {
+          $imageUpload = $this->resizeImage($file,40,40);
+      }
+      else
+      {
+          $imageUpload =  file_get_contents($file);
+      }
+
+     
+      $dt = Carbon::now();
+      $ext = explode(".",$fname)[1];
+      $dir = 'icon_link/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+      $filename = $dt->format('ymdHis').'-'.$page->id.'.'.$ext;
+      Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
+      $icon_image_path = $dir."/".$filename;
+
+      return $icon_image_path;
   }
 
   public function test(Request $request)
@@ -1234,11 +1697,48 @@ class BiolinkController extends Controller
 
   public function savepixel(Request $request)
   {
-
     $temp_arr = array();
     $pixel_proof = null;
-    $temp_arr['script'] = ['required', 'string' ];
-    $pixelscript = $request->script;
+    $pixelscript = '';
+    $jenis_pixel = strip_tags($request->jenis_pixel);
+    $fb_pixel_id = strip_tags($request->fb_id);
+    $fb_event = strip_tags($request->fb_event);
+    $fb_custom_event = strip_tags($request->fb_custom_event);
+
+    //VLIDATION TO DETERMINE FB PIXEL OR NOT
+    if($jenis_pixel == 'fb')
+    {
+      $temp_arr['fb_id'] = ['required', 'string'];
+      $temp_arr['fb_event'] = ['required', new CheckFBEvents];
+
+      if($request->fb_event == 'CustomEvent')
+      {
+        $temp_arr['fb_custom_event'] = ['required','max:190'];
+      }
+
+      $pixelscript .= "<!-- Facebook Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)"; 
+      $pixelscript .= "return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; "; 
+      $pixelscript .= "if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);"; 
+      $pixelscript .= "t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}"; 
+      $pixelscript .= "(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');"; 
+
+      // IF CUSTOM EVENT
+      if($request->fb_event == 'CustomEvent')
+      {
+        $pixelscript .= "fbq('init', '".$fb_pixel_id."'); fbq('trackCustom', ".$fb_custom_event."); </script>";
+      }
+      else
+      {
+        $pixelscript .= "fbq('init', '".$fb_pixel_id."'); fbq('track', ".$fb_event."); </script>";
+      } 
+      $pixelscript .= '<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id='.$fb_pixel_id.'&ev=PageView&noscript=1" /></noscript> <!-- End Facebook Pixel Code -->'; 
+    }
+    else
+    {
+      $temp_arr['script'] = ['required', 'string' ];
+      $pixelscript = $request->script; 
+    }
+
     $temp_arr['title'] = ['required','string','max:190'];
 
     $messages = [
@@ -1250,24 +1750,29 @@ class BiolinkController extends Controller
         'in'      => 'The :attribute must be one of the following types: :values',*/
     ];
 
-    $validator = Validator::make($request->all(), $temp_arr, $messages); 
+    $validator = Validator::make($request->all(), $temp_arr, $messages);
+   
     
-    if($validator->fails()) {
+    if($validator->fails()) {  
       $arr['status'] = 'error';
       $arr['message'] = $validator->errors()->first('script');
+      $arr['statusfb'] = 'error';
+      $arr['fb_id'] = $validator->errors()->first('fb_id');
+      $arr['fb_event'] = $validator->errors()->first('fb_event');
+      $arr['fb_custom_event'] = $validator->errors()->first('fb_custom_event');
       $arr['statustitle'] = 'error';
       $arr['errtitle'] = $validator->errors()->first('title');
       return $arr;
     }
 
-    #TO CHECK CORRECT SCRIPT WRITTING
-    preg_match_all('/<script>|<script.*?>/im', $pixelscript, $patternopen);
-    preg_match_all('/<\/script>/im', $pixelscript, $patternclose);
+    //TO CHECK CORRECT SCRIPT WRITTING
+    preg_match_all('/\<script\>|\<script.*\>/im', $pixelscript, $patternopen);
+    preg_match_all('/\<\/script\>/im', $pixelscript, $patternclose);
 
     $opentag = count($patternopen[0]);
     $closetag = count($patternclose[0]);
 
-    if(($opentag <> $closetag) || $opentag < 1)
+    if(($opentag <> $closetag) || $opentag < 1 && $jenis_pixel <> 'fb')
     {
         $data['status'] = 'error';
         $data['message'] = 'Mohon gunakan javascript yang valid'; 
@@ -1290,9 +1795,9 @@ class BiolinkController extends Controller
   	$user=Auth::user();
   	$pixel->pages_id=$page->id;
   	$pixel->users_id=$user->id;
-  	$pixel->title=$request->title;
-    $pixel->jenis_pixel=$request->jenis_pixel;
-  	$pixel->script=$request->script;
+  	$pixel->title=strip_tags($request->title);
+    $pixel->jenis_pixel=strip_tags($request->jenis_pixel);
+  	$pixel->script=$pixelscript; 
   	$pixel->save();
   	// return redirect('/biolinks/'.$uuid);
     
@@ -1632,7 +2137,7 @@ class BiolinkController extends Controller
     Storage::disk('local')->put('banner/testresize.png',$image_content);
   }
 
-  #RESIZE IMAGE
+  //RESIZE IMAGE
   public function resizeImage($file, $w, $h, $crop=false){
     list($width, $height) = getimagesize($file);
         $r = $width / $height;
@@ -1695,10 +2200,11 @@ class BiolinkController extends Controller
             imagedestroy($src);
         break;
       }
+      // dd($image_contents);
       return $image_contents;
   }
 
-  #SAVE WA CHAT
+  //SAVE WA CHAT
   public function savewaChat(Request $request)
   {
       $userid = Auth::id();
@@ -1721,14 +2227,14 @@ class BiolinkController extends Controller
         'wa_chat_pixel_id'=>$wapixelchatid
       );
 
-      # --- WACHAT MEMBERS ---
+      // --- WACHAT MEMBERS ---
 
       $chat['name'] = $request->member_name;
       $chat['position'] = $request->position;
       $chat['wa_number'] = $request->wa_number;
       $chat['photo'] = $request->photo;
 
-      #member_name
+      //member_name
       if(!empty($chat['name']))
       {
         foreach($chat['name'] as $id=>$name)
@@ -1746,7 +2252,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #position
+      //position
       if(!empty($chat['position']))
       {
         foreach($chat['position'] as $id=>$position)
@@ -1764,7 +2270,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #wa_number
+      //wa_number
       if(!empty($chat['wa_number']))
       {
         foreach($chat['wa_number'] as $id=>$wa_number)
@@ -1782,7 +2288,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #photo
+      //photo
       if(env('APP_ENV') == 'local')
       {
         $dir = 'wa_chat_member_test';
@@ -1796,7 +2302,7 @@ class BiolinkController extends Controller
       {
         foreach($chat['photo'] as $id=>$photo)
         {
-            #get photo name and path from database
+            //get photo name and path from database
             $getphotoname = wachat::where('id','=',$id)->select('photo')->first();
             if(!is_null($getphotoname))
             {
@@ -1804,7 +2310,7 @@ class BiolinkController extends Controller
                 $filename = $photopath[1];
                 $path = $dir."/".$filename;
                 
-                #get uploaded photo from user
+                //get uploaded photo from user
                 $arr_size = getimagesize($photo);
                 $imagewidth = $arr_size[0];
 
@@ -1829,7 +2335,7 @@ class BiolinkController extends Controller
         }
       }
 
-      #if all of data passed and then..
+      //if all of data passed and then..
       try {
           Page::where([['uid','=',$uuid],['user_id','=',$userid]])->update($data);
           $response['status'] = 'success';
@@ -1843,7 +2349,7 @@ class BiolinkController extends Controller
       return response()->json($response);
   }
 
-  #SAVE WA CHAT MEMBER
+  //SAVE WA CHAT MEMBER
   public function savewaChatMember(Request $request)
   {
     $dt = Carbon::now();
@@ -1883,7 +2389,7 @@ class BiolinkController extends Controller
 
     if(empty($wa_id))
     {
-      #INSERT DATA
+      //INSERT DATA
       $chat = new wachat;
       $chat->user_id = Auth::id();
       $chat->uid = $uid;
@@ -1917,7 +2423,7 @@ class BiolinkController extends Controller
     }
     else
     {
-      #UPDATE DATA
+      //UPDATE DATA
       $updateerror = false;
       $updatechat = wachat::where('id','=',$wa_id)->first();
       $updatepath = $updatechat->photo;
@@ -1973,7 +2479,7 @@ class BiolinkController extends Controller
     } 
   }
 
-  #LOAD WA CHAT MEMBERS
+  //LOAD WA CHAT MEMBERS
   public function loadWAChatMembers(Request $request)
   {
       $user_id = Auth::id();
@@ -2000,7 +2506,7 @@ class BiolinkController extends Controller
       return response()->json($data);
   }
 
-  #DELETE WA CHAT MEMBER
+  //DELETE WA CHAT MEMBER
   public function delWAChatMembers(Request $request)
   {
       $userid = Auth::id();

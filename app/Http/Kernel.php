@@ -66,6 +66,8 @@ class Kernel extends HttpKernel
         'wachat'=>\App\Http\Middleware\CheckWAChatSettings::class,
         'wamember'=>\App\Http\Middleware\CheckWAMember::class,
         'proof'=>\App\Http\Middleware\ProofValidation::class,
+        'allocate'=>\App\Http\Middleware\AllocateValidation::class,
+        'mailchimp'=>\App\Http\Middleware\CheckMailchimp::class,
     ];
 
     /**

@@ -26,15 +26,20 @@ if(env('DOMAIN_TYPE')=='main'){
   // Route::get('/use/{id}/edit','UserController@edit');
   // Route::post('/use/{id}/update','UserController@update');
   // Route::get('/use/{id}/delete','UserController@delete');
+
   Auth::routes();
   
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');
 
-  //API 
+  //API
+  
   //Route::get('testmail','ApiController@testmail');
   Route::post('generate-coupon', 'ApiController@generate_coupon');
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
+  Route::post('save-api','ApiController@sendDataAPI');
+  // Route::get('validation-mailchimp', 'ApiController@mailchimp_valid_api');
+  Route::post('save-mailchimp','ApiController@connect_mailchimp')->middleware('mailchimp');
 
   //information
   Route::get('/about',function(){
@@ -124,8 +129,11 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/biolinks/','BiolinkController@newbio');
     Route::get('/biolinks/{names}/{mod?}','BiolinkController@viewpage');
     Route::get('/pixel/load-pixellink','BiolinkController@pixelink');
+
+    //banner
     Route::post('/save-template','BiolinkController@savetemp');
     Route::get('/banner/load-banner','BiolinkController@addBanner');
+
     Route::post('/save-link','BiolinkController@savelink');
     Route::post('/savewachat','BiolinkController@savewaChat')->middleware('wachat')->name('savewachat');
     Route::post('savewachatmember','BiolinkController@savewaChatMember')->middleware('wamember')->name('savewachatmember');
@@ -149,11 +157,14 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('/pixel/deletepixel','BiolinkController@deletepixel');
 
     //proof
-    Route::post('save-proof','BiolinkController@saveProof')->middleware('proof');
+    Route::post('save-proof','BiolinkController@saveProof')/*->middleware('proof')*/;
     Route::get('load-proof','BiolinkController@loadProof');
     Route::get('delete-proof','BiolinkController@delProof');
     Route::get('proof_settings','BiolinkController@settingProof');
 
+    //connect API
+    Route::post('save-connect','BiolinkController@save_connect');
+    
     //makesinglelink
     Route::get('/singlelink','SingleLinkController@newsingle');
     Route::post('/save-singlelink','SingleLinkController@single');
@@ -167,7 +178,18 @@ if(env('DOMAIN_TYPE')=='main'){
 
     //Custom Link
     Route::get('/premium-id-biolinks/tambah','PremiumIDController@premiumid_biolinks');
-    Route::get('/premium-id-singlelinks/tambah','PremiumIDController@premiumid_singlelinks');    
+    Route::get('/premium-id-singlelinks/tambah','PremiumIDController@premiumid_singlelinks');
+
+    //Proof-Shop
+    Route::get('activproof','ProofController@index');
+    Route::get('display_links','ProofController@display_links');    
+    Route::post('counting_point','ProofController@counting_point')->middleware('allocate');    
+    Route::get('proof_history/{mod?}','ProofController@proof_history'); 
+    Route::get('checkout_proof/{id}','ProofController@checkout_proof');   
+    Route::post('proof_payment','ProofController@proof_payment');  
+
+    //WA GENERATOR
+    Route::get('/wa-generator','ApiController@wa_generator');  
   });
 
 
@@ -180,6 +202,10 @@ if(env('DOMAIN_TYPE')=='main'){
     /* Super Admin page */
     Route::get('super-admin', 'UserController@user_list');
     Route::get('check-super/{id}', 'UserController@check_super');
+
+    /* TO FLAGGING INAPPROPIATE LINK */
+    Route::get('flag-link', 'UserController@flag_link');
+    Route::get('flag-link-banner', 'UserController@flag_link_banner');
   
     //admin order
     Route::get('/list-order',function(){
@@ -217,7 +243,7 @@ if(env('DOMAIN_TYPE')=='main'){
     //List Ads 
     Route::get('/list-ads','AdsController@index');
     Route::get('/list-ads/load-ads','AdsController@load_ads');  
-    Route::get('/list-ads/view-log','AdsController@view_log');  
+    Route::get('/list-ads/view-log','AdsController@view_log'); 
   });
 }
 
@@ -225,6 +251,7 @@ if((env('DOMAIN_TYPE')=='shortlink')||(env('APP_ENV')=='local')){
   Route::get('logs-8877', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
   Route::get('click/{mode}/{id}', 'BiolinkController@click');
   Route::get('/click-ads/{id}','AdsController@click_ads');
+  Route::post('page_point','ProofController@count_page_point');    
   //url
   // Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
   // Route::get('/omn.lkz/{names}','BiolinkController@link');

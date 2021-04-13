@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use App\Account;
 use App\HistorySearch;
 use App\User;
@@ -13,6 +14,7 @@ use App\UserLog;
 use App\Notification;
 use App\Ads;
 use App\AdsHistory;
+use App\ProofHistory;
 
 use App\Helpers\Helper;
 use Carbon, Crypt;
@@ -48,7 +50,6 @@ class OrderController extends Controller
       'Popular' => 225000, 
       'Elite' => 255000, 
       'Super' => 295000, 
-      
       'Pro Lifetime' => 595000,
     );
 
@@ -351,7 +352,6 @@ class OrderController extends Controller
     return view('pricing.thankyou-confirm-payment');
   }
 
-
   //checkout klo uda login
   public function confirm_payment(Request $request){
     //buat order user lama
@@ -571,6 +571,18 @@ class OrderController extends Controller
     return $valid;
   }
 
+  private function getActivproofCredit($package)
+  {
+    $paket = array(
+      getActivProofPackage()[1]['package'] => getActivProofPackage()[1]['credit'],
+      getActivProofPackage()[2]['package'] => getActivProofPackage()[2]['credit'],
+      getActivProofPackage()[3]['package'] => getActivProofPackage()[3]['credit'],
+      getActivProofPackage()[4]['package'] => getActivProofPackage()[4]['credit'],
+    );
+
+    return $paket[$package];
+  }
+
   //klo dilunasi lewat admin page
   public function confirm_order(Request $request){
     //konfirmasi pembayaran admin
@@ -580,7 +592,7 @@ class OrderController extends Controller
     $user = User::find($order->user_id);
     $valid=null;
     $type = "";
-    
+
     /*
       'Pro' => 195000, 
       'Popular' => 225000, 
@@ -646,7 +658,42 @@ class OrderController extends Controller
       $type="super";
       $user->membership = 'super';
     }
-    
+    else if(substr($order->package,0,10) === "ActivProof") {
+      $user->point += $this->getActivproofCredit($order->package);
+      $type="activproof";
+    }
+    /*<<<<< CONFLICT*/
+    if($valid <> null)
+    {
+        $formattedDate = $valid->format('Y-m-d H:i:s');
+    }
+    else
+    {
+        $formattedDate = $user->valid_until;
+    }
+
+    $userlog = new UserLog;
+    $userlog->user_id = $user->id;
+    if(substr($order->package,0,10) === "ActivProof") {
+      $userlog->type = 'membership-credit';
+    }
+    else
+    {
+      $userlog->type = 'membership';
+    }
+   
+    $userlog->value = $type;
+    $userlog->keterangan = 'Confirm Order '.$order->package.'. From '.$user->membership.'('.$formattedDate.') to '.$type.'('.$formattedDate.')';
+   // $userlog->keterangan = 'Order '.$order->package.'. From '.$user->membership.'('.$user->valid_until.') to '.$type.'('.$formattedDate.')';
+    $userlog->save();
+    if(substr($order->package,0,10) <> "ActivProof") {
+      $user->valid_until = $valid;
+    }
+    $user->is_member = 1;
+    $user->save();
+
+    /*=======*/
+
     if(substr($order->package,0,6) <> "Top Up"){
       if($valid <> null){
           $formattedDate = $valid->format('Y-m-d H:i:s');
@@ -664,8 +711,27 @@ class OrderController extends Controller
       $user->is_member = 1;
       $user->save();
     }
+    /*>>>>>>> master*/
     $order->save();
 
+    //History Proof
+    if(substr($order->package,0,10) === "ActivProof") {
+      $ph = new ProofHistory;
+      $ph->user_id = $user->id;
+      $ph->page_name = '-';
+      $ph->debit = $this->getActivproofCredit($order->package);
+
+      try
+      {
+        $ph->save();
+      }
+      catch(QueryException $e)
+      {
+        //$e->getMessage();
+      }
+    }
+
+    // ADS
     if(substr($order->package,0,6) === "Top Up"){
       $ads = Ads::find($order->ads_id);
 
@@ -695,7 +761,7 @@ class OrderController extends Controller
 
     $arr['status'] = 'success';
     $arr['message'] = 'Order berhasil dikonfirmasi';
-    $arr['response'] = $this->IsPay($user->email,17,1);
+    // $arr['response'] = $this->IsPay($user->email,17,1);
 
     return $arr;
   }

@@ -161,4 +161,6 @@ class HomeController extends Controller
           return redirect(404);
         }
       }
+
+/*end class*/
 }

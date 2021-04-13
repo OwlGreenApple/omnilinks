@@ -71,11 +71,19 @@
   @if(Request::is('pricing')) 
   <link rel="stylesheet" href="{{ asset('css/style-pricing.css') }}"/>
   @endif
+
+  @if(Request::is('activproof')) 
+  <link rel="stylesheet" href="{{ asset('css/activproof.css') }}"/>
+  @endif
   
   @if(Request::is('kupon')) 
   <link rel="stylesheet" href="{{ asset('css/kupon.css') }}"/>
   @endif
   <link rel="stylesheet" href="{{ asset('jquery-countdown/jQuery.countdownTimer.css') }}"/>
+
+  @if(Request::is('wa-generator')) 
+  <link rel="stylesheet" href="{{ asset('css/wa-generator.css') }}"/>
+  @endif
 
   <!-- bootstrap datetimepicker -->
   <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}"/>
@@ -190,11 +198,18 @@
                   </a>
                 </li>
 
+                 <li class="nav-item">
+                  <a class="nav-link navlog" href="{{url('activproof')}}">
+                    {{ __('Activproof') }}
+                  </a>
+                </li>         
+
                 <!--<li class="nav-item">
                   <a class="nav-link navlog" href="{{url('ads-manager')}}">
                     {{ __('Ads') }}
                   </a>
-                </li>
+
+                </li>           
                 -->
               @endif
 
@@ -217,6 +232,11 @@
                 <!--<a class="nav-link navlog" href="{{route('kupon')}}" class="linkfooter">-->
                 <a class="nav-link navlog" href="https://omnilinkz.com/kupon" class="linkfooter">
                   Kupon
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link navlog" href="{{url('wa-generator')}}">
+                  WA Generator
                 </a>
               </li>
 

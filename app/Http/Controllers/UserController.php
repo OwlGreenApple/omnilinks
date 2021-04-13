@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserLog;
+<<<<<<< HEAD
 use App\Link;
 use App\Banner;
+=======
+>>>>>>> 391ba0ef364829dbc933fce6c453bc2675416771
 use App\Helpers\Helper;
+use App\Link;
+use App\Banner;
 
 use App\Http\Controllers\OrderController;
 
@@ -128,6 +133,7 @@ class UserController extends Controller
       $user->username = $request->username;
       $user->is_admin = $request->is_admin;
       $user->membership = $request->membership;
+      $user->point += $request->proof_views; 
 
       if(isset($request->unlimited)){
         // $user->valid_until = null;

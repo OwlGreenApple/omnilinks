@@ -1,0 +1,142 @@
+/*
+	Mon April 12 2021
+*/
+
+@font-face {
+  font-family: wagenerator;
+  src: url('../fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: wagenerator_bold;
+  src: url('../fonts/OpenSans-Bold.ttf');
+}
+
+@font-face {
+  font-family: wagenerator_ex_bold;
+  src: url('../fonts/OpenSans-ExtraBold.ttf');
+}
+
+exbold {
+	font-family : 'wagenerator_ex_bold';
+	font-size : 22pt;
+	line-height :38px;
+}
+
+input[name='copy'] {
+	border-top-left-radius : 10px !important;
+	border-bottom-left-radius : 10px !important;
+	border-top-right-radius : 0px !important;
+	border-bottom-right-radius : 0 !important;
+	border: 2px solid #000 !important;
+}
+
+.btn-copy {
+	border-top-left-radius : 0;
+	border-bottom-left-radius : 0;
+	border : 1px solid #000;
+	border-left : 0;
+}
+
+.btn-copy img {
+	width : 100%;
+	max-width : 18px;
+	vertical-align: text-top;
+}
+
+.bg-generator {
+	background: url('images/bg-generator.jpg') center;
+	height: 400px;
+    background-size: cover;
+}
+
+.bg-generator .modal-content {
+	box-shadow: 1px 1px 8px #b7b921;
+	border-radius: 20px;
+}
+
+.bg-generator .container {
+	color : #fff;
+}
+
+.white-bg {
+	background: #fff;
+	height: 200px;
+    background-size: cover;
+}
+
+.icon-generator {
+	display : flex;
+	max-width: 125px;
+	position: absolute;
+	left : 65%;
+	top : -35px;
+	z-index : 30;
+}
+
+.icon-generator img {
+	width : 100%;
+	max-width : 85px;
+}
+
+.abs_image {
+	position: absolute;
+    left: 64px;
+}
+
+.wa-gen-form {
+	padding-top : 6rem;
+}
+
+.wa-gen-form input {
+	border : 2px solid #000;
+	border-radius: 11px;
+}
+
+.wa-gen-form b {
+	font-family : 'wagenerator_bold';
+	font-size: 20px;
+    letter-spacing: -1px;
+}
+
+.wa-gen-form .modal-body {
+	padding-top : 60px;
+	padding-right: 40px;
+    padding-left: 40px;
+}
+
+.no-wa {
+	line-height: 14px;
+}
+
+.wa-gen-form .sml {
+	font-family : 'wagenerator';
+	font-size : 11px;
+}
+
+.wa-gen-text {
+	padding-top : 8.5rem;
+}
+
+.reg-font {
+	font-family: 'wagenerator';
+	font-size : 12pt;
+	padding-top : 4pt;
+}
+
+.btn-wa-generator {
+	background-color: #be3988;
+	border-color: #be3988;
+	color : #fff;
+	border-radius: 12px;
+}
+
+.copied {
+	display : none;
+	font-family: wagenerator_bold;
+	padding-top: 8px;
+}
+
+#wa-link {
+	display : none;
+}
