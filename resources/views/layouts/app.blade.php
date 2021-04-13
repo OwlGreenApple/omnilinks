@@ -234,6 +234,11 @@
                   Kupon
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link navlog" href="{{url('wa-generator')}}">
+                  WA Generator
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a class="nav-link navlog" href="{{env('APP_URL2').'/blog'}}">
