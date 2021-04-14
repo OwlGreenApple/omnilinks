@@ -143,6 +143,7 @@ class ApiController extends Controller
   //TO ADD CONTACTS / SUBSCRIBER INTO AUDIENCE/LIST ON MAILCHIMP 
   public function connect_mailchimp(Request $request)
   {
+    dd($request->all());
     $pagename = strip_tags($request->pagename);
     $page = Page::where('names',$pagename)->first();
 

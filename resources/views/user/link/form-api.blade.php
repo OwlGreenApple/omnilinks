@@ -80,7 +80,7 @@ function sendAPImailchimp()
       type: 'POST',
       data: data,
       url: "{{ url('save-mailchimp') }}",
-      dataType: 'json',
+      dataType: 'text',
       beforeSend: function()
       {
         $('#loader').show();
@@ -135,7 +135,7 @@ function sendAPIdata()
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       type: 'POST',
-      data: data,
+      data: text,
       url: "{{ url('save-api') }}",
       dataType: 'json',
       beforeSend: function()
