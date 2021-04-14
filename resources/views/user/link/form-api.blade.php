@@ -63,3 +63,118 @@
     </div>
   </form>
 @endif
+
+<script>
+function sendAPImailchimp()
+{
+  $("#connect_mailchimp").submit(function(e){
+    e.preventDefault();
+    var data = $(this).serializeArray();
+    data.push(
+      {'name': 'pagename','value':'{{$pages->names}}'}
+    );
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: 'POST',
+      data: data,
+      url: "{{ url('save-mailchimp') }}",
+      dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      }, 
+      success: function(result) 
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        if(result.success == 0)
+        {     
+          $(".err_connect_mc").html('<div class="alert alert-danger mb-3">'+result.title+'</div>')
+        }
+        else if(result.success == 2)
+        {
+          $(".error").show();
+          (result.api_mc_fname !== undefined)? $(".api_mc_fname").html(result.api_mc_fname):$(".api_mc_fname").html('');
+          (result.api_mc_lname !== undefined)? $(".api_mc_lname").html(result.api_mc_lname):$(".api_mc_lname").html('');
+          (result.api_mc_email !== undefined)? $(".api_mc_email").html(result.api_mc_email):$(".api_mc_email").html('');
+          (result.pagename !== undefined)? $(".err_connect_mc").html('<div class="alert alert-danger mb-3">'+result.pagename+'</div>'):$(".err_connect_mc").html('');
+        }
+        else
+        {
+           $(".err_connect_mc").html('<div class="alert alert-success mb-3">Thank you for join us.</div>')
+           $(".error").hide();
+           empty_form();
+          
+        }
+      },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+    //end ajax
+  });
+}
+
+
+function sendAPIdata()
+{
+  $("#connect_preview").submit(function(e){
+    e.preventDefault();
+    var data = $(this).serializeArray();
+    data.push(
+      {'name': 'pagename','value':'{{$pages->names}}'}
+    );
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: 'POST',
+      data: data,
+      url: "{{ url('save-api') }}",
+      dataType: 'json',
+      beforeSend: function()
+      {
+        $('#loader').show();
+        $('.div-loading').addClass('background-load');
+      }, 
+      success: function(result) 
+      {
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+
+        if(result.error == 1)
+        {     
+          $(".error").show();
+          $(".api_name").html(result.name);
+          $(".api_email").html(result.email);
+          $(".api_phone").html(result.phone);
+          (result.db !== undefined)?  $(".err_connect").html('<div class="alert alert-danger mb-3">'+result.db+'</div>'): $(".err_connect").html('');
+        }
+        else
+        {
+           $(".err_connect").html('<div class="alert alert-success mb-3">'+result.response+'</div>')
+           $(".error").hide();
+           empty_form();
+        }
+      },
+      error : function(xhr){
+        $('#loader').hide();
+        $('.div-loading').removeClass('background-load');
+        console.log(xhr.responseText);
+      }
+    });
+    //end ajax
+  });
+}
+$(document).ready(function() {
+    sendAPIdata();
+    sendAPImailchimp();
+});
+
+</script>
