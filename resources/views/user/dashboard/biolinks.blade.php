@@ -2386,7 +2386,7 @@
         </div> -->
         <div class="form-check">
             <input id="connect_mailchimp" type="checkbox" class="form-check-input connect_check" {{$connect_mailchimp}}>
-            <label class="form-check-label">Connect Mailchimp <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun mailchimp,<br/> maka anda bisa me-connect-kan form ke audience/list pada akun mailchimp anda</div>">
+            <label class="form-check-label"><span class="mailchimp_label">Connect Mailchimp</span> <span class="tooltipstered" title="<div class='panel-content'>Jika anda memiliki akun mailchimp,<br/> maka anda bisa me-connect-kan form ke audience/list pada akun mailchimp anda</div>">
               <i class="fas fa-question-circle icon-reflink"></i>
               </span></label>
         </div>
@@ -2394,7 +2394,7 @@
         <form id="save_connect" class="row mt-2 mb-3">
           <div class="col-lg-9 col-md-12 col-sm-12 col-12">
             <!-- activrespon -->
-            <div id="activrespon">
+           <!--  <div id="activrespon">
               <div class="form-group">
                 <input placeholder="Form Activrespon" type="text" class="form-control" maxlength="190" name="act_form_text" value="{{ $pages->act_form_text }}"/>
                 <div class="error err_act_form_text"></div>
@@ -2409,7 +2409,7 @@
                 <input placeholder="Activrespon API-KEY" type="text" class="form-control" maxlength="190" name="list_id" value="{{ $pages->list_id }}"/>
                 <div class="error err_list_id"></div>
               </div>
-            </div>
+            </div> -->
 
             <!-- mailchimp -->
             <div id="mailchimp" class="mb-2">
@@ -2446,14 +2446,16 @@
                 </span>
               </div>
               <div class="error err_audience_id"></div>
-            <!-- end mailchimp -->
-            </div>
-            <select name="position_api" class="form-control mb-2">
+
+              <select name="position_api" class="form-control mb-2">
               <option value="0">Tampilkan di atas</option>
               <option value="1">Tampilkan di bawah</option>
-            </select>
-            <div class="error err_position_api"></div>
-            <button class="btn btn-primary">Save</button>
+              </select>
+              <div class="error err_position_api"></div>
+              <button class="btn btn-primary">Save</button>
+            <!-- end mailchimp -->
+            </div>
+            
           </div>
         </form>
       </div>
@@ -4548,6 +4550,7 @@
     move_api_form("{{$pages->position_api}}");
     //proof_preview();
     //callMaintainPlus();
+    mailchimp_label();
   });
 
   function move_api_form(tab)
@@ -4633,6 +4636,23 @@
         }
       });
       //end ajax
+    });
+  }
+
+  function mailchimp_label()
+  {
+    $(".mailchimp_label").click(function(){
+      var check = $("#connect_mailchimp").is(":checked");
+
+      if(check == true)
+      {
+        $("#connect_mailchimp").prop('checked',false);
+      }
+      else
+      {
+        $("#connect_mailchimp").prop('checked',true);
+      }
+      checkbox_connect_api();
     });
   }
 

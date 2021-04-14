@@ -113,6 +113,11 @@
   line-height : 14px;
 }
 
+/* MAILCHIMP */
+#mailchimp {
+  display: none;
+}
+
 @media(max-width:414px){
   .proof-box {
     padding : 0 !important;

@@ -20,7 +20,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'generate-coupon',
-        'sendmailfromactivwa',
-        'save-mailchimp'
+        'sendmailfromactivwa'
     ];
 }
