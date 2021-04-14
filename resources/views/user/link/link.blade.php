@@ -2020,7 +2020,7 @@ function sendAPImailchimp()
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      type: 'GET',
+      type: 'POST',
       data: data,
       url: "{{ url('save-mailchimp') }}",
       dataType: 'json',

@@ -37,9 +37,6 @@ if(env('DOMAIN_TYPE')=='main'){
   //Route::get('testmail','ApiController@testmail');
   Route::post('generate-coupon', 'ApiController@generate_coupon');
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
-  Route::post('save-api','ApiController@sendDataAPI');
-  // Route::get('validation-mailchimp', 'ApiController@mailchimp_valid_api');
-  Route::get('save-mailchimp','ApiController@connect_mailchimp')/*->middleware('mailchimp')*/;
 
   //information
   Route::get('/about',function(){
@@ -256,4 +253,8 @@ if((env('DOMAIN_TYPE')=='shortlink')||(env('APP_ENV')=='local')){
   // Route::get('/dash/new/omn.lkz/{names}','BiolinkController@link');
   // Route::get('/omn.lkz/{names}','BiolinkController@link');
   Route::get('/{names}','BiolinkController@link'); // -> routes ini harus paling bawah karena harus cek dulu yang paling atas
+
+  Route::post('save-api','ApiController@sendDataAPI');
+  // Route::get('validation-mailchimp', 'ApiController@mailchimp_valid_api');
+  Route::post('save-mailchimp','ApiController@connect_mailchimp')/*->middleware('mailchimp')*/;
 }
