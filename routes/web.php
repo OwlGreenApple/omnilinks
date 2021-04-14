@@ -39,7 +39,7 @@ if(env('DOMAIN_TYPE')=='main'){
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
   Route::post('save-api','ApiController@sendDataAPI');
   // Route::get('validation-mailchimp', 'ApiController@mailchimp_valid_api');
-  Route::get('save-mailchimp','ApiController@connect_mailchimp')->middleware('mailchimp');
+  Route::get('save-mailchimp','ApiController@connect_mailchimp')/*->middleware('mailchimp')*/;
 
   //information
   Route::get('/about',function(){
