@@ -5,11 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserLog;
-<<<<<<< HEAD
-use App\Link;
-use App\Banner;
-=======
->>>>>>> 391ba0ef364829dbc933fce6c453bc2675416771
 use App\Helpers\Helper;
 use App\Link;
 use App\Banner;
