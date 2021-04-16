@@ -1204,9 +1204,13 @@ ul {
   height: 117px;
   background-size: cover;  
 }
+
 .btnview{
   white-space:normal;
+  word-wrap: break-word;
+  line-height: 30px !important;
 }
+
 .custom-file-label{
   overflow:hidden;
   white-space:normal;

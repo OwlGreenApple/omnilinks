@@ -1293,7 +1293,7 @@ class BiolinkController extends Controller
       {
         if($request->options[$i] == 1)
         { 
-          $temp_arr['title.'.$i] = ['required', 'string', 'max:191'];
+          $temp_arr['title.'.$i] = ['required', 'string', 'max:160'];
           // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
           $temp_arr['url.'.$i] = ['required', 'string', 'max:191',new TrustedUrlCheck($i)];
           $temp_arr['icon_link.'.$i] = ['max:300','mimes:jpeg,jpg,png'];
@@ -1315,7 +1315,7 @@ class BiolinkController extends Controller
 
     $messages = [
         'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
-        'max'    => 'Maximal character youtube id adalah : :max.',
+        'max'    => 'Maximal character :attribute adalah : :max.',
         /*'same'    => 'The :attribute and :other must match.',
         'size'    => 'The :attribute must be exactly :size.',
         'between' => 'The :attribute value :input is not between :min - :max.',

@@ -21,9 +21,9 @@
                                     <div class="sel_{{$link->id}}">
                                       <input type="hidden" name="idlink[]" value="{{$link->id}}">
                                       <input class="delete-link" type="hidden" name="deletelink[]" value="">
-                                      <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" data-id="{{$link->id}}" placeholder="Title" class="form-control focuslink-update">
+                                      <input type="text" name="title[]" value="{{$link->title}}" id="title-{{$link->id}}-view-update" data-id="{{$link->id}}" placeholder="Title" class="form-control focuslink-update" data-icon="@if($link->icon_link == null) 0 @else 1 @endif" maxlength="160">
                                       <input type="text" name="url[]" value="{{$link->link}}" placeholder="http://url..." class="form-control">
-                                      <input data-file="title-{{$link->id}}-view-update" type="file" name="iconlink[]" class="form-control img_icon_preview" />
+                                      <input data-id="{{$link->id}}" data-file="title-{{$link->id}}-view-update" type="file" name="iconlink[]" class="form-control img_icon_preview" />
                                       <small>Rasio ukuran icon 1:1 contoh : 48px x 48px</small>
                                     </div>
                                   </div>
