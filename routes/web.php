@@ -15,6 +15,10 @@
 */
 
 if(env('DOMAIN_TYPE')=='main'){
+  //WA GENERATOR
+  Route::get('/wa-generator','ApiController@wa_generator');  
+  
+  
   #Route::get('testresize', 'BiolinkController@testresize');
 
   Route::get('/', 'HomeController@index');
@@ -185,8 +189,6 @@ if(env('DOMAIN_TYPE')=='main'){
     Route::get('checkout_proof/{id}','ProofController@checkout_proof');   
     Route::post('proof_payment','ProofController@proof_payment');  
 
-    //WA GENERATOR
-    Route::get('/wa-generator','ApiController@wa_generator');  
   });
 
 
