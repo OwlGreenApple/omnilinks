@@ -258,5 +258,5 @@ if((env('DOMAIN_TYPE')=='shortlink')||(env('APP_ENV')=='local')){
 
   Route::post('save-api','ApiController@sendDataAPI');
   // Route::get('validation-mailchimp', 'ApiController@mailchimp_valid_api');
-  Route::post('save-mailchimp','ApiController@connect_mailchimp')/*->middleware('mailchimp')*/;
+  Route::post('save-mailchimp','ApiController@connect_mailchimp')->middleware('mailchimp');
 }

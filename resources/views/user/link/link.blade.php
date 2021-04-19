@@ -1663,10 +1663,10 @@
             <li class="col-md-12 col-12 mb-3"> 
               <a href="#" data-href="{{env('APP_URL').'/click/link/'.$link->id}}" title=""  target="_blank" class="txthov link-ajax">
                 <button class="@if($link->icon_link !== null) image_icon_link_btn @endif btn btn-block <?php if ( ($ctr==0) && ($pages->is_click_bait) ) { echo 'animate-buzz'; } $ctr += 1; ?> ">
-                  @if($link->icon_link !== null) 
+                  @if($link->icon_link !== null || !empty($link->icon_link)) 
                     <img src="{!! Storage::disk('s3')->url($link->icon_link) !!}" class="rounded-circle image_icon_link" />
                   @endif
-                  <span class="textbutton">
+                  <span class="textbutton" data-icon="@if($link->icon_link !== null || !empty($link->icon_link)) 1 @else 0 @endif" data-len="{{strlen($link->title)}}">
                     {{$link->title}}
                   </span>
                 </button>
@@ -1920,6 +1920,7 @@
 </script>
 @endif
 
+<script defer type="text/javascript" src="{{asset('js/textindent.js')}}"></script>
 <script type="text/javascript">
   var run;
   $('body').css("height",$( window ).height()+"px");

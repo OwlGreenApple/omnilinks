@@ -1413,6 +1413,10 @@
         var data = jQuery.parseJSON(result);
         $('.sortable-link').html(data.view);
         loadPixelPage();
+      },
+      complete: function(xhr,status)
+      {
+        check_text_indent();
       }
     });
   }
@@ -5280,7 +5284,7 @@
     });
   }
 </script>
-
+<script defer type="text/javascript" src="{{asset('js/textindent.js')}}"></script>
 <script type="text/javascript">
   var elhtml;
   let idpic=6;
@@ -5953,11 +5957,18 @@
       var number_id = $(this).attr('data-id');
       var value = $(this).val();
       var len = value.length;
+      var icon = $(this).attr('data-icon');
 
       var prevtext = $("#textprev-new-"+number_id)[0];
       prevtext.lastChild.nodeValue=value;
+
+      if(icon == 1)
+      {
+        preview_text_index(len,number_id,"textprev-new","new");
+      }
       
-      if(len >= 16)
+      
+      if(len >= 160)
       {
         return false;
       }
@@ -5973,11 +5984,17 @@
       var number_id = $(this).attr('data-id');
       var value = $(this).val();
       var len = value.length;
+      var icon = $(this).attr('data-icon');
 
       var prevtext = $("#textprev-update-"+number_id)[0];
       prevtext.lastChild.nodeValue=value;
+
+      if(icon == 1)
+      {
+        preview_text_index(len,number_id,'textprev-update');
+      }
       
-      if(len >= 16)
+      if(len >= 160)
       {
         return false;
       }
@@ -5987,7 +6004,6 @@
       }
 
     });
-
 
    /* OLD CODE 
      $(document).on('focus','.focuslink',function(){
@@ -7048,9 +7064,9 @@
                   '<div class="sel_new_'+counterLink+'">'+
                     '<input type="hidden" name="idlink[]" value="new">'+
                     '<input class="delete-link" type="hidden" name="deletelink[]" value="">'+
-                    '<input data-id="'+counterLink+'" type="text" name="title[]" value="" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink">'+
+                    '<input data-id="'+counterLink+'" type="text" name="title[]" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink" maxlength="160" />'+
                     '<input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">'+
-                    '<input data-file="title-'+ counterLink +'-view-get" type="file" name="iconlink[]" class="form-control img_icon_preview" />'+
+                    '<input data-id="'+counterLink+'" data-file="title-'+ counterLink +'-view-get" type="file" name="iconlink[]" class="form-control img_icon_preview" />'+
                     '<small>Rasio ukuran icon 1:1 contoh : 48px x 48px</small>'+
                   '</div>'+
                 '</div>'+
@@ -7086,9 +7102,29 @@
   {
     $("body").on("change",".img_icon_preview",function(){
       var id = $(this).attr('data-file');
+      var base_id = $(this).attr('data-id');
+      var filename = $(this).attr('data-file');
       // var len = $('#preview_'+id).length; 
       $("."+id).addClass('image_icon_link_btn');
       readURL(this,id);
+
+      var check_file = filename.split("-")[3];
+
+      //CASE NEW LINK
+      if(check_file == 'get')
+      {
+        var title_new_len = $("#title-"+base_id+"-view").val().length;
+        $("#title-"+base_id+"-view").attr('data-icon',1);
+        preview_text_index(title_new_len,base_id,"textprev-new","new")
+      }
+
+      //CASE UPDATE LINK
+      if(check_file == 'update')
+      {
+        var title_len = $("#title-"+base_id+"-view-update").val().length;
+        preview_text_index(title_new_len,base_id,"textprev-update")
+      }
+
     });
   }
 

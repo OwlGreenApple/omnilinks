@@ -94,6 +94,7 @@ a:hover {
 }
 
 .image_icon_link_btn {
+  word-wrap: break-word;
   border-radius: 28px;
   padding-top: 13px;
   padding-bottom: 13px;

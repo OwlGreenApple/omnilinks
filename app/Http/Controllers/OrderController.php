@@ -662,7 +662,7 @@ class OrderController extends Controller
       $user->point += $this->getActivproofCredit($order->package);
       $type="activproof";
     }
-    /*<<<<< CONFLICT*/
+    /* CONFLICT*/
     if($valid <> null)
     {
         $formattedDate = $valid->format('Y-m-d H:i:s');
@@ -694,7 +694,9 @@ class OrderController extends Controller
 
     /*=======*/
 
-    if(substr($order->package,0,6) <> "Top Up"){
+/*    
+      CONFLICT
+if(substr($order->package,0,6) <> "Top Up"){
       if($valid <> null){
           $formattedDate = $valid->format('Y-m-d H:i:s');
       }
@@ -710,8 +712,8 @@ class OrderController extends Controller
       $user->valid_until = $valid;
       $user->is_member = 1;
       $user->save();
-    }
-    /*>>>>>>> master*/
+    }*/
+    /*CONFLICT master*/
     $order->save();
 
     //History Proof
@@ -732,7 +734,7 @@ class OrderController extends Controller
     }
 
     // ADS
-    if(substr($order->package,0,6) === "Top Up"){
+    /*if(substr($order->package,0,6) === "Top Up"){
       $ads = Ads::find($order->ads_id);
 
       $adshistory = new AdsHistory;
@@ -746,18 +748,22 @@ class OrderController extends Controller
 
       $ads->credit = $ads->credit + $order->jmlpoin;
       $ads->save();
-    }
+    }*/
 
     $emaildata = [
       'order' => $order,
       'user' => $user,
     ];
 
-    Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order) {
-      $message->from('info@omnilinkz.com', 'Omnilinkz');
-      $message->to($user->email);
-      $message->subject('[Omnilinkz] Konfirmasi Order'.$order->no_order);
-    });
+    if(env('APP_ENV') <> 'local')
+    {
+      Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order)
+      {
+        $message->from('info@omnilinkz.com', 'Omnilinkz');
+        $message->to($user->email);
+        $message->subject('[Omnilinkz] Konfirmasi Order'.$order->no_order);
+      });
+    }
 
     $arr['status'] = 'success';
     $arr['message'] = 'Order berhasil dikonfirmasi';
