@@ -81,7 +81,7 @@
   @endif
   <link rel="stylesheet" href="{{ asset('jquery-countdown/jQuery.countdownTimer.css') }}"/>
 
-  @if(Request::is('wa-generator')) 
+  @if(Request::is('free-whatsapp-click-to-chat-link-generator')) 
   <link rel="stylesheet" href="{{ asset('css/wa-generator.css') }}"/>
   @endif
 
@@ -235,7 +235,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navlog" href="{{url('wa-generator')}}">
+                <a class="nav-link navlog" href="{{url('free-whatsapp-click-to-chat-link-generator')}}">
                   WA Generator
                 </a>
               </li>

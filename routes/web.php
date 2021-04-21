@@ -16,7 +16,7 @@
 
 if(env('DOMAIN_TYPE')=='main'){
   //WA GENERATOR
-  Route::get('/wa-generator','ApiController@wa_generator');  
+  Route::get('/free-whatsapp-click-to-chat-link-generator','ApiController@wa_generator');  
   
   
   #Route::get('testresize', 'BiolinkController@testresize');
