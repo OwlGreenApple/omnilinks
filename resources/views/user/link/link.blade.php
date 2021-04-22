@@ -2128,7 +2128,7 @@ function runningProof()
   var total = $(".proof-wrapper").length;
   // console.log(total);
   var counting = 0;
-  var timing = 9000;
+  var timing = 7000;
 
   run = setInterval(
      function(){
@@ -2148,7 +2148,7 @@ function runningProof()
               $('.proof-wrapper').hide();
               $('.proof-box').removeAttr('style');   
               $("#proof-fix").css('margin-top','3rem'); 
-            },8000);  
+            },6000);  
           }
       <?php
         endif;
@@ -2166,7 +2166,7 @@ function runningProof()
 function animateProof(interval)
 {
   var speed = 350;
-  var delay = 6650
+  var delay = 5650
 
   $('.proof-wrapper').eq(interval).css({ 'display' : 'inline-flex'}).animate({
       top : 0,
