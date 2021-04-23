@@ -56,17 +56,16 @@
     </div>
 
     <div class="col-lg-6 wa-gen-text">
-      <exbold>GRATIS buat click to chat</exbold> <br/>
-      <exbold>Whatsapp link generator</exbold><br />
-      <div class="reg-font">
-        Gunakan FREE whatsapp WA click to chat link generator ini<br/> 
-        untuk membuat click to whatsapp link dengan mudah.<br/> 
-        Kombinasikan link ini dengan Omnilinkz untuk <br/> 
-        meningkatkan konversi penjualan anda!<br/> 
-        <br/> 
-        Dapatkan promo terbaru Omnilinkz<br/> 
-        Klik Disini
-      </div>
+      <h1>GRATIS buat click to chat</h1>
+      <h1>Whatsapp link generator</h1>
+     <!--   -->
+        <h2>FREE whatsapp WA click to chat link generator</h2> 
+        <h2>untuk membuat click to whatsapp link dengan mudah.</h2> 
+        <h2>Kombinasikan link click to chat whatsapp generator ini dengan Omnilinkz untuk</h2>
+        <div class="reg-font">meningkatkan konversi penjualan anda! 
+          Dapatkan promo terbaru Omnilinkz<br/> 
+          <a target="_blank" href="https://omnilinkz.com/dashboard/pricing">Klik Disini <i class="fas fa-caret-right"></i></a>
+        </div>
     </div>
   </div>
 </section>

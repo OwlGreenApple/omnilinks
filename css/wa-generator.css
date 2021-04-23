@@ -17,10 +17,11 @@
   src: url('../fonts/OpenSans-ExtraBold.ttf');
 }
 
-exbold {
+h1 {
 	font-family : 'wagenerator_ex_bold';
 	font-size : 22pt;
 	line-height :38px;
+	margin-bottom : 2px !important;
 }
 
 input[name='copy'] {
@@ -118,10 +119,16 @@ input[name='copy'] {
 	padding-top : 8.5rem;
 }
 
-.reg-font {
+.reg-font, h2 {
 	font-family: 'wagenerator';
 	font-size : 12pt;
 	padding-top : 4pt;
+	margin-bottom : 2px;
+	line-height : 22px;
+}
+
+.reg-font a {
+	color : #000da7;
 }
 
 .btn-wa-generator {
