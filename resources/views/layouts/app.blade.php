@@ -52,10 +52,10 @@
   <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">-->
   <link rel="stylesheet" href="{{asset('css/landing.css')}}">
-  
+   <!-- Font Awesome 5 -->
+  <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
+
   <?php if(Auth::check()){?>
-    <!-- Font Awesome 5 -->
-    <link href="{{ asset('assets/fontawesome-5.15.1/css/all.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('tooltipster/dist/css/tooltipster.bundle.min.css')}}" />
