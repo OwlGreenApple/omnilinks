@@ -147,3 +147,29 @@ input[name='copy'] {
 #wa-link {
 	display : none;
 }
+
+@media(max-width : 991px)
+{
+	.bg-generator { height : auto ; padding-bottom: 30px;}
+
+	.wa-gen-form {padding-top : 4px; margin-bottom : 10px;}
+
+	.order-12 {padding : 0;}
+
+}
+
+@media(max-width : 428px)
+{
+	.icon-generator img {max-width : 60px;}
+	.abs_image {left : 48px;}
+
+	.wa-gen-form b {font-size : 15px;}
+
+	h1 {font-size : 15pt; line-height:25px;}
+
+	.wa-gen-form .modal-body {padding-left : 20px; padding-right : 20px;}
+
+	.reg-font, h2 {font-size : 11pt;}
+
+	.modal-dialog {padding : 0;}
+}
