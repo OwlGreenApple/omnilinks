@@ -5,7 +5,7 @@
 <section class="bg-generator">
   <div class="container row mx-auto">
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 order-3 order-md-3 order-lg-2">
       <div class="wa-gen-form">
       <div class="modal-dialog col-lg-10" role="document">
         <div class="modal-content">
@@ -55,7 +55,7 @@
       <!-- end col-lg-6 -->
     </div>
 
-    <div class="col-lg-6 wa-gen-text">
+    <div class="col-lg-6 wa-gen-text order-2 order-md-2 order-lg-3">
       <h1>GRATIS buat click to chat</h1>
       <h1>Whatsapp link generator</h1>
      <!--   -->
