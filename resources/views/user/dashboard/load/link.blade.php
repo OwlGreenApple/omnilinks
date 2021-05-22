@@ -15,7 +15,7 @@
                                   <div class="input-stack">
                                     <select name="options[]" id="{{$link->id}}" class="form-control link_option">
                                       <option value="1" @if($link->options == 1) selected @endif>Link</option>
-                                      <option value="2" @if($link->options == 2) selected @endif>Youtube Link</option>
+                                      <option value="2" @if($link->options == 2) selected @endif>Youtube Link (Gunakan link yang lengkap dari browser)</option>
                                     </select>
 
                                     <div class="sel_{{$link->id}}">

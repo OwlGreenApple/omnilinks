@@ -7058,7 +7058,7 @@
                 '<div class="input-stack">'+
                   '<select id="new_'+counterLink+'" name="options[]" class="form-control link_option">'+
                       '<option value="1" selected>Link</option>'+
-                      '<option value="2">Youtube Link</option>'+
+                      '<option value="2">Youtube Link (Gunakan link yang lengkap dari browser)</option>'+
                   '</select>'+
 
                   '<div class="sel_new_'+counterLink+'">'+
