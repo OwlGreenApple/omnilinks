@@ -139,13 +139,25 @@ class Helper
   }
 
   /*TO CHECK TRUSTED lINK FROM KOMINFO.GO.ID*/
-  public static function CheckTrustedLink($value)
+  public static function CheckTrustedLink($value,$validation = null)
   {
     // dd(self::filter_url($value));
     $status = null;
     $curl = curl_init();
+
+    // if this come from page links and banner (multiple validation)
+    if($validation == true)
+    {
+      //example data : "vimeo.com\njudi.com" 
+      $val = $value;
+    }
+    else
+    {
+      $val = self::filter_url($value);
+    }
+
     $data = array(
-        'name'=>self::filter_url($value)
+        'name'=>$val
     );
 
     $url = "https://trustpositif.kominfo.go.id/Rest_server/getrecordsname_home";
@@ -167,17 +179,21 @@ class Helper
     $err = curl_error($curl);
     curl_close($curl);
 
-    if ($err) {
-      // return false;
-      echo "cURL Error #:" . $err;
-    } 
-    elseif(is_array($response) == true)
+    if ($err) 
     {
-      $status = json_decode($response,true)['values'][0]['Status'];
+      return false;
+      // echo "cURL Error #:" . $err;
+    } 
+    
+    // if this come from page links and banner (multiple validation)
+    if($validation == true)
+    {
+      $status = json_decode($response,true);
+      return $status;
     }
     else
     {
-      $status = null;
+      $status = json_decode($response,true)['values'][0]['Status'];
     }
 
     if($status == 'Ada')

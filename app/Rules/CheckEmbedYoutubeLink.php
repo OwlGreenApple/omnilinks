@@ -3,9 +3,8 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\Helpers\Helper;
 
-class TrustedUrlCheck implements Rule
+class CheckEmbedYoutubeLink implements Rule
 {
     /**
      * Create a new rule instance.
@@ -27,7 +26,18 @@ class TrustedUrlCheck implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Helper::CheckTrustedLink($value);
+        /*$match = preg_match("/^https\:\/\/(www)\.(youtube)\.(com)\/watch\?v\=.+|^https\:\/\/(youtu)\.be\/.+/i", $value);*/
+        $val = "https://www.youtube.com/watch?v=".$value;
+        $match = @file_get_contents("https://www.youtube.com/oembed?url=".$val."&format=json");
+
+        if($match == false)
+        {
+          return false;
+        }
+        else
+        {
+          return true;
+        }
     }
 
     /**
@@ -37,6 +47,6 @@ class TrustedUrlCheck implements Rule
      */
     public function message()
     {
-        return 'Link no : <b>'.$this->index.'</b> yang anda masukkan diblacklist oleh kominfo.go.id';
+        return 'Youtube link pada urutan : '.$this->index.' tidak valid.';
     }
 }

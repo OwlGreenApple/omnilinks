@@ -13,10 +13,11 @@ use App\WAChatMember as wachat;
 use App\Console\Commands\CropProfileImage;
 
 use App\Helpers\Helper;
-use App\Rules\TrustedUrlCheck;
 use App\Mail\NotifClickFreeUser; 
 use App\Rules\CheckValidPageID; 
 use App\Rules\CheckFBEvents; 
+use App\Rules\CheckEmbedYoutubeLink; 
+use App\Rules\CheckImageExtension; 
 use App\Http\Controllers\DashboardController;
 
 use Illuminate\Http\Request;
@@ -785,7 +786,7 @@ class BiolinkController extends Controller
         { 
           $temp_arr['judulBanner.'.$i] = ['required', 'string', 'max:191'];
           // $temp_arr['linkBanner.'.$i] = ['required', 'active_url', 'max:191'];
-          $temp_arr['linkBanner.'.$i] = ['required', 'max:191',new TrustedUrlCheck($i)];
+          $temp_arr['linkBanner.'.$i] = ['required', 'max:191'];
           // Validate url
           if (filter_var($request->linkBanner[$i], FILTER_VALIDATE_URL)) {
               // echo("$url is a valid URL");
@@ -797,8 +798,19 @@ class BiolinkController extends Controller
             return $arr;
           }
           $temp_arr['bannerImage.'.$i] = ['mimes:jpeg,jpg,png', 'max:1000'];
+        } //endfor
+
+        //VALIDATION TRUSTED POSTIF
+        $urls = $request->linkBanner;
+        $check_url = self::check_trusted_url($urls);
+
+        if($check_url['status'] == false)
+        {
+          $arr['status'] = 'error';
+          $arr['message'] = $check_url['message'];
+          return $arr;
         }
-      }
+      } //end if
     }
     
     $messages = [
@@ -1294,18 +1306,19 @@ class BiolinkController extends Controller
     }
     if (!is_null($request->title))
     {
+      $trusted = array();
       for ($i=0; $i <count($request->title); $i++)
       {
         if($request->options[$i] == 1)
         { 
           $temp_arr['title.'.$i] = ['required', 'string', 'max:160'];
           // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
-          $temp_arr['url.'.$i] = ['required', 'string', 'max:191',new TrustedUrlCheck($i)];
-          $temp_arr['icon_link.'.$i] = ['max:300','mimes:jpeg,jpg,png'];
+          $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
+          $temp_arr['icon_link.'.$i] = ['max:300', new CheckImageExtension];
         }
         else
         {
-          $temp_arr['embed.'.$i] = ['required','max:16'];
+          $temp_arr['embed.'.$i] = ['required','max:16', new CheckEmbedYoutubeLink($i)];
         }
         
         // Validate url
@@ -1314,12 +1327,23 @@ class BiolinkController extends Controller
           $arr['message'] = "Link Url ".$i." tidak valid";
           return $arr;
         } 
+      }//end for
+
+      //VALIDATION TRUSTED POSTIF
+      $urls = $request->url;
+      $check_url = self::check_trusted_url($urls);
+
+      if($check_url['status'] == false)
+      {
+        $arr['status'] = 'error';
+        $arr['message'] = $check_url['message'];
+        return $arr;
       }
     }
 
     $messages = [
         'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
-        'max'    => 'Maximal character :attribute adalah : :max.',
+        'max'    => 'Maksimal character :attribute adalah : :max.',
         /*'same'    => 'The :attribute and :other must match.',
         'size'    => 'The :attribute must be exactly :size.',
         'between' => 'The :attribute value :input is not between :min - :max.',
@@ -1439,6 +1463,7 @@ class BiolinkController extends Controller
       }*/
 
       // LINK LOGIC
+      $debug = array();
       for ($i=0; $i <count($request->title); $i++)
       {   
 
@@ -1504,8 +1529,32 @@ class BiolinkController extends Controller
         //ICON LINK
         $iconlink = $_FILES['iconlink']['tmp_name']; //replacement of $request->file()
         $icname = $_FILES['iconlink']['name']; //file name for extension
+        $file_size = $_FILES['iconlink']['size'];
+        $file_index = $i + 1;
+
         if($iconlink[$i] !== "")
         {
+          if($file_size[$i] > 300000)
+          {
+            $arr['status'] = 'error';
+            $arr['message'] = 'Ukuran file tidak boleh lebih dari 300 Kb pada link : '.$file_index.' ';
+            return $arr;
+          }
+          // VALIDATE IMAGE
+          $ext = explode(".",$icname[$i]);
+          $extension = false;
+          if($ext[1] =="jpg"||$ext[1] =="jpeg"||$ext[1] =="png"||$ext[1] =="gif")
+          {
+            $extension = true;
+          }
+
+          if($extension == false)
+          {
+            $arr['status'] = 'error';
+            $arr['message'] = 'Mohon gunakan ekstensi yang valid (jpeg,jpg,png,gif) pada link : '.$file_index.' ';
+            return $arr;
+          }
+
           // SEND IMAGE ICON TO S3
           $icon_link = $this->icon_link_filter($iconlink[$i],$page,$icname[$i]);
           //SAVE IMAGE ICON PATH / LINK
@@ -1541,7 +1590,7 @@ class BiolinkController extends Controller
           }
         }*/
         sleep(1);//to prevent same file renaming
-      }
+    }//end for looping
     endif;
     
     $sort_msg = '';
@@ -1666,32 +1715,64 @@ class BiolinkController extends Controller
   	return $arr;
   }
 
+  // validation trusted url
+  public static function check_trusted_url($urls)
+  {
+    $links = null;
+    foreach($urls as $key=>$val)
+    {
+      $key = $key + 1;
+      if($val !== null)
+      {
+        $links[]= Helper::filter_url($val);
+      }
+    }
+
+    $links = implode("\n",$links);
+    $check_trusted = Helper::CheckTrustedLink($links,true);
+    $arr['status'] = true;
+
+    if(isset($check_trusted['values']))
+    {
+      foreach($check_trusted['values'] as $row):
+        if($row['Status'] == 'Ada')
+        {
+          $arr['status'] = false;
+          $arr['message'] = "Link : <b>".$row['Domain']."</b> yang anda masukkan diblack list oleh kominfo.go.id";
+          return $arr;
+        }
+      endforeach;
+    }
+
+    return $arr;;
+  }
+
   private function icon_link_filter($file,$page,$fname)
   {
     //RESIZE FILE IF OVER 100PX
-      $user = Auth::user();
-      $arr_size = getimagesize($file);
-      $imagewidth = $arr_size[0];
-      $imageheight = $arr_size[1];
-      
-      /*if($imagewidth > 40 || $imageheight > 40)
-      {
-          $imageUpload = $this->resizeImage($file,40,40);
-      }
-      else
-      {
-          $imageUpload =  file_get_contents($file);
-      }*/
-      $imageUpload =  file_get_contents($file);
-     
-      $dt = Carbon::now();
-      $ext = explode(".",$fname)[1];
-      $dir = 'icon_link/'.explode(' ',trim($user->name))[0].'-'.$user->id;
-      $filename = $dt->format('ymdHis').'-'.$page->id.'.'.$ext;
-      Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
-      $icon_image_path = $dir."/".$filename;
+    $user = Auth::user();
+    $arr_size = getimagesize($file);
+    $imagewidth = $arr_size[0];
+    $imageheight = $arr_size[1];
+    
+    if($imagewidth > 40 || $imageheight > 40)
+    {
+        $imageUpload = $this->resizeImage($file,40,40);
+    }
+    else
+    {
+        $imageUpload =  file_get_contents($file);
+    }
+    // $imageUpload =  file_get_contents($file);
+   
+    $dt = Carbon::now();
+    $ext = explode(".",$fname)[1];
+    $dir = 'icon_link/'.explode(' ',trim($user->name))[0].'-'.$user->id;
+    $filename = $dt->format('ymdHis').'-'.$page->id.'.'.$ext;
+    Storage::disk('s3')->put($dir."/".$filename,$imageUpload, 'public');
+    $icon_image_path = $dir."/".$filename;
 
-      return $icon_image_path;
+    return $icon_image_path;
   }
 
   public function test(Request $request)
@@ -1701,6 +1782,7 @@ class BiolinkController extends Controller
 
   public function savepixel(Request $request)
   {
+    // dd($request->all());
     $temp_arr = array();
     $pixel_proof = null;
     $pixelscript = '';
@@ -1747,7 +1829,7 @@ class BiolinkController extends Controller
 
     $messages = [
         'required'    => 'Tidak berhasil disimpan, silahkan isi :attribute dahulu.',
-        'max' => 'Maximal character untuk judul ialah :max karakter'
+        'max' => 'Maksimal character untuk judul ialah :max karakter'
         /*'same'    => 'The :attribute and :other must match.',
         'size'    => 'The :attribute must be exactly :size.',
         'between' => 'The :attribute value :input is not between :min - :max.',
@@ -1756,7 +1838,6 @@ class BiolinkController extends Controller
 
     $validator = Validator::make($request->all(), $temp_arr, $messages);
    
-    
     if($validator->fails()) {  
       $arr['status'] = 'error';
       $arr['message'] = $validator->errors()->first('script');
@@ -1815,11 +1896,21 @@ class BiolinkController extends Controller
   	$pixels=Pixel::where('users_id',Auth::user()->id)
                   ->where('pages_id','!=',0)
                   ->where('jenis_pixel','<>','pf')
-  					->orderBy('created_at','ascend')->get();
+  					->orderBy('created_at','asc')->get();
   					//dd($pixels);
   	$arr['view'] =(string) view('user.dashboard.contentpixel')
-                    ->with('pixels',$pixels);
+                    ->with('pixels',$pixels)
+                    ->with('biolink',new BiolinkController);
      return $arr;
+  }
+
+  // TO EXTRACT FB PIXEL ID FROM PIXEL SCRIPTS
+  public function get_fb_pixel_id($str)
+  {
+    preg_match("/\?id\=.*?\&/",$str,$m);
+    $m = rtrim($m[0],"& ");
+    $m = explode("=",$m);
+    return $m[1];
   }
 
   public function deletepixel(Request $request)

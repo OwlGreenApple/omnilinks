@@ -1602,15 +1602,22 @@
     var data_script;
     var elscript = document.getElementById("error-script");
     elscript.innerHTML = ''; //to make element error-script have default value length
-    window.onerror = function(error){
+
+    var jenis_pixel = $("#jenis_pixel").val();
+
+    //  prevent filter javascript if fb pixel
+    if(jenis_pixel !== 'fb')
+    {
+      window.onerror = function(error){
         $("#pesanAlert").html('Javascript error silahkan cek kembali');
         $("#pesanAlert").addClass("alert-danger");
         $("#pesanAlert").removeClass("alert-success");
         $("#pesanAlert").show();
         //alert(error);
         elscript.innerHTML = error;
-    };
-
+      };
+    }
+    
     data_script = $("#script").val();
     $("#script-code").html(data_script);
     var len = elscript.innerHTML.length;
@@ -3098,7 +3105,7 @@
                     Pixel Retargetting
                   </span>
 
-                  <div class="fb-pixel-option">
+                  <div id="fb-pixel" class="fb-pixel-option">
                     <div class="form-group">
                         <label class="control-label">Pixel ID</label>  
                         <input type="text" class="form-control" name="fb_id" />
@@ -5305,7 +5312,7 @@
     descPlaceholder();
     upload_image_icon();
     change_pixel();
-    fb_pixel_detector();
+    fb_pixel_detector('fb');
     fb_custom_event();
     fb_custom_event_sel();
   });
@@ -5337,7 +5344,8 @@
   function change_pixel()
   {
     $("#jenis_pixel").change(function(){
-      fb_pixel_detector();
+      var sel = $(this).val();
+      fb_pixel_detector(sel);
       fb_custom_event();
     });
   }
@@ -5345,7 +5353,7 @@
   /*TO DETECT IF PIXEL DROPDOWN SELECTED ON FBPIXEL*/
   function fb_pixel_detector(sel)
   {
-    var sel = $("select[name='jenis_pixel'] > option:selected").val();
+    // var sel = $("select[name='jenis_pixel'] > option:selected").val();
     if(sel == 'fb')
     {
       $(".fb-pixel-option").show();
@@ -6607,6 +6615,15 @@
     });
     
     $("body").on("click", "#addBanner", function() {
+      var max_link = 5;
+      var total_link = $(".list-banner").length;
+
+      if(total_link >= max_link)
+      {
+        alert('Jumlah maksimal banner adalah 5');
+        return false;
+      }
+
       var bannerhtml ="";
       idpic+=1;
       let $el;
@@ -6793,13 +6810,29 @@
       var title = $(this).attr("dataedittitle");
       var editidpixel = $(this).attr("dataeditpixelid");
       var jenis = $(this).attr("datajenis");
+      var fb_pixel_id = $(this).attr('data-fb-pixel-id');
+
+      fb_pixel_detector(jenis);
+      fb_custom_event();
 
       $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
       $('#script').val(script);
       $('#judul').val(title);
       $('#editidpixel').val(editidpixel);
       $('#jenis_pixel').val(jenis);
-      location.href="#script";
+
+      setTimeout(function(){
+        if(jenis == 'fb')
+        {
+          $("input[name='fb_id']").val(fb_pixel_id);
+          location.href="#fb-pixel";
+        }
+        else
+        {
+          location.href="#script";
+        }
+      },500);
+      
     });
     
     
@@ -7046,6 +7079,16 @@
   			// alert("Jumlah link tidak boleh lebih dari 5");
 	 		 //  return "";
      //  }
+        //limit max link up to 100
+        var max_link = 100;
+        var total_link = $(".link-list").length;
+
+        if(total_link >= max_link)
+        {
+          alert('Jumlah maksimal link adalah 100');
+          return false;
+        }
+
         var $el;
         counterLink += 1;
         $('.sortable-link').append(
