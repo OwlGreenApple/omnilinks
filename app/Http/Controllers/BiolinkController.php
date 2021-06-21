@@ -760,8 +760,12 @@ class BiolinkController extends Controller
     }
 
     //TRUSTPOSITIF FILTER
-    $dt = self::desc_trust_positif($desc);
-
+    $dt = array();
+    if(is_array($desc))
+    {
+      $dt = self::desc_trust_positif($desc);
+    }
+   
     if(count($dt) > 0)
     {
       $arr['status'] = 'error';
@@ -1206,6 +1210,7 @@ class BiolinkController extends Controller
         {
           $dt[] = $filter;
         }
+        sleep(1.2);
       }
     endif;
     
@@ -1309,7 +1314,6 @@ class BiolinkController extends Controller
           $arr['message'] = "Link Url ".$i." tidak valid";
           return $arr;
         } 
-       
       }
     }
 
@@ -1670,15 +1674,15 @@ class BiolinkController extends Controller
       $imagewidth = $arr_size[0];
       $imageheight = $arr_size[1];
       
-      if($imagewidth > 40 || $imageheight > 40)
+      /*if($imagewidth > 40 || $imageheight > 40)
       {
           $imageUpload = $this->resizeImage($file,40,40);
       }
       else
       {
           $imageUpload =  file_get_contents($file);
-      }
-
+      }*/
+      $imageUpload =  file_get_contents($file);
      
       $dt = Carbon::now();
       $ext = explode(".",$fname)[1];

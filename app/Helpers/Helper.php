@@ -171,9 +171,13 @@ class Helper
       // return false;
       echo "cURL Error #:" . $err;
     } 
-    else
+    elseif(is_array($response) == true)
     {
       $status = json_decode($response,true)['values'][0]['Status'];
+    }
+    else
+    {
+      $status = null;
     }
 
     if($status == 'Ada')
