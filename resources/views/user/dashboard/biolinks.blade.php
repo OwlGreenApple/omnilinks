@@ -2966,7 +2966,7 @@
                                  <i class="fab fa-linkedin-in"></i>
                                 </div>
                               </div>
-                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="masukkan url profile linkedin anda">
+                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="masukkan url profile linkedin anda (www.linkedin.com/in/xxxxxxxx) yang tanda xxxxxxxx saja">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
