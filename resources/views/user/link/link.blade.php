@@ -2269,7 +2269,7 @@ function pointCount(ip)
       headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
       type: 'GET',
       url: linkAjax,
-      // data: { id: <?php echo $pages->id; ?>},
+      // data: { id: <php echo $pages->id; ?>},
       dataType: 'text',
       beforeSend: function()
       {
