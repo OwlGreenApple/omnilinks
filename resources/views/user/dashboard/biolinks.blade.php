@@ -1616,17 +1616,17 @@
         //alert(error);
         elscript.innerHTML = error;
       };
-    }
-    
-    data_script = $("#script").val();
-    $("#script-code").html(data_script);
-    var len = elscript.innerHTML.length;
 
-    if(len > 0)
-    {
-        location.href="#pesanAlert";
-        $("#script-code").html('');
-        return false;
+       data_script = $("#script").val();
+       $("#script-code").html(data_script);
+       var len = elscript.innerHTML.length;
+
+       if(len > 0)
+       {
+         location.href="#pesanAlert";
+         $("#script-code").html('');
+         return false;
+       }
     }
 
     $.ajax({
