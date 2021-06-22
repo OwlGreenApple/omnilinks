@@ -239,6 +239,17 @@ $(document).ready(function () {
         //changeLengthMedia();
         return false;
     });
+    $('#deletelnd').on('click', function() {
+        $('#linkedin').hide();
+        $('#linkedin').addClass('hide');
+        $('#linkedin').find("input").val('');
+        $('#linkedinviewid').hide();
+        $('#linkedinviewid').addClass('hide');
+        $('#linkedinviewid').removeClass('shown-sm');
+        $('#check_linkedin').prop('checked',false);
+        //changeLengthMedia();
+        return false;
+    });
     $('#deletefb').on('click', function (e) {
         $('#fb').hide();
         $('#fb').addClass('hide');

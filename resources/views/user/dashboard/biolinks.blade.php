@@ -1837,6 +1837,8 @@
     $("#igpixel").val('{{$pages->ig_pixel_id}}');
     $("#tkpixel").html(dataView);
     $("#tkpixel").val('{{$pages->tk_pixel_id}}');
+    $("#lndpixel").html(dataView);
+    $("#lndpixel").val('{{$pages->lnd_pixel_id}}');
     $("#twitterpixel").html(dataView);
     $("#twitterpixel").val('{{$pages->twitter_pixel_id}}');
     <?php if(!$banner->count()) { ?>
@@ -1874,8 +1876,8 @@
     }
     
     @foreach($banner as $ban)
-    $(".bannerpixel-{{$ban->id}}").html(dataView);
-    $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
+        $(".bannerpixel-{{$ban->id}}").html(dataView);
+        $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
     @endforeach
   }
   
@@ -2946,6 +2948,42 @@
                         </div>
                       </div>
                     </li>
+
+                    <li id="sosmed-linkedin">
+                      <div id="linkedin" class="socialmedia div-table hide" data-type="linkedin" style="">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="linkedin" class="input-hidden">
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                 <i class="fab fa-linkedin-in"></i>
+                                </div>
+                              </div>
+                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="masukkan username linkedin">
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <select name="lndpixel" id="lndpixel" class="form-control linkpixel">
+                            </select>
+                          </div>
+                        </div>
+                          
+                        <div class="div-cell cell-btn" id="deletelnd">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+
+                  <!-- end social media -->
                   </ul>
 
                   <!-- -modal option for social media -->
@@ -2980,6 +3018,11 @@
                                   <div class="form-check">
                                       <input id="check_tiktok" type="checkbox" class="form-check-input check_social" data-check="tiktok">
                                       <label class="form-check-label"><i class="fab fa-tiktok"></i> Tiktok</label>
+                                  </div> 
+                                  <!--  Linked In -->
+                                  <div class="form-check">
+                                      <input id="check_linkedin" type="checkbox" class="form-check-input check_social" data-check="linkedin">
+                                      <label class="form-check-label"><i class="fab fa-linkedin-in"></i> Linkedin</label>
                                   </div>
                                   <!-- end -->
                                 </div>
@@ -4035,6 +4078,12 @@
                         <i style="font-size:25px" class="fab fa-tiktok"></i>
                       </a>  
                     </li>  
+                    <li class="col linked hide" id="linkedinviewid" style="margin-top : -3px">
+                      <a href="#" title="lnd" >
+                        <i style="font-size:25px" class="fab fa-linkedin-in"></i>
+                      </a>  
+                    </li>  
+                  <!-- end social media -->
                   </ul>
                   
                     <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">

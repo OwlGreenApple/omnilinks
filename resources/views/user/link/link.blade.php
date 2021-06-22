@@ -1723,6 +1723,11 @@
                 <i style="font-size:30px" class="fab fa-tiktok"></i>
               </a>
             @endif 
+            @if($sosmed=='linkedin')
+              <a href="#" data-href="{{env('APP_URL').'/click/linkedin/'.$pages->id}}" title="Linkedin" target="_blank" class="link-ajax">
+                <i style="font-size:30px" class="fab fa-linkedin-in"></i>
+              </a>
+            @endif 
           </li>
       <!-- diremark supaya sesuai phone preview, ngga tau dulu kenapa ini dipake
             @if( $sosmed=='fb' and (!is_null($pages->fb_link) || $pages->fb_pixel_id!=0))

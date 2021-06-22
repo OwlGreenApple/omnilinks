@@ -1298,6 +1298,10 @@ class BiolinkController extends Controller
     if (in_array("ig", $request->sortsosmed)) {
       $temp_arr['ig'] = ['required', 'max:191'];
     }
+
+    if (in_array("linkedin", $request->sortsosmed)) {
+      $temp_arr['linkedin'] = ['required', 'max:191'];
+    }
     if (in_array("tiktok", $request->sortsosmed)) {
       $temp_arr['tiktok'] = ['required', 'max:191'];
     }
@@ -1314,7 +1318,7 @@ class BiolinkController extends Controller
           $temp_arr['title.'.$i] = ['required', 'string', 'max:160'];
           // $temp_arr['url.'.$i] = ['required', 'string', 'active_url', 'max:255'];
           $temp_arr['url.'.$i] = ['required', 'string', 'max:191'];
-          $temp_arr['icon_link.'.$i] = ['max:300', new CheckImageExtension];
+          // $temp_arr['icon_link.'.$i] = ['max:300', new CheckImageExtension];
         }
         else
         {
@@ -1381,6 +1385,7 @@ class BiolinkController extends Controller
     $youtube = $request->youtubepixel;
     $ig = $request->igpixel;
     $tiktok = $request->tkpixel;
+    $linkedin = $request->lndpixel;
     $skype = $request->skypepixel;
     $fb = $request->fbpixel;
     $line = $request->linepixel;
@@ -1391,6 +1396,7 @@ class BiolinkController extends Controller
       $page->twitter_pixel_id=$twitter;
       $page->ig_pixel_id=$ig;
       $page->tk_pixel_id=$tiktok;
+      $page->lnd_pixel_id=$linkedin;
       $page->telegram_pixel_id=$telegram;
       $page->youtube_pixel_id=$youtube;
       $page->skype_pixel_id=$skype;
@@ -1403,6 +1409,7 @@ class BiolinkController extends Controller
       $page->twitter_pixel_id=0;
       $page->ig_pixel_id=0;
       $page->tk_pixel_id=0;
+      $page->lnd_pixel_id=0;
       $page->telegram_pixel_id=0;
       $page->youtube_pixel_id=0;
       $page->skype_pixel_id=0;
@@ -1419,6 +1426,7 @@ class BiolinkController extends Controller
   	$page->youtube_link=strip_tags($request->youtube);
     $page->ig_link=strip_tags($request->ig);
     $page->tk_link=strip_tags($request->tiktok);
+    $page->lnd_link=strip_tags($request->linkedin);
     $page->line_link=strip_tags($request->line);
     $page->messenger_link=strip_tags($request->messenger);
 
