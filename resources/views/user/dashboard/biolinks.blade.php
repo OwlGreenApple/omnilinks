@@ -1552,6 +1552,7 @@
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+        $(".alert").fadeIn();
 
         $(window).scrollTop(0);
         var data = jQuery.parseJSON(result);
@@ -1585,6 +1586,10 @@
           $("#pesanAlert").removeClass("alert-success");
           return false;
         }
+      },
+      complete : function(xhr)
+      {
+        $(".alert").delay(3000).fadeOut(2000);
       },
       error : function(xhr)
       {
@@ -2755,6 +2760,13 @@
                   </div>
                   
                   <div class="mb-5">
+                    <!-- build -->
+                    <div class="as offset-md-8 col-md-4 pr-0 mb-3 menu-nomobile">
+                      <button type="button" class="btn btn-primary btn-block btn-biolinks btn-save-link">
+                        SAVE
+                      </button>
+                    </div>
+                     
                     <ul class="sortable-link a">
                       <!-- link displayed here -->
                     </ul>
@@ -2796,7 +2808,7 @@
                                   <i class="fab fa-youtube"></i>
                                 </div>
                               </div>
-                              <input type="text" name="youtube" class="form-control youtube-input" id="" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}">
+                              <input type="text" name="youtube" class="form-control youtube-input" id="" placeholder="Masukkan channel youtube url" value="{{$pages->youtube_link}}">
                             </div>
                           </div> 
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2830,7 +2842,7 @@
                                   <i class="fab fa-facebook-f"></i>
                                 </div>
                               </div>
-                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="" placeholder="masukkan username facebook">
+                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="" placeholder="Masukkan url facebook">
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2864,7 +2876,7 @@
                                   <i class="fab fa-twitter"></i>
                                 </div>
                               </div>
-                              <input type="text" name="twitter" class="form-control twitter-input" id="" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
+                              <input type="text" name="twitter" class="form-control twitter-input" id="" placeholder="Masukkan url twitter" value="{{$pages->twitter_link}}">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2898,7 +2910,7 @@
                                   <i class="fab fa-instagram"></i>
                                 </div>
                               </div>
-                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="" placeholder="masukkan username instagram">
+                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="" placeholder="Masukkan url instagram">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2932,7 +2944,7 @@
                                  <i class="fab fa-tiktok"></i>
                                 </div>
                               </div>
-                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok tanpa @">
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="Masukkan url tiktok anda">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2966,7 +2978,7 @@
                                  <i class="fab fa-linkedin-in"></i>
                                 </div>
                               </div>
-                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="www.linkedin.com/in/xxxx yang tanda xxxx saja">
+                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="Masukkan url profile anda">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -7140,7 +7152,7 @@
 
         var $el;
         counterLink += 1;
-        $('.sortable-link').append(
+        $('.sortable-link').prepend(
           '<li class="link-list" id="link-url-new_' + counterLink + '">'+
             '<div class="div-table mb-4">'+
             '<div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div>'+
@@ -7177,7 +7189,7 @@
         // $("#viewLink").append(' <button type="button" class="btn btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
 
         //back_target
-        $("#viewLink").append('<li class="">'+
+        $("#viewLink").prepend('<li class="">'+
           '<span id="link-url-new_' + counterLink + '-preview" class="embed-ln-new_'+counterLink+'">'+
           '<a id="textprev-new-'+counterLink+'" href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">'+'<img class="rounded-circle image_icon_link" id="preview_title-'+counterLink+'-view-get" />'+'Masukkan Link</a></li></span>');
         check_outlined();

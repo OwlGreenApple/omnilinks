@@ -152,6 +152,12 @@ $(document).ready(function () {
         check_click_bait();
     });
 
+    $(document).on('click','.expand',function(){
+        var id = $(this).attr('data-id');
+        var status = $(".wrapper-"+id);
+        status.toggle("slow","swing");
+    });
+
     /* biolink social-media */
     $(document).on('click', '#sm', function() 
     {
