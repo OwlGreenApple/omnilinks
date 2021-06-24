@@ -1559,7 +1559,7 @@
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
 
-         adaptiveLink();
+         load_embed();
 
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
