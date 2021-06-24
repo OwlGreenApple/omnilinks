@@ -26,6 +26,7 @@ use Auth,Carbon,Validator,Storage,Mail,DB,Session;
 use Ramsey\Uuid\Uuid;
 use App\Http\Controllers\ApiController;
 use Aws\S3\Exception\S3Exception;
+use stdClass;
 
 class BiolinkController extends Controller
 { 
@@ -353,7 +354,7 @@ class BiolinkController extends Controller
 
       if($preview == 1)
       {
-        return view('user.dashboard.previewproof',['proof'=>$query,'proof_text_color'=>$proof_text_color,'s3'=>new S3Exception]);
+        return view('user.dashboard.previewproof',['proof'=>$query,'proof_text_color'=>$proof_text_color]);
       }
       else
       {

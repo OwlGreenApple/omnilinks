@@ -4,19 +4,17 @@
   <div class="proof-box-preview">
   @foreach($proof as $row)
   <div class="proof-wrapper-preview">
-      <div class="proof_image">
-        @php 
-          try
-          {
-             $viewpicture = Storage::disk('s3')->url($row->url_image);
-          }
-          catch(s3 $e)
-          {
-             $viewpicture = "{{asset('/image/no-photo.jpg')}}";
-          }
-        @endphp
-        <img src="{!! $viewpicture !!}"/>
-      </div>
+      @php
+        if(get_headers(Storage::disk('s3')->url($row->url_image))[0] == 'HTTP/1.1 200 OK')
+        {
+          $proof_image = Storage::disk('s3')->url($row->url_image);
+        }
+        else
+        {
+          $proof_image = asset('/image/no-photo.jpg');
+        }
+      @endphp
+      <div class="proof_image"><img src="{!! $proof_image !!}"/></div>
    
       <div class="proof-desc">
           <div class="proof_profile">
