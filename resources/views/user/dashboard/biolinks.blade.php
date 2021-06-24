@@ -1588,7 +1588,7 @@
       complete : function(xhr)
       {
         $(".alert").delay(3000).fadeOut(2000);
-        adaptiveLink();
+        // adaptiveLink();
       },
       error : function(xhr)
       {
