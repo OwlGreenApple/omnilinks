@@ -1417,6 +1417,7 @@
       complete: function(xhr,status)
       {
         check_text_indent();
+        adaptiveLink();
       }
     });
   }
@@ -1575,7 +1576,6 @@
           changepixel = 0;
           changeproof = 0;
           refreshwa();
-          loadLinkBio();
           refreshpixel();
           return true;
         }
@@ -1588,7 +1588,7 @@
       complete : function(xhr)
       {
         $(".alert").delay(3000).fadeOut(2000);
-        // adaptiveLink();
+        loadLinkBio();
       },
       error : function(xhr)
       {
@@ -1746,10 +1746,6 @@
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
         //$('.pixellink').html(data.pixelink);
-      },
-      complete : function(xhr)
-      {
-        adaptiveLink();
       }
     });
   }
