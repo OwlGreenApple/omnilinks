@@ -1559,8 +1559,6 @@
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
 
-         load_embed();
-
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
@@ -1590,6 +1588,7 @@
       complete : function(xhr)
       {
         $(".alert").delay(3000).fadeOut(2000);
+        adaptiveLink();
       },
       error : function(xhr)
       {
