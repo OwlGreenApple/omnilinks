@@ -4,7 +4,19 @@
   <div class="proof-box-preview">
   @foreach($proof as $row)
   <div class="proof-wrapper-preview">
-      <div class="proof_image"><img src="{!! Storage::disk('s3')->url($row->url_image) !!}"/></div>
+      <div class="proof_image">
+        @php 
+          try
+          {
+             $viewpicture = Storage::disk('s3')->url($row->url_image);
+          }
+          catch(s3 $e)
+          {
+             $viewpicture = "{{asset('/image/no-photo.jpg')}}";
+          }
+        @endphp
+        <img src="{!! $viewpicture !!}"/>
+      </div>
    
       <div class="proof-desc">
           <div class="proof_profile">
