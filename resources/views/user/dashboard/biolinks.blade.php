@@ -1746,8 +1746,11 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        adaptiveLink();
         //$('.pixellink').html(data.pixelink);
+      },
+      complete : function(xhr)
+      {
+        adaptiveLink();
       }
     });
   }
@@ -5149,11 +5152,12 @@
     });
   }
 
+  // TO DELAY LOAD EMBED FUNCTION SO LINKS APPEAR ACCORDING ON OPTIONS
   function adaptiveLink()
   {
     setTimeout(function(){
       load_embed();
-    },300);
+    },1000);
   }
 
   function pastePreview()
@@ -5190,9 +5194,7 @@
      $(".link_option").each(function(i){
         var id = $(this).attr('id');
         var value = $(this).val();
-        setTimeout(function(){
-           embed_link(value,id)
-        },300);
+        embed_link(value,id);
       });
   }
 

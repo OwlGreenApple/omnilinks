@@ -31,7 +31,7 @@
     <!-- <script src="{{asset('js/all.js')}}"></script> -->
     <script src="{{asset('selectize/selectize.js')}}"></script>
     <!-- countdown timer -->
-    <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script>
+    <!-- <script src="{{asset('jquery-countdown/jQuery.countdownTimer.min.js')}}"></script> -->
     <!-- bootstrap datetimepicker -->
     <script src="{{asset('bootstrap/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
     <!-- create link -->
