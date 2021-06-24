@@ -152,6 +152,7 @@ $(document).ready(function () {
         check_click_bait();
     });
 
+    // TO EXPAND / MINIMIZE LINKS
     $(document).on('click','.expand',function(){
         var id = $(this).attr('data-id');
         var status = $(".wrapper-"+id);

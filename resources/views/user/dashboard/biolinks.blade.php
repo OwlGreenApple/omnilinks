@@ -5184,15 +5184,19 @@
     })
   }
 
+  // LOAD LINK ACCORDING ON OPTIONS
   function load_embed()
   {
      $(".link_option").each(function(i){
         var id = $(this).attr('id');
         var value = $(this).val();
-        embed_link(value,id)
+        setTimeout(function(){
+           embed_link(value,id)
+        },300);
       });
   }
 
+  // CHANGE DEFAULT LINK TO YOUTUBE LINK
   function change_link()
   {
     $("body").on("change",".link_option",function(){
@@ -5202,6 +5206,7 @@
     });
   }
 
+  // CHANGE PREVIEW LINK
   function embed_link(value,id){
      if(value == 2)
       {
