@@ -1074,6 +1074,7 @@ hr.own {
     from {opacity: .4} 
     to {opacity: 1}
   }
+
   .imagesize{
     width:100%;
     height: 117px;
@@ -1096,11 +1097,12 @@ hr.own {
     border: 1px solid #ced4da;
     cursor: pointer;
   }
-.messengers 
- {
-  margin-bottom: 15px;
-  clear: both; 
-}
+
+  .messengers 
+  {
+    margin-bottom: 15px;
+    clear: both; 
+  }
  
   .messengers.links-num-4 .link
   {
@@ -1157,7 +1159,6 @@ hr.own {
   {
     font-weight: 700; 
   }
-
 
   .form-control{
     border-radius: unset;
@@ -1220,6 +1221,10 @@ ul {
 }
 .free-underline{
   text-decoration : none!important;
+}
+
+.wrapper  {
+  display : none;
 }
 
 /*

@@ -152,6 +152,13 @@ $(document).ready(function () {
         check_click_bait();
     });
 
+    // TO EXPAND / MINIMIZE LINKS
+    $(document).on('click','.expand',function(){
+        var id = $(this).attr('data-id');
+        var status = $(".wrapper-"+id);
+        status.toggle("slow","swing");
+    });
+
     /* biolink social-media */
     $(document).on('click', '#sm', function() 
     {
@@ -236,6 +243,17 @@ $(document).ready(function () {
         $('#tiktokviewid').addClass('hide');
         $('#tiktokviewid').removeClass('shown-sm');
         $('#check_tiktok').prop('checked',false);
+        //changeLengthMedia();
+        return false;
+    });
+    $('#deletelnd').on('click', function() {
+        $('#linkedin').hide();
+        $('#linkedin').addClass('hide');
+        $('#linkedin').find("input").val('');
+        $('#linkedinviewid').hide();
+        $('#linkedinviewid').addClass('hide');
+        $('#linkedinviewid').removeClass('shown-sm');
+        $('#check_linkedin').prop('checked',false);
         //changeLengthMedia();
         return false;
     });

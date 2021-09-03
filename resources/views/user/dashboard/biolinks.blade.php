@@ -1417,6 +1417,7 @@
       complete: function(xhr,status)
       {
         check_text_indent();
+        adaptiveLink();
       }
     });
   }
@@ -1552,13 +1553,12 @@
       success: function(result) {
         $('#loader').hide();
         $('.div-loading').removeClass('background-load');
+        $(".alert").fadeIn();
 
         $(window).scrollTop(0);
         var data = jQuery.parseJSON(result);
         $("#pesanAlert").html(data.message);
         $("#pesanAlert").show();
-
-         load_embed();
 
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
@@ -1576,7 +1576,6 @@
           changepixel = 0;
           changeproof = 0;
           refreshwa();
-          loadLinkBio();
           refreshpixel();
           return true;
         }
@@ -1585,6 +1584,11 @@
           $("#pesanAlert").removeClass("alert-success");
           return false;
         }
+      },
+      complete : function(xhr)
+      {
+        $(".alert").delay(3000).fadeOut(2000);
+        loadLinkBio();
       },
       error : function(xhr)
       {
@@ -1602,24 +1606,31 @@
     var data_script;
     var elscript = document.getElementById("error-script");
     elscript.innerHTML = ''; //to make element error-script have default value length
-    window.onerror = function(error){
+
+    var jenis_pixel = $("#jenis_pixel").val();
+
+    //  prevent filter javascript if fb pixel
+    if(jenis_pixel !== 'fb')
+    {
+      window.onerror = function(error){
         $("#pesanAlert").html('Javascript error silahkan cek kembali');
         $("#pesanAlert").addClass("alert-danger");
         $("#pesanAlert").removeClass("alert-success");
         $("#pesanAlert").show();
         //alert(error);
         elscript.innerHTML = error;
-    };
+      };
 
-    data_script = $("#script").val();
-    $("#script-code").html(data_script);
-    var len = elscript.innerHTML.length;
+       data_script = $("#script").val();
+       $("#script-code").html(data_script);
+       var len = elscript.innerHTML.length;
 
-    if(len > 0)
-    {
-        location.href="#pesanAlert";
-        $("#script-code").html('');
-        return false;
+       if(len > 0)
+       {
+         location.href="#pesanAlert";
+         $("#script-code").html('');
+         return false;
+       }
     }
 
     $.ajax({
@@ -1734,7 +1745,6 @@
 
         var data = jQuery.parseJSON(result);
         $('#content').html(data.view);
-        adaptiveLink();
         //$('.pixellink').html(data.pixelink);
       }
     });
@@ -1830,6 +1840,8 @@
     $("#igpixel").val('{{$pages->ig_pixel_id}}');
     $("#tkpixel").html(dataView);
     $("#tkpixel").val('{{$pages->tk_pixel_id}}');
+    $("#lndpixel").html(dataView);
+    $("#lndpixel").val('{{$pages->lnd_pixel_id}}');
     $("#twitterpixel").html(dataView);
     $("#twitterpixel").val('{{$pages->twitter_pixel_id}}');
     <?php if(!$banner->count()) { ?>
@@ -1867,8 +1879,8 @@
     }
     
     @foreach($banner as $ban)
-    $(".bannerpixel-{{$ban->id}}").html(dataView);
-    $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
+        $(".bannerpixel-{{$ban->id}}").html(dataView);
+        $(".bannerpixel-{{$ban->id}}").val('{{$ban->pixel_id}}');
     @endforeach
   }
   
@@ -2746,6 +2758,13 @@
                   </div>
                   
                   <div class="mb-5">
+                    <!-- build -->
+                    <div class="as offset-md-8 col-md-4 pr-0 mb-3 menu-nomobile">
+                      <button type="button" class="btn btn-primary btn-block btn-biolinks btn-save-link">
+                        SAVE
+                      </button>
+                    </div>
+                     
                     <ul class="sortable-link a">
                       <!-- link displayed here -->
                     </ul>
@@ -2787,7 +2806,7 @@
                                   <i class="fab fa-youtube"></i>
                                 </div>
                               </div>
-                              <input type="text" name="youtube" class="form-control youtube-input" id="" placeholder="masukkan channel youtube url" value="{{$pages->youtube_link}}">
+                              <input type="text" name="youtube" class="form-control youtube-input" id="" placeholder="Masukkan channel youtube url" value="{{$pages->youtube_link}}">
                             </div>
                           </div> 
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2821,7 +2840,7 @@
                                   <i class="fab fa-facebook-f"></i>
                                 </div>
                               </div>
-                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="" placeholder="masukkan username facebook">
+                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="" placeholder="Masukkan url facebook">
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2855,7 +2874,7 @@
                                   <i class="fab fa-twitter"></i>
                                 </div>
                               </div>
-                              <input type="text" name="twitter" class="form-control twitter-input" id="" placeholder="masukkan username twitter" value="{{$pages->twitter_link}}">
+                              <input type="text" name="twitter" class="form-control twitter-input" id="" placeholder="Masukkan url twitter" value="{{$pages->twitter_link}}">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2889,7 +2908,7 @@
                                   <i class="fab fa-instagram"></i>
                                 </div>
                               </div>
-                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="" placeholder="masukkan username instagram">
+                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="" placeholder="Masukkan url instagram">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2923,7 +2942,7 @@
                                  <i class="fab fa-tiktok"></i>
                                 </div>
                               </div>
-                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="masukkan username tiktok tanpa @">
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="Masukkan url tiktok anda">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2939,6 +2958,42 @@
                         </div>
                       </div>
                     </li>
+
+                    <li id="sosmed-linkedin">
+                      <div id="linkedin" class="socialmedia div-table hide" data-type="linkedin" style="">
+                        <input type="hidden" name="sortsosmed[]" value="" data-val="linkedin" class="input-hidden">
+                        <div class="div-cell">
+                          <span class="handle">
+                            <i class="fas fa-bars"></i>
+                          </span>
+                        </div>
+
+                        <div class="div-cell">
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                 <i class="fab fa-linkedin-in"></i>
+                                </div>
+                              </div>
+                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="Masukkan url profile anda">
+                            </div>
+                          </div>
+                          <div class="col-md-12 col-12 pr-0 pl-0">
+                            <select name="lndpixel" id="lndpixel" class="form-control linkpixel">
+                            </select>
+                          </div>
+                        </div>
+                          
+                        <div class="div-cell cell-btn" id="deletelnd">
+                          <span>
+                            <i class="far fa-trash-alt"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+
+                  <!-- end social media -->
                   </ul>
 
                   <!-- -modal option for social media -->
@@ -2973,6 +3028,11 @@
                                   <div class="form-check">
                                       <input id="check_tiktok" type="checkbox" class="form-check-input check_social" data-check="tiktok">
                                       <label class="form-check-label"><i class="fab fa-tiktok"></i> Tiktok</label>
+                                  </div> 
+                                  <!--  Linked In -->
+                                  <div class="form-check">
+                                      <input id="check_linkedin" type="checkbox" class="form-check-input check_social" data-check="linkedin">
+                                      <label class="form-check-label"><i class="fab fa-linkedin-in"></i> Linkedin</label>
                                   </div>
                                   <!-- end -->
                                 </div>
@@ -3098,7 +3158,7 @@
                     Pixel Retargetting
                   </span>
 
-                  <div class="fb-pixel-option">
+                  <div id="fb-pixel" class="fb-pixel-option">
                     <div class="form-group">
                         <label class="control-label">Pixel ID</label>  
                         <input type="text" class="form-control" name="fb_id" />
@@ -4028,6 +4088,12 @@
                         <i style="font-size:25px" class="fab fa-tiktok"></i>
                       </a>  
                     </li>  
+                    <li class="col linked hide" id="linkedinviewid" style="margin-top : -3px">
+                      <a href="#" title="lnd" >
+                        <i style="font-size:25px" class="fab fa-linkedin-in"></i>
+                      </a>  
+                    </li>  
+                  <!-- end social media -->
                   </ul>
                   
                     <div class="col-md-12 mb-4 mt-4" align="center" id="poweredview">
@@ -5081,11 +5147,12 @@
     });
   }
 
+  // TO DELAY LOAD EMBED FUNCTION SO LINKS APPEAR ACCORDING ON OPTIONS
   function adaptiveLink()
   {
     setTimeout(function(){
       load_embed();
-    },300);
+    },1000);
   }
 
   function pastePreview()
@@ -5116,15 +5183,17 @@
     })
   }
 
+  // LOAD LINK ACCORDING ON OPTIONS
   function load_embed()
   {
      $(".link_option").each(function(i){
         var id = $(this).attr('id');
         var value = $(this).val();
-        embed_link(value,id)
+        embed_link(value,id);
       });
   }
 
+  // CHANGE DEFAULT LINK TO YOUTUBE LINK
   function change_link()
   {
     $("body").on("change",".link_option",function(){
@@ -5134,6 +5203,7 @@
     });
   }
 
+  // CHANGE PREVIEW LINK
   function embed_link(value,id){
      if(value == 2)
       {
@@ -5305,7 +5375,7 @@
     descPlaceholder();
     upload_image_icon();
     change_pixel();
-    fb_pixel_detector();
+    fb_pixel_detector('fb');
     fb_custom_event();
     fb_custom_event_sel();
   });
@@ -5337,7 +5407,8 @@
   function change_pixel()
   {
     $("#jenis_pixel").change(function(){
-      fb_pixel_detector();
+      var sel = $(this).val();
+      fb_pixel_detector(sel);
       fb_custom_event();
     });
   }
@@ -5345,7 +5416,7 @@
   /*TO DETECT IF PIXEL DROPDOWN SELECTED ON FBPIXEL*/
   function fb_pixel_detector(sel)
   {
-    var sel = $("select[name='jenis_pixel'] > option:selected").val();
+    // var sel = $("select[name='jenis_pixel'] > option:selected").val();
     if(sel == 'fb')
     {
       $(".fb-pixel-option").show();
@@ -6607,6 +6678,15 @@
     });
     
     $("body").on("click", "#addBanner", function() {
+      var max_link = 5;
+      var total_link = $(".list-banner").length;
+
+      if(total_link >= max_link)
+      {
+        alert('Jumlah maksimal banner adalah 5');
+        return false;
+      }
+
       var bannerhtml ="";
       idpic+=1;
       let $el;
@@ -6793,13 +6873,29 @@
       var title = $(this).attr("dataedittitle");
       var editidpixel = $(this).attr("dataeditpixelid");
       var jenis = $(this).attr("datajenis");
+      var fb_pixel_id = $(this).attr('data-fb-pixel-id');
+
+      fb_pixel_detector(jenis);
+      fb_custom_event();
 
       $('#pesanAlert').addClass('alert-danger').html('<div class="resetedit">anda dalam mode edit tekan reset untuk membatalkan</div>');
       $('#script').val(script);
       $('#judul').val(title);
       $('#editidpixel').val(editidpixel);
       $('#jenis_pixel').val(jenis);
-      location.href="#script";
+
+      setTimeout(function(){
+        if(jenis == 'fb')
+        {
+          $("input[name='fb_id']").val(fb_pixel_id);
+          location.href="#fb-pixel";
+        }
+        else
+        {
+          location.href="#script";
+        }
+      },500);
+      
     });
     
     
@@ -7046,9 +7142,19 @@
   			// alert("Jumlah link tidak boleh lebih dari 5");
 	 		 //  return "";
      //  }
+        //limit max link up to 100
+        var max_link = 100;
+        var total_link = $(".link-list").length;
+
+        if(total_link >= max_link)
+        {
+          alert('Jumlah maksimal link adalah 100');
+          return false;
+        }
+
         var $el;
         counterLink += 1;
-        $('.sortable-link').append(
+        $('.sortable-link').prepend(
           '<li class="link-list" id="link-url-new_' + counterLink + '">'+
             '<div class="div-table mb-4">'+
             '<div class="div-cell"><span class="handle"><i class="fas fa-bars"></i></span></div>'+
@@ -7058,7 +7164,7 @@
                 '<div class="input-stack">'+
                   '<select id="new_'+counterLink+'" name="options[]" class="form-control link_option">'+
                       '<option value="1" selected>Link</option>'+
-                      '<option value="2">Youtube Link</option>'+
+                      '<option value="2">Youtube Link (Gunakan link yang lengkap dari browser)</option>'+
                   '</select>'+
 
                   '<div class="sel_new_'+counterLink+'">'+
@@ -7085,7 +7191,7 @@
         // $("#viewLink").append(' <button type="button" class="btn btnview title-' + counterLink + '-view-get" id="link-url-' + counterLink + '-preview" style="width: 100%; margin-bottom: 12px;">Masukkan Link</button>');
 
         //back_target
-        $("#viewLink").append('<li class="">'+
+        $("#viewLink").prepend('<li class="">'+
           '<span id="link-url-new_' + counterLink + '-preview" class="embed-ln-new_'+counterLink+'">'+
           '<a id="textprev-new-'+counterLink+'" href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">'+'<img class="rounded-circle image_icon_link" id="preview_title-'+counterLink+'-view-get" />'+'Masukkan Link</a></li></span>');
         check_outlined();

@@ -17,10 +17,11 @@
   src: url('../fonts/OpenSans-ExtraBold.ttf');
 }
 
-exbold {
+h1 {
 	font-family : 'wagenerator_ex_bold';
 	font-size : 22pt;
 	line-height :38px;
+	margin-bottom : 2px !important;
 }
 
 input[name='copy'] {
@@ -118,10 +119,16 @@ input[name='copy'] {
 	padding-top : 8.5rem;
 }
 
-.reg-font {
+.reg-font, h2 {
 	font-family: 'wagenerator';
 	font-size : 12pt;
 	padding-top : 4pt;
+	margin-bottom : 2px;
+	line-height : 22px;
+}
+
+.reg-font a {
+	color : #000da7;
 }
 
 .btn-wa-generator {
@@ -139,4 +146,30 @@ input[name='copy'] {
 
 #wa-link {
 	display : none;
+}
+
+@media(max-width : 991px)
+{
+	.bg-generator { height : auto ; padding-bottom: 30px;}
+
+	.wa-gen-form {padding-top : 4px; margin-bottom : 10px;}
+
+	.order-12 {padding : 0;}
+
+}
+
+@media(max-width : 428px)
+{
+	.icon-generator img {max-width : 60px;}
+	.abs_image {left : 48px;}
+
+	.wa-gen-form b {font-size : 15px;}
+
+	h1 {font-size : 15pt; line-height:25px;}
+
+	.wa-gen-form .modal-body {padding-left : 20px; padding-right : 20px;}
+
+	.reg-font, h2 {font-size : 11pt;}
+
+	.modal-dialog {padding : 0;}
 }

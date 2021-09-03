@@ -48,8 +48,9 @@ class CheckFBEvents implements Rule
           'CustomEvent',
         ];
 
-        $search = array_search($value, $fb_events, true);
-
+        // $search = array_search($value, $fb_events, true);
+        $search = in_array($value,$fb_events);
+        
         if($search == false)
         {
           return false;

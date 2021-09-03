@@ -5,7 +5,7 @@
 <section class="bg-generator">
   <div class="container row mx-auto">
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 order-3 order-md-3 order-lg-2">
       <div class="wa-gen-form">
       <div class="modal-dialog col-lg-10" role="document">
         <div class="modal-content">
@@ -55,18 +55,17 @@
       <!-- end col-lg-6 -->
     </div>
 
-    <div class="col-lg-6 wa-gen-text">
-      <exbold>GRATIS buat click to chat</exbold> <br/>
-      <exbold>Whatsapp link generator</exbold><br />
-      <div class="reg-font">
-        Gunakan FREE whatsapp WA click to chat link generator ini<br/> 
-        untuk membuat click to whatsapp link dengan mudah.<br/> 
-        Kombinasikan link ini dengan Omnilinkz untuk <br/> 
-        meningkatkan konversi penjualan anda!<br/> 
-        <br/> 
-        Dapatkan promo terbaru Omnilinkz<br/> 
-        Klik Disini
-      </div>
+    <div class="col-lg-6 wa-gen-text order-2 order-md-2 order-lg-3">
+      <h1>GRATIS buat click to chat</h1>
+      <h1>Whatsapp link generator</h1>
+     <!--   -->
+        <h2>FREE whatsapp WA click to chat link generator</h2> 
+        <h2>untuk membuat click to whatsapp link dengan mudah.</h2> 
+        <h2>Kombinasikan link click to chat whatsapp generator ini dengan Omnilinkz untuk</h2>
+        <div class="reg-font">meningkatkan konversi penjualan anda! 
+          Dapatkan promo terbaru Omnilinkz<br/> 
+          <a target="_blank" href="https://omnilinkz.com/dashboard/pricing">Klik Disini <i class="fas fa-caret-right"></i></a>
+        </div>
     </div>
   </div>
 </section>

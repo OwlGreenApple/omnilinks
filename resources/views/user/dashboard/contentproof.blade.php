@@ -30,7 +30,17 @@
       <div id="detail-{{$proof->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 
         <div class="proof-wrapper">
-            <div class="proof_image"><img src="{!! Storage::disk('s3')->url($proof->url_image) !!}"/></div>
+            @php
+              if(get_headers(Storage::disk('s3')->url($proof->url_image))[0] == 'HTTP/1.1 200 OK')
+              {
+                $proof_image = Storage::disk('s3')->url($proof->url_image);
+              }
+              else
+              {
+                $proof_image = asset('/image/no-photo.jpg');
+              }
+            @endphp
+            <div class="proof_image"><img src="{!! $proof_image !!}"/></div>
          
             <div class="proof-desc">
                 <div class="proof_profile">
