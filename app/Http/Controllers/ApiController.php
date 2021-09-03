@@ -42,7 +42,7 @@ class ApiController extends Controller
           $string = 'special-';
           for ($i = 0; $i < 7 ; $i++) {
             $pos = rand(0, strlen($karakter)-1);
-            $string .= $karakter{$pos};
+            $string .= $karakter[$pos];
           }
           $coupon = Coupon::where("kodekupon","=",$string)->first();
         } while (!is_null($coupon));

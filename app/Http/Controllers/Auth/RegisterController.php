@@ -339,7 +339,7 @@ class RegisterController extends Controller
           $message .= '*Password :* '.$password."\n\n";
           $message .= '*Link login:* ';
           $message .= 'https://omnilinkz.com/dashboard/login'."\n\n";
-          $message .= "Oh iya, kalau ada yang ingin ditanyakan, jangan sungkan menghubungi kami di *WA 0818-318-368*. \n\n";
+          $message .= "Oh iya, kalau ada yang ingin ditanyakan, jangan sungkan menghubungi kami di *WA 0877-9663-6121*. \n\n";
           $message .= "Salam hangat, \n";
           $message .= 'Tim Omnilinkz';
 
