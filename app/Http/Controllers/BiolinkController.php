@@ -2119,8 +2119,8 @@ class BiolinkController extends Controller
         break;
         case "telegram":
           $page->telegram_link_counter = $page->telegram_link_counter+1;
-          $link = 'https://t.me/'.$page->telegram_link;
-          // $link = $page->telegram_link;
+          // $link = 'https://t.me/'.$page->telegram_link;
+          $link = $page->telegram_link;
           $idpixel = $page->telegram_pixel_id;
         break;
         case "skype":
