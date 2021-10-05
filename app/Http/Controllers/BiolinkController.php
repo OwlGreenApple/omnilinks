@@ -1714,7 +1714,7 @@ class BiolinkController extends Controller
     }
     catch(QueryException $e)
     {
-      dd($e->getMessage());
+      // dd($e->getMessage());
       $arr['status'] = 'error';
       $arr['message'] = 'Server kami terlalu sibuk, silahkan dicoba lagi nanti.';
     }
