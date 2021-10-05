@@ -2119,26 +2119,26 @@ class BiolinkController extends Controller
         break;
         case "telegram":
           $page->telegram_link_counter = $page->telegram_link_counter+1;
-          // $link = 'https://t.me/'.$page->telegram_link;
-          $link = $page->telegram_link;
+          $link = 'https://t.me/'.$page->telegram_link;
+          // $link = $page->telegram_link;
           $idpixel = $page->telegram_pixel_id;
         break;
         case "skype":
           $page->skype_link_counter = $page->skype_link_counter+1;
-          // $link = 'skype:'.$page->skype_link.'?chat';
-          $link = $page->skype_link;
+          $link = 'skype:'.$page->skype_link.'?chat';
+          // $link = $page->skype_link;
           $idpixel = $page->skype_pixel_id;
         break;
         case "line":
           $page->line_link_counter = $page->line_link_counter+1;
-          // $link = 'https://line.me/ti/p/~'.$page->line_link;
-          $link = $page->line_link;
+          $link = 'https://line.me/ti/p/~'.$page->line_link;
+          // $link = $page->line_link;
           $idpixel = $page->line_pixel_id;
         break;
         case "messenger":
           $page->messenger_link_counter = $page->messenger_link_counter+1;
-          // $link = 'http://m.me/'.$page->messenger_link;
-          $link = $page->messenger_link;
+          $link = 'http://m.me/'.$page->messenger_link;
+          // $link = $page->messenger_link;
           $idpixel = $page->messenger_pixel_id;
         break;
         case "youtube":
@@ -2148,31 +2148,31 @@ class BiolinkController extends Controller
         break;
         case "fb":
           $page->fb_link_counter = $page->fb_link_counter+1;
-          // $link = "https://facebook.com/".$page->fb_link;
-          $link = $page->fb_link;
+          $link = "https://facebook.com/".$page->fb_link;
+          // $link = $page->fb_link;
           $idpixel = $page->fb_pixel_id;
         break;
         case "twitter":
           $page->twitter_link_counter = $page->twitter_link_counter+1;
-          // $link = "https://twitter.com/".$page->twitter_link;
-          $link = $page->twitter_link;
+          $link = "https://twitter.com/".$page->twitter_link;
+          // $link = $page->twitter_link;
           $idpixel = $page->twitter_pixel_id;
         break;
         case "ig":
           $page->ig_link_counter = $page->ig_link_counter+1;
-          // $link = "https://instagram.com/".$page->ig_link;
-          $link = $page->ig_link;
+          $link = "https://instagram.com/".$page->ig_link;
+          // $link = $page->ig_link;
           $idpixel = $page->ig_pixel_id;
         break;
         case "tiktok":
           $page->tk_link_counter = $page->tk_link_counter+1;
-          // $link = "https://www.tiktok.com/@".$page->tk_link;
-          $link = $page->tk_link;
+          $link = "https://www.tiktok.com/@".$page->tk_link;
+          // $link = $page->tk_link;
           $idpixel = $page->tk_pixel_id; 
         case "linkedin":
           $page->tk_link_counter = $page->tk_link_counter+1;
-          // $link = "https://www.linkedin.com/in/".$page->lnd_link;
-          $link = $page->lnd_link;
+          $link = "https://www.linkedin.com/in/".$page->lnd_link;
+          // $link = $page->lnd_link;
           $idpixel = $page->lnd_pixel_id;
         break;
       }
