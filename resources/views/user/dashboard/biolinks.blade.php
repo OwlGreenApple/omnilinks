@@ -5233,9 +5233,7 @@
         $(".em_"+id).hide();
          
         $(".embed-"+id).html(
-        '<span id="link-url-update-'+id+'-get" class="embed-ln-'+id+'">'+
-          '<a href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;  padding-left: 2px;margin-bottom: 12px;">'+title+'</a>'+
-        '</span>'
+            '<a id="textprev-update-'+id+'" href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;background-color: rgb(80, 80, 80);border-color: rgb(80, 80, 80);color: rgb(255, 255, 255);margin-bottom: 12px;"><img id="preview_title-'+id+'-view-update" class="rounded-circle image_icon_link" style="width : auto"/>'+title+'</a>'
         );
       }
   }
