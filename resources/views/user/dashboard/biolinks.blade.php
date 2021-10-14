@@ -5199,12 +5199,13 @@
     $("body").on("change",".link_option",function(){
       var value = $(this).val();
       var id = $(this).attr('id');
-      embed_link(value,id)
+      var data = $(this).attr('data');
+      embed_link(value,id,data)
     });
   }
 
   // CHANGE PREVIEW LINK
-  function embed_link(value,id){
+  function embed_link(value,id,data){
      if(value == 2)
       {
         $(".sel_"+id).hide();
@@ -5222,19 +5223,32 @@
       }
       else
       {
-        var title = $("#title-"+id+"-view-update").val();
-        if(title === "" || title === undefined){
-          title = "Masukkan Link"
+        if(data == 'new')
+        {
+            var title = $("#title-"+id+"-view").val();
+            if(title === "" || title === undefined){
+              title = "Masukkan Link"
+            }
+            $(".embed-"+id).html(
+            '<a id="textprev-'+id+'" href="#" class="btn btn-md btnview title-'+id+'-view-get txthov" style="width: 100%;background-color: rgb(80, 80, 80);border-color: rgb(80, 80, 80);color: rgb(255, 255, 255);margin-bottom: 12px;"><img id="preview_title-'+id+'-view-get" class="rounded-circle image_icon_link" style="width : auto"/>'+title+'</a>' );
+        }
+        else
+        {
+            var title = $("#title-"+id+"-view-update").val();
+            if(title === "" || title === undefined){
+              title = "Masukkan Link"
+            }
+
+            $(".embed-"+id).html(
+            '<a id="textprev-update-'+id+'" href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;background-color: rgb(80, 80, 80);border-color: rgb(80, 80, 80);color: rgb(255, 255, 255);margin-bottom: 12px;"><img id="preview_title-'+id+'-view-update" class="rounded-circle image_icon_link" style="width : auto"/>'+title+'</a>'
+            );
         }
 
         $(".sel_"+id).show();
         $(".lnp_"+id).show();
         // $(".lnp_"+id).css({"visibility":"visible"});
         $(".em_"+id).hide();
-         
-        $(".embed-"+id).html(
-            '<a id="textprev-update-'+id+'" href="#" class="btn btn-md btnview title-'+id+'-view-update txthov" style="width: 100%;background-color: rgb(80, 80, 80);border-color: rgb(80, 80, 80);color: rgb(255, 255, 255);margin-bottom: 12px;"><img id="preview_title-'+id+'-view-update" class="rounded-circle image_icon_link" style="width : auto"/>'+title+'</a>'
-        );
+      /**/
       }
   }
 
@@ -6028,12 +6042,12 @@
       var len = value.length;
       var icon = $(this).attr('data-icon');
 
-      var prevtext = $("#textprev-new-"+number_id)[0];
+      var prevtext = $("#textprev-"+number_id)[0];
       prevtext.lastChild.nodeValue=value;
 
       if(icon == 1)
       {
-        preview_text_index(len,number_id,"textprev-new","new");
+        preview_text_index(len,number_id,"textprev-");
       }
       
       
@@ -7160,7 +7174,7 @@
             '<div class="div-cell">'+
               '<div class="col-md-12 col-12 pr-0 pl-0">'+
                 '<div class="input-stack">'+
-                  '<select id="new_'+counterLink+'" name="options[]" class="form-control link_option">'+
+                  '<select data="new" id="new_'+counterLink+'" name="options[]" class="form-control link_option">'+
                       '<option value="1" selected>Link</option>'+
                       '<option value="2">Youtube Link (Gunakan link yang lengkap dari browser)</option>'+
                   '</select>'+
@@ -7168,9 +7182,9 @@
                   '<div class="sel_new_'+counterLink+'">'+
                     '<input type="hidden" name="idlink[]" value="new">'+
                     '<input class="delete-link" type="hidden" name="deletelink[]" value="">'+
-                    '<input data-id="'+counterLink+'" type="text" name="title[]" id="title-' + counterLink + '-view" placeholder="Title" class="form-control focuslink" maxlength="160" />'+
+                    '<input data-id="new_'+counterLink+'" type="text" name="title[]" id="title-new_' + counterLink + '-view" placeholder="Title" class="form-control focuslink" maxlength="160" />'+
                     '<input type="text" name="url[]" value="" placeholder="http://url..." class="form-control">'+
-                    '<input data-id="'+counterLink+'" data-file="title-'+ counterLink +'-view-get" type="file" name="iconlink[]" class="form-control img_icon_preview" />'+
+                    '<input data-id=new_"'+counterLink+'" data-file="title-new_'+ counterLink +'-view-get" type="file" name="iconlink[]" class="form-control img_icon_preview" />'+
                     '<small>Rasio ukuran icon 1:1 contoh : 48px x 48px</small>'+
                   '</div>'+
                 '</div>'+
@@ -7191,7 +7205,7 @@
         //back_target
         $("#viewLink").prepend('<li class="">'+
           '<span id="link-url-new_' + counterLink + '-preview" class="embed-ln-new_'+counterLink+'">'+
-          '<a id="textprev-new-'+counterLink+'" href="" class="btn btn-md btnview title-' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">'+'<img class="rounded-circle image_icon_link" id="preview_title-'+counterLink+'-view-get" />'+'Masukkan Link</a></li></span>');
+          '<a id="textprev-new_'+counterLink+'" href="" class="btn btn-md btnview title-new_' + counterLink + '-view-get txthov" style="width: 100%; margin-bottom: 12px;">'+'<img class="rounded-circle image_icon_link" id="preview_title-new_'+counterLink+'-view-get" />'+'Masukkan Link</a></li></span>');
         check_outlined();
         check_rounded();
         $('#linkpixel-' + counterLink).html(dataView);
