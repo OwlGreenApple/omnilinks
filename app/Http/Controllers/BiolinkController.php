@@ -2169,6 +2169,7 @@ class BiolinkController extends Controller
           $link = "https://www.tiktok.com/@".$page->tk_link;
           // $link = $page->tk_link;
           $idpixel = $page->tk_pixel_id; 
+        break;
         case "linkedin":
           $page->linkedin_link_counter = $page->linkedin_link_counter+1;
           $link = "https://www.linkedin.com/in/".$page->lnd_link;

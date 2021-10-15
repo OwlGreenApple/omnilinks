@@ -1695,7 +1695,7 @@
         if (!is_null($pages->sort_sosmed)) {
           foreach ($sort_sosmed as $sosmed) { ?>
           <li class="col text-center icon-sosmed">
-            @if( $sosmed=='fb')
+            @if($sosmed=='fb')
               <a href="#" data-href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank" class="link-ajax">
                 <i class="fab fa-facebook-square"></i>
               </a>
@@ -1724,6 +1724,7 @@
                 <i style="font-size:30px" class="fab fa-tiktok"></i>
               </a>
             @endif 
+
             @if($sosmed=='linkedin')
               <a href="#" data-href="{{env('APP_URL').'/click/linkedin/'.$pages->id}}" title="Linkedin" target="_blank" class="link-ajax">
                 <i style="font-size:30px" class="fab fa-linkedin-in"></i>
@@ -1768,6 +1769,11 @@
                 <span style="font-size:25px" class="icon-tik-tok"></span>
               </a>
           </li>
+          <li class="col text-center icon-sosmed">
+              <a href="#" data-href="{{env('APP_URL').'/click/linkedin/'.$pages->id}}" title="Linkedin" target="_blank" class="link-ajax">
+                <span style="font-size:25px" class="fab fa-linkedin-in"></span>
+              </a>
+          </li>
 
         <?php }?>
       </ul>
@@ -1782,7 +1788,7 @@
         @if(!is_null($ads))
           <!--
           <div class="col-lg-7 col-md-8 text-center redirect-ads big">
-            <a data-href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" class="link-ajax-no-script">
+            <a data-href="<php echo env('APP_URL').'/click-ads/'.$ads->id ?>" class="link-ajax-no-script">
               <span href="#" class="headline-1-view-get headads">
                   {{$ads->headline}}  
               </span>
