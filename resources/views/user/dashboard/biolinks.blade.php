@@ -1563,7 +1563,7 @@
         if (data.status == "success") {
           $("#pesanAlert").addClass("alert-success");
           $("#pesanAlert").removeClass("alert-danger");
-          // loadLinkBio();
+          
           //new 
           // $(".delete-link").parents("li").each(function( index ) {
             // if ($(this).val() != ''){
@@ -1577,8 +1577,10 @@
           changeproof = 0;
           refreshwa();
           refreshpixel();
+          loadLinkBio();
           return true;
         }
+
         if (data.status == "error") {
           $("#pesanAlert").addClass("alert-danger");
           $("#pesanAlert").removeClass("alert-success");
@@ -1588,7 +1590,6 @@
       complete : function(xhr)
       {
         $(".alert").delay(3000).fadeOut(2000);
-        loadLinkBio();
       },
       error : function(xhr)
       {
