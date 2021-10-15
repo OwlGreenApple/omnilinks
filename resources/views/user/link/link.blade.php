@@ -1689,6 +1689,7 @@
         @include('user.link.form-api')
       @endif
 
+      <!-- SOCMED -->
       <ul class="col-lg-7 col-md-8 mb-5 row" id="icon-sosmed">
         <?php 
         if (!is_null($pages->sort_sosmed)) {

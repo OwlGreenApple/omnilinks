@@ -2170,7 +2170,7 @@ class BiolinkController extends Controller
           // $link = $page->tk_link;
           $idpixel = $page->tk_pixel_id; 
         case "linkedin":
-          $page->tk_link_counter = $page->tk_link_counter+1;
+          $page->linkedin_link_counter = $page->linkedin_link_counter+1;
           $link = "https://www.linkedin.com/in/".$page->lnd_link;
           // $link = $page->lnd_link;
           $idpixel = $page->lnd_pixel_id;
