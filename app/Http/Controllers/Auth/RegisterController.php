@@ -141,6 +141,11 @@ class RegisterController extends Controller
         $user->valid_until = new DateTime('+7 days');
         $user->save();
 
+        if($kuponid !== null)
+        {
+          $ordercont::update_coupon($kuponid,$user->id);
+        }
+
         $emaildata = [
             'order' => $order,
             'user' => $user,
@@ -238,6 +243,11 @@ class RegisterController extends Controller
 
         $user->valid_until = $valid;
         $user->save();
+
+        if($kuponid !== null)
+        {
+          $ordercont::update_coupon($kuponid,$user->id);
+        }
         // $user->valid_until = new DateTime('+0 days');
         // $user->valid_until = Carbon::now();
       }

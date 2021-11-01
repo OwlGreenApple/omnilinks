@@ -40,6 +40,7 @@ if(env('DOMAIN_TYPE')=='main'){
   //Route::get('testmail','ApiController@testmail');
   Route::post('generate-coupon', 'ApiController@generate_coupon');
   Route::post('sendmailfromactivwa', 'ApiController@sendmailfromactivwa');
+  Route::post('wm-coupon', 'ApiController@watchermarket_coupon');
 
   //information
   Route::get('/about',function(){

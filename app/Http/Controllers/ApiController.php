@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 use App\Helpers\Helper;
 
@@ -16,6 +18,7 @@ use App\AdsHistory;
 use App\Page;
 use App\Mail\SendMailActivWA;
 
+use Carbon\Carbon;
 use Auth, DB, Validator, DateTime, Mail, MailchimpMarketing, GuzzleHttp; 
 
 class ApiController extends Controller
@@ -225,10 +228,60 @@ class ApiController extends Controller
   }
 
   // WA GENERATOR
-
   public function wa_generator()
   {
     return view('user.wagenerator.index');
+  }
+
+  public function watchermarket_coupon(Request $request)
+  {
+    $key = "uafxja41pvj1btd83jgqzax7n";
+    if($request->key !== $key)
+    {
+      return json_encode(['coupon'=>'error']);
+    }
+
+    $string = self::coupon_recursive("WM-");
+    $diskon_value = $request->diskon_value;
+    // $diskon_value = 100000;
+
+    $coupon = new Coupon;
+    $coupon->kodekupon = $string;
+    $coupon->diskon_value = $diskon_value;
+    $coupon->diskon_percent = 0;
+    $coupon->valid_until = Carbon::now()->addYears(3)->toDateTimeString();
+    $coupon->valid_to = 'wm';
+    $coupon->keterangan = "Kupon AutoGenerate Watchermarket";
+    $coupon->package_id = 0;
+    $coupon->user_id = 0;
+
+    try
+    {
+      $coupon->save();
+      $ret['coupon'] = $string;
+    }
+    catch(QueryException $e)
+    {
+      //$e->getMessage();
+      $ret['coupon'] = 0;
+    }
+    return json_encode($ret);
+  }
+
+  private static function coupon_recursive($sub)
+  {
+    $string = strtolower(Str::random(8));
+    $gen = $sub.$string;
+    $cp = Coupon::where('kodekupon',$gen)->first();
+
+    if(is_null($cp))
+    {
+      return $gen;
+    }
+    else
+    {
+      return self::coupon_recursive($sub);
+    }
   }
 
 /* end class */

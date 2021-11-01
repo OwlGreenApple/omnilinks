@@ -203,6 +203,7 @@
         else {
           $('#pesan').removeClass('alert-success');
           $('#pesan').addClass('alert-danger');
+          $('.total').html('Rp. ' +data.pricing+' '+ data.total);
         }
       }
     });
