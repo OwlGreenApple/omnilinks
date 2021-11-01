@@ -235,14 +235,15 @@ class ApiController extends Controller
 
   public function watchermarket_coupon(Request $request)
   {
+    $data = json_decode($request->getContent(),true);
     $key = "uafxja41pvj1btd83jgqzax7n";
-    if($request->key !== $key)
+    if($data['key'] !== $key)
     {
       return json_encode(['coupon'=>'error']);
     }
 
     $string = self::coupon_recursive("WM-");
-    $diskon_value = $request->diskon_value;
+    $diskon_value = $data['diskon_value'];
     // $diskon_value = 100000;
 
     $coupon = new Coupon;
