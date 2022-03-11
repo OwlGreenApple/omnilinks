@@ -6063,7 +6063,7 @@
     });
 
     //UPDATE LINK
-    $(document).on('keyup keypress',".focuslink-update",function()
+    $(document).on('keyup keypress paste',".focuslink-update",function()
     {
       var number_id = $(this).attr('data-id');
       var value = $(this).val();
@@ -6384,7 +6384,8 @@
         }
       }
     });
-    $(".sortable-link").disableSelection();
+    // selection disable for boss asking
+    // $(".sortable-link").disableSelection();
     // $( ".sortable-link" ).draggable();
 
     $(".sortable-sosmed").sortable({
