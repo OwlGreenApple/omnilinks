@@ -12,6 +12,7 @@ use App\UserLog;
 use App\Order;
 use App\Coupon;
 use App\Mail\ConfirmEmail;
+use App\Rules\CheckBannedEmail;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
@@ -59,8 +60,8 @@ class RegisterController extends Controller
   protected function validator(array $data)
   {
     return Validator::make($data, [
-      'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-      'name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'string', 'email', 'max:100', 'unique:users',new CheckBannedEmail],
+      'name' => ['required', 'string', 'max:60'],
       // 'password' => ['required', 'string', 'min:6'],
     ]);
   }
