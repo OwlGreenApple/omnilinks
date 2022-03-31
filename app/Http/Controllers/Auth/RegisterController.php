@@ -17,7 +17,8 @@ use App\Rules\CheckBannedEmail;
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
 
-use Carbon, Crypt, Mail, DateTime, Auth;
+use Carbon\Carbon;
+use Crypt, Mail, DateTime, Auth;
 
 class RegisterController extends Controller
 {
@@ -87,6 +88,7 @@ class RegisterController extends Controller
       // 'membership' => 'free',
       'membership' => 'popular',
       'wa_number' => '62'.strip_tags($data['wa_number']),
+      'is_valid_email' => 1,
     ]);
 
 		//New system, to activrespon list
