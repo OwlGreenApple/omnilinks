@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 use App\User;
 use App\UserLog;
@@ -18,7 +19,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
 
 use Carbon\Carbon;
-use Crypt, Mail, DateTime, Auth;
+use Crypt, DateTime, Auth;
 
 class RegisterController extends Controller
 {
@@ -75,6 +76,7 @@ class RegisterController extends Controller
    */
   protected function create(array $data)
   {       
+    $helper = new Helper;
     $ordercont = new OrderController;
 
     //create user register
@@ -88,7 +90,7 @@ class RegisterController extends Controller
       // 'membership' => 'free',
       'membership' => 'popular',
       'wa_number' => '62'.strip_tags($data['wa_number']),
-      'is_valid_email' => 1,
+      'is_valid_email' => $helper->check_email_bouncing(strip_tags($data['email'])),
     ]);
 
 		//New system, to activrespon list
@@ -156,11 +158,17 @@ class RegisterController extends Controller
             'no_order' => $order_number,
         ];
       
-        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-          $message->from('info@omnilinkz.com', 'Michael from Activomni');
-          $message->to($user->email);
-          $message->subject('[Omnilink] Order Nomor '.$order_number);
-        });
+        // SEND MAIL IF EMAIL NOT BOUNCING
+        $helper = new Helper;
+        if($helper->check_email_bouncing($user->email) == 1)
+        {
+          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+            $message->from('info@omnilinkz.com', 'Michael from Activomni');
+            $message->to($user->email);
+            $message->subject('[Omnilink] Order Nomor '.$order_number);
+          });
+        }
+        
         if (!is_null($user->wa_number)){
             $message = null;
             $message .= '*Hi '.$user->name.'*,'."\n\n";
@@ -335,12 +343,16 @@ class RegisterController extends Controller
         'user' => $arrRet['user'],
         // 'password' => $request->password,
         'password' => $password,
-       'price' => $request->price,
-       'coupon_code' => $string,
+        'price' => $request->price,
+        'coupon_code' => $string,
       ];
       
-      Mail::to($arrRet['user']->email)->bcc("celebgramme.dev@gmail.com")->send(new ConfirmEmail($emaildata));
-
+      $helper = new Helper;
+      if($helper->check_email_bouncing($arrRet['user']->email) == 1)
+      {
+        Mail::to($arrRet['user']->email)->bcc("celebgramme.dev@gmail.com")->send(new ConfirmEmail($emaildata));
+      }
+      
       if (!is_null($arrRet['user']->wa_number)){
           $message = null;
           $message .= '*Hi '.$arrRet['user']->name."*, \n\n";

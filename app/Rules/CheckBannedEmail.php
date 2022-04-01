@@ -35,7 +35,11 @@ class CheckBannedEmail implements Rule
         }*/
 
         // CHECK BOUNCING EMAIL
-        if(self::check_bouncing($value) == false)
+        if(self::check_bouncing($value) == true || self::check_bouncing($value) == "empty")
+        {
+            return true;
+        }
+        else
         {
             return false;
         }
@@ -61,7 +65,7 @@ class CheckBannedEmail implements Rule
 
     }
 
-    private static function check_bouncing($mail)
+    public static function check_bouncing($mail)
     {
         // set the api key and email to be validated
         $key = '64GkX3EK7xRBADyYw2htLbnpvmJI8quH';
@@ -83,6 +87,10 @@ class CheckBannedEmail implements Rule
         if($json['status'] == "failed")
         {
             return false;
+        }
+        elseif($json['hourlyQuotaRemaining'] < 1)
+        {
+            return 'empty';
         }
         else
         {

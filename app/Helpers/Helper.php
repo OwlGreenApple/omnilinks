@@ -4,8 +4,9 @@ namespace App\Helpers;
 /**
 * 
 */
-use Carbon;
+use Carbon\Carbon;
 use DB, Crypt, App, DateTime, Auth;
+use App\Rules\CheckBannedEmail;
 
 class Helper
 {
@@ -228,6 +229,25 @@ class Helper
         $url = preg_replace('/^(.*?)\./i',"",$url);
      }
      return $url;
+  }
+
+  
+  // CHECK BOUNCING EMAIL
+  public function check_email_bouncing($email)
+  {
+    $check = new CheckBannedEmail;
+    if($check::check_bouncing($email) == true)
+    {
+        return 1;
+    }
+    elseif($check::check_bouncing($email) == "empty")
+    {
+        return 2;
+    }
+    else
+    {
+        return 3;
+    }
   }
 
 /*end class*/ 
