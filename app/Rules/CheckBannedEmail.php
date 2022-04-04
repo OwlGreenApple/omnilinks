@@ -84,7 +84,7 @@ class CheckBannedEmail implements Rule
         $json = json_decode($response, true);
 
         // if address is failed, alert the user they entered an invalid email
-        if($json['status'] == "failed")
+        if(isset($json['status']) && $json['status'] == "failed")
         {
             return false;
         }
