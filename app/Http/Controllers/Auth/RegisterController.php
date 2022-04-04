@@ -79,6 +79,13 @@ class RegisterController extends Controller
     $helper = new Helper;
     $ordercont = new OrderController;
 
+    // CHECK WHETHER EMAIL IS BOUNCING
+    $check = $helper->check_email_bouncing(strip_tags($data['email']),"new");
+    if($check == 3)
+    {
+       return 'imail';
+    }
+
     //create user register
     $user = User::create([
       'email' => strip_tags($data['email']),
@@ -90,7 +97,7 @@ class RegisterController extends Controller
       // 'membership' => 'free',
       'membership' => 'popular',
       'wa_number' => '62'.strip_tags($data['wa_number']),
-      'is_valid_email' => $helper->check_email_bouncing(strip_tags($data['email']),"new"),
+      'is_valid_email' => $check,
     ]);
 
 		//New system, to activrespon list
@@ -322,6 +329,12 @@ class RegisterController extends Controller
       $arrRequest['password'] = $password;
       $arrRet = $this->create($arrRequest);
 
+      if($arrRet == 'imail')
+      {
+        $request->session()->flash('error','Invalid email');
+        return view('auth.register');
+      }
+
       $register_time = Carbon::now()->toDateTimeString();
       $confirmcode = Hash::make($arrRet['user']->email.$register_time);
       $arrRet['user']->confirm_code = $confirmcode;
@@ -330,6 +343,7 @@ class RegisterController extends Controller
       $string = '';
       if($request->price == null)
       {
+        // .....
       }
 
       $secret_data = [

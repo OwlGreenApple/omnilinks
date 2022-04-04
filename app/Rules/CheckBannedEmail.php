@@ -33,17 +33,7 @@ class CheckBannedEmail implements Rule
         while(!feof($content)) {
            $banned[] = str_replace("\n","",str_replace("\r","",fgets($content)));
         }*/
-
-        // CHECK BOUNCING EMAIL
-        if(self::check_bouncing($value) == true || self::check_bouncing($value) == "empty")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        
         // CHECK BALCKLISTED EMAIL
         $banned = ["driely","alotivi","detectu","dhamsi","unicobd","cream","ahk","magim","owleyes","fuwamofu","ruru","moimoi","eay","honeys","eay","via","hamham","ichigo","mirai","f5","stayhome","usako","effexts","jmvoice","dhnow","jincer","rwstatus","nicloo","gonaute","intobx","yusolar","tirillo","mofpay","oxtenda","onymi","novstan","trynta","azqas","coinxt","mailfm","wwc8","rwstatus","toolve","fabtivia","unite5","mailvs","anidaw","boxnavi","ostinmail","93re","ayfoto","rilemei","xredb","aituvip","doulas","cutsup","techtary","itcess"];
         $mail = explode("@", $value);
@@ -62,7 +52,6 @@ class CheckBannedEmail implements Rule
         {
             return true;
         }
-
     }
 
     public static function check_bouncing($mail)
