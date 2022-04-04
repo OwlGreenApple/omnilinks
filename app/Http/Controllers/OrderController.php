@@ -486,11 +486,17 @@ class OrderController extends Controller
           'nama_paket' => $request->namapaket,
           'no_order' => $order_number,
       ];
-      Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-        $message->from('info@omnilinkz.com', 'Omnilinkz');
-        $message->to($user->email);
-        $message->subject('[Omnilinkz] Order Nomor '.$order_number);
-      });
+
+      $helper = new Helper;
+      if($helper->check_email_bouncing($user->email) == true)
+      {
+        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+          $message->from('info@omnilinkz.com', 'Omnilinkz');
+          $message->to($user->email);
+          $message->subject('[Omnilinkz] Order Nomor '.$order_number);
+        });
+      }
+      
         if (!is_null($user->wa_number)){
             $message = null;
             $message .= '*Hi '.$user->name.'*,'."\n\n";
@@ -819,7 +825,8 @@ if(substr($order->package,0,6) <> "Top Up"){
       'user' => $user,
     ];
 
-    if(env('APP_ENV') <> 'local')
+    $helper = new Helper;
+    if(env('APP_ENV') <> 'local' && $helper->check_email_bouncing($user->email) == true)
     {
       Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order)
       {

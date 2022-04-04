@@ -7,6 +7,7 @@ namespace App\Helpers;
 use Carbon\Carbon;
 use DB, Crypt, App, DateTime, Auth;
 use App\Rules\CheckBannedEmail;
+use App\User;
 
 class Helper
 {
@@ -233,21 +234,59 @@ class Helper
 
   
   // CHECK BOUNCING EMAIL
-  public function check_email_bouncing($email)
+  public function check_email_bouncing($email,$cond = null)
   {
+    $user = User::where('email',$email)->first();
+
+    // PASS IF EMAIL  = 1 || 3
+    if($cond == null)
+    {
+      if(is_null($user) || $user->is_valid_email == 3)
+      {
+          return false;
+      }
+
+      if($user->is_valid_email == 1)
+      {
+          return true;
+      }
+
+      $user_id = $user->id;
+      $usr = User::find($user_id);
+    }
+    
     $check = new CheckBannedEmail;
     if($check::check_bouncing($email) == true)
     {
+      if($cond == "new")
+      {
         return 1;
+      }
+
+      $usr->is_valid_email = 1;
+      $status = true;
     }
     elseif($check::check_bouncing($email) == "empty")
     {
+      if($cond == "new")
+      {
         return 2;
+      }
+      $usr->is_valid_email = 2;
+      $status = false;
     }
     else
     {
+      if($cond == "new")
+      {
         return 3;
+      }
+      $usr->is_valid_email = 3;
+      $status = false;
     }
+
+    $usr->save();
+    return $status;
   }
 
 /*end class*/ 

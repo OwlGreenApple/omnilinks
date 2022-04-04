@@ -90,7 +90,7 @@ class RegisterController extends Controller
       // 'membership' => 'free',
       'membership' => 'popular',
       'wa_number' => '62'.strip_tags($data['wa_number']),
-      'is_valid_email' => $helper->check_email_bouncing(strip_tags($data['email'])),
+      'is_valid_email' => $helper->check_email_bouncing(strip_tags($data['email']),"new"),
     ]);
 
 		//New system, to activrespon list
@@ -160,7 +160,7 @@ class RegisterController extends Controller
       
         // SEND MAIL IF EMAIL NOT BOUNCING
         $helper = new Helper;
-        if($helper->check_email_bouncing($user->email) == 1)
+        if($helper->check_email_bouncing($user->email) == true)
         {
           Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
             $message->from('info@omnilinkz.com', 'Michael from Activomni');
@@ -348,7 +348,7 @@ class RegisterController extends Controller
       ];
       
       $helper = new Helper;
-      if($helper->check_email_bouncing($arrRet['user']->email) == 1)
+      if($helper->check_email_bouncing($arrRet['user']->email) == true)
       {
         Mail::to($arrRet['user']->email)->bcc("celebgramme.dev@gmail.com")->send(new ConfirmEmail($emaildata));
       }

@@ -1992,11 +1992,13 @@ class BiolinkController extends Controller
 
     $filename = 'clicked/'.$user->username.'/'.date('m-Y').'/all/total-click/counter.txt';
 
+    $helper = new Helper;
     $dash = new DashboardController;
     $clicks = $dash->check_file($filename);
 
     if($user->membership=='free'){
-      if($clicks==800){
+      if($clicks==800 && $helper->check_email_bouncing($user->email) == true)
+      {
         Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->queue(new NotifClickFreeUser($user->email,$user,$clicks));
       }
 

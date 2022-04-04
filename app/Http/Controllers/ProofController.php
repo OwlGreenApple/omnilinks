@@ -304,7 +304,8 @@ class ProofController extends Controller
         'no_order' => $order_number,
       ];
     
-      if(env('APP_ENV') !== 'local'){
+      $helper = new Helper;
+      if(env('APP_ENV') !== 'local' && $helper->check_email_bouncing($user->email) == true){
           Mail::send('emails.topupactivproof', $emaildata, function ($message) use ($user,$order_number) {
             $message->from('info@omnilinkz.com', 'Omnilinkz');
             $message->to($user->email);
