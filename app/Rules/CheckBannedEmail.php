@@ -77,7 +77,7 @@ class CheckBannedEmail implements Rule
         {
             return false;
         }
-        elseif($json['hourlyQuotaRemaining'] < 1)
+        elseif(isset($json['hourlyQuotaRemaining']) && $json['hourlyQuotaRemaining'] < 1)
         {
             return 'empty';
         }
