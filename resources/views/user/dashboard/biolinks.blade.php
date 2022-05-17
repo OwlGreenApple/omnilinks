@@ -2788,7 +2788,7 @@
                     <i class="fas fa-plus"></i>
                   </button>
 
-                  <ul class="sortable-sosmed">
+                  <ul class="sortable-sosmed"> 
                     <li id="sosmed-youtube">
                       <div id="youtube" class="socialmedia div-table mb-4 hide">
                         <input type="hidden" name="sortsosmed[]" value="" data-val="youtube" class="input-hidden">
@@ -2807,7 +2807,7 @@
                                   <i class="fab fa-youtube"></i>
                                 </div>
                               </div>
-                              <input type="text" name="youtube" class="form-control youtube-input" id="" placeholder="Masukkan channel youtube url" value="{{$pages->youtube_link}}">
+                              <input type="text" name="youtube" class="form-control youtube-input" id="" placeholder="https://youtube.com/xxxxxx" value="{{$pages->youtube_link}}">
                             </div>
                           </div> 
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2841,7 +2841,7 @@
                                   <i class="fab fa-facebook-f"></i>
                                 </div>
                               </div>
-                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="" placeholder="Masukkan url facebook">
+                              <input type="text" name="fb" class="form-control fb-input" value="{{$pages->fb_link}}" id="" placeholder="https://facebook.com/xxxxxxx">
                             </div>
 
                             <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2875,7 +2875,7 @@
                                   <i class="fab fa-twitter"></i>
                                 </div>
                               </div>
-                              <input type="text" name="twitter" class="form-control twitter-input" id="" placeholder="Masukkan url twitter" value="{{$pages->twitter_link}}">
+                              <input type="text" name="twitter" class="form-control twitter-input" id="" placeholder="https://twitter.com/xxxxxxx" value="{{$pages->twitter_link}}">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2909,7 +2909,7 @@
                                   <i class="fab fa-instagram"></i>
                                 </div>
                               </div>
-                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="" placeholder="Masukkan url instagram">
+                              <input type="text" name="ig" class="form-control ig-input" value="{{$pages->ig_link}}" id="" placeholder="https://instagram.com/xxxxxxx">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2943,7 +2943,7 @@
                                  <i class="fab fa-tiktok"></i>
                                 </div>
                               </div>
-                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="Masukkan url tiktok anda">
+                              <input type="text" name="tiktok" class="form-control tiktok-input" value="{{$pages->tk_link}}" id="" placeholder="https://www.tiktok.com/@xxxxxxx">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
@@ -2977,7 +2977,7 @@
                                  <i class="fab fa-linkedin-in"></i>
                                 </div>
                               </div>
-                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="Masukkan url profile anda">
+                              <input type="text" name="linkedin" class="form-control linkedin-input" value="{{$pages->lnd_link}}" id="" placeholder="https://www.linkedin.com/in/xxxxxxx">
                             </div>
                           </div>
                           <div class="col-md-12 col-12 pr-0 pl-0">
