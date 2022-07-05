@@ -2263,9 +2263,11 @@ function pointCount(ip)
 
      //outside banner
      w = $(".galleryContainer").width();
-     w = w + 18
+     w = w * 7.8;
+     h = w/16;
+     /* w = w + 18
      h = (w/cons) - 18;
-     h = h + 0.05;
+     h = h + 0.05; */
      h = Number(h.toFixed(1));
      $(".galleryContainer").height(h);
   }
