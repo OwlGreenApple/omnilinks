@@ -201,14 +201,13 @@
   }
 
 }
-@media (max-width: 412px) and (min-width: 412px) 
+@media (min-width: 415px) and (max-width: 575px)
 { 
   .textbutton{
     font-size: smaller;
   }
   .banner-image
   {
-    height: 117px;
     background-position: 0;
   }  
   .galleryContainer 
@@ -326,6 +325,11 @@
     font-size: medium; 
     margin-left: 22px;
   }
+  .banner-image
+  {
+    height: 125px;
+    background-position: 0;
+  }  
   .galleryContainer 
   {
     width: 88%;
