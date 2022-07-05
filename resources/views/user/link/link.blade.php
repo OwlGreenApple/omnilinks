@@ -2263,7 +2263,7 @@ function pointCount(ip)
 
      //outside banner
      w = $(".galleryContainer").width();
-     w = w * 7.8;
+     w = w * 8;
      h = w/16;
      /* w = w + 18
      h = (w/cons) - 18;
