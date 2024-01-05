@@ -79,7 +79,12 @@ class NotifOrderUser extends Command
           $order->is_notif_2 = 1;
           $order->is_notif_1 = 1;
           $order->save();
-          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+
+          $helper = new Helper;
+          if($helper->check_email_bouncing($user->email) == true)
+          {
+            Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+          }
 
           if (!is_null($user->wa_number)){
             $message = null;
@@ -117,7 +122,12 @@ class NotifOrderUser extends Command
           }
           $order->is_notif_1 = 1;
           $order->save();
-          Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+
+          $helper = new Helper;
+          if($helper->check_email_bouncing($user->email) == true)
+          {
+            Mail::to($user->email)->queue(new NotifOrderUserMail($user,$order,$interval));
+          }
           
           if (!is_null($user->wa_number)){
             $message = null;

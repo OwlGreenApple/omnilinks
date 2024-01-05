@@ -123,7 +123,9 @@ class OrderController extends Controller
           $arr['status'] = 'error';
           $arr['message'] = 'Kupon sudah tidak berlaku';
           return $arr;
-        } else {
+        } 
+        else 
+        {
           if($coupon->valid_to=='new' and Auth::check()){
               //..
           } else if($coupon->valid_to=='extend' and !Auth::check()){
@@ -211,10 +213,51 @@ class OrderController extends Controller
             return $arr;
           }
         }
+
+        // WATCHERMARKET COUPON
+        $package_wm = null;
+        if($coupon->valid_to == 'wm')
+        {
+          $package_wm = self::filter_package($idpaket);
+        }
+
+        if($package_wm == false)
+        {
+          $arr['status'] = 'error';
+          $arr['message'] = 'Kupon hanya berlaku pada paket : popular, elite dan super';
+          $arr['total'] = number_format($harga, 0, '', '.');
+          return $arr;
+        }
+
+        if($package_wm == true)
+        {
+          $diskon = $coupon->diskon_value;
+          $total = $harga - $coupon->diskon_value;
+
+          $arr['status'] = 'success';
+          $arr['message'] = 'Kupon berhasil dipakai & berlaku sekarang';
+          $arr['pricing'] = '<strike>'.number_format($harga, 0, '', '.').'</strike>';
+          $arr['total'] = number_format($total, 0, '', '.');
+          $arr['diskon'] = $diskon;
+          $arr['coupon'] = $coupon;
+          return $arr;
+        }
+
+      /*end if coupon not null*/
       }
     }
 
     return $arr;
+  }
+
+  private static function filter_package($idpaket)
+  {
+    $arr = [2,3,4];
+    if(in_array($idpaket, $arr))
+    {
+      return true;
+    }
+    return false;
   }
 
   public function register(Request $request) {
@@ -352,6 +395,26 @@ class OrderController extends Controller
     return view('pricing.thankyou-confirm-payment');
   }
 
+  // UPDTAE WATCHERMARKET COUPON VALID UNTIL WHEN USED
+  public static function update_coupon($idkupon,$userid)
+  {
+    $cp = Coupon::find($idkupon);
+  
+    if($cp->valid_to == 'wm')
+    {
+      try
+      {
+        $cp->valid_until = Carbon::now()->toDateTimeString();
+        $cp->user_id = $userid;
+        $cp->save();
+      }
+      catch(QueryException $e)
+      {
+        // $e->getMessage();
+      }
+    }
+  }
+
   //checkout klo uda login
   public function confirm_payment(Request $request){
     //buat order user lama
@@ -388,6 +451,7 @@ class OrderController extends Controller
         
         if($arr['coupon']!=null){
           $kuponid = $arr['coupon']->id;
+          self::update_coupon($kuponid, $user->id);
         }
       }
     }
@@ -422,11 +486,17 @@ class OrderController extends Controller
           'nama_paket' => $request->namapaket,
           'no_order' => $order_number,
       ];
-      Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-        $message->from('info@omnilinkz.com', 'Omnilinkz');
-        $message->to($user->email);
-        $message->subject('[Omnilinkz] Order Nomor '.$order_number);
-      });
+
+      $helper = new Helper;
+      if($helper->check_email_bouncing($user->email) == true)
+      {
+        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+          $message->from('info@omnilinkz.com', 'Omnilinkz');
+          $message->to($user->email);
+          $message->subject('[Omnilinkz] Order Nomor '.$order_number);
+        });
+      }
+      
         if (!is_null($user->wa_number)){
             $message = null;
             $message .= '*Hi '.$user->name.'*,'."\n\n";
@@ -755,7 +825,8 @@ if(substr($order->package,0,6) <> "Top Up"){
       'user' => $user,
     ];
 
-    if(env('APP_ENV') <> 'local')
+    $helper = new Helper;
+    if(env('APP_ENV') <> 'local' && $helper->check_email_bouncing($user->email) == true)
     {
       Mail::send('emails.confirm-order', $emaildata, function ($message) use ($user,$order)
       {

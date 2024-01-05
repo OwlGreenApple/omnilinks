@@ -10,10 +10,10 @@ use App\Page;
 use App\Link;
 use App\Rules\CheckFontEncode;
 
-use Auth, Validator; 
+use Auth, Validator;
 
 class PremiumIDController extends Controller
-{ 
+{
     protected function validator_pages(array $data)
     {
       $message = [
@@ -49,12 +49,12 @@ class PremiumIDController extends Controller
             $arr['status'] = 'error';
             $arr['message'] = 'Custom Link telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Custom Link.';
             return $arr;
-          } 
+          }
           else if($premiumid->count()>=500 and $user->membership=='popular'){
             $arr['status'] = 'error';
             $arr['message'] = 'Custom Link telah mencapai batas maksimal. Silahkan upgrade akun terlebih dahulu untuk menambah jumlah Custom Link.';
             return $arr;
-          } 
+          }
           else if($premiumid->count()>=1000 and $user->membership=='elite'){
             $arr['status'] = 'error';
             $arr['message'] = 'Custom Link telah mencapai batas maksimal.';
@@ -67,12 +67,15 @@ class PremiumIDController extends Controller
           }
         }
       }
+
+      return $arr;
     }
 
     public function premiumid_biolinks(Request $request){
       $arr = $this->check_membership();
 
-      if($arr['status']=='error'){
+      if($arr['status']=='error')
+      {
         return $arr;
       }
 
@@ -89,7 +92,7 @@ class PremiumIDController extends Controller
         if(is_null($premiumid)){
           $premiumid = new PremiumID;
         }
-        
+
         $premiumid->link_id = $page->id;
         $premiumid->user_id = Auth::user()->id;
         $premiumid->type = 'biolinks';
@@ -108,7 +111,7 @@ class PremiumIDController extends Controller
         $arr['status'] = 'error';
         $arr['message'] = $validator->errors()->first();
       }
-      
+
       return $arr;
     }
 
@@ -138,7 +141,7 @@ class PremiumIDController extends Controller
         if(is_null($premiumid)){
           $premiumid = new PremiumID;
         }
-        
+
         $premiumid->link_id = $link->id;
         $premiumid->user_id = Auth::user()->id;
         $premiumid->type = 'singlelinks';
@@ -155,7 +158,7 @@ class PremiumIDController extends Controller
         $arr['status'] = 'error';
         $arr['message'] = $validator->errors()->first();
       }
-      
+
       return $arr;
     }
 }

@@ -10,8 +10,9 @@ use App\Link;
 use App\Banner;
 
 use App\Http\Controllers\OrderController;
+use Carbon\Carbon;
 
-use Excel,DateTime,Hash,Validator,Auth,Carbon,Mail,DB;
+use Excel,DateTime,Hash,Validator,Auth,Mail,DB;
 
 class UserController extends Controller
 { 
@@ -294,11 +295,17 @@ class UserController extends Controller
                   "password" => $password,
                   "valid_until" => $dt->toDateTimeString(),
                 ];
-                Mail::send('emails.welcome', $dataEmail, function ($message) use ($dataEmail) {
-                  $message->from('info@omnilinkz.com', 'Omnilinkz');
-                  $message->to($dataEmail['email']);
-                  $message->subject('[Omnilinkz] Bonus Berlangganan Omnilinkz');
-                });
+
+                $helper = new Helper;
+                if($helper->check_email_bouncing($dataEmail['email']) == true)
+                {
+                  Mail::send('emails.welcome', $dataEmail, function ($message) use ($dataEmail) {
+                    $message->from('info@omnilinkz.com', 'Omnilinkz');
+                    $message->to($dataEmail['email']);
+                    $message->subject('[Omnilinkz] Bonus Berlangganan Omnilinkz');
+                  });
+                }
+                
                 if(env('MAIL_HOST')=='smtp.mailtrap.io'){
                   sleep(1);
                 }

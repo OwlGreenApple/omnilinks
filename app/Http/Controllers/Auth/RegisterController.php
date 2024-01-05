@@ -6,17 +6,20 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 use App\User;
 use App\UserLog;
 use App\Order;
 use App\Coupon;
 use App\Mail\ConfirmEmail;
+use App\Rules\CheckBannedEmail;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\OrderController;
 
-use Carbon, Crypt, Mail, DateTime, Auth;
+use Carbon\Carbon;
+use Crypt, DateTime, Auth;
 
 class RegisterController extends Controller
 {
@@ -59,8 +62,8 @@ class RegisterController extends Controller
   protected function validator(array $data)
   {
     return Validator::make($data, [
-      'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-      'name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'string', 'email', 'max:100', 'unique:users',new CheckBannedEmail],
+      'name' => ['required', 'string', 'max:60'],
       // 'password' => ['required', 'string', 'min:6'],
     ]);
   }
@@ -73,7 +76,15 @@ class RegisterController extends Controller
    */
   protected function create(array $data)
   {       
+    $helper = new Helper;
     $ordercont = new OrderController;
+
+    // CHECK WHETHER EMAIL IS BOUNCING
+    $check = $helper->check_email_bouncing(strip_tags($data['email']),"new");
+    if($check == 3)
+    {
+       return 'imail';
+    }
 
     //create user register
     $user = User::create([
@@ -86,6 +97,7 @@ class RegisterController extends Controller
       // 'membership' => 'free',
       'membership' => 'popular',
       'wa_number' => '62'.strip_tags($data['wa_number']),
+      'is_valid_email' => $check,
     ]);
 
 		//New system, to activrespon list
@@ -141,6 +153,11 @@ class RegisterController extends Controller
         $user->valid_until = new DateTime('+7 days');
         $user->save();
 
+        if($kuponid !== null)
+        {
+          $ordercont::update_coupon($kuponid,$user->id);
+        }
+
         $emaildata = [
             'order' => $order,
             'user' => $user,
@@ -148,11 +165,17 @@ class RegisterController extends Controller
             'no_order' => $order_number,
         ];
       
-        Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
-          $message->from('info@omnilinkz.com', 'Michael from Activomni');
-          $message->to($user->email);
-          $message->subject('[Omnilink] Order Nomor '.$order_number);
-        });
+        // SEND MAIL IF EMAIL NOT BOUNCING
+        $helper = new Helper;
+        if($helper->check_email_bouncing($user->email) == true)
+        {
+          Mail::send('emails.order', $emaildata, function ($message) use ($user,$order_number) {
+            $message->from('info@omnilinkz.com', 'Michael from Activomni');
+            $message->to($user->email);
+            $message->subject('[Omnilink] Order Nomor '.$order_number);
+          });
+        }
+        
         if (!is_null($user->wa_number)){
             $message = null;
             $message .= '*Hi '.$user->name.'*,'."\n\n";
@@ -238,6 +261,11 @@ class RegisterController extends Controller
 
         $user->valid_until = $valid;
         $user->save();
+
+        if($kuponid !== null)
+        {
+          $ordercont::update_coupon($kuponid,$user->id);
+        }
         // $user->valid_until = new DateTime('+0 days');
         // $user->valid_until = Carbon::now();
       }
@@ -301,6 +329,12 @@ class RegisterController extends Controller
       $arrRequest['password'] = $password;
       $arrRet = $this->create($arrRequest);
 
+      if($arrRet == 'imail')
+      {
+        $request->session()->flash('error','Invalid email');
+        return view('auth.register');
+      }
+
       $register_time = Carbon::now()->toDateTimeString();
       $confirmcode = Hash::make($arrRet['user']->email.$register_time);
       $arrRet['user']->confirm_code = $confirmcode;
@@ -309,6 +343,7 @@ class RegisterController extends Controller
       $string = '';
       if($request->price == null)
       {
+        // .....
       }
 
       $secret_data = [
@@ -322,12 +357,16 @@ class RegisterController extends Controller
         'user' => $arrRet['user'],
         // 'password' => $request->password,
         'password' => $password,
-       'price' => $request->price,
-       'coupon_code' => $string,
+        'price' => $request->price,
+        'coupon_code' => $string,
       ];
       
-      Mail::to($arrRet['user']->email)->send(new ConfirmEmail($emaildata));
-
+      $helper = new Helper;
+      if($helper->check_email_bouncing($arrRet['user']->email) == true)
+      {
+        Mail::to($arrRet['user']->email)->send(new ConfirmEmail($emaildata));
+      }
+      
       if (!is_null($arrRet['user']->wa_number)){
           $message = null;
           $message .= '*Hi '.$arrRet['user']->name."*, \n\n";

@@ -1689,12 +1689,13 @@
         @include('user.link.form-api')
       @endif
 
+      <!-- SOCMED -->
       <ul class="col-lg-7 col-md-8 mb-5 row" id="icon-sosmed">
         <?php 
         if (!is_null($pages->sort_sosmed)) {
           foreach ($sort_sosmed as $sosmed) { ?>
           <li class="col text-center icon-sosmed">
-            @if( $sosmed=='fb')
+            @if($sosmed=='fb')
               <a href="#" data-href="{{env('APP_URL').'/click/fb/'.$pages->id}}" title="fb" target="_blank" class="link-ajax">
                 <i class="fab fa-facebook-square"></i>
               </a>
@@ -1723,6 +1724,7 @@
                 <i style="font-size:30px" class="fab fa-tiktok"></i>
               </a>
             @endif 
+
             @if($sosmed=='linkedin')
               <a href="#" data-href="{{env('APP_URL').'/click/linkedin/'.$pages->id}}" title="Linkedin" target="_blank" class="link-ajax">
                 <i style="font-size:30px" class="fab fa-linkedin-in"></i>
@@ -1767,6 +1769,11 @@
                 <span style="font-size:25px" class="icon-tik-tok"></span>
               </a>
           </li>
+          <li class="col text-center icon-sosmed">
+              <a href="#" data-href="{{env('APP_URL').'/click/linkedin/'.$pages->id}}" title="Linkedin" target="_blank" class="link-ajax">
+                <span style="font-size:25px" class="fab fa-linkedin-in"></span>
+              </a>
+          </li>
 
         <?php }?>
       </ul>
@@ -1781,7 +1788,7 @@
         @if(!is_null($ads))
           <!--
           <div class="col-lg-7 col-md-8 text-center redirect-ads big">
-            <a data-href="<?php echo env('APP_URL').'/click-ads/'.$ads->id ?>" class="link-ajax-no-script">
+            <a data-href="<php echo env('APP_URL').'/click-ads/'.$ads->id ?>" class="link-ajax-no-script">
               <span href="#" class="headline-1-view-get headads">
                   {{$ads->headline}}  
               </span>
@@ -2256,9 +2263,11 @@ function pointCount(ip)
 
      //outside banner
      w = $(".galleryContainer").width();
-     w = w + 18
+     w = w * 8;
+     h = w/16;
+     /* w = w + 18
      h = (w/cons) - 18;
-     h = h + 0.05;
+     h = h + 0.05; */
      h = Number(h.toFixed(1));
      $(".galleryContainer").height(h);
   }

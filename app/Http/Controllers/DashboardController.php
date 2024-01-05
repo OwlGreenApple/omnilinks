@@ -12,6 +12,7 @@ use App\Mail\ResendConfirmEmail;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 
 use Auth,Carbon,Validator,Storage,PDF,Crypt,Mail;
 
@@ -805,8 +806,12 @@ class DashboardController extends Controller
       'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
       'user' => $user,
     ];
-    Mail::to($user->email)->send(new ResendConfirmEmail($emaildata));
-    
+
+    $helper = new Helper;
+    if($helper->check_email_bouncing($user->email) == true)
+    {
+      Mail::to($user->email)->send(new ResendConfirmEmail($emaildata));
+    }
     return redirect('/')->with("success","Silahkan cek inbox email anda.");
   }
 

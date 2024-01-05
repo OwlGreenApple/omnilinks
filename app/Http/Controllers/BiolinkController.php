@@ -1992,11 +1992,13 @@ class BiolinkController extends Controller
 
     $filename = 'clicked/'.$user->username.'/'.date('m-Y').'/all/total-click/counter.txt';
 
+    $helper = new Helper;
     $dash = new DashboardController;
     $clicks = $dash->check_file($filename);
 
     if($user->membership=='free'){
-      if($clicks==800){
+      if($clicks==800 && $helper->check_email_bouncing($user->email) == true)
+      {
         Mail::to($user->email)->queue(new NotifClickFreeUser($user->email,$user,$clicks));
       }
 
@@ -2148,31 +2150,32 @@ class BiolinkController extends Controller
         break;
         case "fb":
           $page->fb_link_counter = $page->fb_link_counter+1;
-          $link = "https://facebook.com/".$page->fb_link;
-          // $link = $page->fb_link;
+          // $link = "https://facebook.com/".$page->fb_link;
+          $link = $page->fb_link;
           $idpixel = $page->fb_pixel_id;
         break;
         case "twitter":
           $page->twitter_link_counter = $page->twitter_link_counter+1;
-          $link = "https://twitter.com/".$page->twitter_link;
-          // $link = $page->twitter_link;
+          // $link = "https://twitter.com/".$page->twitter_link;
+          $link = $page->twitter_link;
           $idpixel = $page->twitter_pixel_id;
         break;
         case "ig":
           $page->ig_link_counter = $page->ig_link_counter+1;
-          $link = "https://instagram.com/".$page->ig_link;
-          // $link = $page->ig_link;
+          // $link = "https://instagram.com/".$page->ig_link;
+          $link = $page->ig_link;
           $idpixel = $page->ig_pixel_id;
         break;
         case "tiktok":
           $page->tk_link_counter = $page->tk_link_counter+1;
-          $link = "https://www.tiktok.com/@".$page->tk_link;
-          // $link = $page->tk_link;
+          // $link = "https://www.tiktok.com/@".$page->tk_link;
+          $link = $page->tk_link;
           $idpixel = $page->tk_pixel_id; 
+        break;
         case "linkedin":
-          $page->tk_link_counter = $page->tk_link_counter+1;
-          $link = "https://www.linkedin.com/in/".$page->lnd_link;
-          // $link = $page->lnd_link;
+          $page->linkedin_link_counter = $page->linkedin_link_counter+1;
+          // $link = "https://www.linkedin.com/in/".$page->lnd_link;
+          $link = $page->lnd_link;
           $idpixel = $page->lnd_pixel_id;
         break;
       }
