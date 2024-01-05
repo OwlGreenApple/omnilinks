@@ -805,7 +805,7 @@ class DashboardController extends Controller
       'url' => url('/verifyemail/').'/'.Crypt::encrypt(json_encode($secret_data)),
       'user' => $user,
     ];
-    Mail::to($user->email)->bcc("celebgramme.dev@gmail.com")->send(new ResendConfirmEmail($emaildata));
+    Mail::to($user->email)->send(new ResendConfirmEmail($emaildata));
     
     return redirect('/')->with("success","Silahkan cek inbox email anda.");
   }

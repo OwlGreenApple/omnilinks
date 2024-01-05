@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        Mail::to($this->email)->bcc("celebgramme.dev@gmail.com")->queue(new resetPassword($token));
+        Mail::to($this->email)->queue(new resetPassword($token));
 
         return redirect('/password/reset')->with("success","We have e-mailed your password reset link!"); 
     }
